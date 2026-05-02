@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings",
+  "_doc": "AI Builder School — Harness · Tool Layer permissions. The school applies the principles it teaches: explicit allow/deny instead of implicit defaults.",
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(npm run dev)",
+      "Bash(npm run lint)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run validate)",
+      "Bash(npm run build)",
+      "Bash(npm run check)",
+      "Bash(npm run eval)",
+      "Bash(npm run new-lesson:*)",
+      "Bash(npx lefthook *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(rm -rf .next.nosync)",
+      "Bash(find src/**)",
+      "Bash(find docs/**)",
+      "Bash(find scripts/**)",
+      "Bash(grep *)",
+      "Bash(ls *)",
+      "Read(*)",
+      "Write(src/content/lessons/**)",
+      "Write(scripts/**)",
+      "Write(docs/**)",
+      "Edit(src/**)",
+      "Edit(docs/**)",
+      "Edit(scripts/**)",
+      "Edit(AGENTS.md)",
+      "Edit(CLAUDE.md)",
+      "Edit(README.md)",
+      "Edit(lefthook.yml)",
+      "Edit(tailwind.config.ts)",
+      "Edit(next.config.mjs)"
+    ],
+    "deny": [
+      "Bash(git push *)",
+      "Bash(git commit *)",
+      "Bash(git reset --hard *)",
+      "Bash(git checkout -- *)",
+      "Bash(rm -rf src)",
+      "Bash(rm -rf .git)",
+      "Bash(rm -rf node_modules)",
+      "Bash(npm publish *)",
+      "Bash(npm install --global *)",
+      "Bash(npm uninstall *)",
+      "Write(.env*)",
+      "Write(package-lock.json)",
+      "Edit(.env*)",
+      "Edit(package-lock.json)"
+    ]
+  },
+  "hooks": {
+    "_doc": "Optional: hook into PreToolUse for additional gates. Currently rely on lefthook + CI."
+  }
+}

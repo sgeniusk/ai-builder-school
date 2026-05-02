@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>학습 시작 · AI Builder School</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="assets/theme.css?v=3">
+<link rel="stylesheet" href="assets/layout.css?v=2">
+<link rel="stylesheet" href="assets/pages.css?v=2">
+<script src="assets/content.js?v=2" defer></script>
+<script src="assets/layout.js?v=2" defer></script>
+</head>
+<body>
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Start · 2 질문</p>
+    <h1>당신에게 맞는 트랙을<br>찾아드립니다.</h1>
+    <p class="lede">2개의 질문에 답하면 맞춤 트랙을 추천합니다. 30초면 충분합니다.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap" style="max-width: 760px; margin: 0 auto;">
+    <div id="quiz"></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  function ready(fn){ if(window.ABS_CONTENT) fn(); else setTimeout(()=>ready(fn),20); }
+  ready(() => {
+    const C = window.ABS_CONTENT;
+    const root = document.getElementById('quiz');
+    const steps = [
+      {
+        q: 'Q1. 당신은 어떤 일을 하나요?',
+        sub: '가장 가까운 하나를 골라 주세요.',
+        options: [
+          { v:'office',    t:'일반 직장인',         s:'보고서 · 회의 · 리서치가 많다' },
+          { v:'planner',   t:'기획자 · 관리자',     s:'팀이나 조직에 AI를 도입하려 한다' },
+          { v:'developer', t:'개발자 · 앱 빌더',    s:'Codex/Claude Code로 빠르게 만들고 싶다' },
+          { v:'creator',   t:'콘텐츠 크리에이터',   s:'글 · 영상 파이프라인을 자동화하려 한다' },
+          { v:'engineer',  t:'AI 엔지니어 심화',    s:'RAG · Agents · Evals를 직접 설계한다' },
+        ]
+      },
+      {
+        q: 'Q2. 얼마나 시간을 투자할 수 있나요?',
+        sub: '권장 학습 강도에 맞춰 트랙을 조정합니다.',
+        options: [
+          { v:'light',  t:'주 3–4시간',  s:'느긋하게, 레슨 위주' },
+          { v:'medium', t:'주 6–8시간',  s:'권장 속도 — 8주 MVP 완주' },
+          { v:'heavy',  t:'주 10시간+',  s:'Capstone까지 한 번에' },
+        ]
+      }
+    ];
+
+    let step = 0;
+    const answers = {};
+
+    function render() {
+      if (step >= steps.length) return renderResult();
+      const s = steps[step];
+      root.innerHTML = `
+        <div class="quiz-progress">${steps.map((_,i)=>`<span class="${i<=step?'done':''}"></span>`).join('')}</div>
+        <div class="quiz-card">
+          <h2>${s.q}</h2>
+          <p class="sub">${s.sub}</p>
+          <div class="quiz-options">
+            ${s.options.map(o => `
+              <button data-v="${o.v}">
+                <div><strong>${o.t}</strong><small>${o.s}</small></div>
+                <span class="arrow">→</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      root.querySelectorAll('button').forEach(b => {
+        b.addEventListener('click', () => {
+          answers[step===0?'persona':'pace'] = b.dataset.v;
+          step++;
+          render();
+        });
+      });
+    }
+
+    function renderResult() {
+      const t = C.tracks.find(x => x.persona === answers.persona) || C.tracks[0];
+      const req = t.required.map(id => C.phases.find(p=>p.id===id)).filter(Boolean);
+      const opt = (t.optional||[]).map(id => C.phases.find(p=>p.id===id)).filter(Boolean);
+      const weeks = answers.pace === 'light' ? t.weeks + 2 : answers.pace === 'heavy' ? Math.max(6, t.weeks-2) : t.weeks;
+      root.innerHTML = `
+        <div class="quiz-progress">${steps.map(()=>`<span class="done"></span>`).join('')}</div>
+        <div class="result-card">
+          <div class="head">
+            <div class="eyebrow">Your track</div>
+            <h2>${t.title}</h2>
+            <p>${t.learner} — ${t.promise}.</p>
+          </div>
+          <div class="body">
+            <div style="display:flex; gap:32px; margin-bottom:28px; flex-wrap:wrap;">
+              <div><div class="eyebrow" style="margin:0;">Weeks</div><div style="font-size:28px; font-weight:600;">${weeks}</div></div>
+              <div><div class="eyebrow" style="margin:0;">Required phases</div><div style="font-size:28px; font-weight:600;">${req.length}</div></div>
+              <div><div class="eyebrow" style="margin:0;">Optional</div><div style="font-size:28px; font-weight:600;">${opt.length}</div></div>
+            </div>
+            <div class="eyebrow" style="margin:0 0 12px;">Your roadmap</div>
+            <ol class="lessons-list" style="border-top:1px solid var(--line);">
+              ${req.map((p,i)=>`
+                <li onclick="location.href='phase.html?slug=${p.slug}'">
+                  <span class="l-num">WEEK ${String(i+1).padStart(2,'0')}</span>
+                  <span class="l-title">Phase ${p.num} · ${p.titleKo}</span>
+                  <span class="l-meta">${p.hours}h</span>
+                </li>
+              `).join('')}
+            </ol>
+            <div style="margin-top:28px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" href="phase.html?slug=${req[0]?.slug}">첫 Phase 시작 <span class="arrow">→</span></a>
+              <a class="btn ghost" href="tracks.html#${t.slug}">트랙 전체 보기</a>
+              <button class="btn ghost" onclick="(function(){step=0;render();})()" id="restart" style="background:transparent;">다시 진단</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById('restart').addEventListener('click', () => { step = 0; render(); });
+    }
+
+    window.__renderStart = render;
+    render();
+  });
+})();
+</script>
+</body>
+</html>

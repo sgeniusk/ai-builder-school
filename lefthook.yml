@@ -1,0 +1,32 @@
+# AI Builder School — Harness Engineering · Feedback Loop
+#
+# pre-commit 시 머신이 강제하는 게이트.
+# 이 학교가 가르치는 원리를 학교 자신이 따르는 도그푸딩의 일부.
+#
+# 도구 변경: lefthook (https://github.com/evilmartians/lefthook)
+# 설치 후 한 번 실행: `npx lefthook install`
+
+pre-commit:
+  parallel: true
+  commands:
+    typecheck:
+      run: npm run typecheck
+      tags: gate
+    validate-content:
+      run: npm run validate
+      tags: gate
+
+# pre-push 는 빌드까지 포함해 더 무거운 게이트로 운영한다.
+# 빠른 반복을 위해 commit 단계는 typecheck + validate 만 강제한다.
+pre-push:
+  commands:
+    full-check:
+      run: npm run check
+      tags: heavy
+
+# Skip patterns
+# - .next.nosync 변경은 무시 (빌드 산출물)
+# - node_modules 무시
+skip_output:
+  - meta
+  - summary

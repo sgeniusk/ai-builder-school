@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson · AI Builder School</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="assets/theme.css?v=3">
+<link rel="stylesheet" href="assets/layout.css?v=2">
+<link rel="stylesheet" href="assets/pages.css?v=2">
+<script src="assets/content.js?v=2" defer></script>
+<script src="assets/layout.js?v=2" defer></script>
+</head>
+<body>
+<article class="wrap">
+  <div class="lesson-reader" id="reader">
+    <p class="kicker" id="kicker">Phase 1 · L03</p>
+    <h1 id="title">환각(Hallucination)을 잡는 검증법</h1>
+    <p class="lede" id="lede">AI가 자신 있게 틀리는 순간을 알아채는 것 — 그것이 AI를 쓰는 사람과 만드는 사람을 가르는 선입니다.</p>
+
+    <h2>1. 문제 이해</h2>
+    <p>LLM은 "그럴듯한 다음 토큰"을 예측할 뿐, 사실 여부를 스스로 판단하지 않습니다. 따라서 결과가 아무리 유창해 보여도 <strong>근거 · 출처 · 일관성</strong>을 사람이 검증해야 합니다.</p>
+
+    <h2>2. 최소 개념</h2>
+    <ul>
+      <li><strong>Closed vs. Open:</strong> 제공된 문서 안에서만 답하는지, 모델이 아는 지식으로 답하는지 구분합니다.</li>
+      <li><strong>Grounding:</strong> 답의 각 주장을 원문 근거로 연결합니다.</li>
+      <li><strong>Calibration:</strong> 모델이 "모른다"라고 말할 수 있는 여지를 남깁니다.</li>
+    </ul>
+
+    <h2>3. 미션</h2>
+    <div class="callout">
+      <p class="kicker">Mission · 40분</p>
+      <p style="margin:0;">사내 위키에서 3건의 문단을 복사해, AI에게 <b>근거를 인용하도록 강제한 프롬프트</b>로 답을 받고, 근거가 실제로 존재하는지 확인하는 검증 노트를 작성합니다.</p>
+    </div>
+
+    <ol class="lesson-steps">
+      <li>검증용 문서 3건을 준비한다 (사내 정책 · 제품 사양 · 최근 회의록).</li>
+      <li>아래 <i>RAG 프롬프트 프레임</i>을 사용해 각 문서에 대한 질문 3개씩 던진다.</li>
+      <li>답변의 모든 주장을 원문과 대조한다. 일치 · 누락 · 허구 3가지로 분류.</li>
+      <li>분류 결과를 회고 템플릿에 기록. 허구 비율이 10%를 넘으면 프롬프트를 수정한다.</li>
+    </ol>
+
+    <h2>4. 프롬프트 프레임</h2>
+<pre><code>역할: 사내 문서 기반 답변자.
+규칙:
+- 제공된 문서에 없는 내용은 "문서에서 근거를 찾지 못함"이라고 답한다.
+- 각 주장 뒤에 [문단 번호]를 붙인다.
+- 모호한 경우 질문을 되묻는다.
+
+문서:
+{{docs}}
+
+질문:
+{{question}}</code></pre>
+
+    <h2>5. 검증 체크리스트</h2>
+    <ul class="checklist">
+      <li>모든 주장에 근거 표기 [문단 N]이 붙어 있는가?</li>
+      <li>근거가 실제 원문에 존재하는가? (허구 인용이 아닌가)</li>
+      <li>문서에 없는 질문에 "모름"이라고 답했는가?</li>
+      <li>일관성: 같은 질문을 3회 던졌을 때 답이 크게 달라지지 않는가?</li>
+      <li>편향: 특정 관점에 치우치지 않았는가?</li>
+    </ul>
+
+    <h2>6. 산출물</h2>
+    <p>검증 노트 1개 (문서 3건 × 질문 3개 × 분류 결과). 개인 Notion 또는 프로젝트 저장소에 <code>verification-notes/</code> 폴더로 저장합니다.</p>
+
+    <h2>7. 회고 (3문)</h2>
+    <ul class="checklist">
+      <li>AI가 잘 한 것은 무엇인가?</li>
+      <li>내가 판단해서 바로잡은 것은 무엇인가?</li>
+      <li>다음에 바꿀 한 가지는 무엇인가?</li>
+    </ul>
+
+    <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line); display: flex; gap: 10px; flex-wrap: wrap;">
+      <a class="btn" href="phase.html?slug=phase-1-ai-literacy">Phase 1로 돌아가기 <span class="arrow">→</span></a>
+      <a class="btn ghost" href="curriculum.html">전체 커리큘럼</a>
+    </div>
+  </div>
+</article>
+
+<script>
+(function(){
+  function ready(fn){ if(window.ABS_CONTENT) fn(); else setTimeout(()=>ready(fn),20); }
+  ready(() => {
+    const C = window.ABS_CONTENT;
+    const qs = new URLSearchParams(location.search);
+    const slug = qs.get('slug');
+    if (!slug) return;
+    const l = C.lessons.find(x => x.slug === slug);
+    if (!l) return;
+    const p = C.phases.find(x => x.id === l.phaseId);
+    document.getElementById('kicker').textContent = `Phase ${p.num} · ${l.num} · ${l.minutes}분`;
+    document.getElementById('title').textContent = l.titleKo;
+  });
+})();
+</script>
+</body>
+</html>
