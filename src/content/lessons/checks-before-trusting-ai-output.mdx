@@ -12,9 +12,9 @@
 
 지난 세 레슨에서 만든 것들을 잠깐 모아볼게요.
 
-- [Lesson 01](/lessons/common-skills-of-future-proof-people) — **판단 체크리스트** (어디에 사람을 끼울지)
-- [Lesson 02](/lessons/what-llms-are-good-and-bad-at) — **강·약점 매핑 지도** (어디에 맡길지)
-- [Lesson 03](/lessons/hallucination-verification) — **환각 검증 루프** (받기 전부터 검증 강제)
+- [Lesson 1.1](/lessons/common-skills-of-future-proof-people) — **판단 체크리스트** (어디에 사람을 끼울지)
+- [Lesson 1.2](/lessons/what-llms-are-good-and-bad-at) — **강·약점 매핑 지도** (어디에 맡길지)
+- [Lesson 1.3](/lessons/hallucination-verification) — **환각 검증 루프** (받기 전부터 검증 강제)
 
 세 개가 있어도 매일 다 호출하지 못하면 결국 안 쓰게 돼요. **매일 5분, 한 자리에서 한 번에 부르는 의식**이 필요합니다. 이게 오늘 만들 `trust-check.md`예요.
 
@@ -30,7 +30,7 @@
 
 ### O · Origin (출처) — 60초
 
-답의 각 주장이 어디서 왔는지 추적 가능한가? 출처가 없으면 답을 \"미검증\"으로 표시합니다 (Lesson 03에서 만든 verify-loop를 여기서 호출).
+답의 각 주장이 어디서 왔는지 추적 가능한가? 출처가 없으면 답을 \"미검증\"으로 표시합니다 (Lesson 1.3에서 만든 verify-loop를 여기서 호출).
 
 - 출처가 명시되어 있는가? 출처를 클릭하면 실제로 그 내용이 있는가?
 - 모델 추정인가, 검증 가능한 사실인가?
@@ -44,7 +44,7 @@
 
 ### C · Confidence (신뢰) — 60초
 
-단정적 어조와 실제 신뢰도가 일치하는지 봅니다. Lesson 03의 Confidence 점수 패턴을 여기서 호출하면 빨라요.
+단정적 어조와 실제 신뢰도가 일치하는지 봅니다. Lesson 1.3의 Confidence 점수 패턴을 여기서 호출하면 빨라요.
 
 - \"확실히\", \"항상\", \"절대\" 같은 단정어가 정당한가?
 - 모델이 직접 신뢰도를 적었다면 60 이하 주장은 표시되어 있는가?

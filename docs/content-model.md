@@ -39,7 +39,7 @@ export type Level = 'beginner' | 'intermediate' | 'advanced';
 
 | 필드 | 타입 | 설명 |
 |---|---|---|
-| `id` | `string` | `"lesson-03"` 등. |
+| `id` | `string` | `"lesson-103"` 등. ID 규칙은 §3.1 참고. |
 | `slug` | `string` | URL. `"hallucination-verification"`. |
 | `phaseId` | `string` | 소속 Phase. |
 | `titleKo` | `string` | 한국어 제목. |
@@ -60,6 +60,26 @@ export type Level = 'beginner' | 'intermediate' | 'advanced';
 | `reflectionQuestions` | `string[]` | 회고 질문 3개. |
 | `extensionIdeas` | `string[]` | 다음 주 확장 아이디어. |
 | `tags` | `string[]` | 검색/필터용. |
+
+### 3.1 Lesson ID 규칙 (100단위)
+
+`lesson-{phaseNum}{ordinal:00~99}` 형식. phase 번호 = 100 단위로 매핑되어 ID 만 보고 어느 phase 인지 즉시 알 수 있다.
+
+| Phase | ID 범위 | 비고 |
+|---|---|---|
+| phase-0 | 001~099 | 미래 예약 (현재 미사용) |
+| phase-1 | 101~199 | Literacy |
+| phase-2 | 201~299 | Prompt Engineering |
+| phase-3 | 301~399 | 일상 자동화 |
+| phase-4 | 401~499 | 코딩 에이전트 |
+| phase-5 | 501~599 | AI 앱 개발 |
+| phase-6 | 601~699 | RAG |
+| phase-7 | 701~799 | Agents · MCP |
+| phase-8~10 | 801~1099 | 미래 예약 |
+| phase-11 | 1101~1199 | Product |
+| phase-12 | 1201~1299 | Capstone |
+
+학습자 본문 표기는 `Lesson 1.1`, `Lesson 4.6` 같은 **Phase.순서** 형식을 쓴다. 즉 ID(`lesson-406`)와 본문 표기(`Lesson 4.6`)는 별개. 새 레슨 추가는 `npm run new-lesson <slug> --phase phase-N-...` 으로 하며, 스캐폴더가 해당 phase 의 다음 ordinal 을 자동 부여한다.
 
 ## 4. Track
 

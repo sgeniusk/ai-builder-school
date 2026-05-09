@@ -2,7 +2,7 @@ import type { Lesson } from "@/lib/types";
 
 export const lessons: Lesson[] = [
   {
-    id: "lesson-01",
+    id: "lesson-101",
     slug: "common-skills-of-future-proof-people",
     phaseId: "phase-1",
     titleKo: "AI 시대에 뒤쳐지지 않는 사람들의 공통 역량",
@@ -82,7 +82,7 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-02",
+    id: "lesson-102",
     slug: "what-llms-are-good-and-bad-at",
     phaseId: "phase-1",
     titleKo: "LLM이 잘하는 일과 못하는 일",
@@ -167,7 +167,7 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-03",
+    id: "lesson-103",
     slug: "hallucination-verification",
     phaseId: "phase-1",
     titleKo: "환각(Hallucination)을 잡는 검증법",
@@ -252,7 +252,7 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-04",
+    id: "lesson-104",
     slug: "checks-before-trusting-ai-output",
     phaseId: "phase-1",
     titleKo: "AI 결과를 신뢰하기 전 확인할 것",
@@ -266,7 +266,7 @@ export const lessons: Lesson[] = [
     learningGoals: [
       "5축 트러스트 체크(사실/출처/가정/범위/편향)를 1분 단위로 분배해 5분 안에 돌린다",
       "내 도메인의 \"위험 가중\" 축을 식별해 한 축에 시간을 더 쓰는 규칙을 만든다",
-      "Lesson 01·02·03의 산출물(판단 체크리스트 / 강약 지도 / 환각 검증 루프)을 이 루틴 안에 통합한다",
+      "Lesson 1.1·02·03의 산출물(판단 체크리스트 / 강약 지도 / 환각 검증 루프)을 이 루틴 안에 통합한다",
       "이 체크를 매일 같은 시간·같은 위치에서 호출하는 습관을 시작한다",
     ],
     problemScenario:
@@ -290,7 +290,7 @@ export const lessons: Lesson[] = [
       {
         term: "체크 통합 (Check Stacking)",
         explanation:
-          "Lesson 01의 판단 체크리스트, Lesson 02의 강·약점 지도, Lesson 03의 환각 검증 루프 — 개별 도구들이 5분 트러스트 체크 안에서 한 번에 호출되도록 연결합니다. 도구가 분산되면 결국 안 씁니다.",
+          "Lesson 1.1의 판단 체크리스트, Lesson 1.2의 강·약점 지도, Lesson 1.3의 환각 검증 루프 — 개별 도구들이 5분 트러스트 체크 안에서 한 번에 호출되도록 연결합니다. 도구가 분산되면 결국 안 씁니다.",
       },
     ],
     codexMission:
@@ -298,7 +298,7 @@ export const lessons: Lesson[] = [
     claudeCodeMission:
       "Claude Code에게 5분 체크 루틴을 커스텀 슬래시 명령으로 저장하는 방법을 제안받고 시험 적용한다.",
     mission:
-      "Claude Code에게 아래 작업을 맡깁니다. 40분 안에 끝내는 걸 목표로 하세요.\n\n작업: 매일 호출 가능한 `trust-check.md` 한 장을 만듭니다.\n\n포함할 섹션:\n1. \"내 도메인 위험 가중\" — 5축 중 어느 축에 시간을 더 쓸지 비율(예: 사실 90s / 출처 60s / 범위 30s / 신뢰 60s / 편향 60s)\n2. \"5축 60초 질문 세트\" — 각 축마다 60초 안에 답할 수 있는 검사 질문 3~4개 (예: 사실 → \"수치/이름/날짜가 원본과 일치하는가?\")\n3. \"통합 호출\" — Lesson 01 판단 체크리스트 / Lesson 02 강·약점 지도 / Lesson 03 환각 검증 루프 중 어느 것을 어느 축에서 호출할지 매핑\n4. \"Trust Floor / Ceiling\" — 검토 없이 써도 되는 답의 최소 기준, 절대 안 쓰는 상한선 정의\n5. \"호출 약속\" — 매일 어느 시간·어느 도구에서 이 루틴을 켤지 (예: \"매일 보고서 발송 직전, Notion에서\")\n\n에이전트에게 당신의 도메인·일주일에 받는 AI 산출물 종류·가장 위험했던 사고 사례 1개를 알려주세요. 일반론적인 5축이 아니라 당신의 5축이 나옵니다.",
+      "Claude Code에게 아래 작업을 맡깁니다. 40분 안에 끝내는 걸 목표로 하세요.\n\n작업: 매일 호출 가능한 `trust-check.md` 한 장을 만듭니다.\n\n포함할 섹션:\n1. \"내 도메인 위험 가중\" — 5축 중 어느 축에 시간을 더 쓸지 비율(예: 사실 90s / 출처 60s / 범위 30s / 신뢰 60s / 편향 60s)\n2. \"5축 60초 질문 세트\" — 각 축마다 60초 안에 답할 수 있는 검사 질문 3~4개 (예: 사실 → \"수치/이름/날짜가 원본과 일치하는가?\")\n3. \"통합 호출\" — Lesson 1.1 판단 체크리스트 / Lesson 1.2 강·약점 지도 / Lesson 1.3 환각 검증 루프 중 어느 것을 어느 축에서 호출할지 매핑\n4. \"Trust Floor / Ceiling\" — 검토 없이 써도 되는 답의 최소 기준, 절대 안 쓰는 상한선 정의\n5. \"호출 약속\" — 매일 어느 시간·어느 도구에서 이 루틴을 켤지 (예: \"매일 보고서 발송 직전, Notion에서\")\n\n에이전트에게 당신의 도메인·일주일에 받는 AI 산출물 종류·가장 위험했던 사고 사례 1개를 알려주세요. 일반론적인 5축이 아니라 당신의 5축이 나옵니다.",
     codexNote:
       "Codex CLI는 5축 같은 다축 표를 만들 때 가끔 한 축을 빼먹습니다. \"5축 모두를 동일한 양식으로, 빠짐없이 출력하라\"는 명시 지시 + 마지막에 \"5축 모두 포함되었는지 자가 확인하라\"를 추가하면 안정적입니다.",
     buildSteps: [
@@ -312,13 +312,13 @@ export const lessons: Lesson[] = [
       "5축(사실/출처/범위/신뢰/편향)이 모두 포함되어 있는가",
       "각 축이 60초 안에 답할 수 있는 구체 질문 3~4개로 채워져 있는가",
       "내 도메인 위험 가중이 명시되어 있는가 (모든 축이 균등하면 위험 가중이 안 된 것)",
-      "Lesson 01·02·03 산출물 중 최소 1개가 명시적으로 호출되고 있는가",
+      "Lesson 1.1·02·03 산출물 중 최소 1개가 명시적으로 호출되고 있는가",
       "이 체크가 \"매일 호출되는 위치\"에 실제로 저장되어 있는가",
     ],
     deliverable: {
       title: "5분 트러스트 체크 루틴 trust-check.md",
       description:
-        "FOSCB 5축 + 위험 가중 + Trust Floor/Ceiling + Lesson 01-03 통합 호출이 들어간 매일 루틴 한 장.",
+        "FOSCB 5축 + 위험 가중 + Trust Floor/Ceiling + Lesson 1.1-03 통합 호출이 들어간 매일 루틴 한 장.",
       format: "Markdown 파일(.md) · 1페이지 이내, 매일 호출되는 위치에 고정",
     },
     reflectionQuestions: [
@@ -342,7 +342,7 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-05",
+    id: "lesson-201",
     slug: "structure-of-good-prompts",
     phaseId: "phase-2",
     titleKo: "좋은 프롬프트의 구조",
@@ -394,7 +394,7 @@ export const lessons: Lesson[] = [
     tags: ["prompt", "structure"],
   },
   {
-    id: "lesson-06",
+    id: "lesson-202",
     slug: "enforcing-output-format",
     phaseId: "phase-2",
     titleKo: "출력 형식(Output Format)을 강제하는 법",
@@ -444,7 +444,7 @@ export const lessons: Lesson[] = [
     tags: ["prompt", "structured-output"],
   },
   {
-    id: "lesson-07",
+    id: "lesson-203",
     slug: "feeding-long-documents",
     phaseId: "phase-2",
     titleKo: "긴 문서를 AI에게 먹이는 법",
@@ -495,7 +495,7 @@ export const lessons: Lesson[] = [
     tags: ["prompt", "long-context"],
   },
   {
-    id: "lesson-08",
+    id: "lesson-204",
     slug: "build-personal-prompt-library",
     phaseId: "phase-2",
     titleKo: "개인 프롬프트 라이브러리 만들기",
@@ -546,7 +546,7 @@ export const lessons: Lesson[] = [
     tags: ["prompt", "library", "productivity"],
   },
   {
-    id: "lesson-09",
+    id: "lesson-301",
     slug: "automate-report-drafts",
     phaseId: "phase-3",
     titleKo: "보고서 초안 자동화",
@@ -597,7 +597,7 @@ export const lessons: Lesson[] = [
     tags: ["work-os", "reports"],
   },
   {
-    id: "lesson-10",
+    id: "lesson-302",
     slug: "meeting-notes-pipeline",
     phaseId: "phase-3",
     titleKo: "회의록 자동 정리",
@@ -647,7 +647,7 @@ export const lessons: Lesson[] = [
     tags: ["work-os", "meetings"],
   },
   {
-    id: "lesson-11",
+    id: "lesson-303",
     slug: "research-workflow",
     phaseId: "phase-3",
     titleKo: "리서치 워크플로우 만들기",
@@ -698,7 +698,7 @@ export const lessons: Lesson[] = [
     tags: ["work-os", "research"],
   },
   {
-    id: "lesson-12",
+    id: "lesson-304",
     slug: "blog-writing-pipeline",
     phaseId: "phase-3",
     titleKo: "블로그 글쓰기 파이프라인",
@@ -748,7 +748,7 @@ export const lessons: Lesson[] = [
     tags: ["work-os", "content"],
   },
   {
-    id: "lesson-13",
+    id: "lesson-401",
     slug: "coding-agent-setup",
     phaseId: "phase-4",
     titleKo: "Codex / Claude Code 작업 환경 세팅",
@@ -798,7 +798,7 @@ export const lessons: Lesson[] = [
     tags: ["coding-agents", "setup"],
   },
   {
-    id: "lesson-14",
+    id: "lesson-402",
     slug: "github-issue-to-ai-brief",
     phaseId: "phase-4",
     titleKo: "GitHub Issue를 AI 작업지시서로 바꾸기",
@@ -848,7 +848,7 @@ export const lessons: Lesson[] = [
     tags: ["coding-agents", "workflow"],
   },
   {
-    id: "lesson-15",
+    id: "lesson-403",
     slug: "letting-ai-read-codebase",
     phaseId: "phase-4",
     titleKo: "기존 코드베이스를 AI에게 읽히기",
@@ -898,7 +898,7 @@ export const lessons: Lesson[] = [
     tags: ["coding-agents", "codebase"],
   },
   {
-    id: "lesson-16",
+    id: "lesson-404",
     slug: "plan-with-ai",
     phaseId: "phase-4",
     titleKo: "AI와 함께 구현 계획 세우기",
@@ -948,7 +948,7 @@ export const lessons: Lesson[] = [
     tags: ["coding-agents", "planning"],
   },
   {
-    id: "lesson-17",
+    id: "lesson-405",
     slug: "write-tests-with-coding-agent",
     phaseId: "phase-4",
     titleKo: "Codex / Claude Code로 테스트 만들기",
@@ -999,7 +999,7 @@ export const lessons: Lesson[] = [
     tags: ["coding-agents", "testing"],
   },
   {
-    id: "lesson-18",
+    id: "lesson-406",
     slug: "bug-reproduction-loop",
     phaseId: "phase-4",
     titleKo: "버그 재현과 수정 루프",
@@ -1049,7 +1049,7 @@ export const lessons: Lesson[] = [
     tags: ["coding-agents", "bugs"],
   },
   {
-    id: "lesson-19",
+    id: "lesson-501",
     slug: "connect-ai-api",
     phaseId: "phase-5",
     titleKo: "AI API 붙이기",
@@ -1099,7 +1099,7 @@ export const lessons: Lesson[] = [
     tags: ["app-dev", "api"],
   },
   {
-    id: "lesson-20",
+    id: "lesson-502",
     slug: "streaming-response-ui",
     phaseId: "phase-5",
     titleKo: "스트리밍 응답 UI 만들기",
@@ -1149,7 +1149,7 @@ export const lessons: Lesson[] = [
     tags: ["app-dev", "ui", "streaming"],
   },
   {
-    id: "lesson-21",
+    id: "lesson-503",
     slug: "structured-output-handling",
     phaseId: "phase-5",
     titleKo: "구조화 출력(Structured Output) 다루기",
@@ -1199,7 +1199,7 @@ export const lessons: Lesson[] = [
     tags: ["app-dev", "structured"],
   },
   {
-    id: "lesson-22",
+    id: "lesson-504",
     slug: "conversation-storage-design",
     phaseId: "phase-5",
     titleKo: "대화 기록 저장 구조 설계",
@@ -1249,7 +1249,7 @@ export const lessons: Lesson[] = [
     tags: ["app-dev", "storage"],
   },
   {
-    id: "lesson-23",
+    id: "lesson-601",
     slug: "understanding-embeddings",
     phaseId: "phase-6",
     titleKo: "임베딩(Embedding) 이해하기",
@@ -1299,7 +1299,7 @@ export const lessons: Lesson[] = [
     tags: ["rag", "embeddings"],
   },
   {
-    id: "lesson-24",
+    id: "lesson-602",
     slug: "document-chunking-strategy",
     phaseId: "phase-6",
     titleKo: "문서 청킹(Chunking) 전략 세우기",
@@ -1349,7 +1349,7 @@ export const lessons: Lesson[] = [
     tags: ["rag", "chunking"],
   },
   {
-    id: "lesson-25",
+    id: "lesson-603",
     slug: "vector-search-basics",
     phaseId: "phase-6",
     titleKo: "벡터 검색(Vector Search) 기본",
@@ -1399,7 +1399,7 @@ export const lessons: Lesson[] = [
     tags: ["rag", "search"],
   },
   {
-    id: "lesson-26",
+    id: "lesson-604",
     slug: "grounded-rag-answers",
     phaseId: "phase-6",
     titleKo: "근거가 있는 RAG 답변 만들기",
@@ -1449,7 +1449,7 @@ export const lessons: Lesson[] = [
     tags: ["rag", "citations"],
   },
   {
-    id: "lesson-27",
+    id: "lesson-701",
     slug: "function-calling",
     phaseId: "phase-7",
     titleKo: "Function Calling 이해하기",
@@ -1499,7 +1499,7 @@ export const lessons: Lesson[] = [
     tags: ["agents", "tools"],
   },
   {
-    id: "lesson-28",
+    id: "lesson-702",
     slug: "mini-agent-loop",
     phaseId: "phase-7",
     titleKo: "미니 에이전트 루프 만들기",
@@ -1549,7 +1549,7 @@ export const lessons: Lesson[] = [
     tags: ["agents", "react"],
   },
   {
-    id: "lesson-29",
+    id: "lesson-703",
     slug: "tool-permission-safeguards",
     phaseId: "phase-7",
     titleKo: "도구 권한과 안전장치 설계하기",
@@ -1599,7 +1599,7 @@ export const lessons: Lesson[] = [
     tags: ["agents", "security"],
   },
   {
-    id: "lesson-30",
+    id: "lesson-704",
     slug: "prompt-injection-defense",
     phaseId: "phase-7",
     titleKo: "Prompt Injection 방어 기초",
@@ -1649,7 +1649,7 @@ export const lessons: Lesson[] = [
     tags: ["agents", "security", "prompt-injection"],
   },
   {
-    id: "lesson-31",
+    id: "lesson-1101",
     slug: "ai-app-cost-and-usage",
     phaseId: "phase-11",
     titleKo: "AI 앱 비용과 사용량 계산",
@@ -1700,7 +1700,7 @@ export const lessons: Lesson[] = [
     tags: ["product", "cost"],
   },
   {
-    id: "lesson-32",
+    id: "lesson-1201",
     slug: "capstone-plan-and-launch",
     phaseId: "phase-12",
     titleKo: "Capstone 프로젝트 기획과 배포",

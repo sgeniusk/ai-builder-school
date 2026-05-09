@@ -96,22 +96,30 @@ if (fs.existsSync(mdxPath)) {
   fail(`MDX 파일이 이미 존재: ${mdxPath}`);
 }
 
-// ── 4. 다음 lesson id 결정 ─────────────────────────────────────
-const idMatches = [...lessonsRaw.matchAll(/id:\s*"lesson-(\d+)"/g)].map((m) =>
-  parseInt(m[1] ?? "0", 10),
-);
-const maxId = idMatches.length ? Math.max(...idMatches) : 0;
-const nextId = String(maxId + 1).padStart(2, "0");
-const newId = `lesson-${nextId}`;
-
-// ── 5. lessons.ts 배열에 stub 삽입 ─────────────────────────────
+// ── 4. phase 결정 + 그 phase 안의 다음 lesson id 계산 ─────────
 // phase slug → phase id 변환:  "phase-2-prompt-engineering" → "phase-2"
 const phaseId = phaseSlugArg.match(/^(phase-\d+)/)?.[1];
-if (!phaseId) {
+const phaseNumMatch = phaseSlugArg.match(/^phase-(\d+)/);
+if (!phaseId || !phaseNumMatch) {
   fail(
     `--phase 값이 phase-N-* 형식이 아닙니다. 받은 값: "${phaseSlugArg}"`,
   );
 }
+const phaseNum = parseInt(phaseNumMatch[1] ?? "0", 10);
+
+// ID 규칙: lesson-{phaseNum}{ordinal:00~99}. phase-1 → 101..199, phase-12 → 1201..1299.
+const phaseStart = phaseNum * 100;
+const phaseEnd = phaseStart + 99;
+const idsInPhase = [...lessonsRaw.matchAll(/id:\s*"lesson-(\d+)"/g)]
+  .map((m) => parseInt(m[1] ?? "0", 10))
+  .filter((n) => n >= phaseStart && n <= phaseEnd);
+const nextNum = idsInPhase.length ? Math.max(...idsInPhase) + 1 : phaseStart + 1;
+if (nextNum > phaseEnd) {
+  fail(
+    `phase-${phaseNum} 의 ID 범위(${phaseStart}-${phaseEnd})가 가득 찼습니다.`,
+  );
+}
+const newId = `lesson-${nextNum}`;
 const stub = `  {
     id: "${newId}",
     slug: "${slug}",

@@ -1,6 +1,6 @@
 # 5-Minute Trust Check — trust-check.md
 
-> 이 파일은 AI Builder School · Lesson 04에서 제공되는 출발 템플릿입니다.
+> 이 파일은 AI Builder School · Lesson 1.4에서 제공되는 출발 템플릿입니다.
 > 매일 같은 시간·같은 위치에서 호출하는 것이 핵심입니다. 저장 위치를 한 곳으로 고정하세요.
 
 ## 0. 호출 약속
@@ -34,7 +34,7 @@
 
 ### O · Origin (출처)
 - [ ] 각 주장의 출처가 명시되어 있는가?
-- [ ] 출처 링크가 실제로 그 내용을 담고 있는가? (Lesson 03 verify-loop 호출)
+- [ ] 출처 링크가 실제로 그 내용을 담고 있는가? (Lesson 1.3 verify-loop 호출)
 - [ ] 모델 추정과 검증된 사실이 구분되어 있는가?
 
 ### S · Scope (범위)
@@ -45,7 +45,7 @@
 ### C · Confidence (신뢰)
 - [ ] 단정 어조가 정당한가? (낮은 신뢰도 + 단정 = 환각 신호)
 - [ ] 모델이 신뢰도 점수를 적었는가? 60 이하 주장은 표시되어 있는가?
-- [ ] 내 강·약점 지도(Lesson 02)에서 "약함"으로 분류된 영역인가?
+- [ ] 내 강·약점 지도(Lesson 1.2)에서 "약함"으로 분류된 영역인가?
 
 ### B · Bias (편향)
 - [ ] 한쪽 입장만 강조되었는가?
@@ -54,12 +54,12 @@
 
 ## 3. 통합 호출 매핑
 
-| 축 | 호출할 도구 (Lesson 01-03) |
+| 축 | 호출할 도구 (Lesson 1.1-03) |
 | --- | --- |
-| F · Fact | Lesson 01 판단 체크리스트의 "내가 검토할 지점" |
-| O · Origin | Lesson 03 verify-loop의 Citation-required 패턴 |
-| S · Scope | Lesson 02 강·약점 지도에서 "약함" 칸 항목인지 확인 |
-| C · Confidence | Lesson 03 verify-loop의 Confidence 점수 |
+| F · Fact | Lesson 1.1 판단 체크리스트의 "내가 검토할 지점" |
+| O · Origin | Lesson 1.3 verify-loop의 Citation-required 패턴 |
+| S · Scope | Lesson 1.2 강·약점 지도에서 "약함" 칸 항목인지 확인 |
+| C · Confidence | Lesson 1.3 verify-loop의 Confidence 점수 |
 | B · Bias | (필요 시) 다른 모델에 같은 답을 보여주고 비교 |
 
 ## 4. Trust Floor / Ceiling
