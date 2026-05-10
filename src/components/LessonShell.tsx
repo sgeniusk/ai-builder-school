@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import type { Lesson, Phase } from "@/lib/types";
 import { getJourneys, getLessons, getPhases } from "@/lib/content";
 import { JourneyRail } from "./JourneyRail";
+import { LessonShellMobile } from "./LessonShellMobile";
 import { LessonToc } from "./LessonToc";
 import { PersonaScope } from "./PersonaScope";
 
@@ -30,7 +31,10 @@ export function LessonShell({ lesson, phase, children }: Props) {
   return (
     <PersonaScope>
       <div className="lesson-shell">
-        <div className="lesson-shell__rail">
+        <div
+          id="lesson-rail-drawer"
+          className="lesson-shell__rail"
+        >
           <JourneyRail
             phases={phases}
             lessonsByPhase={lessonsByPhase}
@@ -40,7 +44,10 @@ export function LessonShell({ lesson, phase, children }: Props) {
           />
         </div>
         <main className="lesson-shell__main">{children}</main>
-        <div className="lesson-shell__toc">
+        <div
+          id="lesson-toc-drawer"
+          className="lesson-shell__toc"
+        >
           <LessonToc
             currentLesson={lesson}
             currentPhase={phase}
@@ -48,6 +55,7 @@ export function LessonShell({ lesson, phase, children }: Props) {
           />
         </div>
       </div>
+      <LessonShellMobile />
     </PersonaScope>
   );
 }
