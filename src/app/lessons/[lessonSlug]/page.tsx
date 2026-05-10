@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Container } from "@/components/Layout";
+import { VerificationChecklist } from "@/components/VerificationChecklist";
 import {
   getLessonBySlug,
   getLessons,
@@ -50,8 +50,7 @@ export default async function LessonPage({
   const missionText = lesson.mission ?? lesson.claudeCodeMission;
 
   return (
-    <Container>
-      <article className="lesson-reader">
+    <article className="lesson-reader">
         <p className="kicker">
           Phase {phaseNumStr} · L{lessonNumStr} · {lesson.estimatedMinutes}분 · {LEVEL_LABEL[lesson.level]}
         </p>
@@ -60,10 +59,10 @@ export default async function LessonPage({
 
         {MdxBody && <MdxBody />}
 
-        <h2>1. 문제 이해</h2>
+        <h2 id="section-problem">1. 문제 이해</h2>
         <p style={{ whiteSpace: "pre-line" }}>{lesson.problemScenario}</p>
 
-        <h2>2. 최소 개념</h2>
+        <h2 id="section-concepts">2. 최소 개념</h2>
         {lesson.coreConcepts.map((c) => (
           <div key={c.term} style={{ margin: "16px 0" }}>
             <h3 style={{ margin: "12px 0 4px" }}>{c.term}</h3>
@@ -71,7 +70,7 @@ export default async function LessonPage({
           </div>
         ))}
 
-        <h2>3. 미션</h2>
+        <h2 id="section-mission">3. 미션</h2>
         <div className="callout">
           <div className="kicker">Mission · {lesson.estimatedMinutes}분</div>
           <p style={{ margin: 0, whiteSpace: "pre-line" }}>{missionText}</p>
@@ -95,7 +94,7 @@ export default async function LessonPage({
 
         {lesson.buildSteps.length > 0 && (
           <>
-            <h2>4. 빌드 단계</h2>
+            <h2 id="section-build">4. 빌드 단계</h2>
             <ol className="lesson-steps">
               {lesson.buildSteps.map((s, i) => (
                 <li key={i}>{s}</li>
@@ -104,14 +103,13 @@ export default async function LessonPage({
           </>
         )}
 
-        <h2>5. 검증 체크리스트</h2>
-        <ul className="checklist">
-          {lesson.verificationChecklist.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
+        <h2 id="section-verify">5. 검증 체크리스트</h2>
+        <VerificationChecklist
+          lessonId={lesson.id}
+          items={lesson.verificationChecklist}
+        />
 
-        <h2>6. 산출물</h2>
+        <h2 id="section-deliverable">6. 산출물</h2>
         <div className="callout">
           <div className="kicker">Deliverable</div>
           <p style={{ margin: 0, fontSize: 17, fontWeight: 600, color: "var(--ink)" }}>
@@ -125,7 +123,7 @@ export default async function LessonPage({
 
         <OutputsBlock lesson={lesson} />
 
-        <h2>7. 회고 (3문)</h2>
+        <h2 id="section-reflection">7. 회고 (3문)</h2>
         <ul className="checklist">
           {lesson.reflectionQuestions.map((q, i) => (
             <li key={i}>{q}</li>
@@ -185,8 +183,7 @@ export default async function LessonPage({
             </Link>
           ) : <span style={{ color: "var(--ink-4)" }}>마지막 레슨입니다</span>}
         </nav>
-      </article>
-    </Container>
+    </article>
   );
 }
 

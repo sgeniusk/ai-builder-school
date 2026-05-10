@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Layout";
+import { JourneySelectButton } from "@/components/JourneySelectButton";
 import { PageHead } from "@/components/Sections";
 import { getLessonBySlug, getPhaseBySlug, getJourneys } from "@/lib/content";
 import { JOURNEY_LABEL, JOURNEY_LABEL_KO } from "@/lib/types";
@@ -125,6 +126,11 @@ export default function JourneysPage() {
                   <strong>이 여정 끝에 손에 남는 것 · </strong>
                   {j.expectedOutcome}
                 </div>
+
+                <JourneySelectButton
+                  journeyId={j.id}
+                  firstLessonSlug={j.recommendedLessons[0]}
+                />
               </div>
             </article>
           ))}
