@@ -5,8 +5,8 @@
 
 ## 현황 (2026-05-10 기준)
 
-- 작성 완료 — 4 / 32 (Phase 1)
-- 미작성 — 28 / 32
+- 작성 완료 — 8 / 32 (Phase 1, Phase 2)
+- 미작성 — 24 / 32
 
 ## 작업 단위
 
@@ -26,11 +26,11 @@
 - [x] hallucination-verification (Lesson 1.3)
 - [x] checks-before-trusting-ai-output (Lesson 1.4)
 
-### Phase 2 — Prompt & Context Engineering · 4건
-- [ ] structure-of-good-prompts (Lesson 2.1)
-- [ ] enforcing-output-format (Lesson 2.2)
-- [ ] feeding-long-documents (Lesson 2.3)
-- [ ] build-personal-prompt-library (Lesson 2.4)
+### Phase 2 — Prompt & Context Engineering ✓ 완료
+- [x] structure-of-good-prompts (Lesson 2.1)
+- [x] enforcing-output-format (Lesson 2.2)
+- [x] feeding-long-documents (Lesson 2.3)
+- [x] build-personal-prompt-library (Lesson 2.4)
 
 ### Phase 3 — AI Work OS · 4건
 - [ ] automate-report-drafts (Lesson 3.1)

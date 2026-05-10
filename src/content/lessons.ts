@@ -392,6 +392,14 @@ export const lessons: Lesson[] = [
       "템플릿을 Claude Code 슬래시 명령으로 등록",
     ],
     tags: ["prompt", "structure"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "four-axis-prompt.md",
+        title: "4축 프롬프트 템플릿 (Task/Context/Constraints/Output)",
+        kind: "prompt",
+      },
+    ],
   },
   {
     id: "lesson-202",
@@ -442,6 +450,14 @@ export const lessons: Lesson[] = [
       "RAG 결과에 citations 필드 추가",
     ],
     tags: ["prompt", "structured-output"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "structured-output-example.md",
+        title: "JSON 스키마 + 재시도 루프 미니 예제",
+        kind: "skill",
+      },
+    ],
   },
   {
     id: "lesson-203",
@@ -493,6 +509,14 @@ export const lessons: Lesson[] = [
       "청킹 크기를 바꿔가며 품질 변화를 측정",
     ],
     tags: ["prompt", "long-context"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "long-doc-strategy-comparison.md",
+        title: "Full / Map-Reduce / Selective 비교 실험 노트",
+        kind: "checklist",
+      },
+    ],
   },
   {
     id: "lesson-204",
@@ -543,7 +567,15 @@ export const lessons: Lesson[] = [
       "버전별 A/B 테스트 로그 추가",
       "검색·추천 인터페이스로 확장",
     ],
-    tags: ["prompt", "library", "productivity"],
+    tags: ["prompt", "library", "productivity", "phase-2-capstone"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "prompt-library-skeleton.md",
+        title: "프롬프트 라이브러리 스켈레톤 (폴더 구조 + Front Matter + 첫 템플릿)",
+        kind: "prompt",
+      },
+    ],
   },
   {
     id: "lesson-301",
