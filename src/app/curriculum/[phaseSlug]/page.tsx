@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CurriculumShell } from "@/components/CurriculumShell";
 import { Container } from "@/components/Layout";
 import {
   getLessons,
@@ -42,7 +43,7 @@ export default async function PhaseDetailPage({
   const nextPhase = phase.nextPhaseSlug ? getPhaseBySlug(phase.nextPhaseSlug) : null;
 
   return (
-    <>
+    <CurriculumShell currentPhaseId={phase.id} currentPhaseSlug={phase.slug}>
       <section className="page-head">
         <Container>
           <div
@@ -195,6 +196,6 @@ export default async function PhaseDetailPage({
           </Container>
         </section>
       )}
-    </>
+    </CurriculumShell>
   );
 }
