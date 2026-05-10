@@ -6,6 +6,7 @@ export const projects: Project[] = [
     slug: "document-qa-bot",
     title: "문서 Q&A 봇",
     targetLearner: "개발자·앱 빌더 / AI 엔지니어 심화",
+    targetJourneys: ["engineer", "founder"],
     difficulty: "intermediate",
     requiredPhases: ["phase-2-prompt-engineering", "phase-5-ai-app-dev", "phase-6-rag"],
     finalOutput: "공개 URL로 배포된 문서 Q&A 웹앱 + 근거 스니펫 표시",
@@ -17,6 +18,7 @@ export const projects: Project[] = [
     slug: "meeting-notes-bot",
     title: "회의록 자동 정리 봇",
     targetLearner: "일반 직장인 / 기획자·관리자",
+    targetJourneys: ["practitioner", "adopter"],
     difficulty: "beginner",
     requiredPhases: ["phase-2-prompt-engineering", "phase-3-ai-work-os"],
     finalOutput: "녹취·메모 → 결정·Action Item 구조화된 회의록 파이프라인",
@@ -28,6 +30,7 @@ export const projects: Project[] = [
     slug: "personal-research-agent",
     title: "개인 리서치 에이전트",
     targetLearner: "기획자·관리자 / 개발자·앱 빌더",
+    targetJourneys: ["practitioner", "adopter", "engineer"],
     difficulty: "advanced",
     requiredPhases: [
       "phase-2-prompt-engineering",
@@ -43,6 +46,7 @@ export const projects: Project[] = [
     slug: "blog-to-shortform",
     title: "블로그→쇼츠 자동 파이프라인",
     targetLearner: "콘텐츠 크리에이터",
+    targetJourneys: ["creator"],
     difficulty: "intermediate",
     requiredPhases: [
       "phase-2-prompt-engineering",
@@ -58,6 +62,7 @@ export const projects: Project[] = [
     slug: "rag-with-evals",
     title: "Evals 대시보드가 붙은 RAG",
     targetLearner: "AI 엔지니어 심화",
+    targetJourneys: ["engineer"],
     difficulty: "advanced",
     requiredPhases: [
       "phase-6-rag",
@@ -73,6 +78,7 @@ export const projects: Project[] = [
     slug: "team-onboarding-bot",
     title: "팀 온보딩 봇",
     targetLearner: "기획자·관리자 / 개발자·앱 빌더",
+    targetJourneys: ["adopter", "founder", "engineer"],
     difficulty: "intermediate",
     requiredPhases: [
       "phase-2-prompt-engineering",

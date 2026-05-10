@@ -108,6 +108,7 @@ export type Level = 'beginner' | 'intermediate' | 'advanced';
 | `slug` | `string` |
 | `title` | `string` |
 | `targetLearner` | `string` |
+| `targetJourneys` | `JourneyId[]` — 이 프로젝트가 잘 맞는 여정. /journeys 페이지에 매핑 카드로 노출. |
 | `difficulty` | `Level` |
 | `requiredPhases` | `string[]` — phase slug |
 | `finalOutput` | `string` |

@@ -68,6 +68,10 @@ export function getProjects(): Project[] {
   return projects;
 }
 
+export function getProjectsByJourney(journeyId: JourneyId): Project[] {
+  return projects.filter((p) => p.targetJourneys.includes(journeyId));
+}
+
 export function getTemplates(): ContentTemplate[] {
   return templates;
 }
