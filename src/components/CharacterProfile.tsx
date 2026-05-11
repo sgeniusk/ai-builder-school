@@ -1,7 +1,8 @@
 // 헤더 캐릭터를 누르면 뜨는 프로필 모달. 핸들·여정·완료 lesson 수·완료 phase 배지.
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import type { Journey, Lesson, Phase } from "@/lib/types";
 import { useCharacter } from "@/hooks/useCharacter";
 import { useLessonProgress } from "@/hooks/useLessonProgress";
@@ -22,10 +23,16 @@ export function CharacterProfile({
   lessonsByPhase,
   onClose,
 }: Props) {
-  const { character, setHandle } = useCharacter();
+  const { character, setHandle, reset } = useCharacter();
   const { journey, isLessonComplete } = useLessonProgress();
   const [editing, setEditing] = useState(false);
   const [draftHandle, setDraftHandle] = useState(character?.handle ?? "");
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setPortalTarget(document.body);
+  }, []);
 
   if (!character) return null;
 
@@ -64,7 +71,7 @@ export function CharacterProfile({
     setEditing(false);
   };
 
-  return (
+  const modal = (
     <div
       className={`char-modal-backdrop ${personaClass}`.trim()}
       role="dialog"
@@ -164,7 +171,46 @@ export function CharacterProfile({
           모든 데이터는 이 브라우저의 localStorage 에만 있습니다. 디바이스가
           바뀌면 초기화됩니다.
         </p>
+
+        <div className="char-profile__reset">
+          {confirmReset ? (
+            <div className="char-profile__reset-row">
+              <span className="char-profile__reset-msg">
+                정말 캐릭터를 삭제하고 처음부터 다시 시작할까요? (진행률은
+                유지됩니다)
+              </span>
+              <button
+                type="button"
+                className="char-modal__handle-action"
+                onClick={() => setConfirmReset(false)}
+              >
+                아니오
+              </button>
+              <button
+                type="button"
+                className="char-modal__handle-action char-profile__reset-confirm"
+                onClick={() => {
+                  reset();
+                  onClose();
+                }}
+              >
+                네, 삭제
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              className="char-profile__reset-btn"
+              onClick={() => setConfirmReset(true)}
+            >
+              캐릭터 초기화
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
+
+  if (!portalTarget) return null;
+  return createPortal(modal, portalTarget);
 }

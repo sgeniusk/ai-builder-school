@@ -5,6 +5,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "aibs:progress:v2";
+const CHANGE_EVENT = "aibs:progress:change";
 
 export const SECTIONS = ["build", "verify", "reflect"] as const;
 export type Section = (typeof SECTIONS)[number];
@@ -54,6 +55,8 @@ function writeStorage(state: ProgressState) {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    // same-tab 안 모든 훅 인스턴스 동기화. (storage event 는 다른 탭에서만 발화.)
+    window.dispatchEvent(new Event(CHANGE_EVENT));
   } catch {
     // 용량 초과 등은 조용히 무시
   }
@@ -75,8 +78,13 @@ export function useLessonProgress() {
     const onStorage = (e: StorageEvent) => {
       if (e.key === STORAGE_KEY) setState(readStorage());
     };
+    const onChange = () => setState(readStorage());
     window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    window.addEventListener(CHANGE_EVENT, onChange);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener(CHANGE_EVENT, onChange);
+    };
   }, []);
 
   const persist = useCallback((next: ProgressState) => {

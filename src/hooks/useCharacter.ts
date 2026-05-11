@@ -4,6 +4,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "aibs:character:v1";
+const CHANGE_EVENT = "aibs:character:change";
 
 export const ANIMALS = ["puppy", "kitten", "dolphin"] as const;
 export type Animal = (typeof ANIMALS)[number];
@@ -47,6 +48,8 @@ function writeStorage(c: Character) {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(c));
+    // same-tab 안 모든 훅 인스턴스 동기화. (storage event 는 다른 탭에서만 발화하므로 보조 채널.)
+    window.dispatchEvent(new Event(CHANGE_EVENT));
   } catch {
     /* ignore */
   }
@@ -62,8 +65,13 @@ export function useCharacter() {
     const onStorage = (e: StorageEvent) => {
       if (e.key === STORAGE_KEY) setCharacter(readStorage());
     };
+    const onChange = () => setCharacter(readStorage());
     window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    window.addEventListener(CHANGE_EVENT, onChange);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener(CHANGE_EVENT, onChange);
+    };
   }, []);
 
   const create = useCallback(
@@ -99,11 +107,23 @@ export function useCharacter() {
     [character],
   );
 
+  const reset = useCallback(() => {
+    if (typeof window === "undefined") return;
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+      window.dispatchEvent(new Event(CHANGE_EVENT));
+    } catch {
+      /* ignore */
+    }
+    setCharacter(null);
+  }, []);
+
   return {
     mounted,
     character,        // null 이면 아직 생성 안 됨 (온보딩 띄울 신호)
     create,
     setHandle,
     setAnimal,
+    reset,
   };
 }

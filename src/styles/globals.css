@@ -1409,9 +1409,11 @@ body {
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     z-index: 100;
-    display: grid;
-    place-items: center;
-    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 5vh 20px;
     animation: drawer-fade-in 0.18s var(--ease);
   }
   .char-modal {
@@ -1421,13 +1423,12 @@ body {
     padding: 32px;
     max-width: 440px;
     width: 100%;
-    max-height: 88vh;
-    overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
     position: relative;
     word-break: keep-all;
     overflow-wrap: break-word;
     text-wrap: pretty;
+    margin: auto;
   }
   .char-modal__close {
     position: absolute;
@@ -1639,6 +1640,48 @@ body {
   .char-profile__phase-num {
     font-size: 10px;
     color: var(--ink-3);
+  }
+
+  .char-profile__reset {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+  }
+  .char-profile__reset-btn {
+    background: transparent;
+    border: 0;
+    color: var(--ink-4);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: var(--r-sm);
+    transition: color 0.12s var(--ease), background 0.12s var(--ease);
+    font-family: inherit;
+  }
+  .char-profile__reset-btn:hover {
+    color: var(--ink-2);
+    background: var(--paper-2);
+  }
+  .char-profile__reset-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  .char-profile__reset-msg {
+    flex: 1;
+    min-width: 200px;
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .char-profile__reset-confirm {
+    border-color: color-mix(in srgb, #c33 40%, var(--line-2)) !important;
+    color: #c33 !important;
+  }
+  .char-profile__reset-confirm:hover {
+    border-color: #c33 !important;
+    background: color-mix(in srgb, #c33 8%, transparent);
   }
 
   /* ===== Interactive verification checklist ===== */

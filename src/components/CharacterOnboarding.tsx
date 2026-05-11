@@ -1,7 +1,8 @@
 // 첫 진입 시 한 번만 뜨는 캐릭터 생성 모달. 익명 핸들 자동 생성 + 변경 가능.
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   generateHandle,
   useCharacter,
@@ -16,6 +17,11 @@ export function CharacterOnboarding({ onDone }: { onDone: () => void }) {
   const [handle, setHandle] = useState(() => generateHandle());
   const [animal] = useState<Animal>("puppy");
   const [editing, setEditing] = useState(false);
+  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setPortalTarget(document.body);
+  }, []);
 
   const handleStart = () => {
     const trimmed = handle.trim().slice(0, HANDLE_MAX);
@@ -24,7 +30,7 @@ export function CharacterOnboarding({ onDone }: { onDone: () => void }) {
     onDone();
   };
 
-  return (
+  const modal = (
     <div className="char-modal-backdrop" role="dialog" aria-modal="true">
       <div className="char-modal">
         <div className="char-modal__hero">
@@ -91,4 +97,7 @@ export function CharacterOnboarding({ onDone }: { onDone: () => void }) {
       </div>
     </div>
   );
+
+  if (!portalTarget) return null;
+  return createPortal(modal, portalTarget);
 }
