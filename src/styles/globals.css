@@ -1379,12 +1379,89 @@ body {
     padding: 0;
     margin: 12px 0;
   }
-  .checklist--interactive li { margin: 6px 0; }
+  .checklist--interactive li {
+    margin: 6px 0;
+    border-bottom: 0;
+    padding: 0;
+  }
+  /* 부모 .checklist 의 ::before (빈 가짜 박스) 가 같이 잡히지 않도록 명시적 차단 */
+  .checklist--interactive li::before { display: none; content: none; }
+  /* ordered checklist (buildSteps) — label 안 번호 표시 */
+  .checklist--interactive label {
+    grid-template-columns: 18px auto 1fr;
+  }
+  .checklist--interactive:not(.checklist--build) label {
+    grid-template-columns: 18px 1fr;
+  }
+  .checklist--interactive__num {
+    font-size: 12px;
+    color: var(--ink-4);
+    align-self: center;
+  }
+
+  /* ===== Lesson progress trio (우측 진행률 카드 — 빌드·검증·회고 3-section) ===== */
+  .lesson-progress-trio {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px;
+    display: grid;
+    gap: 6px;
+  }
+  .lesson-progress-trio__row a {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: var(--r-sm);
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: background 0.12s var(--ease);
+  }
+  .lesson-progress-trio__row a:hover { background: var(--paper-2); }
+  .lesson-progress-trio__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .lesson-progress-trio__weight {
+    font-size: 9px;
+    color: var(--ink-4);
+    padding: 1px 5px;
+    background: var(--paper-2);
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+  .lesson-progress-trio__bar {
+    height: 4px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .lesson-progress-trio__fill {
+    display: block;
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+    transition: width 0.25s var(--ease);
+  }
+  .lesson-progress-trio__count {
+    font-size: 10px;
+    color: var(--ink-3);
+    min-width: 28px;
+    text-align: right;
+  }
+  .lesson-progress-trio__weighted {
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+    margin-top: 4px;
+  }
   .checklist--interactive label {
     display: grid;
-    grid-template-columns: 18px 1fr;
     gap: 12px;
-    align-items: start;
+    align-items: center;
     padding: 10px 14px;
     border: 1px solid var(--line);
     border-radius: var(--r-sm);
@@ -1394,7 +1471,7 @@ body {
   }
   .checklist--interactive label:hover { border-color: var(--ink-3); }
   .checklist--interactive input[type="checkbox"] {
-    margin: 4px 0 0;
+    margin: 0;
     width: 16px;
     height: 16px;
     accent-color: var(--ink);

@@ -38,9 +38,7 @@ export function CurriculumToc({
             const list = recommendedLessonsByJourney[j.id] ?? [];
             const total = list.length;
             const done = mounted
-              ? list.filter((l) =>
-                  isLessonComplete(l.id, l.verificationChecklist?.length ?? 0),
-                ).length
+              ? list.filter((l) => isLessonComplete(l)).length
               : 0;
             const pct = total === 0 ? 0 : Math.round((done / total) * 100);
             const isActive = j.id === currentJourney;

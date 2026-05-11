@@ -40,7 +40,7 @@ export function JourneyRail({
         return (
           acc +
           list.filter((l) =>
-            isLessonComplete(l.id, l.verificationChecklist?.length ?? 0),
+            isLessonComplete(l),
           ).length
         );
       }, 0)
@@ -54,7 +54,7 @@ export function JourneyRail({
   const journeyTotal = journeyLessons.length;
   const journeyDone = mounted
     ? journeyLessons.filter((l) =>
-        isLessonComplete(l.id, l.verificationChecklist?.length ?? 0),
+        isLessonComplete(l),
       ).length
     : 0;
   const journeyPct =
@@ -142,7 +142,7 @@ type PhaseRowProps = {
   currentLessonId: string;
   recommendedLessonSlugs: Set<string>;
   mounted: boolean;
-  isLessonComplete: (lessonId: string, totalChecks: number) => boolean;
+  isLessonComplete: (lesson: Lesson) => boolean;
 };
 
 function PhaseRow({
@@ -177,8 +177,7 @@ function PhaseRow({
         <span className="ph-title">{phase.titleKo}</span>
         <span className="ph-prog-dots" aria-hidden>
           {lessons.map((l) => {
-            const total = l.verificationChecklist?.length ?? 0;
-            const done = mounted && isLessonComplete(l.id, total);
+            const done = mounted && isLessonComplete(l);
             const isCurrentLesson = l.id === currentLessonId;
             return (
               <span
@@ -199,8 +198,7 @@ function PhaseRow({
       {open && lessons.length > 0 && (
         <ul className="phase-row__lessons">
           {lessons.map((lesson) => {
-            const total = lesson.verificationChecklist?.length ?? 0;
-            const done = mounted && isLessonComplete(lesson.id, total);
+            const done = mounted && isLessonComplete(lesson);
             const isActive = lesson.id === currentLessonId;
             const isRec = recommendedLessonSlugs.has(lesson.slug);
             return (

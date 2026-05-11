@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { VerificationChecklist } from "@/components/VerificationChecklist";
+import { SectionChecklist } from "@/components/SectionChecklist";
 import {
   getLessonBySlug,
   getLessons,
@@ -95,17 +95,19 @@ export default async function LessonPage({
         {lesson.buildSteps.length > 0 && (
           <>
             <h2 id="section-build">4. 빌드 단계</h2>
-            <ol className="lesson-steps">
-              {lesson.buildSteps.map((s, i) => (
-                <li key={i}>{s}</li>
-              ))}
-            </ol>
+            <SectionChecklist
+              lessonId={lesson.id}
+              section="build"
+              items={lesson.buildSteps}
+              ordered
+            />
           </>
         )}
 
         <h2 id="section-verify">5. 검증 체크리스트</h2>
-        <VerificationChecklist
+        <SectionChecklist
           lessonId={lesson.id}
+          section="verify"
           items={lesson.verificationChecklist}
         />
 
@@ -124,11 +126,11 @@ export default async function LessonPage({
         <OutputsBlock lesson={lesson} />
 
         <h2 id="section-reflection">7. 회고 (3문)</h2>
-        <ul className="checklist">
-          {lesson.reflectionQuestions.map((q, i) => (
-            <li key={i}>{q}</li>
-          ))}
-        </ul>
+        <SectionChecklist
+          lessonId={lesson.id}
+          section="reflect"
+          items={lesson.reflectionQuestions}
+        />
 
         {lesson.extensionIdeas.length > 0 && (
           <>

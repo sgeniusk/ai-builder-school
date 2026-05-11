@@ -1,10 +1,15 @@
-// 레슨 페이지 우측 사이드바 — 3개 카드(TOC / 진행률 / 형제 lesson) 시안 option-2 구조.
+// 레슨 페이지 우측 사이드바 — 3개 카드(TOC / 빌드·검증·회고 3-section 진행률 / 형제 lesson).
 "use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Lesson, Phase } from "@/lib/types";
-import { useLessonProgress } from "@/hooks/useLessonProgress";
+import {
+  SECTIONS,
+  SECTION_WEIGHTS,
+  useLessonProgress,
+  type Section,
+} from "@/hooks/useLessonProgress";
 
 const SECTION_IDS = [
   { id: "section-problem", label: "문제 이해" },
@@ -16,6 +21,18 @@ const SECTION_IDS = [
   { id: "section-reflection", label: "회고" },
 ] as const;
 
+const SECTION_META: Record<Section, { label: string; anchorId: string }> = {
+  build: { label: "빌드", anchorId: "section-build" },
+  verify: { label: "검증", anchorId: "section-verify" },
+  reflect: { label: "회고", anchorId: "section-reflection" },
+};
+
+function sectionItems(lesson: Lesson, section: Section): string[] {
+  if (section === "build") return lesson.buildSteps ?? [];
+  if (section === "verify") return lesson.verificationChecklist ?? [];
+  return lesson.reflectionQuestions ?? [];
+}
+
 type Props = {
   currentLesson: Lesson;
   currentPhase: Phase | undefined;
@@ -23,7 +40,8 @@ type Props = {
 };
 
 export function LessonToc({ currentLesson, currentPhase, siblingLessons }: Props) {
-  const { mounted, getLessonChecks, isLessonComplete } = useLessonProgress();
+  const { mounted, getSectionPct, getWeightedPct, isLessonComplete } =
+    useLessonProgress();
   const [activeId, setActiveId] = useState<string>(SECTION_IDS[0].id);
 
   useEffect(() => {
@@ -46,17 +64,12 @@ export function LessonToc({ currentLesson, currentPhase, siblingLessons }: Props
 
   const activeIndex = SECTION_IDS.findIndex((s) => s.id === activeId);
 
-  // 현재 lesson 검증 체크 진행률
-  const total = currentLesson.verificationChecklist?.length ?? 0;
-  const done = mounted ? getLessonChecks(currentLesson.id).length : 0;
-  const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+  const weighted = mounted ? getWeightedPct(currentLesson) : 0;
 
-  // Phase 진행률 (siblings 중 완료된 lesson 비율)
+  // Phase 진행률 (siblings 중 셋 다 완료된 lesson 비율)
   const phaseTotal = siblingLessons.length;
   const phaseDone = mounted
-    ? siblingLessons.filter((l) =>
-        isLessonComplete(l.id, l.verificationChecklist?.length ?? 0),
-      ).length
+    ? siblingLessons.filter((l) => isLessonComplete(l)).length
     : 0;
   const phasePct =
     phaseTotal === 0 ? 0 : Math.round((phaseDone / phaseTotal) * 100);
@@ -92,28 +105,55 @@ export function LessonToc({ currentLesson, currentPhase, siblingLessons }: Props
         </ul>
       </div>
 
-      {/* 2. 진행률 카드 — segmented bars + Phase 진행 */}
+      {/* 2. 3-section 진행률 카드 */}
       <div className="progress-card">
         <span className="rail-section-label">레슨 진행률</span>
-        <div className="seg-progress" aria-hidden>
-          {Array.from({ length: total }).map((_, i) => (
-            <span
-              key={i}
-              className={`seg${i < done ? " seg--done" : ""}`}
-              suppressHydrationWarning
-            />
-          ))}
-        </div>
-        <div className="prog-meta">
+
+        <ul className="lesson-progress-trio">
+          {SECTIONS.map((s) => {
+            const items = sectionItems(currentLesson, s);
+            const total = items.length;
+            const pct = mounted ? getSectionPct(currentLesson.id, s, total) : 0;
+            const meta = SECTION_META[s];
+            const weightPct = Math.round(SECTION_WEIGHTS[s] * 100);
+            return (
+              <li key={s} className={`lesson-progress-trio__row pp-${s}`}>
+                <a href={`#${meta.anchorId}`}>
+                  <span className="lesson-progress-trio__label">
+                    {meta.label}
+                    <span className="lesson-progress-trio__weight mono">
+                      {weightPct}
+                    </span>
+                  </span>
+                  <span className="lesson-progress-trio__bar" aria-hidden>
+                    <span
+                      className="lesson-progress-trio__fill"
+                      style={{ width: `${pct}%` }}
+                    />
+                  </span>
+                  <span
+                    className="lesson-progress-trio__count tnum mono"
+                    suppressHydrationWarning
+                  >
+                    {Math.round((pct / 100) * total)}/{total}
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="prog-meta lesson-progress-trio__weighted">
           <div className="prog-frac tnum">
-            <span suppressHydrationWarning>{done}</span>
-            <span className="prog-frac__sub"> / {total} 체크</span>
-          </div>
-          <div className="prog-pct mono" suppressHydrationWarning>
-            {pct}%
+            <span suppressHydrationWarning>{weighted}</span>
+            <span className="prog-frac__sub">% 가중 평균</span>
           </div>
         </div>
-        <p className="prog-note">본문 5번 검증 체크리스트와 연동됩니다.</p>
+
+        <p className="prog-note">
+          빌드 50 · 검증 30 · 회고 20 가중. 셋 다 100% 면 완료.
+        </p>
+
         {currentPhase && phaseTotal > 0 && (
           <div className="ph-prog-wrap">
             <div className="ph-prog-label">
@@ -140,8 +180,7 @@ export function LessonToc({ currentLesson, currentPhase, siblingLessons }: Props
           </span>
           <ul className="sibling-card__list">
             {siblingLessons.map((sib) => {
-              const t = sib.verificationChecklist?.length ?? 0;
-              const isDone = mounted && isLessonComplete(sib.id, t);
+              const isDone = mounted && isLessonComplete(sib);
               const isCurrent = sib.id === currentLesson.id;
               return (
                 <li
