@@ -3,10 +3,10 @@
 > 한 세션에 끝나지 않는 multi-session 작업. 진행할 때마다 이 파일을 갱신.
 > 자세한 작성 가이드는 [`mdx-rollout-context-notes.md`](mdx-rollout-context-notes.md).
 
-## 현황 (2026-05-10 기준)
+## 현황 (2026-05-11 기준)
 
-- 작성 완료 — 8 / 32 (Phase 1, Phase 2)
-- 미작성 — 24 / 32
+- 작성 완료 — 12 / 32 (Phase 1, Phase 2, Phase 3)
+- 미작성 — 20 / 32
 
 ## 작업 단위
 
@@ -32,11 +32,11 @@
 - [x] feeding-long-documents (Lesson 2.3)
 - [x] build-personal-prompt-library (Lesson 2.4)
 
-### Phase 3 — AI Work OS · 4건
-- [ ] automate-report-drafts (Lesson 3.1)
-- [ ] meeting-notes-pipeline (Lesson 3.2)
-- [ ] research-workflow (Lesson 3.3)
-- [ ] blog-writing-pipeline (Lesson 3.4)
+### Phase 3 — AI Work OS ✓ 완료
+- [x] automate-report-drafts (Lesson 3.1)
+- [x] meeting-notes-pipeline (Lesson 3.2)
+- [x] research-workflow (Lesson 3.3)
+- [x] blog-writing-pipeline (Lesson 3.4)
 
 ### Phase 4 — Codex / Claude Code Workflow · 6건
 - [ ] coding-agent-setup (Lesson 4.1)

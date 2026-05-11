@@ -7,6 +7,10 @@ import StructureOfGoodPromptsBody from "./lessons/structure-of-good-prompts.mdx"
 import EnforcingOutputFormatBody from "./lessons/enforcing-output-format.mdx";
 import FeedingLongDocumentsBody from "./lessons/feeding-long-documents.mdx";
 import BuildPersonalPromptLibraryBody from "./lessons/build-personal-prompt-library.mdx";
+import AutomateReportDraftsBody from "./lessons/automate-report-drafts.mdx";
+import MeetingNotesPipelineBody from "./lessons/meeting-notes-pipeline.mdx";
+import ResearchWorkflowBody from "./lessons/research-workflow.mdx";
+import BlogWritingPipelineBody from "./lessons/blog-writing-pipeline.mdx";
 
 /**
  * slug → MDX body component.
@@ -21,6 +25,10 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "enforcing-output-format": EnforcingOutputFormatBody,
   "feeding-long-documents": FeedingLongDocumentsBody,
   "build-personal-prompt-library": BuildPersonalPromptLibraryBody,
+  "automate-report-drafts": AutomateReportDraftsBody,
+  "meeting-notes-pipeline": MeetingNotesPipelineBody,
+  "research-workflow": ResearchWorkflowBody,
+  "blog-writing-pipeline": BlogWritingPipelineBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {

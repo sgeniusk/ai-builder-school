@@ -627,6 +627,14 @@ export const lessons: Lesson[] = [
       "다국어 초안 버전 확장",
     ],
     tags: ["work-os", "reports"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "report-pipeline.md",
+        title: "Template Grounding + 3 단 루프 보고서 파이프라인",
+        kind: "prompt",
+      },
+    ],
   },
   {
     id: "lesson-302",
@@ -677,6 +685,14 @@ export const lessons: Lesson[] = [
       "지난 회의 Action Item 이행률 대시보드",
     ],
     tags: ["work-os", "meetings"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "meeting-pipeline.md",
+        title: "회의록 자동 정리 — 스키마·재시도·배포",
+        kind: "skill",
+      },
+    ],
   },
   {
     id: "lesson-303",
@@ -728,6 +744,14 @@ export const lessons: Lesson[] = [
       "주간 자동 리서치 봇",
     ],
     tags: ["work-os", "research"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "research-pipeline.md",
+        title: "Question Decomposition + Evidence Table 리서치 파이프라인",
+        kind: "checklist",
+      },
+    ],
   },
   {
     id: "lesson-304",
@@ -777,7 +801,15 @@ export const lessons: Lesson[] = [
       "뉴스레터/쇼츠 스크립트로 재가공",
       "발행 지표로 역피드백 루프",
     ],
-    tags: ["work-os", "content"],
+    tags: ["work-os", "content", "phase-3-capstone"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "blog-pipeline.md",
+        title: "블로그 4-pass 편집 + Style Capsule",
+        kind: "prompt",
+      },
+    ],
   },
   {
     id: "lesson-401",
