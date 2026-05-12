@@ -1,4 +1,5 @@
 import type { ComponentType } from "react";
+import WhatIsALoopBody from "./lessons/what-is-a-loop.mdx";
 import CommonSkillsBody from "./lessons/common-skills-of-future-proof-people.mdx";
 import WhatLlmsBody from "./lessons/what-llms-are-good-and-bad-at.mdx";
 import HallucinationVerificationBody from "./lessons/hallucination-verification.mdx";
@@ -7,6 +8,7 @@ import StructureOfGoodPromptsBody from "./lessons/structure-of-good-prompts.mdx"
 import EnforcingOutputFormatBody from "./lessons/enforcing-output-format.mdx";
 import FeedingLongDocumentsBody from "./lessons/feeding-long-documents.mdx";
 import BuildPersonalPromptLibraryBody from "./lessons/build-personal-prompt-library.mdx";
+import MetaPromptingBody from "./lessons/meta-prompting.mdx";
 import AutomateReportDraftsBody from "./lessons/automate-report-drafts.mdx";
 import MeetingNotesPipelineBody from "./lessons/meeting-notes-pipeline.mdx";
 import ResearchWorkflowBody from "./lessons/research-workflow.mdx";
@@ -17,12 +19,14 @@ import LettingAiReadCodebaseBody from "./lessons/letting-ai-read-codebase.mdx";
 import PlanWithAiBody from "./lessons/plan-with-ai.mdx";
 import WriteTestsWithCodingAgentBody from "./lessons/write-tests-with-coding-agent.mdx";
 import BugReproductionLoopBody from "./lessons/bug-reproduction-loop.mdx";
+import NightlyLoopPatternBody from "./lessons/nightly-loop-pattern.mdx";
 
 /**
  * slug → MDX body component.
  * 새 레슨도 같은 패턴으로 `src/content/lessons/<slug>.mdx` 생성 + 여기 등록.
  */
 export const lessonBodies: Record<string, ComponentType | undefined> = {
+  "what-is-a-loop": WhatIsALoopBody,
   "common-skills-of-future-proof-people": CommonSkillsBody,
   "what-llms-are-good-and-bad-at": WhatLlmsBody,
   "hallucination-verification": HallucinationVerificationBody,
@@ -31,6 +35,7 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "enforcing-output-format": EnforcingOutputFormatBody,
   "feeding-long-documents": FeedingLongDocumentsBody,
   "build-personal-prompt-library": BuildPersonalPromptLibraryBody,
+  "meta-prompting": MetaPromptingBody,
   "automate-report-drafts": AutomateReportDraftsBody,
   "meeting-notes-pipeline": MeetingNotesPipelineBody,
   "research-workflow": ResearchWorkflowBody,
@@ -41,6 +46,7 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "plan-with-ai": PlanWithAiBody,
   "write-tests-with-coding-agent": WriteTestsWithCodingAgentBody,
   "bug-reproduction-loop": BugReproductionLoopBody,
+  "nightly-loop-pattern": NightlyLoopPatternBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {

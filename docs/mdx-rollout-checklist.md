@@ -3,11 +3,12 @@
 > 한 세션에 끝나지 않는 multi-session 작업. 진행할 때마다 이 파일을 갱신.
 > 자세한 작성 가이드는 [`mdx-rollout-context-notes.md`](mdx-rollout-context-notes.md).
 
-## 현황 (2026-05-12 기준)
+## 현황 (2026-05-13 기준)
 
-- 작성 완료 — 18 / 32 (Phase 1, 2, 3, 4)
-- 미작성 — 14 / 32
-- Phase 4 는 **Codex CLI 위임 파일럿 성공** — 같은 패턴으로 Phase 5~12 위임 가능
+- 작성 완료 — **21 / 35** (Phase 1, 2, 3, 4 + 듀이 분석에서 추가된 신규 3 lesson)
+- 미작성 — 14 / 35
+- Phase 4 + 듀이 신규 3 lesson 모두 **Codex CLI 위임 성공** — 같은 패턴으로 Phase 5~12 위임 가능
+- 듀이 흡수로 *Loop 입문 (Phase 1)* · *메타 프롬프팅 (Phase 2)* · *Nightly Loop (Phase 4)* 신규 lesson 추가됨 (lesson-100, lesson-205, lesson-407)
 
 ## 작업 단위
 

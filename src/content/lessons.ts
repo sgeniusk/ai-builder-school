@@ -2,6 +2,91 @@ import type { Lesson } from "@/lib/types";
 
 export const lessons: Lesson[] = [
   {
+    id: "lesson-100",
+    slug: "what-is-a-loop",
+    phaseId: "phase-1",
+    titleKo: "루프란 무엇인가",
+    titleEn: "What is a loop",
+    hook: "매일 같은 일을 다시 한다면, 그 반복은 이미 작은 루프예요.",
+    summary: "AI Builder School 전체를 관통하는 7-step 학습 루프의 뜻을 배우고, 내 일에서 매일 도는 루프 한 개를 카드로 그립니다.",
+    level: "beginner",
+    estimatedMinutes: 35,
+    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    prerequisites: [],
+    learningGoals: [
+      "루프를 input, process, check, repeat 네 단계로 설명할 수 있다",
+      "학습 루프, 작업 루프, 자동 루프의 차이를 예시로 구분한다",
+      "내 일에서 매일 반복되는 루프 한 개를 카드로 시각화한다",
+      "이후 모든 레슨의 7-step 구조를 루프로 읽을 수 있다",
+    ],
+    problemScenario:
+      "매일 아침 비슷한 보고서를 열고, 어제 숫자를 넣고, 문장을 다듬고, 팀장에게 보내기 전에 다시 확인합니다. 그런데 매번 처음 하는 일처럼 느껴진다면 반복은 있지만 루프는 없는 상태예요. 루프는 같은 일을 다시 하는 것이 아니라, 다시 할 때 조금 더 나아지게 만드는 구조입니다.",
+    coreConcepts: [
+      {
+        term: "Input → Process → Check → Repeat",
+        explanation: "루프는 들어오는 재료, 처리 방식, 확인 기준, 다음 회차로 넘길 개선점으로 이루어집니다.",
+      },
+      {
+        term: "Learning Loop",
+        explanation: "배운 뒤 바로 써보고, 결과를 확인하고, 다음 시도에 반영하는 학습 구조입니다.",
+      },
+      {
+        term: "Work Loop",
+        explanation: "보고서, 회의록, 고객 답변처럼 매일 같은 자리에서 반복되는 업무 흐름입니다.",
+      },
+      {
+        term: "Automation Loop",
+        explanation: "사람이 기준을 정해두면 AI나 도구가 일부 단계를 반복 실행하는 구조입니다.",
+      },
+    ],
+    codexMission:
+      "Codex에게 내 하루 업무 중 매일 반복되는 작업 5개를 묻고, 그중 하나를 input, process, check, repeat 카드로 정리하게 한다.",
+    claudeCodeMission:
+      "Claude Code에게 `loop-card.md` 파일을 만들게 하고, 내 일의 한 사이클과 5% 개선 지점을 카드 형태로 채운다.",
+    mission:
+      "Claude Code에게 아래 작업을 맡깁니다. 35분 안에 끝내는 걸 목표로 하세요.\n\n작업. 내 일에서 매일 반복되는 루프 한 개를 골라 `loop-card.md`로 정리합니다.\n\n포함할 내용.\n1. 내 일의 한 사이클을 한 줄로 씁니다.\n2. input, process, check, repeat 네 칸을 채웁니다.\n3. 매일 같은 자리와 시간을 정합니다.\n4. 다음 회차에 5%만 좋아질 개선 지점 한 곳을 고릅니다.\n5. 한 주 뒤 회고할 질문을 남깁니다.\n\n에이전트에게 당신의 직군, 자주 만드는 산출물, 매일 반복되는 작업을 짧게 알려주세요. 그래야 일반적인 루프가 아니라 내 일의 루프가 됩니다.",
+    codexNote:
+      "Codex CLI에서는 먼저 업무 후보 5개를 표로 뽑게 한 뒤, 하나만 골라 `loop-card.md`로 확장하라고 요청하면 결과가 안정적입니다.",
+    buildSteps: [
+      "오늘 또는 어제 했던 반복 작업 5개를 적는다",
+      "그중 매일 같은 시간대에 돌아오는 작업 1개를 고른다",
+      "input, process, check, repeat 네 칸으로 나눈다",
+      "check 단계에서 사람이 꼭 봐야 하는 기준을 한 줄로 적는다",
+      "다음 회차에 5% 개선할 자리 한 곳과 회고 시간을 정한다",
+    ],
+    verificationChecklist: [
+      "한 사이클이 한 줄로 구체적으로 적혀 있는가",
+      "input, process, check, repeat 네 칸이 모두 채워졌는가",
+      "매일 같은 자리와 시간이 실제 일정과 연결되어 있는가",
+      "5% 개선 지점이 너무 크지 않고 바로 시도 가능한가",
+      "한 주 뒤 회고할 회수와 변화 기준이 정해졌는가",
+    ],
+    deliverable: {
+      title: "내 일의 루프 카드",
+      description: "매일 반복되는 작업 하나를 input, process, check, repeat로 시각화한 한 장.",
+      format: "Markdown 파일(.md) · 1페이지",
+    },
+    reflectionQuestions: [
+      "내가 매일 반복하지만 아직 루프로 관리하지 않는 일은 무엇인가요?",
+      "AI가 도와도 되는 단계와 사람이 확인해야 하는 단계는 어디인가요?",
+      "다음 한 주 동안 몇 번이나 같은 루프를 돌릴 수 있나요?",
+    ],
+    extensionIdeas: [
+      "루프 카드를 주간 회고 템플릿에 붙여 매주 업데이트합니다",
+      "팀원 한 명의 루프 카드와 비교해 공통 check 기준을 찾습니다",
+      "Phase 2에서 이 루프를 프롬프트 템플릿으로 바꿉니다",
+    ],
+    tags: ["loop", "literacy", "meta-learning"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "loop-card.md",
+        title: "내 일의 루프 카드 템플릿",
+        kind: "note",
+      },
+    ],
+  },
+  {
     id: "lesson-101",
     slug: "common-skills-of-future-proof-people",
     phaseId: "phase-1",
@@ -573,6 +658,91 @@ export const lessons: Lesson[] = [
       {
         filename: "prompt-library-skeleton.md",
         title: "프롬프트 라이브러리 스켈레톤 (폴더 구조 + Front Matter + 첫 템플릿)",
+        kind: "prompt",
+      },
+    ],
+  },
+  {
+    id: "lesson-205",
+    slug: "meta-prompting",
+    phaseId: "phase-2",
+    titleKo: "메타 프롬프팅 — 프롬프트를 만드는 프롬프트",
+    titleEn: "Meta prompting — the prompt that writes the prompt",
+    hook: "좋은 프롬프트를 혼자 붙잡고 오래 고민하지 말고, 그 프롬프트를 만드는 일부터 AI에게 맡겨보세요.",
+    summary: "Lesson 2.1의 4축을 재귀 적용해 AI가 내 작업에 맞는 정밀 프롬프트를 만들게 하고, 결과를 개인 프롬프트 라이브러리에 저장합니다.",
+    level: "beginner",
+    estimatedMinutes: 40,
+    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    prerequisites: ["build-personal-prompt-library"],
+    learningGoals: [
+      "메타 프롬프팅을 프롬프트를 만드는 프롬프트로 설명할 수 있다",
+      "Task, Context, Constraints, Output을 Goal, Context, Constraints, Done When으로 매핑한다",
+      "내 업무 3개에 대해 AI가 만든 정밀 프롬프트를 비교한다",
+      "완성된 프롬프트를 개인 라이브러리에 저장하고 버전 약속을 남긴다",
+    ],
+    problemScenario:
+      "막연히 'Pydantic v1을 v2로 바꿔줘'라고 쓰면 AI는 어디를 어떻게 바꿀지 추측합니다. 반대로 AI에게 먼저 좋은 작업 프롬프트를 만들어 달라고 하면 대상 파일, 변환 규칙, 검증 조건, 완료 기준이 한 번에 잡힙니다. 프롬프트를 직접 쓰는 단계에서 프롬프트를 설계하게 하는 단계로 올라가는 거예요.",
+    coreConcepts: [
+      {
+        term: "Goal",
+        explanation: "Lesson 2.1의 Task에 해당합니다. AI가 최종적으로 달성해야 할 목표를 구체화합니다.",
+      },
+      {
+        term: "Context",
+        explanation: "프로젝트, 독자, 파일, 업무 배경처럼 AI가 알아야 할 주변 정보를 채웁니다.",
+      },
+      {
+        term: "Constraints",
+        explanation: "톤, 금지 사항, 도구, 시간, 기존 규칙처럼 반드시 지켜야 할 경계를 정합니다.",
+      },
+      {
+        term: "Done When",
+        explanation: "Lesson 2.1의 Output을 한 단계 확장한 완료 기준입니다. 무엇이 나오면 끝인지와 어떻게 확인할지를 적습니다.",
+      },
+    ],
+    codexMission:
+      "Codex에게 내 프로젝트를 읽고 /goal이나 일반 작업 요청으로 가장 효과가 큰 후보 3개를 고르게 한 뒤, 각 후보에 대해 Goal, Context, Constraints, Done When 구조의 정밀 프롬프트를 작성하게 한다.",
+    claudeCodeMission:
+      "Claude Code에게 `meta-prompt-template.md`를 만들고, 내 업무 후보 3개에 대해 메타 프롬프트와 AI가 생성한 정밀 프롬프트를 함께 저장하게 한다.",
+    mission:
+      "Claude Code에게 아래 작업을 맡깁니다. 40분 안에 끝내는 걸 목표로 하세요.\n\n작업. 내 일에서 자주 반복되는 작업 3개를 고르고, AI에게 메타 프롬프트를 써서 각 작업의 정밀 프롬프트를 받아 `meta-prompt-template.md`로 정리합니다.\n\n포함할 내용.\n1. 작업 후보 3개를 고릅니다.\n2. Goal, Context, Constraints, Done When 네 칸의 메타 프롬프트를 작성합니다.\n3. AI가 만든 정밀 프롬프트 3개를 저장합니다.\n4. 각 프롬프트를 어느 라이브러리 위치에 둘지 정합니다.\n5. 직접 쓴 프롬프트와 AI가 만든 프롬프트의 차이를 회고합니다.\n\n에이전트에게 당신의 역할, 반복 작업, 현재 쓰는 프롬프트 저장 위치를 알려주세요.",
+    codexNote:
+      "Codex의 `/goal`을 쓰는 경우에도 원리는 같습니다. 먼저 좋은 `/goal` 문장을 AI에게 만들게 하고, 그 결과를 실행 전에 사람이 검토하세요.",
+    buildSteps: [
+      "이번 주에 반복해서 요청할 작업 후보 3개를 고른다",
+      "각 작업을 Goal, Context, Constraints, Done When 네 칸으로 묻는 메타 프롬프트를 실행한다",
+      "AI가 만든 정밀 프롬프트에서 빠진 맥락과 과한 제약을 표시한다",
+      "가장 쓸 만한 버전을 개인 프롬프트 라이브러리에 저장한다",
+      "다음에 같은 작업을 부를 파일 경로와 버전 규칙을 적는다",
+    ],
+    verificationChecklist: [
+      "작업 후보 3개가 실제 반복 업무에서 나온 것인가",
+      "각 정밀 프롬프트에 Goal, Context, Constraints, Done When이 모두 있는가",
+      "완료 기준에 검증 방법이 포함되어 있는가",
+      "라이브러리 저장 위치와 파일명이 정해졌는가",
+      "직접 쓴 프롬프트와 AI가 만든 프롬프트의 차이가 한 줄 이상 기록되었는가",
+    ],
+    deliverable: {
+      title: "메타 프롬프트 템플릿",
+      description: "작업 후보 3개, 메타 프롬프트 양식, AI가 만든 정밀 프롬프트 3개, 저장 약속을 담은 템플릿.",
+      format: "Markdown 파일(.md)",
+    },
+    reflectionQuestions: [
+      "AI가 내 작업을 더 구체화해 준 지점은 어디였나요?",
+      "내가 직접 쓴 프롬프트보다 오히려 과해진 제약은 무엇이었나요?",
+      "다음 Phase 자동화에 바로 넣어도 되는 프롬프트는 무엇인가요?",
+    ],
+    extensionIdeas: [
+      "가장 자주 쓰는 메타 프롬프트를 프롬프트 라이브러리의 `_meta/` 폴더에 저장합니다",
+      "팀원에게 같은 메타 프롬프트를 써보게 하고 결과 차이를 비교합니다",
+      "Phase 4에서 코딩 에이전트의 `/goal` 또는 작업 계획 프롬프트로 확장합니다",
+    ],
+    tags: ["prompt", "meta-prompting", "library"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "meta-prompt-template.md",
+        title: "메타 프롬프트 템플릿",
         kind: "prompt",
       },
     ],
@@ -1157,6 +1327,92 @@ export const lessons: Lesson[] = [
         filename: "bug-repro-loop.md",
         title: "버그 재현과 수정 루프 템플릿",
         kind: "checklist",
+      },
+    ],
+  },
+  {
+    id: "lesson-407",
+    slug: "nightly-loop-pattern",
+    phaseId: "phase-4",
+    titleKo: "잠든 사이 도는 자동 루프",
+    titleEn: "Nightly loop pattern",
+    hook: "내가 자리를 비운 동안에도, 정해 둔 기준 안에서 에이전트가 같은 작업을 여러 번 시도할 수 있어요.",
+    summary: "Phase 4의 인-세션 코딩 루프를 세션 밖으로 확장해, 목표와 검증 조건과 예산이 있는 자동 루프 한 사이클을 설계합니다.",
+    level: "intermediate",
+    estimatedMinutes: 50,
+    targetJourneys: ["practitioner", "engineer", "founder"],
+    prerequisites: ["bug-reproduction-loop"],
+    learningGoals: [
+      "인-세션 루프와 세션 밖 자동 루프의 차이를 설명한다",
+      "Ralph Loop, fixed-budget research loop, Codex `/goal`의 쓰임을 구분한다",
+      "밤새 도는 루프에 필요한 목표, 검증 조건, 시간 예산을 설계한다",
+      "자동 루프를 실행하기 전에 멈춤 조건과 비용 기록 방식을 정한다",
+    ],
+    problemScenario:
+      "저녁에 `train.py` 성능 개선 목표와 검증 명령을 남겨두고 잠들었습니다. 아침에 보니 에이전트가 여러 작은 변경을 시도했고, 좋아진 시도와 버린 시도가 로그로 남아 있습니다. 마법처럼 맡기는 것이 아니라, 목표와 검증 조건이 분명한 반복을 잠시 세션 밖으로 내보낸 거예요.",
+    coreConcepts: [
+      {
+        term: "Ralph Loop",
+        explanation: "`while :; do cat PROMPT.md | claude-code; done`처럼 같은 목표를 반복 주입하는 패턴입니다. Stop Hook과 AGENTS.md 누적 학습이 핵심입니다.",
+      },
+      {
+        term: "Fixed-Budget Research Loop",
+        explanation: "정해진 시간 안에서 작은 변경, 검증, 보존 또는 되돌리기를 반복하는 실험 루프입니다.",
+      },
+      {
+        term: "Codex `/goal`",
+        explanation: "plan, act, test, review, iterate 흐름을 도구 안에 묶은 내장 루프입니다. 좋은 목표 문장을 만드는 일이 품질을 좌우합니다.",
+      },
+      {
+        term: "Verification Budget",
+        explanation: "자동 루프는 검증 조건과 토큰, 시간 한도가 있어야 안전합니다. 통과와 실패를 자동으로 가를 기준부터 정합니다.",
+      },
+    ],
+    codexMission:
+      "Codex에게 `/goal`로 실행할 후보 작업 1개를 고르게 하고, Goal, Context, Constraints, Done When, 시간 한도, 검증 명령을 포함한 밤샘 루프 설계를 작성하게 한다.",
+    claudeCodeMission:
+      "Claude Code에게 `nightly-loop-design.md`를 만들게 하고, Ralph식 반복, fixed-budget research loop, `/goal` 중 하나를 골라 실행 전 설계를 완성하게 한다.",
+    mission:
+      "Claude Code에게 아래 작업을 맡깁니다. 50분 안에 끝내는 걸 목표로 하세요.\n\n작업. 내 작업 1개에 대해 세션 밖에서 한 번 돌아갈 자동 루프를 설계하고 `nightly-loop-design.md`로 정리합니다.\n\n포함할 내용.\n1. 작업과 목표를 한 줄로 적습니다.\n2. Ralph, fixed-budget research loop, `/goal` 중 하나를 고릅니다.\n3. 자동 통과와 실패를 나누는 검증 조건을 씁니다.\n4. 토큰 예산과 시간 한도를 정합니다.\n5. 실행 결과를 회수, 성공 비율, 비용으로 기록할 표를 만듭니다.\n6. 사람이 직접 했을 때와 비교할 회고 질문을 남깁니다.\n\n처음부터 밤새 실행하지 말고, 10분짜리 작은 드라이런으로 기준이 작동하는지 먼저 확인하세요.",
+    codexNote:
+      "`/goal`을 쓸 때는 Lesson 2.5의 메타 프롬프팅으로 목표 문장을 먼저 만들면 좋습니다. 실행 전에는 검증 명령과 멈춤 조건을 사람이 읽고 승인하세요.",
+    buildSteps: [
+      "Phase 4에서 다뤘던 코딩 작업 중 반복 실험이 필요한 것 1개를 고른다",
+      "목표, 관련 파일, 하지 말아야 할 변경, 완료 기준을 한 장에 적는다",
+      "Ralph, fixed-budget research loop, `/goal` 중 현재 환경에 맞는 루프를 고른다",
+      "검증 명령과 실패 시 되돌리는 기준을 정한다",
+      "10분 드라이런 뒤 다음 밤에 한 번만 실행할 계획을 남긴다",
+    ],
+    verificationChecklist: [
+      "작업 목표가 한 줄로 좁혀져 있는가",
+      "자동 통과와 실패를 판단할 검증 명령이 있는가",
+      "토큰 예산과 시간 한도가 적혀 있는가",
+      "되돌리기 또는 폐기 기준이 명시되어 있는가",
+      "실행 로그에 회수, 성공 비율, 비용을 남길 자리가 있는가",
+      "사람 승인 없이 커밋, 배포, 외부 전송을 하지 않는다는 제한이 있는가",
+    ],
+    deliverable: {
+      title: "밤새 도는 자동 루프 설계서",
+      description: "목표, 루프 종류, 검증 조건, 예산, 실행 결과 기록표를 담은 자동 루프 설계서.",
+      format: "Markdown 파일(.md)",
+    },
+    reflectionQuestions: [
+      "이 작업을 내 손으로만 했다면 몇 회차까지 시도했을까요?",
+      "자동 루프가 가장 크게 줄여 준 것은 시간, 피로, 탐색 폭 중 무엇인가요?",
+      "다음에는 어떤 Stop Point를 더 앞에 두어야 할까요?",
+    ],
+    extensionIdeas: [
+      "성공한 자동 루프 설계를 팀의 코딩 에이전트 운영 문서에 추가합니다",
+      "비용과 품질 로그를 모아 반복 실험에 맞는 작업 유형을 분류합니다",
+      "Phase 5의 AI 앱 개발에서 테스트와 배포 전 점검 루프로 연결합니다",
+    ],
+    tags: ["coding-agents", "loop", "automation"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "nightly-loop-design.md",
+        title: "밤새 도는 자동 루프 설계서",
+        kind: "mission",
       },
     ],
   },

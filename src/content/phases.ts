@@ -61,6 +61,7 @@ export const phases: Phase[] = [
     ],
     deliverables: ["AI 사용 판단 체크리스트 v1"],
     lessonSlugs: [
+      "what-is-a-loop",
       "common-skills-of-future-proof-people",
       "what-llms-are-good-and-bad-at",
       "hallucination-verification",
@@ -100,6 +101,7 @@ export const phases: Phase[] = [
       "enforcing-output-format",
       "feeding-long-documents",
       "build-personal-prompt-library",
+      "meta-prompting",
     ],
     recommendedTools: ["Claude", "ChatGPT", "Notion", "Markdown"],
     nextPhaseSlug: "phase-3-ai-work-os",
@@ -167,6 +169,7 @@ export const phases: Phase[] = [
       "plan-with-ai",
       "write-tests-with-coding-agent",
       "bug-reproduction-loop",
+      "nightly-loop-pattern",
     ],
     recommendedTools: ["Codex CLI", "Claude Code", "GitHub", "Playwright"],
     nextPhaseSlug: "phase-5-ai-app-dev",
