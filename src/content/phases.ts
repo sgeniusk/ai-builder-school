@@ -5,7 +5,7 @@ export const phases: Phase[] = [
     id: "phase-0",
     slug: "phase-0-setup",
     order: 0,
-    titleKo: "AI 학습 환경 세팅",
+    titleKo: "AI 학습 환경 세팅하기",
     titleEn: "Learning Environment Setup",
     shortDescription: "Codex / Claude Code / GitHub / API 키를 실습 가능한 상태로 준비한다.",
     longDescription:
@@ -39,7 +39,7 @@ export const phases: Phase[] = [
     id: "phase-1",
     slug: "phase-1-ai-literacy",
     order: 1,
-    titleKo: "AI Literacy",
+    titleKo: "AI 리터러시 다지기",
     titleEn: "AI Literacy",
     shortDescription: "AI를 맹신하지 않고, 판단 기준과 한계를 먼저 이해한다.",
     longDescription:
@@ -74,7 +74,7 @@ export const phases: Phase[] = [
     id: "phase-2",
     slug: "phase-2-prompt-engineering",
     order: 2,
-    titleKo: "Prompt & Context Engineering",
+    titleKo: "프롬프트·컨텍스트 다루기",
     titleEn: "Prompt & Context Engineering",
     shortDescription: "모호한 질문을 재현 가능한 작업지시서로 바꾼다.",
     longDescription:
@@ -109,7 +109,7 @@ export const phases: Phase[] = [
     id: "phase-3",
     slug: "phase-3-ai-work-os",
     order: 3,
-    titleKo: "AI Work OS",
+    titleKo: "업무 자동화 만들기",
     titleEn: "AI Work OS",
     shortDescription: "보고서·회의록·리서치·글쓰기를 AI로 운영한다.",
     longDescription:
@@ -138,7 +138,7 @@ export const phases: Phase[] = [
     id: "phase-4",
     slug: "phase-4-coding-agents",
     order: 4,
-    titleKo: "Codex / Claude Code Workflow",
+    titleKo: "코딩 에이전트 부리기",
     titleEn: "Codex / Claude Code Workflow",
     shortDescription: "코딩 에이전트를 페어 프로그래머·리뷰어·테스터로 길들인다.",
     longDescription:
@@ -176,7 +176,7 @@ export const phases: Phase[] = [
     id: "phase-5",
     slug: "phase-5-ai-app-dev",
     order: 5,
-    titleKo: "AI App Development",
+    titleKo: "AI 앱 만들기",
     titleEn: "AI App Development",
     shortDescription: "AI를 호출하는 작은 웹앱을 직접 만들고 배포한다.",
     longDescription:
@@ -205,7 +205,7 @@ export const phases: Phase[] = [
     id: "phase-6",
     slug: "phase-6-rag",
     order: 6,
-    titleKo: "Data, Embedding & RAG",
+    titleKo: "내 문서로 RAG 만들기",
     titleEn: "Data, Embedding & RAG",
     shortDescription: "내가 가진 문서에 답하는 AI를 만든다.",
     longDescription:
@@ -234,7 +234,7 @@ export const phases: Phase[] = [
     id: "phase-7",
     slug: "phase-7-agents-mcp",
     order: 7,
-    titleKo: "Tool Use, Agents & MCP",
+    titleKo: "에이전트·MCP 다루기",
     titleEn: "Tool Use, Agents & MCP",
     shortDescription: "AI가 도구를 안전하게 쓰도록 에이전트를 설계한다.",
     longDescription:
@@ -270,7 +270,7 @@ export const phases: Phase[] = [
     id: "phase-8",
     slug: "phase-8-multimodal",
     order: 8,
-    titleKo: "Multimodal AI & Content Automation",
+    titleKo: "콘텐츠 자동화하기",
     titleEn: "Multimodal AI & Content Automation",
     shortDescription: "텍스트·이미지·오디오·비디오를 잇는 파이프라인을 만든다.",
     longDescription:
@@ -293,7 +293,7 @@ export const phases: Phase[] = [
     id: "phase-9",
     slug: "phase-9-data-decision",
     order: 9,
-    titleKo: "Data Analysis & Decision AI",
+    titleKo: "데이터로 의사결정하기",
     titleEn: "Data Analysis & Decision AI",
     shortDescription: "데이터 분석과 의사결정 보조에 AI를 투입한다.",
     longDescription:
@@ -316,7 +316,7 @@ export const phases: Phase[] = [
     id: "phase-10",
     slug: "phase-10-evals-security",
     order: 10,
-    titleKo: "Evals, Security & Responsible AI",
+    titleKo: "AI 안전성 검증하기",
     titleEn: "Evals, Security & Responsible AI",
     shortDescription: "AI 시스템을 안전하고 검증 가능하게 만든다.",
     longDescription:
@@ -340,7 +340,7 @@ export const phases: Phase[] = [
     id: "phase-11",
     slug: "phase-11-product",
     order: 11,
-    titleKo: "AI Product & Monetization",
+    titleKo: "AI 제품 출시하기",
     titleEn: "AI Product & Monetization",
     shortDescription: "AI 스킬을 제품과 수익으로 바꾼다.",
     longDescription:
@@ -363,7 +363,7 @@ export const phases: Phase[] = [
     id: "phase-12",
     slug: "phase-12-capstone",
     order: 12,
-    titleKo: "Capstone Projects",
+    titleKo: "캡스톤 만들기",
     titleEn: "Capstone Projects",
     shortDescription: "포트폴리오로 쓸 수 있는 AI 프로젝트를 끝까지 간다.",
     longDescription:

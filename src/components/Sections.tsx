@@ -59,9 +59,9 @@ export function Hero() {
           <span className="grad-text">AI로 만드는 사람</span>으로.
         </h1>
         <p className="hero-lede">
-          뉴스 보고 끝나지 않는 학교예요.
+          하루 30분, 8주 안에 직접 만든 결과물 한 가지가 손에 들어옵니다.
           <br className="only-d" />
-          Codex랑 Claude Code로 매주 한 가지씩 만들고, 한국어로 배워요.
+          뉴스로 끝나지 않는 학교 — Codex랑 Claude Code로, 한국어로.
         </p>
         <div className="hero-ctas">
           <Link href="/start" className="btn">
