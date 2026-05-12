@@ -1684,6 +1684,53 @@ body {
     background: color-mix(in srgb, #c33 8%, transparent);
   }
 
+  /* ===== USP 4 axes (Hero 아래) ===== */
+  .usp-section { padding-top: 32px; }
+  .usp-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .usp-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.15s var(--ease), transform 0.15s var(--ease);
+  }
+  .usp-card:hover {
+    border-color: var(--ink-3);
+    transform: translateY(-1px);
+  }
+  .usp-card .kicker { margin: 0; }
+  .usp-card__title {
+    margin: 4px 0 0;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .usp-card__desc {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-3);
+  }
+  @media (max-width: 1023px) {
+    .usp-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .usp-grid { grid-template-columns: 1fr; gap: 12px; }
+    .usp-card { padding: 18px 20px; }
+  }
+
   /* ===== Interactive verification checklist ===== */
   .checklist--interactive {
     list-style: none;

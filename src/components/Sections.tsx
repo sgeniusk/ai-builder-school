@@ -99,6 +99,51 @@ export function Hero() {
   );
 }
 
+/* ---------------- USP 4 axes (placed under Hero) ---------------- */
+// 듀이가 권한 4축 USP — 다른 사이트의 4 카드 패턴을 우리 정체성으로 옮긴 것.
+// (참조: docs/dewey-applied-2026-05-12.md C 항목, docs/curriculum-blueprint.md §0.1)
+
+const USP_AXES: Array<{ label: string; title: string; desc: string }> = [
+  {
+    label: "핵심 01",
+    title: "코딩 0, 프롬프트 0이라도 OK",
+    desc: "사전지식을 가정하지 않습니다. 초보가 빌더 입문자, 그리고 첫 산출물까지의 동선을 끊김 없이.",
+  },
+  {
+    label: "핵심 02",
+    title: "한국어로 말 거는 어조",
+    desc: "UI·예시·레슨 본문 모두 한국어 어조. 격식 X, 학습자 한 명한테 말 거는 톤으로.",
+  },
+  {
+    label: "핵심 03",
+    title: "7-step 학습 루프",
+    desc: "문제 → 개념 → 미션 → 빌드 → 검증 → 산출물 → 회고. 매 레슨이 같은 리듬으로 돌아요.",
+  },
+  {
+    label: "핵심 04",
+    title: "Phase 마다 손에 남는 산출물",
+    desc: "12 Phase 끝마다 포트폴리오로 쓸 결과물 1개. 강의가 아니라 빌더 작업장이에요.",
+  },
+];
+
+export function UspCards() {
+  return (
+    <section className="sec usp-section">
+      <Container>
+        <ul className="usp-grid">
+          {USP_AXES.map((axis) => (
+            <li key={axis.label} className="usp-card">
+              <span className="kicker">{axis.label}</span>
+              <h3 className="usp-card__title">{axis.title}</h3>
+              <p className="usp-card__desc">{axis.desc}</p>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+  );
+}
+
 /* ---------------- Learning loop section (wrapper) ---------------- */
 
 export function LearningLoopSection() {
