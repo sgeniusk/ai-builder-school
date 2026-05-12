@@ -860,6 +860,14 @@ export const lessons: Lesson[] = [
       "에이전트 행위 로그 수집 파이프라인",
     ],
     tags: ["coding-agents", "setup"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "agent-onboarding.md",
+        title: "코딩 에이전트 온보딩 문서",
+        kind: "checklist",
+      },
+    ],
   },
   {
     id: "lesson-402",
@@ -910,6 +918,14 @@ export const lessons: Lesson[] = [
       "이슈 자동 분류 봇",
     ],
     tags: ["coding-agents", "workflow"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "issue-to-brief.md",
+        title: "GitHub Issue → AI 작업지시서 템플릿",
+        kind: "mission",
+      },
+    ],
   },
   {
     id: "lesson-403",
@@ -960,6 +976,14 @@ export const lessons: Lesson[] = [
       "의존 그래프 시각화 연결",
     ],
     tags: ["coding-agents", "codebase"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "codebase-reading-guide.md",
+        title: "Repo Map + Scout Run 코드베이스 읽기 가이드",
+        kind: "checklist",
+      },
+    ],
   },
   {
     id: "lesson-404",
@@ -1010,6 +1034,14 @@ export const lessons: Lesson[] = [
       "계획 대비 실행 비교 리포트",
     ],
     tags: ["coding-agents", "planning"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "plan-with-ai.md",
+        title: "AI 구현 계획 템플릿",
+        kind: "mission",
+      },
+    ],
   },
   {
     id: "lesson-405",
@@ -1061,6 +1093,14 @@ export const lessons: Lesson[] = [
       "E2E 테스트 확장",
     ],
     tags: ["coding-agents", "testing"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "tdd-with-agent.md",
+        title: "Red→Green 테스트 카드",
+        kind: "checklist",
+      },
+    ],
   },
   {
     id: "lesson-406",
@@ -1111,6 +1151,14 @@ export const lessons: Lesson[] = [
       "버그 패턴 카탈로그",
     ],
     tags: ["coding-agents", "bugs"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "bug-repro-loop.md",
+        title: "버그 재현과 수정 루프 템플릿",
+        kind: "checklist",
+      },
+    ],
   },
   {
     id: "lesson-501",

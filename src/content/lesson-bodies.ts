@@ -11,6 +11,12 @@ import AutomateReportDraftsBody from "./lessons/automate-report-drafts.mdx";
 import MeetingNotesPipelineBody from "./lessons/meeting-notes-pipeline.mdx";
 import ResearchWorkflowBody from "./lessons/research-workflow.mdx";
 import BlogWritingPipelineBody from "./lessons/blog-writing-pipeline.mdx";
+import CodingAgentSetupBody from "./lessons/coding-agent-setup.mdx";
+import GithubIssueToAiBriefBody from "./lessons/github-issue-to-ai-brief.mdx";
+import LettingAiReadCodebaseBody from "./lessons/letting-ai-read-codebase.mdx";
+import PlanWithAiBody from "./lessons/plan-with-ai.mdx";
+import WriteTestsWithCodingAgentBody from "./lessons/write-tests-with-coding-agent.mdx";
+import BugReproductionLoopBody from "./lessons/bug-reproduction-loop.mdx";
 
 /**
  * slug → MDX body component.
@@ -29,6 +35,12 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "meeting-notes-pipeline": MeetingNotesPipelineBody,
   "research-workflow": ResearchWorkflowBody,
   "blog-writing-pipeline": BlogWritingPipelineBody,
+  "coding-agent-setup": CodingAgentSetupBody,
+  "github-issue-to-ai-brief": GithubIssueToAiBriefBody,
+  "letting-ai-read-codebase": LettingAiReadCodebaseBody,
+  "plan-with-ai": PlanWithAiBody,
+  "write-tests-with-coding-agent": WriteTestsWithCodingAgentBody,
+  "bug-reproduction-loop": BugReproductionLoopBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {

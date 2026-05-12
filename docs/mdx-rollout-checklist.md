@@ -3,10 +3,11 @@
 > 한 세션에 끝나지 않는 multi-session 작업. 진행할 때마다 이 파일을 갱신.
 > 자세한 작성 가이드는 [`mdx-rollout-context-notes.md`](mdx-rollout-context-notes.md).
 
-## 현황 (2026-05-11 기준)
+## 현황 (2026-05-12 기준)
 
-- 작성 완료 — 12 / 32 (Phase 1, Phase 2, Phase 3)
-- 미작성 — 20 / 32
+- 작성 완료 — 18 / 32 (Phase 1, 2, 3, 4)
+- 미작성 — 14 / 32
+- Phase 4 는 **Codex CLI 위임 파일럿 성공** — 같은 패턴으로 Phase 5~12 위임 가능
 
 ## 작업 단위
 
@@ -38,13 +39,13 @@
 - [x] research-workflow (Lesson 3.3)
 - [x] blog-writing-pipeline (Lesson 3.4)
 
-### Phase 4 — Codex / Claude Code Workflow · 6건
-- [ ] coding-agent-setup (Lesson 4.1)
-- [ ] github-issue-to-ai-brief (Lesson 4.2)
-- [ ] letting-ai-read-codebase (Lesson 4.3)
-- [ ] plan-with-ai (Lesson 4.4)
-- [ ] write-tests-with-coding-agent (Lesson 4.5)
-- [ ] bug-reproduction-loop (Lesson 4.6)
+### Phase 4 — Codex / Claude Code Workflow ✓ 완료 (Codex 위임 파일럿)
+- [x] coding-agent-setup (Lesson 4.1)
+- [x] github-issue-to-ai-brief (Lesson 4.2)
+- [x] letting-ai-read-codebase (Lesson 4.3)
+- [x] plan-with-ai (Lesson 4.4)
+- [x] write-tests-with-coding-agent (Lesson 4.5)
+- [x] bug-reproduction-loop (Lesson 4.6)
 
 ### Phase 5 — AI App Development · 4건
 - [ ] connect-ai-api (Lesson 5.1)
