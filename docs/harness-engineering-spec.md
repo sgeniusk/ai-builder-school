@@ -6,6 +6,31 @@
 
 ---
 
+## 0. AI Builder School 이 정의하는 Harness Engineering
+
+> 같은 어휘를 쓰는 다른 강의들이 시장에 존재한다(Fast Campus 의 두 강의 `data_online_harness`, `biz_online_hermes` 등). 어휘 충돌을 막기 위해 *우리 정의*를 먼저 명시한다.
+
+**Harness Engineering (AI Builder School 정의)** — AI 에이전트가 *흔들리지 않게 일하도록* 받쳐주는 **작업 환경의 설계**. *모델*이 아니라 *모델 주변* 을 만드는 일.
+
+6 축이 한 묶음이다.
+
+1. **Tool layer** — 에이전트가 쓸 수 있는 명령·도구의 화이트리스트. 권한·승인·샌드박스.
+2. **Feedback loop** — 린트·타입·테스트·validate·build 같은 자동 검증. *추측이 아니라 사실*로 통과 판단.
+3. **Recovery** — 실패했을 때 어디로 돌아갈지의 약속. 게이트 실패 시 자동 수정 X, 사람에게 surface.
+4. **Constraint** — *해선 안 되는 것*. CLAUDE.md 의 "Stop points" 같은 명시적 금지.
+5. **Agent topology** — 작업별로 어울리는 *스킬*을 분리 (lesson-writer / ui-stylist / content-validator).
+6. **Evaluation hook** — 실수가 *반복되지 않게* 측정. `npm run validate` 같은 차단형, `npm run eval` 같은 권고형.
+
+다른 강의의 정의 (예 — *"AGENTS.md + 컨텍스트 + 자동화"* 4축, *"메모리 + 자기진화 + 멀티프로파일"* 등) 와 일부 어휘는 겹친다. 핵심 차이,
+
+- 우리 Harness 는 **빌더 입문자도 자기 레포에 그대로 옮길 수 있는** 형태. *Internals* 의 깊이보다 *재현 가능성* 우선.
+- *에이전트 시스템* 만이 아니라 *학습 환경* 자체 (이 레포 + 사이트) 가 살아있는 하네스 예제.
+- 친근 어휘로 번역해 가르친다 — *기억하는 / 알아서 도구 만드는 / 흔들리지 않게 받쳐주는 / 여럿이 같이 일하는*.
+
+이 문서는 6 축을 이 레포에 어떻게 적용하는지를 *작업지시서* 로 옮긴 것.
+
+---
+
 ## 1. Goal
 
 이 레포가 **"학습자가 자기 레포에 그대로 옮길 수 있는 살아있는 harness 예제"**가 되게 만든다.

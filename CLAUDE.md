@@ -10,6 +10,7 @@
 - Lesson long-form bodies are MDX in `src/content/lessons/<slug>.mdx`, registered in `src/content/lesson-bodies.ts`.
 - Build dir is `.next.nosync/` (iCloud sync workaround — do **not** revert to `.next`).
 - UI copy: Korean. Code / variable names / file names: English.
+- **Image alt rule** — 이미지 `alt` 속성은 lesson/페이지 핵심 키워드 **1~3 개만**. 30 개씩 SEO spam 으로 박지 말 것 (스크린리더 폐기물 + 접근성 ↓).
 
 ## Commands you may run
 
