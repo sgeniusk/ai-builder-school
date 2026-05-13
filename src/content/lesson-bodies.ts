@@ -24,6 +24,10 @@ import ConnectAiApiBody from "./lessons/connect-ai-api.mdx";
 import StreamingResponseUiBody from "./lessons/streaming-response-ui.mdx";
 import StructuredOutputHandlingBody from "./lessons/structured-output-handling.mdx";
 import ConversationStorageDesignBody from "./lessons/conversation-storage-design.mdx";
+import UnderstandingEmbeddingsBody from "./lessons/understanding-embeddings.mdx";
+import DocumentChunkingStrategyBody from "./lessons/document-chunking-strategy.mdx";
+import VectorSearchBasicsBody from "./lessons/vector-search-basics.mdx";
+import GroundedRagAnswersBody from "./lessons/grounded-rag-answers.mdx";
 
 /**
  * slug → MDX body component.
@@ -55,6 +59,10 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "streaming-response-ui": StreamingResponseUiBody,
   "structured-output-handling": StructuredOutputHandlingBody,
   "conversation-storage-design": ConversationStorageDesignBody,
+  "understanding-embeddings": UnderstandingEmbeddingsBody,
+  "document-chunking-strategy": DocumentChunkingStrategyBody,
+  "vector-search-basics": VectorSearchBasicsBody,
+  "grounded-rag-answers": GroundedRagAnswersBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {

@@ -5,9 +5,9 @@
 
 ## 현황 (2026-05-13 기준)
 
-- 작성 완료 — **21 / 35** (Phase 1, 2, 3, 4 + 듀이 분석에서 추가된 신규 3 lesson)
-- 미작성 — 14 / 35
-- Phase 4 + 듀이 신규 3 lesson 모두 **Codex CLI 위임 성공** — 같은 패턴으로 Phase 5~12 위임 가능
+- 작성 완료 — **29 / 35** (Phase 1, 2, 3, 4, 5, 6 + 듀이 분석에서 추가된 신규 3 lesson)
+- 미작성 — 6 / 35 (Phase 7 4건 + Phase 11 1건 + Phase 12 1건)
+- Phase 4 + 듀이 신규 3 lesson + Phase 5 + Phase 6 모두 **Codex CLI 위임 성공** — 같은 패턴으로 Phase 7·11·12 위임 가능
 - 듀이 흡수로 *Loop 입문 (Phase 1)* · *메타 프롬프팅 (Phase 2)* · *Nightly Loop (Phase 4)* 신규 lesson 추가됨 (lesson-100, lesson-205, lesson-407)
 
 ## 작업 단위

@@ -1697,6 +1697,14 @@ export const lessons: Lesson[] = [
       "임베딩 모델 비교",
     ],
     tags: ["rag", "embeddings"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "embedding-intro.md",
+        title: "임베딩 실험 노트",
+        kind: "note",
+      },
+    ],
   },
   {
     id: "lesson-602",
@@ -1747,6 +1755,14 @@ export const lessons: Lesson[] = [
       "자동 청킹 평가 도구",
     ],
     tags: ["rag", "chunking"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "chunking-strategy.md",
+        title: "청킹 전략 비교 리포트",
+        kind: "note",
+      },
+    ],
   },
   {
     id: "lesson-603",
@@ -1797,6 +1813,14 @@ export const lessons: Lesson[] = [
       "임베딩 재계산 전략",
     ],
     tags: ["rag", "search"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "vector-search-recipe.md",
+        title: "벡터 검색 기본 레시피",
+        kind: "skill",
+      },
+    ],
   },
   {
     id: "lesson-604",
@@ -1847,6 +1871,14 @@ export const lessons: Lesson[] = [
       "사용자 피드백 수집",
     ],
     tags: ["rag", "citations"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "grounded-rag-design.md",
+        title: "Grounded RAG 설계서",
+        kind: "checklist",
+      },
+    ],
   },
   {
     id: "lesson-701",
