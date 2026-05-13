@@ -1465,6 +1465,14 @@ export const lessons: Lesson[] = [
       "모델 스위칭 기능",
     ],
     tags: ["app-dev", "api"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "api-connect-checklist.md",
+        title: "AI API 연결 체크리스트",
+        kind: "checklist",
+      },
+    ],
   },
   {
     id: "lesson-502",
@@ -1515,6 +1523,14 @@ export const lessons: Lesson[] = [
       "모바일 접근성 개선",
     ],
     tags: ["app-dev", "ui", "streaming"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "streaming-ui-pattern.md",
+        title: "스트리밍 UI 패턴 카드",
+        kind: "skill",
+      },
+    ],
   },
   {
     id: "lesson-503",
@@ -1565,6 +1581,14 @@ export const lessons: Lesson[] = [
       "생성 결과 저장/재사용",
     ],
     tags: ["app-dev", "structured"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "structured-output-handler.md",
+        title: "구조화 출력 핸들러 설계서",
+        kind: "skill",
+      },
+    ],
   },
   {
     id: "lesson-504",
@@ -1615,6 +1639,14 @@ export const lessons: Lesson[] = [
       "세션 내 검색",
     ],
     tags: ["app-dev", "storage"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "conversation-storage-design.md",
+        title: "대화 저장 구조 설계서",
+        kind: "note",
+      },
+    ],
   },
   {
     id: "lesson-601",

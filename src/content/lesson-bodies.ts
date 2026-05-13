@@ -20,6 +20,10 @@ import PlanWithAiBody from "./lessons/plan-with-ai.mdx";
 import WriteTestsWithCodingAgentBody from "./lessons/write-tests-with-coding-agent.mdx";
 import BugReproductionLoopBody from "./lessons/bug-reproduction-loop.mdx";
 import NightlyLoopPatternBody from "./lessons/nightly-loop-pattern.mdx";
+import ConnectAiApiBody from "./lessons/connect-ai-api.mdx";
+import StreamingResponseUiBody from "./lessons/streaming-response-ui.mdx";
+import StructuredOutputHandlingBody from "./lessons/structured-output-handling.mdx";
+import ConversationStorageDesignBody from "./lessons/conversation-storage-design.mdx";
 
 /**
  * slug → MDX body component.
@@ -47,6 +51,10 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "write-tests-with-coding-agent": WriteTestsWithCodingAgentBody,
   "bug-reproduction-loop": BugReproductionLoopBody,
   "nightly-loop-pattern": NightlyLoopPatternBody,
+  "connect-ai-api": ConnectAiApiBody,
+  "streaming-response-ui": StreamingResponseUiBody,
+  "structured-output-handling": StructuredOutputHandlingBody,
+  "conversation-storage-design": ConversationStorageDesignBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {
