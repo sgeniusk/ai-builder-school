@@ -1929,6 +1929,14 @@ export const lessons: Lesson[] = [
       "툴 사용 로깅 대시보드",
     ],
     tags: ["agents", "tools"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "function-calling-recipe.md",
+        title: "Function Calling 레시피",
+        kind: "skill",
+      },
+    ],
   },
   {
     id: "lesson-702",
@@ -1979,6 +1987,14 @@ export const lessons: Lesson[] = [
       "멀티 에이전트 협업",
     ],
     tags: ["agents", "react"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "mini-agent-loop-design.md",
+        title: "미니 에이전트 루프 설계서",
+        kind: "mission",
+      },
+    ],
   },
   {
     id: "lesson-703",
@@ -2029,6 +2045,14 @@ export const lessons: Lesson[] = [
       "실행 취소(undo) 기능",
     ],
     tags: ["agents", "security"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "tool-permission-policy.md",
+        title: "도구 권한 정책 템플릿",
+        kind: "checklist",
+      },
+    ],
   },
   {
     id: "lesson-704",
@@ -2079,6 +2103,14 @@ export const lessons: Lesson[] = [
       "인젝션 로그 분석",
     ],
     tags: ["agents", "security", "prompt-injection"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "prompt-injection-defense.md",
+        title: "프롬프트 인젝션 방어 세트",
+        kind: "checklist",
+      },
+    ],
   },
   {
     id: "lesson-1101",

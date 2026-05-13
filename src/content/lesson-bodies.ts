@@ -28,6 +28,10 @@ import UnderstandingEmbeddingsBody from "./lessons/understanding-embeddings.mdx"
 import DocumentChunkingStrategyBody from "./lessons/document-chunking-strategy.mdx";
 import VectorSearchBasicsBody from "./lessons/vector-search-basics.mdx";
 import GroundedRagAnswersBody from "./lessons/grounded-rag-answers.mdx";
+import FunctionCallingBody from "./lessons/function-calling.mdx";
+import MiniAgentLoopBody from "./lessons/mini-agent-loop.mdx";
+import ToolPermissionSafeguardsBody from "./lessons/tool-permission-safeguards.mdx";
+import PromptInjectionDefenseBody from "./lessons/prompt-injection-defense.mdx";
 
 /**
  * slug → MDX body component.
@@ -63,6 +67,10 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "document-chunking-strategy": DocumentChunkingStrategyBody,
   "vector-search-basics": VectorSearchBasicsBody,
   "grounded-rag-answers": GroundedRagAnswersBody,
+  "function-calling": FunctionCallingBody,
+  "mini-agent-loop": MiniAgentLoopBody,
+  "tool-permission-safeguards": ToolPermissionSafeguardsBody,
+  "prompt-injection-defense": PromptInjectionDefenseBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {

@@ -5,9 +5,9 @@
 
 ## 현황 (2026-05-13 기준)
 
-- 작성 완료 — **29 / 35** (Phase 1, 2, 3, 4, 5, 6 + 듀이 분석에서 추가된 신규 3 lesson)
-- 미작성 — 6 / 35 (Phase 7 4건 + Phase 11 1건 + Phase 12 1건)
-- Phase 4 + 듀이 신규 3 lesson + Phase 5 + Phase 6 모두 **Codex CLI 위임 성공** — 같은 패턴으로 Phase 7·11·12 위임 가능
+- 작성 완료 — **33 / 35** (Phase 1~7 + 듀이 분석에서 추가된 신규 3 lesson)
+- 미작성 — 2 / 35 (Phase 11 1건 + Phase 12 1건)
+- Phase 4·5·6·7 + 듀이 신규 3 lesson 모두 **Codex CLI 위임 성공** — 같은 패턴으로 Phase 11·12 위임 가능
 - 듀이 흡수로 *Loop 입문 (Phase 1)* · *메타 프롬프팅 (Phase 2)* · *Nightly Loop (Phase 4)* 신규 lesson 추가됨 (lesson-100, lesson-205, lesson-407)
 
 ## 작업 단위
@@ -48,23 +48,23 @@
 - [x] write-tests-with-coding-agent (Lesson 4.5)
 - [x] bug-reproduction-loop (Lesson 4.6)
 
-### Phase 5 — AI App Development · 4건
-- [ ] connect-ai-api (Lesson 5.1)
-- [ ] streaming-response-ui (Lesson 5.2)
-- [ ] structured-output-handling (Lesson 5.3)
-- [ ] conversation-storage-design (Lesson 5.4)
+### Phase 5 — AI App Development ✓ 완료 (Codex 위임)
+- [x] connect-ai-api (Lesson 5.1)
+- [x] streaming-response-ui (Lesson 5.2)
+- [x] structured-output-handling (Lesson 5.3)
+- [x] conversation-storage-design (Lesson 5.4)
 
-### Phase 6 — Data, Embedding & RAG · 4건
-- [ ] understanding-embeddings (Lesson 6.1)
-- [ ] document-chunking-strategy (Lesson 6.2)
-- [ ] vector-search-basics (Lesson 6.3)
-- [ ] grounded-rag-answers (Lesson 6.4)
+### Phase 6 — Data, Embedding & RAG ✓ 완료 (Codex 위임)
+- [x] understanding-embeddings (Lesson 6.1)
+- [x] document-chunking-strategy (Lesson 6.2)
+- [x] vector-search-basics (Lesson 6.3)
+- [x] grounded-rag-answers (Lesson 6.4)
 
-### Phase 7 — Agents & MCP · 4건
-- [ ] function-calling (Lesson 7.1)
-- [ ] mini-agent-loop (Lesson 7.2)
-- [ ] tool-permission-safeguards (Lesson 7.3)
-- [ ] prompt-injection-defense (Lesson 7.4)
+### Phase 7 — Agents & MCP ✓ 완료 (Codex 위임)
+- [x] function-calling (Lesson 7.1)
+- [x] mini-agent-loop (Lesson 7.2)
+- [x] tool-permission-safeguards (Lesson 7.3)
+- [x] prompt-injection-defense (Lesson 7.4)
 
 ### Phase 11 — Product · 1건
 - [ ] ai-app-cost-and-usage (Lesson 11.1)
