@@ -2162,6 +2162,14 @@ export const lessons: Lesson[] = [
       "고비용 사용자 자동 안내",
     ],
     tags: ["product", "cost"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "cost-and-usage-dashboard.md",
+        title: "비용과 사용량 대시보드 노트",
+        kind: "note",
+      },
+    ],
   },
   {
     id: "lesson-1201",
@@ -2219,5 +2227,13 @@ export const lessons: Lesson[] = [
       "수익화 실험",
     ],
     tags: ["capstone", "launch"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "capstone-launch-plan.md",
+        title: "캡스톤 런치 플랜",
+        kind: "checklist",
+      },
+    ],
   },
 ];

@@ -3,11 +3,11 @@
 > 한 세션에 끝나지 않는 multi-session 작업. 진행할 때마다 이 파일을 갱신.
 > 자세한 작성 가이드는 [`mdx-rollout-context-notes.md`](mdx-rollout-context-notes.md).
 
-## 현황 (2026-05-13 기준)
+## 현황 (2026-05-13 기준) — ✓ 1차 완성
 
-- 작성 완료 — **33 / 35** (Phase 1~7 + 듀이 분석에서 추가된 신규 3 lesson)
-- 미작성 — 2 / 35 (Phase 11 1건 + Phase 12 1건)
-- Phase 4·5·6·7 + 듀이 신규 3 lesson 모두 **Codex CLI 위임 성공** — 같은 패턴으로 Phase 11·12 위임 가능
+- 작성 완료 — **35 / 35** (Phase 1~7, 11, 12 + 듀이 분석에서 추가된 신규 3 lesson)
+- 미작성 — 0 / 35. Phase 8·9·10 은 `lessonSlugs` 빈 채로 *미래 확장* 자리
+- Phase 4·5·6·7·11·12 + 듀이 신규 3 lesson 모두 **Codex CLI 위임 성공** — 위임 패턴 검증 완료
 - 듀이 흡수로 *Loop 입문 (Phase 1)* · *메타 프롬프팅 (Phase 2)* · *Nightly Loop (Phase 4)* 신규 lesson 추가됨 (lesson-100, lesson-205, lesson-407)
 
 ## 작업 단위
@@ -66,11 +66,11 @@
 - [x] tool-permission-safeguards (Lesson 7.3)
 - [x] prompt-injection-defense (Lesson 7.4)
 
-### Phase 11 — Product · 1건
-- [ ] ai-app-cost-and-usage (Lesson 11.1)
+### Phase 11 — Product ✓ 완료 (Codex 위임)
+- [x] ai-app-cost-and-usage (Lesson 11.1)
 
-### Phase 12 — Capstone · 1건
-- [ ] capstone-plan-and-launch (Lesson 12.1)
+### Phase 12 — Capstone ✓ 완료 (Codex 위임)
+- [x] capstone-plan-and-launch (Lesson 12.1)
 
 ## 권장 진행 순서
 

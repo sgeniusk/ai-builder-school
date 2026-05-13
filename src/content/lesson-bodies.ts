@@ -32,6 +32,8 @@ import FunctionCallingBody from "./lessons/function-calling.mdx";
 import MiniAgentLoopBody from "./lessons/mini-agent-loop.mdx";
 import ToolPermissionSafeguardsBody from "./lessons/tool-permission-safeguards.mdx";
 import PromptInjectionDefenseBody from "./lessons/prompt-injection-defense.mdx";
+import AiAppCostAndUsageBody from "./lessons/ai-app-cost-and-usage.mdx";
+import CapstonePlanAndLaunchBody from "./lessons/capstone-plan-and-launch.mdx";
 
 /**
  * slug → MDX body component.
@@ -71,6 +73,8 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "mini-agent-loop": MiniAgentLoopBody,
   "tool-permission-safeguards": ToolPermissionSafeguardsBody,
   "prompt-injection-defense": PromptInjectionDefenseBody,
+  "ai-app-cost-and-usage": AiAppCostAndUsageBody,
+  "capstone-plan-and-launch": CapstonePlanAndLaunchBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {
