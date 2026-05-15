@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { CharacterChrome } from "./CharacterChrome";
 
 export function Container({
   children,
@@ -35,9 +36,12 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
-          <Link href="/start" className="btn">
-            학습 시작 <span className="arrow">→</span>
-          </Link>
+          <div className="site-header__right">
+            <Link href="/start" className="btn">
+              학습 시작 <span className="arrow">→</span>
+            </Link>
+            <CharacterChrome />
+          </div>
         </div>
       </Container>
     </header>

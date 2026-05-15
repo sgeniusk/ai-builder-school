@@ -176,6 +176,8 @@ export interface Project {
   slug: string;
   title: string;
   targetLearner: string;
+  /** 이 프로젝트가 잘 맞는 여정. /journeys 페이지에서 매핑된 카드를 노출. */
+  targetJourneys: JourneyId[];
   difficulty: Level;
   requiredPhases: string[];
   finalOutput: string;

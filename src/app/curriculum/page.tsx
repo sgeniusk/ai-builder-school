@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CurriculumShell } from "@/components/CurriculumShell";
 import { Container } from "@/components/Layout";
 import {
   CurriculumTimeline,
@@ -20,7 +21,7 @@ export default function CurriculumPage() {
   const totalLessons = getLessons().length;
 
   return (
-    <>
+    <CurriculumShell>
       <PageHead
         eyebrow={<>Curriculum · 12 Phases · {totalLessons} Lessons</>}
         title={
@@ -58,6 +59,6 @@ export default function CurriculumPage() {
           <CurriculumTimeline phases={phases} />
         </Container>
       </section>
-    </>
+    </CurriculumShell>
   );
 }
