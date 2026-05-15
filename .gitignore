@@ -44,3 +44,5 @@ yarn-error.log*
 .agents/
 .tmp-codex-logs/
 .claude/worktrees/
+.vercel
+.env*.local
