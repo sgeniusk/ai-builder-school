@@ -11,7 +11,9 @@
     "typecheck": "tsc --noEmit",
     "validate": "tsx scripts/validate-content.ts",
     "new-lesson": "tsx scripts/new-lesson.ts",
-    "eval": "tsx scripts/eval-lesson-quality.ts",
+    "eval": "tsx scripts/eval-lesson-quality.ts && tsx scripts/journey-route-check.ts",
+    "eval:lessons": "tsx scripts/eval-lesson-quality.ts",
+    "eval:routes": "tsx scripts/journey-route-check.ts",
     "check": "npm run lint && npm run typecheck && npm run validate && npm run build",
     "prepare": "lefthook install"
   },
