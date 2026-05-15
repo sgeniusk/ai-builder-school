@@ -1,0 +1,159 @@
+## "에이전트가 프로덕션 DB를 날렸어요"
+
+새벽 2시, 슬랙 알림이 울립니다. 자동화 에이전트가 "오래된 로그 정리" 작업을 하다가 WHERE 절 없이 DELETE 쿼리를 실행했어요. 테스트 DB가 아니라 **프로덕션 DB**에서. 모델은 "불필요한 데이터를 정리한다"는 지시를 충실히 따랐을 뿐이에요. 문제는 그 도구에 **프로덕션 쓰기 권한이 열려 있었던 것**입니다.
+
+{/* Source · DOC · Anthropic "Building effective agents" (2024) — https://www.anthropic.com/research/building-effective-agents */}
+
+[Lesson 28](/lessons/mini-agent-loop)에서 자율 루프를 만들었죠. 루프가 돌 때 모델이 어떤 도구든 마음대로 부를 수 있다면, 한 번의 잘못된 판단이 사고가 됩니다. 오늘은 **도구마다 권한 경계를 긋는 법**을 배웁니다. 에이전트 안전의 첫 번째 축이에요.
+
+## 도구 위험도 3단 분류
+
+{/* Note: Read-Only / Write / External Side-Effect 3단 분류는 일반 보안 관행을 이 학교 운영자가 한국어로 정리한 것이며, 외부 표준명은 아닙니다. */}
+
+모든 도구가 같은 위험도는 아니에요. 세 단계로 분류합니다.
+
+| 등급 | 설명 | 예시 | 승인 필요? |
+| --- | --- | --- | --- |
+| Read-Only | 데이터를 읽기만 함 | 파일 읽기, 검색, 조회 | 자동 허용 가능 |
+| Write | 로컬 상태를 변경함 | 파일 생성/수정/삭제, DB INSERT/UPDATE | 사전 승인 또는 제한 경로 |
+| External Side-Effect | 외부 세계에 영향 | 이메일 발송, API POST, 결제, 배포 | 반드시 사람 승인 |
+
+핵심 원칙: **도구의 위험도에 비례해서 승인 레벨을 높이세요.** Read-Only는 자유롭게, Write는 경로 제한, External Side-Effect는 반드시 사람 확인.
+
+이 분류를 코드에 명시하는 게 오늘의 첫 번째 산출물이에요.
+
+## Allow-List 패턴 — 허용만 명시
+
+{/* Source · DOC · Anthropic "Building effective agents" (2024) — https://www.anthropic.com/research/building-effective-agents */}
+
+"금지 목록(Deny-List)"보다 **"허용 목록(Allow-List)"**이 안전합니다. 금지 목록은 하나라도 빠뜨리면 뚫리지만, 허용 목록은 명시하지 않은 건 전부 차단이에요.
+
+```yaml
+# tool-permission-policy.yaml
+permissions:
+  read_file:
+    risk: read-only
+    allowed_paths: ["./data/**", "./logs/**"]
+    denied_paths: ["./secrets/**", ".env*"]
+    auto_approve: true
+
+  write_file:
+    risk: write
+    allowed_paths: ["./output/**"]
+    max_file_size_kb: 500
+    auto_approve: false  # 사용자 확인 필요
+
+  send_email:
+    risk: external
+    allowed_recipients: ["team@company.com"]
+    auto_approve: false  # 반드시 사람 승인
+    require_preview: true
+```
+
+이 YAML이 에이전트의 **헌법**이에요. 에이전트가 도구를 호출하기 전에 이 정책을 확인하고, 허용 범위를 벗어나면 실행을 거부합니다.
+
+Claude Code의 `.claude/settings.json`이 정확히 이 패턴이에요. `allowedTools`에 명시한 도구만 자동 실행되고, 나머지는 사용자에게 확인을 요청합니다.
+
+## 사람 승인 큐 — Human-in-the-Loop
+
+{/* Source · DOC · Anthropic "Computer use" — https://docs.claude.com/en/docs/agents-and-tools/computer-use */}
+
+Write 이상의 도구는 **실행 전에 사람에게 물어야** 해요. 이걸 "Human-in-the-Loop" 패턴이라고 합니다.
+
+```typescript
+async function executeWithApproval(tool: Tool, args: unknown) {
+  const policy = getPolicy(tool.name);
+
+  // Read-Only는 바로 실행
+  if (policy.risk === "read-only" && policy.auto_approve) {
+    return await tool.execute(args);
+  }
+
+  // Write / External은 사람에게 물어봄
+  const preview = tool.preview(args); // 실행 전 미리보기
+  const approved = await askHuman({
+    tool: tool.name,
+    args,
+    preview,
+    risk: policy.risk,
+  });
+
+  if (!approved) {
+    return { status: "denied", message: "사용자가 거부했습니다." };
+  }
+
+  return await tool.execute(args);
+}
+```
+
+Anthropic의 Computer Use 가이드에서도 같은 원칙을 강조해요 — "에이전트에게 컴퓨터 제어를 맡길 때는 전용 환경(예: 도커 컨테이너)에서 실행하고, 민감한 동작 전에 사용자 확인을 넣으세요."
+
+## 격리 실행 — 샌드박스
+
+{/* Source · DOC · Anthropic "Computer use" — https://docs.claude.com/en/docs/agents-and-tools/computer-use */}
+
+승인만으로 부족할 때가 있어요. 에이전트가 코드를 실행하거나 시스템 명령을 치는 경우, **격리된 환경**에서 돌려야 합니다.
+
+| 격리 수준 | 도구 | 언제 |
+| --- | --- | --- |
+| 경로 제한 | `allowed_paths` 화이트리스트 | 파일 읽기/쓰기 |
+| 프로세스 격리 | 도커 컨테이너 / VM | 코드 실행, 쉘 명령 |
+| 네트워크 격리 | 아웃바운드 차단 또는 프록시 | 외부 API 호출 |
+| 시간 제한 | 타임아웃 (30초 등) | 모든 도구 |
+
+Anthropic은 Computer Use 시 도커 컨테이너 격리를 명시적으로 권장합니다. 코드를 실행하는 에이전트라면 최소한 프로세스 격리는 있어야 해요.
+
+## 감사 로그 — 사후 추적
+
+도구 실행은 반드시 **로그**로 남겨야 합니다. 사고가 났을 때 "모델이 왜 이 도구를 불렀는지, 인자가 뭐였는지, 결과가 뭐였는지"를 추적할 수 있어야 해요.
+
+```
+[2025-10-15 02:13:45] TOOL_CALL: delete_old_logs
+  args: { older_than: "30d", table: "production_logs" }
+  risk: write
+  policy_check: DENIED — "production_*" 경로는 allow-list에 없음
+  result: BLOCKED
+```
+
+이 로그가 있으면 "왜 막았는지"도, "왜 뚫렸는지"도 알 수 있습니다. 감사 로그 없는 에이전트는 **블랙박스**예요. 문제가 생겨야 문제를 알게 되는데, 어디가 문제인지 모릅니다.
+
+## L06의 3단 방어선을 도구 권한에 적용
+
+[Lesson 06](/lessons/enforcing-output-format)에서 출력 형식을 3단(프롬프트 → 스키마 → 재시도)으로 방어했죠. 도구 권한도 비슷한 구조입니다.
+
+| 방어선 | 출력 형식 (L06) | 도구 권한 (오늘) |
+| --- | --- | --- |
+| 1선 — 시스템 프롬프트 | "JSON만 출력하라" | "이 도구들만 사용하라, 위험 동작은 물어라" |
+| 2선 — 코드 레벨 | API 스키마 강제 | Allow-List + 인자 검증 |
+| 3선 — 런타임 | 파싱 실패 재시도 | Human-in-the-Loop + 감사 로그 |
+
+프롬프트만으로는 부족하고, 코드만으로도 부족해요. **셋을 다 깔아야** 안전해집니다.
+
+## 그래서 오늘 만들 한 장/폴더
+
+오늘 만들 건 두 가지예요. 정책 문서 + 권한 검사 코드.
+
+| 파일 | 역할 |
+| --- | --- |
+| `tool-permission-policy.md` | 도구별 위험도 분류 + Allow-List + 승인 규칙 |
+| `permission-check.ts` | 도구 호출 전 정책 검사 함수 |
+| `audit-log-sample.md` | 차단/허용 로그 예시 5건 |
+
+이 세 파일이 있으면 [Lesson 28](/lessons/mini-agent-loop)에서 만든 미니 에이전트에 권한 레이어를 바로 붙일 수 있어요. 다음 레슨([프롬프트 인젝션 방어](/lessons/prompt-injection-defense))에서는 외부 입력이 이 권한 경계를 우회하려는 공격을 다룹니다 — 에이전트 안전의 두 번째 축이에요.
+
+시작해 볼까요?
+
+---
+
+## 더 깊이 보기
+
+**에이전트 안전 설계 (벤더 공식)**
+- Anthropic (2024) — [Building effective agents](https://www.anthropic.com/research/building-effective-agents) · 도구 권한 설계와 Human-in-the-Loop 원칙
+- Anthropic — [Computer use](https://docs.claude.com/en/docs/agents-and-tools/computer-use) · 도커 격리, 민감 동작 사전 확인 등 실행 환경 안전 가이드
+
+**권한 패턴 실습 (이전/다음 레슨)**
+- [Lesson 06 — 3단 방어선](/lessons/enforcing-output-format) · 프롬프트 → 스키마 → 재시도 3단 방어 구조가 도구 권한에도 적용
+- [Lesson 28 — 미니 에이전트 루프](/lessons/mini-agent-loop) · 권한 레이어를 붙일 대상인 자율 루프
+- [Lesson 30 — 프롬프트 인젝션 방어](/lessons/prompt-injection-defense) · 권한 경계를 우회하려는 공격과 방어
+
+> _참고: 본문 도입의 "프로덕션 DB 삭제" 시나리오는 학습 효과를 위한 가상 사례입니다. 코드 예시의 함수 시그니처는 개념 설명용이며, 실제 프레임워크에 맞게 조정하세요. **Read-Only / Write / External Side-Effect** 3단 분류는 일반 보안 관행을 이 학교 운영자가 정리한 것이며, 외부 표준명은 아닙니다._
