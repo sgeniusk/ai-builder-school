@@ -49,7 +49,7 @@ body {
   font-size: 16px;
   line-height: 1.55;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--paper-2);
   word-break: keep-all;
   overflow-wrap: break-word;
   text-wrap: pretty;
@@ -540,268 +540,8 @@ body {
   .lessons-list .l-title { font-size: 17px; font-weight: 500; letter-spacing: -0.015em; color: var(--ink); }
   .lessons-list .l-meta { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); }
 
-  /* ===== Lesson 3-column layout (sidebar | reader | toc) ===== */
-  .lesson-layout {
-    display: grid;
-    grid-template-columns: 220px minmax(0, 720px) 240px;
-    gap: 48px;
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: 0 24px;
-    align-items: start;
-  }
-  @media (max-width: 1220px) {
-    /* 우측 TOC 숨김, 좌측 narrow */
-    .lesson-layout {
-      grid-template-columns: 200px minmax(0, 720px);
-      gap: 32px;
-    }
-    .lesson-toc { display: none !important; }
-  }
-  @media (max-width: 900px) {
-    /* 좌측 사이드바도 숨김 — reader만 풀폭 */
-    .lesson-layout {
-      grid-template-columns: minmax(0, 720px);
-      max-width: 720px;
-    }
-    .lesson-sidebar { display: none !important; }
-  }
-
-  /* ===== Lesson sidebar (left) ===== */
-  .lesson-sidebar {
-    position: sticky;
-    top: 88px;
-    align-self: start;
-    padding: 24px 0;
-    font-size: 13px;
-    color: var(--ink-3);
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-  }
-  .lesson-sidebar .ls-phase { padding-bottom: 16px; border-bottom: 1px solid var(--line); }
-  .lesson-sidebar .ls-phase .eyebrow { color: var(--ink-3); margin-bottom: 8px; }
-  .lesson-sidebar .ls-phase-title {
-    display: block;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: -0.015em;
-    margin-bottom: 8px;
-    text-decoration: none;
-  }
-  .lesson-sidebar .ls-phase-title:hover { color: var(--ink-2); }
-  .lesson-sidebar .ls-progress {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 4px;
-    font-family: var(--f-mono);
-    font-variant-numeric: tabular-nums;
-    color: var(--ink-3);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-  }
-  .lesson-sidebar .ls-progress-num { color: var(--ink); font-size: 14px; }
-  .lesson-sidebar .ls-progress-sep { opacity: 0.5; }
-
-  .lesson-sidebar .ls-journeys {
-    margin-top: 16px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .lesson-sidebar .ls-journeys-label {
-    font-family: var(--f-mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-4);
-    margin-bottom: 8px;
-  }
-  .lesson-sidebar .ls-journeys-dots {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .lesson-sidebar .ls-journey-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--p-from), var(--p-to));
-    box-shadow: 0 1px 3px -1px color-mix(in oklch, var(--p-to) 50%, transparent);
-  }
-
-  .lesson-sidebar .ls-lesson-list {
-    list-style: none;
-    padding: 0;
-    margin: 16px 0 0;
-    display: grid;
-    gap: 2px;
-  }
-  .lesson-sidebar .ls-lesson-list a {
-    display: grid;
-    grid-template-columns: 32px 1fr;
-    gap: 8px;
-    padding: 8px 6px;
-    border-radius: 6px;
-    color: var(--ink-3);
-    text-decoration: none;
-    transition: background 150ms var(--ease), color 150ms var(--ease);
-    align-items: start;
-  }
-  .lesson-sidebar .ls-lesson-list a:hover {
-    background: var(--paper-2);
-    color: var(--ink-2);
-  }
-  .lesson-sidebar .ls-lesson-list a.is-current {
-    background: var(--ink);
-    color: var(--paper);
-  }
-  .lesson-sidebar .ls-lesson-list a.is-current .ls-num {
-    color: var(--paper);
-    opacity: 0.7;
-  }
-  .lesson-sidebar .ls-num {
-    font-family: var(--f-mono);
-    font-size: 11px;
-    color: var(--ink-4);
-    letter-spacing: 0.04em;
-    padding-top: 1px;
-  }
-  .lesson-sidebar .ls-title {
-    font-size: 13px;
-    line-height: 1.4;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-  }
-
-  .lesson-sidebar .ls-phase-nav {
-    margin-top: 24px;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-    display: grid;
-    gap: 12px;
-  }
-  .lesson-sidebar .ls-phase-link {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 10px;
-    align-items: center;
-    padding: 8px 6px;
-    color: var(--ink-3);
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 12px;
-    line-height: 1.3;
-    transition: background 150ms var(--ease), color 150ms var(--ease);
-  }
-  .lesson-sidebar .ls-phase-link.is-next { grid-template-columns: 1fr auto; text-align: right; }
-  .lesson-sidebar .ls-phase-link:hover { background: var(--paper-2); color: var(--ink-2); }
-  .lesson-sidebar .ls-phase-link .ls-phase-link-arrow {
-    font-family: var(--f-mono);
-    color: var(--ink-4);
-    font-size: 14px;
-  }
-  .lesson-sidebar .ls-phase-link .eyebrow { display: block; margin-bottom: 2px; font-size: 10px; }
-  .lesson-sidebar .ls-phase-link .ls-phase-link-title {
-    display: block;
-    color: var(--ink-2);
-    font-weight: 500;
-  }
-
-  /* ===== Lesson TOC (right) ===== */
-  .lesson-toc {
-    position: sticky;
-    top: 88px;
-    align-self: start;
-    padding: 24px 0;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-  }
-  .lesson-toc .ltoc-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  .lesson-toc .ltoc-header .eyebrow {
-    font-size: 11px;
-    color: var(--ink-3);
-  }
-  .lesson-toc .ltoc-progress {
-    font-family: var(--f-mono);
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    color: var(--ink-3);
-    opacity: 0;
-    transform: translateY(-2px);
-    transition: opacity 200ms var(--ease), transform 200ms var(--ease);
-  }
-  .lesson-toc .ltoc-progress[data-visible="true"] {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .lesson-toc .ltoc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 1px;
-    border-left: 1px solid var(--line);
-    padding-left: 0;
-  }
-  .lesson-toc .ltoc-list li { margin: 0; }
-  .lesson-toc .ltoc-list a {
-    display: grid;
-    grid-template-columns: 22px minmax(0, 1fr);
-    gap: 10px;
-    align-items: center;
-    padding: 8px 10px 8px 12px;
-    margin-left: -1px;
-    border-left: 2px solid transparent;
-    color: var(--ink-3);
-    text-decoration: none;
-    font-size: 12px;
-    line-height: 1.4;
-    transition:
-      color 200ms var(--ease),
-      background 200ms var(--ease),
-      border-color 200ms var(--ease);
-  }
-  .lesson-toc .ltoc-list a:hover { color: var(--ink-2); background: var(--paper-2); }
-  .lesson-toc .ltoc-list .ltoc-num {
-    font-family: var(--f-mono);
-    font-size: 10px;
-    color: var(--ink-4);
-    letter-spacing: 0.04em;
-  }
-  .lesson-toc .ltoc-list .ltoc-label {
-    /* 번호 칸이 없는 항목도 라벨을 항상 2번째 칼럼에 배치 — 22px 칸에 끼어 들어가지 않게 */
-    grid-column: 2;
-    /* 한글이 글자 단위로 깨지지 않게 */
-    word-break: keep-all;
-    overflow-wrap: break-word;
-  }
-  .lesson-toc .ltoc-list li.is-active a {
-    color: var(--ink);
-    font-weight: 600;
-    border-left-color: var(--p-from, var(--ink-4));
-    background: linear-gradient(
-      90deg,
-      color-mix(in oklch, var(--p-from, var(--ink-4)) 16%, transparent),
-      transparent 70%
-    );
-    box-shadow: inset 4px 0 12px -8px var(--p-to, var(--ink-3));
-  }
-  .lesson-toc .ltoc-list li.is-active .ltoc-num {
-    color: var(--ink-2);
-  }
-
   /* ===== Lesson reader ===== */
   .lesson-reader { max-width: 720px; margin: 0 auto; padding: 72px 0 96px; }
-  /* TOC 클릭 시 sticky 헤더(88px)에 가리지 않게 */
-  .lesson-reader h2[id],
-  .lesson-reader h3[id],
-  .lesson-reader section[id] { scroll-margin-top: 100px; }
   .lesson-reader .kicker {
     font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.14em;
     color: var(--ink-3); text-transform: uppercase; margin: 0 0 16px;
@@ -929,4 +669,1177 @@ body {
 
   /* Utility: cursor */
   .link-reset { color: inherit; }
+
+
+  /* ===== Lesson Shell (3-column · option-2 Card-based) ===== */
+  .lesson-shell {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px 28px 64px;
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr) 300px;
+    gap: 24px;
+    align-items: start;
+  }
+  .lesson-shell__rail,
+  .lesson-shell__toc {
+    position: sticky;
+    top: 92px;
+    align-self: start;
+    max-height: calc(100vh - 112px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-2) transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  /* PersonaScope wrapper — 트리에 persona 변수만 흘리고 layout 영향 없음 */
+  .persona-scope { display: contents; }
+  .lesson-shell__rail::-webkit-scrollbar,
+  .lesson-shell__toc::-webkit-scrollbar { width: 3px; }
+  .lesson-shell__rail::-webkit-scrollbar-thumb,
+  .lesson-shell__toc::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 99px; }
+  .lesson-shell__main {
+    min-width: 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 40px 44px;
+  }
+
+  /* Curriculum 페이지에선 본문이 자체 PageHead/section 을 가지므로 셸 main 의 chrome 제거 */
+  .lesson-shell--curriculum .lesson-shell__main {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  /* ===== Mobile drawer (≤1279px) — 좌·우 사이드바를 슬라이드 패널로 ===== */
+  .lesson-drawer-toggles { display: none; }
+  .lesson-drawer-overlay { display: none; }
+
+  @media (max-width: 1279px) {
+    .lesson-shell {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      padding: 16px 20px 80px;
+    }
+    .lesson-shell__main { padding: 28px 22px; border-radius: var(--r); }
+
+    /* 사이드바 → fixed drawer 로 변형 */
+    .lesson-shell__rail,
+    .lesson-shell__toc {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: min(360px, 92vw);
+      max-height: none;
+      z-index: 60;
+      background: var(--paper-2);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.18);
+      padding: 24px 20px 88px;
+      border-radius: 0;
+      transition: transform 0.28s var(--ease);
+    }
+    .lesson-shell__rail {
+      left: 0;
+      transform: translateX(-100%);
+      border-right: 1px solid var(--line);
+    }
+    .lesson-shell__toc {
+      right: 0;
+      transform: translateX(100%);
+      border-left: 1px solid var(--line);
+    }
+
+    /* body 의 토글 클래스에 따라 슬라이드 인 */
+    body.lesson-drawer-rail .lesson-shell__rail { transform: translateX(0); }
+    body.lesson-drawer-toc .lesson-shell__toc { transform: translateX(0); }
+
+    /* 토글 버튼 — 하단 가운데 floating */
+    .lesson-drawer-toggles {
+      display: flex;
+      gap: 8px;
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      padding: 6px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+    }
+    .lesson-drawer-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: transparent;
+      border: 0;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 13px;
+      color: var(--ink-3);
+      cursor: pointer;
+      transition: background 0.12s var(--ease), color 0.12s var(--ease);
+    }
+    .lesson-drawer-toggle:hover { background: var(--paper-2); color: var(--ink); }
+    .lesson-drawer-toggle--active {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .lesson-drawer-toggle--active:hover {
+      background: var(--ink-2);
+      color: var(--paper);
+    }
+
+    /* 오버레이 */
+    .lesson-drawer-overlay {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(2px);
+      z-index: 55;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      animation: drawer-fade-in 0.18s var(--ease);
+    }
+  }
+
+  @keyframes drawer-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @media (max-width: 600px) {
+    .lesson-shell { padding: 12px 16px 80px; }
+    .lesson-shell__main { padding: 24px 18px; }
+  }
+
+  /* ===== 공통 — 사이드 카드 라벨 ===== */
+  .rail-section-label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    display: block;
+  }
+
+  /* ===== Journey Rail — 좌측 사이드바 컨테이너 ===== */
+  .journey-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+
+  /* ===== Journey card (좌측 상단) ===== */
+  .journey-card {
+    background:
+      linear-gradient(var(--card), var(--card)) padding-box,
+      linear-gradient(135deg, var(--p-from, var(--line)), var(--p-to, var(--line))) border-box;
+    border: 1px solid transparent;
+    border-radius: var(--r);
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .journey-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--p-from, transparent) 14%, transparent), transparent 65%);
+    pointer-events: none;
+  }
+  .journey-card > * { position: relative; z-index: 1; }
+  .journey-card .rail-section-label { margin-bottom: 12px; }
+  /* Journey display — 정보 표시 (스위처 없음) */
+  .journey-display {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .j-gradient-pill {
+    width: 32px;
+    height: 12px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 6px;
+    background: linear-gradient(90deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+    box-shadow: 0 1px 6px color-mix(in srgb, var(--p-from, var(--ink-3)) 30%, transparent);
+  }
+  .journey-display__text { flex: 1; min-width: 0; }
+  .journey-display__title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .journey-display__sub {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.45;
+  }
+
+  /* Journey 진행률 — XP 톤 */
+  .journey-progress {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .journey-progress__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .journey-progress__pct {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--ink-2);
+  }
+  .journey-progress__pct .p-text {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  .journey-progress__pct-sym {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-3);
+    margin-left: 2px;
+  }
+  .journey-progress__meta {
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  .journey-progress__bar {
+    height: 6px;
+    background: var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .journey-progress__fill {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+    transition: width 0.35s var(--ease);
+  }
+
+  /* ===== Phase group card — 모든 phase 가 한 카드 안 ===== */
+  .phase-group-card {
+    background: var(--card);
+    border: 1px solid color-mix(in srgb, var(--p-from, var(--line)) 35%, var(--line));
+    border-radius: var(--r);
+    overflow: hidden;
+  }
+  .phase-group-card__header {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .phase-group-card__count {
+    font-size: 10px;
+    color: var(--ink-4);
+  }
+  .phase-row { border-bottom: 1px solid var(--line); }
+  .phase-row:last-child { border-bottom: 0; }
+  .phase-row__btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 9px 14px;
+    background: transparent;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    transition: background 0.1s var(--ease);
+  }
+  .phase-row__btn:hover { background: var(--paper-2); }
+  .phase-row__btn--current { background: var(--paper-2); }
+  .ph-n {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--ink-4);
+    min-width: 20px;
+    flex-shrink: 0;
+  }
+  .phase-row__btn--current .ph-n { color: var(--ink-2); }
+  .ph-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-3);
+    flex: 1;
+    line-height: 1.35;
+  }
+  .phase-row__btn--current .ph-title { color: var(--ink); font-weight: 600; }
+  .phase-row__btn--recommended .ph-title { color: var(--ink-2); }
+  .ph-prog-dots {
+    display: inline-flex;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+  .ph-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--line);
+  }
+  .ph-dot--done {
+    background: linear-gradient(135deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+  }
+  .ph-dot--current { background: var(--ink-3); }
+
+  .phase-row__lessons {
+    list-style: none;
+    margin: 0;
+    padding: 4px 0 8px;
+    background: color-mix(in srgb, var(--paper-2) 50%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  }
+  .phase-sub-item a {
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    align-items: start;
+    gap: 8px;
+    padding: 6px 14px 6px 32px;
+    color: var(--ink-4);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: background 0.1s var(--ease), color 0.1s var(--ease);
+  }
+  .phase-sub-item a:hover { background: color-mix(in srgb, var(--paper-2) 60%, transparent); color: var(--ink-2); }
+  .sub-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--line-2);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .sub-name { font-size: 11px; color: inherit; word-break: keep-all; }
+  .phase-sub-item--current a {
+    background: color-mix(in srgb, var(--paper-2) 80%, transparent);
+    color: var(--ink-2);
+  }
+  .phase-sub-item--current .sub-dot { background: var(--ink); }
+  .phase-sub-item--current .sub-name { color: var(--ink); font-weight: 500; }
+  .phase-sub-item--recommended a { color: var(--ink-3); }
+  .phase-sub-item--recommended .sub-dot {
+    background: linear-gradient(135deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+  }
+  .phase-sub-item--done .sub-name { text-decoration: line-through; opacity: 0.55; }
+
+  /* ===== Lesson TOC 우측 — 3개 카드 ===== */
+  .lesson-toc {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* TOC 카드 */
+  .toc-card {
+    background: var(--card);
+    border: 1px solid color-mix(in srgb, var(--p-from, var(--line)) 35%, var(--line));
+    border-radius: var(--r);
+    padding: 14px 16px;
+  }
+  .toc-card .rail-section-label { margin-bottom: 10px; }
+  .toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1px;
+  }
+  .toc-row a {
+    display: grid;
+    grid-template-columns: 16px 4px 1fr;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: var(--r-sm);
+    color: var(--ink-4);
+    text-decoration: none;
+    transition: background 0.12s var(--ease), color 0.12s var(--ease);
+  }
+  .toc-row a:hover { background: var(--paper-2); color: var(--ink-2); }
+  .toc-step {
+    font-size: 10px;
+    color: var(--ink-4);
+    text-align: center;
+  }
+  .toc-bar {
+    width: 2px;
+    height: 12px;
+    background: var(--line);
+    border-radius: 1px;
+    transition: background 0.15s var(--ease);
+  }
+  .toc-label {
+    font-size: 11px;
+    color: inherit;
+    line-height: 1.4;
+  }
+  .toc-row--passed a { color: var(--ink-3); }
+  .toc-row--passed .toc-bar { background: var(--line-2); }
+  .toc-row--active a {
+    background: color-mix(in srgb, var(--p-from, var(--ink-3)) 10%, var(--paper-2));
+    color: var(--ink);
+  }
+  .toc-row--active .toc-label { color: var(--ink); font-weight: 500; }
+  .toc-row--active .toc-step { color: var(--p-from, var(--ink-2)); }
+  .toc-row--active .toc-bar {
+    background: linear-gradient(180deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+  }
+
+  /* 진행률 카드 */
+  .progress-card {
+    background: var(--card);
+    border: 1px solid color-mix(in srgb, var(--p-from, var(--line)) 35%, var(--line));
+    border-radius: var(--r);
+    padding: 14px 16px;
+  }
+  .progress-card .rail-section-label { margin-bottom: 12px; }
+  .seg-progress {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 10px;
+  }
+  .seg {
+    flex: 1;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--line);
+    transition: background 0.2s var(--ease);
+  }
+  .seg--done {
+    background: linear-gradient(90deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+  }
+  .prog-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .prog-frac {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .prog-frac__sub {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ink-4);
+  }
+  .prog-pct {
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  .prog-note {
+    margin: 8px 0 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--ink-4);
+  }
+  .ph-prog-wrap {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+  .ph-prog-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+  .ph-prog-bar {
+    height: 3px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .ph-prog-fill {
+    display: block;
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+    transition: width 0.25s var(--ease);
+  }
+
+  /* 형제 lesson 카드 */
+  .sibling-card {
+    background: var(--card);
+    border: 1px solid color-mix(in srgb, var(--p-from, var(--line)) 35%, var(--line));
+    border-radius: var(--r);
+    overflow: hidden;
+  }
+  .sibling-card__header {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sibling-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sib-item {
+    border-bottom: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+  }
+  .sib-item:last-child { border-bottom: 0; }
+  .sib-item a {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 14px;
+    color: var(--ink-3);
+    text-decoration: none;
+    transition: background 0.1s var(--ease), color 0.1s var(--ease);
+  }
+  .sib-item a:hover { background: var(--paper-2); color: var(--ink-2); }
+  .sib-item--current a { background: var(--paper-2); }
+  .sib-status {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    border: 1px solid var(--line-2);
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .sib-status--done {
+    background: linear-gradient(135deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+    border-color: transparent;
+  }
+  .sib-status--done::after {
+    content: "✓";
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .sib-status--current {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .sib-status--current::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 4px 0 4px 5px;
+    border-color: transparent transparent transparent white;
+    margin-left: 1px;
+  }
+  .sib-name {
+    font-size: 11px;
+    line-height: 1.4;
+    color: inherit;
+    word-break: keep-all;
+  }
+  .sib-item--current .sib-name { color: var(--ink-2); font-weight: 500; }
+  .sib-item--done .sib-name { color: var(--ink-4); }
+
+  /* ===== Curriculum TOC (우측 사이드바, /curriculum 용) ===== */
+  .curriculum-toc {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .curriculum-toc__journeys {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+  }
+  .curriculum-toc__journey a {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "pill text"
+      "bar bar";
+    align-items: center;
+    gap: 4px 10px;
+    padding: 8px 10px;
+    border-radius: var(--r-sm);
+    color: inherit;
+    text-decoration: none;
+    transition: background 0.12s var(--ease);
+  }
+  .curriculum-toc__journey a:hover { background: var(--paper-2); }
+  .curriculum-toc__journey--active a {
+    background: var(--paper-2);
+  }
+  .curriculum-toc__j-pill {
+    grid-area: pill;
+    width: 20px;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+  }
+  .curriculum-toc__j-text {
+    grid-area: text;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px;
+    min-width: 0;
+  }
+  .curriculum-toc__j-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .curriculum-toc__journey--active .curriculum-toc__j-title {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .curriculum-toc__j-meta {
+    font-size: 10px;
+    color: var(--ink-4);
+    font-family: var(--f-mono);
+    flex-shrink: 0;
+    display: inline-flex;
+    gap: 4px;
+  }
+  .curriculum-toc__j-sep { color: var(--ink-4); }
+  .curriculum-toc__j-bar {
+    grid-area: bar;
+    height: 3px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .curriculum-toc__j-fill {
+    display: block;
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+    transition: width 0.3s var(--ease);
+  }
+
+  /* Phase 모드 — 칩 그리드 */
+  .curriculum-toc__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .curriculum-toc__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: var(--paper-2);
+    border-color: color-mix(in srgb, var(--p-from, var(--line-2)) 35%, var(--line-2));
+    color: var(--ink-2);
+    font-size: 12px;
+    transition: background 0.12s var(--ease), border-color 0.12s var(--ease);
+  }
+  .curriculum-toc__chip:hover { background: var(--card); }
+  .curriculum-toc__chip-pill {
+    width: 14px;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+  }
+
+  /* ===== Character chrome (헤더 아바타 + 모달) ===== */
+  .site-header__right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .character-shell-placeholder {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+  .character-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.15s var(--ease);
+    flex-shrink: 0;
+  }
+  .character-avatar:hover { transform: scale(1.08); }
+  .character-avatar svg { display: block; }
+
+  /* Modal */
+  .char-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    overflow-y: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 5vh 20px;
+    animation: drawer-fade-in 0.18s var(--ease);
+  }
+  .char-modal {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+    position: relative;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+    margin: auto;
+  }
+  .char-modal__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--ink-3);
+    font-size: 22px;
+    line-height: 1;
+    transition: background 0.12s var(--ease), color 0.12s var(--ease);
+  }
+  .char-modal__close:hover { background: var(--paper-2); color: var(--ink); }
+
+  .char-modal__hero {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .char-modal__avatar-wrap {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper-2);
+    border-radius: 50%;
+    padding: 8px;
+  }
+  .char-modal__avatar-wrap .character-avatar {
+    width: 100% !important;
+    height: 100% !important;
+    cursor: default;
+  }
+  .char-modal__avatar-wrap .character-avatar:hover { transform: none; }
+  .char-modal__title {
+    margin: 0 0 6px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .char-modal__title-btn {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    padding: 4px 8px;
+    border-radius: var(--r-sm);
+    transition: background 0.12s var(--ease);
+  }
+  .char-modal__title-btn:hover {
+    background: var(--paper-2);
+  }
+  .char-modal__title-input {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-align: center;
+    padding: 4px 10px;
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-sm);
+    background: var(--paper);
+    font-family: inherit;
+    width: 100%;
+    max-width: 280px;
+  }
+  .char-modal__sub {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.6;
+  }
+
+  .char-modal__field { margin-bottom: 20px; }
+  .char-modal__field .kicker { display: block; margin-bottom: 8px; }
+  .char-modal__handle-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+  }
+  .char-modal__handle {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .char-modal__handle-action {
+    background: transparent;
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-sm);
+    padding: 4px 10px;
+    font-size: 11px;
+    color: var(--ink-3);
+    cursor: pointer;
+    transition: border-color 0.12s var(--ease), color 0.12s var(--ease);
+    font-family: inherit;
+  }
+  .char-modal__handle-action:hover {
+    border-color: var(--ink-3);
+    color: var(--ink);
+  }
+  .char-modal__input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 16px;
+    font-family: inherit;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-sm);
+  }
+  .char-modal__note {
+    margin: 16px 0 20px;
+    font-size: 12px;
+    color: var(--ink-4);
+    line-height: 1.6;
+  }
+  .char-modal__cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Profile-specific */
+  .char-modal--profile { padding-top: 40px; }
+  .char-profile__progress {
+    background: var(--paper-2);
+    border-radius: var(--r);
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .char-profile__pct {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .char-profile__pct-sym {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink-3);
+    margin-left: 2px;
+  }
+  .char-profile__pct-meta {
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--ink-3);
+    font-family: var(--f-mono);
+  }
+  .char-profile__bar {
+    margin-top: 12px;
+    height: 6px;
+    background: var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .char-profile__fill {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+    transition: width 0.35s var(--ease);
+  }
+
+  .char-profile__section {
+    margin-top: 16px;
+  }
+  .char-profile__section .kicker { display: block; margin-bottom: 10px; }
+  .char-profile__empty {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink-4);
+    line-height: 1.6;
+    padding: 12px 14px;
+    background: var(--paper-2);
+    border-radius: var(--r-sm);
+  }
+  .char-profile__phases {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .char-profile__phase-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    background: color-mix(in srgb, var(--p-from, var(--ink-3)) 12%, var(--paper));
+    border: 1px solid color-mix(in srgb, var(--p-from, var(--ink-3)) 40%, var(--line));
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+  .char-profile__phase-num {
+    font-size: 10px;
+    color: var(--ink-3);
+  }
+
+  .char-profile__reset {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+  }
+  .char-profile__reset-btn {
+    background: transparent;
+    border: 0;
+    color: var(--ink-4);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: var(--r-sm);
+    transition: color 0.12s var(--ease), background 0.12s var(--ease);
+    font-family: inherit;
+  }
+  .char-profile__reset-btn:hover {
+    color: var(--ink-2);
+    background: var(--paper-2);
+  }
+  .char-profile__reset-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  .char-profile__reset-msg {
+    flex: 1;
+    min-width: 200px;
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .char-profile__reset-confirm {
+    border-color: color-mix(in srgb, #c33 40%, var(--line-2)) !important;
+    color: #c33 !important;
+  }
+  .char-profile__reset-confirm:hover {
+    border-color: #c33 !important;
+    background: color-mix(in srgb, #c33 8%, transparent);
+  }
+
+  /* ===== USP 4 axes (Hero 아래) ===== */
+  .usp-section { padding-top: 32px; }
+  .usp-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .usp-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.15s var(--ease), transform 0.15s var(--ease);
+  }
+  .usp-card:hover {
+    border-color: var(--ink-3);
+    transform: translateY(-1px);
+  }
+  .usp-card .kicker { margin: 0; }
+  .usp-card__title {
+    margin: 4px 0 0;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .usp-card__desc {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-3);
+  }
+  @media (max-width: 1023px) {
+    .usp-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .usp-grid { grid-template-columns: 1fr; gap: 12px; }
+    .usp-card { padding: 18px 20px; }
+  }
+
+  /* ===== Interactive verification checklist ===== */
+  .checklist--interactive {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+  .checklist--interactive li {
+    margin: 6px 0;
+    border-bottom: 0;
+    padding: 0;
+  }
+  /* 부모 .checklist 의 ::before (빈 가짜 박스) 가 같이 잡히지 않도록 명시적 차단 */
+  .checklist--interactive li::before { display: none; content: none; }
+  /* ordered checklist (buildSteps) — label 안 번호 표시 */
+  .checklist--interactive label {
+    grid-template-columns: 18px auto 1fr;
+  }
+  .checklist--interactive:not(.checklist--build) label {
+    grid-template-columns: 18px 1fr;
+  }
+  .checklist--interactive__num {
+    font-size: 12px;
+    color: var(--ink-4);
+    align-self: center;
+  }
+
+  /* ===== Lesson progress trio (우측 진행률 카드 — 빌드·검증·회고 3-section) ===== */
+  .lesson-progress-trio {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px;
+    display: grid;
+    gap: 6px;
+  }
+  .lesson-progress-trio__row a {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: var(--r-sm);
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: background 0.12s var(--ease);
+  }
+  .lesson-progress-trio__row a:hover { background: var(--paper-2); }
+  .lesson-progress-trio__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .lesson-progress-trio__weight {
+    font-size: 9px;
+    color: var(--ink-4);
+    padding: 1px 5px;
+    background: var(--paper-2);
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+  .lesson-progress-trio__bar {
+    height: 4px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .lesson-progress-trio__fill {
+    display: block;
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+    transition: width 0.25s var(--ease);
+  }
+  .lesson-progress-trio__count {
+    font-size: 10px;
+    color: var(--ink-3);
+    min-width: 28px;
+    text-align: right;
+  }
+  .lesson-progress-trio__weighted {
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+    margin-top: 4px;
+  }
+  .checklist--interactive label {
+    display: grid;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--card);
+    cursor: pointer;
+    transition: border-color 0.12s var(--ease), background 0.12s var(--ease);
+  }
+  .checklist--interactive label:hover { border-color: var(--ink-3); }
+  .checklist--interactive input[type="checkbox"] {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--ink);
+    cursor: pointer;
+  }
+  .checklist--interactive .checklist__item--done label {
+    background: color-mix(in srgb, var(--p-from, var(--ink-2)) 8%, var(--card));
+    border-color: color-mix(in srgb, var(--p-from, var(--ink-2)) 30%, var(--line));
+    color: var(--ink-3);
+  }
+  .checklist--interactive .checklist__item--done span { text-decoration: line-through; }
+
 }

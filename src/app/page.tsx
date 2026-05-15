@@ -7,6 +7,7 @@ import {
   JourneyPicker,
   LearningLoopSection,
   SectionHeading,
+  UspCards,
   WeekPath,
 } from "@/components/Sections";
 import { JourneyCard } from "@/components/Cards";
@@ -24,6 +25,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+
+      <UspCards />
 
       <LearningLoopSection />
 

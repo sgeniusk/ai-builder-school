@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { LessonSidebar } from "@/components/LessonSidebar";
-import { LessonTOC, type TOCSection } from "@/components/LessonTOC";
+import { CurriculumShell } from "@/components/CurriculumShell";
+import { Container } from "@/components/Layout";
 import {
   getLessons,
   getLessonsByPhaseId,
@@ -42,99 +42,103 @@ export default async function PhaseDetailPage({
   const allLessons = getLessons();
   const nextPhase = phase.nextPhaseSlug ? getPhaseBySlug(phase.nextPhaseSlug) : null;
 
-  // TOC 섹션 — Phase 페이지 안의 주요 블록
-  const tocSections: TOCSection[] = [
-    { id: "overview", label: "개요", number: 1 },
-    { id: "outcomes", label: "성과·산출물", number: 2 },
-    { id: "lessons", label: "레슨", number: 3 },
-    ...(nextPhase
-      ? [{ id: "next-phase", label: "다음 Phase", number: 4 }]
-      : []),
-  ];
-
-  // 사이드바·TOC 색 테마는 Phase 의 첫 번째 추천 여정 색
-  const primaryJourney = phase.targetJourneys[0];
-
   return (
-    <div className="lesson-layout">
-      <LessonSidebar currentPhase={phase} />
-
-      <article className="lesson-reader">
-        <p className="kicker">
-          Phase {String(phase.order).padStart(2, "0")}
-          {phase.weekInMvpPath && <> · Week {String(phase.weekInMvpPath).padStart(2, "0")}</>}
-          {" "}· {LEVEL_LABEL[phase.level]} · {phase.estimatedHours}H
-        </p>
-        <h1>{phase.titleKo}</h1>
-        <p className="lede">{phase.shortDescription}</p>
-
-        <div className="phase-meta" style={{ marginTop: 32, marginBottom: 56 }}>
-          <div>
-            <div className="lbl">Lessons</div>
-            <div className="val">{phase.lessonSlugs.length}</div>
+    <CurriculumShell currentPhaseId={phase.id} currentPhaseSlug={phase.slug}>
+      <section className="page-head">
+        <Container>
+          <div
+            style={{
+              display: "flex",
+              gap: 18,
+              alignItems: "center",
+              fontFamily: "var(--f-mono)",
+              fontSize: 12,
+              letterSpacing: "0.14em",
+              color: "var(--ink-3)",
+              textTransform: "uppercase",
+              marginBottom: 20,
+            }}
+          >
+            <span>PHASE {String(phase.order).padStart(2, "0")}</span>
+            {phase.weekInMvpPath && <><span>·</span><span>WEEK {String(phase.weekInMvpPath).padStart(2, "0")}</span></>}
+            <span>·</span>
+            <span>{LEVEL_LABEL[phase.level]}</span>
+            <span>·</span>
+            <span>{phase.estimatedHours}H</span>
           </div>
-          <div>
-            <div className="lbl">Hours</div>
-            <div className="val">{phase.estimatedHours}</div>
-          </div>
-          <div>
-            <div className="lbl">Level</div>
-            <div className="val">{LEVEL_LABEL[phase.level]}</div>
-          </div>
-          <div>
-            <div className="lbl">Week</div>
-            <div className="val">{phase.weekInMvpPath ? `W${String(phase.weekInMvpPath).padStart(2, "0")}` : "—"}</div>
-          </div>
-        </div>
+          <h1>{phase.titleKo}</h1>
+          <p className="lede">{phase.shortDescription}</p>
 
-        <section id="overview" style={{ scrollMarginTop: 88, marginBottom: 64 }}>
-          <h2>개요</h2>
-          <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.8, whiteSpace: "pre-line", margin: "16px 0 0" }}>
-            {phase.longDescription}
-          </p>
-        </section>
-
-        <section id="outcomes" style={{ scrollMarginTop: 88, marginBottom: 64 }}>
-          <h2>성과·산출물</h2>
-
-          <div style={{ marginTop: 24 }}>
-            <div className="eyebrow" style={{ marginBottom: 12 }}>Outcomes</div>
-            <ul style={{ listStyle: "disc", paddingLeft: 20, margin: 0, color: "var(--ink-2)", fontSize: 15, lineHeight: 1.8 }}>
-              {phase.outcomes.map((o) => <li key={o}>{o}</li>)}
-            </ul>
-          </div>
-
-          <div style={{ marginTop: 32 }}>
-            <div className="eyebrow" style={{ marginBottom: 12 }}>Deliverables</div>
-            <ul className="checklist" style={{ marginTop: 0 }}>
-              {phase.deliverables.map((d) => <li key={d}>{d}</li>)}
-            </ul>
-          </div>
-
-          <div style={{ marginTop: 32 }}>
-            <div className="eyebrow" style={{ marginBottom: 12 }}>대상 여정</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-              {phase.targetJourneys.map((p) => (
-                <span key={p} className="chip">{JOURNEY_LABEL[p]}</span>
-              ))}
+          <div className="phase-meta">
+            <div>
+              <div className="lbl">Lessons</div>
+              <div className="val">{phase.lessonSlugs.length}</div>
+            </div>
+            <div>
+              <div className="lbl">Hours</div>
+              <div className="val">{phase.estimatedHours}</div>
+            </div>
+            <div>
+              <div className="lbl">Level</div>
+              <div className="val">{LEVEL_LABEL[phase.level]}</div>
+            </div>
+            <div>
+              <div className="lbl">Week</div>
+              <div className="val">{phase.weekInMvpPath ? `W${String(phase.weekInMvpPath).padStart(2, "0")}` : "—"}</div>
             </div>
           </div>
+        </Container>
+      </section>
 
-          <div style={{ marginTop: 32 }}>
-            <div className="eyebrow" style={{ marginBottom: 12 }}>추천 도구</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-              {phase.recommendedTools.map((t) => (
-                <span key={t} className="chip-mono" style={{ color: "var(--ink-2)" }}>{t}</span>
-              ))}
+      <section className="sec">
+        <Container>
+          <div className="two-col">
+            <div>
+              <div className="eyebrow" style={{ marginBottom: 12 }}>Longform</div>
+              <p style={{ fontSize: 16, color: "var(--ink-2)", lineHeight: 1.7, whiteSpace: "pre-line", margin: 0, maxWidth: "60ch" }}>
+                {phase.longDescription}
+              </p>
+            </div>
+            <div style={{ display: "grid", gap: 24 }}>
+              <div>
+                <div className="eyebrow" style={{ marginBottom: 12 }}>Outcomes</div>
+                <ul style={{ listStyle: "disc", paddingLeft: 20, margin: 0, color: "var(--ink-2)", fontSize: 15, lineHeight: 1.7 }}>
+                  {phase.outcomes.map((o) => <li key={o}>{o}</li>)}
+                </ul>
+              </div>
+              <div>
+                <div className="eyebrow" style={{ marginBottom: 12 }}>Deliverables</div>
+                <ul className="checklist" style={{ marginTop: 0 }}>
+                  {phase.deliverables.map((d) => <li key={d}>{d}</li>)}
+                </ul>
+              </div>
+              <div>
+                <div className="eyebrow" style={{ marginBottom: 12 }}>대상 여정</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  {phase.targetJourneys.map((p) => (
+                    <span key={p} className="chip">{JOURNEY_LABEL[p]}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="eyebrow" style={{ marginBottom: 12 }}>추천 도구</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                  {phase.recommendedTools.map((t) => (
+                    <span key={t} className="chip-mono" style={{ color: "var(--ink-2)" }}>{t}</span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-        </section>
+        </Container>
+      </section>
 
-        <section id="lessons" style={{ scrollMarginTop: 88, marginBottom: 64 }}>
-          <div className="eyebrow" style={{ marginBottom: 8 }}>Lessons · {lessons.length}</div>
-          <h2>이 Phase의 레슨</h2>
+      <section className="sec">
+        <Container>
+          <div className="eyebrow" style={{ marginBottom: 12 }}>Lessons · {lessons.length}</div>
+          <h2 className="section-title" style={{ fontSize: "clamp(28px, 3.6vw, 40px)" }}>이 Phase의 레슨</h2>
           {lessons.length > 0 ? (
-            <ul className="lessons-list" style={{ marginTop: 32 }}>
+            <ul className="lessons-list" style={{ marginTop: 40 }}>
               {lessons.map((lesson) => {
                 const globalIndex = allLessons.findIndex((l) => l.id === lesson.id) + 1;
                 return (
@@ -152,14 +156,16 @@ export default async function PhaseDetailPage({
               })}
             </ul>
           ) : (
-            <div style={{ marginTop: 24, padding: 40, border: "1px dashed var(--line-2)", borderRadius: "var(--r)", textAlign: "center", color: "var(--ink-3)", fontSize: 14 }}>
+            <div style={{ marginTop: 32, padding: 40, border: "1px dashed var(--line-2)", borderRadius: "var(--r)", textAlign: "center", color: "var(--ink-3)", fontSize: 14 }}>
               이 Phase의 레슨은 곧 공개됩니다.
             </div>
           )}
-        </section>
+        </Container>
+      </section>
 
-        {nextPhase && (
-          <section id="next-phase" style={{ scrollMarginTop: 88 }}>
+      {nextPhase && (
+        <section className="sec">
+          <Container>
             <div
               style={{
                 padding: 32,
@@ -187,11 +193,9 @@ export default async function PhaseDetailPage({
                 이어서 보기 <span className="arrow">→</span>
               </Link>
             </div>
-          </section>
-        )}
-      </article>
-
-      <LessonTOC sections={tocSections} journeyId={primaryJourney} />
-    </div>
+          </Container>
+        </section>
+      )}
+    </CurriculumShell>
   );
 }

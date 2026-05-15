@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Layout";
+import { ProjectCard } from "@/components/Cards";
+import { JourneySelectButton } from "@/components/JourneySelectButton";
 import { PageHead } from "@/components/Sections";
-import { getLessonBySlug, getPhaseBySlug, getJourneys } from "@/lib/content";
+import {
+  getJourneys,
+  getLessonBySlug,
+  getPhaseBySlug,
+  getProjectsByJourney,
+} from "@/lib/content";
 import { JOURNEY_LABEL, JOURNEY_LABEL_KO } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -121,10 +128,32 @@ export default function JourneysPage() {
                   </div>
                 )}
 
+                {(() => {
+                  const matchedProjects = getProjectsByJourney(j.id);
+                  if (matchedProjects.length === 0) return null;
+                  return (
+                    <div style={{ marginTop: 24 }}>
+                      <div className="eyebrow" style={{ marginBottom: 12 }}>
+                        이 여정에 잘 맞는 프로젝트
+                      </div>
+                      <div className="proj-grid">
+                        {matchedProjects.map((project) => (
+                          <ProjectCard key={project.id} project={project} />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })()}
+
                 <div className="outcome">
                   <strong>이 여정 끝에 손에 남는 것 · </strong>
                   {j.expectedOutcome}
                 </div>
+
+                <JourneySelectButton
+                  journeyId={j.id}
+                  firstLessonSlug={j.recommendedLessons[0]}
+                />
               </div>
             </article>
           ))}
