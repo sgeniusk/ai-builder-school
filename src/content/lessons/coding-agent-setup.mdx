@@ -1,0 +1,161 @@
+## "터미널에서 AI가 코드를 짜기 시작했는데, 멈출 수가 없어요"
+
+동료가 코딩 에이전트를 처음 써봤습니다. 신기해서 "이 프로젝트 리팩터링해 줘"라고 시켰더니 에이전트가 파일 30개를 동시에 고치기 시작해요. `package.json`도 바꾸고, `.env`도 건드리고, 심지어 `git push`까지 하려 합니다. 동료가 당황해서 터미널을 닫았지만 이미 절반이 바뀌어 있었어요. 되돌리는 데만 2시간.
+
+이건 에이전트가 멍청해서가 아니에요. **권한과 규약 없이 실행시킨 우리 잘못**입니다. 신입한테 회사 키 다 쥐어주고 "알아서 해 줘" 하면 사고가 나죠. AI도 똑같아요. 오늘은 그 키와 매뉴얼을 깔아두는 날입니다.
+
+## 코딩 에이전트란 — 대화형 AI와 뭐가 다른가
+
+{/* Source · DOC · Anthropic "Claude Code overview" — https://docs.anthropic.com/en/docs/claude-code/overview */}
+{/* Source · DOC · OpenAI "Codex CLI" — https://github.com/openai/codex */}
+
+ChatGPT·Claude 같은 **대화형 AI**는 우리가 복사·붙여넣기로 코드를 옮기는 구조예요. 에이전트는 한 단계 더 갑니다 — **직접 파일을 읽고, 명령을 실행하고, 코드를 수정**합니다. 터미널 안에서 주니어 개발자처럼 움직이는 거예요.
+
+| 구분 | 대화형 AI (ChatGPT, Claude) | 코딩 에이전트 (Claude Code, Codex CLI, Cursor) |
+| --- | --- | --- |
+| 코드 전달 | 복사-붙여넣기 | 직접 파일 쓰기 |
+| 명령 실행 | 불가 (사람이 실행) | 터미널 명령 직접 실행 |
+| 컨텍스트 | 내가 붙여준 것만 | 프로젝트 전체를 탐색 |
+| 위험도 | 낮음 (실행은 사람이) | 높음 (에이전트가 직접 실행) |
+
+위험도가 올라간 만큼 **권한 설계가 첫 단추**예요.
+
+## 3대 에이전트 비교 — Claude Code · Codex CLI · Cursor
+
+{/* Source · DOC · Anthropic "Claude Code overview" — https://docs.anthropic.com/en/docs/claude-code/overview */}
+{/* Source · DOC · OpenAI "Codex CLI" — https://github.com/openai/codex */}
+{/* Source · DOC · Cursor "Features" — https://docs.cursor.com */}
+
+2025년 기준 가장 많이 쓰이는 코딩 에이전트 셋을 비교합니다.
+
+| 항목 | Claude Code | Codex CLI | Cursor |
+| --- | --- | --- | --- |
+| 인터페이스 | 터미널 (CLI) | 터미널 (CLI) | VS Code 포크 (IDE) |
+| 모델 | Claude (Sonnet/Opus) | GPT-4.1/o3/o4-mini | 다중 모델 선택 |
+| 파일 접근 | 로컬 파일 직접 | 샌드박스 내 실행 | 에디터 내 직접 |
+| 권한 모델 | `.claude/settings.json` 허용 목록 | 자동 실행 모드 선택 | IDE 내 승인 |
+| 프로젝트 규약 | `CLAUDE.md` | `AGENTS.md` | `.cursorrules` |
+| MCP 지원 | 있음 (도구 확장) | 제한적 | 제한적 |
+| 비용 구조 | API 토큰 과금 | API 토큰 과금 | 구독 + API |
+
+{/* Note: 위 비교는 2025년 5월 기준이며, 각 도구의 기능은 빠르게 변합니다. 최신 정보는 위 공식 문서를 확인하세요. */}
+
+**어떤 도구**보다 **어떻게 권한을 깔지**가 먼저예요. 도구는 분기마다 바뀝니다. 권한 설계 습관은 어떤 에이전트한테든 그대로 따라와요.
+
+## 권한 설계 — 허용 목록이 핵심
+
+{/* Source · DOC · Anthropic "Claude Code permissions" — https://docs.anthropic.com/en/docs/claude-code/security */}
+
+코딩 에이전트의 권한은 **금지 목록(blocklist)**이 아니라 **허용 목록(allowlist)** 으로 설계합니다. "이것만 된다"가 "이것만 안 된다"보다 안전해요.
+
+Claude Code 기준으로, `.claude/settings.json`에 허용할 명령을 명시합니다.
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Bash(npm run lint)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run build)",
+      "Bash(npm run test)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(rm -rf*)",
+      "Bash(npm publish*)"
+    ]
+  }
+}
+```
+
+이 설정이 깔려 있으면 에이전트가 `git push`를 시도할 때 **막혀요**. 사람이 확인하고 직접 push하는 게 그 자리에 들어옵니다.
+
+핵심 원칙 세 가지:
+
+1. **읽기는 넓게, 쓰기는 좁게** — 파일 읽기는 자유롭게, 파일 수정은 특정 디렉터리만
+2. **실행은 명시만** — `npm run lint` 같은 안전한 명령만 허용
+3. **파괴적 동작은 사람이** — `git push`, `rm -rf`, `npm publish`는 무조건 사람 승인
+
+## 프로젝트 규약 — CLAUDE.md / AGENTS.md
+
+{/* Source · DOC · Anthropic "Claude Code CLAUDE.md" — https://docs.anthropic.com/en/docs/claude-code/memory */}
+{/* Source · DOC · OpenAI Codex "AGENTS.md convention" — https://github.com/openai/codex/blob/main/docs/AGENTS.md */}
+
+권한 설정이 "무엇을 해도 되는가"라면, 프로젝트 규약은 "어떻게 해야 하는가"예요. Claude Code는 `CLAUDE.md`, Codex CLI는 `AGENTS.md`를 읽습니다.
+
+좋은 규약 파일에 들어가야 할 5가지:
+
+| 항목 | 예시 |
+| --- | --- |
+| 프로젝트 개요 | "Next.js 15 + TypeScript + Tailwind" |
+| 실행 명령어 | `npm run dev`, `npm run lint`, `npm run build` |
+| 코드 스타일 | "함수형 컴포넌트, 한국어 UI 복사, 영문 변수명" |
+| 금지 사항 | "distDir 변경 금지, .env 수정 금지" |
+| 작업 완료 기준 | "`npm run check` 통과 후 완료 보고" |
+
+[Lesson 05](/lessons/structure-of-good-prompts)의 4축을 떠올려 보세요. CLAUDE.md는 프로젝트 전체에 깔아두는 **상시 프롬프트**예요. 매번 지시하지 않아도 에이전트가 이 규약부터 읽고 따라가요.
+
+## 비밀 관리 — .env와 API 키
+
+에이전트가 가장 위험한 순간은 **비밀이 노출될 때**예요. `.env` 파일에 있는 API 키가 커밋에 섞이거나, 에이전트가 로그에 찍는 순간 사고가 됩니다.
+
+3가지 규칙:
+
+1. **`.gitignore`에 `.env*` 등록** — 기본 중 기본이지만 빠뜨리는 경우가 의외로 많아요
+2. **규약 파일에 명시** — "`CLAUDE.md`에 '.env 파일 수정 금지, 비밀 값 출력 금지' 명시"
+3. **환경변수로 주입** — 에이전트에게 키 값을 직접 알려주지 말고, 환경변수 이름만 알려주세요
+
+```markdown
+# CLAUDE.md 비밀 관리 섹션
+## 절대 하지 말아야 할 것
+- `.env*` 파일 수정/생성/읽기
+- API 키·토큰을 로그나 커밋에 포함
+- `git push` 직접 실행
+```
+
+## 그래서 오늘 만들 한 장
+
+오늘 만들 건 **코딩 에이전트 셋업 한 장** + **실습 프로젝트**예요. 한 장에 권한·규약·비밀 정책을 다 담고, 실습 프로젝트에서 직접 검증합니다.
+
+| 항목 | 무엇 |
+| --- | --- |
+| 에이전트 선택 | Claude Code / Codex CLI / Cursor 중 하나 |
+| 권한 설정 | `.claude/settings.json` 또는 해당 도구의 권한 파일 |
+| 규약 문서 | `CLAUDE.md` 또는 `AGENTS.md` (5섹션 포함) |
+| 비밀 정책 | `.gitignore` + 규약 내 금지 조항 |
+| 검증 | 에이전트에게 금지된 작업을 시켜보고 차단되는지 확인 |
+
+이 셋업을 한 번 깔아두면 다음 레슨([GitHub 이슈 → AI 브리프](/lessons/github-issue-to-ai-brief))부터 에이전트한테 실제 작업을 던질 토대가 섭니다.
+
+## Phase 4를 시작하며
+
+Phase 2에서 [4축 프롬프트](/lessons/structure-of-good-prompts)와 [3단 방어선](/lessons/enforcing-output-format)을 만들었고, Phase 3에서 일상 자동화를 돌렸다면, Phase 4부터는 **AI가 코드를 직접 쓰는 단계**예요.
+
+코딩 에이전트는 강력하지만 위험도가 함께 올라갑니다. 그래서 Phase 4의 첫 레슨이 "셋업"인 거예요. 환경이 안전해야 속도를 낼 수 있습니다.
+
+오늘 셋업을 끝내고, 내일부터 실전에 들어갑시다. 시작해 볼까요?
+
+---
+
+## 더 깊이 보기
+
+**코딩 에이전트 공식 문서**
+- Anthropic — [Claude Code overview](https://docs.anthropic.com/en/docs/claude-code/overview) · 설치부터 권한 설정까지 공식 가이드
+- Anthropic — [Claude Code security](https://docs.anthropic.com/en/docs/claude-code/security) · 권한 모델과 허용 목록 상세
+- Anthropic — [Claude Code memory (CLAUDE.md)](https://docs.anthropic.com/en/docs/claude-code/memory) · 프로젝트 규약 파일의 역할
+- OpenAI — [Codex CLI](https://github.com/openai/codex) · 설치와 AGENTS.md 규약
+- Cursor — [Docs](https://docs.cursor.com) · IDE 기반 에이전트 사용법
+
+**프로젝트 규약 컨벤션**
+- OpenAI — [AGENTS.md convention](https://github.com/openai/codex/blob/main/docs/AGENTS.md) · 코딩 에이전트를 위한 프로젝트 지침서 형식
+
+**이전 레슨 참조**
+- [Lesson 05 — 4축 프롬프트](/lessons/structure-of-good-prompts) · CLAUDE.md는 프로젝트 전체에 대한 상시 4축 프롬프트
+- [Lesson 08 — 프롬프트 라이브러리 v2](/lessons/build-personal-prompt-library) · 규약 문서도 v2 구조(Front Matter + 카테고리)로 관리 가능
+
+**Phase 4 안에서 다음 단계**
+- [Lesson 34 — Karpathy CLAUDE.md 4원칙](/lessons/claude-md-four-principles) · 오늘 만든 CLAUDE.md 안에 들어가야 할 4원칙
+- [Lesson 35 — 하네스 엔지니어링 6단계](/lessons/harness-engineering-roadmap) · CLAUDE.md를 1단계로 시작해 6단계 하네스로 확장
+
+> _참고: 본문 도입의 "터미널에서 AI가 코드를 짜기 시작했는데" 시나리오는 학습 효과를 위한 가상 사례입니다. 3대 에이전트 비교표는 2025년 5월 기준이며, 각 도구의 기능·가격은 빠르게 변합니다. 위 공식 문서에서 최신 정보를 확인하세요. 본문의 권한 설정 예시(`settings.json`)는 개념 설명용이며, 실제 문법은 각 도구의 공식 문서를 따르세요._

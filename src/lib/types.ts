@@ -136,8 +136,8 @@ export interface Lesson {
   learningGoals: string[];
   problemScenario: string;
   coreConcepts: CoreConcept[];
-  codexMission: string;
-  claudeCodeMission: string;
+  codexMission?: string;
+  claudeCodeMission?: string;
   /**
    * Unified mission — Claude Code 기준으로 작성된 단일 미션 프롬프트.
    * 파일럿 이후 lessons가 순차적으로 이 필드로 이관된다. 존재하면 이것이 우선 표시됨.

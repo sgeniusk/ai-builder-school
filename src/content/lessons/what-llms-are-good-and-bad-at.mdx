@@ -6,11 +6,16 @@
 
 답은 단순합니다. **LLM의 능력은 \"얼마나 똑똑한가\"가 아니라 \"어떤 모양의 일에 강한가\"**라는 거예요. 모델은 본질적으로 **다음에 올 토큰을 확률로 예측하는 기계**입니다. 이 한 줄 안에 강함과 약함의 모든 비밀이 들어 있습니다.
 
+{/* Source · DOC · OpenAI Help Center "What are tokens and how to count them?" — https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them */}
+{/* Source · DOC · OpenAI Chat Completions API (temperature) — https://platform.openai.com/docs/api-reference/chat/create#chat-createtemperature */}
+
 문장의 패턴, 단락의 흐름, 보고서의 구조 — 이런 건 인터넷에 수십억 번 반복된 패턴이라 모델이 잘 잇습니다. 반면 \"23,847 + 19,205\"는 패턴이 아니라 **결정적 계산**입니다. 모델은 계산기가 아니라서, \"이 정도 자릿수에선 보통 이런 답이 나오던데...\" 같은 식으로 추정합니다. 그래서 멀쩡해 보이는 답이 그냥 틀려 있어요.
 
 이걸 알고 나면 LLM에 대한 짜증의 절반이 사라집니다. \"왜 못 해?\"가 아니라 \"이건 애초에 모양이 안 맞는 일이었구나\"가 되거든요.
 
 ## LLM이 구조적으로 강한 4가지 모양
+
+{/* Source · PAPER · Brown et al. (2020) "Language Models are Few-Shot Learners" (GPT-3) — https://arxiv.org/abs/2005.14165 · 패턴·예시 기반 일반화 능력 */}
 
 **1. 형태 변환 (Transformation).** 같은 내용을 다른 형식으로 옮기는 일. 회의록 → 요약, 긴 메일 → 3줄 답장, 영문 보고서 → 한국어 초안. 정보 손실은 있지만 사실은 보존됩니다.
 
@@ -23,6 +28,9 @@
 공통점이 보이시나요? 모두 **이미 있는 정보의 모양을 바꾸는** 작업입니다. 새로운 사실을 만들지 않아요.
 
 ## LLM이 구조적으로 약한 4가지 모양
+
+{/* Source · PAPER · Nikankin et al. (2024) "Arithmetic Without Algorithms: Language Models Solve Math With a Bag of Heuristics" — https://arxiv.org/abs/2410.21272 · 산수가 알고리즘이 아닌 휴리스틱 묶음 */}
+{/* Source · PAPER · Razeghi et al. (2022) "Impact of Pretraining Term Frequencies on Few-Shot Reasoning" — https://arxiv.org/abs/2202.07206 · 수치 빈도가 정확도에 미치는 영향 */}
 
 **1. 정확한 산수 (Exact arithmetic).** 자릿수가 커지면 어김없이 틀립니다. 엑셀 합계, 환율 환산, 비율 계산 — 모두 LLM이 아니라 **계산기가 풀어야 할 문제**입니다. (참고로 이 문제는 LLM이 코드를 써서 푸는 \"Code Interpreter\" 같은 도구로 우회 가능합니다. 그건 결국 LLM이 아니라 Python이 푸는 거예요.)
 
@@ -39,6 +47,7 @@
 - 보고서 \"초안\"은 잘 씁니다 (강함). 하지만 그 안의 수치를 검증하지 않으면 틀린 채로 발표됩니다 (약함).
 - 영문 메일 번역은 잘합니다 (강함). 그런데 비즈니스 컨텍스트에서 미묘한 권력 관계가 깨질 수 있습니다 (약함).
 - 코드 리팩터링은 잘합니다 (강함). 그런데 미세한 사이드이펙트는 놓칩니다 (약함).
+- 마케팅·정책 글의 톤 잡기는 잘합니다 (강함). 그런데 학습 데이터의 시기·문화·관점 편향이 그대로 들어옵니다 (약함). 이건 [Lesson 04](/lessons/checks-before-trusting-ai-output)의 **Bias 축**으로 다시 만나요.
 
 이게 **\"보조 가능\"** 영역입니다. 우리가 쓰는 시간 대부분이 사실 이 영역이에요. \"AI에게 맡길까 말까\"가 아니라 \"**어디까지 맡기고 어디서부터 내가 받아 검토할까**\"의 문제로 바뀝니다.
 
@@ -55,3 +64,25 @@
 분류표는 한 번 만들고 끝이 아니라, **분기마다 다시 봅니다**. 모델이 좋아질수록 약함 칸의 항목이 보조 가능으로, 보조 가능이 강함으로 옮겨갑니다. 그 이동을 추적하는 게 다음 단계의 학습이에요.
 
 시작해 볼까요?
+
+---
+
+## 더 깊이 보기
+
+**공식 문서 — 토큰·컨텍스트·샘플링**
+- OpenAI Help — [What are tokens and how to count them?](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them)
+- OpenAI — [Chat Completions API · temperature](https://platform.openai.com/docs/api-reference/chat/create#chat-createtemperature)
+- Anthropic — [Context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows)
+
+**모델별 최신 사양 (날짜 변동)**
+- OpenAI — [Models](https://developers.openai.com/api/docs/models)
+- Anthropic — [Models overview](https://platform.claude.com/docs/en/about-claude/models/overview)
+- Google — [Gemini models](https://ai.google.dev/gemini-api/docs/models)
+
+**학술 근거**
+- Brown 외 (2020) — [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165) · 패턴 일반화의 대표 논문
+- Nikankin 외 (2024) — [Arithmetic Without Algorithms](https://arxiv.org/abs/2410.21272) · 산수 약점의 해석 가능성 분석
+- Razeghi 외 (2022) — [Impact of Pretraining Term Frequencies on Few-Shot Reasoning](https://arxiv.org/abs/2202.07206) · 수치 빈도와 정확도
+- Chen 외 / OpenAI (2021) — [Evaluating Large Language Models Trained on Code](https://arxiv.org/abs/2107.03374) · 코드 능력 초기 대표 논문
+
+> _참고: 본문의 일화·시나리오는 학습 효과를 위한 가상 사례이며, 강·약 분류 4가지 모양은 운영자의 실무 정리입니다. 모델 사양·정확도 수치는 시간에 따라 바뀌므로 위 공식 페이지를 분기마다 다시 보세요._

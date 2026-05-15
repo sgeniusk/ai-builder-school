@@ -1,0 +1,160 @@
+## "그 프롬프트 어디 있더라..."
+
+3개월 전에 한 번 잘 썼던 프롬프트가 있었어요. 슬랙에 동료한테 보낸 것 같기도 하고, 메모장에 둔 것 같기도 하고, ChatGPT 대화창 어딘가에 묻혀 있는 것도 같아요. 30분 검색하다 결국 처음부터 다시 짭니다. 어제 다른 동료가 같은 작업을 똑같이 새로 짜고 있었던 게 어렴풋이 떠올라요.
+
+[Lesson 05](/lessons/structure-of-good-prompts)에서 `prompt-library-v1.md` 한 장을 만들었죠. 그 한 장을 한 달만 쓰면 자연스럽게 한계가 보입니다 — **혼자 쓸 땐 됐는데, 팀과 나누려니 한 장으론 부족**해요.
+
+오늘은 그 한 장을 **팀과 공유 가능한 v2 구조**로 진화시킵니다. Phase 2의 마지막 한 장이에요.
+
+## v1의 한계 4가지
+
+`prompt-library-v1.md` 한 장을 한 달 써 보면 정확히 네 군데서 막힙니다.
+
+1. **버전을 모른다.** 두 번째 수정 후엔 어느 게 최신인지 흐릿. "어제 그거 잘 됐는데 오늘 안 되네"의 절반이 여기서 옵니다.
+2. **변수가 매번 손으로**. `{topic}`, `{audience}` 자리표시자를 매번 찾아 바꿔 넣음. 5번 호출하면 한 번은 빠뜨려요.
+3. **카테고리가 없다.** 10개가 넘어가면 한 페이지에서 찾기 힘들어집니다.
+4. **공유가 안 된다.** 동료에게 보내려면 통째로 복사 — 동료가 수정한 버전이 다시 합쳐질 길이 없습니다.
+
+이 네 가지를 한 번에 푸는 구조가 v2예요.
+
+## v2의 4가지 축
+
+{/* Note: Front Matter / 변수 치환 / 카테고리 폴더 / 공유 README 4축은 일반 Dev 관행을 이 학교 운영자가 한국어로 정리한 것입니다. */}
+
+### 1. Front Matter — 모든 템플릿에 메타데이터
+
+{/* Source · DOC · Jekyll "Front Matter" (YAML 헤더 표준) — https://jekyllrb.com/docs/front-matter/ */}
+
+각 프롬프트 파일 맨 위에 YAML 메타를 답니다.
+
+```yaml
+---
+title: "보고서 초안"
+purpose: "주간 진행 상황을 임원진 4명에게 3분 안에 읽히는 형태로"
+version: "1.3"
+last_updated: "2025-09-15"
+author: "@taewook"
+variables:
+  - audience: "이 보고서를 받을 사람"
+  - period: "보고 기간 (예: 'Q3 2025')"
+  - blockers: "이번 주 가장 큰 막힘 (없으면 'None')"
+examples:
+  - input: { audience: "임원 4명", period: "9월 1주", blockers: "프리미엄 플랜 출시 지연" }
+    output: "(여기에 잘 나왔던 답 한 토막)"
+tags: ["report", "weekly", "executive"]
+---
+
+(이 아래에 4축 프롬프트 본문)
+```
+
+이 헤더가 있으면 검색·필터·자동 도구 연결이 다 가능해집니다. 무엇보다 **"이 프롬프트가 왜 이 모양인지"**의 답이 같이 살아 있어요.
+
+### 2. 카테고리 폴더 — 1차 분류
+
+```
+prompt-library/
+├── research/
+│   ├── literature-scan.md
+│   └── interview-question.md
+├── report/
+│   ├── weekly-report.md       ← 위 예시
+│   └── exec-summary.md
+├── review/
+│   ├── pr-review.md
+│   └── doc-review.md
+└── README.md
+```
+
+평소 일이 어느 카테고리에 떨어지는지를 보면 그 카테고리가 자연스럽게 정해져요. 보통 **3~5개 카테고리**로 시작하면 충분합니다. 너무 잘게 자르면 "이건 어디 두지?"의 마찰이 생겨요.
+
+### 3. 변수 치환 — 손이 아니라 도구로
+
+`{audience}`를 매번 손으로 바꾸는 대신, 미니 CLI 또는 슬래시 명령으로 자동화합니다.
+
+```bash
+# 미니 CLI 예시
+$ promptlib report/weekly-report --audience="임원 4명" --period="9월 1주"
+# → 변수가 채워진 프롬프트가 클립보드로 복사됨
+```
+
+또는 Claude Code의 슬래시 명령으로 등록하면 호출 비용이 거의 0이 됩니다. 이 단계가 깔리면 매일 호출 마찰이 사라져요.
+
+### 4. README — 팀에 공유하는 안내서
+
+{/* Source · 일반 관행 · README-driven development (Tom Preston-Werner, GitHub 공동창업자) — https://tom.preston-werner.com/2010/08/23/readme-driven-development.html */}
+
+라이브러리 루트의 `README.md`에 세 가지를 적습니다.
+
+- **무엇이 들어있나** — 카테고리별 템플릿 목록 (한 줄씩)
+- **어떻게 쓰나** — 변수 치환 / 슬래시 명령 사용법
+- **어떻게 기여하나** — 새 템플릿 추가 시 Front Matter 필드 / 버전 규칙 / 리뷰 절차
+
+이 한 장이 있으면 동료가 처음 봐도 30분 안에 자기 템플릿을 추가할 수 있어요. 없으면 "이거 어떻게 쓰는 거야?"가 매번 반복됩니다.
+
+## 진화 경로 — v1에서 v2로
+
+{/* Note: v1→v2→v3 진화 경로는 이 학교 운영자의 정리입니다. */}
+
+| 단계 | 무엇 | 언제 |
+| --- | --- | --- |
+| v1 (Lesson 05) | 한 장짜리 Markdown · 3개 템플릿 | 일주일 안 |
+| **v2 (오늘)** | 카테고리 폴더 · Front Matter · 변수 치환 · README | 1~3개월 |
+| v3 (다음) | Git/Notion 동기화 · 팀 공유 · 자동화 호출 | 3개월~ |
+
+v2에서 멈춰도 충분해요. 혼자 쓸 거면 v1로도 됩니다. **자기 사용 빈도와 팀 사이즈에 맞는 단계**를 고르세요. 도구가 일을 만들지 않게.
+
+## Git이냐 Notion이냐 — 어디에 둘까
+
+이 라이브러리를 어디에 둘지가 자주 발목을 잡아요. 두 선택지가 있습니다.
+
+- **Git 저장소** — 버전 관리·diff·PR 리뷰가 자연스러움. 엔지니어링 팀에 적합.
+- **Notion DB / Confluence** — 검색·태그·코멘트가 편함. 비엔지니어 포함 팀에 적합.
+
+둘 다 좋은 답이에요. 중요한 건 **매일 호출되는 위치**인지. 출근해서 첫 번째로 여는 도구 안에 두세요. 다른 데 있으면 안 씁니다. (Phase 8에서 둘을 동기화하는 패턴을 다뤄요.)
+
+## 그래서 오늘 만들 한 장
+
+오늘 만들 건 `prompt-library/` 폴더예요. v1에서 만든 3개 템플릿을 이관하면서 다음을 추가합니다.
+
+| 항목 | 무엇 |
+| --- | --- |
+| 폴더 | 3~5개 카테고리 (research / report / review 등) |
+| 템플릿 | 5개 이상 (v1의 3개 + 새로 2개 이상) |
+| Front Matter | 모든 템플릿이 7개 필드 (title / purpose / version / last_updated / author / variables / examples) 포함 |
+| README.md | 무엇·어떻게·기여 3섹션 |
+| 변수 치환 도구 | 미니 CLI 또는 슬래시 명령 1개 (선택) |
+
+40분이면 v2 골격이 섭니다. 변수 치환 도구는 그날 못 깔아도 괜찮아요. 다음 주에 한 시간만 쓰면 됩니다.
+
+## Phase 2를 닫으며
+
+Phase 2 (Prompt & Context Engineering)에서 만든 4장을 모아볼게요.
+
+- [Lesson 05](/lessons/structure-of-good-prompts) — **4축 프롬프트 라이브러리 v1** (한 장)
+- [Lesson 06](/lessons/enforcing-output-format) — **3단 방어선 자동화 출력** (한 폴더)
+- [Lesson 07](/lessons/feeding-long-documents) — **장문 처리 3 전략 비교 노트** (한 장)
+- **Lesson 08 (오늘)** — **개인 프롬프트 라이브러리 v2** (한 폴더)
+
+이 네 장이 있으면 매일의 AI 사용이 다음 단계로 갑니다. 매번 새로 짜지 않아요. **호출하면 됩니다.**
+
+다음 Phase ([Phase 3 — AI Work OS](/curriculum/phase-3-ai-work-os))에서는 이 라이브러리를 **실제 업무 파이프라인**에 붙입니다. 보고서 초안 자동화, 회의록 → Action Item 파이프라인, 리서치 워크플로우 — 모두 이 라이브러리에서 호출돼요.
+
+오늘 한 장 더 만들고, 다음 주부터 매일 호출해 봅시다. 시작해 볼까요?
+
+---
+
+## 더 깊이 보기
+
+**Front Matter / README 표준 (관행 출처)**
+- Jekyll — [Front Matter (YAML 헤더)](https://jekyllrb.com/docs/front-matter/) · 정적 사이트 생성기에서 시작된 메타데이터 표준
+- Tom Preston-Werner — [README Driven Development](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) · README를 먼저 쓰는 개발 철학
+
+**프롬프트 관리 도구 (참고)**
+- Google — [Dotprompt](https://google.github.io/dotprompt/) · 프롬프트를 파일로 관리하는 한 가지 표준
+- LangChain — [Hub](https://smith.langchain.com/hub) · 커뮤니티 프롬프트 저장소 사례
+
+**라이브러리 진화 (Phase 2의 다른 레슨)**
+- [Lesson 05 — 4축 프롬프트 v1](/lessons/structure-of-good-prompts) · 한 장에서 시작
+- [Lesson 06 — 3단 방어선 출력](/lessons/enforcing-output-format) · 자동화 가능 수준의 출력 강제
+
+> _참고: 본문 도입의 "3개월 전 프롬프트 검색" 시나리오는 학습 효과를 위한 가상 사례입니다. 폴더 구조·Front Matter 7필드·진화 경로(v1→v2→v3)는 일반 Dev 관행을 이 학교 운영자가 한국어로 정리한 것이며, 외부 표준 명칭은 아닙니다. 도구 선택(Git vs Notion)은 본인 팀·도메인에 맞게 조정하세요. 본문의 "30분 안에 추가" 같은 시간 표현은 평균적인 감을 위한 것이며, 본인 환경에서 직접 측정해 보세요._

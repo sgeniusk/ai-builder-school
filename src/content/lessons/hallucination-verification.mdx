@@ -1,8 +1,10 @@
 ## 그 그럴싸한 논문이, 사실은 없었다
 
+{/* 본문에 이어 등장하는 'Smith & Lee (2021)' 인용은 환각 시연을 위한 가상 사례입니다. 실제 논문이 아닙니다. */}
+
 어느 날 Claude에게 \"이 주장의 출처를 알려줘\"라고 물었더니, 멋진 답이 돌아왔어요.
 
-> **\"Smith & Lee (2021), 'Cognitive Load and Decision Reversal in Knowledge Work', Journal of Applied Cognition, Vol 14(3), pp. 412–428\"**
+> **\"Smith & Lee (2021), 'Cognitive Load and Decision Reversal in Knowledge Work', Journal of Applied Cognition, Vol 14(3), pp. 412–428\"** _— 환각으로 만들어진 가상 인용_
 
 저자 이름, 발행연도, 저널명, 페이지 번호까지. 너무 깔끔해서 의심도 안 했습니다. 보고서에 그대로 인용하려다 마지막 순간 검색해 봤어요.
 
@@ -13,6 +15,9 @@
 오늘은 \"AI를 쓰면서도 데이지 않는 시스템\"을 만듭니다. 답을 받기 전부터 **검증을 강제하는 프롬프트 구조** — 한 장이면 됩니다.
 
 ## 환각은 버그가 아니라 본질입니다
+
+{/* Source · PAPER · Ji et al. (2022/2023) "Survey of Hallucination in Natural Language Generation" — https://arxiv.org/abs/2202.03629 · 환각의 정의·intrinsic/extrinsic 분류 */}
+{/* Source · DOC · Anthropic "Reduce hallucinations" — https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations */}
 
 먼저 한 가지를 받아들여야 해요. 모델이 거짓말을 하는 게 아닙니다. **모델은 \"그럴듯한 다음 토큰\"을 확률로 골라 잇는 기계**예요. \"Smith\"라는 성, \"2021\"이라는 연도, \"Journal of...\"라는 저널 이름 — 이런 패턴이 학습 데이터에 무수히 등장했기 때문에, 새로운 조합으로 자연스럽게 만들어집니다. 모델 입장에서는 \"존재하는가\" 여부 자체가 판단 대상이 아니에요.
 
@@ -38,14 +43,18 @@
 
 ### 1. Citation-required 프롬프트 (가장 기본)
 
+{/* Source · DOC · Anthropic "Reduce hallucinations" (Verify with citations / admit uncertainty) — https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations */}
+
 답마다 출처를 요구하고, 출처를 못 찾으면 답을 거부하게 만듭니다.
 
 > 답의 각 주장 뒤에 [출처]를 표기해 주세요.
 > 출처를 확신하지 못하면 \"확인 불가\"라고 답하고, 그 이유를 한 줄로 설명하세요.
 
-이 두 줄이 환각의 70%를 막습니다. 효과가 큰 이유는 **모델에게 \"모름\"이라는 출구를 열어주기 때문**이에요.
+이 두 줄이 환각을 **눈에 띄게** 줄여 줍니다. 효과가 큰 이유는 **모델에게 \"모름\"이라는 출구를 열어주기 때문**이에요. (정확한 감소율은 모델·도메인마다 다르니, 자기 검증 루프와 함께 측정해 보세요.)
 
 ### 2. Chain of Verification (CoVe) — 자기 검증
+
+{/* Source · PAPER · Dhuliawala et al. (2023) "Chain-of-Verification Reduces Hallucination in Large Language Models" — https://arxiv.org/abs/2309.11495 */}
 
 답을 받은 뒤 같은 모델에게 **자기 답을 검증할 질문**을 만들게 합니다.
 
@@ -59,6 +68,9 @@
 같은 모델이라도 \"답을 만드는 모드\"와 \"답을 의심하는 모드\"는 다른 출력을 냅니다. 단일 호출보다 일관성이 올라갑니다.
 
 ### 3. Confidence 점수 요청
+
+{/* Source · PAPER · Tian et al. (2023) "Just Ask for Calibration" — https://arxiv.org/abs/2305.14975 · verbalized confidence */}
+{/* Source · PAPER · Guo et al. (2017) "On Calibration of Modern Neural Networks" — https://proceedings.mlr.press/v70/guo17a.html · calibration 표준 근거 */}
 
 모델에게 답마다 신뢰도를 0~100으로 추정해 달라고 합니다.
 
@@ -85,3 +97,18 @@
 이 한 장이 생긴 다음 주부터 당신의 AI 사용은 다르게 보입니다. 출처가 없는 답에 손이 잘 안 가요. 단정적인 어조가 거슬려요. \"신뢰도 알려줘\" 한 줄을 안 붙인 게 어색해요. 이 작은 거슬림이 빌더의 감각이 자라고 있다는 신호입니다.
 
 시작해 볼까요?
+
+---
+
+## 더 깊이 보기
+
+**공식 문서**
+- Anthropic — [Reduce hallucinations](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations) · "모름" 출구·인용 강제·문서 grounding
+
+**학술 논문**
+- Ji 외 (2022/2023) — [Survey of Hallucination in Natural Language Generation](https://arxiv.org/abs/2202.03629) · 환각 정의·intrinsic/extrinsic 분류
+- Dhuliawala 외 (2023) — [Chain-of-Verification Reduces Hallucination in LLMs](https://arxiv.org/abs/2309.11495) · 본문의 4단 루프와 직접 대응
+- Tian 외 (2023) — [Just Ask for Calibration](https://arxiv.org/abs/2305.14975) · verbalized confidence
+- Guo 외 (2017) — [On Calibration of Modern Neural Networks](https://proceedings.mlr.press/v70/guo17a.html) · calibration 표준 근거
+
+> _참고: 본문 도입의 \"Smith & Lee (2021)\" 인용은 환각 시연을 위해 만든 **가상 인용**입니다. 실제 논문이 아니에요. 본문의 \"눈에 띄게 줄여 준다\"는 표현은 모델·도메인마다 효과 폭이 달라 정량 수치(예: 70%)는 명시하지 않았습니다. 자기 도메인에서 직접 측정해 보는 걸 권장합니다._

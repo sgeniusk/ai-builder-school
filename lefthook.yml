@@ -30,3 +30,21 @@ pre-push:
 skip_output:
   - meta
   - summary
+
+# post-commit auto-push — main 브랜치는 보호하고 feature branch만 자동 푸시
+# pre-push의 npm run check 게이트가 그대로 작동해 검증 실패 시 푸시 거부됨
+post-commit:
+  commands:
+    auto-push:
+      run: |
+        BRANCH=$(git rev-parse --abbrev-ref HEAD)
+        if [ "$BRANCH" = "main" ]; then
+          echo "main 브랜치는 수동 푸시 권장 — skip"
+          exit 0
+        fi
+        if git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1; then
+          git push
+        else
+          git push -u origin "$BRANCH"
+        fi
+      tags: convenience

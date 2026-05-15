@@ -1,0 +1,167 @@
+## AI 코드가 테스트를 통과했다. 충분한가?
+
+아니다.
+
+테스트는 코드가 **동작하는가**를 검증한다. Eval 게이트는 코드가 **의도한 대로** 동작하고 **안전한가**를 검증한다.
+
+AI 코딩 에이전트가 만든 PR에서 실제로 발견되는 문제들이 있다.
+
+- 존재하지 않는 라이브러리 버전을 임포트 (환각)
+- deprecated된 API를 최신 API인 것처럼 사용
+- 하드코딩된 API 키, 비밀번호
+- 요청한 기능과 다른 동작 (의도 불일치)
+- 보안 헤더 누락, SQL 인젝션 취약 패턴
+
+이 중 일부는 정적 분석으로 잡히지만, 대부분은 AI 코드 특유의 패턴을 알아야 보인다.
+
+---
+
+## AI 코드의 4가지 오류 패턴
+
+### 1. 환각 API (Hallucinated APIs)
+
+AI는 학습 데이터에서 본 패턴으로 코드를 생성한다. 실제로 존재하지 않는 메서드나 파라미터를 만들어내는 경우가 있다.
+
+```python
+# AI가 생성한 코드 — 실제로는 없는 파라미터
+response = openai.chat.completions.create(
+    model="gpt-4",
+    messages=messages,
+    response_format={"type": "json_object"},
+    strict_mode=True  # ← 이 파라미터는 존재하지 않음
+)
+```
+
+**방어:** 공식 문서에서 파라미터를 직접 확인한다.
+
+### 2. 오래된 패턴 (Deprecated Patterns)
+
+AI의 학습 데이터에는 과거 버전 코드가 많다. 현재는 deprecated된 API를 현재 표준인 것처럼 쓴다.
+
+```javascript
+// AI가 생성한 코드 — 구 버전 패턴
+componentWillMount() {  // React에서 deprecated
+  this.setState({ data: [] });
+}
+```
+
+**방어:** 사용된 라이브러리 버전을 명시하고, 주요 변경사항 체크.
+
+### 3. 보안 취약 패턴
+
+AI는 학습 데이터의 패턴을 따른다. 보안이 취약한 예제 코드가 학습 데이터에 많으면 그 패턴이 나온다.
+
+```python
+# 하드코딩된 시크릿 — 절대 안 됨
+API_KEY = "sk-abc123..."
+
+# SQL 인젝션 취약
+query = f"SELECT * FROM users WHERE id = {user_input}"
+```
+
+**방어:** 정적 분석 도구(Semgrep, Bandit) + 시크릿 스캔.
+
+### 4. 의도 불일치 (Intent Mismatch)
+
+테스트는 통과하지만 요청한 것과 다른 동작을 한다. AI가 요청을 다르게 해석했을 때 발생한다.
+
+요청: "사용자가 삭제 요청하면 soft delete 처리"
+AI 구현: `DELETE FROM users WHERE id = ?` (hard delete)
+
+테스트: `assert user_deleted == True` ← 통과함 (하지만 잘못된 구현)
+
+---
+
+## AI 코드 전용 PR 체크리스트
+
+일반 코드 리뷰 체크리스트와 다른 점은 **AI 특유의 패턴에 집중**한다는 것이다.
+
+```
+[ ] 환각 API 확인
+    - 임포트된 라이브러리 버전과 공식 문서 대조
+    - 존재하지 않는 메서드/파라미터 없음
+
+[ ] deprecated 패턴 확인
+    - 사용된 프레임워크 버전 명시됨
+    - 최근 1년 내 deprecated된 API 없음
+
+[ ] 보안 패턴 확인
+    - 하드코딩된 시크릿/패스워드 없음
+    - 사용자 입력이 그대로 쿼리/명령에 삽입되지 않음
+    - 인증/인가 체크 누락 없음
+
+[ ] 의도 불일치 확인
+    - PR 설명과 실제 코드 동작이 일치
+    - 엣지 케이스 처리가 요청 명세와 일치
+    - 에러 처리 방식이 기대와 일치
+
+[ ] 기존 코드 스타일 유지
+    - 네이밍 컨벤션 일관성
+    - 에러 처리 패턴 일관성
+```
+
+---
+
+## LLM이 LLM 코드를 리뷰하는 방법
+
+같은 AI에게 "코드 잘 됐나요?"라고 물으면 대부분 긍정적으로 답한다. 구체적인 오류 패턴을 지목해야 실질적인 검증이 된다.
+
+```
+아래 코드를 다음 항목으로 리뷰해줘:
+
+[코드]
+<PR 코드 붙여넣기>
+
+[리뷰 항목]
+1. 존재하지 않거나 deprecated된 API 메서드/파라미터
+2. 하드코딩된 시크릿, 환경변수로 빠져야 할 값
+3. SQL 인젝션, XSS 같은 보안 취약 패턴
+4. PR 설명("이렇게 동작해야 한다")과 실제 코드 동작의 불일치
+5. 기존 코드베이스 패턴과 일관성 없는 부분
+
+각 항목에서 문제가 없으면 "이상 없음"으로 명시해줘.
+문제가 있으면 코드 라인과 구체적인 수정 방향을 줘.
+```
+
+---
+
+## CI에 Eval 게이트 넣기
+
+수동 체크리스트 단계를 자동화하는 구조:
+
+```yaml
+# .github/workflows/ai-eval.yml
+name: AI Code Eval Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    # PR 라벨이 'ai-generated'일 때만 실행
+    
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Secret scan
+        run: gitleaks detect --source . --no-git
+      - name: Security lint
+        run: semgrep --config=auto .
+
+  llm-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run LLM review
+        run: python scripts/llm_review.py ${{ github.event.pull_request.number }}
+        # 출력: review-report.md → PR 코멘트로 게시
+```
+
+Eval 게이트가 실패해도 머지를 강제 차단할지, 경고만 할지는 팀 상황에 맞게 결정한다. 초기엔 경고 모드로 시작해 신뢰가 쌓이면 차단 모드로 전환하는 것이 일반적이다.
+
+---
+
+## 핵심 원칙
+
+> AI 코드는 동작하는 것처럼 보인다. 그래서 더 위험하다.
+> 일반 코드 리뷰 체크리스트로는 AI 특유의 패턴을 잡지 못한다.
+> "잘 됐나요?"가 아니라 "이 패턴이 있는가?"로 물어라.

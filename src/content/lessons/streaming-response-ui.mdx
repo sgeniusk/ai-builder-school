@@ -1,0 +1,212 @@
+## "10초 동안 빈 화면만 보고 있었어요"
+
+[Lesson 19](/lessons/connect-ai-api)에서 만든 API 라우트로 첫 호출을 붙였습니다. 잘 됩니다 — 문제는 **기다리는 시간**이에요. 모델이 500토큰짜리 답을 만드는 데 8초. 그 8초 동안 사용자는 빈 화면에 로딩 스피너만 봅니다. "먹통인 건가?" 하고 뒤로 가기를 누르죠.
+
+ChatGPT가 한 글자씩 찍히는 걸 한 번이라도 써 본 사람은 압니다 — **기다리게 하지 말고 보여주면 됩니다**. 답이 완성될 때까지 기다리는 게 아니라, 만들어지는 과정을 실시간으로 흘려보내는 거예요.
+
+오늘은 그 스트리밍 UI를 만들어요.
+
+## 스트리밍의 원리 — SSE와 토큰 단위 전송
+
+{/* Source · DOC · MDN "Server-Sent Events" — https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events */}
+{/* Source · DOC · OpenAI "Streaming" — https://developers.openai.com/api/docs/guides/streaming-responses */}
+{/* Source · DOC · Anthropic "Streaming Messages" — https://docs.claude.com/en/docs/build-with-claude/streaming */}
+
+일반 API 호출은 **답이 다 만들어진 뒤** 한 덩어리로 옵니다. 스트리밍은 **토큰이 생성될 때마다** 조각을 보냅니다.
+
+```
+일반 호출:   [요청] ────── 8초 ──────> [전체 응답]
+스트리밍:    [요청] → 토큰1 → 토큰2 → 토큰3 → ... → [끝]
+```
+
+이 조각 전송에 가장 많이 쓰이는 프로토콜이 **SSE (Server-Sent Events)** 예요. HTTP 연결을 유지한 채 서버가 `data: ...` 줄을 계속 보내고, 클라이언트가 한 줄씩 읽습니다.
+
+OpenAI와 Anthropic 모두 `stream: true` 파라미터 하나로 스트리밍을 켤 수 있어요.
+
+## 서버 라우트 — 스트림을 중계하기
+
+{/* Source · DOC · Vercel AI SDK "Streaming" — https://ai-sdk.dev/docs/ai-sdk-ui/chatbot */}
+
+[Lesson 19](/lessons/connect-ai-api)의 라우트를 스트리밍 버전으로 바꿉니다.
+
+```typescript
+// app/api/chat/route.ts (스트리밍 버전)
+import OpenAI from "openai";
+
+const client = new OpenAI({ timeout: 60_000 });
+
+export async function POST(req: Request) {
+  const { message } = await req.json();
+
+  const stream = await client.chat.completions.create({
+    model: "gpt-4o",
+    messages: [{ role: "user", content: message }],
+    stream: true,
+  });
+
+  // ReadableStream으로 변환해 클라이언트에 중계
+  const encoder = new TextEncoder();
+  const readable = new ReadableStream({
+    async start(controller) {
+      for await (const chunk of stream) {
+        const text = chunk.choices[0]?.delta?.content ?? "";
+        if (text) {
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text })}\n\n`));
+        }
+      }
+      controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+      controller.close();
+    },
+  });
+
+  return new Response(readable, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      Connection: "keep-alive",
+    },
+  });
+}
+```
+
+핵심은 **`ReadableStream`으로 감싸서 중계하는 것**이에요. 모델이 토큰을 뱉을 때마다 `controller.enqueue`로 클라이언트에 밀어넣습니다.
+
+## Vercel AI SDK — 보일러플레이트를 줄이는 길
+
+{/* Source · DOC · Vercel AI SDK "useChat" — https://ai-sdk.dev/docs/ai-sdk-ui/chatbot */}
+
+위 코드를 직접 짜도 되지만, **Vercel AI SDK**를 쓰면 서버·클라이언트 양쪽의 보일러플레이트가 대폭 줄어요.
+
+| 직접 구현 | Vercel AI SDK |
+| --- | --- |
+| ReadableStream 수동 생성 | `streamText()` 한 줄 |
+| SSE 파싱 직접 구현 | `useChat()` 훅이 자동 처리 |
+| 중단/재시도 직접 구현 | `stop()` / `reload()` 내장 |
+
+```typescript
+// 서버 (Vercel AI SDK)
+import { streamText } from "ai";
+import { openai } from "@ai-sdk/openai";
+
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+  const result = streamText({
+    model: openai("gpt-4o"),
+    messages,
+  });
+  return result.toDataStreamResponse();
+}
+```
+
+```tsx
+// 클라이언트 (React)
+"use client";
+import { useChat } from "@ai-sdk/react";
+
+export default function Chat() {
+  const { messages, input, handleInputChange, handleSubmit, isLoading, stop } = useChat();
+
+  return (
+    <div>
+      {messages.map((m) => (
+        <div key={m.id}>{m.role}: {m.content}</div>
+      ))}
+      <form onSubmit={handleSubmit}>
+        <input value={input} onChange={handleInputChange} />
+        {isLoading ? (
+          <button type="button" onClick={stop}>중단</button>
+        ) : (
+          <button type="submit">보내기</button>
+        )}
+      </form>
+    </div>
+  );
+}
+```
+
+## 중단 버튼 — AbortController의 역할
+
+{/* Source · DOC · MDN "AbortController" — https://developer.mozilla.org/en-US/docs/Web/API/AbortController */}
+
+사용자가 긴 답을 중간에 끊고 싶을 때가 있어요. "아, 그거 말고 다른 거 물어볼래." Vercel AI SDK는 `stop()` 한 줄이지만, 직접 구현할 때는 **AbortController**를 씁니다.
+
+```typescript
+const controller = new AbortController();
+
+const response = await fetch("/api/chat", {
+  method: "POST",
+  body: JSON.stringify({ message }),
+  signal: controller.signal, // 이 signal로 요청 취소
+});
+
+// 중단 버튼 클릭 시
+controller.abort();
+```
+
+서버 쪽에서도 스트림이 끊기면 모델 호출을 멈춰야 과금이 줄어요. OpenAI SDK는 `stream.controller.abort()`로, Anthropic SDK는 스트림 이터레이터를 `break`하면 됩니다.
+
+## 스크롤 UX — 작은 디테일이 큰 차이
+
+스트리밍 UI에서 가장 흔한 실수: 새 토큰이 추가될 때마다 **자동 스크롤**이 안 돼서 사용자가 답을 보려면 매번 아래로 내려야 해요.
+
+| 문제 | 해법 |
+| --- | --- |
+| 새 토큰이 화면 밖에 추가됨 | `scrollIntoView({ behavior: "smooth" })` |
+| 사용자가 위로 올려서 읽고 있는데 자동 스크롤 | "사용자가 스크롤 중이면 자동 스크롤 멈춤" 로직 |
+| 코드 블록 중간에 스크롤이 튐 | `overflow-anchor: auto` CSS 속성 활용 |
+
+```tsx
+// 자동 스크롤 + 사용자 스크롤 감지
+const bottomRef = useRef<HTMLDivElement>(null);
+const [isUserScrolling, setIsUserScrolling] = useState(false);
+
+useEffect(() => {
+  if (!isUserScrolling) {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }
+}, [messages, isUserScrolling]);
+```
+
+이 디테일 하나가 "프로토타입"과 "쓸 만한 제품"을 가릅니다.
+
+## 그래서 오늘 만들 미니 채팅 UI
+
+오늘 만들 건 `examples/streaming-chat/` — 토큰별 표시 + 중단 버튼 + 자동 스크롤이 되는 미니 채팅 UI예요.
+
+| 파일 | 역할 |
+| --- | --- |
+| `route.ts` | 스트리밍 API 라우트 (SSE) |
+| `Chat.tsx` | React 클라이언트 — 토큰 누적 + 중단 + 스크롤 |
+| `useStreamChat.ts` | 커스텀 훅 — SSE 파싱 + AbortController |
+| `README.md` | 설정 → 실행 → 확인 가이드 |
+
+[Lesson 19](/lessons/connect-ai-api)의 안전한 라우트 위에 스트리밍 레이어를 얹는 구조입니다.
+
+## 스트리밍이 답이 아닌 순간
+
+스트리밍이 항상 좋은 건 아니에요.
+
+- **구조화 출력** (JSON 파싱 필요) — [Lesson 21](/lessons/structured-output-handling)에서 다루겠지만, JSON을 스트리밍으로 받으면 중간에 파싱할 수 없어요. 완성된 JSON이 필요하면 일반 호출이 낫습니다.
+- **짧은 답** (1~2문장) — 스트리밍 오버헤드가 답보다 커요.
+- **배치 처리** — 1000건을 돌리는 자동화에서 스트리밍은 의미 없어요.
+
+"사용자가 보는 긴 답"에서만 스트리밍을 쓰고, 나머지는 일반 호출로. 이 판단 기준 하나면 됩니다.
+
+시작해 볼까요?
+
+---
+
+## 더 깊이 보기
+
+**스트리밍 API (벤더 공식)**
+- OpenAI — [Streaming responses](https://developers.openai.com/api/docs/guides/streaming-responses) · `stream: true` 파라미터와 SSE 형식
+- Anthropic — [Streaming Messages](https://docs.claude.com/en/docs/build-with-claude/streaming) · 이벤트 타입별 처리 가이드
+
+**SDK / 프레임워크**
+- Vercel — [AI SDK](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot) · `streamText()` + `useChat()` 로 서버-클라이언트 스트리밍을 한 줄로
+- MDN — [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) · SSE 프로토콜의 웹 표준 레퍼런스
+
+**중단 처리**
+- MDN — [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) · fetch 요청 취소의 웹 표준
+
+> _참고: 본문 도입의 "10초 빈 화면" 시나리오는 학습 효과를 위한 가상 사례입니다. 실제 응답 시간은 모델·입력 길이·서버 상태에 따라 다릅니다. 코드 예시는 개념 설명용이며, 실제 SDK 시그니처는 위 공식 문서에서 최신 버전을 확인하세요. Vercel AI SDK는 Vercel 제품이며, 반드시 써야 하는 것은 아닙니다 — 직접 구현도 충분히 가능해요._

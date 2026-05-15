@@ -1,0 +1,144 @@
+## 왜 AI SQL은 그럴듯하게 틀리는가
+
+AI에게 SQL 쿼리를 요청하면 잘 동작할 것처럼 보이는 코드가 나온다. 실행해보면 에러다. 가장 흔한 이유는 컬럼명이 틀렸기 때문이다. AI는 실제 데이터베이스에 접근하지 못한다. 스키마를 주지 않으면 **그럴듯한 컬럼명을 만들어낸다**.
+
+이 패턴을 알면 해결책은 간단하다. 스키마를 준다.
+
+---
+
+## 스키마 없이 vs 있을 때
+
+**스키마 없이 요청:**
+> "최근 30일 신규 가입자 중 첫 구매까지 걸린 일수 분포를 뽑아줘."
+
+AI 응답 예시:
+```sql
+SELECT
+  DATEDIFF(first_purchase_date, signup_date) AS days_to_purchase,
+  COUNT(*) AS user_count
+FROM users
+WHERE signup_date >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+  AND first_purchase_date IS NOT NULL
+GROUP BY days_to_purchase
+ORDER BY days_to_purchase;
+```
+
+실제 테이블엔 `signup_date` 대신 `created_at`, `first_purchase_date` 대신 `orders` 테이블의 `MIN(created_at)`을 JOIN해야 한다면? 바로 에러다.
+
+**스키마를 주고 요청:**
+```
+[스키마]
+users 테이블: id, email, created_at, plan_type
+orders 테이블: id, user_id, created_at, amount, status
+
+위 스키마를 기반으로 최근 30일 신규 가입자의 첫 구매까지 걸린 일수 분포를 뽑는 쿼리를 작성해줘.
+```
+
+이제 AI는 실제 컬럼명으로 쿼리를 작성한다.
+
+---
+
+## 루프: 생성 → 셀프 리뷰 → 테스트 → 실행
+
+쿼리를 한 번에 실행하지 않는다. 3단계를 거친다.
+
+### 1단계 — 스키마 주입 + 쿼리 생성
+
+프롬프트 구조:
+```
+[스키마]
+<CREATE TABLE 구문 또는 컬럼 목록>
+
+[요청]
+<원하는 분석을 비즈니스 언어로>
+
+[제약]
+- MySQL 8.0 기준
+- 인덱스가 있는 컬럼: user_id, created_at
+- NULL 처리 명시
+```
+
+### 2단계 — AI 셀프 리뷰
+
+생성된 쿼리를 AI에게 다시 보여준다:
+```
+위 쿼리에서 다음을 확인해줘:
+1. 스키마와 맞지 않는 컬럼명이 있는가
+2. NULL 처리가 빠진 곳이 있는가
+3. GROUP BY 누락이 있는가
+4. 엣지 케이스(빈 결과, 0 나누기 등)가 있는가
+```
+
+셀프 리뷰에서 AI가 스스로 오류를 찾아내는 경우가 많다. 1차 생성보다 2차 리뷰가 더 정확한 이유는 AI가 **생성 모드**와 **검토 모드**에서 다른 패턴을 활성화하기 때문이다.
+
+### 3단계 — 소규모 테스트 데이터
+
+전체 DB에 실행하기 전, 5~10행 테스트 데이터로 결과를 손 계산과 비교한다.
+
+```sql
+-- 테스트 데이터 삽입
+INSERT INTO users VALUES (1, 'a@test.com', '2025-04-15', 'free');
+INSERT INTO users VALUES (2, 'b@test.com', '2025-04-20', 'pro');
+INSERT INTO orders VALUES (1, 1, '2025-04-18', 9900, 'completed');
+-- ... 5행 정도
+
+-- 쿼리 실행 후 예상값과 비교
+-- user_id=1: 2025-04-15 → 2025-04-18 = 3일
+-- user_id=2: 첫 구매 없음 → NULL (또는 제외)
+```
+
+예상값과 실제값이 다르면 쿼리 로직 오류다.
+
+---
+
+## 점진적 복잡도 쌓기
+
+복잡한 쿼리를 한 번에 요청하면 오류 위치를 찾기 어렵다. 단계별로 쌓는다.
+
+```
+1단계: SELECT user_id, created_at FROM orders WHERE status = 'completed'
+      → 결과 확인
+
+2단계: JOIN users 추가
+      → 조인 결과 확인
+
+3단계: DATE_DIFF 계산 추가
+      → 날짜 계산 확인
+
+4단계: GROUP BY + 집계
+      → 최종 분포 확인
+```
+
+각 단계에서 결과를 확인하면 오류를 격리할 수 있다.
+
+---
+
+## 자주 발생하는 AI SQL 오류 패턴
+
+| 패턴 | 예시 | 방어 방법 |
+|------|------|----------|
+| 없는 컬럼명 | `user_signup_date` vs `created_at` | 스키마 주입 |
+| 집계 함수 없이 GROUP BY | SELECT 에 non-aggregate 컬럼 | 셀프 리뷰 요청 |
+| NULL 처리 누락 | 0으로 나누기, 빈 JOIN | 엣지 케이스 명시 요청 |
+| 잘못된 날짜 함수 | `DATEDIFF` vs `DATE_DIFF` (DB 방언) | DB 종류 명시 |
+| 인덱스 무시 쿼리 | 풀 스캔 발생 | 인덱스 컬럼 알려주기 |
+
+---
+
+## 산출물 구성
+
+이번 레슨이 끝나면 `sql-workflow/` 폴더에 다음이 있어야 한다.
+
+**schema-notes.md** — 자주 쓰는 테이블 스키마를 정리해둔 메모. 매번 CREATE TABLE을 다시 찾을 필요 없이 여기서 복사해 AI에 붙인다.
+
+**query-prompt-template.md** — 스키마 주입 + 요청 + 셀프 리뷰 요청이 포함된 재사용 프롬프트. 새 쿼리를 요청할 때마다 이 템플릿을 채운다.
+
+---
+
+## 핵심 원칙
+
+> AI는 스키마를 모른다. 내가 줘야 한다.
+> AI가 생성한 쿼리는 AI가 검토하게 한다.
+> 전체 DB 실행 전에 작은 데이터로 먼저 확인한다.
+
+SQL AI 협업의 핵심은 신뢰가 아니라 **검증 루프**다.

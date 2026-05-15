@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Container } from "@/components/Layout";
 import {
   getLessonBySlug,
   getLessons,
@@ -10,6 +9,8 @@ import {
 import { getLessonBody } from "@/content/lesson-bodies";
 import { LEVEL_LABEL } from "@/lib/types";
 import type { Lesson } from "@/lib/types";
+import { LessonSidebar } from "@/components/LessonSidebar";
+import { LessonTOC, type TOCSection } from "@/components/LessonTOC";
 
 export function generateStaticParams() {
   return getLessons().map((l) => ({ lessonSlug: l.slug }));
@@ -49,8 +50,38 @@ export default async function LessonPage({
   const lessonNumStr = String(idx + 1).padStart(2, "0");
   const missionText = lesson.mission ?? lesson.claudeCodeMission;
 
+  // TOC 섹션 목록 — 실제 존재하는 섹션만 포함
+  const tocSections: TOCSection[] = [];
+  if (MdxBody) tocSections.push({ id: "lesson-intro", label: "들어가며" });
+  tocSections.push({ id: "section-1-problem", label: "문제 이해", number: 1 });
+  tocSections.push({ id: "section-2-concepts", label: "최소 개념", number: 2 });
+  tocSections.push({ id: "section-3-mission", label: "미션", number: 3 });
+  if (lesson.buildSteps.length > 0) {
+    tocSections.push({ id: "section-4-build", label: "빌드 단계", number: 4 });
+  }
+  tocSections.push({
+    id: "section-5-verify",
+    label: "검증 체크리스트",
+    number: 5,
+  });
+  tocSections.push({ id: "section-6-deliverable", label: "산출물", number: 6 });
+  if (lesson.outputs && lesson.outputs.length > 0) {
+    tocSections.push({ id: "section-outputs", label: "Outputs" });
+  }
+  tocSections.push({ id: "section-7-reflect", label: "회고", number: 7 });
+  if (lesson.extensionIdeas.length > 0) {
+    tocSections.push({ id: "section-extensions", label: "확장 아이디어" });
+  }
+
+  // 좌측 사이드바 색 테마는 첫 번째 추천 여정의 색
+  const primaryJourney = lesson.targetJourneys[0];
+
   return (
-    <Container>
+    <div className="lesson-layout">
+      {phase && (
+        <LessonSidebar currentPhase={phase} currentLesson={lesson} />
+      )}
+
       <article className="lesson-reader">
         <p className="kicker">
           Phase {phaseNumStr} · L{lessonNumStr} · {lesson.estimatedMinutes}분 · {LEVEL_LABEL[lesson.level]}
@@ -58,12 +89,16 @@ export default async function LessonPage({
         <h1>{lesson.titleKo}</h1>
         <p className="lede">{lesson.hook ?? lesson.summary}</p>
 
-        {MdxBody && <MdxBody />}
+        {MdxBody && (
+          <section id="lesson-intro" aria-label="들어가며">
+            <MdxBody />
+          </section>
+        )}
 
-        <h2>1. 문제 이해</h2>
+        <h2 id="section-1-problem">1. 문제 이해</h2>
         <p style={{ whiteSpace: "pre-line" }}>{lesson.problemScenario}</p>
 
-        <h2>2. 최소 개념</h2>
+        <h2 id="section-2-concepts">2. 최소 개념</h2>
         {lesson.coreConcepts.map((c) => (
           <div key={c.term} style={{ margin: "16px 0" }}>
             <h3 style={{ margin: "12px 0 4px" }}>{c.term}</h3>
@@ -71,7 +106,7 @@ export default async function LessonPage({
           </div>
         ))}
 
-        <h2>3. 미션</h2>
+        <h2 id="section-3-mission">3. 미션</h2>
         <div className="callout">
           <div className="kicker">Mission · {lesson.estimatedMinutes}분</div>
           <p style={{ margin: 0, whiteSpace: "pre-line" }}>{missionText}</p>
@@ -95,7 +130,7 @@ export default async function LessonPage({
 
         {lesson.buildSteps.length > 0 && (
           <>
-            <h2>4. 빌드 단계</h2>
+            <h2 id="section-4-build">4. 빌드 단계</h2>
             <ol className="lesson-steps">
               {lesson.buildSteps.map((s, i) => (
                 <li key={i}>{s}</li>
@@ -104,14 +139,14 @@ export default async function LessonPage({
           </>
         )}
 
-        <h2>5. 검증 체크리스트</h2>
+        <h2 id="section-5-verify">5. 검증 체크리스트</h2>
         <ul className="checklist">
           {lesson.verificationChecklist.map((item, i) => (
             <li key={i}>{item}</li>
           ))}
         </ul>
 
-        <h2>6. 산출물</h2>
+        <h2 id="section-6-deliverable">6. 산출물</h2>
         <div className="callout">
           <div className="kicker">Deliverable</div>
           <p style={{ margin: 0, fontSize: 17, fontWeight: 600, color: "var(--ink)" }}>
@@ -123,9 +158,13 @@ export default async function LessonPage({
           </p>
         </div>
 
-        <OutputsBlock lesson={lesson} />
+        {lesson.outputs && lesson.outputs.length > 0 && (
+          <section id="section-outputs">
+            <OutputsBlock lesson={lesson} />
+          </section>
+        )}
 
-        <h2>7. 회고 (3문)</h2>
+        <h2 id="section-7-reflect">7. 회고 (3문)</h2>
         <ul className="checklist">
           {lesson.reflectionQuestions.map((q, i) => (
             <li key={i}>{q}</li>
@@ -134,7 +173,7 @@ export default async function LessonPage({
 
         {lesson.extensionIdeas.length > 0 && (
           <>
-            <h2>확장 아이디어</h2>
+            <h2 id="section-extensions">확장 아이디어</h2>
             <ul>
               {lesson.extensionIdeas.map((i) => (
                 <li key={i}>{i}</li>
@@ -186,7 +225,9 @@ export default async function LessonPage({
           ) : <span style={{ color: "var(--ink-4)" }}>마지막 레슨입니다</span>}
         </nav>
       </article>
-    </Container>
+
+      <LessonTOC sections={tocSections} journeyId={primaryJourney} />
+    </div>
   );
 }
 
