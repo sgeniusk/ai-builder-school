@@ -48,6 +48,14 @@ This repo enforces the Harness Engineering principles it teaches. Every coding a
 5. **`mission` is the unified field.** Use it for new lessons. Older lessons may still carry `codexMission` / `claudeCodeMission` for back-compat — don't delete.
 6. **`npm run check` must pass** before reporting "done."
 
+## Branch policy
+
+- `main` = production reference. 직접 push 금지. PR로만 머지.
+- 모든 작업은 `claude/v<version>-<topic>` feature branch에서 진행.
+- 새 워크트리는 `main`이 아니라 작업 중인 feature branch에서 분기.
+- lefthook이 commit/push 시점에 typecheck·validate·build 자동 게이트.
+- push 후 GitHub Actions CI + Vercel preview URL 자동 생성.
+
 ## Stop points (ask before proceeding)
 
 - Introducing a new framework, runtime, database, backend route, or external service.
