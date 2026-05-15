@@ -39,3 +39,10 @@ yarn-error.log*
 
 # OMC
 .omc/
+
+# AI agent local artifacts
+.agents/
+.tmp-codex-logs/
+.claude/worktrees/
+.vercel
+.env*.local

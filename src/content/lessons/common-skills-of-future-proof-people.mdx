@@ -25,9 +25,11 @@
 
 ## 세 가지 공통 역량
 
-"AI 시대에 뒤쳐지지 않는 사람들"을 몇 십 명 인터뷰했을 때 공통점은 세 가지였습니다. 기술이 아니라 **습관**이었어요.
+"AI 시대에 뒤쳐지지 않는 사람들"을 곁에서 보다 보면 공통점이 세 가지 있어요. 기술이 아니라 **습관**입니다.
 
 ### 1. 휴먼 인 더 루프(Human-in-the-loop)를 먼저 설계한다
+
+{/* Source · PAPER · Mosqueira-Rey et al. (2022) "Human-in-the-loop machine learning: a state of the art" — https://link.springer.com/article/10.1007/s10462-022-10246-w */}
 
 대체 어디에 사람을 끼울지를 **요청하기 전에** 정해둡니다. 예를 들어 보고서라면:
 
@@ -41,6 +43,9 @@
 
 ### 2. '근거'를 같이 요구하는 습관
 
+{/* Source · DOC · Anthropic "Reduce hallucinations" — https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations */}
+{/* Source · DOC · Anthropic "Citations" — https://platform.claude.com/docs/en/build-with-claude/citations */}
+
 좋은 프롬프트의 90%는 한 문장을 추가하는 것에서 시작합니다.
 
 > "답의 각 주장에 출처를 함께 표기해 주세요. 확신이 없으면 '모르겠다'고 답하세요."
@@ -48,6 +53,8 @@
 이 한 줄이 있고 없고의 차이가 업무 생산성의 절반을 결정합니다. 출처가 없으면 "재확인 필요"라고 붙이고 내일 아침에 다시 봐요. 있으면 그 출처로 바로 넘어가서 검증합니다. 어느 쪽이든 **모호한 답을 실무에 섞는 상황**이 사라집니다.
 
 ### 3. 짧은 회고를 실제로 한다
+
+{/* Source · PAPER · Lajoie (2008) "Metacognition, Self Regulation, and Self-regulated Learning" — https://link.springer.com/article/10.1007/s10648-008-9088-1 */}
 
 "주 1회 AI 회고"는 사실 5분이면 충분합니다. 질문 세 개면 돼요.
 
@@ -64,3 +71,17 @@
 파일 이름에 `.md`가 붙는다고 겁먹지 마세요. Notion 페이지든, 메모장이든 같은 역할을 합니다. 형식보다 **매번 같은 체크리스트를 본다**는 행위가 중요합니다.
 
 40분 뒤에는, AI에게 요청하기 전에 한 번, 결과를 받고 한 번, 매주 금요일에 한 번 — 총 세 번 열어보게 될 파일이 있을 거예요. 시작해 볼까요?
+
+---
+
+## 더 깊이 보기
+
+**공식 문서**
+- Anthropic — [Reduce hallucinations](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations) · "모른다고 말하게 하라" 패턴
+- Anthropic — [Citations](https://platform.claude.com/docs/en/build-with-claude/citations) · 출처 검증 가능성
+
+**학술 논문**
+- Mosqueira-Rey 외 (2022) — [Human-in-the-loop machine learning: a state of the art](https://link.springer.com/article/10.1007/s10462-022-10246-w)
+- Lajoie (2008) — [Metacognition, Self Regulation, and Self-regulated Learning](https://link.springer.com/article/10.1007/s10648-008-9088-1) · 회고 루틴의 학습과학적 근거
+
+> _참고: 본문에 등장하는 일화·시나리오는 학습 효과를 위한 가상 사례입니다. 본문의 비교표("AI를 쓰는 사람 vs AI로 만드는 사람")는 운영자의 정리이며, 형식적 인터뷰 결과가 아닙니다._

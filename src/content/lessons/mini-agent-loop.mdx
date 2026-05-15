@@ -1,0 +1,158 @@
+## "한 번 불러서는 끝이 안 나요"
+
+여행 일정을 짜달라고 합니다. 모델이 항공편을 검색하고 — 결과를 보니 시간이 안 맞아요. 호텔을 다시 찾고 — 가격이 예산을 넘깁니다. 예산에 맞는 호텔을 찾아서 일정을 다시 조합합니다. 이 과정이 한 번의 함수 호출로 끝날 리 없죠. **생각 → 도구 호출 → 결과 관찰 → 다시 생각**의 루프가 필요합니다.
+
+{/* Source · PAPER · Yao et al. (2022) "ReAct: Synergizing Reasoning and Acting in Language Models" — https://arxiv.org/abs/2210.03629 */}
+{/* Source · DOC · Anthropic "Building effective agents" (2024) — https://www.anthropic.com/research/building-effective-agents */}
+
+[Lesson 27](/lessons/function-calling)에서 단발 도구 호출을 만들었죠. 오늘은 그 호출을 **자율 반복 루프**로 확장합니다. 이게 "에이전트"의 시작점이에요.
+
+## 에이전트 루프 = while문
+
+{/* Source · DOC · Anthropic "Building effective agents" (2024) — https://www.anthropic.com/research/building-effective-agents */}
+
+Anthropic의 "Building effective agents" 글에서는 에이전트를 이렇게 정의해요:
+
+> LLM이 자기 프로세스와 도구 사용을 스스로 지시하며, 얻은 결과에 따라 다음 행동을 결정하는 시스템.
+
+이걸 코드로 옮기면 사실 **while문 하나**예요.
+
+```
+while (목표 미달성 AND 스텝 < 최대값):
+    1. 모델에게 현재 상태 + 도구 목록을 보냄
+    2. 모델이 "이 도구를 이 인자로 호출하라" 또는 "완료" 응답
+    3. 도구를 실행하고 결과를 대화에 추가
+    4. 다음 턴으로
+```
+
+이 루프의 각 턴을 **스텝(step)**이라고 부릅니다. 핵심은 **모델이 매 스텝에서 "다음에 뭘 할지"를 스스로 결정한다**는 점이에요. 하드코딩된 분기문이 아니라 LLM의 추론에 위임합니다.
+
+## ReAct — 생각과 행동을 번갈아
+
+{/* Source · PAPER · Yao et al. (2022) "ReAct: Synergizing Reasoning and Acting in Language Models" — https://arxiv.org/abs/2210.03629 */}
+
+이 패턴의 학술적 이름이 **ReAct (Reason + Act)**예요. Yao et al. (2022)이 제안한 구조입니다.
+
+| 단계 | 무엇 | 예시 |
+| --- | --- | --- |
+| Thought | 현재 상태를 분석하고 다음 행동을 계획 | "항공편 시간이 안 맞으니 다음 날짜로 검색해야겠다" |
+| Action | 도구를 호출 | `search_flights({ date: "2025-10-02", dest: "Tokyo" })` |
+| Observation | 도구 실행 결과를 받음 | "10:30 출발, 15만원" |
+| (반복) | Thought로 돌아감 | "가격이 예산 안이다. 이제 호텔을 찾자" |
+
+모델이 Thought를 명시적으로 출력하게 하면 **추론 과정이 로그에 남아요**. 디버깅할 때 "모델이 왜 이 도구를 골랐는지"가 보입니다. 이 가시성이 에이전트 개발에서 가장 중요한 자산이에요.
+
+## 종료 조건 — 루프가 영원히 돌면 안 돼요
+
+자율 루프의 가장 큰 위험은 **무한 반복**이에요. 모델이 "완료"라고 판단하지 못하면, 또는 도구가 계속 실패하면 루프가 멈추지 않습니다. 종료 조건 세 가지를 반드시 넣으세요.
+
+| 종료 조건 | 설명 |
+| --- | --- |
+| 성공 신호 | 모델이 "done" 또는 최종 답을 반환 |
+| 최대 스텝 | `maxIterations` 도달 시 강제 종료 (보통 5~15) |
+| 에러 임계 | 연속 실패 N회 시 중단 후 사람에게 넘김 |
+
+```typescript
+const MAX_STEPS = 10;
+const MAX_CONSECUTIVE_ERRORS = 3;
+
+let step = 0;
+let consecutiveErrors = 0;
+
+while (step < MAX_STEPS) {
+  step++;
+  const response = await callModel(conversationHistory, tools);
+
+  if (response.type === "final_answer") {
+    return response.content; // 성공 종료
+  }
+
+  if (response.type === "tool_use") {
+    try {
+      const result = await executeTool(response.name, response.input);
+      conversationHistory.push({ role: "tool", content: result });
+      consecutiveErrors = 0;
+    } catch (e) {
+      consecutiveErrors++;
+      conversationHistory.push({ role: "tool", content: `Error: ${e.message}` });
+      if (consecutiveErrors >= MAX_CONSECUTIVE_ERRORS) {
+        return "연속 실패로 중단. 사람 확인 필요.";
+      }
+    }
+  }
+}
+return "최대 스텝 도달. 부분 결과를 반환합니다.";
+```
+
+`maxIterations`를 너무 크게 잡으면 비용이 폭증하고, 너무 작게 잡으면 복잡한 작업을 못 끝내요. 자기 도메인에서 "보통 몇 스텝이면 끝나는가"를 먼저 측정하고, 그 2배를 상한으로 잡으세요.
+
+## 오케스트레이션 패턴 — 어디까지 자율?
+
+{/* Source · DOC · Anthropic "Building effective agents" (2024) — https://www.anthropic.com/research/building-effective-agents */}
+
+Anthropic은 에이전트의 자율성을 단계적으로 올리는 패턴을 제안합니다.
+
+| 패턴 | 자율 수준 | 언제 |
+| --- | --- | --- |
+| Prompt Chaining | 고정 파이프라인, 도구 호출 순서 하드코딩 | 단계가 예측 가능할 때 |
+| Routing | 첫 턴에서 분류 → 미리 정한 경로로 보냄 | 입력 유형이 명확할 때 |
+| Autonomous Agent | 모델이 매 스텝 자율 결정 (오늘 만드는 것) | 경로가 예측 불가능할 때 |
+
+"항상 Autonomous가 좋다"가 아니에요. 자율 수준이 올라갈수록 **예측 불가능성도 올라갑니다**. [Lesson 29](/lessons/tool-permission-safeguards)에서 이 위험을 어떻게 막는지 다룹니다.
+
+오늘은 Autonomous Agent의 가장 작은 형태 — **도구 3~5개, 최대 10스텝** — 를 직접 만들어서 "자율 루프가 실제로 어떻게 돌아가는지" 손에 익히는 게 목표예요.
+
+## 디버깅 — 로그가 전부예요
+
+에이전트가 이상하게 행동할 때, 코드를 고치기 전에 **로그를 먼저 봐야 해요**. 매 스텝의 Thought · Action · Observation을 기록하면 어디서 틀어졌는지 바로 보입니다.
+
+```
+[Step 1] Thought: 사용자가 서울 맛집을 원한다. search_restaurant를 호출하자.
+[Step 1] Action: search_restaurant({ city: "Seoul", cuisine: "Korean" })
+[Step 1] Observation: [{ name: "광화문 집밥", rating: 4.5 }, ...]
+[Step 2] Thought: 결과가 나왔다. 평점 4.0 이상만 필터하자.
+[Step 2] Action: filter_results({ min_rating: 4.0 })
+[Step 2] Observation: [{ name: "광화문 집밥", rating: 4.5 }]
+[Step 3] Thought: 1개만 남았다. 최종 답을 만들자.
+[Step 3] Final Answer: "서울 한식 맛집 추천: 광화문 집밥 (평점 4.5)"
+```
+
+이 로그가 없으면 "모델이 왜 3번째 스텝에서 엉뚱한 도구를 골랐는지" 알 수 없어요. **에이전트 개발 시간의 절반은 로그를 읽는 데** 씁니다.
+
+## 그래서 오늘 만들 한 장/폴더
+
+오늘 만들 건 `examples/mini-agent/` 폴더예요. 도구 3~5개를 정의하고, 5~10스텝 자율 루프가 동작하는 미니 에이전트를 만듭니다.
+
+| 파일 | 역할 |
+| --- | --- |
+| `tools.ts` | 도구 3~5개 정의 (검색, 필터, 계산, 저장 등) |
+| `agent-loop.ts` | while 루프 + 종료 조건 3종 |
+| `logger.ts` | 스텝별 Thought/Action/Observation 로깅 |
+| `run.ts` | 실행 진입점 — 질문 하나를 던지고 에이전트 구동 |
+| `log-sample.md` | 실제 실행 로그 예시 (5~10 스텝) |
+
+이 폴더가 만들어지면 다음 레슨([도구 권한 가드](/lessons/tool-permission-safeguards))에서 "이 루프가 위험한 도구를 마음대로 부르면 어쩌지?"로 자연스럽게 넘어갑니다.
+
+시작해 볼까요?
+
+---
+
+## 더 깊이 보기
+
+**에이전트 루프의 학술 원조**
+- Yao 외 (2022) — [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629) · Thought → Action → Observation 반복 패턴의 원조 논문
+
+**실전 에이전트 설계 (벤더 공식)**
+- Anthropic (2024) — [Building effective agents](https://www.anthropic.com/research/building-effective-agents) · Prompt Chaining → Routing → Autonomous Agent 단계별 패턴과 설계 원칙
+
+**이전 레슨 (기반)**
+- [Lesson 27 — Function Calling](/lessons/function-calling) · 단발 도구 호출의 스키마 등록 → 실행 → 결과 반환 흐름
+
+**다음 레슨 (안전)**
+- [Lesson 29 — 도구 권한 가드](/lessons/tool-permission-safeguards) · 자율 루프에 권한 경계를 만드는 법
+- [Lesson 30 — 프롬프트 인젝션 방어](/lessons/prompt-injection-defense) · 외부 입력이 에이전트를 조종하지 못하게 막는 법
+
+**자율 루프 본격편**
+- [Lesson 36 — Ralph Loop · Codex /goal](/lessons/ralph-loop-codex-goal) · 5줄 bash → Anthropic 플러그인 → Codex 공식 기능까지의 진화 + 4중 안전장치
+
+> _참고: 본문 도입의 "여행 일정" 시나리오와 코드 예시는 학습 효과를 위한 가상 사례입니다. 실제 에이전트 구현은 사용하는 SDK(Anthropic SDK, OpenAI SDK, LangGraph 등)에 따라 API 호출 방식이 다릅니다. **ReAct**는 Yao et al. (2022) 논문의 공식 명칭이며, 본문의 "오케스트레이션 패턴" 분류는 Anthropic 블로그 글에 기반합니다._
