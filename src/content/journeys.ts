@@ -118,6 +118,7 @@ export const journeys: Journey[] = [
       "AI를 코어로 한 작은 제품을 직접 손으로 만들고, 시장에 내놓습니다.",
     recommendedPhases: [
       "phase-0-setup",
+      "phase-1-ai-literacy",
       "phase-2-prompt-engineering",
       "phase-4-coding-agents",
       "phase-5-ai-app-dev",
@@ -153,6 +154,7 @@ export const journeys: Journey[] = [
       "평가·보안까지 포함된, 운영 가능한 AI 시스템을 짓는 엔지니어가 됩니다.",
     recommendedPhases: [
       "phase-0-setup",
+      "phase-1-ai-literacy",
       "phase-2-prompt-engineering",
       "phase-4-coding-agents",
       "phase-5-ai-app-dev",

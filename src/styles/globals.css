@@ -540,8 +540,268 @@ body {
   .lessons-list .l-title { font-size: 17px; font-weight: 500; letter-spacing: -0.015em; color: var(--ink); }
   .lessons-list .l-meta { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); }
 
+  /* ===== Lesson 3-column layout (sidebar | reader | toc) ===== */
+  .lesson-layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 720px) 240px;
+    gap: 48px;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    align-items: start;
+  }
+  @media (max-width: 1220px) {
+    /* 우측 TOC 숨김, 좌측 narrow */
+    .lesson-layout {
+      grid-template-columns: 200px minmax(0, 720px);
+      gap: 32px;
+    }
+    .lesson-toc { display: none !important; }
+  }
+  @media (max-width: 900px) {
+    /* 좌측 사이드바도 숨김 — reader만 풀폭 */
+    .lesson-layout {
+      grid-template-columns: minmax(0, 720px);
+      max-width: 720px;
+    }
+    .lesson-sidebar { display: none !important; }
+  }
+
+  /* ===== Lesson sidebar (left) ===== */
+  .lesson-sidebar {
+    position: sticky;
+    top: 88px;
+    align-self: start;
+    padding: 24px 0;
+    font-size: 13px;
+    color: var(--ink-3);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .lesson-sidebar .ls-phase { padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .lesson-sidebar .ls-phase .eyebrow { color: var(--ink-3); margin-bottom: 8px; }
+  .lesson-sidebar .ls-phase-title {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    margin-bottom: 8px;
+    text-decoration: none;
+  }
+  .lesson-sidebar .ls-phase-title:hover { color: var(--ink-2); }
+  .lesson-sidebar .ls-progress {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    font-family: var(--f-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-3);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .lesson-sidebar .ls-progress-num { color: var(--ink); font-size: 14px; }
+  .lesson-sidebar .ls-progress-sep { opacity: 0.5; }
+
+  .lesson-sidebar .ls-journeys {
+    margin-top: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .lesson-sidebar .ls-journeys-label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 8px;
+  }
+  .lesson-sidebar .ls-journeys-dots {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .lesson-sidebar .ls-journey-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--p-from), var(--p-to));
+    box-shadow: 0 1px 3px -1px color-mix(in oklch, var(--p-to) 50%, transparent);
+  }
+
+  .lesson-sidebar .ls-lesson-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+    display: grid;
+    gap: 2px;
+  }
+  .lesson-sidebar .ls-lesson-list a {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 8px;
+    padding: 8px 6px;
+    border-radius: 6px;
+    color: var(--ink-3);
+    text-decoration: none;
+    transition: background 150ms var(--ease), color 150ms var(--ease);
+    align-items: start;
+  }
+  .lesson-sidebar .ls-lesson-list a:hover {
+    background: var(--paper-2);
+    color: var(--ink-2);
+  }
+  .lesson-sidebar .ls-lesson-list a.is-current {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .lesson-sidebar .ls-lesson-list a.is-current .ls-num {
+    color: var(--paper);
+    opacity: 0.7;
+  }
+  .lesson-sidebar .ls-num {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--ink-4);
+    letter-spacing: 0.04em;
+    padding-top: 1px;
+  }
+  .lesson-sidebar .ls-title {
+    font-size: 13px;
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .lesson-sidebar .ls-phase-nav {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 12px;
+  }
+  .lesson-sidebar .ls-phase-link {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 6px;
+    color: var(--ink-3);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.3;
+    transition: background 150ms var(--ease), color 150ms var(--ease);
+  }
+  .lesson-sidebar .ls-phase-link.is-next { grid-template-columns: 1fr auto; text-align: right; }
+  .lesson-sidebar .ls-phase-link:hover { background: var(--paper-2); color: var(--ink-2); }
+  .lesson-sidebar .ls-phase-link .ls-phase-link-arrow {
+    font-family: var(--f-mono);
+    color: var(--ink-4);
+    font-size: 14px;
+  }
+  .lesson-sidebar .ls-phase-link .eyebrow { display: block; margin-bottom: 2px; font-size: 10px; }
+  .lesson-sidebar .ls-phase-link .ls-phase-link-title {
+    display: block;
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+
+  /* ===== Lesson TOC (right) ===== */
+  .lesson-toc {
+    position: sticky;
+    top: 88px;
+    align-self: start;
+    padding: 24px 0;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .lesson-toc .ltoc-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .lesson-toc .ltoc-header .eyebrow {
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  .lesson-toc .ltoc-progress {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--ink-3);
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: opacity 200ms var(--ease), transform 200ms var(--ease);
+  }
+  .lesson-toc .ltoc-progress[data-visible="true"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .lesson-toc .ltoc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1px;
+    border-left: 1px solid var(--line);
+    padding-left: 0;
+  }
+  .lesson-toc .ltoc-list li { margin: 0; }
+  .lesson-toc .ltoc-list a {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+    padding: 8px 10px 8px 12px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    color: var(--ink-3);
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 1.4;
+    transition:
+      color 200ms var(--ease),
+      background 200ms var(--ease),
+      border-color 200ms var(--ease);
+  }
+  .lesson-toc .ltoc-list a:hover { color: var(--ink-2); background: var(--paper-2); }
+  .lesson-toc .ltoc-list .ltoc-num {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--ink-4);
+    letter-spacing: 0.04em;
+  }
+  .lesson-toc .ltoc-list .ltoc-label {
+    /* 번호 칸이 없는 항목도 라벨을 항상 2번째 칼럼에 배치 — 22px 칸에 끼어 들어가지 않게 */
+    grid-column: 2;
+    /* 한글이 글자 단위로 깨지지 않게 */
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .lesson-toc .ltoc-list li.is-active a {
+    color: var(--ink);
+    font-weight: 600;
+    border-left-color: var(--p-from, var(--ink-4));
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--p-from, var(--ink-4)) 16%, transparent),
+      transparent 70%
+    );
+    box-shadow: inset 4px 0 12px -8px var(--p-to, var(--ink-3));
+  }
+  .lesson-toc .ltoc-list li.is-active .ltoc-num {
+    color: var(--ink-2);
+  }
+
   /* ===== Lesson reader ===== */
   .lesson-reader { max-width: 720px; margin: 0 auto; padding: 72px 0 96px; }
+  /* TOC 클릭 시 sticky 헤더(88px)에 가리지 않게 */
+  .lesson-reader h2[id],
+  .lesson-reader h3[id],
+  .lesson-reader section[id] { scroll-margin-top: 100px; }
   .lesson-reader .kicker {
     font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.14em;
     color: var(--ink-3); text-transform: uppercase; margin: 0 0 16px;

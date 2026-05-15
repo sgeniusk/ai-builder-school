@@ -20,6 +20,10 @@
 
 ## FOSCB — 5축 60초
 
+{/* Note: "FOSCB" 5축 묶음과 명칭은 이 학교 운영자의 정리로, 외부 표준명이 아닙니다. */}
+{/* Source · DOC · NIST AI RMF 1.0 (2023) · 위험 기반 신뢰 운영의 일반 프레임워크 — https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10 */}
+{/* Source · DOC · Anthropic "Reduce hallucinations" (Always validate critical information) — https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations */}
+
 ### F · Fact (사실) — 60초
 
 수치, 이름, 날짜, 인용구를 원본과 대조합니다. AI가 가장 자주 틀리는 곳이에요.
@@ -61,7 +65,13 @@
 
 ## 위험 가중 — 5축이 다 같지 않습니다
 
+{/* Source · PAPER · Singhal et al. (2023) "Large language models encode clinical knowledge" — https://www.nature.com/articles/s41586-023-06291-2 · 의료 LLM의 별도 평가 필요성 */}
+{/* Source · PAPER · Singhal et al. (2023) "Towards Expert-Level Medical Question Answering" (Med-PaLM 2) — https://arxiv.org/abs/2305.09617 */}
+{/* Source · PAPER · Stanford-affiliated (2024) "Large Legal Fictions: Profiling Legal Hallucinations" — https://arxiv.org/abs/2401.01301 · 법률 환각 위험 직접 근거 */}
+
 여기서 중요한 게 있어요. **모든 도메인이 5축에 동일한 시간을 써야 하는 게 아닙니다.**
+
+{/* Note: 아래 표의 시간 배분(120s/90s/60s)은 운영자의 권장 출발점이며, 위 학술 자료에서 직접 도출된 수치는 아닙니다. 본인 도메인에서 측정해 조정하세요. */}
 
 | 도메인 | 가중 축 | 가중 축 |
 | --- | --- | --- |
@@ -73,6 +83,8 @@
 내 도메인이 무엇인지에 따라 5분의 분배 비율을 미리 정해두면, 매일 \"어디에 시간을 쓸지\" 망설이지 않습니다. 의식의 무게가 사라져요.
 
 ## Trust Floor와 Trust Ceiling
+
+{/* Note: "Trust Floor / Ceiling" 명칭은 이 학교 운영자의 표현으로, 외부 표준명이 아닙니다. 위험 티어링의 일반 사례는 NIST AI RMF 1.0 참조. */}
 
 5분 체크가 자라면 자연스럽게 두 선이 생깁니다.
 
@@ -97,3 +109,20 @@ Phase 1 (AI Literacy)에서 만든 것들은 모두 **사고 도구**였어요. 
 다음 Phase부터는 \"받은 답을 검증하는\" 단계에서 \"애초에 좋은 답이 오게 만드는\" 단계로 넘어갑니다. **Prompt & Context Engineering** 이에요. Phase 1을 마쳤다는 건, 이제 입력을 다듬을 준비가 되었다는 뜻입니다.
 
 오늘 5분 짜고, 내일부터 매일 켜요.
+
+---
+
+## 더 깊이 보기
+
+**위험 관리 프레임워크**
+- NIST (Tabassi, 2023) — [Artificial Intelligence Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10) · 위험 기반 신뢰 운영의 일반 표준
+
+**공식 문서**
+- Anthropic — [Reduce hallucinations](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations) · 핵심 정보 원본 대조의 공식 가이드
+
+**도메인별 위험 — 학술 논문**
+- Singhal 외 (2023) — [Large language models encode clinical knowledge](https://www.nature.com/articles/s41586-023-06291-2) · 의료 도메인의 별도 평가
+- Singhal 외 (2023) — [Towards Expert-Level Medical Question Answering with LLMs](https://arxiv.org/abs/2305.09617) · Med-PaLM 2 한계와 평가
+- Stanford-affiliated (2024) — [Large Legal Fictions: Profiling Legal Hallucinations](https://arxiv.org/abs/2401.01301) · 법률 환각의 직접 사례
+
+> _참고: 본문 도입의 \"발표 1시간 전\" 시나리오는 학습 효과를 위한 가상 사례입니다. **FOSCB 5축**과 **Trust Floor / Ceiling** 명칭은 이 학교 운영자가 정리한 명칭으로, 외부 표준 용어는 아닙니다. 도메인별 위험 가중표(의료/법/금융 …)는 위 학술 자료를 출발점으로 본인 업무에 맞게 직접 조정하세요._
