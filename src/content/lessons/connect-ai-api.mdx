@@ -1,0 +1,212 @@
+## "터미널에서 한 줄 쳤는데 AI가 답했어요"
+
+회의실에서 GPT 데모를 보여줬더니 대표님이 말합니다 — "이거 우리 서비스에 붙여." 그날 밤, 프론트엔드에 API 키를 하드코딩해서 호출을 붙였어요. 잘 됩니다. 다음 날 아침, GitHub에 올린 코드를 누군가 크롤링해서 API 키가 털렸습니다. 청구서에 찍힌 금액을 보고 식은땀이 났어요.
+
+첫 API 호출은 "되게 만드는 것"보다 **"안전하게 되게 만드는 것"**이 훨씬 중요합니다. 오늘은 그 안전한 첫 호출을 만들어요.
+
+## 왜 프론트엔드에서 직접 호출하면 안 되나
+
+{/* Source · DOC · OpenAI Help "Best practices for API key safety" — https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety */}
+{/* Source · DOC · Anthropic "Getting started" — https://docs.claude.com/en/docs/initial-setup */}
+
+브라우저 JavaScript는 **누구나 볼 수 있어요**. 개발자 도구 → Network 탭을 열면 요청 헤더에 박힌 API 키가 그대로 보입니다. 키가 노출되면 누구든 당신 계정으로 호출할 수 있고, 과금은 당신에게 옵니다.
+
+해법은 단순합니다 — **서버를 한 겹 끼웁니다**. 클라이언트는 우리 서버에 요청하고, 서버가 API 키를 붙여서 AI 모델에 전달합니다. 이 중간 서버를 Server Route(또는 Proxy Route)라고 불러요.
+
+```
+[브라우저] → /api/chat (우리 서버) → OpenAI / Anthropic API
+              ↑ 키가 여기에만 있음
+```
+
+Next.js의 App Router라면 `app/api/chat/route.ts` 한 파일이면 됩니다. Python이라면 FastAPI / Flask 엔드포인트 하나면 돼요.
+
+## 환경변수와 `.env` — 키를 코드 밖으로
+
+{/* Source · DOC · Next.js "Environment Variables" — https://nextjs.org/docs/app/building-your-application/configuring/environment-variables */}
+{/* Source · DOC · Vercel "Environment Variables" — https://vercel.com/docs/projects/environment-variables */}
+
+API 키는 코드에 적지 않습니다. `.env.local` 파일에 넣고, `.gitignore`에 `.env*`를 추가해요.
+
+```bash
+# .env.local (절대 커밋하지 않음)
+OPENAI_API_KEY=sk-proj-xxxx
+ANTHROPIC_API_KEY=sk-ant-xxxx
+```
+
+```typescript
+// app/api/chat/route.ts
+const apiKey = process.env.OPENAI_API_KEY;
+if (!apiKey) throw new Error("OPENAI_API_KEY is not set");
+```
+
+세 줄 규칙:
+
+| 규칙 | 왜 |
+| --- | --- |
+| `.env.local`에 저장 | 코드와 분리, 배포 환경별 다른 값 가능 |
+| `.gitignore`에 `.env*` | 실수로 커밋해도 Git이 무시 |
+| `NEXT_PUBLIC_` 접두사 금지 | Next.js에서 이 접두사가 붙으면 브라우저에 노출됨 |
+
+## 첫 호출 — 최소 코드
+
+{/* Source · DOC · OpenAI "Chat Completions API" — https://developers.openai.com/api/docs/guides/text-generation */}
+{/* Source · DOC · Anthropic "Messages API" — https://docs.claude.com/en/api/messages */}
+
+두 벤더 모두 SDK를 제공합니다. 최소한의 호출 코드를 보면:
+
+```typescript
+// OpenAI SDK 예시
+import OpenAI from "openai";
+
+const client = new OpenAI(); // 환경변수 OPENAI_API_KEY 자동 인식
+
+export async function POST(req: Request) {
+  const { message } = await req.json();
+
+  const response = await client.chat.completions.create({
+    model: "gpt-4o",
+    messages: [{ role: "user", content: message }],
+  });
+
+  return Response.json({
+    reply: response.choices[0].message.content,
+  });
+}
+```
+
+```typescript
+// Anthropic SDK 예시
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic(); // 환경변수 ANTHROPIC_API_KEY 자동 인식
+
+export async function POST(req: Request) {
+  const { message } = await req.json();
+
+  const response = await client.messages.create({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: 1024,
+    messages: [{ role: "user", content: message }],
+  });
+
+  return Response.json({
+    reply: response.content[0].type === "text"
+      ? response.content[0].text
+      : "",
+  });
+}
+```
+
+이 두 코드 모두 "되긴 됩니다". 하지만 실전에서는 **세 가지가 빠져 있어요**.
+
+## 타임아웃 · 리트라이 · 에러 분리
+
+{/* Source · DOC · OpenAI "Error handling" — https://developers.openai.com/api/docs/guides/error-codes */}
+{/* Source · DOC · Anthropic "Errors" — https://docs.claude.com/en/api/errors */}
+
+### 1. 타임아웃 — 기다림에 한계를 둔다
+
+AI API는 입력 길이와 모델 상태에 따라 몇 초 이상 걸릴 수 있어요. 타임아웃 없이 기다리면 사용자는 "먹통인가?" 하고 떠나요.
+
+```typescript
+const client = new OpenAI({
+  timeout: 30_000, // 30초
+});
+```
+
+### 2. 리트라이 — 일시 장애를 넘긴다
+
+429 (Rate Limit) · 500 (서버 에러) · 503 (과부하)은 잠깐 뒤에 다시 치면 되는 에러예요. OpenAI SDK와 Anthropic SDK 모두 자동 리트라이를 내장하고 있습니다.
+
+```typescript
+const client = new OpenAI({
+  maxRetries: 2,       // 기본값도 2
+  timeout: 30_000,
+});
+```
+
+`maxRetries: 2`면 최대 3번(원래 1번 + 재시도 2번) 시도합니다. 3번 넘기면 과금만 폭주하고 문제는 안 풀려요 — 그때는 에러를 돌려주는 게 맞습니다.
+
+### 3. 에러 분리 — 사용자에게 보여줄 것 vs 로그에 남길 것
+
+```typescript
+export async function POST(req: Request) {
+  try {
+    const { message } = await req.json();
+    const response = await client.chat.completions.create({
+      model: "gpt-4o",
+      messages: [{ role: "user", content: message }],
+    });
+    return Response.json({
+      reply: response.choices[0].message.content,
+    });
+  } catch (error) {
+    // 1) 서버 로그에는 전체를 남긴다
+    console.error("[AI API Error]", error);
+
+    // 2) 사용자에게는 안전한 메시지만
+    return Response.json(
+      { error: "AI 응답을 가져오지 못했습니다. 잠시 후 다시 시도해 주세요." },
+      { status: 502 }
+    );
+  }
+}
+```
+
+핵심은 **에러 객체를 클라이언트에 그대로 넘기지 않는 것**이에요. API 키 힌트, 내부 URL, 에러 스택 — 이런 것들이 사용자 응답에 실리면 보안 구멍이 됩니다.
+
+## Rate Limit — 과금을 지키는 기본 안전장치
+
+{/* Source · DOC · OpenAI "Rate limits" — https://developers.openai.com/api/docs/guides/rate-limits */}
+
+AI API는 분당 요청 수(RPM)와 분당 토큰 수(TPM)에 제한이 있어요. 무료 티어는 특히 낮습니다.
+
+| 대응 | 어떻게 |
+| --- | --- |
+| 헤더 확인 | `x-ratelimit-remaining-requests` 등으로 남은 쿼터 모니터링 |
+| 큐 도입 | 요청을 큐에 쌓고 일정 간격으로 소비 |
+| 사용자 제한 | 사용자당 분당 호출 횟수를 서버에서 카운트 |
+
+MVP 단계에서는 "사용자당 분당 5~10회 제한 + 429 에러 시 사용자에게 안내"만 깔아도 청구서 사고를 막습니다.
+
+## 그래서 오늘 만들 폴더
+
+오늘 만들 건 `examples/first-api-call/` 폴더예요. [Lesson 05](/lessons/structure-of-good-prompts)의 4축 프롬프트와 [Lesson 06](/lessons/enforcing-output-format)의 3단 방어선이 코드 안에 자연스럽게 녹아들어 있는 형태입니다.
+
+| 파일 | 역할 |
+| --- | --- |
+| `route.ts` | Next.js API 라우트 — 타임아웃·리트라이·에러 분리 포함 |
+| `.env.example` | 환경변수 템플릿 (실제 키는 `.env.local`에) |
+| `client.ts` | 프론트엔드 호출 유틸 — 에러·로딩 상태 처리 |
+| `README.md` | 환경변수 세팅 → 실행 → 확인까지 3단계 가이드 |
+
+이 네 파일이 한 자리에 있으면, 다음 AI 앱에서 API 연결을 처음부터 짜지 않아도 됩니다. 폴더를 복사하고 모델명과 프롬프트만 갈아끼우면 돼요.
+
+## Phase 5의 첫 발 — 코드가 시작된다
+
+[Phase 2](/curriculum/phase-2-prompt-engineering)에서 만든 4축 프롬프트와 3단 방어선은 "사람이 복사해서 붙여넣는" 수준이었어요. 오늘부터 Phase 5에서는 그 프롬프트가 **코드 안에서 자동으로 실행**됩니다.
+
+다음 레슨([스트리밍 응답 UI](/lessons/streaming-response-ui))에서는 이 라우트를 스트리밍으로 바꿔 토큰이 한 글자씩 UI에 찍히게 만들어요. 그 전에 오늘의 안전한 첫 호출을 손으로 한 번 만들어 보세요. API 키를 안전하게 다루는 감각은 한 번 손에 익히면 평생 갑니다.
+
+시작해 볼까요?
+
+---
+
+## 더 깊이 보기
+
+**API 연결 (벤더 공식)**
+- OpenAI — [Chat Completions API](https://developers.openai.com/api/docs/guides/text-generation) · 첫 호출부터 파라미터 상세까지
+- Anthropic — [Messages API](https://docs.claude.com/en/api/messages) · Claude 모델 호출의 기본 인터페이스
+
+**보안·환경변수**
+- OpenAI Help — [Best practices for API key safety](https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety) · 키 관리·로테이션·제한
+- Next.js — [Environment Variables](https://nextjs.org/docs/app/building-your-application/configuring/environment-variables) · `.env.local`과 `NEXT_PUBLIC_` 차이
+
+**에러 처리·Rate Limit**
+- OpenAI — [Error codes](https://developers.openai.com/api/docs/guides/error-codes) · HTTP 상태별 대응 가이드
+- OpenAI — [Rate limits](https://developers.openai.com/api/docs/guides/rate-limits) · RPM/TPM 제한과 최적화
+
+**전체 사이클 사례 (Vibe Coding)**
+- AI 에이전트(Codex 등)에게 아이디어부터 GitHub 푸시·Vercel 배포까지 풀 사이클을 맡기는 흐름이 "Vibe Coding"으로 자리잡고 있어요. 첫 호출이 안전하게 깔리면, 이 흐름의 토대가 됩니다 — 다음 레슨([스트리밍 응답 UI](/lessons/streaming-response-ui), [Phase 4 코딩 에이전트 셋업](/lessons/coding-agent-setup))이 그 위에 얹힙니다.
+
+> _참고: 본문 도입의 "API 키 노출" 시나리오는 학습 효과를 위한 가상 사례입니다. 실제 SDK 시그니처·파라미터는 위 공식 문서에서 최신 버전을 다시 확인하세요. 코드 예시의 모델명·파라미터는 작성 시점 기준이며, 벤더가 수시로 업데이트합니다. **Server Route** 패턴은 일반적인 프록시 아키텍처를 이 학교 운영자가 한국어로 정리한 것입니다._
