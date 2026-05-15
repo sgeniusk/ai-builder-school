@@ -81,8 +81,14 @@ export interface Journey {
   targetLearner: string;
   /** 한 줄 약속 */
   promise: string;
-  /** 필수/추천 Phase slug 목록 */
+  /**
+   * @deprecated v0.4 — `recommendedStages`로 이관 중. PR E에서 제거 예정. legacy 라우트 보호용.
+   */
   recommendedPhases: string[];
+  /**
+   * v0.4 Stage 모델 — 추천 Stage slug 목록.
+   */
+  recommendedStages?: string[];
   /** 추천 레슨 slug 목록 */
   recommendedLessons: string[];
   /** 캡스톤 아이디어 (포트폴리오 후보) */
@@ -91,6 +97,10 @@ export interface Journey {
   expectedOutcome: string;
 }
 
+/**
+ * @deprecated v0.4 Stage 모델로 이관 중. PR E에서 제거 예정.
+ * 새 코드는 `Stage`/`StageSubGroup`을 사용한다.
+ */
 export interface Phase {
   id: string;
   slug: string;
@@ -111,6 +121,48 @@ export interface Phase {
   weekInMvpPath?: number | null;
 }
 
+/**
+ * Stage 내부의 sub-group (Stage 4·6에서만 사용).
+ * 학습자에게 노출되는 명시적 분류 — 예: Stage 4의 4a/4b/4c.
+ */
+export interface StageSubGroup {
+  id: string; // "4a" | "4b" | "4c" | "6a" | "6b" | "6c"
+  label: string; // "업무 자동화", "AI에게 지식 주기 — RAG" 등
+  shortDescription: string;
+  deliverable: string; // "반복 업무 1개 자동화"
+  lessonSlugs: string[];
+}
+
+/**
+ * Stage — 학습자 수직 진척의 한 단계.
+ * 8개 stage가 만나다 → 물어보다 → 확인하다 → 함께일하다 → 일감주다 → 시스템만들다 → 운영하다 → 공유하다 의 사다리를 이룬다.
+ * Stage 4·6은 내부에 `subGroups`로 sub-group을 가진다 (학습자 노출).
+ */
+export interface Stage {
+  id: string; // "stage-1" .. "stage-8"
+  slug: string; // "stage-1-meet" 등 URL 친화 slug
+  order: number; // 1..8
+  label: string; // "AI와 만나다" — 짧은 라벨
+  titleKo: string; // 헤딩용 풀 제목
+  titleEn: string;
+  positionChange: string; // "AI 도구 켜고 첫 대화" — 학습자 위치 변화 한 줄
+  deliverable: string; // "매일 쓰는 AI 도구 1개" — stage 완료 산출물
+  shortDescription: string;
+  longDescription: string;
+  level: Level;
+  estimatedHours: number;
+  targetJourneys: JourneyId[];
+  outcomes: string[];
+  topics: string[];
+  lessonSlugs: string[]; // stage 전체 lesson — 학습 순서 보장
+  subGroups?: StageSubGroup[]; // Stage 4·6에서만 정의
+  recommendedTools: string[];
+  nextStageSlug?: string | null;
+  weekInMvpPath?: number | null;
+  introEssaySlug?: string; // 도입부 에세이 (D-content-scaffold에서 채움)
+  outroEssaySlug?: string; // 마무리 에세이
+}
+
 export interface CoreConcept {
   term: string;
   explanation: string;
@@ -125,7 +177,22 @@ export interface LessonDeliverable {
 export interface Lesson {
   id: string;
   slug: string;
+  /**
+   * @deprecated v0.4 — `stageId`로 이관 중. PR E에서 제거 예정. legacy 라우트 보호용.
+   */
   phaseId: string;
+  /**
+   * v0.4 Stage 모델 — 이 lesson이 속한 stage (예: "stage-1"). PR D에서 `lesson-stage-mapping.ts`로 주입.
+   */
+  stageId?: string;
+  /**
+   * Stage 4·6의 sub-group ID (예: "4a", "6b"). Stage 4·6 lesson만 가짐.
+   */
+  stageSubGroupId?: string;
+  /**
+   * Stage 내 순서 — 새 ID 체계의 XX 부분 (101의 01). PR E에서 lesson.id 재번호 시 사용.
+   */
+  stageOrdinal?: number;
   titleKo: string;
   titleEn: string;
   summary: string;

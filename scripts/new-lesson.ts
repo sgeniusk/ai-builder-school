@@ -6,11 +6,15 @@
  * 새 레슨을 추가할 때 스키마가 빠짐없이 채워지도록 강제한다.
  *
  * 사용법:
- *   npm run new-lesson <slug> [--phase phase-2-prompt-engineering] [--title "프롬프트 비교 실험"]
+ *   npm run new-lesson <slug> [--stage stage-2-ask] [--sub 4a] [--title "프롬프트 비교 실험"]
+ *   npm run new-lesson <slug> [--phase phase-2-prompt-engineering] [--title "..."]   # legacy
  *
  * 예시:
  *   npm run new-lesson prompt-ab-test
- *   npm run new-lesson prompt-ab-test --phase phase-2-prompt-engineering --title "프롬프트 A/B 비교"
+ *   npm run new-lesson prompt-ab-test --stage stage-2-ask --title "프롬프트 A/B 비교"
+ *   npm run new-lesson rag-eval-loop --stage stage-6-build --sub 6b --title "RAG 평가 루프"
+ *
+ * v0.4 — `--stage` (선택사항: `--sub`) 권장. `--phase`는 legacy로 작동은 하지만 deprecated 경고가 나온다.
  *
  * 동작:
  *   1. slug 검증 (kebab-case, 3~60자)
@@ -62,13 +66,37 @@ if (!slug || slug.startsWith("--")) {
 
 let phaseSlugArg = "phase-2-prompt-engineering";
 let titleKoArg = "(레슨 제목을 입력하세요)";
+let stageSlugArg: string | undefined;
+let subGroupArg: string | undefined;
 for (let i = 1; i < args.length; i += 2) {
   const flag = args[i];
   const val = args[i + 1];
   if (!val) fail(`${flag} 다음에 값이 와야 합니다.`);
   if (flag === "--phase") phaseSlugArg = val;
   else if (flag === "--title") titleKoArg = val;
+  else if (flag === "--stage") stageSlugArg = val;
+  else if (flag === "--sub") subGroupArg = val;
   else fail(`알 수 없는 플래그: ${flag}`);
+}
+
+// v0.4: stage 정보 결정. --stage가 있으면 stage-aware, 없으면 legacy phase 경고.
+let stageId: string | undefined;
+let stageOrdinal: number | undefined;
+if (stageSlugArg) {
+  // "stage-1-meet" → "stage-1"
+  const m = stageSlugArg.match(/^(stage-\d+)/);
+  if (!m) fail(`--stage 값이 stage-N-* 형식이 아닙니다. 받은 값: "${stageSlugArg}"`);
+  stageId = m[1];
+  if (subGroupArg && !/^[1-9][a-z]$/.test(subGroupArg)) {
+    fail(`--sub 값이 형식에 맞지 않습니다. 예: 4a, 6c. 받은 값: "${subGroupArg}"`);
+  }
+} else {
+  console.warn(
+    c(
+      COLORS.yellow,
+      "⚠ v0.4 — `--stage` 플래그를 권장합니다. `--phase`는 legacy로 작동만 지원됩니다.",
+    ),
+  );
 }
 
 // ── 2. slug 검증 ───────────────────────────────────────────────
@@ -82,6 +110,10 @@ if (!slugPattern.test(slug)) {
 // ── 3. 충돌 확인 ───────────────────────────────────────────────
 const lessonsPath = path.join(ROOT, "src/content/lessons.ts");
 const lessonBodiesPath = path.join(ROOT, "src/content/lesson-bodies.ts");
+const lessonStageMappingPath = path.join(
+  ROOT,
+  "src/content/lesson-stage-mapping.ts",
+);
 const mdxPath = path.join(ROOT, `src/content/lessons/${slug}.mdx`);
 const outputsDir = path.join(ROOT, `src/content/lessons/${slug}/outputs`);
 
@@ -103,6 +135,30 @@ const idMatches = [...lessonsRaw.matchAll(/id:\s*"lesson-(\d+)"/g)].map((m) =>
 const maxId = idMatches.length ? Math.max(...idMatches) : 0;
 const nextId = String(maxId + 1).padStart(2, "0");
 const newId = `lesson-${nextId}`;
+
+// ── 4.5 stage ordinal 계산 (v0.4) ──────────────────────────────
+let mappingRaw = "";
+if (stageId) {
+  if (!fs.existsSync(lessonStageMappingPath)) {
+    fail(
+      `lesson-stage-mapping.ts를 찾을 수 없음: ${lessonStageMappingPath}`,
+      2,
+    );
+  }
+  mappingRaw = fs.readFileSync(lessonStageMappingPath, "utf-8");
+  if (mappingRaw.includes(`"${slug}":`)) {
+    fail(`이미 매핑된 slug: "${slug}". lesson-stage-mapping.ts에 존재.`);
+  }
+  // 해당 stage의 ordinal 최댓값 찾기
+  const ordinalPattern = new RegExp(
+    `stageId:\\s*"${stageId}",\\s*stageOrdinal:\\s*(\\d+)`,
+    "g",
+  );
+  const ordinals = [...mappingRaw.matchAll(ordinalPattern)].map((m) =>
+    parseInt(m[1] ?? "0", 10),
+  );
+  stageOrdinal = ordinals.length ? Math.max(...ordinals) + 1 : 1;
+}
 
 // ── 5. lessons.ts 배열에 stub 삽입 ─────────────────────────────
 // phase slug → phase id 변환:  "phase-2-prompt-engineering" → "phase-2"
@@ -267,6 +323,24 @@ if (registryInsertPattern.test(newBodiesRaw)) {
   );
 }
 
+// ── 7.5 lesson-stage-mapping.ts 갱신 (v0.4) ────────────────────
+let newMappingRaw: string | undefined;
+if (stageId && mappingRaw) {
+  const subSnippet = subGroupArg
+    ? `, stageSubGroupId: "${subGroupArg}"`
+    : "";
+  const mappingLine = `  "${slug}": { stageId: "${stageId}", stageOrdinal: ${stageOrdinal}${subSnippet} },\n`;
+  // 매핑 객체 닫는 `};` 직전에 삽입
+  const mappingClosePattern = /\n\};\s*\n\s*\/\*\*/;
+  if (!mappingClosePattern.test(mappingRaw)) {
+    fail(
+      "lesson-stage-mapping.ts 닫는 패턴(`};` + 분포 상수 주석)을 찾지 못함. 수동 추가 필요.",
+      2,
+    );
+  }
+  newMappingRaw = mappingRaw.replace(mappingClosePattern, "\n" + mappingLine + "};\n\n/**");
+}
+
 // ── 8. 파일 시스템 쓰기 (트랜잭셔널 흉내) ────────────────────
 try {
   fs.mkdirSync(path.dirname(mdxPath), { recursive: true });
@@ -275,6 +349,9 @@ try {
   fs.writeFileSync(path.join(outputsDir, "README.md"), outputsReadme, "utf-8");
   fs.writeFileSync(lessonsPath, newLessonsRaw, "utf-8");
   fs.writeFileSync(lessonBodiesPath, newBodiesRaw, "utf-8");
+  if (newMappingRaw) {
+    fs.writeFileSync(lessonStageMappingPath, newMappingRaw, "utf-8");
+  }
 } catch (err) {
   console.error(c(COLORS.red, "파일 쓰기 중 오류"), err);
   process.exit(2);
@@ -289,11 +366,25 @@ console.log(`  ${path.relative(ROOT, path.join(outputsDir, "README.md"))}`);
 console.log(c(COLORS.dim, "수정된 파일:"));
 console.log(`  src/content/lessons.ts (lesson id: ${newId})`);
 console.log(`  src/content/lesson-bodies.ts (registered ${importVarName})`);
+if (stageId) {
+  console.log(
+    `  src/content/lesson-stage-mapping.ts (${stageId} / ordinal ${stageOrdinal}${
+      subGroupArg ? ` / sub ${subGroupArg}` : ""
+    })`,
+  );
+}
 console.log("");
 console.log(c(COLORS.yellow + COLORS.bold, "다음 단계:"));
 console.log("  1. lessons.ts 새 객체에서 TODO 항목을 채웁니다.");
 console.log(`  2. ${path.relative(ROOT, mdxPath)} 본문을 친근 어조로 작성합니다.`);
 console.log("  3. outputs 폴더에 산출물 템플릿(.md)을 만듭니다.");
-console.log(`  4. phases.ts의 phaseId="${phaseSlugArg}"에 lessonSlugs로 "${slug}" 추가.`);
-console.log("  5. npm run check 통과 확인.");
+if (stageId) {
+  console.log(
+    `  4. src/content/stages.ts의 stageId="${stageId}" 객체에 lessonSlugs로 "${slug}" 추가 (subGroup 있으면 해당 subGroup에도).`,
+  );
+  console.log("  5. v0.4 — phases.ts는 legacy. stages.ts만 갱신해도 PR D 이후엔 충분합니다.");
+} else {
+  console.log(`  4. phases.ts의 phaseId="${phaseSlugArg}"에 lessonSlugs로 "${slug}" 추가.`);
+}
+console.log("  6. npm run check 통과 확인.");
 process.exit(0);
