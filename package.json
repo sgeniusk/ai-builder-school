@@ -15,7 +15,7 @@
     "eval:lessons": "tsx scripts/eval-lesson-quality.ts",
     "eval:routes": "tsx scripts/journey-route-check.ts",
     "check": "npm run lint && npm run typecheck && npm run validate && npm run build",
-    "prepare": "lefthook install"
+    "prepare": "lefthook install || true"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
