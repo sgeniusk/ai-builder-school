@@ -1,0 +1,156 @@
+## 프롬프트를 바꿨더니 달라졌다. 어디가?
+
+프롬프트를 조금 수정했다. 결과가 달라진 것 같다. 어디가 달라진 건지, 더 좋아진 건지 나빠진 건지 판단하기 어렵다. 이전 버전 결과를 저장해두지 않았으니까.
+
+이게 LLM 관측의 출발점이다. **비교할 기준이 없으면 개선인지 퇴보인지 알 수 없다.**
+
+---
+
+## 구조화된 LLM 로그
+
+LLM 호출마다 기록해야 할 최소 필드:
+
+```json
+{
+  "log_id": "uuid",
+  "timestamp": "2025-05-13T14:23:00Z",
+  "feature": "review_summary",
+  "prompt_version": "v1.3",
+  "model": "claude-3-5-sonnet-20241022",
+  "temperature": 0.3,
+  "input": {
+    "review_text": "배송이 너무 늦었어요. 포장은 괜찮았는데...",
+    "context": "5-star rated product"
+  },
+  "output": "배송 지연에 대한 불만, 포장 상태는 긍정적.",
+  "latency_ms": 1240,
+  "tokens": { "input": 180, "output": 42 }
+}
+```
+
+`prompt_version` 필드가 핵심이다. 이게 없으면 나중에 "어떤 프롬프트를 썼을 때 이 결과가 나왔는지" 추적할 수 없다.
+
+---
+
+## 골든 셋 구성
+
+골든 셋은 **"이 입력에 대해 이 출력이 나와야 한다"는 기대값 쌍**이다.
+
+처음엔 완벽한 기준을 정하려다 막히는 경우가 많다. 두 가지 질문으로 시작한다.
+
+1. **항상 있어야 하는 것:** "부정적인 리뷰면 요약에 주요 불만이 반드시 언급돼야 한다"
+2. **절대 있으면 안 되는 것:** "리뷰에 없는 내용을 요약이 만들어내면 안 된다"
+
+```yaml
+# golden-set.yaml
+- id: gs-001
+  input: "배송이 3일이나 늦었어요. 상품 자체는 마음에 들어요."
+  must_contain: ["배송 지연", "상품 만족"]
+  must_not_contain: ["환불", "교환"]  # 리뷰에 없는 내용
+  max_length: 100
+
+- id: gs-002
+  input: "완전 최고예요!! 강력 추천합니다!!"
+  sentiment: "positive"
+  must_contain_sentiment: true
+  max_length: 50
+```
+
+골든 셋은 5개로 시작한다. 문제가 발생할 때마다 해당 케이스를 추가한다.
+
+---
+
+## 회귀 테스트 루프
+
+프롬프트를 변경할 때마다 이 루프를 돌린다.
+
+```python
+# regression_test.py (구조 스케치)
+import json
+from pathlib import Path
+
+def run_regression(new_prompt_version: str, golden_set_path: str):
+    golden_set = load_golden_set(golden_set_path)
+    results = []
+
+    for case in golden_set:
+        output = call_llm(case["input"], prompt_version=new_prompt_version)
+        score = evaluate(output, case)
+        results.append({
+            "id": case["id"],
+            "passed": score["passed"],
+            "issues": score["issues"],
+            "output": output
+        })
+
+    passed = sum(r["passed"] for r in results)
+    print(f"[{new_prompt_version}] {passed}/{len(results)} passed")
+
+    # 실패한 케이스만 출력
+    for r in results:
+        if not r["passed"]:
+            print(f"  FAIL {r['id']}: {r['issues']}")
+
+    return results
+
+def evaluate(output: str, case: dict) -> dict:
+    issues = []
+    # must_contain 체크
+    for keyword in case.get("must_contain", []):
+        if keyword not in output:
+            issues.append(f"missing: {keyword}")
+    # max_length 체크
+    if len(output) > case.get("max_length", 9999):
+        issues.append(f"too long: {len(output)} > {case['max_length']}")
+    return {"passed": len(issues) == 0, "issues": issues}
+```
+
+이 스크립트를 `v1.2` → `v1.3` 프롬프트 변경 때 실행하면 어떤 골든 셋 케이스가 달라졌는지 정확히 알 수 있다.
+
+---
+
+## LLM-as-Judge 채점
+
+골든 셋의 `must_contain` 같은 규칙 기반 체크는 빠르지만 맥락을 이해하지 못한다. LLM-as-Judge는 맥락 기반 품질을 채점한다.
+
+```
+아래 요약의 품질을 1~5점으로 채점해줘.
+
+[원문 리뷰]
+{input}
+
+[AI 생성 요약]
+{output}
+
+채점 기준:
+- 핵심 내용 포함도 (1~5): 원문의 주요 내용이 요약에 있는가
+- 정보 정확도 (1~5): 원문에 없는 내용을 만들어냈는가 (없으면 5점)
+- 간결도 (1~5): 불필요한 내용 없이 간결한가
+
+각 항목 점수와 1문장 이유를 JSON으로 줘.
+```
+
+**LLM-as-Judge의 한계:** Judge LLM 자체도 편향이 있다. 같은 출력에 대해 다른 프롬프트로 물으면 점수가 달라질 수 있다. 채점 프롬프트도 버전 관리가 필요하다.
+
+---
+
+## 프롬프트 드리프트 감지
+
+로그에 `prompt_version`이 있으면 버전별 품질 추이를 볼 수 있다.
+
+```
+v1.0  →  평균 점수 3.8  (골든 셋 통과율 80%)
+v1.1  →  평균 점수 4.1  (+0.3, 통과율 90%) ← 개선
+v1.2  →  평균 점수 3.6  (-0.5, 통과율 70%) ← 드리프트!
+v1.3  →  평균 점수 4.2  (+0.6, 통과율 95%) ← 회복
+```
+
+v1.2에서 드리프트가 발생했다. 로그가 없었다면 v1.3이 v1.0보다 좋다는 것만 알고, v1.2에서 무슨 문제가 있었는지 놓쳤을 것이다.
+
+---
+
+## 핵심 원칙
+
+> 비교할 기준 없이 '개선됐다'고 말할 수 없다.
+> 골든 셋 5개로 시작한다. 완벽하지 않아도 된다.
+> prompt_version 로그 없이는 드리프트를 인식할 수 없다.
