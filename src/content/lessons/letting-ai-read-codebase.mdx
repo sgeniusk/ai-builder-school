@@ -1,0 +1,171 @@
+## "파일이 200개인데 에이전트가 엉뚱한 파일을 고쳐요"
+
+코딩 에이전트에게 "헤더 컴포넌트의 네비게이션 메뉴를 수정해 줘"라고 시켰습니다. 에이전트가 열심히 작업한 결과 — `src/components/Header.tsx`가 아니라 `src/legacy/Header.jsx`를 고쳤어요. 레거시 파일이라 아무도 안 쓰는 건데, 에이전트는 그걸 몰랐습니다. 파일 이름만 보고 골랐으니까요.
+
+[Lesson 07](/lessons/feeding-long-documents)에서 "100페이지 문서를 통째로 넣으면 가운데를 놓친다"고 했죠. 코드베이스도 같은 문제예요. 파일이 200개, 300개가 되면 에이전트는 **전체를 한 번에 이해하지 못합니다**. 컨텍스트 윈도우에 다 넣어도 "Lost in the Middle"이 작동하고, 대부분은 윈도우에 아예 안 들어가요.
+
+오늘은 에이전트가 코드베이스를 **빠르고 정확하게 파악하도록 돕는 지도**를 만듭니다.
+
+## L07의 코드베이스 버전 — 3 전략 리캡
+
+{/* Source · PAPER · Liu et al. (2023) "Lost in the Middle: How Language Models Use Long Contexts" — https://arxiv.org/abs/2307.03172 */}
+
+[Lesson 07](/lessons/feeding-long-documents)에서 긴 문서를 다루는 3가지 전략을 배웠어요. 코드베이스에도 똑같이 적용됩니다.
+
+| L07 전략 | 코드베이스 버전 | 도구/방법 |
+| --- | --- | --- |
+| Full Injection (통째로) | 코드베이스 전체를 한 파일로 | Repomix |
+| Map-Reduce (청크별 요약) | 폴더별 요약 → 전체 요약 | 계층적 README |
+| Selective (관련만 주입) | 작업 관련 파일만 선택 | CLAUDE.md + 에이전트의 탐색 |
+
+작은 프로젝트(파일 50개 이하)는 Full이 통하지만, 실무 프로젝트에서는 **Map-Reduce + Selective를 조합**하는 게 현실적이에요.
+
+## 방법 1 — Repomix로 코드베이스 평탄화
+
+{/* Source · DOC · Repomix — https://repomix.com/ */}
+
+Repomix는 코드베이스 전체를 **하나의 텍스트 파일로 평탄화(flatten)** 하는 도구예요. 에이전트에게 통째로 넘기기 좋은 형태로 만들어줍니다.
+
+```bash
+# 설치
+npm install -g repomix
+
+# 현재 프로젝트를 하나의 파일로
+repomix
+
+# 특정 디렉터리만
+repomix --include "src/**"
+
+# 출력 형식 선택
+repomix --style markdown
+```
+
+생성된 파일에는 디렉터리 구조, 각 파일의 내용, 파일 간 관계가 포함됩니다.
+
+| 장점 | 한계 |
+| --- | --- |
+| 한 번에 전체 그림 | 큰 프로젝트는 토큰 초과 |
+| 설정 거의 없음 | "Lost in the Middle" 여전히 작동 |
+| 1회성 분석에 좋음 | 매번 재생성 필요 |
+
+Repomix는 **처음 프로젝트를 파악할 때** 한 번 돌리기 좋아요. 하지만 매일의 작업에서는 다음 두 방법이 더 실용적입니다.
+
+## 방법 2 — CLAUDE.md / AGENTS.md로 상시 지도
+
+{/* Source · DOC · Anthropic "Claude Code memory (CLAUDE.md)" — https://docs.anthropic.com/en/docs/claude-code/memory */}
+{/* Source · DOC · OpenAI Codex "AGENTS.md" — https://github.com/openai/codex/blob/main/docs/AGENTS.md */}
+
+[Lesson 13](/lessons/coding-agent-setup)에서 만든 CLAUDE.md를 기억하시죠? 거기에 **코드베이스 지도 섹션**을 추가합니다.
+
+```markdown
+## 코드베이스 구조
+
+### 핵심 디렉터리
+- `src/app/` — Next.js App Router 페이지 (라우팅)
+- `src/components/` — 재사용 UI 컴포넌트
+- `src/lib/` — 유틸리티, 타입, 비즈니스 로직
+- `src/content/` — 데이터 소스 (수정 시 validate 필수)
+
+### 건드리지 말 것
+- `src/legacy/` — 마이그레이션 예정, 현재 사용 안 함
+- `next.config.mjs` 의 `distDir` — `.next.nosync` 유지 필수
+
+### 코드 컨벤션
+- 컴포넌트: 함수형 + TypeScript
+- 스타일: Tailwind 유틸리티 클래스
+- UI 텍스트: 한국어, 변수/파일명: 영어
+
+### 검증 명령
+- `npm run lint` → `npm run typecheck` → `npm run build`
+- 모든 변경 후 `npm run check` 통과 필수
+```
+
+이 지도가 있으면 에이전트는 `src/legacy/Header.jsx` 대신 `src/components/Header.tsx`를 여는 거예요. **파일 200개를 다 읽지 않아도, 지도를 보고 어디를 열지 판단**할 수 있습니다.
+
+## 방법 3 — 계층적 README로 깊이 조절
+
+큰 프로젝트에서는 CLAUDE.md 하나로 모든 컨텍스트를 담기 어려워요. 이때 **각 디렉터리에 README.md를 배치**하는 패턴이 효과적입니다.
+
+```
+project/
+├── CLAUDE.md          ← 전체 지도 (핵심 디렉터리 + 금지 영역)
+├── src/
+│   ├── README.md      ← src/ 전체 요약
+│   ├── app/
+│   │   └── README.md  ← 라우팅 규칙, 페이지 목록
+│   ├── components/
+│   │   └── README.md  ← 컴포넌트 네이밍, 공통 패턴
+│   └── lib/
+│       └── README.md  ← 타입 스키마, 유틸 함수 목록
+```
+
+에이전트는 작업에 따라 **필요한 깊이의 README만** 읽습니다. 전체를 요약할 때는 CLAUDE.md, 특정 디렉터리를 수정할 때는 해당 디렉터리의 README를 참조해요. L07의 **Selective Injection(관련 청크만 골라 주입)** 전략과 같은 원리입니다.
+
+## 트레이드오프 한 표로
+
+{/* Note: 효과·비용은 프로젝트 규모에 따라 다릅니다. 자기 프로젝트에서 직접 비교해 보세요. */}
+
+| 방법 | 초기 비용 | 유지 비용 | 작은 프로젝트 | 큰 프로젝트 |
+| --- | --- | --- | --- | --- |
+| Repomix (Full) | 낮음 (한 줄) | 낮음 (매번 재생성) | 좋음 | 토큰 초과 |
+| CLAUDE.md (Selective) | 중간 (수동 작성) | 중간 (변경 시 업데이트) | 좋음 | 좋음 |
+| 계층적 README (Map-Reduce) | 높음 (폴더마다 작성) | 높음 (각각 유지) | 과잉 | 좋음 |
+
+권장 조합: **CLAUDE.md를 기본으로 깔고**, 필요한 디렉터리에만 README를 추가. Repomix는 처음 파악할 때 한 번 돌려요.
+
+## 지도를 최신으로 유지하는 법
+
+코드베이스 지도의 가장 큰 적은 **낡은 정보**예요. 3개월 전에 쓴 CLAUDE.md가 현재 코드와 다르면, 에이전트가 지도를 믿고 잘못된 방향으로 갑니다.
+
+유지 전략 세 가지:
+
+1. **코드 리뷰에 포함** — PR에 디렉터리 구조 변경이 있으면 CLAUDE.md도 함께 업데이트
+2. **에이전트에게 시키기** — "현재 코드베이스를 스캔해서 CLAUDE.md의 디렉터리 구조 섹션을 업데이트해 줘"
+3. **주간 루틴** — 매주 월요일 5분, CLAUDE.md를 훑어보며 틀린 부분 수정
+
+완벽할 필요 없어요. **완벽하지 않아도** 에이전트가 첫 시도에서 참고할 기준이 생깁니다.
+
+## 그래서 오늘 만들 한 장
+
+오늘 만들 건 `repo-context-pack/` — 코드베이스 지도 생성 워크플로우예요.
+
+| 항목 | 무엇 |
+| --- | --- |
+| `CLAUDE.md` 템플릿 | 코드베이스 지도 섹션이 포함된 규약 문서 |
+| Repomix 실행 결과 | 프로젝트를 평탄화한 1회성 스냅샷 |
+| 계층적 README 예시 | 2~3개 디렉터리의 README 샘플 |
+| 유지 체크리스트 | 주간 업데이트 루틴 |
+
+이 팩이 있으면 새 프로젝트를 시작할 때 "에이전트가 코드를 어떻게 이해하지?"에서 멈추지 않습니다. 템플릿을 복사하고 자기 프로젝트에 맞게 채우면 됩니다.
+
+## L07에서 여기까지, 그리고 다음
+
+[Lesson 07](/lessons/feeding-long-documents)에서 "긴 문서를 AI에게 어떻게 먹일까"를 배웠다면, 오늘은 **그 원리를 코드베이스에 적용**한 거예요. Full / Map-Reduce / Selective 세 전략이 문서에서도, 코드에서도 같은 원리로 작동합니다.
+
+[Lesson 13](/lessons/coding-agent-setup)의 권한 + 규약 셋업, [Lesson 14](/lessons/github-issue-to-ai-brief)의 이슈 브리프, 오늘의 코드베이스 지도 — 이 세 장이 Phase 4a의 "환경·입력 준비"예요. 이 기반 위에서 Phase 4b는 에이전트가 **실제로 코드를 짜고, 리뷰하고, 반복**하는 실행 단계로 넘어갑니다.
+
+오늘의 지도를 한 번 만들어 보세요. 시작해 볼까요?
+
+---
+
+## 더 깊이 보기
+
+**코드베이스 컨텍스트 도구**
+- [Repomix](https://repomix.com/) · 코드베이스를 하나의 텍스트로 평탄화하는 도구
+
+**프로젝트 규약 파일**
+- Anthropic — [Claude Code memory (CLAUDE.md)](https://docs.anthropic.com/en/docs/claude-code/memory) · 에이전트가 프로젝트를 이해하는 상시 지도
+- OpenAI — [AGENTS.md convention](https://github.com/openai/codex/blob/main/docs/AGENTS.md) · Codex용 프로젝트 지침서
+
+**긴 컨텍스트의 한계 (학술)**
+- Liu 외 (2023) — [Lost in the Middle](https://arxiv.org/abs/2307.03172) · 긴 입력의 중간 정보 누락 실증 연구
+
+**이전 레슨 참조**
+- [Lesson 07 — 긴 문서 먹이기](/lessons/feeding-long-documents) · Full / Map-Reduce / Selective 3 전략의 원리
+- [Lesson 13 — 코딩 에이전트 셋업](/lessons/coding-agent-setup) · 권한 설정과 CLAUDE.md 기본 구조
+- [Lesson 14 — 이슈 → 브리프](/lessons/github-issue-to-ai-brief) · 에이전트에게 "무엇을 할지" 전달하는 법
+
+**큰 코드베이스 토큰 절약 (다음 단계)**
+- [Lesson 37 — Claude Code 토큰 절약](/lessons/claude-code-token-saving) · QMD 사전 인덱싱·read-once 훅 등 큰 프로젝트에서 효과 큰 12가지
+
+> _참고: 본문 도입의 "파일 200개 프로젝트" 시나리오는 학습 효과를 위한 가상 사례입니다. Repomix 명령어와 출력 형식은 해당 도구의 버전에 따라 달라질 수 있으니, 위 공식 문서를 확인하세요. 계층적 README 패턴은 일반 소프트웨어 엔지니어링 관행을 이 학교 운영자가 한국어로 정리한 것이며, 외부 표준 명칭은 아닙니다. 3 방법(Repomix / CLAUDE.md / 계층적 README)의 트레이드오프는 프로젝트 규모·팀 사이즈에 따라 달라지므로, 자기 환경에서 직접 비교해 보세요._
