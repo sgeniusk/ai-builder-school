@@ -14,10 +14,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * 절대 경로(예: /var/folders/...)는 Next.js가 path.join으로 프로젝트 루트에 붙여버려서
  * 사용 불가 — 반드시 프로젝트 내부의 상대 경로 + `.nosync` 접미사 조합이어야 합니다.
  *
- * Vercel/Netlify 같은 배포 환경에서는 기본 .next를 쓰도록
- * `USE_DEFAULT_DIST=1` 환경변수로 우회 가능합니다.
+ * 배포 환경 우회
+ * - Vercel은 자동 감지 (process.env.VERCEL === "1"을 Vercel runtime이 주입).
+ * - 기타 환경(Netlify 등)에서는 USE_DEFAULT_DIST=1로 명시 우회.
  */
-const distDir = process.env.USE_DEFAULT_DIST
+const distDir = process.env.USE_DEFAULT_DIST || process.env.VERCEL
   ? ".next"
   : ".next.nosync";
 
