@@ -1,0 +1,189 @@
+## "AI 코딩 잘하는 사람과 못하는 사람의 차이는 IDE가 아닙니다"
+
+같은 Claude Code, 같은 Codex CLI를 쓰는데 결과물 품질이 천지차이인 사람들이 있어요. 어떤 사람은 한 시간이면 PR을 올리고, 어떤 사람은 하루를 들여도 되돌리기에 다 써버립니다. 도구는 같은데 무엇이 다른가.
+
+답은 **하네스(Harness)** 예요. 도구 자체가 아니라, **도구를 둘러싸고 깔린 환경 전체**를 가리킵니다. 좋은 하네스가 깔린 사람은 같은 도구로 10배의 산출을 냅니다.
+
+오늘 만들 건 **하네스 엔지니어링 6단계 로드맵**이에요. Anthropic, OpenAI, LangChain, Mitchell Hashimoto, HumanLayer 등 글로벌 테크 기업·엔지니어 14개 글에서 추출한 실전 가이드입니다.
+
+## 하네스란 무엇인가
+
+{/* Source · DOC · 본 학교 "Harness Engineering Spec" — docs/harness-engineering-spec.md (운영자 정리, 외부 표준 명칭 아님) */}
+{/* Note: "하네스 엔지니어링" 명칭과 6단계 분류는 이 학교 운영자가 외부 14개 글을 합성해 정리한 프레임워크이며, 외부 단일 표준 명칭은 아닙니다. */}
+
+말 그대로 옮기면 "마구"예요. 말이 무거운 짐을 끌 수 있는 건 말 자체의 힘 + 짐을 분배하는 마구가 같이 일하기 때문입니다. AI 코딩도 똑같아요. AI의 능력 + 그것을 받쳐주는 환경(하네스)이 같이 일해야 결과가 나옵니다.
+
+하네스는 6가지 축으로 이루어집니다.
+
+| 축 | 무엇 | 이번 학교에서 |
+| --- | --- | --- |
+| 1. 규약 (CLAUDE.md) | 프로젝트 상시 프롬프트 | [L13](/lessons/coding-agent-setup), [L33](/lessons/claude-md-four-principles) |
+| 2. 도구 연결 | AI가 호출할 수 있는 도구 | [L15](/lessons/letting-ai-read-codebase) |
+| 3. 세션 관리 | 긴 작업을 끊기지 않게 | 토큰 절약 레슨 |
+| 4. 검증 파이프라인 | 실수할 수 없는 시스템 | [L17](/lessons/write-tests-with-coding-agent), [L18](/lessons/bug-reproduction-loop) |
+| 5. 멀티 에이전트 | 여러 에이전트의 협업 | [Phase 7](/curriculum/phase-7-agents-mcp) |
+| 6. 유지보수 | 하네스가 썩지 않게 관리 | (분기별 리뷰) |
+
+이 6단계가 구비되면 같은 도구로 다른 결과가 나옵니다. 하나씩 들여다볼게요.
+
+## 1단계 — CLAUDE.md 작성: 가장 쉬운 것부터
+
+{/* Source · DOC · Andrej Karpathy "CLAUDE.md" — https://github.com/karpathy/nanochat/blob/master/CLAUDE.md */}
+
+CLAUDE.md는 **온보딩 문서**예요. 새 입사자가 첫날 반드시 읽는 안내서처럼, Claude가 새 세션을 시작할 때 가장 먼저 읽는 파일입니다.
+
+좋은 CLAUDE.md는 5섹션을 가져요.
+
+1. **프로젝트 개요** — 무엇을 만드는 프로젝트인지 3줄
+2. **실행 명령어** — `npm run dev`, `npm run lint` 같은 일상 명령
+3. **코드 스타일** — 함수형 컴포넌트 / 한국어 UI / 영문 변수명
+4. **금지 사항** — `.env` 수정 금지, `distDir` 변경 금지
+5. **작업 완료 기준** — `npm run check` 통과 후 완료 보고
+
+[L33](/lessons/claude-md-four-principles)의 Karpathy 4원칙이 여기 더해지면 1단계가 완성돼요.
+
+## 2단계 — 도구 연결: AI에게 뭘 쥐어줄지
+
+CLAUDE.md만 깔아도 AI는 잘 움직입니다. 그런데 **도구**를 추가로 쥐어주면 능력이 한 단계 올라가요. 회사 위키 검색, 사내 DB 조회, 디자인 시스템 가져오기 같은 것을 AI가 직접 부를 수 있게 됩니다.
+
+도구 연결의 두 가지 방식.
+
+| 방식 | 사용처 |
+| --- | --- |
+| **MCP 서버** | 외부 시스템(Slack, GitHub, Notion) 표준 연결 |
+| **커스텀 슬래시 명령** | 프로젝트별 반복 작업 (`/release`, `/bug-loop`) |
+
+[L15](/lessons/letting-ai-read-codebase)에서 코드베이스를 어떻게 보여줄지 다뤘다면, 2단계는 그 외의 모든 외부 도구·API를 어떻게 연결할지의 영역이에요.
+
+## 3단계 — 세션 관리: 끊기지 않고 이어가는 법
+
+{/* Source · DOC · Anthropic "Context windows" — https://platform.claude.com/docs/en/build-with-claude/context-windows */}
+
+Claude Code는 매번 전체 대화를 재로딩해요. 메시지 30번 주고받으면 1번째 메시지보다 31배 비싼 토큰이 들어갑니다.
+
+세션 관리의 4가지 핵심.
+
+- 작업 끝났으면 **`/clear`로 즉시 초기화** — 가장 빠른 토큰 절약
+- CLAUDE.md를 **200줄 이하로 다이어트** — 매 메시지마다 읽힘
+- 상세 지식은 **스킬 파일로 분리** — 필요할 때만 로드
+- `.claudeignore`로 **node_modules / .next 제외** — 큰 프로젝트 필수
+
+이 4가지만 깔아도 토큰 비용이 절반 이하로 떨어져요. 토큰 절약 시리즈는 별도 레슨에서 깊게 다룹니다.
+
+## 4단계 — 검증 파이프라인: 실수할 수 없는 시스템
+
+여기서부터는 약간의 엔지니어링 사고가 필요해요. AI가 만든 코드가 **실수할 수 없는 시스템**을 만드는 단계입니다.
+
+3겹의 검증.
+
+```
+1. lint    → 형식 오류 차단
+2. typecheck → 타입 오류 차단
+3. test    → 동작 오류 차단
+```
+
+이 3겹을 통과해야 "완료"라고 부르게 만드는 거예요. CLAUDE.md에 한 줄 박아둡니다.
+
+```markdown
+## Definition of done
+- `npm run check` exit 0 (lint + typecheck + test 모두 통과)
+- 새 함수에는 Golden Path 1개 + Edge Case 5개 테스트
+```
+
+[L17 테스트](/lessons/write-tests-with-coding-agent)와 [L18 버그 재현](/lessons/bug-reproduction-loop)이 이 단계의 본격 작업이에요.
+
+## 5단계 — 멀티 에이전트 설계
+
+여러 에이전트가 협업하는 단계예요. 한 명은 코드를 짜고, 한 명은 리뷰하고, 한 명은 테스트를 짭니다. 사람이 매 단계 끼어들지 않고도 코드가 흘러가요.
+
+설계 패턴 3가지.
+
+| 패턴 | 언제 씁니다 |
+| --- | --- |
+| **Pipeline** | 입력 → A → B → C → 출력. 단순한 흐름 |
+| **Orchestrator** | 한 매니저 에이전트가 여러 워커 에이전트 분배 |
+| **Peer Review** | 두 에이전트가 서로의 산출을 검증 |
+
+[Phase 7 Agents & MCP](/curriculum/phase-7-agents-mcp)에서 본격 다뤄요. 5단계는 4단계 검증이 깔린 다음에 안전하게 진입할 수 있어요.
+
+## 6단계 — 유지보수: 하네스가 썩지 않게
+
+{/* Source · DOC · 본 학교 "Curriculum blueprint" — docs/curriculum-blueprint.md */}
+
+하네스는 한 번 깔고 끝이 아니에요. 모델이 좋아지고, 도구가 바뀌고, 프로젝트가 자랍니다. 분기마다 다음을 갱신합니다.
+
+- CLAUDE.md 길이 — 200줄 넘어가면 다이어트 타이밍
+- 사용 안 되는 슬래시 명령 정리
+- 모델 사양 (windows / pricing) 재확인
+- 사고 기록(post-mortem) 한 줄씩 CLAUDE.md에 합치기
+
+좋은 하네스는 한 달이면 손에 익고, 1년이면 본인 일하는 방식 자체를 바꿔놔요.
+
+## 그래서 오늘 만들 한 장
+
+오늘 만들 건 본인 프로젝트의 **하네스 진단표 + 6단계 액션 플랜**이에요.
+
+| 단계 | 진단 | 다음 액션 |
+| --- | --- | --- |
+| 1. CLAUDE.md | (있음 / 없음 / 부족) | (작성 / 다이어트 / 4원칙 추가) |
+| 2. 도구 연결 | (MCP 0개 / N개, 커스텀 명령 N개) | (가장 자주 하는 작업 1개를 슬래시 명령으로) |
+| 3. 세션 관리 | (200줄 이내 / .claudeignore 있음) | (없으면 즉시 추가) |
+| 4. 검증 파이프라인 | (`npm run check` 있음 / 없음) | (없으면 lint + typecheck + test 묶기) |
+| 5. 멀티 에이전트 | (현재 단발 호출 / 파이프라인 / ...) | (가장 자주 하는 워크플로우 1개를 파이프라인화) |
+| 6. 유지보수 | (분기 리뷰 일정 / 없음) | (캘린더에 분기말 1시간 슬롯 추가) |
+
+이 진단표가 한 장 생기면 다음부터 "내 하네스 어디가 약한가"가 한 눈에 보여요.
+
+## Phase 4의 마무리
+
+Phase 4 (Coding Agents)에서 만든 6개 레슨이 **하네스 엔지니어링의 6단계 중 1~4단계**에 해당해요. 5·6단계는 [Phase 7](/curriculum/phase-7-agents-mcp)와 운영 단계에서 본격 다뤄요.
+
+이 학교의 시그니처는 **하네스 엔지니어링**이에요. 좋은 도구 + 좋은 하네스 + 좋은 사용자 = 10배의 산출. 도구는 분기마다 바뀌지만, 하네스 설계 습관은 평생 따라옵니다.
+
+시작해 볼까요?
+
+---
+
+## 이게 어디로 가는가 — HyperAgents 흐름
+
+2026년 Meta와 UBC가 발표한 **HyperAgents** 연구는 흥미로운 한 점을 짚어요. *자기참조적 에이전트* — 작업 코드뿐 아니라 *자신을 개선하는 메커니즘 자체* 까지 수정 가능한 에이전트 — 를 수백 회 반복시켰더니, 에이전트가 *스스로* 영속 메모리 · 성능 추적 · 다단계 검증 · 도메인 지식 베이스 · 재시도 루프 같은 구성요소를 **재발명** 했다는 거예요.
+
+이게 우리 6단계 하네스의 정확히 어떤 항목과 일치하는지 보세요.
+
+| HyperAgents 가 재발명한 것 | 우리 6단계 매핑 |
+| --- | --- |
+| 영속 메모리 + 도메인 지식 베이스 | 1단계 (CLAUDE.md) + 3단계 (세션) |
+| 성능 추적 | 4단계 (검증) + 6단계 (유지보수) |
+| 다단계 검증 파이프라인 | 4단계 (검증) |
+| 임계값 의사결정 프로토콜 | 5단계 (멀티 에이전트 조율) |
+| 재시도 · 자기 교정 | 4단계 (검증) |
+
+논문이 던지는 핵심 메시지 — *"하네스는 단순한 개발 편의가 아니라 에이전틱 시스템의 수렴적 아키텍처"*. 우리가 손으로 짓는 6단계가 *임의의 디자인 선택* 이 아니라 *충분히 자기 개선하는 에이전트가 도달하는 결말* 이라는 뜻이에요.
+
+이 흐름이 진짜라면, 빌더의 역할은 *하네스를 직접 짓는 것* 에서 *에이전트가 효과적 하네스를 진화시킬 수 있는 초기 조건을 설계* 하는 쪽으로 점점 옮겨 갈 거예요. 지금 6단계를 손으로 짜는 연습은 *"에이전트에게 어떤 초기 조건을 줘야 하나"* 를 직관으로 익히는 것과 같습니다.
+
+**원전**
+- Cobus Greyling — [Meta의 HyperAgents — 에이전트가 스스로 자신의 하네스를 설계할 때](https://cobusgreyling.medium.com/) (medium.com)
+- 원논문 — DGM-Hyperagents (DGM-H) by Meta · UBC
+
+---
+
+## 더 깊이 보기
+
+**원전 14개 글 (대표 출처)**
+- Andrej Karpathy — [CLAUDE.md (nanochat)](https://github.com/karpathy/nanochat/blob/master/CLAUDE.md) · 1단계의 정수
+- Anthropic — [Claude Code overview](https://docs.claude.com/en/docs/claude-code/) · 도구·세션·메모리 공식
+- Anthropic — [Building effective agents](https://www.anthropic.com/research/building-effective-agents) · 5단계 멀티 에이전트의 토대
+- OpenAI — [Codex CLI](https://github.com/openai/codex) · 또 다른 코딩 에이전트 표준
+- LangChain — [Agent Patterns](https://python.langchain.com/docs/concepts/agents/) · 5단계 패턴 라이브러리
+- Mitchell Hashimoto — [On AI Agents](https://mitchellh.com/writing/ai-agents-impact) · 시니어 엔지니어 관점
+
+**연결 레슨**
+- [Lesson 13 — 코딩 에이전트 셋업](/lessons/coding-agent-setup) · 1단계
+- [Lesson 33 — CLAUDE.md 4원칙](/lessons/claude-md-four-principles) · 1단계 심화
+- [Lesson 15 — 코드베이스 읽히기](/lessons/letting-ai-read-codebase) · 2단계
+- [Lesson 17 — 테스트 짜기](/lessons/write-tests-with-coding-agent) · 4단계
+- [Lesson 18 — 버그 재현 루프](/lessons/bug-reproduction-loop) · 4단계
+- [Phase 7 — Agents & MCP](/curriculum/phase-7-agents-mcp) · 5단계 본격편
+
+> _참고: 본문의 "하네스 엔지니어링 6단계" 명칭과 분류는 이 학교 운영자가 글로벌 테크 기업의 14개 글(Anthropic·OpenAI·LangChain·Mitchell Hashimoto·HumanLayer 등)을 합성해 정리한 프레임워크입니다. 외부 단일 표준 명칭은 아니에요. 단계별 핵심 출처는 위 "원전" 섹션을 참조하시고, 본인 프로젝트에 적용할 때는 도메인 특성에 맞게 조정하세요._
