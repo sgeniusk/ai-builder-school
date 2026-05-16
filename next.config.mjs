@@ -18,9 +18,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * - Vercel은 자동 감지 (process.env.VERCEL === "1"을 Vercel runtime이 주입).
  * - 기타 환경(Netlify 등)에서는 USE_DEFAULT_DIST=1로 명시 우회.
  */
-const distDir = process.env.USE_DEFAULT_DIST || process.env.VERCEL
-  ? ".next"
-  : ".next.nosync";
+/**
+ * GitHub Pages 배포
+ * - GITHUB_PAGES=true 일 때만 정적 export 모드로 전환된다.
+ * - 사이트가 sgeniusk.github.io/ai-builder-school/ 서브경로로 서빙되므로 basePath 필요.
+ * - Vercel·로컬·CI 빌드는 이 분기에 들어오지 않아 영향 없음.
+ */
+const isGitHubPages = process.env.GITHUB_PAGES === "true";
+
+const distDir =
+  process.env.USE_DEFAULT_DIST || process.env.VERCEL || isGitHubPages
+    ? ".next"
+    : ".next.nosync";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
@@ -37,6 +46,14 @@ const nextConfig = {
   outputFileTracingRoot: __dirname,
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   distDir,
+  ...(isGitHubPages
+    ? {
+        output: "export",
+        basePath: "/ai-builder-school",
+        trailingSlash: true,
+        images: { unoptimized: true },
+      }
+    : {}),
 };
 
 export default withMDX(nextConfig);
