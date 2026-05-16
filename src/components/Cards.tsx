@@ -55,25 +55,24 @@ export function JourneyCard({ journey }: { journey: Journey }) {
   );
 }
 
-/* Project card — styled via .proj-card (inside .proj-grid parent) */
+/* Project card — /projects/[slug] 상세로 연결되는 링크 카드 (.proj-card) */
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="proj-card">
+    <Link href={`/projects/${project.slug}`} className="proj-card">
       <div className="tag-row">
         <span className="chip">{LEVEL_LABEL[project.difficulty]}</span>
-        <span className="chip">{project.targetLearner}</span>
+        <span className="chip">{project.estimatedDuration}</span>
       </div>
       <h3>{project.title}</h3>
-      <p>{project.summary}</p>
+      <p>{project.hook}</p>
       <div style={{ marginTop: 16, padding: "12px 14px", background: "var(--paper-2)", borderRadius: "var(--r-sm)", borderLeft: "3px solid var(--ink)", fontSize: 13, color: "var(--ink-2)" }}>
         <strong style={{ color: "var(--ink)" }}>최종 산출물 · </strong>{project.finalOutput}
       </div>
-      <div className="stack">
-        {project.suggestedStack.map((tech) => (
-          <span key={tech}>{tech}</span>
-        ))}
+      <div className="tfoot" style={{ marginTop: 16 }}>
+        <span>빌드 가이드 보기</span>
+        <span className="arrow mono">→</span>
       </div>
-    </div>
+    </Link>
   );
 }
 
