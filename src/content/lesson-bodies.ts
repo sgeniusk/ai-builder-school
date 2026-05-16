@@ -8,6 +8,11 @@ import ChecksBeforeTrustingBody from "./lessons/checks-before-trusting-ai-output
 import CostMonitoringInProductionBody from "./lessons/cost-monitoring-in-production.mdx";
 import AiDelegationDecisionBody from "./lessons/ai-delegation-decision.mdx";
 import AiCollaborationMindsetBody from "./lessons/ai-collaboration-mindset.mdx";
+import ReasoningVsInstructPromptingBody from "./lessons/reasoning-vs-instruct-prompting.mdx";
+import PromptDebuggingLoopBody from "./lessons/prompt-debugging-loop.mdx";
+import MultimodalPromptingBody from "./lessons/multimodal-prompting.mdx";
+import OutputEvaluationRefineBody from "./lessons/output-evaluation-refine.mdx";
+import ApiRateLimitingAndBatchingBody from "./lessons/api-rate-limiting-and-batching.mdx";
 
 // Phase 2 — Prompt & Context Engineering
 import StructureOfGoodPromptsBody from "./lessons/structure-of-good-prompts.mdx";
@@ -172,6 +177,11 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "cost-monitoring-in-production": CostMonitoringInProductionBody,
   "ai-delegation-decision": AiDelegationDecisionBody,
   "ai-collaboration-mindset": AiCollaborationMindsetBody,
+  "reasoning-vs-instruct-prompting": ReasoningVsInstructPromptingBody,
+  "prompt-debugging-loop": PromptDebuggingLoopBody,
+  "multimodal-prompting": MultimodalPromptingBody,
+  "output-evaluation-refine": OutputEvaluationRefineBody,
+  "api-rate-limiting-and-batching": ApiRateLimitingAndBatchingBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {
