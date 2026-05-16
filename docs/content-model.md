@@ -10,9 +10,35 @@ export type Persona = 'office' | 'planner' | 'developer' | 'creator' | 'engineer
 export type Level = 'beginner' | 'intermediate' | 'advanced';
 ```
 
-## 2. Phase
+## 2. Stage (v0.4 — 권장)
 
-하나의 학습 단계. 12개 존재.
+학습자의 수직 진척을 8개로 나눈 사다리. 13개 Phase를 8개 Stage로 재편하면서 "학습자가 자기 위치를 안다"를 1순위로 둔다. Stage 4·6은 내부 `subGroups`로 학습자에게 노출되는 sub-그룹(4a/4b/4c, 6a/6b/6c)을 가진다.
+
+| 필드 | 타입 | 설명 |
+|---|---|---|
+| `id` | `string` | `"stage-1"` .. `"stage-8"`. |
+| `slug` | `string` | URL slug. `"stage-1-meet"`, `"stage-6-build"` 등. |
+| `order` | `number` | 1..8. |
+| `label` | `string` | 짧은 라벨. `"AI와 만나다"`. |
+| `titleKo` / `titleEn` | `string` | 풀 제목. |
+| `positionChange` | `string` | 학습자 위치 변화 한 줄. `"AI 도구 켜고 첫 대화"`. |
+| `deliverable` | `string` | stage 완료 시 손에 남는 것. |
+| `shortDescription` / `longDescription` | `string` | 카드/페이지용. |
+| `lessonSlugs` | `string[]` | stage 전체 lesson — 학습 순서 보장. |
+| `subGroups?` | `StageSubGroup[]` | Stage 4·6에서만. 각 sub-그룹이 `id`/`label`/`deliverable`/`lessonSlugs`를 가짐. |
+| `nextStageSlug?` | `string \| null` | 다음 stage. |
+| `weekInMvpPath?` | `number \| null` | 8주 MVP 경로 위치. |
+| `introEssaySlug?` / `outroEssaySlug?` | `string` | 도입/마무리 에세이 slug (PR D-content-scaffold에서 채움). |
+
+Lesson은 v0.4부터 `stageId?`, `stageOrdinal?`, `stageSubGroupId?` 옵셔널 필드를 갖는다. 실제 매핑은 lessons.ts가 아니라 별도 `src/content/lesson-stage-mapping.ts`에 두고, `getLessons()` 헬퍼가 머지한다 — diff 최소화 + 롤백 용이.
+
+Journey는 v0.4부터 `recommendedStages?` (slug 배열) 옵셔널 필드를 갖는다.
+
+Phase / `phaseId` / `recommendedPhases` / `requiredPhases`는 **legacy로 보존**되며 PR E에서 제거된다. 새 작업은 stage 필드를 기준으로 쓴다.
+
+## 2-legacy. Phase (@deprecated, PR E에서 제거)
+
+하나의 학습 단계. 13개 존재.
 
 | 필드 | 타입 | 설명 |
 |---|---|---|
@@ -111,19 +137,49 @@ export type Level = 'beginner' | 'intermediate' | 'advanced';
 
 ## 7. 불변 규칙 (Invariants)
 
+Legacy (Phase):
 - 모든 `lesson.phaseId`는 반드시 존재하는 `Phase.id`.
-- 모든 `track.recommendedPhases`는 반드시 존재하는 `Phase.slug`.
+- 모든 `journey.recommendedPhases`는 반드시 존재하는 `Phase.slug`.
 - 모든 `project.requiredPhases`는 반드시 존재하는 `Phase.slug`.
-- `lesson.slug`, `phase.slug`, `track.slug`, `project.slug`, `template.slug`는 전역 유일.
-- 빌드 시 헬퍼(`src/lib/content.ts`)가 무결성을 검증하고 오류를 던진다.
+- `lesson.slug`, `phase.slug`, `journey.slug`, `project.slug`, `template.slug`는 전역 유일.
 
-## 8. 새 레슨 추가하기 (Non-engineer)
+v0.4 (Stage):
+- 모든 lesson은 `lesson-stage-mapping.ts`에 매핑이 있어야 한다 — `getLessons()`가 머지한 결과로 `lesson.stageId`가 존재해야 한다.
+- 모든 `lesson.stageId`는 반드시 존재하는 `Stage.id`.
+- 각 stage의 `lessonSlugs`와 그 lesson들의 `stageId`는 양방향 일치.
+- Stage 4·6의 `subGroups[].lessonSlugs` 합 = `stage.lessonSlugs` (어느 sub-그룹에도 빠지지 않고, 중복도 없음).
+- Lesson 분포는 stage-redesign.md 매핑 그대로 — 4-5-4-14-8-13-6-7 = 61.
+- 모든 `journey.recommendedStages`는 반드시 존재하는 `Stage.slug`.
 
-1. `src/content/lessons.ts` 열기
-2. 배열 맨 아래에 기존 객체를 복사해 붙여넣기
-3. 필드를 수정 (특히 `slug`, `phaseId`, `titleKo`)
-4. 저장 → 자동으로 `/lessons/{slug}`이 노출됨
-5. Phase 페이지에도 자동 표시되려면 `phases.ts`의 해당 Phase `lessonSlugs`에 slug 추가
+빌드 시 헬퍼(`src/lib/content.ts`의 `validateContent`)가 위 규칙을 모두 검사하고 무결성 이슈를 반환한다. `npm run validate`로 호출.
+
+## 8. 새 레슨 추가하기
+
+권장: `scripts/new-lesson.ts` 사용. lessons.ts/lesson-bodies.ts/lesson-stage-mapping.ts/MDX 본문/outputs README 전부를 한 번에 스캐폴드한다.
+
+```bash
+npm run new-lesson <slug> --stage <stage-slug> [--sub <subId>] --title "한글 제목"
+
+# 예시
+npm run new-lesson prompt-debugging-loop --stage stage-2-ask --title "프롬프트 실패 진단"
+npm run new-lesson auth-and-user-sessions --stage stage-6-build --sub 6a --title "사용자 인증과 세션"
+```
+
+스크립트가 자동으로:
+1. `src/content/lessons.ts`에 stub 삽입 (lesson-NN id 자동 부여)
+2. `src/content/lesson-stage-mapping.ts`에 stage 매핑 추가 (stageOrdinal은 stage 내 다음 빈 번호)
+3. `src/content/lessons/<slug>.mdx` 본문 템플릿 생성
+4. `src/content/lessons/<slug>/outputs/README.md` 생성
+5. `src/content/lesson-bodies.ts`에 import + 등록
+
+이후 수동으로:
+1. lessons.ts 새 객체의 TODO 항목 채우기
+2. MDX 본문 작성 (친근 어조, "당신"으로 학습자 호명)
+3. outputs 폴더에 산출물 템플릿(.md) 작성
+4. `src/content/stages.ts`의 해당 stage `lessonSlugs`에 slug 추가 (subGroup이면 해당 subGroup에도)
+5. `npm run check` 통과 확인
+
+레거시 `--phase` 플래그도 작동하지만 deprecated 경고가 나온다 — v0.4 stage 모델 기준으로 작성.
 
 ## 9. 로컬라이제이션
 

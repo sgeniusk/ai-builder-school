@@ -27,6 +27,13 @@ export const journeys: Journey[] = [
       "phase-9-data-decision",
       "phase-10-evals-security",
     ],
+    recommendedStages: [
+      "stage-1-meet",
+      "stage-2-ask",
+      "stage-3-verify",
+      "stage-4-collaborate",
+      "stage-7-operate",
+    ],
     recommendedLessons: [
       "common-skills-of-future-proof-people",
       "structure-of-good-prompts",
@@ -61,6 +68,14 @@ export const journeys: Journey[] = [
       "phase-10-evals-security",
       "phase-11-product",
     ],
+    recommendedStages: [
+      "stage-1-meet",
+      "stage-2-ask",
+      "stage-3-verify",
+      "stage-4-collaborate",
+      "stage-7-operate",
+      "stage-8-share",
+    ],
     recommendedLessons: [
       "checks-before-trusting-ai-output",
       "research-workflow",
@@ -92,6 +107,13 @@ export const journeys: Journey[] = [
       "phase-3-ai-work-os",
       "phase-8-multimodal",
       "phase-11-product",
+    ],
+    recommendedStages: [
+      "stage-1-meet",
+      "stage-2-ask",
+      "stage-3-verify",
+      "stage-4-collaborate",
+      "stage-8-share",
     ],
     recommendedLessons: [
       "structure-of-good-prompts",
@@ -125,6 +147,16 @@ export const journeys: Journey[] = [
       "phase-9-data-decision",
       "phase-11-product",
       "phase-12-capstone",
+    ],
+    recommendedStages: [
+      "stage-1-meet",
+      "stage-2-ask",
+      "stage-3-verify",
+      "stage-4-collaborate",
+      "stage-5-delegate",
+      "stage-6-build",
+      "stage-7-operate",
+      "stage-8-share",
     ],
     recommendedLessons: [
       "coding-agent-setup",
@@ -163,6 +195,15 @@ export const journeys: Journey[] = [
       "phase-10-evals-security",
       "phase-12-capstone",
     ],
+    recommendedStages: [
+      "stage-1-meet",
+      "stage-2-ask",
+      "stage-3-verify",
+      "stage-5-delegate",
+      "stage-6-build",
+      "stage-7-operate",
+      "stage-8-share",
+    ],
     recommendedLessons: [
       "plan-with-ai",
       "write-tests-with-coding-agent",
@@ -194,6 +235,12 @@ export const journeys: Journey[] = [
       "phase-1-ai-literacy",
       "phase-2-prompt-engineering",
       "phase-3-ai-work-os",
+    ],
+    recommendedStages: [
+      "stage-1-meet",
+      "stage-2-ask",
+      "stage-3-verify",
+      "stage-4-collaborate",
     ],
     recommendedLessons: [
       "common-skills-of-future-proof-people",
