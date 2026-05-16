@@ -44,10 +44,14 @@
 - ✅ `lesson.id` 재번호 (`lesson-NN` → `lesson-{S}{XX}`)
 - ✅ 본문·도구 스크립트의 "Phase" 잔재 정리
 
-### STEP 2. 품질 검증 — 베타 테스트 반영 (다음)
-- 20인 페르소나 베타 테스트(`docs/persona-test-prompt.md`, Cowork에 전달됨) 결과 수령
-- 페르소나가 막힌 지점·UI 마찰·이탈 lesson을 우선순위로 정리
-- High 우선순위 개선만 런칭 전 반영, 나머지는 v0.5로
+### STEP 2. 품질 검증 — 베타 테스트 반영 (진행 중)
+- ✅ 20인 페르소나 베타 테스트 결과 수령 — `docs/persona-reviews/2026-05-16-synthesis.md` + 페르소나 20장
+- ✅ High 우선순위 4건 반영
+	- `ai-tool-account-and-cost` — 무료 한도 트랙 / 유료 API 트랙 두 갈래로 (Stage 1 이탈 최대 원인)
+	- `zero-coding-orientation` — 본문 "12 Phase 지도" 표 → 8 Stage 사다리 표
+	- `terminal-first-day` — Windows 분기 보강 (PowerShell·Git Bash·WSL 결정 가이드)
+	- `/start` Founder 첫 미션 → `connect-ai-api` 대신 Stage 1 lesson
+- ⏳ Med·Low 우선순위(추천 lesson 빈약, 모바일 코드블록 wrap, 신규 lesson 등) → v0.5로 이관
 
 ### STEP 3. 런칭 — production 배포
 - §3 런칭 체크리스트 통과
@@ -74,7 +78,7 @@
 - [ ] 홈 → /stages → stage 상세 → lesson → 다음 lesson 동선 끊김 없음
 - [ ] 모바일 렌더 점검 (계단 사다리·lesson 본문)
 - [ ] 6 journey 추천 경로가 실제 stage로 연결
-- [ ] 베타 테스트 High 우선순위 개선 반영
+- [x] 베타 테스트 High 우선순위 개선 반영 (4건)
 
 **SEO·메타**
 - [ ] 각 페이지 metadata(title·description)
@@ -96,6 +100,6 @@
 
 ## 5. 진행 로그 (요약)
 
-머지 완료 — #5 데이터골격 · #6 D1 · #7 테스트프롬프트 · #8 D2 · #9 D3 · #10 D4 · #11 홈Stage전환 · #12 계단+잔재제거 · #13 Pages셋업 · #14 D5 · #15 D6 · #16 D7 · #17 D8(84 lesson 완성) · #18 Phase legacy 제거
+머지 완료 — #5 데이터골격 · #6~17 D1~D8(84 lesson 완성) · #18 Phase legacy 제거 · #20 LLM 루브릭 eval · #21 코드블록 복사버튼 · #22 MDX Phase 잔재 정리 · #23 eval Gemini provider
 
-다음 — 베타 테스트 결과 반영(STEP 2) → 런칭(STEP 3)
+다음 — STEP 2 베타 High 반영 머지 → 런칭 체크리스트(STEP 3)
