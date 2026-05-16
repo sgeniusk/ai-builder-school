@@ -104,14 +104,16 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
   "ai-app-cost-and-usage": { stageId: "stage-7", stageOrdinal: 8 },
   "claude-code-token-saving": { stageId: "stage-7", stageOrdinal: 9 },
 
-  // Stage 8 — AI 시스템을 공유하다 (7)
+  // Stage 8 — AI 시스템을 공유하다 (9)
   "ai-product-brief": { stageId: "stage-8", stageOrdinal: 1 },
   "landing-page-for-ai-product": { stageId: "stage-8", stageOrdinal: 2 },
   "pricing-and-monetization": { stageId: "stage-8", stageOrdinal: 3 },
   "capstone-scope-selection": { stageId: "stage-8", stageOrdinal: 4 },
   "capstone-build-loop": { stageId: "stage-8", stageOrdinal: 5 },
   "capstone-plan-and-launch": { stageId: "stage-8", stageOrdinal: 6 },
-  "portfolio-and-retrospective": { stageId: "stage-8", stageOrdinal: 7 },
+  "early-user-recruitment-for-ai-products": { stageId: "stage-8", stageOrdinal: 7 },
+  "claude-skills-authoring": { stageId: "stage-8", stageOrdinal: 8 },
+  "portfolio-and-retrospective": { stageId: "stage-8", stageOrdinal: 9 },
 };
 
 /**
@@ -125,6 +127,8 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
  * - PR D5 (Stage 5 책 보완): stage-5 8 → 11 (+pr-review-with-ai·agent-hooks-automation·subagent-context-design)
  * - PR D6 (Stage 6 책 보완): stage-6 13 → 16 (+auth-and-user-sessions·long-term-memory-state, 6a / +build-mcp-server, 6c)
  * - PR D7 (Stage 7 책 보완): stage-7 6 → 9 (+agent-failure-patterns·mcp-production-patterns·user-feedback-collection-for-ai-products)
+ * - PR D8 (Stage 8 책 보완): stage-8 7 → 9 (+early-user-recruitment-for-ai-products·claude-skills-authoring)
+ *   최종 분포 7-10-5-17-11-16-9-9 = 84
  */
 export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-1": 7,
@@ -134,7 +138,7 @@ export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-5": 11,
   "stage-6": 16,
   "stage-7": 9,
-  "stage-8": 7,
+  "stage-8": 9,
 } as const;
 
-export const EXPECTED_TOTAL_LESSONS = 82;
+export const EXPECTED_TOTAL_LESSONS = 84;
