@@ -1,5 +1,5 @@
 // 캡스톤·포트폴리오용 프로젝트 카탈로그.
-// v0.4 — requiredStages(Stage 모델) 기준. requiredPhases는 legacy 보존.
+// v0.4 — requiredStages(Stage 모델) 기준.
 // 난이도 순으로 정렬 — 입문자가 /projects 첫 화면에서 자기 수준 프로젝트를 먼저 본다.
 import type { Project } from "@/lib/types";
 
@@ -11,7 +11,6 @@ export const projects: Project[] = [
     targetLearner: "실무자·도입자·탐험가 — 코딩 없이 시작하는 첫 자동화",
     targetJourneys: ["practitioner", "adopter", "explorer"],
     difficulty: "beginner",
-    requiredPhases: ["phase-2-prompt-engineering", "phase-3-ai-work-os"],
     requiredStages: ["stage-2-ask", "stage-4-collaborate"],
     finalOutput: "녹취·메모 → 결정·Action Item 구조화된 회의록 파이프라인",
     suggestedStack: ["Google Drive", "Make / n8n", "Claude"],
@@ -24,11 +23,6 @@ export const projects: Project[] = [
     targetLearner: "크리에이터 — 콘텐츠 한 편을 여러 채널 포맷으로",
     targetJourneys: ["creator"],
     difficulty: "intermediate",
-    requiredPhases: [
-      "phase-2-prompt-engineering",
-      "phase-3-ai-work-os",
-      "phase-8-multimodal",
-    ],
     requiredStages: ["stage-2-ask", "stage-4-collaborate"],
     finalOutput: "블로그 글 1편 → 쇼츠 스크립트/이미지 브리프/뉴스레터 자동 생성",
     suggestedStack: ["Notion", "ChatGPT", "Midjourney", "Runway"],
@@ -41,7 +35,6 @@ export const projects: Project[] = [
     targetLearner: "엔지니어·파운더 — 내 문서에 답하는 첫 RAG 앱",
     targetJourneys: ["engineer", "founder"],
     difficulty: "intermediate",
-    requiredPhases: ["phase-2-prompt-engineering", "phase-5-ai-app-dev", "phase-6-rag"],
     requiredStages: ["stage-2-ask", "stage-6-build"],
     finalOutput: "공개 URL로 배포된 문서 Q&A 웹앱 + 근거 스니펫 표시",
     suggestedStack: ["Next.js", "pgvector or Pinecone", "OpenAI / Anthropic"],
@@ -54,11 +47,6 @@ export const projects: Project[] = [
     targetLearner: "도입자·파운더·엔지니어 — 사내 지식을 봇으로",
     targetJourneys: ["adopter", "founder", "engineer"],
     difficulty: "intermediate",
-    requiredPhases: [
-      "phase-2-prompt-engineering",
-      "phase-5-ai-app-dev",
-      "phase-6-rag",
-    ],
     requiredStages: ["stage-2-ask", "stage-6-build"],
     finalOutput: "신규 입사자를 위한 사내 Q&A 봇(RAG + 접근 제어)",
     suggestedStack: ["Next.js", "pgvector", "Supabase Auth"],
@@ -71,11 +59,6 @@ export const projects: Project[] = [
     targetLearner: "엔지니어·파운더 — 도구를 쓰는 자율 에이전트",
     targetJourneys: ["engineer", "founder"],
     difficulty: "advanced",
-    requiredPhases: [
-      "phase-2-prompt-engineering",
-      "phase-4-coding-agents",
-      "phase-7-agents-mcp",
-    ],
     requiredStages: ["stage-2-ask", "stage-5-delegate", "stage-6-build"],
     finalOutput: "질문을 넣으면 웹 검색·요약·출처 정리까지 수행하는 에이전트",
     suggestedStack: ["Node.js", "Claude Tools", "SerpAPI"],
@@ -88,11 +71,6 @@ export const projects: Project[] = [
     targetLearner: "엔지니어 — 운영·평가까지 갖춘 RAG 시스템",
     targetJourneys: ["engineer"],
     difficulty: "advanced",
-    requiredPhases: [
-      "phase-6-rag",
-      "phase-10-evals-security",
-      "phase-12-capstone",
-    ],
     requiredStages: ["stage-6-build", "stage-7-operate", "stage-8-share"],
     finalOutput: "품질·비용·안전성을 관찰 가능한 RAG 서비스 + 대시보드",
     suggestedStack: ["Next.js", "pgvector", "Promptfoo", "Langfuse"],

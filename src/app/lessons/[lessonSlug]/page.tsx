@@ -5,7 +5,7 @@ import { SectionChecklist } from "@/components/SectionChecklist";
 import {
   getLessonBySlug,
   getLessons,
-  getPhaseById,
+  getStageById,
 } from "@/lib/content";
 import { getLessonBody } from "@/content/lesson-bodies";
 import { LEVEL_LABEL } from "@/lib/types";
@@ -38,21 +38,21 @@ export default async function LessonPage({
   const lesson = getLessonBySlug(lessonSlug);
   if (!lesson) notFound();
 
-  const phase = getPhaseById(lesson.phaseId);
+  const stage = lesson.stageId ? getStageById(lesson.stageId) : undefined;
   const all = getLessons();
   const idx = all.findIndex((l) => l.id === lesson.id);
   const prev = idx > 0 ? all[idx - 1] : null;
   const next = idx < all.length - 1 ? all[idx + 1] : null;
   const MdxBody = lesson.hasMdxBody ? getLessonBody(lesson.slug) : null;
 
-  const phaseNumStr = phase ? String(phase.order).padStart(2, "0") : "--";
-  const lessonNumStr = String(idx + 1).padStart(2, "0");
+  const stageNumStr = stage ? String(stage.order).padStart(2, "0") : "--";
+  const lessonNumStr = String(lesson.stageOrdinal ?? idx + 1).padStart(2, "0");
   const missionText = lesson.mission ?? lesson.claudeCodeMission;
 
   return (
     <article className="lesson-reader">
         <p className="kicker">
-          Phase {phaseNumStr} · L{lessonNumStr} · {lesson.estimatedMinutes}분 · {LEVEL_LABEL[lesson.level]}
+          Stage {stageNumStr} · L{lessonNumStr} · {lesson.estimatedMinutes}분 · {LEVEL_LABEL[lesson.level]}
         </p>
         <h1>{lesson.titleKo}</h1>
         <p className="lede">{lesson.hook ?? lesson.summary}</p>
@@ -153,12 +153,12 @@ export default async function LessonPage({
             flexWrap: "wrap",
           }}
         >
-          {phase && (
-            <Link href={`/curriculum/${phase.slug}`} className="btn">
-              Phase {phase.order}로 돌아가기 <span className="arrow">→</span>
+          {stage && (
+            <Link href={`/stages/${stage.slug}`} className="btn">
+              Stage {stage.order} · {stage.label}로 돌아가기 <span className="arrow">→</span>
             </Link>
           )}
-          <Link href="/curriculum" className="btn ghost">
+          <Link href="/stages" className="btn ghost">
             전체 커리큘럼
           </Link>
         </div>

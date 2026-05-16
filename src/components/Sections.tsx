@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { Container } from "./Layout";
 import { LearningLoop } from "./LearningLoop";
-import type { Phase, Journey, Stage } from "@/lib/types";
+import type { Journey, Stage } from "@/lib/types";
 
 /* ---------------- Reusable PageHead ---------------- */
 
@@ -158,79 +158,6 @@ export function LearningLoopSection() {
         <LearningLoop />
       </Container>
     </section>
-  );
-}
-
-/* ---------------- Week path ---------------- */
-
-export function WeekPath({
-  weeks,
-}: {
-  weeks: Array<{ week: number; phase: Phase }>;
-}) {
-  return (
-    <ol className="weekpath">
-      {weeks.map(({ week, phase }) => {
-        const isCapstone = week === 8;
-        return (
-          <li key={phase.id} className={isCapstone ? "is-capstone" : undefined}>
-            <Link
-              href={`/curriculum/${phase.slug}`}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                gap: 12,
-                height: "100%",
-                color: "inherit",
-              }}
-            >
-              <div>
-                <div className="wk">
-                  WEEK {String(week).padStart(2, "0")} · PHASE {phase.order}
-                </div>
-                <div className="wp-title">{phase.titleKo}</div>
-              </div>
-              <div className="wp-deliv">{phase.deliverables[0] ?? ""}</div>
-            </Link>
-          </li>
-        );
-      })}
-    </ol>
-  );
-}
-
-/* ---------------- Curriculum timeline (uses phase-card markup) ---------------- */
-
-export function CurriculumTimeline({ phases }: { phases: Phase[] }) {
-  return (
-    <div className="phases-grid">
-      {phases.map((phase) => (
-        <Link
-          key={phase.id}
-          href={`/curriculum/${phase.slug}`}
-          className="phase-card"
-        >
-          <div>
-            <div className="ph-top">
-              <span className="ph-num">PHASE {String(phase.order).padStart(2, "0")}</span>
-              {phase.weekInMvpPath && (
-                <span className="ph-wk">WEEK {String(phase.weekInMvpPath).padStart(2, "0")}</span>
-              )}
-            </div>
-            <h3>{phase.titleKo}</h3>
-            <p>{phase.shortDescription}</p>
-          </div>
-          <div className="ph-meta">
-            <span>{phase.estimatedHours}h</span>
-            <span>·</span>
-            <span>{phase.level === "beginner" ? "입문" : phase.level === "intermediate" ? "중급" : "심화"}</span>
-            <span>·</span>
-            <span>{phase.lessonSlugs.length} 레슨</span>
-          </div>
-        </Link>
-      ))}
-    </div>
   );
 }
 

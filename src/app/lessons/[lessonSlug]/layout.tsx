@@ -2,7 +2,7 @@
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { LessonShell } from "@/components/LessonShell";
-import { getLessonBySlug, getPhaseById } from "@/lib/content";
+import { getLessonBySlug, getStageById } from "@/lib/content";
 
 type Props = {
   children: ReactNode;
@@ -13,10 +13,10 @@ export default async function LessonLayout({ children, params }: Props) {
   const { lessonSlug } = await params;
   const lesson = getLessonBySlug(lessonSlug);
   if (!lesson) notFound();
-  const phase = getPhaseById(lesson.phaseId);
+  const stage = lesson.stageId ? getStageById(lesson.stageId) : undefined;
 
   return (
-    <LessonShell lesson={lesson} phase={phase}>
+    <LessonShell lesson={lesson} stage={stage}>
       {children}
     </LessonShell>
   );

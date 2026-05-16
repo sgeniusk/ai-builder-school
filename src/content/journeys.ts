@@ -19,14 +19,6 @@ export const journeys: Journey[] = [
       "보고서·이메일·회의록·리서치를 매일 다루는 직장인. AI를 자기 일에 깔아 시간을 되찾고 싶은 사람.",
     promise:
       "내 업무를 AI로 운영해서, 반복은 줄이고 판단에 시간을 씁니다.",
-    recommendedPhases: [
-      "phase-0-setup",
-      "phase-1-ai-literacy",
-      "phase-2-prompt-engineering",
-      "phase-3-ai-work-os",
-      "phase-9-data-decision",
-      "phase-10-evals-security",
-    ],
     recommendedStages: [
       "stage-1-meet",
       "stage-2-ask",
@@ -59,15 +51,6 @@ export const journeys: Journey[] = [
       "조직의 의사결정·프로세스·정책을 다루는 기획자/매니저. AI를 팀과 회사에 들여오는 책임을 지는 사람.",
     promise:
       "조직에 AI를 안전하게 들여오고, 위험과 품질을 함께 운영합니다.",
-    recommendedPhases: [
-      "phase-0-setup",
-      "phase-1-ai-literacy",
-      "phase-2-prompt-engineering",
-      "phase-3-ai-work-os",
-      "phase-9-data-decision",
-      "phase-10-evals-security",
-      "phase-11-product",
-    ],
     recommendedStages: [
       "stage-1-meet",
       "stage-2-ask",
@@ -100,14 +83,6 @@ export const journeys: Journey[] = [
       "블로그·뉴스레터·유튜브·숏폼 등을 운영하며 AI로 표현력과 속도를 키우려는 크리에이터.",
     promise:
       "AI를 부속으로 쓰지 않고, 표현의 폭을 넓히는 도구로 다룹니다.",
-    recommendedPhases: [
-      "phase-0-setup",
-      "phase-1-ai-literacy",
-      "phase-2-prompt-engineering",
-      "phase-3-ai-work-os",
-      "phase-8-multimodal",
-      "phase-11-product",
-    ],
     recommendedStages: [
       "stage-1-meet",
       "stage-2-ask",
@@ -138,16 +113,6 @@ export const journeys: Journey[] = [
       "AI로 제품·사업·사이드프로젝트를 띄우려는 솔로프리뉴어, 인디 해커, 1인 창업자. 코드보다 시장과 가치가 본업인 사람.",
     promise:
       "AI를 코어로 한 작은 제품을 직접 손으로 만들고, 시장에 내놓습니다.",
-    recommendedPhases: [
-      "phase-0-setup",
-      "phase-1-ai-literacy",
-      "phase-2-prompt-engineering",
-      "phase-4-coding-agents",
-      "phase-5-ai-app-dev",
-      "phase-9-data-decision",
-      "phase-11-product",
-      "phase-12-capstone",
-    ],
     recommendedStages: [
       "stage-1-meet",
       "stage-2-ask",
@@ -184,17 +149,6 @@ export const journeys: Journey[] = [
       "RAG·Agents·Evals를 깊이 다루고 싶은 실무 개발자·ML 엔지니어·AI 시스템을 책임지는 사람.",
     promise:
       "평가·보안까지 포함된, 운영 가능한 AI 시스템을 짓는 엔지니어가 됩니다.",
-    recommendedPhases: [
-      "phase-0-setup",
-      "phase-1-ai-literacy",
-      "phase-2-prompt-engineering",
-      "phase-4-coding-agents",
-      "phase-5-ai-app-dev",
-      "phase-6-rag",
-      "phase-7-agents-mcp",
-      "phase-10-evals-security",
-      "phase-12-capstone",
-    ],
     recommendedStages: [
       "stage-1-meet",
       "stage-2-ask",
@@ -230,12 +184,6 @@ export const journeys: Journey[] = [
       "AI를 진지하게 처음 배우는 사람, 다섯 여정 중 어디에 정착할지 아직 모르는 호기심형 학습자. 또는 배운 것을 곧바로 누군가에게 가르치는 학생-교육자.",
     promise:
       "흡수하면서 동시에 나눕니다. 매일 배우고 매일 가르치는 빌더가 되는 길.",
-    recommendedPhases: [
-      "phase-0-setup",
-      "phase-1-ai-literacy",
-      "phase-2-prompt-engineering",
-      "phase-3-ai-work-os",
-    ],
     recommendedStages: [
       "stage-1-meet",
       "stage-2-ask",
@@ -252,9 +200,9 @@ export const journeys: Journey[] = [
     capstoneIdeas: [
       "한 달 AI 학습 일지 → 동료 5명에게 공유",
       "내가 처음 배운 5개 프롬프트 → 사내 5분 발표",
-      "Phase 1·2 회고를 블로그에 공개 — 누군가의 입구가 되기",
+      "Stage 1·2 회고를 블로그에 공개 — 누군가의 입구가 되기",
     ],
     expectedOutcome:
-      "Phase 1·2를 마친 뒤 다섯 정체성 중 자기 자리를 자신 있게 고름 + 첫 학습 결과를 한 사람 이상에게 가르침으로 환원.",
+      "Stage 1·2를 마친 뒤 다섯 정체성 중 자기 자리를 자신 있게 고름 + 첫 학습 결과를 한 사람 이상에게 가르침으로 환원.",
   },
 ];

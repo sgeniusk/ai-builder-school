@@ -35,7 +35,7 @@ const principles = [
 const faqs = [
   {
     q: "프로그래밍을 전혀 모르는데 시작해도 될까요?",
-    a: "Phase 0~3까지는 프로그래밍 없이 AI를 업무에 연결하는 과정입니다. Phase 4부터 코딩 에이전트를 본격적으로 다루지만, 코드를 직접 쓰는 것이 아니라 AI에게 쓰게 하는 방식입니다.",
+    a: "Stage 1~4까지는 프로그래밍 없이 AI를 업무에 연결하는 과정입니다. Stage 5부터 코딩 에이전트를 본격적으로 다루지만, 코드를 직접 쓰는 것이 아니라 AI에게 쓰게 하는 방식입니다.",
   },
   {
     q: "Codex와 Claude Code 중 무엇을 써야 하나요?",
@@ -146,7 +146,7 @@ export default function AboutPage() {
               {
                 n: "02",
                 t: "필드 수정",
-                b: "slug, phaseId, titleKo, hook, mission, 체크리스트, 산출물 등을 수정합니다.",
+                b: "slug, titleKo, hook, mission, 체크리스트, 산출물 등을 수정합니다.",
               },
               {
                 n: "03",
@@ -163,7 +163,7 @@ export default function AboutPage() {
           </div>
           <p style={{ marginTop: 32, fontSize: 14, color: "var(--ink-3)" }}>
             자세한 규칙은{" "}
-            <Link href="/curriculum" className="link-reset" style={{ textDecoration: "underline" }}>
+            <Link href="/stages" className="link-reset" style={{ textDecoration: "underline" }}>
               커리큘럼
             </Link>
             ,{" "}

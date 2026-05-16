@@ -82,43 +82,15 @@ export interface Journey {
   /** 한 줄 약속 */
   promise: string;
   /**
-   * @deprecated v0.4 — `recommendedStages`로 이관 중. PR E에서 제거 예정. legacy 라우트 보호용.
-   */
-  recommendedPhases: string[];
-  /**
    * v0.4 Stage 모델 — 추천 Stage slug 목록.
    */
-  recommendedStages?: string[];
+  recommendedStages: string[];
   /** 추천 레슨 slug 목록 */
   recommendedLessons: string[];
   /** 캡스톤 아이디어 (포트폴리오 후보) */
   capstoneIdeas: string[];
   /** 여정 끝났을 때 손에 남는 것 한 줄 */
   expectedOutcome: string;
-}
-
-/**
- * @deprecated v0.4 Stage 모델로 이관 중. PR E에서 제거 예정.
- * 새 코드는 `Stage`/`StageSubGroup`을 사용한다.
- */
-export interface Phase {
-  id: string;
-  slug: string;
-  order: number;
-  titleKo: string;
-  titleEn: string;
-  shortDescription: string;
-  longDescription: string;
-  level: Level;
-  estimatedHours: number;
-  targetJourneys: JourneyId[];
-  outcomes: string[];
-  topics: string[];
-  deliverables: string[];
-  lessonSlugs: string[];
-  recommendedTools: string[];
-  nextPhaseSlug?: string | null;
-  weekInMvpPath?: number | null;
 }
 
 /**
@@ -178,11 +150,7 @@ export interface Lesson {
   id: string;
   slug: string;
   /**
-   * @deprecated v0.4 — `stageId`로 이관 중. PR E에서 제거 예정. legacy 라우트 보호용.
-   */
-  phaseId: string;
-  /**
-   * v0.4 Stage 모델 — 이 lesson이 속한 stage (예: "stage-1"). PR D에서 `lesson-stage-mapping.ts`로 주입.
+   * v0.4 Stage 모델 — 이 lesson이 속한 stage (예: "stage-1"). `lesson-stage-mapping.ts`에서 `getLessons()`가 주입.
    */
   stageId?: string;
   /**
@@ -247,13 +215,9 @@ export interface Project {
   targetJourneys: JourneyId[];
   difficulty: Level;
   /**
-   * @deprecated v0.4 — `requiredStages`로 이관 중. PR E 최종 정리에서 제거. legacy /curriculum 보호용.
-   */
-  requiredPhases: string[];
-  /**
    * v0.4 Stage 모델 — 이 프로젝트가 전제하는 Stage slug 목록.
    */
-  requiredStages?: string[];
+  requiredStages: string[];
   finalOutput: string;
   suggestedStack: string[];
   summary: string;

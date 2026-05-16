@@ -4,7 +4,7 @@ import { Container } from "@/components/Layout";
 import { PageHead } from "@/components/Sections";
 import {
   getJourneys,
-  getPhaseBySlug,
+  getStageBySlug,
   getLessonBySlug,
 } from "@/lib/content";
 import { JOURNEY_LABEL, JOURNEY_LABEL_KO, type JourneyId } from "@/lib/types";
@@ -48,12 +48,12 @@ export default function StartPage() {
               {journeys.map((j) => {
                 const missionSlug = firstMissions[j.id];
                 const lesson = getLessonBySlug(missionSlug);
-                const firstPhase = getPhaseBySlug(j.recommendedPhases[0] ?? "");
+                const firstStage = getStageBySlug(j.recommendedStages[0] ?? "");
                 const target = lesson
                   ? `/lessons/${lesson.slug}`
-                  : firstPhase
-                    ? `/curriculum/${firstPhase.slug}`
-                    : "/curriculum";
+                  : firstStage
+                    ? `/stages/${firstStage.slug}`
+                    : "/stages";
                 return (
                   <Link key={j.id} href={target} className={`p-${j.id}`}>
                     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -97,7 +97,7 @@ export default function StartPage() {
             여정이 이미 정해져 있다면
           </h2>
           <p className="section-lede" style={{ marginBottom: 24 }}>
-            여섯 여정의 비교와 추천 Phase는 여정 페이지에서 한눈에 볼 수 있어요.
+            여섯 여정의 비교와 추천 Stage는 여정 페이지에서 한눈에 볼 수 있어요.
           </p>
           <Link href="/journeys" className="btn ghost">
             여섯 여정 비교 <span className="arrow">→</span>
