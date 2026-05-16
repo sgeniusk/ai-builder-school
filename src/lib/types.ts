@@ -246,7 +246,14 @@ export interface Project {
   /** 이 프로젝트가 잘 맞는 여정. /journeys 페이지에서 매핑된 카드를 노출. */
   targetJourneys: JourneyId[];
   difficulty: Level;
+  /**
+   * @deprecated v0.4 — `requiredStages`로 이관 중. PR E 최종 정리에서 제거. legacy /curriculum 보호용.
+   */
   requiredPhases: string[];
+  /**
+   * v0.4 Stage 모델 — 이 프로젝트가 전제하는 Stage slug 목록.
+   */
+  requiredStages?: string[];
   finalOutput: string;
   suggestedStack: string[];
   summary: string;

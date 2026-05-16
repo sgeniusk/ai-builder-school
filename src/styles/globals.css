@@ -1842,4 +1842,117 @@ body {
   }
   .checklist--interactive .checklist__item--done span { text-decoration: line-through; }
 
+  /* ---------------- Stage staircase (v0.4) ---------------- */
+  .stage-stair {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  /* 좌측 연결선 — 번호 배지 중앙을 관통 */
+  .stage-stair::before {
+    content: "";
+    position: absolute;
+    left: 19px;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background: var(--line-2);
+  }
+  .stage-step {
+    position: relative;
+    padding-left: 56px;
+    margin-bottom: 10px;
+  }
+  .stage-step:last-child { margin-bottom: 0; }
+  .stage-step__num {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card);
+    border: 2px solid var(--line-2);
+    font-family: var(--f-mono);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink-3);
+    z-index: 1;
+    transition: border-color 0.15s var(--ease), background 0.15s var(--ease), color 0.15s var(--ease);
+  }
+  /* 계단 — 단계마다 카드를 오른쪽으로 들여쓴다 */
+  .stage-step__card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: calc(var(--step, 0) * 26px);
+    padding: 18px 22px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    color: inherit;
+    transition: border-color 0.15s var(--ease), transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+  }
+  .stage-step__card:hover {
+    border-color: var(--ink-3);
+    transform: translateX(2px);
+    box-shadow: 0 6px 24px -12px rgba(0, 0, 0, 0.18);
+  }
+  .stage-step:hover .stage-step__num {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .stage-step__body { flex: 1; min-width: 0; }
+  .stage-step__head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .stage-step__label {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .stage-step__pos {
+    font-size: 12px;
+    color: var(--ink-3);
+    font-family: var(--f-mono);
+  }
+  .stage-step__desc {
+    margin: 6px 0 8px;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+  .stage-step__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+    font-family: var(--f-mono);
+  }
+  .stage-step__deliv { color: var(--ink-2); }
+  .stage-step__go {
+    font-size: 18px;
+    color: var(--ink-4);
+    transition: color 0.15s var(--ease), transform 0.15s var(--ease);
+  }
+  .stage-step__card:hover .stage-step__go {
+    color: var(--ink);
+    transform: translateX(3px);
+  }
+  /* 모바일 — 계단 들여쓰기 제거, 한 줄 정렬 */
+  @media (max-width: 640px) {
+    .stage-step__card { margin-left: 0; }
+    .stage-step__go { display: none; }
+  }
+
 }

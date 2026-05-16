@@ -18,7 +18,7 @@ export default function ProjectsPage() {
       <PageHead
         eyebrow={<>Projects · {projects.length}</>}
         title={<>만든 것이<br />포트폴리오가 됩니다.</>}
-        lede="각 프로젝트는 특정 Phase 세트를 전제로 하며, 배포 가능한 결과물이 목표입니다. 여정 완주 증거로 쓸 수 있습니다."
+        lede="각 프로젝트는 특정 Stage 세트를 전제로 하며, 배포 가능한 결과물이 목표입니다. 입문자는 위쪽, 심화는 아래쪽 — 자기 수준에서 시작하세요."
       />
 
       <section className="sec">

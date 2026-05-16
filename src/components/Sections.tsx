@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { Container } from "./Layout";
 import { LearningLoop } from "./LearningLoop";
 import type { Phase, Journey, Stage } from "@/lib/types";
@@ -234,35 +234,39 @@ export function CurriculumTimeline({ phases }: { phases: Phase[] }) {
   );
 }
 
-/* ---------------- Stage ladder (v0.4 — uses phase-card markup) ---------------- */
+/* ---------------- Stage ladder (v0.4 — 계단형 staircase) ---------------- */
 
 export function StageLadder({ stages }: { stages: Stage[] }) {
+  const ordered = [...stages].sort((a, b) => a.order - b.order);
   return (
-    <div className="phases-grid">
-      {stages.map((stage) => (
-        <Link
+    <ol className="stage-stair">
+      {ordered.map((stage, i) => (
+        <li
           key={stage.id}
-          href={`/stages/${stage.slug}`}
-          className="phase-card"
+          className="stage-step"
+          style={{ "--step": i } as CSSProperties}
         >
-          <div>
-            <div className="ph-top">
-              <span className="ph-num">STAGE {String(stage.order).padStart(2, "0")}</span>
-              <span className="ph-wk">{stage.lessonSlugs.length} 레슨</span>
+          <span className="stage-step__num">{stage.order}</span>
+          <Link href={`/stages/${stage.slug}`} className="stage-step__card">
+            <div className="stage-step__body">
+              <div className="stage-step__head">
+                <span className="stage-step__label">{stage.label}</span>
+                <span className="stage-step__pos">{stage.positionChange}</span>
+              </div>
+              <p className="stage-step__desc">{stage.shortDescription}</p>
+              <div className="stage-step__meta">
+                <span>{stage.lessonSlugs.length} 레슨</span>
+                <span>·</span>
+                <span>{stage.estimatedHours}h</span>
+                <span>·</span>
+                <span className="stage-step__deliv">→ {stage.deliverable}</span>
+              </div>
             </div>
-            <h3>{stage.label}</h3>
-            <p>{stage.shortDescription}</p>
-          </div>
-          <div className="ph-meta">
-            <span>{stage.estimatedHours}h</span>
-            <span>·</span>
-            <span>{stage.level === "beginner" ? "입문" : stage.level === "intermediate" ? "중급" : "심화"}</span>
-            <span>·</span>
-            <span>{stage.deliverable}</span>
-          </div>
-        </Link>
+            <span className="stage-step__go" aria-hidden>→</span>
+          </Link>
+        </li>
       ))}
-    </div>
+    </ol>
   );
 }
 
