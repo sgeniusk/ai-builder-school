@@ -23,6 +23,9 @@ import SubagentContextDesignBody from "./lessons/subagent-context-design.mdx";
 import AuthAndUserSessionsBody from "./lessons/auth-and-user-sessions.mdx";
 import LongTermMemoryStateBody from "./lessons/long-term-memory-state.mdx";
 import BuildMcpServerBody from "./lessons/build-mcp-server.mdx";
+import AgentFailurePatternsBody from "./lessons/agent-failure-patterns.mdx";
+import McpProductionPatternsBody from "./lessons/mcp-production-patterns.mdx";
+import UserFeedbackCollectionForAiProductsBody from "./lessons/user-feedback-collection-for-ai-products.mdx";
 
 // Phase 2 — Prompt & Context Engineering
 import StructureOfGoodPromptsBody from "./lessons/structure-of-good-prompts.mdx";
@@ -202,6 +205,9 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "auth-and-user-sessions": AuthAndUserSessionsBody,
   "long-term-memory-state": LongTermMemoryStateBody,
   "build-mcp-server": BuildMcpServerBody,
+  "agent-failure-patterns": AgentFailurePatternsBody,
+  "mcp-production-patterns": McpProductionPatternsBody,
+  "user-feedback-collection-for-ai-products": UserFeedbackCollectionForAiProductsBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {
