@@ -13,7 +13,10 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
   "zero-coding-orientation": { stageId: "stage-1", stageOrdinal: 1 },
   "terminal-first-day": { stageId: "stage-1", stageOrdinal: 2 },
   "ai-tool-account-and-cost": { stageId: "stage-1", stageOrdinal: 3 },
-  "common-skills-of-future-proof-people": { stageId: "stage-1", stageOrdinal: 4 },
+  "cost-monitoring-in-production": { stageId: "stage-1", stageOrdinal: 4 },
+  "common-skills-of-future-proof-people": { stageId: "stage-1", stageOrdinal: 5 },
+  "ai-delegation-decision": { stageId: "stage-1", stageOrdinal: 6 },
+  "ai-collaboration-mindset": { stageId: "stage-1", stageOrdinal: 7 },
 
   // Stage 2 — AI에게 물어보다 (5)
   "structure-of-good-prompts": { stageId: "stage-2", stageOrdinal: 1 },
@@ -94,11 +97,13 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
 };
 
 /**
- * stage-redesign.md 분포 표: 4-5-4-14-8-13-6-7 = 61.
- * validate 게이트에서 이 상수와 매핑 항목 수를 비교한다.
+ * stage 분포 표. v0.4 redesign 이후 stage별 콘텐츠 PR(D1~D8)에서 신규 lesson이
+ * 추가될 때마다 갱신한다. validate 게이트가 이 상수와 매핑 항목 수를 비교한다.
+ * - 원본 분포 (PR D): 4-5-4-14-8-13-6-7 = 61
+ * - PR D1 (Stage 1 책 보완): stage-1 4 → 7 (+ai-delegation·cost-monitoring·ai-collaboration)
  */
 export const EXPECTED_STAGE_DISTRIBUTION = {
-  "stage-1": 4,
+  "stage-1": 7,
   "stage-2": 5,
   "stage-3": 4,
   "stage-4": 14,
@@ -108,4 +113,4 @@ export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-8": 7,
 } as const;
 
-export const EXPECTED_TOTAL_LESSONS = 61;
+export const EXPECTED_TOTAL_LESSONS = 64;
