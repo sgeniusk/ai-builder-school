@@ -111,6 +111,10 @@ export function getProjects(): Project[] {
   return projects;
 }
 
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((p) => p.slug === slug);
+}
+
 export function getProjectsByJourney(journeyId: JourneyId): Project[] {
   return projects.filter((p) => p.targetJourneys.includes(journeyId));
 }
@@ -292,6 +296,19 @@ export function validateContent(): ContentIntegrityIssue[] {
           kind: "project.stage",
           ref: project.slug,
           message: `Project "${project.slug}" requires missing stage "${slug}"`,
+        });
+      }
+    }
+  }
+
+  // 9) project.keyLessons가 실제 lesson을 가리키는지
+  for (const project of projects) {
+    for (const slug of project.keyLessons) {
+      if (!lessonSlugs.has(slug)) {
+        issues.push({
+          kind: "project.keyLesson",
+          ref: project.slug,
+          message: `Project "${project.slug}" references missing lesson "${slug}"`,
         });
       }
     }

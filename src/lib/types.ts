@@ -206,21 +206,43 @@ export interface Lesson {
   }>;
 }
 
+/** 프로젝트 빌드 단계 한 칸 — /projects/[slug] 상세에서 마일스톤으로 표시. */
+export interface ProjectMilestone {
+  /** "1단계 — 범위 정의" 같은 짧은 라벨. */
+  title: string;
+  /** 그 단계에서 무엇을 하는지 1~2문장. */
+  description: string;
+}
+
 export interface Project {
   id: string;
   slug: string;
   title: string;
+  /** 1-문장 훅 — 학습자에게 말 거는 어조. 카드·상세 상단에 노출. */
+  hook: string;
   targetLearner: string;
   /** 이 프로젝트가 잘 맞는 여정. /journeys 페이지에서 매핑된 카드를 노출. */
   targetJourneys: JourneyId[];
   difficulty: Level;
+  /** 권장 소요 기간 — "2주", "4주" 등. */
+  estimatedDuration: string;
   /**
    * v0.4 Stage 모델 — 이 프로젝트가 전제하는 Stage slug 목록.
    */
   requiredStages: string[];
+  /** 이 프로젝트를 준비시키는 핵심 lesson slug 목록. 상세에서 링크로 노출. */
+  keyLessons: string[];
+  summary: string;
+  /** 왜 이걸 만드나 — 어떤 빈자리를 채우는가. 2~3문장. */
+  problem: string;
   finalOutput: string;
   suggestedStack: string[];
-  summary: string;
+  /** 빌드 단계 — 3~5개 마일스톤. */
+  milestones: ProjectMilestone[];
+  /** "완료 기준" 체크리스트. */
+  verification: string[];
+  /** 확장 아이디어. */
+  extensionIdeas: string[];
 }
 
 export type TemplateKind = "prompt" | "mission" | "checklist";
