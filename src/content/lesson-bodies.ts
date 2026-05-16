@@ -26,6 +26,8 @@ import BuildMcpServerBody from "./lessons/build-mcp-server.mdx";
 import AgentFailurePatternsBody from "./lessons/agent-failure-patterns.mdx";
 import McpProductionPatternsBody from "./lessons/mcp-production-patterns.mdx";
 import UserFeedbackCollectionForAiProductsBody from "./lessons/user-feedback-collection-for-ai-products.mdx";
+import EarlyUserRecruitmentForAiProductsBody from "./lessons/early-user-recruitment-for-ai-products.mdx";
+import ClaudeSkillsAuthoringBody from "./lessons/claude-skills-authoring.mdx";
 
 // Phase 2 — Prompt & Context Engineering
 import StructureOfGoodPromptsBody from "./lessons/structure-of-good-prompts.mdx";
@@ -208,6 +210,8 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "agent-failure-patterns": AgentFailurePatternsBody,
   "mcp-production-patterns": McpProductionPatternsBody,
   "user-feedback-collection-for-ai-products": UserFeedbackCollectionForAiProductsBody,
+  "early-user-recruitment-for-ai-products": EarlyUserRecruitmentForAiProductsBody,
+  "claude-skills-authoring": ClaudeSkillsAuthoringBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {
