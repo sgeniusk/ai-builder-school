@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Container } from "./Layout";
 import { LearningLoop } from "./LearningLoop";
-import type { Phase, Journey } from "@/lib/types";
+import type { Phase, Journey, Stage } from "@/lib/types";
 
 /* ---------------- Reusable PageHead ---------------- */
 
@@ -52,14 +52,14 @@ export function Hero() {
   return (
     <section className="hero">
       <Container>
-        <p className="eyebrow">AI Builder School · v0.2</p>
+        <p className="eyebrow">AI Builder School · v0.4</p>
         <h1 className="hero-h">
           AI를 쓰는 사람에서,
           <br />
           <span className="grad-text">AI로 만드는 사람</span>으로.
         </h1>
         <p className="hero-lede">
-          하루 30분, 8주 안에 직접 만든 결과물 한 가지가 손에 들어옵니다.
+          8단계 사다리를 한 칸씩 오르면, 직접 만든 결과물 한 가지가 손에 들어옵니다.
           <br className="only-d" />
           뉴스로 끝나지 않는 학교 — Codex랑 Claude Code로, 한국어로.
         </p>
@@ -67,19 +67,19 @@ export function Hero() {
           <Link href="/start" className="btn">
             30초 진단 시작 <span className="arrow">→</span>
           </Link>
-          <Link href="/curriculum" className="btn ghost">
-            커리큘럼 둘러보기
+          <Link href="/stages" className="btn ghost">
+            8단계 커리큘럼 둘러보기
           </Link>
         </div>
 
         <div className="hero-stats">
           <div>
-            <div className="hs-num">12</div>
-            <div className="hs-lbl">Phases</div>
+            <div className="hs-num">8</div>
+            <div className="hs-lbl">Stages</div>
           </div>
           <div>
             <div className="hs-num">
-              32<span className="hs-sub">+</span>
+              73<span className="hs-sub">+</span>
             </div>
             <div className="hs-lbl">Lessons</div>
           </div>
@@ -89,9 +89,9 @@ export function Hero() {
           </div>
           <div>
             <div className="hs-num">
-              8<span className="hs-sub">주</span>
+              1<span className="hs-sub">개</span>
             </div>
-            <div className="hs-lbl">MVP 경로</div>
+            <div className="hs-lbl">단계마다 산출물</div>
           </div>
         </div>
       </Container>
@@ -121,8 +121,8 @@ const USP_AXES: Array<{ label: string; title: string; desc: string }> = [
   },
   {
     label: "핵심 04",
-    title: "Phase 마다 손에 남는 산출물",
-    desc: "12 Phase 끝마다 포트폴리오로 쓸 결과물 1개. 강의가 아니라 빌더 작업장이에요.",
+    title: "단계마다 손에 남는 산출물",
+    desc: "8단계 사다리를 한 칸 오를 때마다 포트폴리오로 쓸 결과물 1개. 강의가 아니라 빌더 작업장이에요.",
   },
 ];
 
@@ -227,6 +227,38 @@ export function CurriculumTimeline({ phases }: { phases: Phase[] }) {
             <span>{phase.level === "beginner" ? "입문" : phase.level === "intermediate" ? "중급" : "심화"}</span>
             <span>·</span>
             <span>{phase.lessonSlugs.length} 레슨</span>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+/* ---------------- Stage ladder (v0.4 — uses phase-card markup) ---------------- */
+
+export function StageLadder({ stages }: { stages: Stage[] }) {
+  return (
+    <div className="phases-grid">
+      {stages.map((stage) => (
+        <Link
+          key={stage.id}
+          href={`/stages/${stage.slug}`}
+          className="phase-card"
+        >
+          <div>
+            <div className="ph-top">
+              <span className="ph-num">STAGE {String(stage.order).padStart(2, "0")}</span>
+              <span className="ph-wk">{stage.lessonSlugs.length} 레슨</span>
+            </div>
+            <h3>{stage.label}</h3>
+            <p>{stage.shortDescription}</p>
+          </div>
+          <div className="ph-meta">
+            <span>{stage.estimatedHours}h</span>
+            <span>·</span>
+            <span>{stage.level === "beginner" ? "입문" : stage.level === "intermediate" ? "중급" : "심화"}</span>
+            <span>·</span>
+            <span>{stage.deliverable}</span>
           </div>
         </Link>
       ))}
