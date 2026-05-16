@@ -1,25 +1,25 @@
-// 레슨 페이지 좌측 사이드바 — 여정 진행률 카드 + phase-group 카드 (시안 option-2 톤).
+// 레슨 페이지 좌측 사이드바 — 여정 진행률 카드 + stage-group 카드 (시안 option-2 톤).
 "use client";
 
 import Link from "next/link";
 import { useState } from "react";
-import type { Journey, Lesson, Phase } from "@/lib/types";
+import type { Journey, Lesson, Stage } from "@/lib/types";
 import { useLessonProgress } from "@/hooks/useLessonProgress";
 
 type Props = {
-  phases: Phase[];
-  lessonsByPhase: Record<string, Lesson[]>;
+  stages: Stage[];
+  lessonsByStage: Record<string, Lesson[]>;
   journeys: Journey[];
   currentLessonId: string;
-  currentPhaseId: string;
+  currentStageId: string;
 };
 
 export function JourneyRail({
-  phases,
-  lessonsByPhase,
+  stages,
+  lessonsByStage,
   journeys,
   currentLessonId,
-  currentPhaseId,
+  currentStageId,
 }: Props) {
   const { mounted, journey, isLessonComplete } = useLessonProgress();
 
@@ -28,15 +28,15 @@ export function JourneyRail({
   const displayJourneyId = mounted ? journey : "practitioner";
   const selectedJourney = journeys.find((j) => j.id === displayJourneyId);
   const recommendedLessonSlugs = new Set(selectedJourney?.recommendedLessons ?? []);
-  const recommendedPhaseSlugs = new Set(selectedJourney?.recommendedPhases ?? []);
+  const recommendedStageSlugs = new Set(selectedJourney?.recommendedStages ?? []);
 
-  const totalLessons = phases.reduce(
-    (acc, p) => acc + (lessonsByPhase[p.id]?.length ?? 0),
+  const totalLessons = stages.reduce(
+    (acc, s) => acc + (lessonsByStage[s.id]?.length ?? 0),
     0,
   );
   const doneLessons = mounted
-    ? phases.reduce((acc, p) => {
-        const list = lessonsByPhase[p.id] ?? [];
+    ? stages.reduce((acc, s) => {
+        const list = lessonsByStage[s.id] ?? [];
         return (
           acc +
           list.filter((l) =>
@@ -47,7 +47,7 @@ export function JourneyRail({
     : 0;
 
   // 여정 진행률 — 추천 lesson 기준
-  const allLessons = Object.values(lessonsByPhase).flat();
+  const allLessons = Object.values(lessonsByStage).flat();
   const journeyLessons = allLessons.filter((l) =>
     recommendedLessonSlugs.has(l.slug),
   );
@@ -99,7 +99,7 @@ export function JourneyRail({
         )}
       </div>
 
-      {/* Phase 그룹 카드 */}
+      {/* Stage 그룹 카드 */}
       <div className="phase-group-card">
         <div className="phase-group-card__header">
           <span className="rail-section-label">커리큘럼</span>
@@ -108,15 +108,15 @@ export function JourneyRail({
           </span>
         </div>
 
-        {phases.map((phase) => {
-          const lessons = lessonsByPhase[phase.id] ?? [];
-          const isCurrent = phase.id === currentPhaseId;
-          const hasRecommended = recommendedPhaseSlugs.has(phase.slug);
+        {stages.map((stage) => {
+          const lessons = lessonsByStage[stage.id] ?? [];
+          const isCurrent = stage.id === currentStageId;
+          const hasRecommended = recommendedStageSlugs.has(stage.slug);
 
           return (
-            <PhaseRow
-              key={phase.id}
-              phase={phase}
+            <StageRow
+              key={stage.id}
+              stage={stage}
               lessons={lessons}
               isCurrent={isCurrent}
               hasRecommended={hasRecommended}
@@ -133,8 +133,8 @@ export function JourneyRail({
   );
 }
 
-type PhaseRowProps = {
-  phase: Phase;
+type StageRowProps = {
+  stage: Stage;
   lessons: Lesson[];
   isCurrent: boolean;
   hasRecommended: boolean;
@@ -145,8 +145,8 @@ type PhaseRowProps = {
   isLessonComplete: (lesson: Lesson) => boolean;
 };
 
-function PhaseRow({
-  phase,
+function StageRow({
+  stage,
   lessons,
   isCurrent,
   hasRecommended,
@@ -155,9 +155,9 @@ function PhaseRow({
   recommendedLessonSlugs,
   mounted,
   isLessonComplete,
-}: PhaseRowProps) {
+}: StageRowProps) {
   const [open, setOpen] = useState(defaultOpen);
-  const phaseNum = String(phase.order).padStart(2, "0");
+  const stageNum = String(stage.order).padStart(2, "0");
 
   return (
     <div className={`phase-row${open ? " phase-row--open" : ""}`}>
@@ -173,8 +173,8 @@ function PhaseRow({
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
-        <span className="ph-n mono">{phaseNum}</span>
-        <span className="ph-title">{phase.titleKo}</span>
+        <span className="ph-n mono">{stageNum}</span>
+        <span className="ph-title">{stage.label}</span>
         <span className="ph-prog-dots" aria-hidden>
           {lessons.map((l) => {
             const done = mounted && isLessonComplete(l);

@@ -4,36 +4,10 @@ import type {
   ContentTemplate,
   Journey,
   Lesson,
-  Phase,
   Project,
 } from "@/lib/types";
 
-/* Phase card — used only where the older generic card was needed. For curriculum grid use the CurriculumTimeline in Sections.tsx which uses .phase-card directly. */
-export function PhaseCard({ phase }: { phase: Phase }) {
-  return (
-    <Link href={`/curriculum/${phase.slug}`} className="phase-card">
-      <div>
-        <div className="ph-top">
-          <span className="ph-num">PHASE {String(phase.order).padStart(2, "0")}</span>
-          {phase.weekInMvpPath && (
-            <span className="ph-wk">WEEK {String(phase.weekInMvpPath).padStart(2, "0")}</span>
-          )}
-        </div>
-        <h3>{phase.titleKo}</h3>
-        <p>{phase.shortDescription}</p>
-      </div>
-      <div className="ph-meta">
-        <span>{phase.estimatedHours}h</span>
-        <span>·</span>
-        <span>{LEVEL_LABEL[phase.level]}</span>
-        <span>·</span>
-        <span>{phase.lessonSlugs.length} 레슨</span>
-      </div>
-    </Link>
-  );
-}
-
-/* Lesson card — compact list-style card used on home's preview grid and inside phase detail. */
+/* Lesson card — compact list-style card used on home's preview grid and inside stage detail. */
 export function LessonCard({ lesson, index }: { lesson: Lesson; index?: number }) {
   const num = typeof index === "number" ? String(index).padStart(2, "0") : lesson.id.replace(/[^0-9]/g, "").padStart(2, "0");
   return (

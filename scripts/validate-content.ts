@@ -15,7 +15,7 @@
  */
 
 import { validateContent } from "../src/lib/content";
-import { phases } from "../src/content/phases";
+import { stages } from "../src/content/stages";
 import { lessons } from "../src/content/lessons";
 import { journeys } from "../src/content/journeys";
 import { projects } from "../src/content/projects";
@@ -38,7 +38,7 @@ function color(code: string, text: string): string {
 try {
   const issues = validateContent();
   const stats = {
-    phases: phases.length,
+    stages: stages.length,
     lessons: lessons.length,
     journeys: journeys.length,
     projects: projects.length,

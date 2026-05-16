@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import type { Lesson, Phase } from "@/lib/types";
+import type { Lesson, Stage } from "@/lib/types";
 import {
   SECTIONS,
   SECTION_WEIGHTS,
@@ -35,11 +35,11 @@ function sectionItems(lesson: Lesson, section: Section): string[] {
 
 type Props = {
   currentLesson: Lesson;
-  currentPhase: Phase | undefined;
+  currentStage: Stage | undefined;
   siblingLessons: Lesson[];
 };
 
-export function LessonToc({ currentLesson, currentPhase, siblingLessons }: Props) {
+export function LessonToc({ currentLesson, currentStage, siblingLessons }: Props) {
   const { mounted, getSectionPct, getWeightedPct, isLessonComplete } =
     useLessonProgress();
   const [activeId, setActiveId] = useState<string>(SECTION_IDS[0].id);
@@ -66,13 +66,13 @@ export function LessonToc({ currentLesson, currentPhase, siblingLessons }: Props
 
   const weighted = mounted ? getWeightedPct(currentLesson) : 0;
 
-  // Phase 진행률 (siblings 중 셋 다 완료된 lesson 비율)
-  const phaseTotal = siblingLessons.length;
-  const phaseDone = mounted
+  // Stage 진행률 (siblings 중 셋 다 완료된 lesson 비율)
+  const stageTotal = siblingLessons.length;
+  const stageDone = mounted
     ? siblingLessons.filter((l) => isLessonComplete(l)).length
     : 0;
-  const phasePct =
-    phaseTotal === 0 ? 0 : Math.round((phaseDone / phaseTotal) * 100);
+  const stagePct =
+    stageTotal === 0 ? 0 : Math.round((stageDone / stageTotal) * 100);
 
   return (
     <aside className="lesson-toc" aria-label="레슨 안 네비게이션">
@@ -154,18 +154,18 @@ export function LessonToc({ currentLesson, currentPhase, siblingLessons }: Props
           빌드 50 · 검증 30 · 회고 20 가중. 셋 다 100% 면 완료.
         </p>
 
-        {currentPhase && phaseTotal > 0 && (
+        {currentStage && stageTotal > 0 && (
           <div className="ph-prog-wrap">
             <div className="ph-prog-label">
-              <span>Phase {String(currentPhase.order).padStart(2, "0")} 진행</span>
+              <span>Stage {String(currentStage.order).padStart(2, "0")} 진행</span>
               <span className="tnum" suppressHydrationWarning>
-                {phaseDone}/{phaseTotal} 레슨
+                {stageDone}/{stageTotal} 레슨
               </span>
             </div>
             <div className="ph-prog-bar" aria-hidden>
               <span
                 className="ph-prog-fill"
-                style={{ width: `${phasePct}%` }}
+                style={{ width: `${stagePct}%` }}
               />
             </div>
           </div>
@@ -173,10 +173,10 @@ export function LessonToc({ currentLesson, currentPhase, siblingLessons }: Props
       </div>
 
       {/* 3. 형제 lesson 카드 — status box */}
-      {siblingLessons.length > 0 && currentPhase && (
+      {siblingLessons.length > 0 && currentStage && (
         <div className="sibling-card">
           <span className="rail-section-label sibling-card__header">
-            Phase {String(currentPhase.order).padStart(2, "0")} 레슨
+            Stage {String(currentStage.order).padStart(2, "0")} 레슨
           </span>
           <ul className="sibling-card__list">
             {siblingLessons.map((sib) => {

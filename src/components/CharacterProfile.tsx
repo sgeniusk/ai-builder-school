@@ -1,26 +1,26 @@
-// 헤더 캐릭터를 누르면 뜨는 프로필 모달. 핸들·여정·완료 lesson 수·완료 phase 배지.
+// 헤더 캐릭터를 누르면 뜨는 프로필 모달. 핸들·여정·완료 lesson 수·완주 stage 배지.
 "use client";
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import type { Journey, Lesson, Phase } from "@/lib/types";
+import type { Journey, Lesson, Stage } from "@/lib/types";
 import { useCharacter } from "@/hooks/useCharacter";
 import { useLessonProgress } from "@/hooks/useLessonProgress";
 import { CharacterAvatar } from "./CharacterAvatar";
 
 type Props = {
-  phases: Phase[];
+  stages: Stage[];
   journeys: Journey[];
-  lessonsByPhase: Record<string, Lesson[]>;
+  lessonsByStage: Record<string, Lesson[]>;
   onClose: () => void;
 };
 
 const HANDLE_MAX = 20;
 
 export function CharacterProfile({
-  phases,
+  stages,
   journeys,
-  lessonsByPhase,
+  lessonsByStage,
   onClose,
 }: Props) {
   const { character, setHandle, reset } = useCharacter();
@@ -38,23 +38,23 @@ export function CharacterProfile({
 
   const myJourney = journeys.find((j) => j.id === journey);
 
-  // 전체 / 완료 lesson 수 + phase 별 완료 여부
+  // 전체 / 완료 lesson 수 + stage 별 완료 여부
   let totalLessons = 0;
   let doneLessons = 0;
-  const completedPhases: Phase[] = [];
-  for (const p of phases) {
-    const list = lessonsByPhase[p.id] ?? [];
+  const completedStages: Stage[] = [];
+  for (const s of stages) {
+    const list = lessonsByStage[s.id] ?? [];
     if (list.length === 0) continue;
     totalLessons += list.length;
-    let phaseAllDone = true;
+    let stageAllDone = true;
     for (const l of list) {
       if (isLessonComplete(l)) {
         doneLessons += 1;
       } else {
-        phaseAllDone = false;
+        stageAllDone = false;
       }
     }
-    if (phaseAllDone) completedPhases.push(p);
+    if (stageAllDone) completedStages.push(s);
   }
   const pct =
     totalLessons === 0 ? 0 : Math.round((doneLessons / totalLessons) * 100);
@@ -147,20 +147,20 @@ export function CharacterProfile({
         </div>
 
         <div className="char-profile__section">
-          <div className="kicker">완주한 Phase</div>
-          {completedPhases.length === 0 ? (
+          <div className="kicker">완주한 Stage</div>
+          {completedStages.length === 0 ? (
             <p className="char-profile__empty">
-              아직 완주한 phase 가 없어요. 한 lesson 의 빌드·검증·회고를 모두
-              체크하면 진행률이 차고, phase 전체가 차면 여기 배지가 추가됩니다.
+              아직 완주한 stage 가 없어요. 한 lesson 의 빌드·검증·회고를 모두
+              체크하면 진행률이 차고, stage 전체가 차면 여기 배지가 추가됩니다.
             </p>
           ) : (
             <ul className="char-profile__phases">
-              {completedPhases.map((p) => (
-                <li key={p.id} className="char-profile__phase-badge">
+              {completedStages.map((s) => (
+                <li key={s.id} className="char-profile__phase-badge">
                   <span className="char-profile__phase-num mono">
-                    {String(p.order).padStart(2, "0")}
+                    {String(s.order).padStart(2, "0")}
                   </span>
-                  <span>{p.titleKo}</span>
+                  <span>{s.label}</span>
                 </li>
               ))}
             </ul>

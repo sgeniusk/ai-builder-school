@@ -2,9 +2,8 @@ import type { Lesson } from "@/lib/types";
 
 export const lessons: Lesson[] = [
   {
-    id: "lesson-01",
+    id: "lesson-105",
     slug: "common-skills-of-future-proof-people",
-    phaseId: "phase-1",
     titleKo: "AI 시대에 뒤쳐지지 않는 사람들의 공통 역량",
     titleEn: "Common skills of future-proof people",
     hook: "AI가 더 잘하는 일에 내 시간을 쓰지 않는 것 — 이것이 버티는 사람의 첫 번째 기술입니다.",
@@ -82,9 +81,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-02",
+    id: "lesson-301",
     slug: "what-llms-are-good-and-bad-at",
-    phaseId: "phase-1",
     titleKo: "LLM이 잘하는 일과 못하는 일",
     titleEn: "What LLMs are good and bad at",
     hook: "LLM의 능력은 \"얼마나 똑똑한가\"가 아니라 \"어떤 모양의 일에 강한가\"로 봐야 합니다.",
@@ -167,9 +165,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-03",
+    id: "lesson-302",
     slug: "hallucination-verification",
-    phaseId: "phase-1",
     titleKo: "환각(Hallucination)을 잡는 검증법",
     titleEn: "Catching hallucinations",
     hook: "AI는 \"모른다\"라고 말하는 능력이 약합니다. 그래서 검증은 사용자의 일이 됩니다.",
@@ -238,7 +235,7 @@ export const lessons: Lesson[] = [
     ],
     extensionIdeas: [
       "팀 공용 \"환각 발견 로그\"를 만들어 매주 사례를 누적합니다",
-      "이 템플릿을 RAG 시스템 (Phase 6)의 인용 강제 프롬프트로 확장합니다",
+      "이 템플릿을 RAG 시스템 (Stage 6)의 인용 강제 프롬프트로 확장합니다",
       "월 1회 \"내 업계의 환각 위험 지도\"를 갱신해 동료에게 공유합니다",
     ],
     tags: ["literacy", "verification", "hallucination"],
@@ -252,9 +249,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-04",
+    id: "lesson-303",
     slug: "checks-before-trusting-ai-output",
-    phaseId: "phase-1",
     titleKo: "AI 결과를 신뢰하기 전 확인할 것",
     titleEn: "Checks before trusting AI output",
     hook: "100% 신뢰하면 사고가 나고, 100% 의심하면 일이 안 됩니다. 5분이면 그 사이를 결정할 수 있습니다.",
@@ -342,9 +338,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-05",
+    id: "lesson-201",
     slug: "structure-of-good-prompts",
-    phaseId: "phase-2",
     titleKo: "좋은 프롬프트의 구조",
     titleEn: "Structure of good prompts",
     hook: "프롬프트는 부탁이 아니라 명세예요. \"작업·맥락·제약·출력\" 네 칸만 분리해도 답이 단단해집니다.",
@@ -432,9 +427,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-06",
+    id: "lesson-203",
     slug: "enforcing-output-format",
-    phaseId: "phase-2",
     titleKo: "출력 형식(Output Format)을 강제하는 법",
     titleEn: "Enforcing output format",
     hook: "사람이 읽을 답은 흔들려도 괜찮지만, 기계가 읽을 답은 99.9% 같은 모양이어야 해요. 한 번의 이탈이 자동화 전체를 멈춥니다.",
@@ -547,9 +541,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-07",
+    id: "lesson-205",
     slug: "feeding-long-documents",
-    phaseId: "phase-2",
     titleKo: "긴 문서를 AI에게 먹이는 법",
     titleEn: "Feeding long documents to AI",
     hook: "100페이지를 통째로 넣어도 모델은 가운데를 흐릿하게 봅니다. \"Lost in the Middle\" 은 운이 아니라 구조예요. 작업 모양에 맞게 입력을 다듬는 게 출력 품질을 결정합니다.",
@@ -595,11 +588,11 @@ export const lessons: Lesson[] = [
       },
     ],
     codexMission:
-      "Codex에게 본인 업무 관련 40~60쪽 PDF/Markdown 1개를 받아 같은 질문 2개를 세 전략(Full / Map-Reduce / Selective)으로 처리하고, 토큰 비용·시간·답 품질(1~5점)을 표로 정리한 비교 노트를 만들게 합니다. Selective의 청크 선별은 키워드 검색 수준이면 충분합니다 (본격 임베딩은 Phase 6).",
+      "Codex에게 본인 업무 관련 40~60쪽 PDF/Markdown 1개를 받아 같은 질문 2개를 세 전략(Full / Map-Reduce / Selective)으로 처리하고, 토큰 비용·시간·답 품질(1~5점)을 표로 정리한 비교 노트를 만들게 합니다. Selective의 청크 선별은 키워드 검색 수준이면 충분합니다 (본격 임베딩은 Stage 6).",
     claudeCodeMission:
       "Claude Code에게 `examples/long-doc-strategies/` 폴더에 세 전략 각각의 실행 스크립트 + 같은 질문을 던지는 러너 + 결과를 자동으로 비교 표로 출력하는 코드를 만들게 합니다.",
     mission:
-      "Claude Code에게 아래 작업을 맡깁니다. 50분 안에 끝내는 걸 목표로 하세요.\n\n작업: `long-doc-strategies.md` 비교 노트를 만듭니다. 같은 긴 문서(40~60쪽) 하나에 같은 질문 1~2개를 던져, 세 전략의 답을 나란히 놓고 비교합니다.\n\n포함할 섹션:\n1. \"샘플 문서 메타\" — 문서 종류·페이지 수·대략 토큰 수·왜 이걸 골랐는지 (3문장)\n2. \"질문 2개\" — Q1: 전체 요약 (Full/Map-Reduce 비교용) · Q2: 특정 주제 X에 대한 부분만 (Selective 강점)\n3. \"세 전략 실행 결과\" — Full · Map-Reduce · Selective 각각의 답 본문 (또는 핵심만 발췌)\n4. \"비교 표\" — 답 품질 1~5점 · 호출 비용(토큰 추정) · 시간 · 구현 마찰 한 줄\n5. \"한 줄 결론\" — 내 작업에 가장 자주 맞을 전략 + 그 이유\n\nMap-Reduce는 1000~2000 토큰 청크 + 100~200 오버랩에서 시작하세요. Selective의 청크 선별은 키워드 grep 수준이면 충분합니다 (임베딩은 Phase 6).",
+      "Claude Code에게 아래 작업을 맡깁니다. 50분 안에 끝내는 걸 목표로 하세요.\n\n작업: `long-doc-strategies.md` 비교 노트를 만듭니다. 같은 긴 문서(40~60쪽) 하나에 같은 질문 1~2개를 던져, 세 전략의 답을 나란히 놓고 비교합니다.\n\n포함할 섹션:\n1. \"샘플 문서 메타\" — 문서 종류·페이지 수·대략 토큰 수·왜 이걸 골랐는지 (3문장)\n2. \"질문 2개\" — Q1: 전체 요약 (Full/Map-Reduce 비교용) · Q2: 특정 주제 X에 대한 부분만 (Selective 강점)\n3. \"세 전략 실행 결과\" — Full · Map-Reduce · Selective 각각의 답 본문 (또는 핵심만 발췌)\n4. \"비교 표\" — 답 품질 1~5점 · 호출 비용(토큰 추정) · 시간 · 구현 마찰 한 줄\n5. \"한 줄 결론\" — 내 작업에 가장 자주 맞을 전략 + 그 이유\n\nMap-Reduce는 1000~2000 토큰 청크 + 100~200 오버랩에서 시작하세요. Selective의 청크 선별은 키워드 grep 수준이면 충분합니다 (임베딩은 Stage 6).",
     codexNote:
       "Codex CLI가 Map-Reduce를 구현할 때 Reduce 단계를 빠뜨리고 Map 결과를 그냥 이어붙이는 경향이 있어요. \"Reduce 단계에서 모든 청크 요약을 단일 호출로 다시 요약하라\"고 명시하세요. 또 청크 오버랩(100~200 토큰)을 빠뜨리면 청크 경계의 정보가 끊깁니다 — 오버랩 명시 필수.",
     buildSteps: [
@@ -630,7 +623,7 @@ export const lessons: Lesson[] = [
       "내 작업의 80%는 어느 전략에 떨어지나요? 그게 다음 자동화의 기본값이 됩니다.",
     ],
     extensionIdeas: [
-      "Selective Injection을 키워드 grep에서 임베딩 검색으로 업그레이드 (Phase 6 RAG로 가는 다리)",
+      "Selective Injection을 키워드 grep에서 임베딩 검색으로 업그레이드 (Stage 6 RAG로 가는 다리)",
       "청크 크기를 500 / 1500 / 3000 토큰으로 바꿔가며 품질 변화 측정",
       "오버랩을 0 / 100 / 300 토큰으로 바꿔가며 청크 경계 정보 손실 측정",
       "같은 비교를 다른 모델(Claude / GPT / Gemini)로 반복해 모델별 강점 파악",
@@ -646,9 +639,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-08",
+    id: "lesson-209",
     slug: "build-personal-prompt-library",
-    phaseId: "phase-2",
     titleKo: "개인 프롬프트 라이브러리 만들기",
     titleEn: "Build personal prompt library",
     hook: "Lesson 05의 한 장짜리 라이브러리를 한 달 쓰면 정확히 네 군데서 막혀요. 버전·변수·카테고리·공유. 오늘은 그 한 장을 팀이 쓸 수 있는 v2 폴더 구조로 진화시킵니다.",
@@ -732,7 +724,7 @@ export const lessons: Lesson[] = [
     extensionIdeas: [
       "Claude Code 슬래시 명령으로 등록해 변수 치환 마찰을 거의 0으로",
       "버전별 A/B 테스트 로그 추가 — version 1.2 vs 1.3 답 품질 비교",
-      "Phase 8에서 Git ↔ Notion 동기화 패턴으로 v3 진화",
+      "이후 Stage에서 Git ↔ Notion 동기화 패턴으로 v3 진화",
       "팀 단위로 템플릿 PR 리뷰 프로세스 도입 — Front Matter 검토부터",
     ],
     tags: ["prompt", "library", "productivity", "team-share"],
@@ -751,9 +743,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-09",
+    id: "lesson-401",
     slug: "automate-report-drafts",
-    phaseId: "phase-3",
     titleKo: "보고서 초안 자동화",
     titleEn: "Automate report drafts",
     hook: "매주 금요일, 보고서 형식을 맞추느라 분석할 시간이 없어요. 형식은 매번 같은데 매번 새로 채워야 하는 게 보고서의 함정입니다.",
@@ -856,9 +847,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-10",
+    id: "lesson-402",
     slug: "meeting-notes-pipeline",
-    phaseId: "phase-3",
     titleKo: "회의록 → Action Item 파이프라인",
     titleEn: "Meeting notes pipeline",
     hook: "월요일 스탠드업. \"지난주에 누가 그거 하기로 했잖아요.\" 40줄짜리 줄글 회의록은 있는데, 누가·언제까지·무엇을 해야 하는지는 그 줄글 속 어딘가에 파묻혀 있어요.",
@@ -961,9 +951,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-11",
+    id: "lesson-403",
     slug: "research-workflow",
-    phaseId: "phase-3",
     titleKo: "리서치 워크플로우",
     titleEn: "Research workflow",
     hook: "AI가 30초 만에 깔끔한 요약을 줬는데, \"이 숫자 출처가 뭐야?\"에 답을 못 합니다. 링크를 달라고 하면 존재하지 않는 URL을 만들어 줘요.",
@@ -1039,7 +1028,7 @@ export const lessons: Lesson[] = [
       "이 파이프라인에서 사람이 반드시 개입해야 하는 단계는 어디인가요?",
     ],
     extensionIdeas: [
-      "RAG(Phase 6)로 사내 자료를 검색 소스에 통합해 사내 리서치 자동화",
+      "RAG(Stage 6)로 사내 자료를 검색 소스에 통합해 사내 리서치 자동화",
       "Anthropic Citations API를 활용해 문서 내 인용 위치까지 자동 연결",
       "주간 자동 리서치 봇 — 매주 같은 주제의 최신 동향을 근거 표로 정리",
       "여러 모델(Claude / GPT / Perplexity)의 답을 나란히 비교하는 교차 검증 확장",
@@ -1065,9 +1054,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-12",
+    id: "lesson-404",
     slug: "blog-writing-pipeline",
-    phaseId: "phase-3",
     titleKo: "블로그 글쓰기 파이프라인",
     titleEn: "Blog writing pipeline",
     hook: "AI가 쓴 글, 읽어보면 다 '그런 글'이에요. 문법도 맞고 구조도 깔끔한데, 내 글에 있던 날카로운 비유와 짧은 호흡이 다 사라져 있습니다.",
@@ -1170,9 +1158,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-13",
+    id: "lesson-501",
     slug: "coding-agent-setup",
-    phaseId: "phase-4",
     titleKo: "코딩 에이전트 셋업",
     titleEn: "Coding agent environment setup",
     hook: "코딩 에이전트는 파일을 직접 읽고 명령을 실행합니다. 권한·규약·비밀 정책 없이 돌리면, 되돌리는 데 하루가 걸려요.",
@@ -1274,9 +1261,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-14",
+    id: "lesson-502",
     slug: "github-issue-to-ai-brief",
-    phaseId: "phase-4",
     titleKo: "GitHub 이슈 → AI 브리프",
     titleEn: "GitHub issue → AI brief",
     hook: "\"버그 수정해줘\" 한 줄 이슈를 에이전트에게 던지면? 추측으로 고치다 멀쩡한 기능까지 깨집니다. 이슈를 브리프로 바꾸면 첫 시도가 달라져요.",
@@ -1384,9 +1370,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-15",
+    id: "lesson-503",
     slug: "letting-ai-read-codebase",
-    phaseId: "phase-4",
     titleKo: "AI에게 코드베이스 읽히기",
     titleEn: "Letting AI read a codebase",
     hook: "파일 200개 프로젝트에서 에이전트가 레거시 파일을 잘못 고쳤어요. L07의 'Lost in the Middle'이 코드베이스에서도 작동합니다. 지도를 만들면 첫 시도가 달라져요.",
@@ -1489,9 +1474,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-16",
+    id: "lesson-504",
     slug: "plan-with-ai",
-    phaseId: "phase-4",
     titleKo: "AI와 함께 구현 계획 세우기",
     titleEn: "Plan with AI",
     hook: "코드 한 줄 짜기 전에 5분만 계획을 세우면, 실행 시간이 절반으로 줄어요. \"일단 짜 봐\"의 대가는 3시간짜리 git reset입니다.",
@@ -1580,9 +1564,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-17",
+    id: "lesson-505",
     slug: "write-tests-with-coding-agent",
-    phaseId: "phase-4",
     titleKo: "Codex / Claude Code로 테스트 만들기",
     titleEn: "Write tests with coding agent",
     hook: "테스트는 나중에 쓰는 보험이 아니라, AI에게 구현을 맡기기 전 방향을 고정하는 계약서예요.",
@@ -1678,9 +1661,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-18",
+    id: "lesson-506",
     slug: "bug-reproduction-loop",
-    phaseId: "phase-4",
     titleKo: "버그 재현과 수정 루프",
     titleEn: "Bug reproduction loop",
     hook: "버그 수정의 첫 줄은 코드가 아니라 재현입니다. 재현 없는 수정은 증상을 덮을 뿐이에요.",
@@ -1774,9 +1756,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-19",
+    id: "lesson-601",
     slug: "connect-ai-api",
-    phaseId: "phase-5",
     titleKo: "AI API 붙이기",
     titleEn: "Connect AI API",
     hook: "AI API 첫 호출의 핵심은 답을 받는 것이 아니라, 키를 숨기고 실패를 다루는 안전한 통로를 만드는 거예요.",
@@ -1876,9 +1857,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-20",
+    id: "lesson-602",
     slug: "streaming-response-ui",
-    phaseId: "phase-5",
     titleKo: "스트리밍 응답 UI 만들기",
     titleEn: "Streaming response UI",
     hook: "스트리밍은 모델을 빠르게 만드는 기술이 아니라, 기다리는 시간을 사용자가 이해할 수 있게 만드는 UI 기술이에요.",
@@ -1973,9 +1953,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-21",
+    id: "lesson-603",
     slug: "structured-output-handling",
-    phaseId: "phase-5",
     titleKo: "구조화 출력(Structured Output) 다루기",
     titleEn: "Handling structured output",
     hook: "JSON이 왔다고 끝이 아니에요. 앱 안에서는 스키마 검증을 통과한 데이터만 UI 상태가 될 수 있어요.",
@@ -2070,9 +2049,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-22",
+    id: "lesson-604",
     slug: "conversation-storage-design",
-    phaseId: "phase-5",
     titleKo: "대화 기록 저장 구조 설계",
     titleEn: "Conversation storage design",
     hook: "채팅 앱은 답을 잘하는 것만으로 부족해요. 어제의 대화를 오늘 다시 이어갈 수 있어야 제품이 됩니다.",
@@ -2152,7 +2130,7 @@ export const lessons: Lesson[] = [
     ],
     extensionIdeas: [
       "세션 공유 URL — 읽기 전용 링크 + 만료 정책",
-      "세션 내 의미 검색 — 임베딩 인덱스 추가 (Phase 6 RAG와 연결)",
+      "세션 내 의미 검색 — 임베딩 인덱스 추가 (Stage 6 RAG와 연결)",
       "사용자별 보존 기간 정책 — TTL 자동 삭제",
       "비용 시뮬레이션 대시보드 — 토큰·저장 비용 추정",
     ],
@@ -2167,9 +2145,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-23",
+    id: "lesson-607",
     slug: "understanding-embeddings",
-    phaseId: "phase-6",
     titleKo: "임베딩(Embedding) 이해하기",
     titleEn: "Understanding embeddings",
     hook: "키워드가 달라도 뜻이 같으면 가까이 찾을 수 있어요. 임베딩은 텍스트를 의미의 좌표로 바꾸는 첫 단계입니다.",
@@ -2265,9 +2242,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-24",
+    id: "lesson-608",
     slug: "document-chunking-strategy",
-    phaseId: "phase-6",
     titleKo: "문서 청킹(Chunking) 전략 세우기",
     titleEn: "Document chunking strategy",
     hook: "RAG 품질은 모델보다 먼저 청크에서 갈립니다. 무엇을 한 덩어리로 임베딩하느냐가 검색 결과를 바꿔요.",
@@ -2362,9 +2338,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-25",
+    id: "lesson-609",
     slug: "vector-search-basics",
-    phaseId: "phase-6",
     titleKo: "벡터 검색(Vector Search) 기본",
     titleEn: "Vector search basics",
     hook: "임베딩한 벡터가 많아지면 파일 검색은 금방 한계에 닿아요. 벡터 DB는 가까운 의미를 빠르게 찾기 위한 검색 엔진입니다.",
@@ -2460,9 +2435,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-26",
+    id: "lesson-610",
     slug: "grounded-rag-answers",
-    phaseId: "phase-6",
     titleKo: "근거가 있는 RAG 답변 만들기",
     titleEn: "Grounded RAG answers",
     hook: "RAG의 목표는 그럴듯한 답이 아니라, 근거를 따라가면 다시 확인할 수 있는 답이에요.",
@@ -2558,9 +2532,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-27",
+    id: "lesson-611",
     slug: "function-calling",
-    phaseId: "phase-7",
     titleKo: "Function Calling 이해하기",
     titleEn: "Function calling",
     hook: "LLM은 텍스트를 잘 만들지만, 외부 세계에 손을 뻗는 능력은 기본적으로 없어요. 도구 스키마를 주면 모델이 \"이 함수를 이 인자로 불러달라\"고 요청합니다.",
@@ -2649,9 +2622,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-28",
+    id: "lesson-612",
     slug: "mini-agent-loop",
-    phaseId: "phase-7",
     titleKo: "미니 에이전트 루프 만들기",
     titleEn: "Mini agent loop",
     hook: "도구 호출 한 번으로 끝나지 않는 작업은 루프가 필요해요. 에이전트는 생각하고, 행동하고, 관찰한 뒤 다시 결정합니다.",
@@ -2748,9 +2720,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-29",
+    id: "lesson-613",
     slug: "tool-permission-safeguards",
-    phaseId: "phase-7",
     titleKo: "도구 권한과 안전장치 설계하기",
     titleEn: "Tool permissions and safeguards",
     hook: "에이전트가 똑똑해질수록 더 중요한 건 능력이 아니라 권한이에요. 할 수 있는 일과 해도 되는 일을 분리해야 합니다.",
@@ -2847,9 +2818,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-30",
+    id: "lesson-614",
     slug: "prompt-injection-defense",
-    phaseId: "phase-7",
     titleKo: "Prompt Injection 방어 기초",
     titleEn: "Prompt injection defense basics",
     hook: "프롬프트 인젝션은 사용자의 질문이 아니라 외부 입력이 에이전트를 조종하는 순간 시작돼요.",
@@ -2946,9 +2916,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-31",
+    id: "lesson-708",
     slug: "ai-app-cost-and-usage",
-    phaseId: "phase-11",
     titleKo: "AI 앱 비용·사용량 관리",
     titleEn: "AI app cost and usage",
     hook: "프로토타입에서는 안 보이던 비용이 사용자 10배에서 갑자기 보여요. 인풋/아웃풋 단가 차이부터 모델 라우팅까지, 지속 가능한 AI 앱의 비용 관리법을 만듭니다.",
@@ -3001,13 +2970,12 @@ export const lessons: Lesson[] = [
     hasMdxBody: true,
   },
   {
-    id: "lesson-32",
+    id: "lesson-806",
     slug: "capstone-plan-and-launch",
-    phaseId: "phase-12",
     titleKo: "Capstone 프로젝트 기획과 배포",
     titleEn: "Capstone plan and launch",
     hook: "많이 배운 것보다 중요한 건 하나라도 끝까지 공개한 결과예요. 캡스톤은 지식을 URL로 바꾸는 마지막 루프입니다.",
-    summary: "Phase 1-11에서 만든 산출물을 하나의 캡스톤 프로젝트로 묶고, Narrow MVP 범위 + 4주 실행 계획 + 첫 사용자 피드백 + 런칭 회고로 \"공개된 결과물\" 을 만듭니다.",
+    summary: "지금까지의 모든 Stage에서 만든 산출물을 하나의 캡스톤 프로젝트로 묶고, Narrow MVP 범위 + 4주 실행 계획 + 첫 사용자 피드백 + 런칭 회고로 \"공개된 결과물\" 을 만듭니다.",
     level: "advanced",
     estimatedMinutes: 120,
     targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
@@ -3057,7 +3025,7 @@ export const lessons: Lesson[] = [
     claudeCodeMission:
       "Claude Code에게 4주 실행을 도우면서 배포 후 `docs/retrospective.md` 에 지표/피드백/다음 단계를 구조화 기록하게 합니다.",
     mission:
-      "본인 직접 작업 (90-120분 + 4주 실행).\n\n작업: 4주 안에 공개된 캡스톤 프로젝트 1개.\n\n## 1주차 — Spec\n- 가장 위험한 가정 1개 골라 1페이지 브리프 작성\n- Narrow MVP 한 문장 정의\n- 기능 3개 이하로 범위 압축\n- 어떤 Phase 산출물을 재활용할지 매핑\n\n## 2주차 — Build (절반)\n- 핵심 사용자 흐름 1개만 동작하게\n- L29 권한 정책 + L31 비용 추적 미리 적용\n\n## 3주차 — Build (마무리) + Test\n- L30 인젝션 방어 + L21 구조화 출력 검증 추가\n- 본인 + 가까운 사람 1-2명으로 테스트\n\n## 4주차 — Launch + Retro\n- 공개 URL 배포 (Vercel 등)\n- README — 무엇·왜·어떻게\n- 첫 사용자 5명 정도 피드백 수집 (예: 가까운 동료부터)\n- `docs/retrospective.md` — 지표·AI/사람 비율·다음 버전\n\n## Phase 1-11 회고\n캡스톤 작업 중 과거 레슨을 다시 호출하게 됩니다. 그 흐름이 \"내가 32개를 다 만들었구나\" 의 증거예요.\n- L01 판단 체크리스트로 어디에 사람을 끼울지\n- L05 4축 프롬프트로 LLM 호출 설계\n- L06 3단 방어선으로 자동화 안정\n- L08 프롬프트 라이브러리 v2 호출\n- L13-L18 코딩 에이전트로 빠르게 빌드\n- L19-L22 앱 기초 + 영속성\n- L23-L26 RAG (필요 시)\n- L27-L30 에이전트 + 권한 + 인젝션 방어\n- L31 비용·사용량 관리",
+      "본인 직접 작업 (90-120분 + 4주 실행).\n\n작업: 4주 안에 공개된 캡스톤 프로젝트 1개.\n\n## 1주차 — Spec\n- 가장 위험한 가정 1개 골라 1페이지 브리프 작성\n- Narrow MVP 한 문장 정의\n- 기능 3개 이하로 범위 압축\n- 어떤 Stage 산출물을 재활용할지 매핑\n\n## 2주차 — Build (절반)\n- 핵심 사용자 흐름 1개만 동작하게\n- L29 권한 정책 + L31 비용 추적 미리 적용\n\n## 3주차 — Build (마무리) + Test\n- L30 인젝션 방어 + L21 구조화 출력 검증 추가\n- 본인 + 가까운 사람 1-2명으로 테스트\n\n## 4주차 — Launch + Retro\n- 공개 URL 배포 (Vercel 등)\n- README — 무엇·왜·어떻게\n- 첫 사용자 5명 정도 피드백 수집 (예: 가까운 동료부터)\n- `docs/retrospective.md` — 지표·AI/사람 비율·다음 버전\n\n## 지금까지의 Stage 회고\n캡스톤 작업 중 과거 레슨을 다시 호출하게 됩니다. 그 흐름이 \"내가 32개를 다 만들었구나\" 의 증거예요.\n- L01 판단 체크리스트로 어디에 사람을 끼울지\n- L05 4축 프롬프트로 LLM 호출 설계\n- L06 3단 방어선으로 자동화 안정\n- L08 프롬프트 라이브러리 v2 호출\n- L13-L18 코딩 에이전트로 빠르게 빌드\n- L19-L22 앱 기초 + 영속성\n- L23-L26 RAG (필요 시)\n- L27-L30 에이전트 + 권한 + 인젝션 방어\n- L31 비용·사용량 관리",
     codexNote:
       "Codex CLI는 캡스톤 브리프 작성 시 \"기능 5-7개\" 같은 넓은 범위를 제안하는 경향이 있어요. \"기능 3개 이하로 좁히고, 가장 위험한 가정 1개에만 집중하라\" 고 강제하세요. 4주 안에 공개되어야 합니다.",
     buildSteps: [
@@ -3089,7 +3057,7 @@ export const lessons: Lesson[] = [
       "첫 사용자에게 물어볼 세 가지 질문은 무엇인가요?",
       "AI가 한 일과 내가 판단한 일의 비율은 어땠나요?",
       "다음 버전에서 가장 먼저 바꿀 한 가지는?",
-      "Phase 1-11 중 캡스톤에 가장 자주 호출한 레슨은?",
+      "지금까지의 Stage 중 캡스톤에 가장 자주 호출한 레슨은?",
     ],
     extensionIdeas: [
       "사용자 10명 정도로 확장한 피드백 라운드",
@@ -3113,9 +3081,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-33",
+    id: "lesson-210",
     slug: "ai-concept-learning-framework",
-    phaseId: "phase-1",
     titleKo: "새 AI 용어 흔들리지 않는 학습법",
     titleEn: "AI concept learning framework",
     hook: "RAG, MCP, Agent... 새 용어가 매주 쏟아져요. 매번 처음부터 공부할 게 아니라, 3가지 질문으로 한 번에 이해하는 법이 있어요.",
@@ -3206,9 +3173,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-34",
+    id: "lesson-508",
     slug: "claude-md-four-principles",
-    phaseId: "phase-4",
     titleKo: "CLAUDE.md 4원칙 — Karpathy 65줄",
     titleEn: "CLAUDE.md four principles (Karpathy)",
     hook: "65줄짜리 CLAUDE.md 한 장이 깃헙 10만 스타를 받았어요. AI 코딩의 3가지 고질병을 잡는 4원칙입니다.",
@@ -3305,9 +3271,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-35",
+    id: "lesson-511",
     slug: "harness-engineering-roadmap",
-    phaseId: "phase-4",
     titleKo: "하네스 엔지니어링 6단계 로드맵",
     titleEn: "Harness engineering roadmap (6 stages)",
     hook: "AI 코딩 잘하는 사람과 못하는 사람의 차이는 IDE가 아니에요. 도구를 둘러싸고 깔린 환경 — 하네스 — 가 다릅니다.",
@@ -3413,9 +3378,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-36",
+    id: "lesson-616",
     slug: "ralph-loop-codex-goal",
-    phaseId: "phase-7",
     titleKo: "Ralph Loop · Codex /goal — 자율 코딩의 진화",
     titleEn: "Ralph Loop and Codex /goal",
     hook: "사람이 매 단계 검토하던 LLM 코딩이 /goal 한 줄로 자율 루프가 됐어요. 5줄 bash 스크립트가 OpenAI 공식 기능까지 진화한 길.",
@@ -3513,9 +3477,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-37",
+    id: "lesson-709",
     slug: "claude-code-token-saving",
-    phaseId: "phase-11",
     titleKo: "Claude Code 토큰 절약 — /clear부터 QMD까지",
     titleEn: "Claude Code token saving (12 essentials)",
     hook: "1번째 메시지 500토큰이 30번째에 232,000토큰. 31배 비싸지는 이유와 막는 12가지.",
@@ -3613,9 +3576,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-38",
+    id: "lesson-408",
     slug: "blog-to-shorts-pipeline",
-    phaseId: "phase-8",
     titleKo: "롱폼 1개 → 쇼츠 5개 + 뉴스레터 1개 자동 재가공 파이프라인",
     titleEn: "Blog/long-form to shorts repurposing pipeline",
     hook: "롱폼 영상 1개를 만들면 끝이 아니라 시작이에요. 같은 자산이 쇼츠 5개·뉴스레터 1개·카드뉴스 한 세트로 한 주를 굴러야, 만들기에 쏟은 시간이 진짜 자산이 됩니다.",
@@ -3687,9 +3649,9 @@ export const lessons: Lesson[] = [
       "쇼츠 5개 중 실제 발행 가치가 있는 건 몇 개였나요? 비트 강도 기준을 어떻게 조정할까요?",
     ],
     extensionIdeas: [
-      "Phase 6 (RAG)와 결합 — 내 콘텐츠 아카이브를 검색 소스로, 새 주제도 내 어휘로 자동 재가공",
+      "Stage 6 (RAG)와 결합 — 내 콘텐츠 아카이브를 검색 소스로, 새 주제도 내 어휘로 자동 재가공",
       "협찬·광고 트랙 추가 — 브랜드 제안서 자동 생성을 동일 파이프라인의 6번째 트랙으로",
-      "Phase 7 (Agents)로 발행 자동화 — Buffer·Hootsuite API 연결로 캘린더 → 실제 발행 자동 트리거",
+      "Stage 6 (Agents)로 발행 자동화 — Buffer·Hootsuite API 연결로 캘린더 → 실제 발행 자동 트리거",
       "성과 피드백 루프 — 발행 후 조회수·좋아요·댓글을 비트 강도 보정에 자동 반영",
     ],
     tags: ["multimodal", "content-pipeline", "repurposing", "creator-economy"],
@@ -3728,9 +3690,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-39",
+    id: "lesson-409",
     slug: "design-visual-prompt-system",
-    phaseId: "phase-8",
     titleKo: "디자이너용 시각 프롬프트 시스템 — 브랜드 톤 기반 Midjourney 라이브러리",
     titleEn: "Visual prompt system for designers — brand-tone Midjourney library",
     hook: "Midjourney에 '감각적인 분위기로' 라고 던지면 매번 다른 톤이 나와요. 시각 어휘를 모듈로 정리하면 같은 브랜드를 1년 동안 한 톤으로 굴릴 수 있어요.",
@@ -3833,9 +3794,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-40",
+    id: "lesson-410",
     slug: "youtube-script-research-to-outline",
-    phaseId: "phase-8",
     titleKo: "유튜브 스크립트 — 리서치에서 촬영 큐시트까지 AI 파이프라인",
     titleEn: "YouTube script — research to shoot cue-sheet AI pipeline",
     hook: "영상 하나에 자료 조사 3시간, 구성 짜는 데 2시간. 정작 촬영은 1시간이에요. 리서치-구성이 한 시간으로 줄면, 그 시간에 더 좋은 한 컷을 찍을 수 있어요.",
@@ -3908,7 +3868,7 @@ export const lessons: Lesson[] = [
     ],
     extensionIdeas: [
       "L38(재가공 파이프라인)과 연결 — 이 영상이 완성되면 바로 쇼츠 5개로 재가공",
-      "Phase 6 (RAG)로 내 과거 영상 아카이브를 리서치 소스에 통합",
+      "Stage 6 (RAG)로 내 과거 영상 아카이브를 리서치 소스에 통합",
       "협업 채널이라면 큐시트를 팀 공유 — 촬영 감독·편집자가 같은 문서를 봄",
       "발행 후 시청 지속률 그래프를 후크 강도 보정에 반영",
     ],
@@ -3938,9 +3898,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-41",
+    id: "lesson-411",
     slug: "figma-ai-ui-variation-workflow",
-    phaseId: "phase-8",
     titleKo: "Figma + AI로 UI 변형 자동 생성 — 컴포넌트 1개에서 변형 매트릭스까지",
     titleEn: "Figma + AI UI variation workflow — one component to a variant matrix",
     hook: "버튼 컴포넌트 하나 만들면 끝이 아니에요. 사이즈·상태·다크모드·변종까지 손으로 다 만들면 한나절. AI에게 변형 규칙을 주면 같은 컴포넌트가 변형 매트릭스로 한 시간에 펼쳐져요.",
@@ -4043,9 +4002,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-42",
+    id: "lesson-412",
     slug: "thumbnail-and-title-ab-test",
-    phaseId: "phase-8",
     titleKo: "썸네일·제목 A/B 실험 — AI가 만들고 사람이 데이터로 고르는 루프",
     titleEn: "Thumbnail & title A/B test — AI generates, you pick by data",
     hook: "썸네일 하나, 제목 하나로 발행하면 그게 정답인지 알 길이 없어요. AI에게 후크 각도별로 5세트를 만들게 하고, 데이터로 고르면 클릭률이 다음 영상부터 달라져요.",
@@ -4148,9 +4106,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-43",
+    id: "lesson-413",
     slug: "local-business-content-calendar",
-    phaseId: "phase-8",
     titleKo: "매장 운영자용 콘텐츠 캘린더 — 메뉴 사진 한 장에서 한 달치 SNS까지",
     titleEn: "Content calendar for local businesses — one photo to a month of posts",
     hook: "메뉴 사진 한 장 찍어두고 '인스타에 뭐라고 올리지' 매번 고민하셨죠? 캘린더 틀 하나 만들어두면, 같은 사진이 인스타 캡션·네이버 소식·단골 안내문으로 한 달치 콘텐츠가 돼요.",
@@ -4252,11 +4209,10 @@ export const lessons: Lesson[] = [
       },
     ],
   },
-  // Phase 9 — Data Analysis & Decision AI
+  // Data Analysis & Decision AI
   {
-    id: "lesson-44",
+    id: "lesson-414",
     slug: "sql-with-ai-verification",
-    phaseId: "phase-9",
     titleKo: "AI로 SQL 쿼리 작성 + 자체 검증 — 틀린 쿼리를 고치는 루프",
     titleEn: "Write & verify SQL with AI — closing the wrong-query loop",
     hook: "AI한테 SQL 쿼리 만들어달라고 했더니 컬럼명이 틀렸어요. 스키마를 안 보여줬거든요. AI가 쿼리를 쓰고, AI가 틀린 곳을 찾고, 내가 실행해 확인하는 루프를 한 번 돌려보세요.",
@@ -4353,9 +4309,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-45",
+    id: "lesson-415",
     slug: "crm-segmentation-with-ai",
-    phaseId: "phase-9",
     titleKo: "CRM 고객 세그먼트를 AI로 자동화 — 규칙 설계부터 대량 레이블링까지",
     titleEn: "Automate CRM segmentation with AI — from rule design to bulk labeling",
     hook: "고객 세그먼트를 매번 손으로 분류하고 있나요? 기준 설계를 AI와 함께하고, 레이블링은 AI에게 맡기면 됩니다. 단, 규칙이 없으면 AI도 흔들립니다.",
@@ -4451,9 +4406,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-46",
+    id: "lesson-416",
     slug: "dashboard-narrative-and-qa",
-    phaseId: "phase-9",
     titleKo: "대시보드 숫자를 서술로 — AI가 쓴 분석 코멘트 QA하기",
     titleEn: "Turn dashboard numbers into narrative — QA for AI-written commentary",
     hook: "'전환율 3.2% → 2.8%'는 숫자예요. '광고 CTR 하락이 전환율 감소의 주요 원인'은 해석이에요. AI가 숫자를 해석으로 바꿔줄 수 있지만, 근거 없이 원인을 만들어낼 수도 있어요.",
@@ -4550,9 +4504,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-47",
+    id: "lesson-417",
     slug: "ab-test-decision-memo",
-    phaseId: "phase-9",
     titleKo: "A/B 테스트 결과를 의사결정 메모로 — 통계 해석부터 권고안까지",
     titleEn: "From A/B test results to a decision memo — interpreting stats to recommendations",
     hook: "p-value 0.03이 나왔어요. 성공인가요? AI한테 물어보면 '통계적으로 유의미합니다, 출시를 권장합니다'라고 해요. 하지만 샘플 크기가 충분한지, 실용적 유의미성은 있는지는 안 물어봤죠.",
@@ -4648,11 +4601,10 @@ export const lessons: Lesson[] = [
       },
     ],
   },
-  // Phase 10 — Evals, Security & Responsible AI
+  // Evals, Security & Responsible AI
   {
-    id: "lesson-48",
+    id: "lesson-701",
     slug: "evals-for-ai-coded-prs",
-    phaseId: "phase-10",
     titleKo: "AI가 작성한 코드를 Eval로 검증 — PR 머지 전 품질 게이트",
     titleEn: "Eval gate for AI-coded PRs — quality checks before merge",
     hook: "Codex나 Claude Code가 만든 PR을 어떻게 믿고 머지하나요? 테스트가 통과해도 안심이 안 되는 이유가 있어요. Eval 게이트를 직접 만들어보세요.",
@@ -4749,9 +4701,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-49",
+    id: "lesson-702",
     slug: "llm-observability-and-regression",
-    phaseId: "phase-10",
     titleKo: "LLM 관측과 회귀 테스트 — 프롬프트 바꿨더니 왜 달라졌는지 알기",
     titleEn: "LLM observability & regression — know why output changed after prompt edits",
     hook: "프롬프트를 조금 고쳤더니 전혀 다른 결과가 나왔어요. 어느 부분이 바뀐 건지, 이전 버전이 더 좋은 건지 판단할 방법이 없었어요. LLM 출력을 관측하고 비교하는 루프를 만들어야 합니다.",
@@ -4848,9 +4799,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-50",
+    id: "lesson-705",
     slug: "ai-output-eval-for-pms",
-    phaseId: "phase-10",
     titleKo: "PM을 위한 AI 출력 품질 평가 — 코드 없이 Eval 기준 만들기",
     titleEn: "AI output eval for PMs — defining quality criteria without code",
     hook: "개발팀이 AI 기능을 만들었어요. PM인 당신이 '이 출력이 좋은가'를 판단해야 하는데, 코드를 몰라서 손을 못 대고 있나요? Eval 기준을 정의하는 건 코드가 아니라 비즈니스 판단입니다.",
@@ -4947,9 +4897,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-51",
+    id: "lesson-707",
     slug: "responsible-ai-policy-template",
-    phaseId: "phase-10",
     titleKo: "팀 AI 사용 정책 템플릿 — 무엇을 맡기고 무엇을 검토할 것인가",
     titleEn: "Team AI policy template — what to delegate and what to review",
     hook: "팀원이 AI 출력을 그대로 고객에게 보냈어요. 검토가 없었어요. 정책이 없었으니까요. 팀이 AI를 쓰는 방식을 한 번 명확하게 정리해두면, 나중에 '그걸 AI가 썼다고요?'라는 상황을 막을 수 있습니다.",
@@ -5045,11 +4994,10 @@ export const lessons: Lesson[] = [
       },
     ],
   },
-  // Phase 0 — AI 학습 환경 세팅
+  // AI 학습 환경 세팅
   {
-    id: "lesson-52",
+    id: "lesson-101",
     slug: "zero-coding-orientation",
-    phaseId: "phase-0",
     titleKo: "코딩 에이전트 오리엔테이션 — 터미널이 왜 필요한가",
     titleEn: "Coding agent orientation — why the terminal matters",
     hook: "AI한테 코드 짜달라고 했는데 '터미널에서 실행하세요'가 나왔어요. 터미널이 뭔지도 모르는데요. 딱 이 레슨 하나로 '코딩 에이전트가 뭔지, 내가 왜 터미널을 알아야 하는지' 그림이 잡힙니다.",
@@ -5129,9 +5077,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-53",
+    id: "lesson-102",
     slug: "terminal-first-day",
-    phaseId: "phase-0",
     titleKo: "터미널 첫날 — 겁먹지 않고 살아남는 10개 명령어",
     titleEn: "Terminal first day — 10 commands to survive without fear",
     hook: "터미널 창을 열었어요. 검은 화면에 커서만 깜빡입니다. 뭘 입력해야 할지 모르겠어요. 10개 명령어만 알면 AI Builder School의 모든 실습을 진행할 수 있어요.",
@@ -5214,9 +5161,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-54",
+    id: "lesson-103",
     slug: "ai-tool-account-and-cost",
-    phaseId: "phase-0",
     titleKo: "AI 도구 계정 세팅과 비용 관리 — 무엇을 언제 돈 내고 쓰는가",
     titleEn: "AI tool accounts & cost management — what to pay for and when",
     hook: "AI 도구를 쓰다 보면 갑자기 '월 $20 구독하시겠어요?'가 나와요. 뭘 무료로 쓸 수 있고 뭘 유료로 써야 하는지, AI API를 쓰면 얼마가 나오는지 — 처음에 정리해두지 않으면 나중에 예상치 못한 청구서를 받습니다.",
@@ -5304,13 +5250,12 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-55",
+    id: "lesson-305",
     slug: "privacy-and-academic-ethics",
-    phaseId: "phase-0",
     titleKo: "AI 사용 윤리 기초 — 개인정보·저작권·표절 경계 잡기",
     titleEn: "AI ethics basics — privacy, copyright, and plagiarism boundaries",
     hook: "AI에게 업무 이메일을 정리해달라고 했어요. 고객 이름이 들어간 내용인데 괜찮은 건가요? AI가 쓴 보고서를 내 이름으로 제출하면 표절인가요? 시작 전에 선을 그어두면 나중에 곤란해지지 않아요.",
-    summary: "AI를 사용할 때 반드시 알아야 하는 윤리 기초를 다룹니다. 개인정보 처리 경계, AI 생성 콘텐츠의 저작권, 표절과 AI 보조 작업의 경계, 그리고 AI 출력을 무비판적으로 믿는 위험을 짧고 실용적으로 정리합니다. Phase 0의 마지막 레슨으로, 이후 모든 실습에서 의식적으로 적용할 습관을 만듭니다.",
+    summary: "AI를 사용할 때 반드시 알아야 하는 윤리 기초를 다룹니다. 개인정보 처리 경계, AI 생성 콘텐츠의 저작권, 표절과 AI 보조 작업의 경계, 그리고 AI 출력을 무비판적으로 믿는 위험을 짧고 실용적으로 정리합니다. Stage 1의 마지막 레슨으로, 이후 모든 실습에서 의식적으로 적용할 습관을 만듭니다.",
     level: "beginner",
     estimatedMinutes: 25,
     targetJourneys: ["adopter", "creator", "explorer", "founder", "engineer", "practitioner"],
@@ -5386,11 +5331,10 @@ export const lessons: Lesson[] = [
       },
     ],
   },
-  // ─── Phase 11 — AI Product & Monetization ───────────────────────────────
+  // ─── AI Product & Monetization ───────────────────────────────
   {
-    id: "lesson-56",
+    id: "lesson-801",
     slug: "ai-product-brief",
-    phaseId: "phase-11",
     titleKo: "AI 제품 1페이지 브리프",
     titleEn: "AI product brief",
     hook: "아이디어는 많은데 '뭘 먼저 만들까'가 안 정해져요. 1페이지 브리프 하나면 아이디어를 실행 가능한 제품으로 좁힐 수 있습니다.",
@@ -5462,9 +5406,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-57",
+    id: "lesson-802",
     slug: "landing-page-for-ai-product",
-    phaseId: "phase-11",
     titleKo: "AI 제품 랜딩 페이지 설계",
     titleEn: "Landing page for AI product",
     hook: "만들었는데 아무도 모르면 존재하지 않는 것과 같아요. 첫 사용자를 부르는 랜딩 페이지 1장이 제품의 첫 문장입니다.",
@@ -5536,9 +5479,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-58",
+    id: "lesson-803",
     slug: "pricing-and-monetization",
-    phaseId: "phase-11",
     titleKo: "AI 서비스 가격 책정과 수익화",
     titleEn: "Pricing and monetization for AI products",
     hook: "무료로 시작했다가 유료 전환이 안 돼요. AI API 비용은 나가는데 수익은 없는 상태, 어떻게 빠져나올 수 있을까요?",
@@ -5609,28 +5551,27 @@ export const lessons: Lesson[] = [
       },
     ],
   },
-  // ─── Phase 12 — Capstone Projects ────────────────────────────────────────
+  // ─── Capstone Projects ────────────────────────────────────────
   {
-    id: "lesson-59",
+    id: "lesson-804",
     slug: "capstone-scope-selection",
-    phaseId: "phase-12",
     titleKo: "캡스톤 프로젝트 선택과 범위 압축",
     titleEn: "Capstone scope selection",
     hook: "아이디어가 너무 크거나 너무 막연해요. '뭘 만들지' 결정 자체가 프로젝트의 첫 번째 작업입니다.",
-    summary: "Phase 0-11 산출물을 돌아보며 캡스톤 후보 3개를 찾고, 실현 가능성·임팩트·학습 가치 3축 매트릭스로 1개를 선택합니다. 선택된 프로젝트의 범위를 4주 안에 공개 가능한 수준으로 압축하는 방법을 익힙니다.",
+    summary: "지금까지의 모든 Stage 산출물을 돌아보며 캡스톤 후보 3개를 찾고, 실현 가능성·임팩트·학습 가치 3축 매트릭스로 1개를 선택합니다. 선택된 프로젝트의 범위를 4주 안에 공개 가능한 수준으로 압축하는 방법을 익힙니다.",
     level: "advanced",
     estimatedMinutes: 40,
     targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
     prerequisites: ["capstone-plan-and-launch"],
     learningGoals: [
-      "Phase 0-11 산출물에서 캡스톤 후보를 발굴한다",
+      "지금까지의 모든 Stage 산출물에서 캡스톤 후보를 발굴한다",
       "실현 가능성·임팩트·학습 가치 3축 매트릭스로 후보를 평가한다",
       "선택된 프로젝트의 범위를 4주·기능 3개 이하로 압축한다",
       "'만들다 멈추게 되는 이유' 3가지를 사전에 식별한다",
       "프로젝트 선언문(한 문장)을 작성한다",
     ],
     problemScenario:
-      "Phase 1-11을 마쳤는데 캡스톤을 뭘 만들지 모르겠어요. 회사 업무에 쓸 자동화 툴, 개인 생산성 앱, 오픈소스 기여 중 어떤 걸 골라야 할지. 한번 시작했다가 '이것보다 저게 더 좋겠는데'라는 생각에 바꾸기를 반복한 경험이 있습니다.",
+      "앞선 모든 Stage를 마쳤는데 캡스톤을 뭘 만들지 모르겠어요. 회사 업무에 쓸 자동화 툴, 개인 생산성 앱, 오픈소스 기여 중 어떤 걸 골라야 할지. 한번 시작했다가 '이것보다 저게 더 좋겠는데'라는 생각에 바꾸기를 반복한 경험이 있습니다.",
     coreConcepts: [
       {
         term: "3축 평가 매트릭스",
@@ -5646,7 +5587,7 @@ export const lessons: Lesson[] = [
       },
     ],
     mission:
-      "캡스톤 프로젝트를 선택하고 선언문을 작성한다.\n\n## 단계\n1. Phase 0-11 산출물 목록을 훑고 '이걸 발전시키면 쓸 만하겠다'는 후보 3개를 찾는다\n2. 각 후보를 3축(실현 가능성·임팩트·학습 가치)으로 1-5점 평가한다\n3. 가장 점수가 높은 1개를 선택한다 — 동점이면 임팩트 우선\n4. 선택된 프로젝트의 기능 목록을 쓰고, '4주 안에 반드시 있어야 하는 것'만 남길 때까지 줄인다\n5. 프로젝트 선언문 1문장을 작성한다\n6. AI에게 '이 선언문의 범위가 4주 안에 혼자 완성 가능한가?' 를 검토받는다",
+      "캡스톤 프로젝트를 선택하고 선언문을 작성한다.\n\n## 단계\n1. 지금까지의 모든 Stage 산출물 목록을 훑고 '이걸 발전시키면 쓸 만하겠다'는 후보 3개를 찾는다\n2. 각 후보를 3축(실현 가능성·임팩트·학습 가치)으로 1-5점 평가한다\n3. 가장 점수가 높은 1개를 선택한다 — 동점이면 임팩트 우선\n4. 선택된 프로젝트의 기능 목록을 쓰고, '4주 안에 반드시 있어야 하는 것'만 남길 때까지 줄인다\n5. 프로젝트 선언문 1문장을 작성한다\n6. AI에게 '이 선언문의 범위가 4주 안에 혼자 완성 가능한가?' 를 검토받는다",
     buildSteps: [
       "산출물 목록 돌아보기 → 후보 3개 발굴",
       "3축 매트릭스 평가",
@@ -5686,9 +5627,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-60",
+    id: "lesson-805",
     slug: "capstone-build-loop",
-    phaseId: "phase-12",
     titleKo: "캡스톤 빌드 루프",
     titleEn: "Capstone build loop",
     hook: "계획은 있는데 매일 진행하기가 어려요. 코딩 에이전트와 함께 일주일씩 끊어 진행하는 빌드 리듬이 필요합니다.",
@@ -5713,7 +5653,7 @@ export const lessons: Lesson[] = [
       },
       {
         term: "일일 지시 패턴",
-        explanation: "매일 코딩 에이전트에게 '오늘 목표', '맥락', '완료 기준' 3줄로 지시를 시작합니다. Phase 2의 4축 프롬프트를 압축한 형태입니다.",
+        explanation: "매일 코딩 에이전트에게 '오늘 목표', '맥락', '완료 기준' 3줄로 지시를 시작합니다. Stage 2의 4축 프롬프트를 압축한 형태입니다.",
       },
       {
         term: "막힘 탈출 루틴",
@@ -5760,9 +5700,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-61",
+    id: "lesson-809",
     slug: "portfolio-and-retrospective",
-    phaseId: "phase-12",
     titleKo: "포트폴리오 공개와 회고",
     titleEn: "Portfolio and retrospective",
     hook: "4주가 지났어요. 이제 공개할 차례입니다. 좋은 회고는 이번 캡스톤을 다음 프로젝트의 출발점으로 만들어줍니다.",
@@ -5836,9 +5775,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-62",
+    id: "lesson-104",
     slug: "cost-monitoring-in-production",
-    phaseId: "phase-1",
     titleKo: "프로덕션 비용 모니터링 — 청구서가 터지기 전에",
     titleEn: "Cost monitoring before the bill explodes",
     hook: "AI 비용은 천천히 오르지 않습니다. 평소처럼 쓰다가 어느 날 청구서에 0이 하나 더 붙어 있어요. 매주 5분이면 그 사고를 막을 수 있습니다.",
@@ -5927,9 +5865,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-63",
+    id: "lesson-106",
     slug: "ai-delegation-decision",
-    phaseId: "phase-1",
     titleKo: "AI에 맡길까 말까 — 위임 판단의 기준",
     titleEn: "Delegate to AI, or not — the decision rule",
     hook: "AI를 잘 쓰는 사람의 첫 번째 기술은 좋은 프롬프트가 아니라, \"이 일을 AI에 맡길까\"를 3초 안에 판단하는 것입니다.",
@@ -6018,9 +5955,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-64",
+    id: "lesson-107",
     slug: "ai-collaboration-mindset",
-    phaseId: "phase-1",
     titleKo: "팀에 AI를 들이는 법 — 저항을 다루는 마인드셋",
     titleEn: "Bringing AI to your team — handling resistance",
     hook: "혼자 AI를 잘 쓰는 것과, 팀이 AI를 쓰게 만드는 것은 완전히 다른 기술입니다. 후자의 절반은 도구가 아니라 사람을 다루는 일이에요.",
@@ -6109,9 +6045,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-65",
+    id: "lesson-202",
     slug: "reasoning-vs-instruct-prompting",
-    phaseId: "phase-2",
     titleKo: "추론 모델 vs 일반 모델 — 모델 종류별 프롬프트",
     titleEn: "Reasoning models vs instruct models — prompting by model type",
     hook: "같은 프롬프트가 어떤 모델에선 잘 되고 어떤 모델에선 헛돕니다. 모델이 멍청해진 게 아니라, 모델 종류가 다른 거예요.",
@@ -6199,9 +6134,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-66",
+    id: "lesson-204",
     slug: "prompt-debugging-loop",
-    phaseId: "phase-2",
     titleKo: "프롬프트가 실패할 때 — 4축 디버깅 루프",
     titleEn: "When a prompt fails — the 4-axis debugging loop",
     hook: "프롬프트가 안 먹힐 때 가장 흔한 실수는 그냥 다시 쓰는 거예요. 어느 축이 약했는지 모르면, 다음 프롬프트도 같은 자리에서 실패합니다.",
@@ -6289,9 +6223,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-67",
+    id: "lesson-206",
     slug: "multimodal-prompting",
-    phaseId: "phase-2",
     titleKo: "이미지·음성을 프롬프트에 — 멀티모달 입력 다루기",
     titleEn: "Multimodal prompting — image and audio inputs",
     hook: "프롬프트는 글로만 쓰는 게 아니에요. 스크린샷 한 장, 화이트보드 사진 한 장이 긴 설명 열 줄보다 정확할 때가 많습니다.",
@@ -6379,9 +6312,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-68",
+    id: "lesson-207",
     slug: "output-evaluation-refine",
-    phaseId: "phase-2",
     titleKo: "AI 출력 평가하고 다듬기 — 한 번에 끝내지 않는 법",
     titleEn: "Evaluate and refine AI output — don't settle for the first draft",
     hook: "AI의 첫 답을 그대로 쓰는 사람과, 한 번 더 다듬는 사람의 결과물은 전혀 다릅니다. 차이는 프롬프트가 아니라 그다음에 있어요.",
@@ -6469,9 +6401,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-69",
+    id: "lesson-208",
     slug: "api-rate-limiting-and-batching",
-    phaseId: "phase-2",
     titleKo: "여러 작업 한 번에 — 배치 프롬프팅과 비용 최적화",
     titleEn: "Batch prompting and cost optimization",
     hook: "100개를 하나씩 물어보면 100번의 복붙과 100배의 시간이 듭니다. 묶어서 한 번에 처리하는 법을 알면, 그 일이 5분이 돼요.",
@@ -6559,9 +6490,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-70",
+    id: "lesson-304",
     slug: "fallback-strategy-when-ai-fails",
-    phaseId: "phase-1",
     titleKo: "검증했는데 또 틀렸다 — AI 실패 시 차선책",
     titleEn: "Fallback strategy when AI fails",
     hook: "검증법을 배우면 AI의 실수를 잡아냅니다. 그런데 잡아낸 다음은요? 거기서 멈추면 일이 멈춰요.",
@@ -6650,9 +6580,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-71",
+    id: "lesson-405",
     slug: "custom-gpt-builder",
-    phaseId: "phase-3",
     titleKo: "재사용 AI 어시스턴트 만들기 — Custom GPT와 프로젝트",
     titleEn: "Build a reusable AI assistant — Custom GPT and Projects",
     hook: "매번 같은 지시를 복붙하고 있나요? 그 지시를 한 번 어시스턴트에 박아두면, 다음부터는 그냥 부르기만 하면 돼요.",
@@ -6741,9 +6670,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-72",
+    id: "lesson-406",
     slug: "multi-workflow-orchestration",
-    phaseId: "phase-3",
     titleKo: "여러 파이프라인을 한 루틴으로 — 워크플로우 오케스트레이션",
     titleEn: "Orchestrate multiple workflows into one routine",
     hook: "파이프라인을 하나씩 만들다 보면 어느새 다섯 개가 됩니다. 그런데 그 다섯 개가 서로 모르고 따로 돌면, 관리가 또 다른 일이 돼요.",
@@ -6832,9 +6760,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-73",
+    id: "lesson-407",
     slug: "cost-estimation-and-roi-by-task",
-    phaseId: "phase-3",
     titleKo: "이 자동화, 돈이 될까 — 업무별 비용과 ROI",
     titleEn: "Cost and ROI by task — is this automation worth it",
     hook: "자동화를 만드는 건 신나는 일이에요. 그런데 \"이게 실제로 이득인가\"를 숫자로 못 답하면, 좋아 보이는 일에 시간을 계속 쓰게 됩니다.",
@@ -6923,9 +6850,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-74",
+    id: "lesson-507",
     slug: "pr-review-with-ai",
-    phaseId: "phase-4",
     titleKo: "AI와 함께 PR 리뷰하기 — 머지 전 마지막 점검",
     titleEn: "Reviewing PRs with AI — the last gate before merge",
     hook: "AI가 짠 코드는 빠릅니다. 그런데 그 코드를 머지 버튼 누르기 전에 누가 봅니까? AI에게 짜게 했다면, 리뷰도 함께 설계해야 해요.",
@@ -7014,9 +6940,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-75",
+    id: "lesson-509",
     slug: "agent-hooks-automation",
-    phaseId: "phase-4",
     titleKo: "Hooks로 자동 게이트 만들기 — 까먹지 않는 검증",
     titleEn: "Automated gates with hooks",
     hook: "\"커밋 전에 테스트 돌리기\"를 매번 기억하나요? 사람은 까먹습니다. Hook은 안 까먹어요.",
@@ -7105,9 +7030,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-76",
+    id: "lesson-510",
     slug: "subagent-context-design",
-    phaseId: "phase-4",
     titleKo: "서브에이전트 설계 — 컨텍스트를 나눠 일을 키운다",
     titleEn: "Designing subagents — split context to scale work",
     hook: "큰 작업을 한 에이전트에 다 던지면 컨텍스트가 엉켜요. 일을 쪼개 각자의 깨끗한 컨텍스트를 가진 서브에이전트에 맡기면 결과가 달라집니다.",
@@ -7196,9 +7120,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-77",
+    id: "lesson-605",
     slug: "auth-and-user-sessions",
-    phaseId: "phase-5",
     titleKo: "사용자 인증과 세션 — 누가 쓰는지 아는 앱",
     titleEn: "Auth and user sessions",
     hook: "지금까지 만든 AI 앱은 \"누구나\" 쓰는 앱이었어요. 그런데 대화 기록·비용·권한은 결국 \"누가\"에 묶입니다.",
@@ -7287,9 +7210,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-78",
+    id: "lesson-606",
     slug: "long-term-memory-state",
-    phaseId: "phase-5",
     titleKo: "장기 기억과 상태 — 어제를 기억하는 AI",
     titleEn: "Long-term memory and state",
     hook: "대화를 저장하는 것과, AI가 \"당신을 기억하는\" 것은 다릅니다. 후자는 무엇을 기억하고 무엇을 잊을지 설계하는 일이에요.",
@@ -7378,9 +7300,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-79",
+    id: "lesson-615",
     slug: "build-mcp-server",
-    phaseId: "phase-7",
     titleKo: "MCP 서버 만들기 — 내 도구를 AI에 표준으로 연결",
     titleEn: "Build an MCP server",
     hook: "Function Calling은 한 앱 안에서만 통합니다. MCP는 그 도구를 어느 AI 클라이언트에든 꽂을 수 있는 표준 플러그로 만들어요.",
@@ -7469,9 +7390,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-80",
+    id: "lesson-703",
     slug: "agent-failure-patterns",
-    phaseId: "phase-7",
     titleKo: "에이전트가 실패하는 패턴 — 미리 아는 함정",
     titleEn: "Agent failure patterns",
     hook: "에이전트는 새로운 방식으로 실패합니다. 그 실패 패턴을 미리 알면, 사고가 아니라 예방으로 다룰 수 있어요.",
@@ -7560,9 +7480,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-81",
+    id: "lesson-704",
     slug: "mcp-production-patterns",
-    phaseId: "phase-7",
     titleKo: "MCP 서버 운영 — 프로덕션에서 도구를 굴리는 법",
     titleEn: "MCP server production patterns",
     hook: "MCP 서버를 만드는 것과, 그 서버를 여러 사람이 매일 쓰게 굴리는 것은 다른 일이에요.",
@@ -7651,9 +7570,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-82",
+    id: "lesson-706",
     slug: "user-feedback-collection-for-ai-products",
-    phaseId: "phase-7",
     titleKo: "사용자 피드백 모으기 — AI 제품의 진짜 신호",
     titleEn: "Collecting user feedback for AI products",
     hook: "Eval은 내가 정한 기준이에요. 사용자 피드백은 내가 못 정한 기준 — 진짜 쓸모는 거기서 드러납니다.",
@@ -7742,9 +7660,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-83",
+    id: "lesson-807",
     slug: "early-user-recruitment-for-ai-products",
-    phaseId: "phase-8",
     titleKo: "첫 사용자 찾기 — 5명을 어디서 모으나",
     titleEn: "Recruiting your first users",
     hook: "제품을 만들고 배포까지 했어요. 그런데 아무도 안 와요. \"만들면 온다\"는 거짓말입니다 — 첫 사용자는 찾아 나서야 합니다.",
@@ -7833,9 +7750,8 @@ export const lessons: Lesson[] = [
     ],
   },
   {
-    id: "lesson-84",
+    id: "lesson-808",
     slug: "claude-skills-authoring",
-    phaseId: "phase-8",
     titleKo: "재사용 Skill로 패키징하기 — 내 노하우를 자산으로",
     titleEn: "Authoring reusable Skills",
     hook: "여기까지 오며 당신은 수십 개의 워크플로우를 만들었어요. 그걸 Skill 한 장으로 패키징하면, 다음 사람도·미래의 당신도 그대로 꺼내 씁니다.",

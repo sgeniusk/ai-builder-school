@@ -2,19 +2,19 @@
 "use client";
 
 import { useState } from "react";
-import type { Journey, Lesson, Phase } from "@/lib/types";
+import type { Journey, Lesson, Stage } from "@/lib/types";
 import { useCharacter } from "@/hooks/useCharacter";
 import { CharacterAvatar } from "./CharacterAvatar";
 import { CharacterOnboarding } from "./CharacterOnboarding";
 import { CharacterProfile } from "./CharacterProfile";
 
 type Props = {
-  phases: Phase[];
+  stages: Stage[];
   journeys: Journey[];
-  lessonsByPhase: Record<string, Lesson[]>;
+  lessonsByStage: Record<string, Lesson[]>;
 };
 
-export function CharacterShell({ phases, journeys, lessonsByPhase }: Props) {
+export function CharacterShell({ stages, journeys, lessonsByStage }: Props) {
   const { mounted, character } = useCharacter();
   const [profileOpen, setProfileOpen] = useState(false);
 
@@ -36,9 +36,9 @@ export function CharacterShell({ phases, journeys, lessonsByPhase }: Props) {
       />
       {profileOpen && (
         <CharacterProfile
-          phases={phases}
+          stages={stages}
           journeys={journeys}
-          lessonsByPhase={lessonsByPhase}
+          lessonsByStage={lessonsByStage}
           onClose={() => setProfileOpen(false)}
         />
       )}

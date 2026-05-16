@@ -32,7 +32,7 @@ export default function NotFound() {
           <Link href="/" className="btn">
             홈으로 <span className="arrow">→</span>
           </Link>
-          <Link href="/curriculum" className="btn ghost">
+          <Link href="/stages" className="btn ghost">
             커리큘럼 보기
           </Link>
         </div>

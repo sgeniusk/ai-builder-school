@@ -1,4 +1,3 @@
-import { phases } from "@/content/phases";
 import { lessons as rawLessons } from "@/content/lessons";
 import { journeys } from "@/content/journeys";
 import { projects } from "@/content/projects";
@@ -13,7 +12,6 @@ import type {
   Journey,
   JourneyId,
   Lesson,
-  Phase,
   Project,
   Stage,
   ContentTemplate,
@@ -34,28 +32,12 @@ const lessons: Lesson[] = rawLessons.map((lesson) => {
   };
 });
 
-export function getPhases(): Phase[] {
-  return [...phases].sort((a, b) => a.order - b.order);
-}
-
-export function getPhaseBySlug(slug: string): Phase | undefined {
-  return phases.find((p) => p.slug === slug);
-}
-
-export function getPhaseById(id: string): Phase | undefined {
-  return phases.find((p) => p.id === id);
-}
-
 export function getLessons(): Lesson[] {
   return lessons;
 }
 
 export function getLessonBySlug(slug: string): Lesson | undefined {
   return lessons.find((l) => l.slug === slug);
-}
-
-export function getLessonsByPhaseId(phaseId: string): Lesson[] {
-  return lessons.filter((l) => l.phaseId === phaseId);
 }
 
 export function getLessonsByJourney(journeyId: JourneyId): Lesson[] {
@@ -133,27 +115,12 @@ export function getProjectsByJourney(journeyId: JourneyId): Project[] {
   return projects.filter((p) => p.targetJourneys.includes(journeyId));
 }
 
-export function getJourneysByPhaseSlug(slug: string): Journey[] {
-  return journeys.filter((j) => j.recommendedPhases.includes(slug));
-}
-
-export function getProjectsByPhaseSlug(slug: string): Project[] {
-  return projects.filter((p) => p.requiredPhases.includes(slug));
-}
-
 export function getProjectsByStageSlug(slug: string): Project[] {
-  return projects.filter((p) => p.requiredStages?.includes(slug) ?? false);
+  return projects.filter((p) => p.requiredStages.includes(slug));
 }
 
 export function getTemplates(): ContentTemplate[] {
   return templates;
-}
-
-export function getMvpWeeks(): Array<{ week: number; phase: Phase }> {
-  return getPhases()
-    .filter((p) => typeof p.weekInMvpPath === "number")
-    .map((p) => ({ week: p.weekInMvpPath as number, phase: p }))
-    .sort((a, b) => a.week - b.week);
 }
 
 export interface ContentIntegrityIssue {
@@ -164,67 +131,15 @@ export interface ContentIntegrityIssue {
 
 export function validateContent(): ContentIntegrityIssue[] {
   const issues: ContentIntegrityIssue[] = [];
-  const phaseIds = new Set(phases.map((p) => p.id));
-  const phaseSlugs = new Set(phases.map((p) => p.slug));
   const lessonSlugs = new Set(lessons.map((l) => l.slug));
 
-  for (const lesson of lessons) {
-    if (!phaseIds.has(lesson.phaseId)) {
-      issues.push({
-        kind: "lesson.phaseId",
-        ref: lesson.slug,
-        message: `Lesson "${lesson.slug}" references missing phase "${lesson.phaseId}"`,
-      });
-    }
-  }
-
-  for (const phase of phases) {
-    for (const slug of phase.lessonSlugs) {
-      if (!lessonSlugs.has(slug)) {
-        issues.push({
-          kind: "phase.lessonSlug",
-          ref: phase.slug,
-          message: `Phase "${phase.slug}" references missing lesson "${slug}"`,
-        });
-      }
-    }
-    if (phase.nextPhaseSlug && !phaseSlugs.has(phase.nextPhaseSlug)) {
-      issues.push({
-        kind: "phase.nextPhaseSlug",
-        ref: phase.slug,
-        message: `Phase "${phase.slug}" references missing next phase "${phase.nextPhaseSlug}"`,
-      });
-    }
-  }
-
   for (const journey of journeys) {
-    for (const slug of journey.recommendedPhases) {
-      if (!phaseSlugs.has(slug)) {
-        issues.push({
-          kind: "journey.phase",
-          ref: journey.slug,
-          message: `Journey "${journey.slug}" recommends missing phase "${slug}"`,
-        });
-      }
-    }
     for (const slug of journey.recommendedLessons) {
       if (!lessonSlugs.has(slug)) {
         issues.push({
           kind: "journey.lesson",
           ref: journey.slug,
           message: `Journey "${journey.slug}" recommends missing lesson "${slug}"`,
-        });
-      }
-    }
-  }
-
-  for (const project of projects) {
-    for (const slug of project.requiredPhases) {
-      if (!phaseSlugs.has(slug)) {
-        issues.push({
-          kind: "project.phase",
-          ref: project.slug,
-          message: `Project "${project.slug}" requires missing phase "${slug}"`,
         });
       }
     }
@@ -337,7 +252,7 @@ export function validateContent(): ContentIntegrityIssue[] {
     }
   }
 
-  // 6) 분포 표 일치 (4-5-4-14-8-13-6-7 = 61)
+  // 6) 분포 표 일치 (7-10-5-17-11-16-9-9 = 84)
   for (const [stageId, expected] of Object.entries(EXPECTED_STAGE_DISTRIBUTION)) {
     const actual = lessons.filter((l) => l.stageId === stageId).length;
     if (actual !== expected) {
@@ -358,7 +273,6 @@ export function validateContent(): ContentIntegrityIssue[] {
 
   // 7) journey.recommendedStages가 실제 stage를 가리키는지
   for (const journey of journeys) {
-    if (!journey.recommendedStages) continue;
     for (const slug of journey.recommendedStages) {
       if (!stageSlugs.has(slug)) {
         issues.push({
@@ -372,7 +286,6 @@ export function validateContent(): ContentIntegrityIssue[] {
 
   // 8) project.requiredStages가 실제 stage를 가리키는지
   for (const project of projects) {
-    if (!project.requiredStages) continue;
     for (const slug of project.requiredStages) {
       if (!stageSlugs.has(slug)) {
         issues.push({
