@@ -6575,4 +6575,277 @@ export const lessons: Lesson[] = [
       },
     ],
   },
+  {
+    id: "lesson-71",
+    slug: "custom-gpt-builder",
+    phaseId: "phase-3",
+    titleKo: "재사용 AI 어시스턴트 만들기 — Custom GPT와 프로젝트",
+    titleEn: "Build a reusable AI assistant — Custom GPT and Projects",
+    hook: "매번 같은 지시를 복붙하고 있나요? 그 지시를 한 번 어시스턴트에 박아두면, 다음부터는 그냥 부르기만 하면 돼요.",
+    summary:
+      "자주 쓰는 프롬프트·맥락·예시를 Custom GPT 또는 Projects 같은 재사용 어시스턴트로 묶는 법을 익힙니다. 코드 없이 만드는 나만의 업무 전용 AI 도우미 하나를 완성합니다.",
+    level: "beginner",
+    estimatedMinutes: 45,
+    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    prerequisites: ["build-personal-prompt-library", "automate-report-drafts"],
+    learningGoals: [
+      "매번 프롬프트를 복붙하는 일과 재사용 어시스턴트의 차이를 설명한다",
+      "Custom GPT / Projects에 지시·맥락·예시·참고 파일을 묶는다",
+      "어시스턴트가 일관되게 동작하도록 시스템 지시를 작성한다",
+      "팀이나 동료와 어시스턴트를 공유하는 법을 안다",
+    ],
+    problemScenario:
+      "당신은 주간 보고서를 AI로 씁니다. 그런데 매번 같은 일을 반복해요. \"우리 팀은 B2B SaaS고, 보고서는 이런 톤이고, 이런 섹션이 필요하고…\"를 채팅창에 다시 붙입니다. 좋은 프롬프트를 라이브러리에 저장해뒀어도, 쓸 때마다 꺼내 붙이는 건 여전히 번거로워요. 한 단계 위가 있습니다. 그 지시와 맥락을 아예 어시스턴트 안에 박아두면, 다음부터는 \"이번 주 보고서\"라고만 해도 됩니다.",
+    coreConcepts: [
+      {
+        term: "재사용 어시스턴트",
+        explanation:
+          "시스템 지시·맥락·예시·참고 파일을 미리 묶어둔 전용 AI. Custom GPT(ChatGPT), Projects(Claude/ChatGPT) 등 코드 없이 만듭니다.",
+      },
+      {
+        term: "시스템 지시 (System Instruction)",
+        explanation:
+          "어시스턴트가 매 대화에서 항상 따르는 상시 지시. 역할·톤·금지 사항·출력 형식을 한 번 정해두면 매번 반복하지 않아도 됩니다.",
+      },
+      {
+        term: "지식 파일 (Knowledge)",
+        explanation:
+          "어시스턴트에 미리 올려두는 참고 문서(브랜드 가이드·과거 산출물·용어집). 매 대화에 맥락을 다시 붙이지 않게 합니다.",
+      },
+      {
+        term: "어시스턴트 공유",
+        explanation:
+          "잘 만든 어시스턴트는 링크로 팀에 공유할 수 있습니다. 한 사람의 좋은 프롬프트가 팀 전체의 도구가 됩니다.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 Custom GPT·Projects를 지원하는 AI 도구)에게 아래 작업을 맡깁니다. 45분 안에 끝내는 걸 목표로 하세요.\n\n작업: 당신의 반복 업무 하나를 위한 재사용 어시스턴트를 만들고, 그 설계를 `assistant-spec.md`에 정리합니다.\n\n포함해야 할 섹션:\n1. \"어시스턴트 목적\" — 어떤 반복 업무를 위한 것인지 한 문장\n2. \"시스템 지시\" — 역할·톤·필수 섹션·금지 사항·출력 형식 (실제 어시스턴트에 넣을 본문)\n3. \"지식 파일 목록\" — 미리 올려둘 참고 문서 (브랜드 가이드·예시 산출물 등)\n4. \"대화 예시 3개\" — 이 어시스턴트를 부르는 짧은 지시문 예시\n5. \"공유 계획\" — 누구와 어떻게 공유할지\n\n에이전트에게 당신이 가장 자주 반복하는 AI 업무 하나를 알려주세요. 그 업무 전용 어시스턴트를 설계합니다.",
+    codexNote:
+      "Codex CLI 자체는 Custom GPT를 만들지 않습니다. Codex에는 `assistant-spec.md` 설계 문서 작성을 맡기고, 실제 어시스턴트는 ChatGPT·Claude 앱에서 그 spec대로 만들라고 안내하세요.",
+    buildSteps: [
+      "자주 반복하는 AI 업무 하나를 고른다",
+      "그 업무의 시스템 지시(역할·톤·섹션·금지·형식)를 작성한다",
+      "미리 올려둘 지식 파일을 정한다",
+      "Custom GPT 또는 Projects로 어시스턴트를 실제로 만든다",
+      "짧은 지시문 3개로 어시스턴트를 시험한다",
+      "어시스턴트를 공유할 대상과 방법을 정한다",
+    ],
+    verificationChecklist: [
+      "어시스턴트 목적이 한 문장으로 분명한가",
+      "시스템 지시에 역할·톤·금지·출력 형식이 모두 있는가",
+      "지식 파일이 미리 올라가 있어 매 대화에 맥락을 안 붙여도 되는가",
+      "짧은 지시문만으로 기대한 결과가 나오는가",
+      "공유 계획이 구체적인가 (누구·어떻게)",
+      "이 어시스턴트를 내일 실제 업무에 쓸 수 있는가",
+    ],
+    deliverable: {
+      title: "재사용 어시스턴트 + 설계서 (`assistant-spec.md`)",
+      description:
+        "반복 업무 전용 Custom GPT/Project 1개 + 시스템 지시·지식 파일·대화 예시·공유 계획을 담은 설계서.",
+      format: "어시스턴트 + Markdown 파일(.md)",
+    },
+    reflectionQuestions: [
+      "지금 매번 복붙하고 있는 지시 중 어시스턴트에 박아둘 만한 것은 무엇인가요?",
+      "시스템 지시에서 가장 빠뜨리기 쉬운 항목은 무엇이었나요?",
+      "이 어시스턴트를 팀에 공유하면 누가 가장 먼저 덕을 볼까요?",
+    ],
+    extensionIdeas: [
+      "업무 종류마다 어시스턴트를 따로 만들어 \"AI 도우미 세트\"를 갖추기",
+      "어시스턴트의 시스템 지시를 분기마다 회고하며 개선하기",
+      "팀 공용 어시스턴트를 만들어 산출물 톤·형식을 통일하기",
+    ],
+    tags: ["work-os", "assistant", "automation", "custom-gpt"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "assistant-spec.md",
+        title: "재사용 어시스턴트 설계서 템플릿",
+        kind: "prompt",
+      },
+    ],
+  },
+  {
+    id: "lesson-72",
+    slug: "multi-workflow-orchestration",
+    phaseId: "phase-3",
+    titleKo: "여러 파이프라인을 한 루틴으로 — 워크플로우 오케스트레이션",
+    titleEn: "Orchestrate multiple workflows into one routine",
+    hook: "파이프라인을 하나씩 만들다 보면 어느새 다섯 개가 됩니다. 그런데 그 다섯 개가 서로 모르고 따로 돌면, 관리가 또 다른 일이 돼요.",
+    summary:
+      "보고서·회의록·리서치·콘텐츠 같은 개별 AI 파이프라인들을 하나의 주간 루틴으로 엮는 법을 익힙니다. 무엇을 언제 어떤 순서로 돌릴지, 한 파이프라인의 출력이 다음 입력이 되게 연결하는 설계도를 만듭니다.",
+    level: "intermediate",
+    estimatedMinutes: 50,
+    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    prerequisites: ["automate-report-drafts", "meeting-notes-pipeline", "custom-gpt-builder"],
+    learningGoals: [
+      "개별 파이프라인을 따로 돌리는 일과 오케스트레이션의 차이를 설명한다",
+      "여러 파이프라인을 시간·순서·의존 관계로 배치한다",
+      "한 파이프라인의 출력이 다음 파이프라인의 입력이 되게 연결한다",
+      "주간 단위로 무엇이 자동으로 돌고 무엇에 사람이 끼는지 한눈에 본다",
+    ],
+    problemScenario:
+      "이 stage를 거치며 당신은 파이프라인을 여럿 만들었어요. 보고서 초안, 회의록 정리, 리서치, 블로그. 각각은 잘 돌아갑니다. 그런데 월요일 아침이 되면 — 무엇부터 돌리지? 회의록 정리가 끝나야 보고서에 넣을 수 있는데, 순서를 매번 머리로 기억해요. 파이프라인이 늘수록 \"파이프라인을 관리하는 일\"이 새로운 부담이 됩니다. 개별 자동화를 넘어, 그것들을 하나의 흐름으로 엮는 단계가 필요해요.",
+    coreConcepts: [
+      {
+        term: "오케스트레이션",
+        explanation:
+          "여러 개별 작업을 순서·시점·의존 관계에 맞춰 하나의 흐름으로 엮는 것. 자동화의 자동화에 해당합니다.",
+      },
+      {
+        term: "파이프라인 의존 관계",
+        explanation:
+          "A의 출력이 B의 입력일 때 A가 먼저 돌아야 합니다. 어느 파이프라인이 무엇에 의존하는지 그려야 순서가 정해집니다.",
+      },
+      {
+        term: "주간 루틴 맵",
+        explanation:
+          "한 주에 무엇이 언제 돌고, 어디에 사람이 끼는지 한 장에 그린 지도. \"무엇부터 하지\"를 매번 고민하지 않게 합니다.",
+      },
+      {
+        term: "사람 체크포인트",
+        explanation:
+          "파이프라인 사이에 사람이 검토·승인하는 지점. 전부 자동이 아니라, 위험한 이음새에만 사람을 끼웁니다.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 50분 안에 끝내는 걸 목표로 하세요.\n\n작업: 당신의 AI 파이프라인들을 엮은 `workflow-orchestration.md`를 만듭니다.\n\n포함해야 할 섹션:\n1. \"내 파이프라인 목록\" — 지금 돌리고 있는 AI 파이프라인 3개 이상. 각각 입력·출력\n2. \"의존 관계도\" — 어느 파이프라인의 출력이 어느 파이프라인의 입력인지\n3. \"주간 루틴 맵\" — 요일·시점별로 무엇이 돌고 무엇에 사람이 끼는지 표\n4. \"사람 체크포인트\" — 자동 흐름 중 사람이 반드시 검토할 이음새\n5. \"첫 실행 회고\" — 이 루틴을 한 번 돌려보고 느낀 마찰 한 줄\n\n에이전트에게 당신이 지금 쓰는 AI 파이프라인 3개 이상을 알려주세요.",
+    codexNote:
+      "Codex CLI에서는 의존 관계도를 먼저 그린 뒤 주간 맵으로 넘어가라고 순서를 명시하세요. 의존 관계 없이 짠 주간 맵은 순서가 어긋납니다.",
+    buildSteps: [
+      "지금 돌리는 AI 파이프라인 3개 이상을 입력·출력과 함께 적는다",
+      "파이프라인 사이의 의존 관계를 그린다",
+      "의존 관계에 맞춰 주간 루틴 맵(요일·시점)을 짠다",
+      "자동 흐름 중 사람이 끼어야 할 체크포인트를 표시한다",
+      "이 루틴을 실제로 한 번 돌려본다",
+      "느낀 마찰을 한 줄로 회고한다",
+    ],
+    verificationChecklist: [
+      "파이프라인이 3개 이상, 각각 입력·출력이 명시되어 있는가",
+      "의존 관계도가 \"무엇이 무엇 다음\"을 보여주는가",
+      "주간 루틴 맵이 요일·시점으로 구체적인가",
+      "사람 체크포인트가 위험한 이음새에 놓여 있는가",
+      "루틴을 실제로 한 번 돌려본 회고가 있는가",
+      "월요일 아침에 \"무엇부터\"를 고민하지 않아도 되는가",
+    ],
+    deliverable: {
+      title: "워크플로우 오케스트레이션 맵 (`workflow-orchestration.md`)",
+      description:
+        "파이프라인 목록 + 의존 관계도 + 주간 루틴 맵 + 사람 체크포인트 + 첫 실행 회고.",
+      format: "Markdown 파일(.md)",
+    },
+    reflectionQuestions: [
+      "지금 \"무엇부터 돌리지\"를 매번 머리로 기억하는 파이프라인이 있나요?",
+      "한 파이프라인의 출력을 다음 입력으로 손으로 옮기고 있진 않나요?",
+      "전부 자동으로 만들면 위험해지는 이음새는 어디인가요?",
+    ],
+    extensionIdeas: [
+      "자동화 도구(예약 실행·웹훅)로 주간 루틴의 일부를 자동 트리거하기",
+      "팀 단위 오케스트레이션으로 확장해 역할별 파이프라인을 엮기",
+      "월말에 루틴 맵을 회고하며 빠진 단계·중복 단계를 정리하기",
+    ],
+    tags: ["work-os", "orchestration", "automation"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "workflow-orchestration.md",
+        title: "워크플로우 오케스트레이션 맵 템플릿",
+        kind: "checklist",
+      },
+    ],
+  },
+  {
+    id: "lesson-73",
+    slug: "cost-estimation-and-roi-by-task",
+    phaseId: "phase-3",
+    titleKo: "이 자동화, 돈이 될까 — 업무별 비용과 ROI",
+    titleEn: "Cost and ROI by task — is this automation worth it",
+    hook: "자동화를 만드는 건 신나는 일이에요. 그런데 \"이게 실제로 이득인가\"를 숫자로 못 답하면, 좋아 보이는 일에 시간을 계속 쓰게 됩니다.",
+    summary:
+      "AI 자동화 하나하나가 실제로 시간·비용 면에서 이득인지 계산하는 법을 익힙니다. 업무별 AI 비용과 절약 시간을 같이 놓고, 어떤 자동화에 더 투자하고 어떤 건 접을지 판단하는 ROI 시트를 만듭니다.",
+    level: "beginner",
+    estimatedMinutes: 45,
+    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    prerequisites: ["cost-monitoring-in-production", "automate-report-drafts"],
+    learningGoals: [
+      "자동화의 가치를 \"느낌\"이 아니라 시간·비용 숫자로 본다",
+      "한 업무의 AI 비용(도구·API·내 시간)을 추정한다",
+      "자동화로 절약한 시간을 금액으로 환산한다",
+      "ROI가 낮은 자동화를 알아보고 접거나 바꾸는 판단을 한다",
+    ],
+    problemScenario:
+      "Stage 1에서 AI 비용을 모니터링하는 법을 배웠어요. 그건 \"얼마 나가는가\"였습니다. 그런데 비용에는 짝이 있어요 — \"그래서 얼마를 벌었는가\". 당신은 자동화를 여럿 만들었지만, 그중 어떤 게 진짜 이득인지 숫자로 답할 수 있나요. 어떤 자동화는 만드느라 8시간 썼는데 매주 10분 아껴요. 어떤 건 30분 만에 만들었는데 매주 3시간을 아낍니다. 느낌만으로는 둘을 구분 못 해요. 비용과 절약을 같이 놓고 봐야 합니다.",
+    coreConcepts: [
+      {
+        term: "업무별 비용 추정",
+        explanation:
+          "한 자동화의 비용은 AI 도구·API 요금만이 아닙니다. 만드는 데 든 내 시간, 유지·검토 시간까지 합쳐야 진짜 비용입니다.",
+      },
+      {
+        term: "절약 시간의 금액 환산",
+        explanation:
+          "자동화가 매주 N시간을 아낀다면, 그 시간에 시급(또는 기회비용)을 곱해 금액으로 봅니다. 시간은 추상적이고 금액은 비교 가능합니다.",
+      },
+      {
+        term: "ROI (투자 대비 효과)",
+        explanation:
+          "절약 금액 ÷ 들인 비용. 1보다 크면 이득, 작으면 손해. 단 만든 비용은 한 번이고 절약은 매주 쌓이므로 시간축을 함께 봅니다.",
+      },
+      {
+        term: "손익분기 시점",
+        explanation:
+          "자동화를 만드는 데 든 시간을, 매주 아끼는 시간으로 회수하는 데 걸리는 기간. 이게 너무 길면 그 자동화는 다시 생각합니다.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 45분 안에 끝내는 걸 목표로 하세요.\n\n작업: 당신의 AI 자동화들을 평가한 `automation-roi.md`를 만듭니다.\n\n포함해야 할 섹션:\n1. \"자동화 목록\" — 지금 쓰는 AI 자동화 3개 이상\n2. \"비용 추정\" — 각 자동화의 (a) 만든 시간 (b) 매주 유지·검토 시간 (c) AI 도구·API 월 비용\n3. \"절약 추정\" — 각 자동화가 매주 아끼는 시간 + 그 시간의 금액 환산\n4. \"ROI·손익분기\" — 각 자동화의 손익분기 시점과 ROI 한 줄 평가\n5. \"결정\" — 더 투자할 것 / 유지할 것 / 접을 것 분류\n\n에이전트에게 당신의 시급(또는 기회비용)과 자동화 3개를 알려주세요. 그래야 일반론이 아니라 당신 숫자가 나옵니다.",
+    codexNote:
+      "Codex CLI에서는 비용·절약 추정을 표로 만들라고 명시하면 ROI 계산이 깔끔합니다.",
+    buildSteps: [
+      "지금 쓰는 AI 자동화 3개 이상을 적는다",
+      "각 자동화의 비용(만든 시간·유지 시간·도구 비용)을 추정한다",
+      "각 자동화가 매주 아끼는 시간을 추정하고 금액으로 환산한다",
+      "손익분기 시점과 ROI를 계산한다",
+      "더 투자할 것·유지할 것·접을 것으로 분류한다",
+      "ROI가 가장 낮은 자동화를 어떻게 할지 정한다",
+    ],
+    verificationChecklist: [
+      "자동화가 3개 이상 평가되어 있는가",
+      "비용에 도구 요금뿐 아니라 만든 시간·유지 시간이 포함됐는가",
+      "절약 시간이 금액으로 환산되어 있는가",
+      "각 자동화에 손익분기 시점이 적혀 있는가",
+      "더 투자/유지/접을 것 분류가 되어 있는가",
+      "ROI가 낮은 자동화에 대한 결정이 있는가",
+    ],
+    deliverable: {
+      title: "자동화 ROI 시트 (`automation-roi.md`)",
+      description:
+        "AI 자동화별 비용·절약·ROI·손익분기 + 더 투자/유지/접을 것 분류.",
+      format: "Markdown 파일(.md) · 1페이지 이내",
+    },
+    reflectionQuestions: [
+      "만드는 데 공들였지만 사실 ROI가 낮은 자동화가 있었나요?",
+      "절약 시간을 금액으로 바꿔보니 느낌과 달랐던 자동화는 무엇인가요?",
+      "다음에 자동화를 만들기 전, 무엇을 먼저 추정할 건가요?",
+    ],
+    extensionIdeas: [
+      "팀 단위 ROI 시트로 확장해 \"우리 팀 AI 투자\"를 한눈에 보기",
+      "분기마다 ROI를 다시 계산해 자동화 포트폴리오를 정리하기",
+      "새 자동화를 만들기 전 ROI를 미리 추정하는 사전 점검 만들기",
+    ],
+    tags: ["work-os", "cost", "roi", "decision"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "automation-roi.md",
+        title: "자동화 ROI 시트 템플릿",
+        kind: "checklist",
+      },
+    ],
+  },
 ];

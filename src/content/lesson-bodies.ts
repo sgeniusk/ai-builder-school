@@ -14,6 +14,9 @@ import MultimodalPromptingBody from "./lessons/multimodal-prompting.mdx";
 import OutputEvaluationRefineBody from "./lessons/output-evaluation-refine.mdx";
 import ApiRateLimitingAndBatchingBody from "./lessons/api-rate-limiting-and-batching.mdx";
 import FallbackStrategyWhenAiFailsBody from "./lessons/fallback-strategy-when-ai-fails.mdx";
+import CustomGptBuilderBody from "./lessons/custom-gpt-builder.mdx";
+import MultiWorkflowOrchestrationBody from "./lessons/multi-workflow-orchestration.mdx";
+import CostEstimationAndRoiByTaskBody from "./lessons/cost-estimation-and-roi-by-task.mdx";
 
 // Phase 2 — Prompt & Context Engineering
 import StructureOfGoodPromptsBody from "./lessons/structure-of-good-prompts.mdx";
@@ -184,6 +187,9 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "output-evaluation-refine": OutputEvaluationRefineBody,
   "api-rate-limiting-and-batching": ApiRateLimitingAndBatchingBody,
   "fallback-strategy-when-ai-fails": FallbackStrategyWhenAiFailsBody,
+  "custom-gpt-builder": CustomGptBuilderBody,
+  "multi-workflow-orchestration": MultiWorkflowOrchestrationBody,
+  "cost-estimation-and-roi-by-task": CostEstimationAndRoiByTaskBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {
