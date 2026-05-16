@@ -11,11 +11,11 @@
 
 | 영역 | 상태 |
 |---|---|
-| 데이터 모델 | ✅ Stage 모델·validate 게이트 |
+| 데이터 모델 | ✅ Stage 단일 모델·validate 게이트 |
 | 콘텐츠 (Stage 1~8) | ✅ **8 Stage 전부 책 보완 완료 — 84 lesson** |
 | UI | ✅ `/stages` 라우트·계단형 사다리·journeys/projects de-phase |
 | 배포 | ✅ GitHub Pages(상시) + Vercel(PR preview) |
-| Phase legacy | ⏳ 보존 중 — 런칭 전 제거 (STEP 1) |
+| Phase legacy | ✅ **완전 제거 (STEP 1 완료) — Stage 단일 모델** |
 
 **stage별 lesson 분포 — 7-10-5-17-11-16-9-9 = 84.**
 
@@ -34,15 +34,17 @@
 
 ## 2. 런칭까지 — 3단계
 
-### STEP 1. 코드 정리 — Phase legacy 제거 (다음)
-런칭 전 죽은 코드를 걷어낸다. 사용자에게 안 보이지만 유지보수·신뢰성에 직결.
-- `/curriculum` 라우트 · `phases.ts` · `Phase` 타입 삭제
-- `LessonSidebar`의 phase 참조 → stage 참조
-- `lesson.phaseId` · `journey.recommendedPhases` · `project.requiredPhases` 필드 제거
-- legacy 헬퍼(`getPhases`·`getProjectsByPhaseSlug` 등) 제거
-- `lesson.id` 재번호 (`lesson-NN` → `lesson-{S}{XX}`)
+### STEP 1. 코드 정리 — Phase legacy 제거 ✅ 완료 (#18)
+런칭 전 죽은 코드를 걷어냈다. 사용자에게 안 보이지만 유지보수·신뢰성에 직결.
+- ✅ `/curriculum` 라우트 · `phases.ts` · `Phase` 타입 삭제
+- ✅ 죽은 컴포넌트 제거 — `LessonSidebar`·`CurriculumShell`·`CurriculumToc`·`PhaseCard` 등
+- ✅ `LessonShell`·`JourneyRail`·`LessonToc`·`Character*` 체인을 Stage 모델로 전환
+- ✅ `lesson.phaseId` · `journey.recommendedPhases` · `project.requiredPhases` 필드 제거
+- ✅ legacy 헬퍼(`getPhases`·`getProjectsByPhaseSlug` 등) 제거
+- ✅ `lesson.id` 재번호 (`lesson-NN` → `lesson-{S}{XX}`)
+- ✅ 본문·도구 스크립트의 "Phase" 잔재 정리
 
-### STEP 2. 품질 검증 — 베타 테스트 반영
+### STEP 2. 품질 검증 — 베타 테스트 반영 (다음)
 - 20인 페르소나 베타 테스트(`docs/persona-test-prompt.md`, Cowork에 전달됨) 결과 수령
 - 페르소나가 막힌 지점·UI 마찰·이탈 lesson을 우선순위로 정리
 - High 우선순위 개선만 런칭 전 반영, 나머지는 v0.5로
@@ -62,8 +64,8 @@
 - [ ] `npm run eval` (Tier 3) 품질 경고 검토
 
 **코드·기술**
-- [ ] Phase legacy 완전 제거 (STEP 1)
-- [ ] `npm run check` 그린 — lint·typecheck·validate·build
+- [x] Phase legacy 완전 제거 (STEP 1)
+- [x] `npm run check` 그린 — lint·typecheck·validate·build
 - [ ] GitHub Pages·Vercel production 빌드 정상
 - [ ] 깨진 링크 없음 (lesson 연결문·stage 라우트)
 
@@ -93,7 +95,6 @@
 
 ## 5. 진행 로그 (요약)
 
-머지 완료 — #5 데이터골격 · #6 D1 · #7 테스트프롬프트 · #8 D2 · #9 D3 · #10 D4 · #11 홈Stage전환 · #12 계단+잔재제거 · #13 Pages셋업 · #14 D5 · #15 D6 · #16 D7
-진행 중 — D8 (Stage 8, 84 lesson 완성)
+머지 완료 — #5 데이터골격 · #6 D1 · #7 테스트프롬프트 · #8 D2 · #9 D3 · #10 D4 · #11 홈Stage전환 · #12 계단+잔재제거 · #13 Pages셋업 · #14 D5 · #15 D6 · #16 D7 · #17 D8(84 lesson 완성) · #18 Phase legacy 제거
 
-다음 — Phase legacy 제거 → 베타 반영 → 런칭
+다음 — 베타 테스트 결과 반영(STEP 2) → 런칭(STEP 3)
