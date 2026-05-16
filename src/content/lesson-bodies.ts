@@ -1,4 +1,8 @@
 import type { ComponentType } from "react";
+import type { MDXComponents } from "mdx/types";
+
+/** MDX 본문 컴포넌트가 받는 props — components 매핑 주입용. */
+export type MdxBody = ComponentType<{ components?: MDXComponents }>;
 
 // AI Literacy
 import CommonSkillsBody from "./lessons/common-skills-of-future-proof-people.mdx";
@@ -114,7 +118,7 @@ import ClaudeCodeTokenSavingBody from "./lessons/claude-code-token-saving.mdx";
  * slug → MDX body component.
  * 새 레슨도 같은 패턴으로 `src/content/lessons/<slug>.mdx` 생성 + 여기 등록.
  */
-export const lessonBodies: Record<string, ComponentType | undefined> = {
+export const lessonBodies: Record<string, MdxBody | undefined> = {
   // AI Literacy
   "common-skills-of-future-proof-people": CommonSkillsBody,
   "what-llms-are-good-and-bad-at": WhatLlmsBody,
@@ -214,6 +218,6 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "claude-skills-authoring": ClaudeSkillsAuthoringBody,
 };
 
-export function getLessonBody(slug: string): ComponentType | null {
+export function getLessonBody(slug: string): MdxBody | null {
   return lessonBodies[slug] ?? null;
 }

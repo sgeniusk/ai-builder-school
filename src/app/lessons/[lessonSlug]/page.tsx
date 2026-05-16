@@ -8,6 +8,7 @@ import {
   getStageById,
 } from "@/lib/content";
 import { getLessonBody } from "@/content/lesson-bodies";
+import { mdxElements } from "@/components/mdx-elements";
 import { LEVEL_LABEL } from "@/lib/types";
 import type { Lesson } from "@/lib/types";
 
@@ -57,7 +58,7 @@ export default async function LessonPage({
         <h1>{lesson.titleKo}</h1>
         <p className="lede">{lesson.hook ?? lesson.summary}</p>
 
-        {MdxBody && <MdxBody />}
+        {MdxBody && <MdxBody components={mdxElements} />}
 
         <h2 id="section-problem">1. 문제 이해</h2>
         <p style={{ whiteSpace: "pre-line" }}>{lesson.problemScenario}</p>
