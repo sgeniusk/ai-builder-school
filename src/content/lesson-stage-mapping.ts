@@ -72,23 +72,26 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
   "subagent-context-design": { stageId: "stage-5", stageOrdinal: 10 },
   "harness-engineering-roadmap": { stageId: "stage-5", stageOrdinal: 11 },
 
-  // Stage 6 — AI 시스템을 만들다 (13, sub 6a/6b/6c)
-  // 6a API (4)
+  // Stage 6 — AI 시스템을 만들다 (16, sub 6a/6b/6c)
+  // 6a API (6)
   "connect-ai-api": { stageId: "stage-6", stageOrdinal: 1, stageSubGroupId: "6a" },
   "streaming-response-ui": { stageId: "stage-6", stageOrdinal: 2, stageSubGroupId: "6a" },
   "structured-output-handling": { stageId: "stage-6", stageOrdinal: 3, stageSubGroupId: "6a" },
   "conversation-storage-design": { stageId: "stage-6", stageOrdinal: 4, stageSubGroupId: "6a" },
+  "auth-and-user-sessions": { stageId: "stage-6", stageOrdinal: 5, stageSubGroupId: "6a" },
+  "long-term-memory-state": { stageId: "stage-6", stageOrdinal: 6, stageSubGroupId: "6a" },
   // 6b RAG (4)
-  "understanding-embeddings": { stageId: "stage-6", stageOrdinal: 5, stageSubGroupId: "6b" },
-  "document-chunking-strategy": { stageId: "stage-6", stageOrdinal: 6, stageSubGroupId: "6b" },
-  "vector-search-basics": { stageId: "stage-6", stageOrdinal: 7, stageSubGroupId: "6b" },
-  "grounded-rag-answers": { stageId: "stage-6", stageOrdinal: 8, stageSubGroupId: "6b" },
-  // 6c Agent (5)
-  "function-calling": { stageId: "stage-6", stageOrdinal: 9, stageSubGroupId: "6c" },
-  "mini-agent-loop": { stageId: "stage-6", stageOrdinal: 10, stageSubGroupId: "6c" },
-  "tool-permission-safeguards": { stageId: "stage-6", stageOrdinal: 11, stageSubGroupId: "6c" },
-  "prompt-injection-defense": { stageId: "stage-6", stageOrdinal: 12, stageSubGroupId: "6c" },
-  "ralph-loop-codex-goal": { stageId: "stage-6", stageOrdinal: 13, stageSubGroupId: "6c" },
+  "understanding-embeddings": { stageId: "stage-6", stageOrdinal: 7, stageSubGroupId: "6b" },
+  "document-chunking-strategy": { stageId: "stage-6", stageOrdinal: 8, stageSubGroupId: "6b" },
+  "vector-search-basics": { stageId: "stage-6", stageOrdinal: 9, stageSubGroupId: "6b" },
+  "grounded-rag-answers": { stageId: "stage-6", stageOrdinal: 10, stageSubGroupId: "6b" },
+  // 6c Agent (6)
+  "function-calling": { stageId: "stage-6", stageOrdinal: 11, stageSubGroupId: "6c" },
+  "mini-agent-loop": { stageId: "stage-6", stageOrdinal: 12, stageSubGroupId: "6c" },
+  "tool-permission-safeguards": { stageId: "stage-6", stageOrdinal: 13, stageSubGroupId: "6c" },
+  "prompt-injection-defense": { stageId: "stage-6", stageOrdinal: 14, stageSubGroupId: "6c" },
+  "build-mcp-server": { stageId: "stage-6", stageOrdinal: 15, stageSubGroupId: "6c" },
+  "ralph-loop-codex-goal": { stageId: "stage-6", stageOrdinal: 16, stageSubGroupId: "6c" },
 
   // Stage 7 — AI 시스템을 운영하다 (6)
   "evals-for-ai-coded-prs": { stageId: "stage-7", stageOrdinal: 1 },
@@ -117,6 +120,7 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
  * - PR D3 (Stage 3 책 보완): stage-3 4 → 5 (+fallback-strategy-when-ai-fails)
  * - PR D4 (Stage 4 책 보완): stage-4 14 → 17 (+custom-gpt-builder·multi-workflow-orchestration·cost-estimation-and-roi-by-task, 4a)
  * - PR D5 (Stage 5 책 보완): stage-5 8 → 11 (+pr-review-with-ai·agent-hooks-automation·subagent-context-design)
+ * - PR D6 (Stage 6 책 보완): stage-6 13 → 16 (+auth-and-user-sessions·long-term-memory-state, 6a / +build-mcp-server, 6c)
  */
 export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-1": 7,
@@ -124,9 +128,9 @@ export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-3": 5,
   "stage-4": 17,
   "stage-5": 11,
-  "stage-6": 13,
+  "stage-6": 16,
   "stage-7": 6,
   "stage-8": 7,
 } as const;
 
-export const EXPECTED_TOTAL_LESSONS = 76;
+export const EXPECTED_TOTAL_LESSONS = 79;

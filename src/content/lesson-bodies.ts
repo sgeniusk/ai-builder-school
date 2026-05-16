@@ -20,6 +20,9 @@ import CostEstimationAndRoiByTaskBody from "./lessons/cost-estimation-and-roi-by
 import PrReviewWithAiBody from "./lessons/pr-review-with-ai.mdx";
 import AgentHooksAutomationBody from "./lessons/agent-hooks-automation.mdx";
 import SubagentContextDesignBody from "./lessons/subagent-context-design.mdx";
+import AuthAndUserSessionsBody from "./lessons/auth-and-user-sessions.mdx";
+import LongTermMemoryStateBody from "./lessons/long-term-memory-state.mdx";
+import BuildMcpServerBody from "./lessons/build-mcp-server.mdx";
 
 // Phase 2 — Prompt & Context Engineering
 import StructureOfGoodPromptsBody from "./lessons/structure-of-good-prompts.mdx";
@@ -196,6 +199,9 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "pr-review-with-ai": PrReviewWithAiBody,
   "agent-hooks-automation": AgentHooksAutomationBody,
   "subagent-context-design": SubagentContextDesignBody,
+  "auth-and-user-sessions": AuthAndUserSessionsBody,
+  "long-term-memory-state": LongTermMemoryStateBody,
+  "build-mcp-server": BuildMcpServerBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {
