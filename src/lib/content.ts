@@ -141,6 +141,10 @@ export function getProjectsByPhaseSlug(slug: string): Project[] {
   return projects.filter((p) => p.requiredPhases.includes(slug));
 }
 
+export function getProjectsByStageSlug(slug: string): Project[] {
+  return projects.filter((p) => p.requiredStages?.includes(slug) ?? false);
+}
+
 export function getTemplates(): ContentTemplate[] {
   return templates;
 }
@@ -361,6 +365,20 @@ export function validateContent(): ContentIntegrityIssue[] {
           kind: "journey.stage",
           ref: journey.slug,
           message: `Journey "${journey.slug}" recommends missing stage "${slug}"`,
+        });
+      }
+    }
+  }
+
+  // 8) project.requiredStages가 실제 stage를 가리키는지
+  for (const project of projects) {
+    if (!project.requiredStages) continue;
+    for (const slug of project.requiredStages) {
+      if (!stageSlugs.has(slug)) {
+        issues.push({
+          kind: "project.stage",
+          ref: project.slug,
+          message: `Project "${project.slug}" requires missing stage "${slug}"`,
         });
       }
     }

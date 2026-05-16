@@ -7,7 +7,7 @@ import { PageHead } from "@/components/Sections";
 import {
   getJourneys,
   getLessonBySlug,
-  getPhaseBySlug,
+  getStageBySlug,
   getProjectsByJourney,
 } from "@/lib/content";
 import { JOURNEY_LABEL, JOURNEY_LABEL_KO } from "@/lib/types";
@@ -26,7 +26,7 @@ export default function JourneysPage() {
       <PageHead
         eyebrow={<>Journeys · 6</>}
         title={<>출발점이 어디든,<br />결국 빌더가 됩니다.</>}
-        lede="여섯 여정 중 하나를 골라요. 필수 Phase와 추천 레슨이 자동으로 묶이고, 6–10주 안에 완주할 수 있게 짜여 있어요. 도중에 길이 바뀌어도 괜찮아요 — 다시 고르면 돼요."
+        lede="여섯 여정 중 하나를 골라요. 필요한 Stage와 추천 레슨이 자동으로 묶이고, 6–10주 안에 완주할 수 있게 짜여 있어요. 도중에 길이 바뀌어도 괜찮아요 — 다시 고르면 돼요."
       />
 
       <section className="sec">
@@ -60,7 +60,7 @@ export default function JourneysPage() {
                   {j.identity}
                 </p>
                 <p className="meta">
-                  {j.recommendedPhases.length} Phase · {j.recommendedLessons.length} 레슨
+                  {(j.recommendedStages ?? []).length} Stage · {j.recommendedLessons.length} 레슨
                 </p>
               </div>
               <div>
@@ -77,15 +77,15 @@ export default function JourneysPage() {
                 </p>
 
                 <div className="ph-list">
-                  {j.recommendedPhases.map((slug) => {
-                    const p = getPhaseBySlug(slug);
+                  {(j.recommendedStages ?? []).map((slug) => {
+                    const s = getStageBySlug(slug);
                     return (
                       <Link
                         key={slug}
-                        href={`/curriculum/${slug}`}
+                        href={`/stages/${slug}`}
                         className="chip chip-mono"
                       >
-                        Phase {p?.order ?? "?"} · {p?.titleKo ?? slug}
+                        Stage {s?.order ?? "?"} · {s?.label ?? slug}
                       </Link>
                     );
                   })}
