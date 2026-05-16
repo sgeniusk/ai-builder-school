@@ -7468,4 +7468,277 @@ export const lessons: Lesson[] = [
       },
     ],
   },
+  {
+    id: "lesson-80",
+    slug: "agent-failure-patterns",
+    phaseId: "phase-7",
+    titleKo: "에이전트가 실패하는 패턴 — 미리 아는 함정",
+    titleEn: "Agent failure patterns",
+    hook: "에이전트는 새로운 방식으로 실패합니다. 그 실패 패턴을 미리 알면, 사고가 아니라 예방으로 다룰 수 있어요.",
+    summary:
+      "운영 중인 AI 에이전트가 실패하는 전형적 패턴(루프 폭주·도구 오용·목표 표류·조용한 실패)을 정리하고, 각 패턴을 미리 잡는 guardrail을 자기 시스템에 매핑합니다.",
+    level: "advanced",
+    estimatedMinutes: 50,
+    targetJourneys: ["engineer", "founder"],
+    prerequisites: ["mini-agent-loop", "llm-observability-and-regression"],
+    learningGoals: [
+      "에이전트가 일반 코드와 다르게 실패하는 이유를 설명한다",
+      "전형적 실패 패턴 4가지(루프 폭주·도구 오용·목표 표류·조용한 실패)를 구분한다",
+      "각 실패 패턴에 맞는 guardrail을 설계한다",
+      "내 에이전트 시스템에 실패 패턴별 방어 지점을 매핑한다",
+    ],
+    problemScenario:
+      "에이전트를 운영에 올렸어요. 데모에선 완벽했습니다. 그런데 실제 사용자 앞에서 — 어떤 에이전트는 같은 도구를 50번 부르며 토큰을 태우고, 어떤 에이전트는 \"파일 정리\"를 시켰더니 멀쩡한 파일을 지웠고, 어떤 에이전트는 처음 목표를 잊고 엉뚱한 일을 하고 있어요. 더 무서운 건 — 아무 에러도 안 났는데 답이 그냥 틀린 경우입니다. 에이전트는 일반 코드와 다른 방식으로 실패해요. 그 패턴을 모르면 매번 \"사고\"로 겪습니다.",
+    coreConcepts: [
+      {
+        term: "루프 폭주 (Runaway loop)",
+        explanation:
+          "에이전트가 같은 행동을 의미 없이 반복하며 종료하지 못하는 실패. max iterations·token budget 같은 hard limit으로 막습니다.",
+      },
+      {
+        term: "도구 오용 (Tool misuse)",
+        explanation:
+          "에이전트가 도구를 의도와 다르게 호출하는 실패 — 잘못된 인자, 위험한 동작. 권한 등급·인자 검증·승인 큐로 방어합니다.",
+      },
+      {
+        term: "목표 표류 (Goal drift)",
+        explanation:
+          "긴 루프에서 에이전트가 처음 목표를 잊고 다른 일을 하는 실패. 목표를 매 턴 다시 주입하거나 체크포인트로 잡습니다.",
+      },
+      {
+        term: "조용한 실패 (Silent failure)",
+        explanation:
+          "에러 없이 그럴듯한 틀린 답을 내는 가장 위험한 실패. Eval·관측·사람 검토 지점이 없으면 발견되지 않습니다.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 50분 안에 끝내는 걸 목표로 하세요.\n\n작업: 운영 중(또는 운영 예정)인 에이전트의 `agent-failure-map.md`를 만듭니다.\n\n포함해야 할 섹션:\n1. \"실패 패턴 4가지\" — 루프 폭주·도구 오용·목표 표류·조용한 실패를 각각 한 줄로 정의\n2. \"내 시스템 매핑\" — 내 에이전트가 각 패턴으로 실패할 수 있는 구체 지점\n3. \"패턴별 guardrail\" — 각 실패 지점에 거는 방어 (hard limit·검증·체크포인트·Eval)\n4. \"실패 주입 테스트\" — 1개 패턴을 일부러 유발해 guardrail이 막는지 확인\n5. \"조용한 실패 탐지\" — 에러 없이 틀리는 경우를 어떻게 발견할지\n\n에이전트에게 당신이 운영하거나 만들 에이전트 시스템 하나를 알려주세요.",
+    codexNote:
+      "Codex CLI에서는 실패 패턴 표를 먼저 확정한 뒤 내 시스템 매핑으로 넘어가라고 순서를 명시하세요.",
+    buildSteps: [
+      "실패 패턴 4가지를 자기 말로 정의한다",
+      "내 에이전트가 각 패턴으로 실패할 구체 지점을 찾는다",
+      "각 실패 지점에 맞는 guardrail을 설계한다",
+      "실패 패턴 1개를 일부러 유발해 guardrail이 막는지 테스트한다",
+      "조용한 실패를 발견할 탐지 장치를 정한다",
+      "`agent-failure-map.md`에 매핑을 정리한다",
+    ],
+    verificationChecklist: [
+      "실패 패턴 4가지가 모두 정의되어 있는가",
+      "내 시스템의 실패 지점이 구체적으로 매핑됐는가",
+      "각 패턴에 맞는 guardrail이 설계됐는가 (일괄 처방 아님)",
+      "실패 주입 테스트로 guardrail이 검증됐는가",
+      "조용한 실패 탐지 장치가 있는가",
+      "이 맵을 운영 점검에 실제로 쓸 수 있는가",
+    ],
+    deliverable: {
+      title: "에이전트 실패 패턴 맵 (`agent-failure-map.md`)",
+      description:
+        "실패 패턴 4가지 + 내 시스템 매핑 + 패턴별 guardrail + 실패 주입 테스트 + 조용한 실패 탐지.",
+      format: "Markdown 파일(.md)",
+    },
+    reflectionQuestions: [
+      "내 에이전트가 가장 일어나기 쉬운 실패 패턴은 무엇인가요?",
+      "지금까지 \"사고\"로 겪은 에이전트 실패가 사실 알려진 패턴은 아니었나요?",
+      "조용한 실패를 발견하지 못하고 지나친 적이 있나요?",
+    ],
+    extensionIdeas: [
+      "실패 패턴별 회귀 테스트를 만들어 배포 게이트에 넣기",
+      "운영 로그에서 실패 패턴을 자동 분류하는 알림 만들기",
+      "팀 공용 실패 패턴 카탈로그로 확장해 사고를 누적 학습하기",
+    ],
+    tags: ["operations", "agents", "failure", "guardrails"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "agent-failure-map.md",
+        title: "에이전트 실패 패턴 맵 템플릿",
+        kind: "checklist",
+      },
+    ],
+  },
+  {
+    id: "lesson-81",
+    slug: "mcp-production-patterns",
+    phaseId: "phase-7",
+    titleKo: "MCP 서버 운영 — 프로덕션에서 도구를 굴리는 법",
+    titleEn: "MCP server production patterns",
+    hook: "MCP 서버를 만드는 것과, 그 서버를 여러 사람이 매일 쓰게 굴리는 것은 다른 일이에요.",
+    summary:
+      "Stage 6에서 만든 MCP 서버를 운영 단계로 끌어올립니다. 인증·버전 관리·에러 처리·관측을 붙여, 데모용 도구를 팀이 신뢰하고 쓰는 서비스로 만듭니다.",
+    level: "advanced",
+    estimatedMinutes: 50,
+    targetJourneys: ["engineer", "founder"],
+    prerequisites: ["build-mcp-server", "llm-observability-and-regression"],
+    learningGoals: [
+      "MCP 서버를 만드는 것과 운영하는 것의 차이를 설명한다",
+      "MCP 서버에 인증·접근 제어를 붙인다",
+      "도구 스키마 변경을 깨지 않게 다루는 버전 관리를 적용한다",
+      "MCP 서버의 에러·호출을 관측해 운영 신호를 만든다",
+    ],
+    problemScenario:
+      "Stage 6에서 MCP 서버를 만들었어요. 내 노트북에서 stdio로 잘 돕니다. 그런데 팀에 공유하니 문제가 쏟아져요 — 누가 호출하든 다 통하고(인증 없음), 도구 스키마를 살짝 고쳤더니 동료의 클라이언트가 죄다 깨지고(버전 관리 없음), 서버가 조용히 죽었는데 아무도 모릅니다(관측 없음). MCP 서버를 만드는 건 시작일 뿐이에요. 여러 사람이 매일 의존하게 굴리려면 운영이 따라와야 합니다.",
+    coreConcepts: [
+      {
+        term: "만들기 vs 운영하기",
+        explanation:
+          "MCP 서버 구축은 \"도구가 호출된다\"까지. 운영은 \"여러 사람이 신뢰하고 매일 쓴다\"까지 — 인증·버전·에러·관측이 그 사이를 채웁니다.",
+      },
+      {
+        term: "MCP 인증·접근 제어",
+        explanation:
+          "원격 MCP 서버는 누가 호출하는지 확인하고 권한을 나눠야 합니다. 로컬 stdio와 달리 HTTP 전송은 인증이 필수입니다.",
+      },
+      {
+        term: "도구 스키마 버전 관리",
+        explanation:
+          "도구의 파라미터를 바꾸면 기존 클라이언트가 깨집니다. 옵셔널 추가·버전 태그·점진적 폐기로 호환을 지킵니다.",
+      },
+      {
+        term: "MCP 관측",
+        explanation:
+          "어떤 도구가 얼마나·어떤 인자로 호출됐고 무엇이 실패했는지 로그·지표로 봅니다. 서버가 조용히 죽는 것을 막는 운영 신호입니다.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 50분 안에 끝내는 걸 목표로 하세요.\n\n작업: Stage 6에서 만든 MCP 서버를 운영 가능하게 보강하고 `mcp-ops.md`를 만듭니다.\n\n포함할 산출물:\n1. 인증·접근 제어 — 원격 전송이면 호출자 인증, 도구별 접근 권한\n2. 버전 관리 — 도구 스키마 변경 시 기존 클라이언트가 안 깨지는 규칙 (옵셔널 추가·버전 태그)\n3. 에러 처리 — 도구 실패가 클라이언트에 명확한 메시지로 전달되는지\n4. 관측 — 도구 호출·인자·결과·실패를 로그·지표로\n5. `mcp-ops.md` — 운영 점검 체크리스트 + 서버가 죽었을 때 알아채는 방법\n\n에이전트에게 build-mcp-server에서 만든 MCP 서버를 입력으로 주세요.",
+    codexNote:
+      "Codex CLI에서는 \"운영 보강\"을 한 번에 다 하지 말고 인증→버전→관측 순으로 단계별로 요청하세요.",
+    buildSteps: [
+      "build-mcp-server에서 만든 MCP 서버를 가져온다",
+      "원격 전송이면 호출자 인증·도구별 접근 제어를 붙인다",
+      "도구 스키마 버전 관리 규칙을 정한다",
+      "도구 실패가 명확한 에러로 전달되게 한다",
+      "도구 호출·실패를 로그·지표로 관측한다",
+      "`mcp-ops.md`에 운영 점검 체크리스트를 정리한다",
+    ],
+    verificationChecklist: [
+      "원격 MCP 서버에 호출자 인증이 붙어 있는가",
+      "도구 스키마 변경 시 기존 클라이언트가 안 깨지는 규칙이 있는가",
+      "도구 실패가 클라이언트에 명확한 메시지로 전달되는가",
+      "도구 호출·실패가 관측되는가",
+      "서버가 죽었을 때 알아챌 방법이 있는가",
+      "운영 점검 체크리스트가 실제 점검에 쓸 수 있는가",
+    ],
+    deliverable: {
+      title: "MCP 서버 운영 보강 (`mcp-ops.md` + 보강된 서버)",
+      description:
+        "인증·접근 제어 + 버전 관리 + 에러 처리 + 관측 + 운영 점검 체크리스트.",
+      format: "Markdown + TypeScript",
+    },
+    reflectionQuestions: [
+      "내 MCP 서버가 지금 팀에 공유되면 가장 먼저 터질 문제는 무엇인가요?",
+      "도구 스키마를 바꿔야 할 때 어떻게 호환을 지킬 건가요?",
+      "서버가 조용히 죽으면 며칠 만에 알아챌 것 같나요?",
+    ],
+    extensionIdeas: [
+      "MCP 서버를 클라우드에 배포하고 가동률을 모니터링하기",
+      "도구별 사용량·비용 대시보드를 붙이기",
+      "여러 MCP 서버를 게이트웨이로 묶어 한 곳에서 관리하기",
+    ],
+    tags: ["operations", "mcp", "tools"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "mcp-ops.md",
+        title: "MCP 서버 운영 점검 체크리스트",
+        kind: "checklist",
+      },
+    ],
+  },
+  {
+    id: "lesson-82",
+    slug: "user-feedback-collection-for-ai-products",
+    phaseId: "phase-7",
+    titleKo: "사용자 피드백 모으기 — AI 제품의 진짜 신호",
+    titleEn: "Collecting user feedback for AI products",
+    hook: "Eval은 내가 정한 기준이에요. 사용자 피드백은 내가 못 정한 기준 — 진짜 쓸모는 거기서 드러납니다.",
+    summary:
+      "내부 Eval만으로는 안 보이는 \"실제 사용자 만족도\"를 모으는 피드백 루프를 만듭니다. 인앱 피드백 장치·비즈니스 지표·주간 회고로, 운영 중인 AI 제품의 진짜 신호를 잡습니다.",
+    level: "intermediate",
+    estimatedMinutes: 45,
+    targetJourneys: ["practitioner", "adopter", "founder", "engineer"],
+    prerequisites: ["evals-for-ai-coded-prs", "ai-output-eval-for-pms"],
+    learningGoals: [
+      "내부 Eval과 사용자 피드백이 서로 못 보는 것을 설명한다",
+      "인앱 피드백 장치(좋아요/싫어요·신고·자유 코멘트)를 가볍게 설계한다",
+      "AI 제품에 맞는 비즈니스 지표를 정의한다",
+      "피드백을 다음 개선으로 잇는 주간 회고 루프를 만든다",
+    ],
+    problemScenario:
+      "AI 제품을 운영합니다. Eval 점수는 좋아요. 관측 대시보드도 초록색입니다. 그런데 사용자가 점점 안 들어와요. 무엇이 문제인지 모릅니다 — Eval은 \"내가 정한 기준\"을 통과했을 뿐, 사용자가 실제로 원하는 걸 묻지 않았으니까요. 운영의 진짜 신호는 내부 점수가 아니라 사용자에게서 옵니다. 그 신호를 모으는 장치가 없으면, 잘 굴러가는 것처럼 보이는 채로 천천히 죽습니다.",
+    coreConcepts: [
+      {
+        term: "Eval vs 사용자 피드백",
+        explanation:
+          "Eval은 \"내가 정한 정답\"을 검사하고, 사용자 피드백은 \"내가 몰랐던 기대\"를 드러냅니다. 둘은 다른 것을 보며 둘 다 필요합니다.",
+      },
+      {
+        term: "인앱 피드백 장치",
+        explanation:
+          "답변 옆 좋아요/싫어요, 신고 버튼, 자유 코멘트 같은 가벼운 수집 장치. 사용자가 흐름을 안 끊고 신호를 남기게 합니다.",
+      },
+      {
+        term: "비즈니스 지표",
+        explanation:
+          "AI 품질 점수가 아니라 제품이 잘 되는지 보는 지표 — 재방문·완료율·유지율. AI 제품의 \"진짜 잘 됨\"은 여기서 보입니다.",
+      },
+      {
+        term: "피드백 → 개선 루프",
+        explanation:
+          "모은 피드백을 주간으로 회고해 다음 개선 1~2개로 잇는 루틴. 수집만 하고 안 보면 피드백은 쌓이기만 합니다.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 45분 안에 끝내는 걸 목표로 하세요.\n\n작업: 운영 중(또는 예정)인 AI 제품의 `feedback-loop.md`를 만듭니다.\n\n포함해야 할 섹션:\n1. \"Eval이 못 보는 것\" — 내부 Eval만으로 안 보이는 사용자 기대 2~3가지\n2. \"인앱 피드백 장치\" — 흐름 안 끊고 신호를 모을 가벼운 장치 설계 (실제 1개 구현해도 좋음)\n3. \"비즈니스 지표\" — 내 AI 제품에 맞는 지표 3개와 측정 방법\n4. \"주간 회고 루프\" — 피드백·지표를 매주 어떻게 보고 다음 개선으로 잇는지\n5. \"첫 회고\" — 가상 또는 실제 피드백으로 회고를 한 번 돌려본 기록\n\n에이전트에게 당신의 AI 제품(또는 만들 제품) 하나를 알려주세요.",
+    codexNote:
+      "Codex CLI에서는 \"인앱 피드백 장치를 무겁게 만들지 말고, 좋아요/싫어요 한 쌍부터\"라고 범위를 좁혀 주세요.",
+    buildSteps: [
+      "내부 Eval이 못 보는 사용자 기대 2~3가지를 적는다",
+      "흐름을 안 끊는 가벼운 인앱 피드백 장치를 설계한다",
+      "내 AI 제품에 맞는 비즈니스 지표 3개를 정한다",
+      "피드백·지표를 보는 주간 회고 루프를 만든다",
+      "피드백으로 회고를 한 번 돌려 다음 개선 1~2개를 뽑는다",
+      "`feedback-loop.md`에 정리한다",
+    ],
+    verificationChecklist: [
+      "Eval이 못 보는 것이 구체적으로 적혀 있는가",
+      "인앱 피드백 장치가 흐름을 안 끊는 가벼운 설계인가",
+      "비즈니스 지표가 품질 점수가 아니라 제품 지표인가",
+      "주간 회고 루프가 피드백을 개선으로 잇는가",
+      "회고를 한 번 돌려 다음 개선이 도출됐는가",
+      "이 루프를 다음 주에 실제로 시작할 수 있는가",
+    ],
+    deliverable: {
+      title: "사용자 피드백 루프 (`feedback-loop.md`)",
+      description:
+        "Eval 사각지대 + 인앱 피드백 장치 + 비즈니스 지표 + 주간 회고 루프 + 첫 회고 기록.",
+      format: "Markdown 파일(.md)",
+    },
+    reflectionQuestions: [
+      "Eval 점수는 좋은데 사용자가 안 좋아한 경험이 있나요?",
+      "내 AI 제품의 \"진짜 잘 됨\"을 한 지표로 고른다면 무엇인가요?",
+      "지금까지 모은 피드백 중 회고 없이 묻힌 것은 없나요?",
+    ],
+    extensionIdeas: [
+      "피드백을 AI로 자동 분류해 주간 회고 입력으로 만들기",
+      "싫어요가 달린 답변을 모아 Eval 케이스로 추가하기",
+      "비즈니스 지표 대시보드를 운영 관측과 한 화면에 합치기",
+    ],
+    tags: ["operations", "feedback", "product"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "feedback-loop.md",
+        title: "사용자 피드백 루프 템플릿",
+        kind: "checklist",
+      },
+    ],
+  },
 ];

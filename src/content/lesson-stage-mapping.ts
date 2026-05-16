@@ -93,13 +93,16 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
   "build-mcp-server": { stageId: "stage-6", stageOrdinal: 15, stageSubGroupId: "6c" },
   "ralph-loop-codex-goal": { stageId: "stage-6", stageOrdinal: 16, stageSubGroupId: "6c" },
 
-  // Stage 7 — AI 시스템을 운영하다 (6)
+  // Stage 7 — AI 시스템을 운영하다 (9)
   "evals-for-ai-coded-prs": { stageId: "stage-7", stageOrdinal: 1 },
   "llm-observability-and-regression": { stageId: "stage-7", stageOrdinal: 2 },
-  "ai-output-eval-for-pms": { stageId: "stage-7", stageOrdinal: 3 },
-  "responsible-ai-policy-template": { stageId: "stage-7", stageOrdinal: 4 },
-  "ai-app-cost-and-usage": { stageId: "stage-7", stageOrdinal: 5 },
-  "claude-code-token-saving": { stageId: "stage-7", stageOrdinal: 6 },
+  "agent-failure-patterns": { stageId: "stage-7", stageOrdinal: 3 },
+  "mcp-production-patterns": { stageId: "stage-7", stageOrdinal: 4 },
+  "ai-output-eval-for-pms": { stageId: "stage-7", stageOrdinal: 5 },
+  "user-feedback-collection-for-ai-products": { stageId: "stage-7", stageOrdinal: 6 },
+  "responsible-ai-policy-template": { stageId: "stage-7", stageOrdinal: 7 },
+  "ai-app-cost-and-usage": { stageId: "stage-7", stageOrdinal: 8 },
+  "claude-code-token-saving": { stageId: "stage-7", stageOrdinal: 9 },
 
   // Stage 8 — AI 시스템을 공유하다 (7)
   "ai-product-brief": { stageId: "stage-8", stageOrdinal: 1 },
@@ -121,6 +124,7 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
  * - PR D4 (Stage 4 책 보완): stage-4 14 → 17 (+custom-gpt-builder·multi-workflow-orchestration·cost-estimation-and-roi-by-task, 4a)
  * - PR D5 (Stage 5 책 보완): stage-5 8 → 11 (+pr-review-with-ai·agent-hooks-automation·subagent-context-design)
  * - PR D6 (Stage 6 책 보완): stage-6 13 → 16 (+auth-and-user-sessions·long-term-memory-state, 6a / +build-mcp-server, 6c)
+ * - PR D7 (Stage 7 책 보완): stage-7 6 → 9 (+agent-failure-patterns·mcp-production-patterns·user-feedback-collection-for-ai-products)
  */
 export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-1": 7,
@@ -129,8 +133,8 @@ export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-4": 17,
   "stage-5": 11,
   "stage-6": 16,
-  "stage-7": 6,
+  "stage-7": 9,
   "stage-8": 7,
 } as const;
 
-export const EXPECTED_TOTAL_LESSONS = 79;
+export const EXPECTED_TOTAL_LESSONS = 82;
