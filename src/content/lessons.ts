@@ -2579,38 +2579,74 @@ export const lessons: Lesson[] = [
     problemScenario:
       "챗봇에 \"오늘 서울 날씨 알려줘\"라고 물으면 그럴듯한 답이 나오지만, 실제 날씨 API를 호출한 게 아니라 학습 데이터에서 지어낸 거예요. LLM은 외부 세계에 손을 뻗어 데이터를 가져오거나 동작을 실행하는 능력은 기본적으로 없습니다.",
     coreConcepts: [
-      { term: "Tool Schema", explanation: "모델이 호출 가능한 함수의 이름/인자 정의." },
-      { term: "Argument Validation", explanation: "모델이 만든 인자를 실행 전 검증." },
+      {
+        term: "Tool Schema",
+        explanation:
+          "모델이 호출할 수 있는 함수의 이름·설명·파라미터를 JSON Schema로 정의한 것. 설명이 모호하면 모델이 엉뚱한 때 호출하므로, 스키마는 \"언제 쓰는 도구인지\"까지 담아야 합니다.",
+      },
+      {
+        term: "4단계 흐름",
+        explanation:
+          "스키마 등록 → 모델이 호출 판단 → 개발자 코드가 실제 실행 → 결과를 모델에 반환. 모델은 \"부르겠다\"고 요청할 뿐, 실행하는 건 당신 코드입니다.",
+      },
+      {
+        term: "인자 런타임 검증",
+        explanation:
+          "모델이 만든 인자는 틀릴 수 있습니다. Zod 같은 런타임 검증으로 실행 전에 인자를 확인해, 잘못된 호출이 실제 함수에 닿지 않게 막습니다.",
+      },
+      {
+        term: "벤더별 포맷 차이",
+        explanation:
+          "Anthropic Tool Use와 OpenAI Function Calling은 같은 개념이지만 용어·응답 포맷이 다릅니다. 한쪽 코드를 다른 쪽에 그대로 못 쓰므로 차이를 알아둬야 합니다.",
+      },
     ],
-    codexMission:
-      "Codex에게 '날씨 조회' 함수를 정의하고 모델이 호출하도록 구현하게 한다.",
-    claudeCodeMission:
-      "Claude Code에게 Claude Tools로 같은 예제를 구현하고 실패 케이스 로그를 남기게 한다.",
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 50분 안에 끝내는 걸 목표로 하세요.\n\n작업: `examples/function-calling/`에 동작하는 단발 Function Calling 예제를 만듭니다.\n\n포함할 파일:\n1. `lib/tools.ts` — 도구 1~2개의 JSON Schema 정의 (예: 날씨 조회, 메모 검색). 이름·설명·파라미터 명시.\n2. `lib/validate.ts` — Zod로 모델이 만든 인자를 실행 전 검증\n3. `app/api/chat/route.ts` — 4단계 흐름 구현 (스키마 등록 → 모델 호출 → 검증 → 실제 실행 → 결과 반환)\n4. `lib/log.ts` — 도구 호출·인자·결과·실패를 구조화 로그로\n5. `tests/tool-call.test.ts` — 올바른 호출 / 잘못된 인자 차단 / 실패 케이스\n6. `README.md` — Anthropic Tool Use vs OpenAI Function Calling 비교 표\n\n에이전트에게 \"모델이 인자를 만들었다고 바로 실행하지 말고, 반드시 검증을 거쳐라\"고 명시하세요.",
+    codexNote:
+      "Codex CLI는 모델 응답의 tool_call 포맷을 벤더 간 혼용하는 경향이 있어요. \"한 벤더로 먼저 완성하고, README에만 다른 벤더 차이를 표로 정리하라\"고 안내하세요.",
     buildSteps: [
-      "함수 스키마 정의",
-      "실행 경로/권한 설정",
-      "모델 호출 실험",
+      "도구 1~2개의 JSON Schema를 이름·설명·파라미터로 정의한다",
+      "Zod로 모델 인자를 실행 전 검증하는 함수를 만든다",
+      "4단계 흐름(등록→판단→실행→반환)을 라우트로 구현한다",
+      "도구 호출·인자·결과·실패를 구조화 로그로 남긴다",
+      "올바른 호출·잘못된 인자 차단·실패 케이스를 테스트한다",
+      "Anthropic·OpenAI 포맷 차이를 README 비교 표로 정리한다",
     ],
     verificationChecklist: [
-      "모델이 올바른 인자로 호출하는가",
-      "잘못된 인자가 차단되는가",
-      "실행 로그가 남는가",
+      "모델이 올바른 상황에 올바른 인자로 도구를 호출하는가",
+      "잘못된 인자가 검증 단계에서 차단되는가",
+      "도구 호출·결과·실패가 구조화 로그에 남는가",
+      "4단계 흐름에서 실행 주체가 모델이 아니라 개발자 코드인가",
+      "Anthropic·OpenAI 포맷 차이가 비교되어 있는가",
+      "검증 없이 모델 인자를 바로 실행하지 않는가",
     ],
     deliverable: {
-      title: "Function Calling 예제",
-      description: "함수 스키마와 검증·실행 예제.",
-      format: "코드",
+      title: "Function Calling 예제 (`examples/function-calling/`)",
+      description:
+        "도구 스키마 + Zod 인자 검증 + 4단계 호출 흐름 + 로그 + 테스트 + 벤더 비교 README.",
+      format: "TypeScript 폴더",
     },
     reflectionQuestions: [
-      "함수와 프롬프트 중 어느 것이 모호할 때 실패가 커지는가?",
-      "권한이 있는 함수와 없는 함수를 어떻게 나눌 것인가?",
+      "도구 스키마의 설명이 모호해서 모델이 엉뚱하게 호출한 적이 있나요?",
+      "함수와 프롬프트 중 어느 것이 모호할 때 실패가 더 컸나요?",
+      "실행 권한이 위험한 도구와 안전한 도구를 어떻게 나눌 건가요?",
     ],
     extensionIdeas: [
-      "여러 도구 체이닝",
-      "툴 사용 로깅 대시보드",
+      "여러 도구를 이어 부르는 도구 체이닝으로 확장 (Stage 6c mini-agent-loop와 연결)",
+      "도구 사용 로그를 대시보드로 시각화하기",
+      "도구를 MCP 서버로 감싸 여러 클라이언트에서 재사용하기 (build-mcp-server와 연결)",
     ],
     tags: ["agents", "tools"],
     hasMdxBody: true,
+    outputs: [
+      {
+        filename: "function-calling-guide.md",
+        title: "Function Calling 4단계 흐름 가이드",
+        kind: "skill",
+      },
+    ],
   },
   {
     id: "lesson-28",
@@ -7156,6 +7192,279 @@ export const lessons: Lesson[] = [
         filename: "subagent-design.md",
         title: "서브에이전트 설계서 템플릿",
         kind: "note",
+      },
+    ],
+  },
+  {
+    id: "lesson-77",
+    slug: "auth-and-user-sessions",
+    phaseId: "phase-5",
+    titleKo: "사용자 인증과 세션 — 누가 쓰는지 아는 앱",
+    titleEn: "Auth and user sessions",
+    hook: "지금까지 만든 AI 앱은 \"누구나\" 쓰는 앱이었어요. 그런데 대화 기록·비용·권한은 결국 \"누가\"에 묶입니다.",
+    summary:
+      "AI 앱에 사용자 인증과 세션을 붙입니다. 로그인·세션 유지·사용자별 데이터 격리의 기본 구조를 익혀, \"누구나\"의 앱을 \"누가\"를 아는 앱으로 만듭니다.",
+    level: "intermediate",
+    estimatedMinutes: 55,
+    targetJourneys: ["engineer", "founder"],
+    prerequisites: ["connect-ai-api", "conversation-storage-design"],
+    learningGoals: [
+      "AI 앱에 인증이 필요해지는 시점을 설명한다",
+      "로그인·세션·로그아웃의 기본 흐름을 구현 수준으로 이해한다",
+      "사용자별로 대화·사용량 데이터를 격리한다",
+      "비밀번호·토큰·세션을 안전하게 다루는 기본 원칙을 적용한다",
+    ],
+    problemScenario:
+      "스트리밍 챗 앱을 만들고, 대화도 저장하게 했어요. 그런데 누가 접속하든 같은 대화 목록이 보입니다. A의 대화를 B가 봐요. AI 비용도 누가 얼마나 썼는지 모릅니다. \"AI 기능\"은 다 됐는데 \"누가 쓰는가\"가 없어서 제품이 못 됩니다. 인증은 화려한 기능이 아니라, 사용자별 데이터·비용·권한이 성립하기 위한 바닥이에요.",
+    coreConcepts: [
+      {
+        term: "인증 vs 인가",
+        explanation:
+          "인증(Authentication)은 \"당신이 누구인가\"를 확인하는 것, 인가(Authorization)는 \"그래서 무엇을 해도 되는가\"입니다. 둘은 다른 일이며 순서대로 일어납니다.",
+      },
+      {
+        term: "세션 (Session)",
+        explanation:
+          "로그인 상태를 요청 사이에 이어주는 장치. 쿠키·토큰으로 \"이미 인증된 사용자\"임을 매 요청마다 다시 증명하지 않게 합니다.",
+      },
+      {
+        term: "사용자별 데이터 격리",
+        explanation:
+          "모든 데이터(대화·사용량·산출물)에 user_id를 묶고, 조회 시 항상 현재 사용자로 필터링하는 원칙. 빠지면 A의 데이터가 B에게 노출됩니다.",
+      },
+      {
+        term: "비밀 다루기",
+        explanation:
+          "비밀번호는 해시로만 저장, 토큰은 만료를 두고, 세션 쿠키는 httpOnly·secure로. 인증은 직접 구현보다 검증된 라이브러리·서비스를 쓰는 게 안전합니다.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 55분 안에 끝내는 걸 목표로 하세요.\n\n작업: 앞서 만든 AI 앱에 인증·세션을 붙여 `examples/auth-app/`을 만듭니다.\n\n포함할 산출물:\n1. 인증 연결 — 검증된 인증 라이브러리/서비스(예: Auth.js, Supabase Auth, Clerk)로 로그인·로그아웃\n2. 세션 — 로그인 상태가 요청 사이에 유지되고, 보호된 라우트는 미인증 시 차단\n3. 사용자별 데이터 격리 — 대화·사용량 테이블에 user_id, 조회 시 현재 사용자로 필터\n4. 보안 점검 — 비밀번호 해시·토큰 만료·쿠키 옵션 확인\n5. `README.md` — 인증 방식 선택 이유 + 사용자별 격리가 적용된 곳\n\n에이전트에게 \"인증을 직접 구현하지 말고 검증된 라이브러리를 쓰라\"고 명시하세요.",
+    codexNote:
+      "Codex CLI는 인증을 직접 구현하려는 경향이 있어요. \"비밀번호 해싱·세션 관리를 직접 짜지 말고 Auth.js 등 검증된 라이브러리에 맡겨라\"고 강제하세요.",
+    buildSteps: [
+      "검증된 인증 라이브러리/서비스를 하나 고른다",
+      "로그인·로그아웃·세션 유지를 붙인다",
+      "보호된 라우트가 미인증 시 차단되는지 확인한다",
+      "대화·사용량 데이터에 user_id를 묶고 조회를 현재 사용자로 필터한다",
+      "다른 사용자로 로그인해 데이터가 격리되는지 검증한다",
+      "비밀번호 해시·토큰 만료·쿠키 옵션을 점검한다",
+    ],
+    verificationChecklist: [
+      "로그인·로그아웃·세션 유지가 동작하는가",
+      "보호된 라우트가 미인증 사용자를 차단하는가",
+      "모든 사용자 데이터에 user_id가 묶여 있는가",
+      "다른 사용자로 로그인했을 때 데이터가 격리되는가",
+      "인증을 직접 구현하지 않고 검증된 라이브러리를 썼는가",
+      "비밀번호 해시·토큰 만료·쿠키 옵션이 안전하게 설정됐는가",
+    ],
+    deliverable: {
+      title: "인증·세션이 붙은 AI 앱 (`examples/auth-app/`)",
+      description:
+        "로그인·세션 + 보호된 라우트 + 사용자별 데이터 격리 + 보안 점검 + README.",
+      format: "Next.js 폴더 (TypeScript)",
+    },
+    reflectionQuestions: [
+      "내 AI 앱에서 사용자별로 격리되어야 하는데 안 된 데이터가 있나요?",
+      "인증을 직접 짰다면 어디서 보안 구멍이 났을까요?",
+      "인가(권한)까지 필요한 기능은 무엇인가요?",
+    ],
+    extensionIdeas: [
+      "역할 기반 인가(관리자/일반) 추가하기",
+      "사용자별 AI 사용량·비용 대시보드 붙이기",
+      "소셜 로그인(Google·GitHub) 추가하기",
+    ],
+    tags: ["app-dev", "auth", "security"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "auth-setup.md",
+        title: "인증·세션 셋업 가이드",
+        kind: "checklist",
+      },
+    ],
+  },
+  {
+    id: "lesson-78",
+    slug: "long-term-memory-state",
+    phaseId: "phase-5",
+    titleKo: "장기 기억과 상태 — 어제를 기억하는 AI",
+    titleEn: "Long-term memory and state",
+    hook: "대화를 저장하는 것과, AI가 \"당신을 기억하는\" 것은 다릅니다. 후자는 무엇을 기억하고 무엇을 잊을지 설계하는 일이에요.",
+    summary:
+      "대화 저장을 넘어, AI가 사용자에 대한 사실을 장기 기억으로 쌓고 다음 대화에 활용하는 구조를 만듭니다. 무엇을 기억하고·요약하고·잊을지 정하는 메모리 설계를 익힙니다.",
+    level: "advanced",
+    estimatedMinutes: 55,
+    targetJourneys: ["engineer", "founder"],
+    prerequisites: ["conversation-storage-design", "auth-and-user-sessions"],
+    learningGoals: [
+      "대화 저장과 장기 기억의 차이를 설명한다",
+      "사용자에 대한 사실을 추출·저장하는 메모리 구조를 설계한다",
+      "다음 대화에 관련 기억만 골라 넣는 방법을 안다",
+      "무엇을 잊을지·갱신할지 정하는 기억 수명 정책을 만든다",
+    ],
+    problemScenario:
+      "챗봇이 대화를 다 저장합니다. 그런데 사용자가 어제 \"나는 채식주의자야\"라고 했는데, 오늘 새 대화에서 또 고기 요리를 추천해요. 대화는 저장됐지만 — 그 안의 \"사실\"이 다음 대화로 이어지지 않았습니다. 대화 로그를 통째로 매번 넣을 순 없어요(비용·컨텍스트 한계). 무엇이 \"기억할 사실\"이고 무엇이 \"흘려보낼 잡담\"인지, 그리고 다음 대화에 무엇을 꺼낼지 — 그게 메모리 설계입니다.",
+    coreConcepts: [
+      {
+        term: "저장 vs 기억",
+        explanation:
+          "대화 저장(storage)은 원문을 보관하는 것. 장기 기억(memory)은 그 안에서 재사용할 사실을 뽑아 구조화하는 것입니다. 저장이 있다고 기억이 되는 건 아닙니다.",
+      },
+      {
+        term: "사실 추출 (Fact extraction)",
+        explanation:
+          "대화에서 \"사용자에 대해 계속 참일 사실\"(선호·제약·맥락)을 골라내 별도 메모리로 저장하는 과정. 잡담과 사실을 가릅니다.",
+      },
+      {
+        term: "관련 기억 회수 (Retrieval)",
+        explanation:
+          "다음 대화에 모든 기억이 아니라 지금 주제에 관련된 것만 골라 넣는 것. RAG의 검색 원리를 사용자 메모리에 적용합니다.",
+      },
+      {
+        term: "기억 수명 — 갱신·망각",
+        explanation:
+          "사실은 바뀝니다(\"이직했어\"). 오래되거나 모순된 기억을 갱신·삭제하는 정책이 없으면 메모리가 틀린 정보로 오염됩니다.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 55분 안에 끝내는 걸 목표로 하세요.\n\n작업: `examples/long-term-memory/`에 사용자 장기 기억 미니 시스템을 만듭니다.\n\n포함할 파일:\n1. `memory-schema` — 사용자별 사실(선호·제약·맥락)을 저장하는 구조. 원문 대화와 분리.\n2. `lib/extract.ts` — 대화에서 \"계속 참일 사실\"을 추출하는 함수. 잡담은 거른다.\n3. `lib/recall.ts` — 새 대화 주제에 관련된 기억만 골라 컨텍스트에 넣는 함수\n4. `lib/memory-lifecycle.ts` — 모순·노후 기억을 갱신·삭제하는 정책\n5. `tests/memory.test.ts` — \"채식주의자\" 같은 사실이 다음 대화에 반영되는지, 갱신 시 옛 사실이 사라지는지\n6. `README.md` — 무엇을 기억하고 무엇을 잊는지의 기준\n\n에이전트에게 \"대화 원문을 통째로 컨텍스트에 넣지 말고, 추출한 사실만 회수해 넣어라\"고 명시하세요.",
+    codexNote:
+      "Codex CLI는 메모리를 \"대화 로그 전체 재주입\"으로 단순화하는 경향이 있어요. \"원문 저장과 사실 메모리를 분리하고, 회수는 관련 사실만\"을 명시하세요.",
+    buildSteps: [
+      "사용자별 사실을 저장하는 메모리 구조를 원문 대화와 분리해 설계한다",
+      "대화에서 \"계속 참일 사실\"을 추출하는 함수를 만든다",
+      "새 주제에 관련된 기억만 회수하는 함수를 만든다",
+      "모순·노후 기억을 갱신·삭제하는 정책을 만든다",
+      "\"채식주의자\" 같은 사실이 다음 대화에 반영되는지 테스트한다",
+      "기억의 갱신·망각 기준을 README에 적는다",
+    ],
+    verificationChecklist: [
+      "사실 메모리가 원문 대화와 분리되어 저장되는가",
+      "추출 함수가 잡담과 사실을 가르는가",
+      "회수가 모든 기억이 아니라 관련 기억만 넣는가",
+      "모순·노후 기억의 갱신·삭제 정책이 있는가",
+      "어제의 사실이 오늘 대화에 실제로 반영되는가 (테스트)",
+      "대화 원문을 통째로 재주입하지 않는가",
+    ],
+    deliverable: {
+      title: "사용자 장기 기억 시스템 (`examples/long-term-memory/`)",
+      description:
+        "사실 메모리 구조 + 추출·회수·수명 정책 + 테스트 + 기억 기준 README.",
+      format: "TypeScript 폴더",
+    },
+    reflectionQuestions: [
+      "내 앱에서 사용자가 한 번 말하면 계속 기억해야 할 사실은 무엇인가요?",
+      "잡담과 사실을 가르는 기준을 어디에 뒀나요?",
+      "기억이 틀렸을 때(이직·이사) 어떻게 갱신할 건가요?",
+    ],
+    extensionIdeas: [
+      "사용자가 자기 기억을 직접 보고 수정·삭제하는 UI 만들기",
+      "기억을 벡터로 인덱싱해 회수를 의미 검색으로 확장하기 (Stage 6b RAG와 연결)",
+      "기억 추출 정확도를 평가하는 테스트 세트 만들기",
+    ],
+    tags: ["app-dev", "memory", "state"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "memory-design.md",
+        title: "장기 기억 설계 가이드",
+        kind: "note",
+      },
+    ],
+  },
+  {
+    id: "lesson-79",
+    slug: "build-mcp-server",
+    phaseId: "phase-7",
+    titleKo: "MCP 서버 만들기 — 내 도구를 AI에 표준으로 연결",
+    titleEn: "Build an MCP server",
+    hook: "Function Calling은 한 앱 안에서만 통합니다. MCP는 그 도구를 어느 AI 클라이언트에든 꽂을 수 있는 표준 플러그로 만들어요.",
+    summary:
+      "내 도구·데이터를 MCP(Model Context Protocol) 서버로 감싸, 여러 AI 클라이언트가 표준 방식으로 호출하게 만듭니다. Function Calling을 넘어 \"재사용 가능한 도구\"로 가는 단계입니다.",
+    level: "advanced",
+    estimatedMinutes: 60,
+    targetJourneys: ["engineer", "founder"],
+    prerequisites: ["function-calling", "tool-permission-safeguards"],
+    learningGoals: [
+      "Function Calling과 MCP의 차이를 \"앱 전용 vs 표준 플러그\"로 설명한다",
+      "MCP 서버의 구성요소(tools·resources·전송 방식)를 안다",
+      "내 도구 하나를 MCP 서버로 감싸 동작시킨다",
+      "MCP 서버를 AI 클라이언트에 연결해 호출되는지 검증한다",
+    ],
+    problemScenario:
+      "Stage 6c에서 Function Calling으로 \"날씨 조회\" 도구를 만들었어요. 잘 됩니다 — 그 앱 안에서만. 같은 도구를 다른 챗봇에도, Claude Code에도 쓰고 싶은데, 매번 그 클라이언트 방식대로 다시 붙여야 해요. 도구를 만들 때마다 클라이언트마다 재작업하는 거죠. MCP는 이걸 표준화합니다 — 도구를 한 번 MCP 서버로 만들면, MCP를 지원하는 어떤 AI 클라이언트든 똑같이 꽂아 씁니다.",
+    coreConcepts: [
+      {
+        term: "MCP (Model Context Protocol)",
+        explanation:
+          "AI 클라이언트와 외부 도구·데이터를 잇는 표준 프로토콜. \"USB-C 같은 표준 플러그\"에 비유됩니다. 도구를 한 번 만들면 여러 클라이언트가 재사용.",
+      },
+      {
+        term: "Function Calling vs MCP",
+        explanation:
+          "Function Calling은 한 앱·한 호출 안의 도구 사용. MCP는 그 도구를 별도 서버로 떼어 표준 인터페이스로 노출 — 앱 전용이 아니라 재사용 가능한 부품이 됩니다.",
+      },
+      {
+        term: "Tools와 Resources",
+        explanation:
+          "MCP 서버가 노출하는 두 가지 — Tools는 \"실행하는 동작\"(함수 호출), Resources는 \"읽는 데이터\"(파일·DB 내용). 클라이언트가 둘을 표준 방식으로 가져갑니다.",
+      },
+      {
+        term: "전송 방식 (Transport)",
+        explanation:
+          "MCP 서버와 클라이언트가 통신하는 통로 — 로컬 stdio 또는 원격 HTTP. 로컬 도구는 stdio, 공유 서비스는 HTTP로 시작합니다.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 60분 안에 끝내는 걸 목표로 하세요.\n\n작업: 내 도구 하나를 MCP 서버로 만든 `examples/mcp-server/`를 완성합니다.\n\n포함할 파일:\n1. 도구 선정 — Stage 6c에서 만든 도구 1개 또는 단순한 도구(메모 검색·날씨 등)\n2. MCP 서버 — 공식 MCP SDK로 그 도구를 tool로 노출. resource가 있으면 함께.\n3. 전송 방식 — 로컬 도구면 stdio로 시작\n4. 클라이언트 연결 — Claude Code 등 MCP 지원 클라이언트에 서버를 등록하고 실제 호출\n5. 검증 — 클라이언트에서 도구가 호출되고 결과가 돌아오는지 확인\n6. `README.md` — Function Calling 버전과 MCP 버전의 차이 + 서버 등록 방법\n\n에이전트에게 MCP SDK 공식 문서를 따르라고 안내하세요. 프로토콜은 버전에 민감합니다.",
+    codexNote:
+      "Codex CLI 환경에서 MCP 서버 테스트는 stdio 전송이 가장 단순합니다. \"원격 HTTP 전에 stdio로 먼저 동작시켜라\"고 안내하세요.",
+    buildSteps: [
+      "MCP 서버로 만들 도구 하나를 고른다",
+      "공식 MCP SDK로 그 도구를 tool로 노출하는 서버를 만든다",
+      "stdio 전송으로 서버를 띄운다",
+      "MCP 지원 클라이언트에 서버를 등록한다",
+      "클라이언트에서 도구가 실제 호출되는지 검증한다",
+      "Function Calling 버전과의 차이를 README에 정리한다",
+    ],
+    verificationChecklist: [
+      "MCP 서버가 도구를 tool로 표준 노출하는가",
+      "전송 방식(stdio 등)이 동작하는가",
+      "MCP 클라이언트에 서버가 등록되는가",
+      "클라이언트에서 도구가 실제로 호출되고 결과가 돌아오는가",
+      "Function Calling 버전과 MCP 버전의 차이가 설명되어 있는가",
+      "MCP SDK 공식 문서의 버전을 확인했는가",
+    ],
+    deliverable: {
+      title: "MCP 서버 (`examples/mcp-server/`)",
+      description:
+        "내 도구를 표준 노출하는 MCP 서버 + 클라이언트 연결 + 호출 검증 + Function Calling 대비 README.",
+      format: "TypeScript 폴더",
+    },
+    reflectionQuestions: [
+      "내 도구 중 여러 AI 클라이언트에서 재사용하고 싶은 것은 무엇인가요?",
+      "Function Calling으로 충분한 경우와 MCP가 필요한 경우는 어떻게 갈리나요?",
+      "MCP 서버를 팀에 공유한다면 무엇을 먼저 문서화해야 할까요?",
+    ],
+    extensionIdeas: [
+      "MCP 서버를 원격 HTTP 전송으로 확장해 팀이 공유하기",
+      "여러 도구를 한 MCP 서버에 묶어 도구 세트로 배포하기",
+      "MCP resource로 사내 문서를 노출해 RAG 없이 참조시키기",
+    ],
+    tags: ["agents", "mcp", "tools"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "mcp-server-guide.md",
+        title: "MCP 서버 구축 가이드",
+        kind: "skill",
       },
     ],
   },
