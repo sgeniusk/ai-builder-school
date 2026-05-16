@@ -13,7 +13,7 @@ export function Container({
 }
 
 const navLinks = [
-  { href: "/curriculum", label: "커리큘럼" },
+  { href: "/stages", label: "커리큘럼" },
   { href: "/journeys", label: "여정" },
   { href: "/projects", label: "프로젝트" },
   { href: "/templates", label: "템플릿" },
@@ -84,7 +84,7 @@ export function SiteFooter() {
             title="학습"
             links={[
               { href: "/start", label: "학습 시작" },
-              { href: "/curriculum", label: "커리큘럼" },
+              { href: "/stages", label: "커리큘럼" },
               { href: "/journeys", label: "여정" },
               { href: "/projects", label: "프로젝트" },
             ]}

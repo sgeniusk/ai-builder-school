@@ -7,18 +7,18 @@ import {
   JourneyPicker,
   LearningLoopSection,
   SectionHeading,
+  StageLadder,
   UspCards,
-  WeekPath,
 } from "@/components/Sections";
 import { JourneyCard } from "@/components/Cards";
 import {
-  getMvpWeeks,
+  getStages,
   getStartingJourneys,
   getJourneys,
 } from "@/lib/content";
 
 export default function HomePage() {
-  const weeks = getMvpWeeks();
+  const stages = getStages();
   const startingJourneys = getStartingJourneys();
   const teaserJourneys = getJourneys().slice(0, 3);
 
@@ -33,14 +33,14 @@ export default function HomePage() {
       <section className="sec">
         <Container>
           <SectionHeading
-            eyebrow="8-week path"
-            title="8주, 한 주에 하나씩 쌓아요"
-            description="Phase 1부터 Capstone까지. 매주 한 가지 산출물이 손에 남으면, 8주 뒤엔 '공부했다'가 아니라 '만들었다'로 끝나요."
+            eyebrow="8-stage ladder"
+            title="8단계 사다리, 한 칸씩 올라요"
+            description="AI와 만나고 → 물어보고 → 확인하고 → 함께 일하고 → 일감을 주고 → 시스템을 만들고 → 운영하고 → 공유하기. 한 칸마다 산출물 하나가 손에 남아요."
           />
-          <WeekPath weeks={weeks} />
+          <StageLadder stages={stages} />
           <div style={{ marginTop: 28 }}>
-            <Link href="/curriculum" className="btn ghost">
-              전체 12 Phase 커리큘럼 <span className="arrow">→</span>
+            <Link href="/stages" className="btn ghost">
+              전체 8단계 커리큘럼 <span className="arrow">→</span>
             </Link>
           </div>
         </Container>
@@ -70,7 +70,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Journeys"
             title="가까이서 본 여정"
-            description="각 여정은 '이 길 끝에 손에 남는 것' 한 줄과, 그 길에 필요한 Phase 조합으로 이루어져 있어요."
+            description="각 여정은 '이 길 끝에 손에 남는 것' 한 줄과, 그 길에 필요한 Stage 조합으로 이루어져 있어요."
           />
           <div className="track-cards">
             {teaserJourneys.map((j) => (
