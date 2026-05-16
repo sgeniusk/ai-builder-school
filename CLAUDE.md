@@ -37,7 +37,7 @@ This repo enforces the Harness Engineering principles it teaches. Every coding a
    - **lesson-writer** (`.claude/skills/lesson-writer.md`) — adding/editing lessons. Wraps `npm run new-lesson`.
    - **content-validator** (`.claude/skills/content-validator.md`) — runs `npm run validate` and reports.
    - **ui-stylist** (`.claude/skills/ui-stylist.md`) — UI / styling only; never touches `src/content/**` or `src/lib/**`.
-6. **Evaluation hook** — `npm run validate` is the gate. `npm run eval` (Tier 3) gives quality warnings but is non-blocking by design.
+6. **Evaluation hook** — `npm run validate` is the gate. `npm run eval` (Tier 3) gives structural quality warnings but is non-blocking by design. `npm run eval:rubric` is the *qualitative* loop — LLM grades lesson prose against `docs/lesson-quality-rubric.md` (needs `ANTHROPIC_API_KEY`, advisory, opt-in).
 
 ## Workflow expectations
 
