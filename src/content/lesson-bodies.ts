@@ -5,6 +5,9 @@ import CommonSkillsBody from "./lessons/common-skills-of-future-proof-people.mdx
 import WhatLlmsBody from "./lessons/what-llms-are-good-and-bad-at.mdx";
 import HallucinationVerificationBody from "./lessons/hallucination-verification.mdx";
 import ChecksBeforeTrustingBody from "./lessons/checks-before-trusting-ai-output.mdx";
+import CostMonitoringInProductionBody from "./lessons/cost-monitoring-in-production.mdx";
+import AiDelegationDecisionBody from "./lessons/ai-delegation-decision.mdx";
+import AiCollaborationMindsetBody from "./lessons/ai-collaboration-mindset.mdx";
 
 // Phase 2 — Prompt & Context Engineering
 import StructureOfGoodPromptsBody from "./lessons/structure-of-good-prompts.mdx";
@@ -166,6 +169,9 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "harness-engineering-roadmap": HarnessEngineeringRoadmapBody,
   "ralph-loop-codex-goal": RalphLoopCodexGoalBody,
   "claude-code-token-saving": ClaudeCodeTokenSavingBody,
+  "cost-monitoring-in-production": CostMonitoringInProductionBody,
+  "ai-delegation-decision": AiDelegationDecisionBody,
+  "ai-collaboration-mindset": AiCollaborationMindsetBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {
