@@ -72,12 +72,12 @@
 - [x] Phase legacy 완전 제거 (STEP 1)
 - [x] `npm run check` 그린 — lint·typecheck·validate·build
 - [x] GitHub Pages 정적 export 빌드 정상 (`GITHUB_PAGES=true npm run build`) · Vercel은 PR마다 빌드
-- [ ] 깨진 링크 없음 (lesson 연결문·stage 라우트)
+- [x] 깨진 링크 없음 — export `out/` 자동 검사, HTML 101개·내부 링크 102개 0 broken
 
 **제품·UX**
-- [ ] 홈 → /stages → stage 상세 → lesson → 다음 lesson 동선 끊김 없음
-- [ ] 모바일 렌더 점검 (계단 사다리·lesson 본문)
-- [ ] 6 journey 추천 경로가 실제 stage로 연결
+- [x] 홈 → /stages → stage 상세 → lesson → 다음 lesson 동선 — 내부 링크 검사로 404 없음 확인
+- [ ] 모바일 렌더 점검 (계단 사다리·lesson 본문) — 실기기/프리뷰 육안 확인 필요
+- [x] 6 journey 추천 경로가 실제 stage로 연결 — `validateContent` 게이트가 강제
 - [x] 베타 테스트 High 우선순위 개선 반영 (4건)
 
 **SEO·메타**
@@ -100,6 +100,6 @@
 
 ## 5. 진행 로그 (요약)
 
-머지 완료 — #5 데이터골격 · #6~17 D1~D8(84 lesson 완성) · #18 Phase legacy 제거 · #20 LLM 루브릭 eval · #21 코드블록 복사버튼 · #22 MDX Phase 잔재 정리 · #23 eval Gemini provider
+머지 완료 — #5 데이터골격 · #6~17 D1~D8(84 lesson 완성) · #18 Phase legacy 제거 · #20 LLM 루브릭 eval · #21 코드블록 복사버튼 · #22 MDX Phase 잔재 정리 · #23 eval Gemini provider · #24 베타 High 4건 반영 · #25 SEO·메타(OG·favicon·sitemap·robots)
 
-다음 — STEP 2 베타 High 반영 머지 → 런칭 체크리스트(STEP 3)
+다음 — 모바일 렌더 육안 점검 · `eval:rubric` 1회 실행 → production 공개(STEP 3 마무리)
