@@ -37,24 +37,27 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
   "fallback-strategy-when-ai-fails": { stageId: "stage-3", stageOrdinal: 4 },
   "privacy-and-academic-ethics": { stageId: "stage-3", stageOrdinal: 5 },
 
-  // Stage 4 — AI와 함께 일하다 (14, sub 4a/4b/4c)
-  // 4a 업무 자동화 (4)
+  // Stage 4 — AI와 함께 일하다 (17, sub 4a/4b/4c)
+  // 4a 업무 자동화 (7)
   "automate-report-drafts": { stageId: "stage-4", stageOrdinal: 1, stageSubGroupId: "4a" },
   "meeting-notes-pipeline": { stageId: "stage-4", stageOrdinal: 2, stageSubGroupId: "4a" },
   "research-workflow": { stageId: "stage-4", stageOrdinal: 3, stageSubGroupId: "4a" },
   "blog-writing-pipeline": { stageId: "stage-4", stageOrdinal: 4, stageSubGroupId: "4a" },
+  "custom-gpt-builder": { stageId: "stage-4", stageOrdinal: 5, stageSubGroupId: "4a" },
+  "multi-workflow-orchestration": { stageId: "stage-4", stageOrdinal: 6, stageSubGroupId: "4a" },
+  "cost-estimation-and-roi-by-task": { stageId: "stage-4", stageOrdinal: 7, stageSubGroupId: "4a" },
   // 4b 콘텐츠·미디어 (6)
-  "blog-to-shorts-pipeline": { stageId: "stage-4", stageOrdinal: 5, stageSubGroupId: "4b" },
-  "design-visual-prompt-system": { stageId: "stage-4", stageOrdinal: 6, stageSubGroupId: "4b" },
-  "youtube-script-research-to-outline": { stageId: "stage-4", stageOrdinal: 7, stageSubGroupId: "4b" },
-  "figma-ai-ui-variation-workflow": { stageId: "stage-4", stageOrdinal: 8, stageSubGroupId: "4b" },
-  "thumbnail-and-title-ab-test": { stageId: "stage-4", stageOrdinal: 9, stageSubGroupId: "4b" },
-  "local-business-content-calendar": { stageId: "stage-4", stageOrdinal: 10, stageSubGroupId: "4b" },
+  "blog-to-shorts-pipeline": { stageId: "stage-4", stageOrdinal: 8, stageSubGroupId: "4b" },
+  "design-visual-prompt-system": { stageId: "stage-4", stageOrdinal: 9, stageSubGroupId: "4b" },
+  "youtube-script-research-to-outline": { stageId: "stage-4", stageOrdinal: 10, stageSubGroupId: "4b" },
+  "figma-ai-ui-variation-workflow": { stageId: "stage-4", stageOrdinal: 11, stageSubGroupId: "4b" },
+  "thumbnail-and-title-ab-test": { stageId: "stage-4", stageOrdinal: 12, stageSubGroupId: "4b" },
+  "local-business-content-calendar": { stageId: "stage-4", stageOrdinal: 13, stageSubGroupId: "4b" },
   // 4c 데이터·분석 (4)
-  "sql-with-ai-verification": { stageId: "stage-4", stageOrdinal: 11, stageSubGroupId: "4c" },
-  "crm-segmentation-with-ai": { stageId: "stage-4", stageOrdinal: 12, stageSubGroupId: "4c" },
-  "dashboard-narrative-and-qa": { stageId: "stage-4", stageOrdinal: 13, stageSubGroupId: "4c" },
-  "ab-test-decision-memo": { stageId: "stage-4", stageOrdinal: 14, stageSubGroupId: "4c" },
+  "sql-with-ai-verification": { stageId: "stage-4", stageOrdinal: 14, stageSubGroupId: "4c" },
+  "crm-segmentation-with-ai": { stageId: "stage-4", stageOrdinal: 15, stageSubGroupId: "4c" },
+  "dashboard-narrative-and-qa": { stageId: "stage-4", stageOrdinal: 16, stageSubGroupId: "4c" },
+  "ab-test-decision-memo": { stageId: "stage-4", stageOrdinal: 17, stageSubGroupId: "4c" },
 
   // Stage 5 — AI에게 일감을 주다 (8)
   "coding-agent-setup": { stageId: "stage-5", stageOrdinal: 1 },
@@ -109,16 +112,17 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
  * - PR D1 (Stage 1 책 보완): stage-1 4 → 7 (+ai-delegation·cost-monitoring·ai-collaboration)
  * - PR D2 (Stage 2 책 보완): stage-2 5 → 10 (+reasoning-vs-instruct·prompt-debugging·multimodal·output-evaluation·api-rate-limiting)
  * - PR D3 (Stage 3 책 보완): stage-3 4 → 5 (+fallback-strategy-when-ai-fails)
+ * - PR D4 (Stage 4 책 보완): stage-4 14 → 17 (+custom-gpt-builder·multi-workflow-orchestration·cost-estimation-and-roi-by-task, 4a)
  */
 export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-1": 7,
   "stage-2": 10,
   "stage-3": 5,
-  "stage-4": 14,
+  "stage-4": 17,
   "stage-5": 8,
   "stage-6": 13,
   "stage-7": 6,
   "stage-8": 7,
 } as const;
 
-export const EXPECTED_TOTAL_LESSONS = 70;
+export const EXPECTED_TOTAL_LESSONS = 73;
