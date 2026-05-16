@@ -61,7 +61,8 @@
 - [x] 8 Stage · 84 lesson 모두 본문·미션·산출물 채워짐
 - [x] 모든 lesson "다음 레슨" 연결문, 모든 stage intro/outro 에세이
 - [x] `npm run validate` 그린 (분포 7-10-5-17-11-16-9-9 = 84)
-- [ ] `npm run eval` (Tier 3) 품질 경고 검토
+- [ ] `npm run eval` (Tier 3) 구조 경고 검토
+- [ ] `npm run eval:rubric` (LLM 루브릭) 내용 품질 리포트 검토 — flag 우선순위 반영
 
 **코드·기술**
 - [x] Phase legacy 완전 제거 (STEP 1)
