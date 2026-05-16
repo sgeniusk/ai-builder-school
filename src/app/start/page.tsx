@@ -15,11 +15,14 @@ export const metadata: Metadata = {
     "30초면 충분해요. 6개 여정 중 지금 가장 가까운 하나를 고르면, 첫 미션이 바로 열려요.",
 };
 
+// 각 여정의 첫 미션 — /start에서 여정을 고르면 이 lesson으로 바로 보낸다.
+// Founder는 추천 흐름이 Stage 1부터 시작하므로 첫 미션도 Stage 1의 가벼운
+// lesson으로 잡는다 ("코드보다 시장이 본업" 카피와 어긋나지 않게).
 const firstMissions: Record<JourneyId, string> = {
   practitioner: "common-skills-of-future-proof-people",
   adopter: "checks-before-trusting-ai-output",
   creator: "blog-writing-pipeline",
-  founder: "connect-ai-api",
+  founder: "common-skills-of-future-proof-people",
   engineer: "coding-agent-setup",
   explorer: "common-skills-of-future-proof-people",
 };

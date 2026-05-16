@@ -1,26 +1,56 @@
-## API 키가 새면 청구서가 온다
+## 결제 카드는 아직 꺼내지 않는다
 
-Claude API를 며칠 써봤는데 한 달 후 이메일이 왔다. "$47 청구됩니다."
+AI 도구를 처음 켜면 곧바로 "월 $20 구독" "결제 카드 등록" 화면이 나온다. 여기서 많은 사람이 멈춘다. 카드를 등록할지 말지 정하느라 학습이 시작도 못 한 채 끝난다.
 
-두 가지 실수였다. 첫째, API 키를 GitHub에 올렸다. 봇이 자동으로 수집해 다른 사람이 내 키로 요청을 보냈다. 둘째, spending limit을 설정하지 않았다.
+좋은 소식이 있다. **이 학교의 Stage 1~4는 결제 없이, 무료 한도만으로 따라올 수 있다.** 결제가 정말 필요한 건 Stage 5부터다 — AI를 *코드에서* 호출하기 시작할 때.
 
-이 레슨은 이 두 가지 실수를 사전에 막는다.
+그러니 길을 두 갈래로 나눈다.
+
+| 트랙 | 누구를 위한 것 | 무엇으로 | 결제 |
+|------|--------------|---------|------|
+| **무료 한도 트랙** | 지금 — Stage 1~4를 가볍게 시작 | Claude·ChatGPT·Gemini 무료 웹 | 카드 등록 없음 |
+| **유료 API 트랙** | Stage 5부터 — 코드에서 AI 호출 | API 키 + `.env` | 사용량 기반 (월 $5부터) |
+
+지금 할 일은 **무료 한도 트랙**뿐이다. 유료 API 트랙은 Stage 5에 도착했을 때 이 레슨으로 다시 돌아와서 하면 된다.
 
 ---
 
-## 필요한 계정 목록
+## 무료 한도 트랙 — 지금 할 일
 
-| 계정 | 용도 | 무료 여부 |
+### 필요한 무료 계정 2개
+
+| 계정 | 용도 | 카드 등록 |
 |------|------|---------|
-| GitHub | 코드 저장소, 협업 | 무료 (공개 저장소) |
-| Anthropic Console | Claude API 키 발급 | API 사용량 기반 과금 |
-| OpenAI Platform | GPT API 키 발급 (선택) | API 사용량 기반 과금 |
+| GitHub | 코드·산출물 저장, 협업 | 불필요 |
+| AI 챗봇 1개 | 매일 쓸 AI 도구 | 불필요 |
 
-**Claude.ai 웹 vs Anthropic API는 다르다.** Claude.ai 웹($20/월 Pro)은 브라우저에서 쓰는 것이고, Anthropic API는 코드에서 호출하는 것이다. 이 학교 실습에서는 API를 쓴다.
+### AI 챗봇 — 셋 중 편한 하나
+
+세 가지 모두 무료 한도가 있다. 하나만 골라 가입하면 된다. 셋 다 가입해도 좋다.
+
+| 챗봇 | 주소 | 무료 한도 |
+|------|------|---------|
+| Claude | [claude.ai](https://claude.ai) | 하루 일정량 무료 |
+| ChatGPT | [chatgpt.com](https://chatgpt.com) | 하루 일정량 무료 |
+| Gemini | [gemini.google.com](https://gemini.google.com) | 하루 일정량 무료 (Google 계정이면 바로) |
+
+이 두 계정(GitHub + 챗봇 1개)이면 Stage 1~4를 끝까지 따라올 수 있다. 무료 한도는 학습용으로는 대체로 충분하다. 한도에 걸리면 다음 날 다시 차거나, 다른 챗봇으로 옮기면 된다.
+
+**여기까지가 지금 반드시 할 일이다.** 아래 "유료 API 트랙"은 읽어만 두고 넘어가도 된다.
 
 ---
 
-## API 키 안전하게 저장하기
+## 유료 API 트랙 — Stage 5에 도착하면
+
+Stage 5부터는 AI를 채팅창이 아니라 *코드에서* 호출한다. 그때 **API 키**가 필요하고, API는 쓴 만큼 돈이 나간다. 아래는 Stage 5에 도착했을 때 이 레슨으로 돌아와서 하면 된다. 지금 미리 해두고 싶다면 해도 좋다.
+
+### Claude.ai 웹 vs Anthropic API는 다르다
+
+Claude.ai 웹(무료 한도 / Pro $20월)은 브라우저에서 쓰는 것이고, Anthropic API는 코드에서 호출하는 것이다. 무료 한도 트랙은 웹을 쓰고, 유료 API 트랙은 API를 쓴다.
+
+### API 키 안전하게 저장하기
+
+API 키가 새면 청구서가 온다. 키를 GitHub에 올리면 봇이 자동으로 수집해 다른 사람이 내 키로 요청을 보낸다.
 
 **절대 이렇게 하지 않는다:**
 
@@ -31,11 +61,11 @@ client = anthropic.Anthropic(api_key="sk-ant-api03-...")
 
 **이렇게 한다:**
 
-### 1단계 — .env 파일 만들기
-
 ```bash
 # my-ai-builder-lab 폴더에서
 touch .env
+touch .gitignore
+echo '.env' >> .gitignore
 ```
 
 `.env` 파일에 입력:
@@ -44,16 +74,7 @@ touch .env
 ANTHROPIC_API_KEY=sk-ant-api03-여기에-실제-키-입력
 ```
 
-### 2단계 — .gitignore에 추가
-
-```bash
-touch .gitignore
-echo '.env' >> .gitignore
-```
-
-`.gitignore`에 `.env`가 있으면 Git이 해당 파일을 무시한다. GitHub에 올라가지 않는다.
-
-### 3단계 — 코드에서 불러오기
+`.gitignore`에 `.env`가 있으면 Git이 그 파일을 무시한다. GitHub에 올라가지 않는다. 코드에서는 이렇게 불러온다:
 
 ```python
 import os
@@ -63,16 +84,24 @@ load_dotenv()
 api_key = os.environ.get("ANTHROPIC_API_KEY")
 ```
 
-이 패턴이 표준이다. 한 번 익혀두면 모든 프로젝트에 동일하게 쓴다.
+이 패턴이 표준이다. 한 번 익혀두면 모든 프로젝트에 똑같이 쓴다.
 
----
+### Spending Limit 설정
 
-## 비용 구조 이해
+유료 API를 쓰기로 했다면 한도를 반드시 건다.
+
+1. [console.anthropic.com](https://console.anthropic.com) 로그인
+2. Settings → Limits
+3. **Monthly spend limit** → $5 또는 $10으로 설정
+
+한도에 도달하면 API 호출이 중단된다. 학습·실습 중에는 $5로도 충분하다.
+
+### 비용 구조 이해
 
 AI API는 **토큰** 단위로 과금된다. 토큰은 대략 단어 0.75개에 해당한다.
 
 ```
-Claude 3.5 Sonnet 기준 (2025년 5월):
+Claude 3.5 Sonnet 기준:
 - 입력: $3 / 1M 토큰
 - 출력: $15 / 1M 토큰
 
@@ -81,19 +110,7 @@ Claude 3.5 Sonnet 기준 (2025년 5월):
 - 하루 100회 호출 ≈ 약 $0.30
 ```
 
-개발·실습 중에는 비용이 거의 안 나온다. 하지만 루프를 잘못 짜서 API를 수천 번 호출하면 금방 오른다.
-
----
-
-## Spending Limit 설정
-
-Anthropic Console에서 반드시 설정한다.
-
-1. [console.anthropic.com](https://console.anthropic.com) 로그인
-2. Settings → Limits
-3. **Monthly spend limit** → $5 또는 $10으로 설정
-
-한도에 도달하면 API 호출이 중단된다. 학습·실습 중에는 $5로도 충분하다.
+개발·실습 중에는 비용이 거의 안 나온다. 하지만 루프를 잘못 짜서 API를 수천 번 호출하면 금방 오른다. 그래서 spending limit이 안전망이다.
 
 ---
 
@@ -101,25 +118,29 @@ Anthropic Console에서 반드시 설정한다.
 
 | 도구 | 무료로 쓸 수 있는 것 | 유료가 필요한 것 |
 |------|-------------------|--------------|
-| Claude.ai 웹 | 일일 한도 내 무료 | Pro $20/월 (한도 해제) |
-| Anthropic API | 없음 (신규 가입 크레딧 있음) | 사용량 기반 |
+| Claude.ai 웹 | 하루 한도 내 무료 | Pro $20/월 (한도 해제) |
+| ChatGPT 웹 | 하루 한도 내 무료 | Plus $20/월 |
+| Gemini 웹 | 하루 한도 내 무료 | 고급 모델은 유료 |
+| Anthropic·OpenAI API | 신규 가입 크레딧 (있을 때) | 사용량 기반 — Stage 5부터 |
 | GitHub | 공개 저장소 무료 | 비공개 팀 기능 유료 |
-| VS Code | 완전 무료 | - |
-| Codex CLI | 별도 확인 필요 | 모델 사용량 기반 |
+| VS Code | 완전 무료 | — |
 
 ---
 
 ## 체크리스트
 
-이 레슨이 끝나면:
+**무료 한도 트랙 — 지금 끝낼 것:**
 
 - [ ] GitHub 계정 생성 완료
-- [ ] Anthropic 계정 + API 키 발급 완료
-- [ ] `.env` 파일에 API 키 저장
-- [ ] `.gitignore`에 `.env` 추가
-- [ ] Anthropic Console에서 monthly spend limit 설정
-- [ ] `git status`에서 `.env`가 tracked 되지 않는 것 확인
+- [ ] AI 챗봇(Claude / ChatGPT / Gemini 중 1개) 무료 가입 완료
+- [ ] 각 도구의 무료/유료 경계를 한 번 읽고 이해
+
+**유료 API 트랙 — Stage 5에 도착하면 (지금은 건너뛰어도 됨):**
+
+- [ ] API 키 발급 + `.env` 파일에 저장
+- [ ] `.gitignore`에 `.env` 추가, `git status`에서 tracked 안 되는지 확인
+- [ ] Console에서 monthly spend limit 설정
 
 ## 다음 레슨
 
-계정과 예산을 잡았다면, 이제 그 예산이 새지 않게 지킬 차례다. [다음 레슨](/lessons/cost-monitoring-in-production)에서는 AI 비용을 매주 5분에 점검하는 모니터링 루프를 만들어, 청구서가 터지기 전에 막는다.
+무료 한도 트랙으로 도구가 준비됐다. [다음 레슨](/lessons/cost-monitoring-in-production)에서는 — 나중에 유료 API를 쓰게 됐을 때를 대비해 — AI 비용을 매주 5분에 점검하는 모니터링 루프를 미리 살펴본다.
