@@ -59,15 +59,18 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
   "dashboard-narrative-and-qa": { stageId: "stage-4", stageOrdinal: 16, stageSubGroupId: "4c" },
   "ab-test-decision-memo": { stageId: "stage-4", stageOrdinal: 17, stageSubGroupId: "4c" },
 
-  // Stage 5 — AI에게 일감을 주다 (8)
+  // Stage 5 — AI에게 일감을 주다 (11)
   "coding-agent-setup": { stageId: "stage-5", stageOrdinal: 1 },
   "github-issue-to-ai-brief": { stageId: "stage-5", stageOrdinal: 2 },
   "letting-ai-read-codebase": { stageId: "stage-5", stageOrdinal: 3 },
   "plan-with-ai": { stageId: "stage-5", stageOrdinal: 4 },
   "write-tests-with-coding-agent": { stageId: "stage-5", stageOrdinal: 5 },
   "bug-reproduction-loop": { stageId: "stage-5", stageOrdinal: 6 },
-  "claude-md-four-principles": { stageId: "stage-5", stageOrdinal: 7 },
-  "harness-engineering-roadmap": { stageId: "stage-5", stageOrdinal: 8 },
+  "pr-review-with-ai": { stageId: "stage-5", stageOrdinal: 7 },
+  "claude-md-four-principles": { stageId: "stage-5", stageOrdinal: 8 },
+  "agent-hooks-automation": { stageId: "stage-5", stageOrdinal: 9 },
+  "subagent-context-design": { stageId: "stage-5", stageOrdinal: 10 },
+  "harness-engineering-roadmap": { stageId: "stage-5", stageOrdinal: 11 },
 
   // Stage 6 — AI 시스템을 만들다 (13, sub 6a/6b/6c)
   // 6a API (4)
@@ -113,16 +116,17 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
  * - PR D2 (Stage 2 책 보완): stage-2 5 → 10 (+reasoning-vs-instruct·prompt-debugging·multimodal·output-evaluation·api-rate-limiting)
  * - PR D3 (Stage 3 책 보완): stage-3 4 → 5 (+fallback-strategy-when-ai-fails)
  * - PR D4 (Stage 4 책 보완): stage-4 14 → 17 (+custom-gpt-builder·multi-workflow-orchestration·cost-estimation-and-roi-by-task, 4a)
+ * - PR D5 (Stage 5 책 보완): stage-5 8 → 11 (+pr-review-with-ai·agent-hooks-automation·subagent-context-design)
  */
 export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-1": 7,
   "stage-2": 10,
   "stage-3": 5,
   "stage-4": 17,
-  "stage-5": 8,
+  "stage-5": 11,
   "stage-6": 13,
   "stage-7": 6,
   "stage-8": 7,
 } as const;
 
-export const EXPECTED_TOTAL_LESSONS = 73;
+export const EXPECTED_TOTAL_LESSONS = 76;

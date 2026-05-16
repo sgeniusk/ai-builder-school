@@ -1499,47 +1499,85 @@ export const lessons: Lesson[] = [
       "코딩 에이전트에게 실행을 시키기 전에 Plan Mode와 implementation-plan.md 패턴으로 변경 파일·테스트 전략·롤백 포인트·Stop Points를 합의하고, plan-then-execute 사이클 한 건을 기록합니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "practitioner"],
     prerequisites: ["github-issue-to-ai-brief"],
     learningGoals: [
-      "구현 전에 합의된 계획을 만든다",
-      "AI가 계획을 벗어나지 않게 안전장치를 건다",
+      "코드를 짜기 전에 AI와 구현 계획을 먼저 합의하는 이유를 설명한다",
+      "implementation-plan.md에 들어갈 4요소(변경 파일·테스트 전략·롤백 포인트·Stop Points)를 작성한다",
+      "Plan Mode로 \"계획 합의\"와 \"실행\"을 분리한다",
+      "AI가 계획을 벗어나려 할 때 멈추는 Stop Point를 설계한다",
     ],
     problemScenario:
-      "에이전트가 '일단' 고치기 시작하면 범위가 폭주하거나, 엉뚱한 리팩터링을 한다.",
+      "에이전트에게 \"이 기능 추가해줘\"라고 하면 곧바로 코드를 짜기 시작합니다. 처음엔 빠르게 느껴져요. 그런데 30분 뒤 — 건드리지 말았어야 할 파일 5개가 바뀌어 있고, 테스트는 안 만들어졌고, 어디서부터 잘못됐는지 모릅니다. 결국 `git reset`. \"일단 짜 봐\"의 대가는 늘 뒤에 옵니다. 코드 한 줄 전에 5분짜리 계획을 합의하면, 이 폭주가 사라져요.",
     coreConcepts: [
-      { term: "Implementation Plan", explanation: "변경 파일/테스트 전략/롤백 포인트를 담은 합의 문서." },
-      { term: "Stop Points", explanation: "에이전트가 반드시 사람에게 묻게 되는 지점." },
+      {
+        term: "Implementation Plan",
+        explanation:
+          "실행 전에 AI와 합의하는 계획 문서. 변경할 파일 목록, 테스트 전략, 롤백 포인트, Stop Points 4요소를 담습니다. 합의된 계획은 에이전트의 범위 폭주를 막는 울타리입니다.",
+      },
+      {
+        term: "Plan Mode — 계획과 실행의 분리",
+        explanation:
+          "에이전트가 곧바로 코드를 짜지 않고, 먼저 계획만 출력하고 멈추는 모드. 사람이 계획을 검토·승인한 뒤에야 실행으로 넘어갑니다.",
+      },
+      {
+        term: "Stop Points",
+        explanation:
+          "에이전트가 반드시 사람에게 묻고 멈춰야 하는 지점. 계획에 없던 파일 수정·되돌리기 어려운 변경·외부 호출 등. 계획 이탈을 조기에 잡습니다.",
+      },
+      {
+        term: "변경 파일 목록 (Blast Radius)",
+        explanation:
+          "이 작업이 건드릴 파일과 \"건드리지 말 파일\"을 미리 못박은 목록. 계획서의 가장 구체적인 부분이며, 폭주 여부를 판정하는 기준이 됩니다.",
+      },
     ],
-    codexMission:
-      "Codex에게 `docs/plans/<slug>.md` 템플릿을 만들게 하고, 특정 이슈로 실제 계획서를 작성·합의한다.",
-    claudeCodeMission:
-      "Claude Code에게 계획 모드에서 '파일 목록/테스트/롤백'을 반드시 출력하도록 규약을 추가한다.",
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 45분 안에 끝내는 걸 목표로 하세요.\n\n작업: 실제 이슈 하나로 plan-then-execute 사이클을 한 번 돌리고 `implementation-plan.md`로 남깁니다.\n\n포함할 단계:\n1. 계획 템플릿 — implementation-plan.md에 4요소 섹션(변경 파일·테스트 전략·롤백 포인트·Stop Points)\n2. 실제 이슈 1개 선택 — 지난 레슨에서 만든 AI 브리프를 입력으로\n3. Plan Mode로 계획만 받기 — 에이전트가 코드를 짜지 않고 계획만 출력하게 함\n4. 계획 검토 — 변경 파일 목록이 구체적인가, 빠진 게 없는가 사람이 확인\n5. 승인 후 실행 — 계획대로 구현. Stop Point에 닿으면 멈추는지 확인\n6. 회고 — 계획 대비 실제로 무엇이 달랐는지 한 줄\n\n에이전트에게 \"승인 전에는 코드를 절대 짜지 말고 계획만 출력하라\"고 명시하세요.",
+    codexNote:
+      "Codex CLI는 Plan Mode가 도구에 따라 다릅니다. 명시적 Plan Mode가 없으면 \"먼저 계획만 출력하고 STOP. 내가 '실행'이라고 할 때까지 코드 금지\"를 프롬프트로 강제하세요.",
     buildSteps: [
-      "계획 템플릿 확정",
-      "특정 이슈로 계획 생성",
-      "Stop Point 설정",
+      "implementation-plan.md 템플릿을 4요소 섹션으로 만든다",
+      "실제 이슈 1개를 골라 AI 브리프를 입력으로 준비한다",
+      "Plan Mode로 계획만 받는다 (코드 금지)",
+      "변경 파일 목록·테스트 전략·롤백 포인트가 구체적인지 검토한다",
+      "Stop Point를 명시하고 계획을 승인한다",
+      "계획대로 실행하고, 계획 대비 차이를 한 줄로 회고한다",
     ],
     verificationChecklist: [
-      "변경 파일 목록이 구체적인가",
-      "테스트 전략이 있는가",
-      "롤백 포인트가 명시되었는가",
+      "계획서에 변경 파일 목록이 구체적으로 적혀 있는가 (\"건드리지 말 파일\" 포함)",
+      "테스트 전략이 명시되어 있는가",
+      "롤백 포인트가 정해져 있는가",
+      "Stop Points가 \"계획 이탈 시 멈춤\"으로 작동하는가",
+      "승인 전까지 에이전트가 코드를 짜지 않았는가",
+      "계획 대비 실행 차이가 회고로 기록되었는가",
     ],
     deliverable: {
-      title: "구현 계획 템플릿 + 실제 계획 1건",
-      description: "계획 문서 양식과 실 사례.",
-      format: "Markdown",
+      title: "구현 계획 템플릿 + 실제 계획 1건 (`implementation-plan.md`)",
+      description:
+        "변경 파일·테스트 전략·롤백 포인트·Stop Points 4요소 템플릿 + 실제 이슈로 돌린 plan-then-execute 사이클 기록.",
+      format: "Markdown 파일(.md)",
     },
     reflectionQuestions: [
-      "계획을 만들면서 가장 자주 드러나는 빈 구멍은?",
-      "어떤 Stop Point가 실제로 사고를 막았나?",
+      "계획을 세우면서 \"아, 이건 생각 못 했네\" 하고 드러난 빈 구멍은 무엇이었나요?",
+      "어떤 Stop Point가 실제로 폭주를 막았나요?",
+      "계획 없이 바로 짰다면 어디서 git reset을 했을 것 같나요?",
     ],
     extensionIdeas: [
-      "계획 자동 생성 명령 만들기",
-      "계획 대비 실행 비교 리포트",
+      "계획 자동 생성 슬래시 명령을 만들어 매 이슈에 재사용하기",
+      "계획 대비 실행 결과를 비교하는 리포트를 만들어 계획 정확도 추적하기",
+      "팀 공용 계획 템플릿을 CLAUDE.md에 박아 모든 작업에 강제하기",
     ],
     tags: ["coding-agents", "planning"],
     hasMdxBody: true,
+    outputs: [
+      {
+        filename: "implementation-plan.md",
+        title: "구현 계획 4요소 템플릿",
+        kind: "prompt",
+      },
+    ],
   },
   {
     id: "lesson-17",
@@ -6845,6 +6883,279 @@ export const lessons: Lesson[] = [
         filename: "automation-roi.md",
         title: "자동화 ROI 시트 템플릿",
         kind: "checklist",
+      },
+    ],
+  },
+  {
+    id: "lesson-74",
+    slug: "pr-review-with-ai",
+    phaseId: "phase-4",
+    titleKo: "AI와 함께 PR 리뷰하기 — 머지 전 마지막 점검",
+    titleEn: "Reviewing PRs with AI — the last gate before merge",
+    hook: "AI가 짠 코드는 빠릅니다. 그런데 그 코드를 머지 버튼 누르기 전에 누가 봅니까? AI에게 짜게 했다면, 리뷰도 함께 설계해야 해요.",
+    summary:
+      "AI가 만든 PR을 머지 전에 점검하는 리뷰 루프를 만듭니다. AI에게 자기 코드를 1차 셀프 리뷰시키고, 사람이 봐야 할 지점을 체크리스트로 고정해, \"빠르게 짠 코드\"가 \"빠르게 사고 친 코드\"가 되지 않게 합니다.",
+    level: "intermediate",
+    estimatedMinutes: 45,
+    targetJourneys: ["engineer", "founder", "practitioner"],
+    prerequisites: ["bug-reproduction-loop", "write-tests-with-coding-agent"],
+    learningGoals: [
+      "AI가 짠 코드의 리뷰가 사람 코드 리뷰와 무엇이 다른지 설명한다",
+      "AI에게 자기 PR을 1차 셀프 리뷰시키는 프롬프트를 만든다",
+      "사람이 반드시 직접 봐야 하는 리뷰 지점을 체크리스트로 고정한다",
+      "리뷰에서 걸린 문제를 다음 브리프·CLAUDE.md로 되먹인다",
+    ],
+    problemScenario:
+      "AI에게 일감을 주고, 계획을 세우고, 테스트를 만들고, 버그도 잡았어요. PR이 5분 만에 올라옵니다. 그리고 — 그대로 머지합니다. AI가 짰으니 괜찮겠지. 그런데 일주일 뒤, 그 PR이 멀쩡한 기능 하나를 조용히 깨뜨린 걸 발견해요. AI 코드는 빠르게 나오지만, 빠른 만큼 리뷰 없이 흘러가기 쉽습니다. \"누가 짰는가\"보다 \"머지 전에 누가 봤는가\"가 중요해요.",
+    coreConcepts: [
+      {
+        term: "AI 코드 리뷰는 다르다",
+        explanation:
+          "사람 코드는 \"왜 이렇게 했나\"를 묻지만, AI 코드는 \"부탁 안 한 걸 했나\"를 먼저 봅니다. 범위 초과·과한 추상화·조용한 동작 변경이 AI 코드의 흔한 결함입니다.",
+      },
+      {
+        term: "셀프 리뷰 (Self-review)",
+        explanation:
+          "AI에게 자기가 만든 diff를 다시 보게 하고 \"위험한 변경·범위 밖 수정·빠진 테스트\"를 스스로 표시하게 하는 1차 점검. 사람 리뷰 전에 노이즈를 줄입니다.",
+      },
+      {
+        term: "사람 필수 점검 지점",
+        explanation:
+          "AI에 맡길 수 없는 리뷰 항목 — 보안·권한·데이터 마이그레이션·외부 호출·되돌리기 어려운 변경. 이건 사람이 직접 눈으로 봅니다.",
+      },
+      {
+        term: "리뷰 → 브리프 되먹임",
+        explanation:
+          "리뷰에서 반복해 걸리는 문제는 다음 작업 브리프나 CLAUDE.md에 규칙으로 넣습니다. 같은 실수를 매번 리뷰로 잡지 않게.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 45분 안에 끝내는 걸 목표로 하세요.\n\n작업: AI가 만든 PR 하나를 리뷰하는 `pr-review-loop.md`를 만듭니다.\n\n포함해야 할 섹션:\n1. \"셀프 리뷰 프롬프트\" — AI에게 자기 diff를 보고 위험 변경·범위 밖 수정·빠진 테스트를 표시하게 하는 프롬프트\n2. \"사람 필수 점검 체크리스트\" — AI에 맡길 수 없는 리뷰 항목 6개 이상 (보안·권한·마이그레이션 등)\n3. \"실제 리뷰 1건\" — 최근 AI가 만든 PR 하나에 위 둘을 적용한 기록. 셀프 리뷰 결과 + 사람이 걸러낸 것\n4. \"되먹임\" — 리뷰에서 걸린 문제 중 다음 브리프·CLAUDE.md에 넣을 규칙 1~2개\n\n에이전트에게 최근 AI로 만든 PR(또는 변경) 하나를 보여주세요. 실제 diff로 리뷰 루프를 돌립니다.",
+    codexNote:
+      "Codex CLI에서는 `git diff`를 먼저 보여준 뒤 셀프 리뷰를 요청하면 정확합니다. \"칭찬하지 말고 위험 지점만 찾아라\"고 명시하세요.",
+    buildSteps: [
+      "AI에게 자기 diff를 셀프 리뷰시키는 프롬프트를 작성한다",
+      "사람이 반드시 직접 볼 점검 항목 6개 이상을 체크리스트로 만든다",
+      "최근 AI가 만든 PR 하나를 고른다",
+      "셀프 리뷰를 돌리고 결과를 기록한다",
+      "사람 체크리스트로 직접 점검하고 걸린 것을 적는다",
+      "반복될 문제를 다음 브리프·CLAUDE.md 규칙으로 적는다",
+    ],
+    verificationChecklist: [
+      "셀프 리뷰 프롬프트가 \"위험·범위초과·빠진 테스트\"를 찾게 하는가",
+      "사람 필수 점검 항목이 6개 이상이고 AI에 못 맡길 것들인가",
+      "실제 PR 1건에 리뷰 루프가 적용되어 있는가",
+      "셀프 리뷰가 잡은 것과 사람이 잡은 것이 구분되어 있는가",
+      "되먹임 규칙이 다음 작업에 실제로 반영 가능한가",
+      "리뷰 없이 머지하던 습관이 이 루프로 바뀌는가",
+    ],
+    deliverable: {
+      title: "AI PR 리뷰 루프 (`pr-review-loop.md`)",
+      description:
+        "셀프 리뷰 프롬프트 + 사람 필수 점검 체크리스트 + 실제 리뷰 1건 + 되먹임 규칙.",
+      format: "Markdown 파일(.md) · 1페이지 이내",
+    },
+    reflectionQuestions: [
+      "지금까지 AI가 짰다는 이유로 리뷰 없이 머지한 PR이 있었나요?",
+      "AI 코드에서 가장 자주 발견되는 결함 유형은 무엇이었나요?",
+      "셀프 리뷰가 잡지 못해 사람이 잡아야 했던 것은 무엇인가요?",
+    ],
+    extensionIdeas: [
+      "셀프 리뷰를 GitHub Action으로 자동화해 PR 열릴 때 코멘트 달기",
+      "사람 점검 체크리스트를 PR 템플릿에 박아 매번 강제하기",
+      "리뷰에서 자주 걸리는 패턴을 모아 분기별 회고 입력으로 쓰기",
+    ],
+    tags: ["coding-agents", "review", "quality"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "pr-review-loop.md",
+        title: "AI PR 리뷰 루프 템플릿",
+        kind: "checklist",
+      },
+    ],
+  },
+  {
+    id: "lesson-75",
+    slug: "agent-hooks-automation",
+    phaseId: "phase-4",
+    titleKo: "Hooks로 자동 게이트 만들기 — 까먹지 않는 검증",
+    titleEn: "Automated gates with hooks",
+    hook: "\"커밋 전에 테스트 돌리기\"를 매번 기억하나요? 사람은 까먹습니다. Hook은 안 까먹어요.",
+    summary:
+      "코딩 에이전트의 hook으로 \"항상 거치는 자동 게이트\"를 만듭니다. 작업 전후에 lint·typecheck·테스트가 자동으로 돌게 걸어, 검증을 \"기억\"이 아니라 \"구조\"로 만듭니다.",
+    level: "intermediate",
+    estimatedMinutes: 45,
+    targetJourneys: ["engineer", "founder"],
+    prerequisites: ["coding-agent-setup", "claude-md-four-principles"],
+    learningGoals: [
+      "검증을 \"사람이 기억하는 일\"에서 \"자동으로 걸리는 게이트\"로 바꾼다",
+      "코딩 에이전트의 hook이 작업 흐름 어디에 끼어드는지 설명한다",
+      "작업 전후로 lint·typecheck·test가 자동 실행되는 hook을 건다",
+      "hook이 막았을 때 에이전트가 스스로 고치게 하는 루프를 설계한다",
+    ],
+    problemScenario:
+      "CLAUDE.md에 \"커밋 전 npm run check를 돌려라\"고 적어뒀어요. 그런데 에이전트는 가끔 그걸 건너뜁니다. 당신도 바쁠 땐 까먹어요. 규약은 \"지켜주기를 바라는 것\"이고, 안 지켜지면 깨진 코드가 그대로 흘러갑니다. 진짜 안전한 검증은 사람이나 AI의 기억에 기대지 않아요. 작업 흐름 자체에 게이트를 박아, 통과 못 하면 다음으로 못 가게 만듭니다.",
+    coreConcepts: [
+      {
+        term: "Hook — 자동 게이트",
+        explanation:
+          "특정 시점(작업 전·후, 파일 수정 후, 커밋 전)에 자동으로 실행되는 스크립트. 코딩 에이전트와 git 모두 hook 메커니즘을 제공합니다.",
+      },
+      {
+        term: "기억 vs 구조",
+        explanation:
+          "\"커밋 전 테스트\"를 규약에 적는 건 기억에 기대는 것. hook으로 거는 건 구조에 박는 것. 구조는 까먹지 않습니다.",
+      },
+      {
+        term: "차단형 게이트 (Blocking)",
+        explanation:
+          "검증이 실패하면 작업 자체를 멈추는 hook. 경고만 하는 것과 다릅니다 — 통과 못 하면 커밋도 다음 단계도 진행되지 않습니다.",
+      },
+      {
+        term: "실패 → 자가 수정 루프",
+        explanation:
+          "hook이 막으면 그 출력을 에이전트에 돌려주고 스스로 고치게 합니다. 게이트가 \"막기\"에서 끝나지 않고 \"고치게 하기\"까지 이어집니다.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 45분 안에 끝내는 걸 목표로 하세요.\n\n작업: 실습 프로젝트에 자동 검증 게이트를 걸고 `hooks-setup.md`에 정리합니다.\n\n포함할 산출물:\n1. 작업 흐름 도식 — 어느 시점(파일 수정 후·커밋 전)에 무엇(lint·typecheck·test)이 자동으로 돌지\n2. 실제 hook 설정 — 코딩 에이전트 hook 또는 git pre-commit hook으로 검증을 차단형으로 건다\n3. 실패 테스트 — 일부러 깨진 코드를 만들고, hook이 실제로 막는지 확인\n4. 자가 수정 루프 — hook이 막았을 때 에이전트가 출력을 받아 스스로 고치게 하는 지시\n5. `hooks-setup.md` — 무엇을 어디에 걸었는지 + 새 프로젝트에 재적용하는 법\n\n에이전트에게 실습 프로젝트의 검증 명령(lint·typecheck·test)을 알려주세요.",
+    codexNote:
+      "Codex CLI 환경에서는 git hook(`.git/hooks/pre-commit`) 또는 lefthook 같은 도구를 권장합니다. \"경고만 하지 말고 실패 시 exit 1로 커밋을 막아라\"고 명시하세요.",
+    buildSteps: [
+      "작업 흐름에서 검증이 끼어들 시점을 정한다 (수정 후·커밋 전)",
+      "각 시점에 돌릴 검증 명령(lint·typecheck·test)을 정한다",
+      "코딩 에이전트 hook 또는 git pre-commit hook으로 차단형 게이트를 건다",
+      "일부러 깨진 코드로 hook이 실제 막는지 검증한다",
+      "hook 실패 출력을 에이전트에 돌려 자가 수정시키는 지시를 만든다",
+      "`hooks-setup.md`에 설정과 재적용 법을 기록한다",
+    ],
+    verificationChecklist: [
+      "검증이 작업 흐름의 특정 시점에 자동으로 걸리는가",
+      "hook이 경고만이 아니라 실패 시 진행을 차단하는가",
+      "일부러 깨진 코드에서 hook이 실제로 막는 것을 확인했는가",
+      "hook이 막았을 때 에이전트가 스스로 고치는 루프가 있는가",
+      "설정이 새 프로젝트에 재적용 가능하게 문서화됐는가",
+      "검증이 \"기억\"이 아니라 \"구조\"로 바뀌었는가",
+    ],
+    deliverable: {
+      title: "자동 검증 게이트 (`hooks-setup.md` + hook 설정)",
+      description:
+        "작업 흐름 도식 + 차단형 hook 설정 + 실패 검증 + 자가 수정 루프 + 재적용 가이드.",
+      format: "Markdown + hook 설정 파일",
+    },
+    reflectionQuestions: [
+      "지금까지 \"기억\"에 기대던 검증 중 hook으로 옮길 만한 것은 무엇인가요?",
+      "차단형 게이트가 과해서 정상 작업을 막는 경우는 없을까요?",
+      "hook이 막은 것을 에이전트가 못 고치면 그다음은 무엇인가요?",
+    ],
+    extensionIdeas: [
+      "pre-push hook에 더 무거운 게이트(빌드·E2E)를 분리해 걸기",
+      "CI에도 같은 게이트를 걸어 로컬·원격 이중 방어 만들기",
+      "팀 공용 hook 설정을 만들어 새 프로젝트마다 자동 상속하기",
+    ],
+    tags: ["coding-agents", "hooks", "harness", "automation"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "hooks-setup.md",
+        title: "자동 검증 게이트 설정 가이드",
+        kind: "skill",
+      },
+    ],
+  },
+  {
+    id: "lesson-76",
+    slug: "subagent-context-design",
+    phaseId: "phase-4",
+    titleKo: "서브에이전트 설계 — 컨텍스트를 나눠 일을 키운다",
+    titleEn: "Designing subagents — split context to scale work",
+    hook: "큰 작업을 한 에이전트에 다 던지면 컨텍스트가 엉켜요. 일을 쪼개 각자의 깨끗한 컨텍스트를 가진 서브에이전트에 맡기면 결과가 달라집니다.",
+    summary:
+      "하나의 에이전트로는 버거운 큰 작업을, 컨텍스트가 격리된 서브에이전트로 나눠 맡기는 법을 익힙니다. 무엇을 분리하고 무엇을 메인에 남길지, 서브에이전트에 무엇을 넘기고 무엇을 돌려받을지 설계합니다.",
+    level: "advanced",
+    estimatedMinutes: 50,
+    targetJourneys: ["engineer", "founder"],
+    prerequisites: ["coding-agent-setup", "plan-with-ai"],
+    learningGoals: [
+      "한 에이전트의 컨텍스트가 엉키는 신호를 알아챈다",
+      "작업을 서브에이전트로 분리할지 메인에 둘지 판단한다",
+      "서브에이전트에 넘길 입력과 돌려받을 출력을 좁게 설계한다",
+      "서브에이전트 결과를 메인이 검증·통합하는 흐름을 만든다",
+    ],
+    problemScenario:
+      "큰 리팩터링을 코딩 에이전트에 통째로 맡겼어요. 에이전트는 파일을 읽고, 또 읽고, 컨텍스트가 점점 차오릅니다. 30분 뒤 — 처음에 합의한 계획을 흐릿하게 기억하고, 엉뚱한 파일을 고치기 시작해요. 한 에이전트의 컨텍스트 창은 무한하지 않습니다. 큰 일을 한 머리에 다 담으려 하면 앞부분이 잊혀요. 일을 쪼개, 각자 깨끗한 컨텍스트를 가진 서브에이전트에 맡기는 게 답입니다.",
+    coreConcepts: [
+      {
+        term: "컨텍스트 오염 (Context pollution)",
+        explanation:
+          "한 에이전트가 너무 많은 파일·시도·대화를 누적하면 핵심 지시가 흐려지는 현상. 작업이 길수록 심해집니다.",
+      },
+      {
+        term: "서브에이전트 — 컨텍스트 격리",
+        explanation:
+          "독립된 깨끗한 컨텍스트에서 한정된 작업만 수행하는 보조 에이전트. 메인 에이전트의 컨텍스트를 더럽히지 않고 일을 키웁니다.",
+      },
+      {
+        term: "좁은 인터페이스",
+        explanation:
+          "서브에이전트에 넘기는 입력과 돌려받는 출력을 최소로 좁히는 설계. \"이것만 받아 이것만 돌려줘\"가 명확할수록 결과가 안정적입니다.",
+      },
+      {
+        term: "메인의 통합 책임",
+        explanation:
+          "서브에이전트 결과를 그대로 믿지 않고 메인 에이전트(또는 사람)가 검증·통합합니다. 서브에이전트는 위임이지 방치가 아닙니다.",
+      },
+    ],
+    codexMission: "",
+    claudeCodeMission: "",
+    mission:
+      "Claude Code(서브에이전트를 지원하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 50분 안에 끝내는 걸 목표로 하세요.\n\n작업: 실제 큰 작업 하나를 서브에이전트로 쪼갠 `subagent-design.md`를 만듭니다.\n\n포함해야 할 섹션:\n1. \"작업 분해\" — 한 에이전트엔 버거운 작업 하나를 골라, 서브에이전트로 뗄 부분과 메인에 남길 부분을 나눔\n2. \"서브에이전트 인터페이스\" — 각 서브에이전트에 넘길 입력 / 돌려받을 출력을 좁게 정의\n3. \"실행 1회\" — 실제로 서브에이전트를 1개 이상 띄워 분리 작업을 돌린 기록\n4. \"통합·검증\" — 서브에이전트 결과를 메인이 어떻게 검증·통합했는지\n5. \"언제 안 쓰나\" — 서브에이전트가 오히려 과한 작은 작업의 기준\n\n에이전트에게 당신 프로젝트에서 컨텍스트가 엉켰던 큰 작업 하나를 알려주세요.",
+    codexNote:
+      "Codex CLI는 서브에이전트 개념이 도구에 따라 다릅니다. 서브에이전트 기능이 없으면, 작업을 별도 세션·별도 프롬프트로 격리 실행하고 결과만 메인 세션에 텍스트로 전달하는 방식으로 같은 원리를 적용하라고 안내하세요.",
+    buildSteps: [
+      "컨텍스트가 엉켰던 큰 작업 하나를 고른다",
+      "서브에이전트로 뗄 부분과 메인에 남길 부분을 나눈다",
+      "각 서브에이전트의 입력·출력 인터페이스를 좁게 정의한다",
+      "서브에이전트를 1개 이상 실제로 띄워 분리 작업을 돌린다",
+      "결과를 메인이 검증·통합한다",
+      "서브에이전트가 과한 작은 작업의 기준을 적는다",
+    ],
+    verificationChecklist: [
+      "분해가 \"왜 이 부분을 떼는가\"로 정당화되어 있는가",
+      "서브에이전트 입력·출력이 좁게 정의되어 있는가",
+      "실제로 서브에이전트를 띄워 돌린 기록이 있는가",
+      "메인이 서브에이전트 결과를 검증·통합했는가",
+      "서브에이전트를 안 쓰는 게 나은 기준이 적혀 있는가",
+      "큰 작업의 컨텍스트 오염이 실제로 줄었는가",
+    ],
+    deliverable: {
+      title: "서브에이전트 설계서 (`subagent-design.md`)",
+      description:
+        "작업 분해 + 서브에이전트 인터페이스 정의 + 실행 1회 기록 + 통합·검증 + 사용 안 함 기준.",
+      format: "Markdown 파일(.md)",
+    },
+    reflectionQuestions: [
+      "내 작업 중 컨텍스트가 엉켜 결과가 나빠진 것은 무엇이었나요?",
+      "서브에이전트에 넘긴 인터페이스가 충분히 좁았나요?",
+      "서브에이전트가 오히려 과했던 작업이 있었나요?",
+    ],
+    extensionIdeas: [
+      "여러 서브에이전트를 병렬로 띄워 독립 작업을 동시에 처리하기",
+      "역할별 서브에이전트(탐색·구현·검증)를 정형화한 토폴로지 만들기",
+      "서브에이전트 호출을 슬래시 명령으로 저장해 재사용하기",
+    ],
+    tags: ["coding-agents", "subagents", "context", "orchestration"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "subagent-design.md",
+        title: "서브에이전트 설계서 템플릿",
+        kind: "note",
       },
     ],
   },

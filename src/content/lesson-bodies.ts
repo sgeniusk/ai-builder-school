@@ -17,6 +17,9 @@ import FallbackStrategyWhenAiFailsBody from "./lessons/fallback-strategy-when-ai
 import CustomGptBuilderBody from "./lessons/custom-gpt-builder.mdx";
 import MultiWorkflowOrchestrationBody from "./lessons/multi-workflow-orchestration.mdx";
 import CostEstimationAndRoiByTaskBody from "./lessons/cost-estimation-and-roi-by-task.mdx";
+import PrReviewWithAiBody from "./lessons/pr-review-with-ai.mdx";
+import AgentHooksAutomationBody from "./lessons/agent-hooks-automation.mdx";
+import SubagentContextDesignBody from "./lessons/subagent-context-design.mdx";
 
 // Phase 2 — Prompt & Context Engineering
 import StructureOfGoodPromptsBody from "./lessons/structure-of-good-prompts.mdx";
@@ -190,6 +193,9 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "custom-gpt-builder": CustomGptBuilderBody,
   "multi-workflow-orchestration": MultiWorkflowOrchestrationBody,
   "cost-estimation-and-roi-by-task": CostEstimationAndRoiByTaskBody,
+  "pr-review-with-ai": PrReviewWithAiBody,
+  "agent-hooks-automation": AgentHooksAutomationBody,
+  "subagent-context-design": SubagentContextDesignBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {
