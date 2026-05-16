@@ -10,15 +10,18 @@
  * 채점 6축: 명료성 · 어조 · 연속성 · 7-step 정합성 · 사실성 · 실행 가능성.
  *
  * 사용법:
- *   ANTHROPIC_API_KEY=sk-... npm run eval:rubric                 # 기본 8개 샘플
- *   ANTHROPIC_API_KEY=sk-... npm run eval:rubric -- --all        # 84개 전부
- *   ANTHROPIC_API_KEY=sk-... npm run eval:rubric -- --stage stage-6
+ *   GEMINI_API_KEY=... npm run eval:rubric                 # 기본 8개 샘플
+ *   GEMINI_API_KEY=... npm run eval:rubric -- --all        # 84개 전부
+ *   GEMINI_API_KEY=... npm run eval:rubric -- --stage stage-6
  *   ANTHROPIC_API_KEY=sk-... npm run eval:rubric -- --slug grounded-rag-answers
- *   ANTHROPIC_API_KEY=sk-... npm run eval:rubric -- --limit 20 --model claude-sonnet-4-5
+ *   npm run eval:rubric -- --provider gemini --model gemini-2.5-flash
  *
- * 환경변수:
- *   ANTHROPIC_API_KEY — 필수. 없으면 안내만 하고 exit 0.
- *   EVAL_MODEL        — 채점 모델 (기본 claude-3-5-haiku-latest). --model로도 지정.
+ * 환경변수 (Gemini · Anthropic 중 하나 — 채점이라 비용 낮은 쪽 권장):
+ *   GEMINI_API_KEY (또는 GOOGLE_API_KEY) — Google Gemini
+ *   ANTHROPIC_API_KEY                    — Anthropic Claude
+ *   둘 다 있으면 Gemini 우선. --provider로 강제 지정.
+ *   EVAL_MODEL — 채점 모델 (provider별 기본값 있음). --model로도 지정.
+ *   키가 하나도 없으면 안내만 하고 exit 0.
  *
  * 결과: 콘솔 표 + docs/lesson-rubric-report.md.
  */
@@ -78,6 +81,7 @@ let stageArg: string | undefined;
 let limitArg: number | undefined;
 let allArg = false;
 let modelArg: string | undefined;
+let providerArg: string | undefined;
 for (let i = 0; i < args.length; i++) {
   const a = args[i];
   if (a === "--all") allArg = true;
@@ -85,26 +89,48 @@ for (let i = 0; i < args.length; i++) {
   else if (a === "--stage") stageArg = args[++i];
   else if (a === "--limit") limitArg = parseInt(args[++i] ?? "0", 10);
   else if (a === "--model") modelArg = args[++i];
+  else if (a === "--provider") providerArg = args[++i];
   else {
     console.error(c(COLORS.red, `알 수 없는 인자: ${a}`));
     process.exit(0);
   }
 }
 
-const MODEL =
-  modelArg ?? process.env.EVAL_MODEL ?? "claude-3-5-haiku-latest";
-const API_KEY = process.env.ANTHROPIC_API_KEY;
+// ── provider · model · key 결정 ────────────────────────────────
+type Provider = "anthropic" | "gemini";
+
+const geminiKey = process.env.GEMINI_API_KEY ?? process.env.GOOGLE_API_KEY;
+const anthropicKey = process.env.ANTHROPIC_API_KEY;
+
+if (providerArg && providerArg !== "gemini" && providerArg !== "anthropic") {
+  console.error(
+    c(COLORS.red, `--provider는 gemini | anthropic 만 가능. 받은 값: ${providerArg}`),
+  );
+  process.exit(0);
+}
+// --provider 우선, 없으면 키 존재로 자동 감지 (Gemini 우선)
+const provider: Provider | undefined =
+  (providerArg as Provider | undefined) ??
+  (geminiKey ? "gemini" : anthropicKey ? "anthropic" : undefined);
+
+const API_KEY =
+  provider === "gemini" ? geminiKey : provider === "anthropic" ? anthropicKey : undefined;
+const DEFAULT_MODEL =
+  provider === "gemini" ? "gemini-2.0-flash" : "claude-3-5-haiku-latest";
+const MODEL = modelArg ?? process.env.EVAL_MODEL ?? DEFAULT_MODEL;
 
 console.log(c(COLORS.bold + COLORS.cyan, "AI Builder School — Lesson Rubric Eval (LLM)"));
 console.log(c(COLORS.dim, "advisory only · exit 0 보장 · 기준 docs/lesson-quality-rubric.md"));
 console.log("");
 
-if (!API_KEY) {
-  console.log(c(COLORS.yellow + COLORS.bold, "△ ANTHROPIC_API_KEY 가 없어 LLM 채점을 건너뜁니다."));
+if (!provider || !API_KEY) {
+  console.log(c(COLORS.yellow + COLORS.bold, "△ API 키가 없어 LLM 채점을 건너뜁니다."));
   console.log(
     c(
       COLORS.dim,
-      "  실행하려면:  ANTHROPIC_API_KEY=sk-... npm run eval:rubric\n" +
+      "  Gemini:    GEMINI_API_KEY=... npm run eval:rubric\n" +
+        "  Anthropic: ANTHROPIC_API_KEY=sk-... npm run eval:rubric\n" +
+        "  두 키가 다 있으면 Gemini 우선 — --provider로 강제 지정 가능.\n" +
         "  이 스크립트는 advisory 입니다 — 키가 없어도 빌드/CI는 막지 않습니다.",
     ),
   );
@@ -161,7 +187,7 @@ if (!allArg && !slugArg && !stageArg) {
 }
 
 console.log(
-  c(COLORS.dim, `대상 ${targets.length}개 레슨 · 모델 ${MODEL}`) +
+  c(COLORS.dim, `대상 ${targets.length}개 레슨 · ${provider}/${MODEL}`) +
     (allArg || slugArg || stageArg ? "" : c(COLORS.dim, " (기본 샘플 — 전체는 --all)")),
 );
 console.log("");
@@ -229,7 +255,63 @@ function lessonPayload(lesson: Lesson): string {
   ].join("\n");
 }
 
-// ── 4. Anthropic API 호출 ──────────────────────────────────────
+// ── 4. LLM API 호출 (provider 분기) ────────────────────────────
+type CallResult = { text: string } | { error: string };
+
+async function callAnthropic(userText: string): Promise<CallResult> {
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "x-api-key": API_KEY as string,
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      max_tokens: 1024,
+      temperature: 0,
+      system: SYSTEM_PROMPT,
+      messages: [{ role: "user", content: userText }],
+    }),
+  });
+  if (!res.ok) {
+    return { error: `HTTP ${res.status} — ${(await res.text()).slice(0, 160)}` };
+  }
+  const data = (await res.json()) as {
+    content?: Array<{ type: string; text?: string }>;
+  };
+  return { text: data.content?.find((b) => b.type === "text")?.text ?? "" };
+}
+
+async function callGemini(userText: string): Promise<CallResult> {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      "x-goog-api-key": API_KEY as string,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      contents: [{ role: "user", parts: [{ text: userText }] }],
+      generationConfig: {
+        maxOutputTokens: 2048,
+        temperature: 0,
+        responseMimeType: "application/json",
+      },
+    }),
+  });
+  if (!res.ok) {
+    return { error: `HTTP ${res.status} — ${(await res.text()).slice(0, 160)}` };
+  }
+  const data = (await res.json()) as {
+    candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
+  };
+  const text =
+    data.candidates?.[0]?.content?.parts?.map((p) => p.text ?? "").join("") ?? "";
+  return { text };
+}
+
 async function grade(lesson: Lesson): Promise<RubricResult> {
   const base: RubricResult = {
     slug: lesson.slug,
@@ -239,29 +321,13 @@ async function grade(lesson: Lesson): Promise<RubricResult> {
     summary: "",
   };
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "x-api-key": API_KEY as string,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 1024,
-        system: SYSTEM_PROMPT,
-        messages: [{ role: "user", content: lessonPayload(lesson) }],
-      }),
-    });
-    if (!res.ok) {
-      const txt = await res.text();
-      return { ...base, error: `HTTP ${res.status} — ${txt.slice(0, 160)}` };
-    }
-    const data = (await res.json()) as {
-      content?: Array<{ type: string; text?: string }>;
-    };
-    const text = data.content?.find((b) => b.type === "text")?.text ?? "";
-    const match = text.match(/\{[\s\S]*\}/);
+    const userText = lessonPayload(lesson);
+    const r =
+      provider === "gemini"
+        ? await callGemini(userText)
+        : await callAnthropic(userText);
+    if ("error" in r) return { ...base, error: r.error };
+    const match = r.text.match(/\{[\s\S]*\}/);
     if (!match) return { ...base, error: "JSON 파싱 실패" };
     const parsed = JSON.parse(match[0]) as {
       scores?: Partial<Record<Axis, number>>;
