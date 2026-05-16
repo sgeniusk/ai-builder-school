@@ -13,6 +13,7 @@ import PromptDebuggingLoopBody from "./lessons/prompt-debugging-loop.mdx";
 import MultimodalPromptingBody from "./lessons/multimodal-prompting.mdx";
 import OutputEvaluationRefineBody from "./lessons/output-evaluation-refine.mdx";
 import ApiRateLimitingAndBatchingBody from "./lessons/api-rate-limiting-and-batching.mdx";
+import FallbackStrategyWhenAiFailsBody from "./lessons/fallback-strategy-when-ai-fails.mdx";
 
 // Phase 2 — Prompt & Context Engineering
 import StructureOfGoodPromptsBody from "./lessons/structure-of-good-prompts.mdx";
@@ -182,6 +183,7 @@ export const lessonBodies: Record<string, ComponentType | undefined> = {
   "multimodal-prompting": MultimodalPromptingBody,
   "output-evaluation-refine": OutputEvaluationRefineBody,
   "api-rate-limiting-and-batching": ApiRateLimitingAndBatchingBody,
+  "fallback-strategy-when-ai-fails": FallbackStrategyWhenAiFailsBody,
 };
 
 export function getLessonBody(slug: string): ComponentType | null {

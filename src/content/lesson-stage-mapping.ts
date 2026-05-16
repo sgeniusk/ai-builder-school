@@ -30,11 +30,12 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
   "build-personal-prompt-library": { stageId: "stage-2", stageOrdinal: 9 },
   "ai-concept-learning-framework": { stageId: "stage-2", stageOrdinal: 10 },
 
-  // Stage 3 — AI의 답을 확인하다 (4)
+  // Stage 3 — AI의 답을 확인하다 (5)
   "what-llms-are-good-and-bad-at": { stageId: "stage-3", stageOrdinal: 1 },
   "hallucination-verification": { stageId: "stage-3", stageOrdinal: 2 },
   "checks-before-trusting-ai-output": { stageId: "stage-3", stageOrdinal: 3 },
-  "privacy-and-academic-ethics": { stageId: "stage-3", stageOrdinal: 4 },
+  "fallback-strategy-when-ai-fails": { stageId: "stage-3", stageOrdinal: 4 },
+  "privacy-and-academic-ethics": { stageId: "stage-3", stageOrdinal: 5 },
 
   // Stage 4 — AI와 함께 일하다 (14, sub 4a/4b/4c)
   // 4a 업무 자동화 (4)
@@ -107,11 +108,12 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
  * - 원본 분포 (PR D): 4-5-4-14-8-13-6-7 = 61
  * - PR D1 (Stage 1 책 보완): stage-1 4 → 7 (+ai-delegation·cost-monitoring·ai-collaboration)
  * - PR D2 (Stage 2 책 보완): stage-2 5 → 10 (+reasoning-vs-instruct·prompt-debugging·multimodal·output-evaluation·api-rate-limiting)
+ * - PR D3 (Stage 3 책 보완): stage-3 4 → 5 (+fallback-strategy-when-ai-fails)
  */
 export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-1": 7,
   "stage-2": 10,
-  "stage-3": 4,
+  "stage-3": 5,
   "stage-4": 14,
   "stage-5": 8,
   "stage-6": 13,
@@ -119,4 +121,4 @@ export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-8": 7,
 } as const;
 
-export const EXPECTED_TOTAL_LESSONS = 69;
+export const EXPECTED_TOTAL_LESSONS = 70;
