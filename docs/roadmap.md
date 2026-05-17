@@ -25,12 +25,13 @@ https://sgeniusk.github.io/ai-builder-school/
 
 ## 2. v0.6 → v1.0 마일스톤
 
-### v0.6 — 다듬기·접근성
+### v0.6 — 다듬기·접근성 ✅ 완료
 v0.4 베타에서 v0.5로 미룬 Med/Low + 접근성·편의.
-- 베타 Med 콘텐츠 — Adopter·Creator 추천 lesson 보강, `custom-gpt-builder` 비결제 대안, L3 건너뛰기 경로, lesson 시간 "최소/권장" 표기
-- 모바일 코드블록 가로 스크롤 → wrap 토글
-- 다크(야간) 모드
-- 사이트 검색 — 정적 클라이언트 인덱스
+- ✅ 다크(야간) 모드 (#29)
+- ✅ 모바일 코드블록 가로 스크롤 → wrap 토글 (#30)
+- ✅ 사이트 검색 — 커맨드 팔레트 (#31)
+- ✅ 베타 Med 콘텐츠 — Adopter·Creator 추천 lesson 보강, `custom-gpt-builder` 비결제 대안 (#32)
+- ⏳ 후속(Low) — L3 건너뛰기 경로, lesson 시간 "최소/권장" 표기
 
 ### v0.7 — 빌더 정체성 레이어
 이미 localStorage로 도는 진척·캐릭터를 동기 부여 시스템으로 키운다.
@@ -89,4 +90,6 @@ v0.4 베타에서 v0.5로 미룬 Med/Low + 접근성·편의.
 
 **v0.4 → v0.5 완료** — 8 Stage 전환 · 84 lesson · Phase legacy 제거 · SEO·메타 · 13 project 확장 · 베타 High 반영 · 코드블록 복사 버튼 · LLM 루브릭 eval (PR #5~#27)
 
-**다음** — v0.6 다듬기·접근성
+**v0.6 완료** — 다크 모드 · 코드블록 wrap 토글 · 사이트 검색(커맨드 팔레트) · 베타 Med 콘텐츠 (PR #28~#32)
+
+**다음** — v0.7 빌더 정체성 레이어
