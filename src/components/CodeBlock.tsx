@@ -1,4 +1,4 @@
-// MDX 코드 블록 — 우상단 복사 버튼을 붙인 <pre> 래퍼.
+// MDX 코드 블록 — 우상단에 줄바꿈 토글 + 복사 버튼을 붙인 <pre> 래퍼.
 // mdx-components.tsx 에서 `pre` 엘리먼트가 이 컴포넌트로 매핑된다.
 "use client";
 
@@ -49,9 +49,11 @@ function extractText(node: ReactNode): string {
 
 export function CodeBlock({
   children,
+  className,
   ...props
 }: HTMLAttributes<HTMLPreElement>) {
   const [copied, setCopied] = useState(false);
+  const [wrapped, setWrapped] = useState(false);
   const text = extractText(children);
 
   async function handleCopy() {
@@ -62,17 +64,34 @@ export function CodeBlock({
     }
   }
 
+  const preClass =
+    [className, wrapped ? "is-wrapped" : ""].filter(Boolean).join(" ") ||
+    undefined;
+
   return (
     <div className="code-block">
-      <button
-        type="button"
-        className={`code-copy-btn${copied ? " is-copied" : ""}`}
-        onClick={handleCopy}
-        aria-label={copied ? "복사됨" : "코드 복사"}
-      >
-        {copied ? "복사됨" : "복사"}
-      </button>
-      <pre {...props}>{children}</pre>
+      <div className="code-actions">
+        <button
+          type="button"
+          className={`code-wrap-btn${wrapped ? " is-active" : ""}`}
+          onClick={() => setWrapped((w) => !w)}
+          aria-pressed={wrapped}
+          aria-label={wrapped ? "줄바꿈 끄기" : "긴 줄 줄바꿈"}
+        >
+          줄바꿈
+        </button>
+        <button
+          type="button"
+          className={`code-copy-btn${copied ? " is-copied" : ""}`}
+          onClick={handleCopy}
+          aria-label={copied ? "복사됨" : "코드 복사"}
+        >
+          {copied ? "복사됨" : "복사"}
+        </button>
+      </div>
+      <pre {...props} className={preClass}>
+        {children}
+      </pre>
     </div>
   );
 }
