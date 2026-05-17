@@ -2,6 +2,59 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { CharacterChrome } from "./CharacterChrome";
 import { ThemeToggle } from "./ThemeToggle";
+import { SiteSearch, type SearchItem } from "./SiteSearch";
+import {
+  getJourneys,
+  getLessons,
+  getProjects,
+  getStages,
+  getTemplates,
+} from "@/lib/content";
+
+/** 검색 인덱스 — 서버에서 한 번 만들어 SiteSearch 클라이언트로 넘긴다. */
+function buildSearchIndex(): SearchItem[] {
+  return [
+    ...getStages().map((s) => ({
+      type: "Stage",
+      title: `Stage ${s.order} · ${s.label}`,
+      subtitle: s.shortDescription,
+      href: `/stages/${s.slug}`,
+      keywords:
+        `${s.label} ${s.titleKo} ${s.titleEn} ${s.shortDescription} ${s.topics.join(" ")}`.toLowerCase(),
+    })),
+    ...getLessons().map((l) => ({
+      type: "레슨",
+      title: l.titleKo,
+      subtitle: l.summary,
+      href: `/lessons/${l.slug}`,
+      keywords:
+        `${l.titleKo} ${l.titleEn} ${l.summary} ${l.tags.join(" ")}`.toLowerCase(),
+    })),
+    ...getProjects().map((p) => ({
+      type: "프로젝트",
+      title: p.title,
+      subtitle: p.hook,
+      href: `/projects/${p.slug}`,
+      keywords:
+        `${p.title} ${p.hook} ${p.summary} ${p.suggestedStack.join(" ")}`.toLowerCase(),
+    })),
+    ...getJourneys().map((j) => ({
+      type: "여정",
+      title: j.titleKo,
+      subtitle: j.identity,
+      href: `/journeys#${j.slug}`,
+      keywords:
+        `${j.titleKo} ${j.title} ${j.identity} ${j.targetLearner}`.toLowerCase(),
+    })),
+    ...getTemplates().map((t) => ({
+      type: "템플릿",
+      title: t.title,
+      subtitle: t.summary,
+      href: "/templates",
+      keywords: `${t.title} ${t.summary} ${t.tags.join(" ")}`.toLowerCase(),
+    })),
+  ];
+}
 
 export function Container({
   children,
@@ -22,6 +75,7 @@ const navLinks = [
 ];
 
 export function SiteHeader() {
+  const searchIndex = buildSearchIndex();
   return (
     <header className="site-header">
       <Container>
@@ -38,6 +92,7 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="site-header__right">
+            <SiteSearch index={searchIndex} />
             <ThemeToggle />
             <Link href="/start" className="btn">
               학습 시작 <span className="arrow">→</span>
