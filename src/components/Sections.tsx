@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { Container } from "./Layout";
 import { LearningLoop } from "./LearningLoop";
+import { HeroStats } from "./HeroStats";
 import type { Journey, Stage } from "@/lib/types";
 
 /* ---------------- Reusable PageHead ---------------- */
@@ -51,6 +52,12 @@ export function SectionHeading({
 export function Hero() {
   return (
     <section className="hero">
+      <div className="hero-orbs" aria-hidden>
+        <div className="orb orb-1" />
+        <div className="orb orb-2" />
+        <div className="orb orb-3" />
+        <div className="orb orb-4" />
+      </div>
       <Container>
         <p className="eyebrow">AI Builder School · v0.5</p>
         <h1 className="hero-h">
@@ -72,28 +79,7 @@ export function Hero() {
           </Link>
         </div>
 
-        <div className="hero-stats">
-          <div>
-            <div className="hs-num">8</div>
-            <div className="hs-lbl">Stages</div>
-          </div>
-          <div>
-            <div className="hs-num">
-              73<span className="hs-sub">+</span>
-            </div>
-            <div className="hs-lbl">Lessons</div>
-          </div>
-          <div>
-            <div className="hs-num">6</div>
-            <div className="hs-lbl">Journeys</div>
-          </div>
-          <div>
-            <div className="hs-num">
-              1<span className="hs-sub">개</span>
-            </div>
-            <div className="hs-lbl">단계마다 산출물</div>
-          </div>
-        </div>
+        <HeroStats />
       </Container>
     </section>
   );
