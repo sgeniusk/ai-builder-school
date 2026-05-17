@@ -12,7 +12,7 @@
 
 AI 코딩 에이전트는 구현보다 테스트를 더 잘 짜요. 이유가 있어요.
 
-**테스트는 "의도를 서술"하는 글쓰기**예요. "이 함수에 빈 배열을 넣으면 0을 반환해야 한다" — 이건 자연어에 가깝습니다. AI가 자연어를 코드로 바꾸는 것에 강하다는 건 [Lesson 02](/lessons/what-llms-are-good-and-bad-at)에서 봤죠. 테스트 코드는 그 강점이 가장 잘 먹히는 영역이에요.
+**테스트는 "의도를 서술"하는 글쓰기**예요. "이 함수에 빈 배열을 넣으면 0을 반환해야 한다" — 이건 자연어에 가깝습니다. AI가 자연어를 코드로 바꾸는 것에 강하다는 건 [LLM이 잘하는 일과 못하는 일](/lessons/what-llms-are-good-and-bad-at)에서 봤죠. 테스트 코드는 그 강점이 가장 잘 먹히는 영역이에요.
 
 반면 구현은 **시스템의 맥락**이 필요합니다. 다른 모듈과 어떻게 연결되는지, 성능 제약이 뭔지, 기존 코드 스타일이 뭔지. 에이전트가 놓치기 쉬운 부분이죠. 테스트에는 이 맥락이 덜 필요합니다.
 
@@ -41,7 +41,7 @@ AI 코딩 에이전트와 함께 돌면 각 단계가 이렇게 바뀝니다.
 | Green | 테스트 결과 확인, 방향 판단 | 최소 구현 작성 |
 | Refactor | 코드 리뷰, 수용/거부 결정 | 리팩터링 제안 |
 
-핵심은 사람의 역할이 **"코드를 직접 짜는 것"에서 "의도를 정의하고 결과를 판단하는 것"**으로 바뀐다는 점이에요. 이건 [Lesson 16](/lessons/plan-with-ai)의 Plan-then-Execute 패턴과 같은 원리입니다 — 방향을 먼저 잡고, 실행은 에이전트에게.
+핵심은 사람의 역할이 **"코드를 직접 짜는 것"에서 "의도를 정의하고 결과를 판단하는 것"**으로 바뀐다는 점이에요. 이건 [AI와 함께 구현 계획 세우기](/lessons/plan-with-ai)의 Plan-then-Execute 패턴과 같은 원리입니다 — 방향을 먼저 잡고, 실행은 에이전트에게.
 
 ## 의도 먼저, 엣지 케이스 두 번째 — 2단계 테스트 요청
 
@@ -149,7 +149,7 @@ test("runs without error", () => {
 - Anthropic — [Extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) · 복잡한 엣지 케이스 추론에 활용
 
 **이전 레슨 연결**
-- [Lesson 02 — AI가 잘/못하는 일](/lessons/what-llms-are-good-and-bad-at) · 자연어 ↔ 코드 변환이 왜 강한지
-- [Lesson 16 — AI와 함께 계획 짜기](/lessons/plan-with-ai) · 테스트 전에 계획을 합의하는 패턴
+- [LLM이 잘하는 일과 못하는 일](/lessons/what-llms-are-good-and-bad-at) · 자연어 ↔ 코드 변환이 왜 강한지
+- [AI와 함께 구현 계획 세우기](/lessons/plan-with-ai) · 테스트 전에 계획을 합의하는 패턴
 
 > _참고: 본문의 `calculateTotal` 예시는 학습 효과를 위한 가상 사례입니다. **2단계 테스트 요청** 패턴(Golden Path → Edge Cases)과 **의도 주석** 관행은 소프트웨어 엔지니어링의 일반 관행을 이 학교 운영자가 한국어로 정리한 것이며, 외부 표준명은 아닙니다. TDD 사이클(Red-Green-Refactor)은 Kent Beck의 원전을 참고하세요._

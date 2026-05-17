@@ -2,7 +2,7 @@
 
 코딩 에이전트에게 "헤더 컴포넌트의 네비게이션 메뉴를 수정해 줘"라고 시켰습니다. 에이전트가 열심히 작업한 결과 — `src/components/Header.tsx`가 아니라 `src/legacy/Header.jsx`를 고쳤어요. 레거시 파일이라 아무도 안 쓰는 건데, 에이전트는 그걸 몰랐습니다. 파일 이름만 보고 골랐으니까요.
 
-[Lesson 07](/lessons/feeding-long-documents)에서 "100페이지 문서를 통째로 넣으면 가운데를 놓친다"고 했죠. 코드베이스도 같은 문제예요. 파일이 200개, 300개가 되면 에이전트는 **전체를 한 번에 이해하지 못합니다**. 컨텍스트 윈도우에 다 넣어도 "Lost in the Middle"이 작동하고, 대부분은 윈도우에 아예 안 들어가요.
+[긴 문서를 AI에게 먹이는 법](/lessons/feeding-long-documents)에서 "100페이지 문서를 통째로 넣으면 가운데를 놓친다"고 했죠. 코드베이스도 같은 문제예요. 파일이 200개, 300개가 되면 에이전트는 **전체를 한 번에 이해하지 못합니다**. 컨텍스트 윈도우에 다 넣어도 "Lost in the Middle"이 작동하고, 대부분은 윈도우에 아예 안 들어가요.
 
 오늘은 에이전트가 코드베이스를 **빠르고 정확하게 파악하도록 돕는 지도**를 만듭니다.
 
@@ -10,7 +10,7 @@
 
 {/* Source · PAPER · Liu et al. (2023) "Lost in the Middle: How Language Models Use Long Contexts" — https://arxiv.org/abs/2307.03172 */}
 
-[Lesson 07](/lessons/feeding-long-documents)에서 긴 문서를 다루는 3가지 전략을 배웠어요. 코드베이스에도 똑같이 적용됩니다.
+[긴 문서를 AI에게 먹이는 법](/lessons/feeding-long-documents)에서 긴 문서를 다루는 3가지 전략을 배웠어요. 코드베이스에도 똑같이 적용됩니다.
 
 | L07 전략 | 코드베이스 버전 | 도구/방법 |
 | --- | --- | --- |
@@ -55,7 +55,7 @@ Repomix는 **처음 프로젝트를 파악할 때** 한 번 돌리기 좋아요.
 {/* Source · DOC · Anthropic "Claude Code memory (CLAUDE.md)" — https://docs.anthropic.com/en/docs/claude-code/memory */}
 {/* Source · DOC · OpenAI Codex "AGENTS.md" — https://github.com/openai/codex/blob/main/docs/AGENTS.md */}
 
-[Lesson 13](/lessons/coding-agent-setup)에서 만든 CLAUDE.md를 기억하시죠? 거기에 **코드베이스 지도 섹션**을 추가합니다.
+[코딩 에이전트 셋업](/lessons/coding-agent-setup)에서 만든 CLAUDE.md를 기억하시죠? 거기에 **코드베이스 지도 섹션**을 추가합니다.
 
 ```markdown
 ## 코드베이스 구조
@@ -140,9 +140,9 @@ project/
 
 ## L07에서 여기까지, 그리고 다음
 
-[Lesson 07](/lessons/feeding-long-documents)에서 "긴 문서를 AI에게 어떻게 먹일까"를 배웠다면, 오늘은 **그 원리를 코드베이스에 적용**한 거예요. Full / Map-Reduce / Selective 세 전략이 문서에서도, 코드에서도 같은 원리로 작동합니다.
+[긴 문서를 AI에게 먹이는 법](/lessons/feeding-long-documents)에서 "긴 문서를 AI에게 어떻게 먹일까"를 배웠다면, 오늘은 **그 원리를 코드베이스에 적용**한 거예요. Full / Map-Reduce / Selective 세 전략이 문서에서도, 코드에서도 같은 원리로 작동합니다.
 
-[Lesson 13](/lessons/coding-agent-setup)의 권한 + 규약 셋업, [Lesson 14](/lessons/github-issue-to-ai-brief)의 이슈 브리프, 오늘의 코드베이스 지도 — 이 세 장이 Stage 5의 "환경·입력 준비"예요. 이 기반 위에서 다음 단계는 에이전트가 **실제로 코드를 짜고, 리뷰하고, 반복**하는 실행 단계로 넘어갑니다.
+[코딩 에이전트 셋업](/lessons/coding-agent-setup)의 권한 + 규약 셋업, [GitHub 이슈 → AI 브리프](/lessons/github-issue-to-ai-brief)의 이슈 브리프, 오늘의 코드베이스 지도 — 이 세 장이 Stage 5의 "환경·입력 준비"예요. 이 기반 위에서 다음 단계는 에이전트가 **실제로 코드를 짜고, 리뷰하고, 반복**하는 실행 단계로 넘어갑니다.
 
 오늘의 지도를 한 번 만들어 보세요. 시작해 볼까요?
 
@@ -161,12 +161,12 @@ project/
 - Liu 외 (2023) — [Lost in the Middle](https://arxiv.org/abs/2307.03172) · 긴 입력의 중간 정보 누락 실증 연구
 
 **이전 레슨 참조**
-- [Lesson 07 — 긴 문서 먹이기](/lessons/feeding-long-documents) · Full / Map-Reduce / Selective 3 전략의 원리
-- [Lesson 13 — 코딩 에이전트 셋업](/lessons/coding-agent-setup) · 권한 설정과 CLAUDE.md 기본 구조
-- [Lesson 14 — 이슈 → 브리프](/lessons/github-issue-to-ai-brief) · 에이전트에게 "무엇을 할지" 전달하는 법
+- [긴 문서를 AI에게 먹이는 법](/lessons/feeding-long-documents) · Full / Map-Reduce / Selective 3 전략의 원리
+- [코딩 에이전트 셋업](/lessons/coding-agent-setup) · 권한 설정과 CLAUDE.md 기본 구조
+- [GitHub 이슈 → AI 브리프](/lessons/github-issue-to-ai-brief) · 에이전트에게 "무엇을 할지" 전달하는 법
 
 **큰 코드베이스 토큰 절약 (다음 단계)**
-- [Lesson 37 — Claude Code 토큰 절약](/lessons/claude-code-token-saving) · QMD 사전 인덱싱·read-once 훅 등 큰 프로젝트에서 효과 큰 12가지
+- [Claude Code 토큰 절약 — /clear부터 QMD까지](/lessons/claude-code-token-saving) · QMD 사전 인덱싱·read-once 훅 등 큰 프로젝트에서 효과 큰 12가지
 
 ## 다음 레슨
 

@@ -79,7 +79,7 @@ Function Calling의 전체 흐름은 네 단계입니다.
 
 모델이 만들어낸 인자를 그대로 함수에 넣으면 안 돼요. 모델은 스키마를 "참고"하지만 100% 지키지는 않습니다.
 
-[Lesson 06](/lessons/enforcing-output-format)에서 배운 3단 방어선의 2선(스키마 강제)이 여기서도 적용됩니다.
+[출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format)에서 배운 3단 방어선의 2선(스키마 강제)이 여기서도 적용됩니다.
 
 ```typescript
 // 인자 검증 예시 (Zod)
@@ -145,10 +145,10 @@ function executeGetWeather(rawArgs: unknown) {
 - [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) · 도구·리소스·프롬프트를 표준 인터페이스로 공유
 
 **런타임 검증 (이전 레슨 복습)**
-- [Lesson 06 — 3단 방어선](/lessons/enforcing-output-format) · 스키마 강제 + 재시도 패턴이 도구 인자 검증에도 그대로 적용
+- [출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format) · 스키마 강제 + 재시도 패턴이 도구 인자 검증에도 그대로 적용
 
 **에이전트로 가는 다리 (다음 레슨 예고)**
-- [Lesson 28 — 미니 에이전트 루프](/lessons/mini-agent-loop) · 단발 호출을 반복 루프로 확장
+- [미니 에이전트 루프 만들기](/lessons/mini-agent-loop) · 단발 호출을 반복 루프로 확장
 
 ## 다음 레슨
 
