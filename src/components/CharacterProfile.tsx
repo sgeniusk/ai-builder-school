@@ -7,6 +7,7 @@ import Link from "next/link";
 import type { Journey, Lesson, Stage } from "@/lib/types";
 import { useCharacter } from "@/hooks/useCharacter";
 import { useLessonProgress } from "@/hooks/useLessonProgress";
+import { getBuilderRank } from "@/lib/builderRank";
 import { CharacterAvatar } from "./CharacterAvatar";
 
 type Props = {
@@ -125,6 +126,10 @@ export function CharacterProfile({
 
           <p className="char-modal__sub">
             {myJourney ? myJourney.titleKo : "여정 미정"} · 시작 {createdStr}
+          </p>
+          <p className="char-modal__rank">
+            <span aria-hidden>{getBuilderRank(doneLessons).emoji}</span>{" "}
+            {getBuilderRank(doneLessons).label}
           </p>
         </div>
 

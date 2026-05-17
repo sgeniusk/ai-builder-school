@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Container } from "@/components/Layout";
 import { CharacterAvatar } from "@/components/CharacterAvatar";
 import { ShareCardButton } from "@/components/ShareCardButton";
+import { getBuilderRank } from "@/lib/builderRank";
 import { useCharacter } from "@/hooks/useCharacter";
 import { useLessonProgress } from "@/hooks/useLessonProgress";
 import { useStreak } from "@/hooks/useStreak";
@@ -60,6 +61,7 @@ export function BuilderDashboard({ stages, lessonsByStage, journeys }: Props) {
   const total = allLessons.length;
   const done = allLessons.filter((l) => isLessonComplete(l)).length;
   const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+  const rank = getBuilderRank(done);
 
   const stageStats = stages.map((s) => {
     const list = lessonsByStage[s.id] ?? [];
@@ -101,6 +103,16 @@ export function BuilderDashboard({ stages, lessonsByStage, journeys }: Props) {
             <p className="dash-sub">
               {myJourney ? `${myJourney.titleKo} 여정` : "여정 미정"}
               {createdStr ? ` · ${createdStr} 시작` : ""}
+            </p>
+            <p className="dash-rank">
+              <span className="dash-rank__badge">
+                <span aria-hidden>{rank.emoji}</span> {rank.label}
+              </span>
+              {rank.nextLabel && (
+                <span className="dash-rank__next">
+                  다음 ‘{rank.nextLabel}’까지 {rank.toNext}개
+                </span>
+              )}
             </p>
           </div>
           <ShareCardButton
