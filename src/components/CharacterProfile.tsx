@@ -9,6 +9,7 @@ import { useCharacter } from "@/hooks/useCharacter";
 import { useLessonProgress } from "@/hooks/useLessonProgress";
 import { getBuilderRank } from "@/lib/builderRank";
 import { CharacterAvatar } from "./CharacterAvatar";
+import { AnimalPicker } from "./AnimalPicker";
 
 type Props = {
   stages: Stage[];
@@ -25,7 +26,7 @@ export function CharacterProfile({
   lessonsByStage,
   onClose,
 }: Props) {
-  const { character, setHandle, reset } = useCharacter();
+  const { character, setHandle, setAnimal, reset } = useCharacter();
   const { journey, isLessonComplete } = useLessonProgress();
   const [editing, setEditing] = useState(false);
   const [draftHandle, setDraftHandle] = useState(character?.handle ?? "");
@@ -155,6 +156,11 @@ export function CharacterProfile({
         <Link href="/me" className="btn ghost char-profile__dash" onClick={onClose}>
           빌더 대시보드 열기 <span className="arrow">→</span>
         </Link>
+
+        <div className="char-profile__section">
+          <div className="kicker">동물 친구</div>
+          <AnimalPicker value={character.animal} onChange={setAnimal} />
+        </div>
 
         <div className="char-profile__section">
           <div className="kicker">완주한 Stage</div>
