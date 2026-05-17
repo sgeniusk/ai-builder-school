@@ -5,6 +5,7 @@
 import Link from "next/link";
 import { Container } from "@/components/Layout";
 import { CharacterAvatar } from "@/components/CharacterAvatar";
+import { ShareCardButton } from "@/components/ShareCardButton";
 import { useCharacter } from "@/hooks/useCharacter";
 import { useLessonProgress } from "@/hooks/useLessonProgress";
 import { useStreak } from "@/hooks/useStreak";
@@ -102,6 +103,15 @@ export function BuilderDashboard({ stages, lessonsByStage, journeys }: Props) {
               {createdStr ? ` · ${createdStr} 시작` : ""}
             </p>
           </div>
+          <ShareCardButton
+            handle={character ? character.handle : "이름 없는 빌더"}
+            journeyLabel={myJourney ? `${myJourney.titleKo} 여정` : "AI Builder"}
+            pct={pct}
+            done={done}
+            total={total}
+            completedStages={completedStages}
+            streak={streak?.current ?? 0}
+          />
         </header>
 
         {/* 전체 진척 */}
