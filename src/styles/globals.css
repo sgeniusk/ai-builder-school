@@ -609,6 +609,91 @@ body {
   .proj-card .stack { margin-top: auto; padding-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
   .proj-card .stack span { font-family: var(--f-mono); font-size: 11px; color: var(--ink-3); }
 
+  /* ===== Project detail — 캡스톤 안내 + 보강된 마일스톤 ===== */
+  .capstone-note {
+    margin: 24px 0 8px;
+    padding: 14px 18px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ink);
+    border-radius: var(--r-sm);
+  }
+  .capstone-note__tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin-bottom: 8px;
+  }
+  .lesson-reader .capstone-note p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+  .lesson-reader .proj-ms-intro {
+    margin: 4px 0 20px;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+  .lesson-reader ol.proj-milestones {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    display: grid;
+    gap: 16px;
+  }
+  .lesson-reader ol.proj-milestones li.proj-milestone {
+    margin: 0;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ink);
+    border-radius: var(--r-sm);
+    background: var(--card);
+    padding: 16px 18px 18px;
+  }
+  .lesson-reader .proj-milestone__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .lesson-reader .proj-milestone__desc {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .proj-ms-first {
+    margin-top: 14px;
+    padding: 10px 12px;
+    background: var(--paper-2);
+    border-radius: var(--r-sm);
+  }
+  .lesson-reader .proj-ms-first p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  .proj-ms-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-3);
+  }
+  .proj-ms-prompt { margin-top: 12px; }
+  .proj-ms-prompt .proj-ms-tag { margin-bottom: 2px; }
+  .proj-ms-prompt .code-block { margin: 4px 0 0; }
+  .lesson-reader .proj-ms-fallback {
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+
   /* ===== Track cards (home) ===== */
   .track-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   @media (max-width: 900px) { .track-cards { grid-template-columns: 1fr; } }

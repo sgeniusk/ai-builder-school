@@ -106,19 +106,39 @@ Phase / `phaseId` / `recommendedPhases` / `requiredPhases`는 **legacy로 보존
 
 ## 5. Project
 
-캡스톤/포트폴리오 아이디어.
+캡스톤/포트폴리오 프로젝트. 레슨처럼 한 줄씩 손잡아 주는 가이드가 아니라, 배운 걸 혼자 적용하는 졸업 과제.
 
 | 필드 | 타입 |
 |---|---|
 | `id` | `string` |
 | `slug` | `string` |
 | `title` | `string` |
+| `hook` | `string` — 1문장 훅 |
 | `targetLearner` | `string` |
+| `targetJourneys` | `JourneyId[]` |
 | `difficulty` | `Level` |
-| `requiredPhases` | `string[]` — phase slug |
+| `estimatedDuration` | `string` — "1주", "4주" 등 |
+| `requiredStages` | `string[]` — stage slug |
+| `keyLessons` | `string[]` — lesson slug |
+| `summary` | `string` |
+| `problem` | `string` — 왜 만드나 |
 | `finalOutput` | `string` |
 | `suggestedStack` | `string[]` |
-| `summary` | `string` |
+| `milestones` | `ProjectMilestone[]` — 빌드 단계 |
+| `verification` | `string[]` — 완료 기준 체크리스트 |
+| `extensionIdeas` | `string[]` |
+
+### 5-1. ProjectMilestone
+
+빌드 단계 하나. `firstStep`·`starterPrompt`가 "그냥 알아서 해보라"는 막막함을 줄인다.
+
+| 필드 | 타입 |
+|---|---|
+| `title` | `string` — "1단계 — 범위 정의" 같은 라벨 |
+| `description` | `string` — 단계 설명 1~2문장 |
+| `firstStep` | `string` — 막막함을 더는 구체적 첫 행동 |
+| `starterPrompt` | `string?` — 복붙해 출발하는 시작 프롬프트 |
+| `fallbackLesson` | `string?` — 막히면 다시 볼 lesson slug |
 
 ## 6. Template
 
@@ -147,6 +167,9 @@ v0.4 (Stage):
 - 모든 lesson은 `lesson-stage-mapping.ts`에 매핑이 있어야 한다 — `getLessons()`가 머지한 결과로 `lesson.stageId`가 존재해야 한다.
 - 모든 `lesson.stageId`는 반드시 존재하는 `Stage.id`.
 - 각 stage의 `lessonSlugs`와 그 lesson들의 `stageId`는 양방향 일치.
+- 모든 `project.requiredStages`는 반드시 존재하는 `Stage.slug`.
+- 모든 `project.keyLessons`는 반드시 존재하는 `Lesson.slug`.
+- 모든 `project.milestones[].fallbackLesson`(존재 시)은 반드시 존재하는 `Lesson.slug`.
 - Stage 4·6의 `subGroups[].lessonSlugs` 합 = `stage.lessonSlugs` (어느 sub-그룹에도 빠지지 않고, 중복도 없음).
 - Lesson 분포는 stage-redesign.md 매핑 그대로 — 4-5-4-14-8-13-6-7 = 61.
 - 모든 `journey.recommendedStages`는 반드시 존재하는 `Stage.slug`.

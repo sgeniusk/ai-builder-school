@@ -212,6 +212,12 @@ export interface ProjectMilestone {
   title: string;
   /** 그 단계에서 무엇을 하는지 1~2문장. */
   description: string;
+  /** 막막함을 더는 구체적 첫 행동 한 가지 — 학습자에게 거는 말투. */
+  firstStep: string;
+  /** 복붙해서 출발할 수 있는 시작 프롬프트나 명령. 없으면 생략. */
+  starterPrompt?: string;
+  /** 이 단계에서 막히면 다시 볼 lesson slug. 없으면 생략. */
+  fallbackLesson?: string;
 }
 
 export interface Project {
