@@ -2,7 +2,7 @@
 
 회사 기술 가이드(30페이지)를 RAG에 넣었어요. "인증 방식이 뭐야?"라고 물으면 정확한 답이 나옵니다. 그런데 동료가 같은 문서를 다른 방식으로 잘라 넣었더니 엉뚱한 답이 나와요. 문서가 같고, 질문이 같고, 모델이 같은데 **자르는 방식만 달라서** 답이 달라졌습니다.
 
-[Lesson 23](/lessons/understanding-embeddings)에서 임베딩이 "의미의 좌표"를 만든다고 했죠. 그 좌표의 품질은 **무엇을 임베딩하느냐** — 즉 청크의 모양에 달려 있어요. 너무 짧게 자르면 맥락이 사라지고, 너무 길게 자르면 [Lesson 07](/lessons/feeding-long-documents)의 "Lost in the Middle"이 다시 켜집니다.
+[임베딩(Embedding) 이해하기](/lessons/understanding-embeddings)에서 임베딩이 "의미의 좌표"를 만든다고 했죠. 그 좌표의 품질은 **무엇을 임베딩하느냐** — 즉 청크의 모양에 달려 있어요. 너무 짧게 자르면 맥락이 사라지고, 너무 길게 자르면 [긴 문서를 AI에게 먹이는 법](/lessons/feeding-long-documents)의 "Lost in the Middle"이 다시 켜집니다.
 
 오늘 만들 건 **같은 문서를 3가지 청킹 전략으로 잘라 검색 품질을 비교한 노트**예요.
 
@@ -163,8 +163,8 @@ OAuth 2.0 인증 플로우는 다음과 같다...
 - Liu 외 (2023) — [Lost in the Middle](https://arxiv.org/abs/2307.03172) · 긴 컨텍스트에서 중간 정보가 누락되는 문제 (청크가 너무 크면 이게 켜짐)
 
 **이전 레슨 연결**
-- [Lesson 07 — 긴 문서 처리](/lessons/feeding-long-documents) · 청킹의 전신 — Full / Map-Reduce / Selective 3전략
-- [Lesson 23 — 임베딩 이해](/lessons/understanding-embeddings) · 청크를 벡터로 바꾸는 원리
+- [긴 문서를 AI에게 먹이는 법](/lessons/feeding-long-documents) · 청킹의 전신 — Full / Map-Reduce / Selective 3전략
+- [임베딩(Embedding) 이해하기](/lessons/understanding-embeddings) · 청크를 벡터로 바꾸는 원리
 
 ## 다음 레슨
 

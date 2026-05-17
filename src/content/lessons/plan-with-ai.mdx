@@ -14,7 +14,7 @@
 
 직관에 반하는 얘기죠. "5분 더 쓰는데 어떻게 시간이 줄어?" 실제 실행 시간의 상당 부분은 **되돌리기**에 쓰이는 경우가 많아요. 잘못된 방향으로 10분 달린 뒤 5분 되돌리고 다시 10분 달리면 — 25분 중 유효 작업은 10분이에요. 계획이 방향을 미리 잡아주면 되돌리기가 줄어듭니다.
 
-[Lesson 14](/lessons/github-issue-to-ai-brief)에서 이슈를 에이전트 브리프로 바꾸는 법을 배웠죠. 그 브리프가 "무엇을 할지"였다면, 오늘의 계획은 **"어떻게 할지"**예요. 어느 파일을 건드리고, 어느 순서로 하고, 어디서 멈출지.
+[GitHub 이슈 → AI 브리프](/lessons/github-issue-to-ai-brief)에서 이슈를 에이전트 브리프로 바꾸는 법을 배웠죠. 그 브리프가 "무엇을 할지"였다면, 오늘의 계획은 **"어떻게 할지"**예요. 어느 파일을 건드리고, 어느 순서로 하고, 어디서 멈출지.
 
 | 단계 | 무엇 | 시간 |
 | --- | --- | --- |
@@ -98,7 +98,7 @@ Plan Mode가 "계획을 텍스트로 보여달라"는 것이라면, **Extended T
 - [ ] UI 완성 후, API 연결 전 → 여기서 한 번 멈춤
 ```
 
-핵심은 **"건드리지 않는 것"** 섹션이에요. 에이전트의 범위 폭주를 막는 가장 강력한 장치입니다. [Lesson 05](/lessons/structure-of-good-prompts)의 Constraints 축과 같은 원리 — 금지를 명시하면 허용 범위가 좁아져요.
+핵심은 **"건드리지 않는 것"** 섹션이에요. 에이전트의 범위 폭주를 막는 가장 강력한 장치입니다. [좋은 프롬프트의 구조](/lessons/structure-of-good-prompts)의 Constraints 축과 같은 원리 — 금지를 명시하면 허용 범위가 좁아져요.
 
 ## Stop Points — 에이전트를 중간에 세우는 장치
 
@@ -159,7 +159,7 @@ Stop Points:
 - Anthropic — [Extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) · 복잡한 추론을 위한 내부 사고 확장
 
 **이전 레슨 연결**
-- [Lesson 05 — 4축 프롬프트](/lessons/structure-of-good-prompts) · Constraints 축으로 범위를 잠그는 원리
-- [Lesson 14 — 이슈를 에이전트 브리프로](/lessons/github-issue-to-ai-brief) · "무엇을 할지"를 정리하는 브리프 패턴
+- [좋은 프롬프트의 구조](/lessons/structure-of-good-prompts) · Constraints 축으로 범위를 잠그는 원리
+- [GitHub 이슈 → AI 브리프](/lessons/github-issue-to-ai-brief) · "무엇을 할지"를 정리하는 브리프 패턴
 
 > _참고: 본문 도입의 "비밀번호 찾기 버튼" 시나리오는 학습 효과를 위한 가상 사례입니다. **implementation-plan.md** 템플릿과 **Stop Points** 패턴은 소프트웨어 엔지니어링의 일반 관행을 이 학교 운영자가 한국어로 정리한 것이며, 외부 표준명은 아닙니다. Plan Mode·Extended Thinking의 정확한 사용법은 위 공식 문서를 확인하세요._

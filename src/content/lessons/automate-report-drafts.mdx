@@ -2,7 +2,7 @@
 
 금요일 오후 4시. 주간 보고서를 써야 합니다. 구글 독스를 열고 지난주 보고서를 복사해 날짜를 고치고, 이번 주 수치를 채우고, 요약을 다시 씁니다. 1시간 반이 지나면 내용 자체보다 **형식을 맞추는 데** 시간을 더 쓴 자신을 발견해요. 정작 "이 수치가 왜 이렇게 나왔는지"를 생각할 시간은 없었습니다.
 
-이게 보고서의 함정이에요. 형식은 매번 같은데 매번 새로 채워야 하고, 채우느라 분석이 밀립니다. [Lesson 05](/lessons/structure-of-good-prompts)에서 만든 4축 프롬프트와 [Lesson 08](/lessons/build-personal-prompt-library)의 라이브러리가 있으니, 오늘은 그걸 **실제 보고서 파이프라인**에 붙여 봅시다.
+이게 보고서의 함정이에요. 형식은 매번 같은데 매번 새로 채워야 하고, 채우느라 분석이 밀립니다. [좋은 프롬프트의 구조](/lessons/structure-of-good-prompts)에서 만든 4축 프롬프트와 [개인 프롬프트 라이브러리 만들기](/lessons/build-personal-prompt-library)의 라이브러리가 있으니, 오늘은 그걸 **실제 보고서 파이프라인**에 붙여 봅시다.
 
 ## 보고서는 왜 자동화하기 좋은가
 
@@ -38,7 +38,7 @@ Task:
 - [수치/이벤트/메모]
 ```
 
-[Lesson 07](/lessons/feeding-long-documents)에서 배운 컨텍스트 윈도우를 떠올려 보세요. 보고서 3개면 보통 3000~6000 토큰. 현재 모델들의 윈도우에 충분히 들어갑니다. 보고서가 길다면 핵심 섹션만 골라 넣는 Selective 전략을 쓰세요.
+[긴 문서를 AI에게 먹이는 법](/lessons/feeding-long-documents)에서 배운 컨텍스트 윈도우를 떠올려 보세요. 보고서 3개면 보통 3000~6000 토큰. 현재 모델들의 윈도우에 충분히 들어갑니다. 보고서가 길다면 핵심 섹션만 골라 넣는 Selective 전략을 쓰세요.
 
 ## 3단 파이프라인 — 초안 → 자기 검토 → 사람 검수
 
@@ -50,7 +50,7 @@ Task:
 | 2. 자기 검토 | 초안을 다시 읽고 빠진 섹션·수치 오류 체크 | AI (다른 호출) |
 | 3. 사람 검수 | 톤·맥락·민감 정보 최종 확인 | 사람 |
 
-2단계가 핵심이에요. 같은 AI에게 "이 초안에서 빠진 섹션, 수치 오류, 톤 불일치를 찾아줘"라고 한 번 더 시키면 1단계에서 빠뜨린 것의 상당 부분이 잡힙니다. [Lesson 06](/lessons/enforcing-output-format)의 3단 방어선과 같은 원리 — 한 단계가 놓치면 다음 단계가 잡아 줍니다.
+2단계가 핵심이에요. 같은 AI에게 "이 초안에서 빠진 섹션, 수치 오류, 톤 불일치를 찾아줘"라고 한 번 더 시키면 1단계에서 빠뜨린 것의 상당 부분이 잡힙니다. [출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format)의 3단 방어선과 같은 원리 — 한 단계가 놓치면 다음 단계가 잡아 줍니다.
 
 ## 자기 검토 프롬프트 — "상사의 눈으로 읽어줘"
 
@@ -75,7 +75,7 @@ Output:
 - 수정 제안 (원문 → 수정안)
 ```
 
-이 검토 프롬프트를 [Lesson 08](/lessons/build-personal-prompt-library)의 라이브러리에 넣어두면 매주 복사 없이 호출할 수 있어요.
+이 검토 프롬프트를 [개인 프롬프트 라이브러리 만들기](/lessons/build-personal-prompt-library)의 라이브러리에 넣어두면 매주 복사 없이 호출할 수 있어요.
 
 ## 수치 검증 — AI가 가장 약한 지점
 
@@ -123,9 +123,9 @@ Output:
 - OpenAI — [Prompt engineering](https://platform.openai.com/docs/guides/prompt-engineering) · 반복 작업 자동화에서의 프롬프트 설계 가이드
 
 **이전 레슨 (Stage 2 도구)**
-- [Lesson 05 — 4축 프롬프트](/lessons/structure-of-good-prompts) · Task/Context/Constraints/Output 구조
-- [Lesson 06 — 3단 방어선 출력](/lessons/enforcing-output-format) · 프롬프트 + API 스키마 + 재시도
-- [Lesson 08 — 프롬프트 라이브러리 v2](/lessons/build-personal-prompt-library) · 팀과 공유 가능한 라이브러리
+- [좋은 프롬프트의 구조](/lessons/structure-of-good-prompts) · Task/Context/Constraints/Output 구조
+- [출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format) · 프롬프트 + API 스키마 + 재시도
+- [개인 프롬프트 라이브러리 만들기](/lessons/build-personal-prompt-library) · 팀과 공유 가능한 라이브러리
 
 ## 다음 레슨
 

@@ -2,7 +2,7 @@
 
 Andrej Karpathy가 자기 프로젝트에 깐 `CLAUDE.md` 한 장이 있어요. 65줄. 코드도 아니고 라이브러리도 아닌 **그냥 텍스트 파일**입니다. 그런데 이 파일을 추가하면 Claude Code의 코딩 품질이 눈에 띄게 달라져요.
 
-[Lesson 13](/lessons/coding-agent-setup)에서 CLAUDE.md를 만들었지만, "어떻게 잘 쓰나"는 따로 다루지 않았어요. 오늘은 Karpathy의 65줄 안에 든 **4가지 원칙**을 풀어 봅니다.
+[코딩 에이전트 셋업](/lessons/coding-agent-setup)에서 CLAUDE.md를 만들었지만, "어떻게 잘 쓰나"는 따로 다루지 않았어요. 오늘은 Karpathy의 65줄 안에 든 **4가지 원칙**을 풀어 봅니다.
 
 ## AI 코딩의 3가지 고질병
 
@@ -77,7 +77,7 @@ Define done. Verify before claiming. Loop until the goal is met.
 
 ## 4원칙을 내 CLAUDE.md에 어떻게 넣나
 
-[Lesson 13](/lessons/coding-agent-setup)에서 만든 CLAUDE.md에 다음 섹션 한 장을 추가하면 됩니다.
+[코딩 에이전트 셋업](/lessons/coding-agent-setup)에서 만든 CLAUDE.md에 다음 섹션 한 장을 추가하면 됩니다.
 
 ```markdown
 ## How to work in this repo
@@ -99,7 +99,7 @@ Define done. Verify before claiming. Loop until the goal is met.
 - Verify before claiming complete.
 ```
 
-이 한 장이 들어가면 Claude Code가 매 메시지마다 이 규약을 먼저 읽고 따라가요. [Lesson 13](/lessons/coding-agent-setup)의 "상시 프롬프트" 개념이 본격 작동하는 거예요.
+이 한 장이 들어가면 Claude Code가 매 메시지마다 이 규약을 먼저 읽고 따라가요. [코딩 에이전트 셋업](/lessons/coding-agent-setup)의 "상시 프롬프트" 개념이 본격 작동하는 거예요.
 
 ## 그래서 오늘 만들 한 장
 
@@ -116,7 +116,7 @@ Define done. Verify before claiming. Loop until the goal is met.
 
 ## Stage 5의 흐름 안에서
 
-[Lesson 13](/lessons/coding-agent-setup)에서 권한·규약·비밀 정책을 깔았다면, 오늘은 그 규약 안에 **AI를 어떻게 행동시킬지의 4원칙**을 채웠어요. 다음 레슨([GitHub 이슈 → AI 브리프](/lessons/github-issue-to-ai-brief))부터는 이 4원칙이 깔린 환경에서 실제 작업을 던지기 시작합니다.
+[코딩 에이전트 셋업](/lessons/coding-agent-setup)에서 권한·규약·비밀 정책을 깔았다면, 오늘은 그 규약 안에 **AI를 어떻게 행동시킬지의 4원칙**을 채웠어요. 다음 레슨([GitHub 이슈 → AI 브리프](/lessons/github-issue-to-ai-brief))부터는 이 4원칙이 깔린 환경에서 실제 작업을 던지기 시작합니다.
 
 시작해 볼까요?
 
@@ -131,9 +131,9 @@ Define done. Verify before claiming. Loop until the goal is met.
 - Anthropic — [Claude Code memory (CLAUDE.md)](https://docs.claude.com/en/docs/claude-code/memory) · 프로젝트 규약 파일의 역할
 
 **연결 레슨**
-- [Lesson 13 — 코딩 에이전트 셋업](/lessons/coding-agent-setup) · 권한과 규약의 토대
-- [Lesson 16 — AI와 함께 계획 짜기](/lessons/plan-with-ai) · 1번 원칙(Think Before Coding)의 본격편
-- [Lesson 17 — 테스트 짜기](/lessons/write-tests-with-coding-agent) · 4번 원칙(Goal-Driven)이 테스트와 만나는 지점
+- [코딩 에이전트 셋업](/lessons/coding-agent-setup) · 권한과 규약의 토대
+- [AI와 함께 구현 계획 세우기](/lessons/plan-with-ai) · 1번 원칙(Think Before Coding)의 본격편
+- [Codex / Claude Code로 테스트 만들기](/lessons/write-tests-with-coding-agent) · 4번 원칙(Goal-Driven)이 테스트와 만나는 지점
 
 ## 다음 레슨
 

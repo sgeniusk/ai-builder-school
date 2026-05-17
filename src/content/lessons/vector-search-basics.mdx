@@ -2,7 +2,7 @@
 
 임베딩 실험이 잘 됐어요. 문장 10개의 코사인 유사도를 비교하니 감이 옵니다. 그래서 회사 문서 500개를 전부 임베딩해 JSON 파일에 저장했습니다. 검색할 때마다 500개 벡터를 다 읽어서 하나하나 비교합니다. 10개일 때는 눈 깜짝할 사이인데, 수가 늘어나면 **눈에 띄게 느려지기 시작합니다**. 1만 개가 되면? 쓸 수 없는 속도가 됩니다.
 
-[Lesson 23](/lessons/understanding-embeddings)에서 임베딩을, [Lesson 24](/lessons/document-chunking-strategy)에서 청킹을 배웠어요. 오늘은 그 청크 벡터들을 **빠르게 검색할 수 있는 장소** — 벡터 DB — 에 넣습니다.
+[임베딩(Embedding) 이해하기](/lessons/understanding-embeddings)에서 임베딩을, [문서 청킹(Chunking) 전략 세우기](/lessons/document-chunking-strategy)에서 청킹을 배웠어요. 오늘은 그 청크 벡터들을 **빠르게 검색할 수 있는 장소** — 벡터 DB — 에 넣습니다.
 
 오늘 만들 건 **10~30개 문서로 동작하는 미니 벡터 검색** (`examples/vector-search/`)이에요.
 
@@ -79,7 +79,7 @@ K를 몇으로 할지가 중요합니다.
 
 {/* Source · DOC · Anthropic "Contextual Retrieval" (2024) — https://www.anthropic.com/news/contextual-retrieval */}
 
-[Lesson 23](/lessons/understanding-embeddings)에서 "문서번호 A-2024-0317을 찾을 때는 키워드 검색이 압도적"이라고 했죠. 실무에서는 **벡터 검색과 키워드 검색을 같이** 돌립니다. 이게 하이브리드 검색이에요.
+[임베딩(Embedding) 이해하기](/lessons/understanding-embeddings)에서 "문서번호 A-2024-0317을 찾을 때는 키워드 검색이 압도적"이라고 했죠. 실무에서는 **벡터 검색과 키워드 검색을 같이** 돌립니다. 이게 하이브리드 검색이에요.
 
 ```
 쿼리: "A-2024-0317 인증 방식"
@@ -105,7 +105,7 @@ Anthropic의 Contextual Retrieval 연구에서도 벡터 검색 단독보다 **B
 
 ```
 1. 문서 10~30개 준비 (Markdown 또는 텍스트)
-2. Lesson 24의 전략으로 청킹
+2. 앞서 배운 전략으로 청킹
 3. 각 청크를 임베딩 API로 벡터화
 4. 벡터 DB에 저장 (Chroma 로컬 추천 — 설치 한 줄)
 5. 쿼리를 받아 Top-K 검색하는 함수 작성
@@ -160,9 +160,9 @@ Anthropic의 Contextual Retrieval 연구에서도 벡터 검색 단독보다 **B
 - Anthropic — [Contextual Retrieval](https://www.anthropic.com/news/contextual-retrieval) · BM25 + 임베딩 결합의 효과와 구현 방향
 
 **이전 레슨 연결**
-- [Lesson 23 — 임베딩 이해](/lessons/understanding-embeddings) · 벡터가 무엇이고 유사도를 어떻게 재는지
-- [Lesson 24 — 문서 청크 전략](/lessons/document-chunking-strategy) · 벡터 DB에 넣을 청크를 어떻게 만드는지
-- [Lesson 07 — 긴 문서 처리](/lessons/feeding-long-documents) · Selective Injection이 오늘의 전신
+- [임베딩(Embedding) 이해하기](/lessons/understanding-embeddings) · 벡터가 무엇이고 유사도를 어떻게 재는지
+- [문서 청킹(Chunking) 전략 세우기](/lessons/document-chunking-strategy) · 벡터 DB에 넣을 청크를 어떻게 만드는지
+- [긴 문서를 AI에게 먹이는 법](/lessons/feeding-long-documents) · Selective Injection이 오늘의 전신
 
 ## 다음 레슨
 

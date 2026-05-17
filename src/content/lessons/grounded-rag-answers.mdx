@@ -2,7 +2,7 @@
 
 벡터 검색까지 붙인 RAG가 돌아갑니다. "우리 회사 환불 정책이 뭐야?"라고 물으면 깔끔한 답이 나와요. 그런데 고객 지원팀장이 묻습니다 — "이 답이 어느 문서에서 나온 거야? 고객한테 이걸 보내도 되는 거야?" 출처가 안 보이니 **답을 믿을 수 없고, 믿을 수 없으니 쓸 수 없습니다**.
 
-더 위험한 건, 검색된 청크에 없는 정보를 모델이 **지어낸** 경우예요. [Lesson 03](/lessons/hallucination-verification)에서 다룬 환각이 RAG 안에서도 일어납니다. 검색 결과를 줬는데도 모델이 "가끔 창작"을 합니다.
+더 위험한 건, 검색된 청크에 없는 정보를 모델이 **지어낸** 경우예요. [환각(Hallucination)을 잡는 검증법](/lessons/hallucination-verification)에서 다룬 환각이 RAG 안에서도 일어납니다. 검색 결과를 줬는데도 모델이 "가끔 창작"을 합니다.
 
 오늘은 이 두 문제를 한 번에 잡습니다 — **답에 반드시 출처를 달고, 근거 없으면 "모른다"고 답하게 만드는** 패턴이에요.
 
@@ -24,7 +24,7 @@ RAG가 환각을 완전히 없앨 거라 기대하지만, 현실은 다릅니다
 
 {/* Source · DOC · Anthropic "Citations" — https://docs.anthropic.com/en/docs/build-with-claude/citations */}
 
-[Lesson 06](/lessons/enforcing-output-format)의 3단 방어선을 RAG에 적용합니다. 1선(프롬프트)에서 인용 규칙을 명시하는 게 출발이에요.
+[출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format)의 3단 방어선을 RAG에 적용합니다. 1선(프롬프트)에서 인용 규칙을 명시하는 게 출발이에요.
 
 ```
 System:
@@ -68,7 +68,7 @@ const response = await anthropic.messages.create({
 // citations: [{source: "chunk-01", ...}, {source: "chunk-02", ...}]
 ```
 
-1선(프롬프트)과 달리 **모델이 인용을 빼먹을 수 없어요**. API가 구조적으로 붙여주니까요. 이게 [Lesson 06](/lessons/enforcing-output-format)의 2선(스키마 강제)에 해당합니다.
+1선(프롬프트)과 달리 **모델이 인용을 빼먹을 수 없어요**. API가 구조적으로 붙여주니까요. 이게 [출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format)의 2선(스키마 강제)에 해당합니다.
 
 ## "근거 없으면 모른다" — Abstain Policy
 
@@ -155,10 +155,10 @@ Abstain Policy의 구현은 간단해요.
 
 RAG에서 만든 4장을 모아볼게요.
 
-- [Lesson 23](/lessons/understanding-embeddings) — **임베딩 유사도 비교 노트** (의미 검색의 감)
-- [Lesson 24](/lessons/document-chunking-strategy) — **청킹 전략 비교 노트** (잘 잘라야 잘 찾음)
-- [Lesson 25](/lessons/vector-search-basics) — **미니 벡터 검색 폴더** (빠른 검색 인프라)
-- **Lesson 26 (오늘)** — **Grounded RAG 파이프라인** (인용 + 거절 = 신뢰)
+- [임베딩(Embedding) 이해하기](/lessons/understanding-embeddings) — **임베딩 유사도 비교 노트** (의미 검색의 감)
+- [문서 청킹(Chunking) 전략 세우기](/lessons/document-chunking-strategy) — **청킹 전략 비교 노트** (잘 잘라야 잘 찾음)
+- [벡터 검색(Vector Search) 기본](/lessons/vector-search-basics) — **미니 벡터 검색 폴더** (빠른 검색 인프라)
+- **오늘 레슨** — **Grounded RAG 파이프라인** (인용 + 거절 = 신뢰)
 
 이 네 장이 쌓이면 "AI가 답했는데 맞는지 모르겠어요"에서 "이 문서 3장 2절에 근거해서 답했고, 나머지는 모른다고 했어요"로 바뀝니다.
 
@@ -176,9 +176,9 @@ RAG에서 만든 4장을 모아볼게요.
 - Lewis 외 (2020) — [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401) · RAG 원논문
 
 **이전 레슨 연결**
-- [Lesson 03 — 환각 검증](/lessons/hallucination-verification) · RAG에서도 환각이 생기는 이유와 검증법
-- [Lesson 06 — 3단 방어선](/lessons/enforcing-output-format) · 인용 강제가 3단 방어선의 RAG 버전
-- [Lesson 07 — 긴 문서 처리](/lessons/feeding-long-documents) · Selective Injection이 RAG의 전신
+- [환각(Hallucination)을 잡는 검증법](/lessons/hallucination-verification) · RAG에서도 환각이 생기는 이유와 검증법
+- [출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format) · 인용 강제가 3단 방어선의 RAG 버전
+- [긴 문서를 AI에게 먹이는 법](/lessons/feeding-long-documents) · Selective Injection이 RAG의 전신
 
 ## 다음 레슨
 

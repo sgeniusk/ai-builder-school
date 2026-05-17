@@ -1,6 +1,6 @@
 ## "JSON은 왔는데 카드 UI가 깨졌어요"
 
-[Lesson 06](/lessons/enforcing-output-format)에서 3단 방어선을 만들었죠 — 프롬프트 가드 · API 스키마 강제 · 재시도 그물. 터미널에서 테스트할 때는 완벽했어요. 그런데 이걸 **React 앱**에 붙이는 순간 새로운 문제가 터집니다.
+[출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format)에서 3단 방어선을 만들었죠 — 프롬프트 가드 · API 스키마 강제 · 재시도 그물. 터미널에서 테스트할 때는 완벽했어요. 그런데 이걸 **React 앱**에 붙이는 순간 새로운 문제가 터집니다.
 
 모델이 보낸 JSON의 `tags` 필드가 때로 문자열이고 때로 배열이에요. `null`이 올 때도 있어요. 카드 컴포넌트가 `tags.map`을 부르다 `TypeError: tags.map is not a function`으로 흰 화면. 사용자는 "이 앱 뭐야?" 하고 떠납니다.
 
@@ -11,7 +11,7 @@
 {/* Source · DOC · Anthropic "Structured outputs" — https://docs.claude.com/en/docs/build-with-claude/structured-outputs */}
 {/* Source · DOC · OpenAI "Structured model outputs" — https://developers.openai.com/api/docs/guides/structured-outputs */}
 
-[Lesson 06](/lessons/enforcing-output-format)의 3단 방어선을 다시 볼게요.
+[출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format)의 3단 방어선을 다시 볼게요.
 
 | 방어선 | 위치 | 역할 |
 | --- | --- | --- |
@@ -28,7 +28,7 @@
 
 {/* Source · DOC · Zod "Introduction" — https://zod.dev */}
 
-[Lesson 06](/lessons/enforcing-output-format)에서 Zod를 처음 만났죠. 오늘은 Zod를 **React 앱의 상태 경계**에 배치합니다.
+[출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format)에서 Zod를 처음 만났죠. 오늘은 Zod를 **React 앱의 상태 경계**에 배치합니다.
 
 ```typescript
 import { z } from "zod";
@@ -142,7 +142,7 @@ const RobustRecipeSchema = z.object({
 | `useStructuredAI.ts` | 커스텀 훅 — safeParse + 에러/로딩 상태 |
 | `README.md` | 설정 → 실행 → 의도적으로 깨뜨려 보기 가이드 |
 
-[Lesson 06](/lessons/enforcing-output-format)의 3단 방어선이 서버에서, [Lesson 05](/lessons/structure-of-good-prompts)의 4축 프롬프트가 호출 안에서, 그리고 오늘의 4번째 벽이 클라이언트에서 — 세 레이어가 하나의 앱에 합쳐지는 구조입니다.
+[출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format)의 3단 방어선이 서버에서, [좋은 프롬프트의 구조](/lessons/structure-of-good-prompts)의 4축 프롬프트가 호출 안에서, 그리고 오늘의 4번째 벽이 클라이언트에서 — 세 레이어가 하나의 앱에 합쳐지는 구조입니다.
 
 ## 스키마 진화 — 필드가 바뀔 때
 
@@ -154,7 +154,7 @@ const RobustRecipeSchema = z.object({
 | 버전 필드 | `{ _version: 2, ... }` — 버전별 분기 파서 |
 | 마이그레이션 함수 | 이전 버전 데이터를 새 스키마로 변환하는 함수 |
 
-이 전략은 [Lesson 22](/lessons/conversation-storage-design)에서 대화 저장소 마이그레이션과 다시 만나요. 데이터가 영속되는 순간부터 스키마 진화는 피할 수 없습니다.
+이 전략은 [대화 기록 저장 구조 설계](/lessons/conversation-storage-design)에서 대화 저장소 마이그레이션과 다시 만나요. 데이터가 영속되는 순간부터 스키마 진화는 피할 수 없습니다.
 
 시작해 볼까요?
 
@@ -171,9 +171,9 @@ const RobustRecipeSchema = z.object({
 - [Pydantic](https://docs.pydantic.dev/) · Python 환경에서의 동일 패턴
 
 **이전 레슨 연결**
-- [Lesson 05 — 4축 프롬프트](/lessons/structure-of-good-prompts) · 프롬프트 안에서 Output 축을 단단하게 만드는 법
-- [Lesson 06 — 3단 방어선](/lessons/enforcing-output-format) · 서버 측 구조화 출력의 기초
-- [Lesson 22 — 대화 저장소 설계](/lessons/conversation-storage-design) · 스키마 진화와 마이그레이션
+- [좋은 프롬프트의 구조](/lessons/structure-of-good-prompts) · 프롬프트 안에서 Output 축을 단단하게 만드는 법
+- [출력 형식(Output Format)을 강제하는 법](/lessons/enforcing-output-format) · 서버 측 구조화 출력의 기초
+- [대화 기록 저장 구조 설계](/lessons/conversation-storage-design) · 스키마 진화와 마이그레이션
 
 ## 다음 레슨
 

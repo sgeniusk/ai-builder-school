@@ -4,7 +4,7 @@
 
 OpenAI Codex CLI 0.128.0에서 등장한 `/goal` 기능은 이 패러다임을 바꿉니다. **목표만 주면 진짜 스스로 코딩**해요. Anthropic도 비슷한 방향으로 가고 있고, 이 흐름의 원형이 **Ralph Loop**입니다.
 
-[Lesson 28](/lessons/mini-agent-loop)에서 미니 에이전트 루프의 일반론을 다뤘다면, 오늘은 그 루프가 **상용 도구의 공식 기능으로 진화**한 사례를 들여다봅니다.
+[미니 에이전트 루프 만들기](/lessons/mini-agent-loop)에서 미니 에이전트 루프의 일반론을 다뤘다면, 오늘은 그 루프가 **상용 도구의 공식 기능으로 진화**한 사례를 들여다봅니다.
 
 ## Ralph Loop — 자율 루프의 원형
 
@@ -97,7 +97,7 @@ codex
 > /goal "src/utils의 모든 함수에 단위 테스트를 추가하라. npm run test가 통과해야 함."
 ```
 
-3중 격리(독립 디렉토리 + git 분리 + 권한 허용 목록)가 깔리면 /goal이 폭주해도 본 프로젝트는 안전해요. [Lesson 29](/lessons/tool-permission-safeguards)의 권한 설계가 여기서 빛을 발합니다.
+3중 격리(독립 디렉토리 + git 분리 + 권한 허용 목록)가 깔리면 /goal이 폭주해도 본 프로젝트는 안전해요. [도구 권한과 안전장치 설계하기](/lessons/tool-permission-safeguards)의 권한 설계가 여기서 빛을 발합니다.
 
 ## 토큰 우려와 4중 안전장치
 
@@ -128,7 +128,7 @@ codex
 
 ## Stage 6의 흐름 안에서
 
-[Lesson 27 Function Calling](/lessons/function-calling)에서 단발 도구 호출을, [Lesson 28 미니 에이전트 루프](/lessons/mini-agent-loop)에서 일반 자율 루프를 다뤘어요. 오늘은 그 일반론이 **상용 도구의 공식 기능으로 정착**한 사례를 봤습니다.
+[Function Calling 이해하기](/lessons/function-calling)에서 단발 도구 호출을, [미니 에이전트 루프 만들기](/lessons/mini-agent-loop)에서 일반 자율 루프를 다뤘어요. 오늘은 그 일반론이 **상용 도구의 공식 기능으로 정착**한 사례를 봤습니다.
 
 다음 레슨([도구 권한 가드](/lessons/tool-permission-safeguards))에서는 자율 루프를 더 안전하게 만드는 권한 설계를 깊게 들어가요. 자율의 폭이 넓어질수록 권한의 설계가 핵심이 됩니다.
 
@@ -144,9 +144,9 @@ codex
 - OpenAI Codex CLI 0.128.0 changelog · /goal 공식 기능
 
 **연결 레슨**
-- [Lesson 27 — Function Calling](/lessons/function-calling) · 단발 도구 호출
-- [Lesson 28 — 미니 에이전트 루프](/lessons/mini-agent-loop) · 자율 루프의 일반론
-- [Lesson 29 — 도구 권한 가드](/lessons/tool-permission-safeguards) · 자율 루프의 안전장치
+- [Function Calling 이해하기](/lessons/function-calling) · 단발 도구 호출
+- [미니 에이전트 루프 만들기](/lessons/mini-agent-loop) · 자율 루프의 일반론
+- [도구 권한과 안전장치 설계하기](/lessons/tool-permission-safeguards) · 자율 루프의 안전장치
 
 ## 다음 레슨
 
