@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/Layout";
+import { CodeBlock } from "@/components/CodeBlock";
 import {
   getLessonBySlug,
   getProjectBySlug,
@@ -65,6 +66,18 @@ export default async function ProjectDetailPage({
           {project.targetLearner}
         </p>
 
+        <div className="capstone-note">
+          <div className="capstone-note__tag">이건 캡스톤이에요</div>
+          <p>
+            프로젝트는 레슨처럼 한 줄씩 따라 하는 가이드가 아니라, 배운 걸 혼자
+            적용하는 졸업 과제예요. 아래 <strong>준비시키는 레슨</strong>을 먼저
+            끝내면 훨씬 수월해요. 각 빌드 단계에는 막막함을 덜어 줄{" "}
+            <strong>먼저 할 것</strong>과 복사해 쓰는{" "}
+            <strong>시작 프롬프트</strong>가 있어요 — 거기서 출발해 당신의 상황에
+            맞게 키워 가세요.
+          </p>
+        </div>
+
         <h2>왜 이 프로젝트인가</h2>
         <p style={{ whiteSpace: "pre-line" }}>{project.problem}</p>
         <p>{project.summary}</p>
@@ -78,19 +91,46 @@ export default async function ProjectDetailPage({
         </div>
 
         <h2>빌드 단계</h2>
-        <div style={{ display: "grid", gap: 14, margin: "20px 0" }}>
-          {project.milestones.map((m) => (
-            <div
-              key={m.title}
-              style={{ borderLeft: "3px solid var(--ink)", paddingLeft: 16 }}
-            >
-              <div style={{ fontWeight: 600, color: "var(--ink)" }}>{m.title}</div>
-              <p style={{ margin: "4px 0 0", fontSize: 15, color: "var(--ink-2)" }}>
-                {m.description}
-              </p>
-            </div>
-          ))}
-        </div>
+        <p className="proj-ms-intro">
+          각 단계는 정답 스크립트가 아니라 출발점이에요. &lsquo;먼저 할 것&rsquo;으로
+          막막함을 깨고, &lsquo;시작 프롬프트&rsquo;를 복사해 당신의 상황에 맞게
+          바꿔 가세요.
+        </p>
+        <ol className="proj-milestones">
+          {project.milestones.map((m) => {
+            const fallback = m.fallbackLesson
+              ? getLessonBySlug(m.fallbackLesson)
+              : undefined;
+            return (
+              <li key={m.title} className="proj-milestone">
+                <h3 className="proj-milestone__title">{m.title}</h3>
+                <p className="proj-milestone__desc">{m.description}</p>
+
+                <div className="proj-ms-first">
+                  <span className="proj-ms-tag">먼저 할 것</span>
+                  <p>{m.firstStep}</p>
+                </div>
+
+                {m.starterPrompt && (
+                  <div className="proj-ms-prompt">
+                    <span className="proj-ms-tag">시작 프롬프트</span>
+                    <CodeBlock>{m.starterPrompt}</CodeBlock>
+                  </div>
+                )}
+
+                {fallback && (
+                  <p className="proj-ms-fallback">
+                    <span aria-hidden>↩</span> 막히면{" "}
+                    <Link href={`/lessons/${fallback.slug}`}>
+                      {fallback.titleKo}
+                    </Link>{" "}
+                    레슨으로
+                  </p>
+                )}
+              </li>
+            );
+          })}
+        </ol>
 
         <h2>완료 기준</h2>
         <ul className="checklist">

@@ -314,5 +314,18 @@ export function validateContent(): ContentIntegrityIssue[] {
     }
   }
 
+  // 10) project.milestones[].fallbackLesson가 실제 lesson을 가리키는지
+  for (const project of projects) {
+    for (const m of project.milestones) {
+      if (m.fallbackLesson && !lessonSlugs.has(m.fallbackLesson)) {
+        issues.push({
+          kind: "project.milestone.fallbackLesson",
+          ref: project.slug,
+          message: `Project "${project.slug}" milestone "${m.title}" references missing lesson "${m.fallbackLesson}"`,
+        });
+      }
+    }
+  }
+
   return issues;
 }
