@@ -39,8 +39,9 @@ function LessonRow({ lesson }: { lesson: Lesson }) {
         </span>
         <div>
           <div className="l-title">{lesson.titleKo}</div>
-          <div style={{ fontSize: 13, color: "var(--ink-3)", marginTop: 4 }}>
-            {lesson.summary}
+          <div className="l-deliverable">
+            <span className="l-deliverable__tag">남는 것</span>
+            <span>{lesson.deliverable.title}</span>
           </div>
         </div>
         <span className="l-meta">
