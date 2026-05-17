@@ -9,6 +9,7 @@ import { ShareCardButton } from "@/components/ShareCardButton";
 import { getBuilderRank } from "@/lib/builderRank";
 import { useCharacter } from "@/hooks/useCharacter";
 import { useLessonProgress } from "@/hooks/useLessonProgress";
+import { useNotes } from "@/hooks/useNotes";
 import { useStreak } from "@/hooks/useStreak";
 
 export type DashStage = {
@@ -44,6 +45,7 @@ export function BuilderDashboard({ stages, lessonsByStage, journeys }: Props) {
   const { mounted: pMounted, journey, isLessonComplete } = useLessonProgress();
   const { mounted: cMounted, character } = useCharacter();
   const streak = useStreak();
+  const { notes } = useNotes();
   const mounted = pMounted && cMounted;
 
   // SSR/첫 렌더 — 자리만 잡아 hydration mismatch 방지
@@ -85,6 +87,7 @@ export function BuilderDashboard({ stages, lessonsByStage, journeys }: Props) {
       : Math.round((recDone / recLessons.length) * 100);
 
   const nextLesson = allLessons.find((l) => !isLessonComplete(l));
+  const bookmarked = allLessons.filter((l) => notes[l.slug]?.bookmarked);
   const createdStr = character
     ? new Date(character.createdAt).toISOString().slice(0, 10)
     : null;
@@ -247,9 +250,29 @@ export function BuilderDashboard({ stages, lessonsByStage, journeys }: Props) {
           </ul>
         </section>
 
+        {/* 책갈피한 레슨 */}
+        {bookmarked.length > 0 && (
+          <section className="dash-card">
+            <div className="dash-card__head">
+              <span className="rail-section-label">책갈피한 레슨</span>
+              <span className="mono dash-frac">{bookmarked.length}</span>
+            </div>
+            <ul className="dash-bookmarks">
+              {bookmarked.map((l) => (
+                <li key={l.id}>
+                  <Link href={`/lessons/${l.slug}`} className="dash-bookmark">
+                    <span aria-hidden>★</span>
+                    <span>{l.titleKo}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <p className="dash-note">
-          진척은 이 브라우저에만 저장돼요. 레슨의 빌드·검증·회고를 모두 체크하면
-          그 레슨이 완료로 집계됩니다.
+          진척·메모는 이 브라우저에만 저장돼요. 레슨의 빌드·검증·회고를 모두
+          체크하면 그 레슨이 완료로 집계됩니다.
         </p>
       </div>
     </Container>

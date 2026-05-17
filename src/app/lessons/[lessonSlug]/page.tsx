@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SectionChecklist } from "@/components/SectionChecklist";
+import { LessonNotes } from "@/components/LessonNotes";
 import {
   getLessonBySlug,
   getLessons,
@@ -143,6 +144,8 @@ export default async function LessonPage({
             </ul>
           </>
         )}
+
+        <LessonNotes slug={lesson.slug} />
 
         <div
           style={{
