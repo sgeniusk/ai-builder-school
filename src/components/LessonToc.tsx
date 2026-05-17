@@ -1,8 +1,7 @@
-// 레슨 페이지 우측 사이드바 — 3개 카드(TOC / 빌드·검증·회고 3-section 진행률 / 형제 lesson).
+// 레슨 페이지 우측 사이드바 — 3개 카드(읽기 레일 / 빌드·검증·회고 3-section 진행률 / 형제 lesson).
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import type { Lesson, Stage } from "@/lib/types";
 import {
   SECTIONS,
@@ -10,16 +9,7 @@ import {
   useLessonProgress,
   type Section,
 } from "@/hooks/useLessonProgress";
-
-const SECTION_IDS = [
-  { id: "section-problem", label: "문제 이해" },
-  { id: "section-concepts", label: "최소 개념" },
-  { id: "section-mission", label: "미션" },
-  { id: "section-build", label: "빌드 단계" },
-  { id: "section-verify", label: "검증 체크리스트" },
-  { id: "section-deliverable", label: "산출물" },
-  { id: "section-reflection", label: "회고" },
-] as const;
+import { ReadingRail } from "./ReadingRail";
 
 const SECTION_META: Record<Section, { label: string; anchorId: string }> = {
   build: { label: "빌드", anchorId: "section-build" },
@@ -42,27 +32,6 @@ type Props = {
 export function LessonToc({ currentLesson, currentStage, siblingLessons }: Props) {
   const { mounted, getSectionPct, getWeightedPct, isLessonComplete } =
     useLessonProgress();
-  const [activeId, setActiveId] = useState<string>(SECTION_IDS[0].id);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible[0]) setActiveId(visible[0].target.id);
-      },
-      { rootMargin: "-30% 0px -60% 0px", threshold: 0 },
-    );
-    SECTION_IDS.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, [currentLesson.id]);
-
-  const activeIndex = SECTION_IDS.findIndex((s) => s.id === activeId);
 
   const weighted = mounted ? getWeightedPct(currentLesson) : 0;
 
@@ -76,34 +45,8 @@ export function LessonToc({ currentLesson, currentStage, siblingLessons }: Props
 
   return (
     <aside className="lesson-toc" aria-label="레슨 안 네비게이션">
-      {/* 1. TOC 카드 */}
-      <div className="toc-card">
-        <span className="rail-section-label">이 레슨</span>
-        <ul className="toc-list">
-          {SECTION_IDS.map(({ id, label }, idx) => {
-            const isActive = id === activeId;
-            const isPassed = idx < activeIndex;
-            return (
-              <li
-                key={id}
-                className={[
-                  "toc-row",
-                  isActive && "toc-row--active",
-                  isPassed && "toc-row--passed",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-              >
-                <a href={`#${id}`}>
-                  <span className="toc-step mono">{idx + 1}</span>
-                  <span className="toc-bar" aria-hidden />
-                  <span className="toc-label">{label}</span>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      {/* 1. 읽기 진행 글로우 레일 — 섹션 점 + 현재 위치 + 남은 시간 */}
+      <ReadingRail estimatedMinutes={currentLesson.estimatedMinutes} />
 
       {/* 2. 3-section 진행률 카드 */}
       <div className="progress-card">
