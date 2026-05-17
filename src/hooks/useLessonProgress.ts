@@ -3,6 +3,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { recordStudyDay } from "@/lib/streak";
 
 const STORAGE_KEY = "aibs:progress:v2";
 const CHANGE_EVENT = "aibs:progress:change";
@@ -109,6 +110,8 @@ export function useLessonProgress() {
           },
         };
         writeStorage(next);
+        // 체크박스 토글 = 학습 행동 → 오늘을 스트릭에 기록
+        recordStudyDay();
         return next;
       });
     },

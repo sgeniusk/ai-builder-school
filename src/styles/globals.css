@@ -2226,6 +2226,22 @@ body {
   .dash-note {
     margin: 20px 2px 0; font-size: 12px; color: var(--ink-4); line-height: 1.6;
   }
+  .dash-streak {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .dash-streak__main { display: flex; align-items: center; gap: 8px; }
+  .dash-streak__flame { font-size: 24px; line-height: 1; }
+  .dash-streak__num {
+    font-size: 36px; font-weight: 700; font-family: var(--f-mono);
+    color: var(--ink); line-height: 1;
+  }
+  .dash-streak__unit { font-size: 14px; color: var(--ink-3); }
+  .dash-streak__meta {
+    display: flex; flex-direction: column; gap: 4px; align-items: flex-end;
+    font-size: 13px; color: var(--ink-3);
+  }
+  .dash-streak__today.is-done { color: var(--ink); font-weight: 600; }
   .char-profile__dash {
     display: flex; justify-content: center;
     width: 100%; margin: 4px 0 8px;

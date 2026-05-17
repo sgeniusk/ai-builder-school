@@ -7,6 +7,7 @@ import { Container } from "@/components/Layout";
 import { CharacterAvatar } from "@/components/CharacterAvatar";
 import { useCharacter } from "@/hooks/useCharacter";
 import { useLessonProgress } from "@/hooks/useLessonProgress";
+import { useStreak } from "@/hooks/useStreak";
 
 export type DashStage = {
   id: string;
@@ -40,6 +41,7 @@ type Props = {
 export function BuilderDashboard({ stages, lessonsByStage, journeys }: Props) {
   const { mounted: pMounted, journey, isLessonComplete } = useLessonProgress();
   const { mounted: cMounted, character } = useCharacter();
+  const streak = useStreak();
   const mounted = pMounted && cMounted;
 
   // SSR/첫 렌더 — 자리만 잡아 hydration mismatch 방지
@@ -118,6 +120,27 @@ export function BuilderDashboard({ stages, lessonsByStage, journeys }: Props) {
             </p>
           </div>
         </section>
+
+        {/* 학습 스트릭 */}
+        {streak && (
+          <section className="dash-card dash-streak">
+            <div className="dash-streak__main">
+              <span className="dash-streak__flame" aria-hidden>
+                🔥
+              </span>
+              <span className="dash-streak__num">{streak.current}</span>
+              <span className="dash-streak__unit">일 연속 학습</span>
+            </div>
+            <div className="dash-streak__meta">
+              <span>최고 {streak.best}일</span>
+              <span
+                className={`dash-streak__today${streak.studiedToday ? " is-done" : ""}`}
+              >
+                {streak.studiedToday ? "오늘 학습 완료 ✓" : "오늘 아직 — 1레슨으로 이어가요"}
+              </span>
+            </div>
+          </section>
+        )}
 
         {/* 이어서 학습 */}
         <section className="dash-card dash-next">
