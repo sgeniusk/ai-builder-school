@@ -52,7 +52,7 @@ export function Hero() {
   return (
     <section className="hero">
       <Container>
-        <p className="eyebrow">AI Builder School · v0.4</p>
+        <p className="eyebrow">AI Builder School · v0.5</p>
         <h1 className="hero-h">
           AI를 쓰는 사람에서,
           <br />

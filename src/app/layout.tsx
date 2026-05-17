@@ -51,6 +51,13 @@ export default function RootLayout({
         className="min-h-screen bg-paper text-ink antialiased"
         suppressHydrationWarning
       >
+        {/* no-FOUC — paint 전에 테마를 결정해 깜박임을 막는다. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();",
+          }}
+        />
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />
