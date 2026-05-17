@@ -61,9 +61,11 @@ export const journeys: Journey[] = [
     ],
     recommendedLessons: [
       "checks-before-trusting-ai-output",
+      "ai-output-eval-for-pms",
       "research-workflow",
       "ai-app-cost-and-usage",
       "prompt-injection-defense",
+      "responsible-ai-policy-template",
     ],
     capstoneIdeas: [
       "내부 AI 사용 가이드라인 v1",
@@ -92,8 +94,10 @@ export const journeys: Journey[] = [
     ],
     recommendedLessons: [
       "structure-of-good-prompts",
-      "blog-writing-pipeline",
       "research-workflow",
+      "blog-writing-pipeline",
+      "blog-to-shorts-pipeline",
+      "youtube-script-research-to-outline",
     ],
     capstoneIdeas: [
       "블로그 → 쇼츠 자동 파이프라인",
