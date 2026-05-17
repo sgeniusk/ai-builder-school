@@ -40,6 +40,21 @@
   --persona-explorer-to:       oklch(60% 0.10 150);
 }
 
+/* ===== 다크(야간) 모드 — 따뜻한 톤의 어두운 종이 ===== */
+/* layout.tsx의 no-FOUC 스크립트가 <html data-theme>를 paint 전에 설정. */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #F0EDE4;
+  --ink-2: #CAC5BA;
+  --ink-3: #948F84;
+  --ink-4: #6B675E;
+  --line: #34302A;
+  --line-2: #443F37;
+  --paper: #1C1A15;
+  --paper-2: #15130F;
+  --card: #24211B;
+}
+
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
@@ -1405,6 +1420,30 @@ body {
     width: 32px;
     height: 32px;
     flex-shrink: 0;
+  }
+  /* 라이트/다크 테마 토글 버튼 */
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid var(--line-2);
+    background: var(--card);
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: border-color 0.15s var(--ease), color 0.15s var(--ease),
+      background 0.15s var(--ease);
+  }
+  .theme-toggle:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
   }
   .character-avatar {
     display: inline-flex;

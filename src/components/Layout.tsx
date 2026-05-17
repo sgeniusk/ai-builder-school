@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { CharacterChrome } from "./CharacterChrome";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Container({
   children,
@@ -37,6 +38,7 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="site-header__right">
+            <ThemeToggle />
             <Link href="/start" className="btn">
               학습 시작 <span className="arrow">→</span>
             </Link>
@@ -120,7 +122,7 @@ export function SiteFooter() {
         >
           <span>© {new Date().getFullYear()} AI Builder School</span>
           <span className="mono" style={{ fontSize: 12, color: "var(--ink-4)" }}>
-            v0.2 · calm editorial
+            v0.5 · calm editorial
           </span>
         </div>
       </Container>
