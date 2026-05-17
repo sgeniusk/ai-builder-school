@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import Link from "next/link";
 import type { Journey, Lesson, Stage } from "@/lib/types";
 import { useCharacter } from "@/hooks/useCharacter";
 import { useLessonProgress } from "@/hooks/useLessonProgress";
@@ -145,6 +146,10 @@ export function CharacterProfile({
             />
           </div>
         </div>
+
+        <Link href="/me" className="btn ghost char-profile__dash" onClick={onClose}>
+          빌더 대시보드 열기 <span className="arrow">→</span>
+        </Link>
 
         <div className="char-profile__section">
           <div className="kicker">완주한 Stage</div>
