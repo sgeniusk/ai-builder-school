@@ -1211,60 +1211,142 @@ body {
     gap: 24px;
   }
 
-  /* TOC 카드 */
-  .toc-card {
+  /* ===== 읽기 진행 글로우 레일 (ReadingRail) ===== */
+  /* 색은 현재 여정의 --p-from / --p-to 를 사용 — 여정마다 다른 색으로 빛난다. */
+  .reading-rail {
     background: var(--card);
     border: 1px solid color-mix(in srgb, var(--p-from, var(--line)) 35%, var(--line));
     border-radius: var(--r);
-    padding: 14px 16px;
+    padding: 14px 16px 16px;
   }
-  .toc-card .rail-section-label { margin-bottom: 10px; }
-  .toc-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 1px;
-  }
-  .toc-row a {
-    display: grid;
-    grid-template-columns: 16px 4px 1fr;
-    align-items: center;
+  .reading-rail__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
     gap: 8px;
-    padding: 6px 8px;
-    border-radius: var(--r-sm);
-    color: var(--ink-4);
-    text-decoration: none;
-    transition: background 0.12s var(--ease), color 0.12s var(--ease);
+    margin-bottom: 10px;
   }
-  .toc-row a:hover { background: var(--paper-2); color: var(--ink-2); }
-  .toc-step {
-    font-size: 10px;
-    color: var(--ink-4);
-    text-align: center;
-  }
-  .toc-bar {
-    width: 2px;
-    height: 12px;
-    background: var(--line);
-    border-radius: 1px;
-    transition: background 0.15s var(--ease);
-  }
-  .toc-label {
+  .reading-rail__status {
     font-size: 11px;
-    color: inherit;
-    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--p-to, var(--ink-2));
   }
-  .toc-row--passed a { color: var(--ink-3); }
-  .toc-row--passed .toc-bar { background: var(--line-2); }
-  .toc-row--active a {
-    background: color-mix(in srgb, var(--p-from, var(--ink-3)) 10%, var(--paper-2));
+  .reading-rail__time { font-size: 11px; color: var(--ink-3); }
+  .reading-rail__body { position: relative; }
+  .reading-rail__track {
+    position: absolute;
+    top: 22px;
+    bottom: 22px;
+    left: 11px;
+    width: 2px;
+    background: var(--line);
+    border-radius: 2px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .reading-rail__fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 2px;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--p-from, var(--ink-3)) 55%, transparent),
+      var(--p-to, var(--ink-2))
+    );
+    transition: height 0.28s var(--ease);
+  }
+  .reading-rail__node {
+    position: absolute;
+    left: 50%;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--p-to, var(--ink-2));
+    border: 2px solid var(--card);
+    transition: top 0.28s var(--ease);
+    animation: rail-pulse 2.4s var(--ease) infinite;
+  }
+  @keyframes rail-pulse {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 2px color-mix(in srgb, var(--p-from, var(--ink-3)) 45%, transparent),
+        0 0 9px 1px color-mix(in srgb, var(--p-to, var(--ink-2)) 55%, transparent);
+    }
+    50% {
+      box-shadow:
+        0 0 0 3px color-mix(in srgb, var(--p-from, var(--ink-3)) 36%, transparent),
+        0 0 16px 4px color-mix(in srgb, var(--p-to, var(--ink-2)) 75%, transparent);
+    }
+  }
+  .reading-rail__list { list-style: none; margin: 0; padding: 0; }
+  .reading-rail__row { height: 44px; }
+  .reading-rail__row button {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    text-align: left;
+    border-radius: var(--r-sm);
+    transition: background 0.12s var(--ease);
+  }
+  .reading-rail__row button:hover { background: var(--paper-2); }
+  .reading-rail__dot {
+    justify-self: center;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--line-2);
+    box-sizing: border-box;
+    transition: border-color 0.15s var(--ease), background 0.15s var(--ease);
+  }
+  .reading-rail__label {
+    font-size: 12px;
+    color: var(--ink-4);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s var(--ease);
+  }
+  .reading-rail__row.is-passed .reading-rail__dot {
+    background: var(--p-from, var(--ink-3));
+    border-color: var(--p-from, var(--ink-3));
+  }
+  .reading-rail__row.is-passed .reading-rail__label { color: var(--ink-3); }
+  .reading-rail__row.is-active .reading-rail__dot {
+    background: var(--p-to, var(--ink-2));
+    border-color: var(--p-to, var(--ink-2));
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--p-from, var(--ink-3)) 20%, transparent);
+  }
+  .reading-rail__row.is-active .reading-rail__label {
     color: var(--ink);
+    font-weight: 600;
   }
-  .toc-row--active .toc-label { color: var(--ink); font-weight: 500; }
-  .toc-row--active .toc-step { color: var(--p-from, var(--ink-2)); }
-  .toc-row--active .toc-bar {
-    background: linear-gradient(180deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
+  .reading-rail__foot {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 10px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+  .reading-rail__chapter { font-size: 14px; font-weight: 700; }
+  .reading-rail__foot-sub { font-size: 11px; color: var(--ink-4); }
+  @media (prefers-reduced-motion: reduce) {
+    .reading-rail__fill,
+    .reading-rail__node { transition: none; }
+    .reading-rail__node { animation: none; }
   }
 
   /* 진행률 카드 */
