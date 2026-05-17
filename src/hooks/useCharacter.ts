@@ -6,8 +6,25 @@ import { useCallback, useEffect, useState } from "react";
 const STORAGE_KEY = "aibs:character:v1";
 const CHANGE_EVENT = "aibs:character:change";
 
-export const ANIMALS = ["puppy", "kitten", "dolphin"] as const;
+export const ANIMALS = [
+  "puppy",
+  "kitten",
+  "dolphin",
+  "rabbit",
+  "fox",
+  "penguin",
+] as const;
 export type Animal = (typeof ANIMALS)[number];
+
+// 동물 선택 UI 에 쓰는 한국어 라벨.
+export const ANIMAL_LABEL: Record<Animal, string> = {
+  puppy: "강아지",
+  kitten: "고양이",
+  dolphin: "돌고래",
+  rabbit: "토끼",
+  fox: "여우",
+  penguin: "펭귄",
+};
 
 export type Character = {
   handle: string;

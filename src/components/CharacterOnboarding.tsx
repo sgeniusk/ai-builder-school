@@ -9,13 +9,14 @@ import {
   type Animal,
 } from "@/hooks/useCharacter";
 import { CharacterAvatar } from "./CharacterAvatar";
+import { AnimalPicker } from "./AnimalPicker";
 
 const HANDLE_MAX = 20;
 
 export function CharacterOnboarding({ onDone }: { onDone: () => void }) {
   const { create } = useCharacter();
   const [handle, setHandle] = useState(() => generateHandle());
-  const [animal] = useState<Animal>("puppy");
+  const [animal, setAnimal] = useState<Animal>("puppy");
   const [editing, setEditing] = useState(false);
   const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
 
@@ -35,7 +36,11 @@ export function CharacterOnboarding({ onDone }: { onDone: () => void }) {
       <div className="char-modal">
         <div className="char-modal__hero">
           <div className="char-modal__avatar-wrap">
-            <CharacterAvatar size={80} ariaLabel="새 캐릭터 미리보기" />
+            <CharacterAvatar
+              size={80}
+              animal={animal}
+              ariaLabel="새 캐릭터 미리보기"
+            />
           </div>
           <h2 className="char-modal__title">반가워요</h2>
           <p className="char-modal__sub">
@@ -82,8 +87,13 @@ export function CharacterOnboarding({ onDone }: { onDone: () => void }) {
           )}
         </div>
 
+        <div className="char-modal__field">
+          <span className="kicker">동물 친구</span>
+          <AnimalPicker value={animal} onChange={setAnimal} />
+        </div>
+
         <p className="char-modal__note">
-          이름과 진행 상태는 이 브라우저에만 저장돼요. 언제든 헤더의
+          이름·동물·진행 상태는 이 브라우저에만 저장돼요. 언제든 헤더의
           캐릭터를 눌러 바꿀 수 있습니다.
         </p>
 

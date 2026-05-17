@@ -1976,6 +1976,47 @@ body {
 
   .char-modal__field { margin-bottom: 20px; }
   .char-modal__field .kicker { display: block; margin-bottom: 8px; }
+
+  /* ===== 동물 캐릭터 선택 그리드 (AnimalPicker) ===== */
+  .animal-picker {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .animal-picker__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 4px 8px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    transition:
+      border-color 0.14s var(--ease),
+      background 0.14s var(--ease),
+      transform 0.14s var(--ease);
+  }
+  .animal-picker__item:hover { transform: translateY(-2px); }
+  .animal-picker__item.is-selected {
+    border-color: var(--p-from, var(--ink));
+    background: color-mix(in srgb, var(--p-from, var(--ink)) 12%, var(--paper-2));
+  }
+  .animal-picker__art {
+    width: 40px;
+    height: 40px;
+    display: block;
+  }
+  .animal-picker__art svg { display: block; width: 100%; height: 100%; }
+  .animal-picker__label { font-size: 11px; color: var(--ink-3); }
+  .animal-picker__item.is-selected .animal-picker__label {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animal-picker__item:hover { transform: none; }
+  }
   .char-modal__handle-row {
     display: flex;
     align-items: center;
