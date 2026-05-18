@@ -1322,6 +1322,10 @@ body {
     border-radius: 50%;
     background: var(--line);
   }
+  /* 내 여정 추천 레슨 — 점을 여정 색으로 (off-path 는 회색 유지) */
+  .ph-dot--recommended {
+    background: var(--p-from, var(--ink-3));
+  }
   .ph-dot--done {
     background: linear-gradient(135deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
   }

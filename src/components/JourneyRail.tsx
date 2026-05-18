@@ -179,11 +179,13 @@ function StageRow({
           {lessons.map((l) => {
             const done = mounted && isLessonComplete(l);
             const isCurrentLesson = l.id === currentLessonId;
+            const isRec = recommendedLessonSlugs.has(l.slug);
             return (
               <span
                 key={l.id}
                 className={[
                   "ph-dot",
+                  isRec && "ph-dot--recommended",
                   done && "ph-dot--done",
                   isCurrentLesson && "ph-dot--current",
                 ]
