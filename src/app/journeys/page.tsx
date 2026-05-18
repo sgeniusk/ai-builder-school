@@ -134,7 +134,7 @@ export default function JourneysPage() {
                   return (
                     <div style={{ marginTop: 24 }}>
                       <div className="eyebrow" style={{ marginBottom: 12 }}>
-                        이 여정에 잘 맞는 프로젝트
+                        이 여정으로 만들게 될 것
                       </div>
                       <div className="proj-grid">
                         {matchedProjects.map((project) => (
