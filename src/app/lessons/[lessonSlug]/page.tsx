@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { SectionChecklist } from "@/components/SectionChecklist";
 import { LessonNotes } from "@/components/LessonNotes";
 import { LessonPager } from "@/components/LessonPager";
+import { Typewriter } from "@/components/Typewriter";
 import {
   getLessonBySlug,
   getLessons,
@@ -90,7 +91,7 @@ export default async function LessonPage({
         </p>
         <div className="callout">
           <div className="kicker">Mission · 권장 {lesson.estimatedMinutes}분</div>
-          <p style={{ margin: 0, whiteSpace: "pre-line" }}>{missionText}</p>
+          <Typewriter text={missionText ?? ""} />
         </div>
         {lesson.codexNote && (
           <div

@@ -859,6 +859,23 @@ body {
     line-height: 1.65;
     color: var(--ink-3);
   }
+  /* 타이핑 효과 커서 */
+  .type-caret {
+    display: inline-block;
+    width: 7px;
+    height: 1em;
+    margin-left: 2px;
+    vertical-align: -0.12em;
+    border-radius: 1px;
+    background: var(--p-from, var(--ink-3));
+    animation: type-blink 0.7s steps(1) infinite;
+  }
+  @keyframes type-blink {
+    50% { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .type-caret { animation: none; }
+  }
   .lesson-reader pre {
     background: #0D0D0D; color: #E6E4DE;
     padding: 20px 24px; border-radius: var(--r);
