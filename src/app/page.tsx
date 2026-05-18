@@ -12,15 +12,11 @@ import {
   UspCards,
 } from "@/components/Sections";
 import { JourneyCard } from "@/components/Cards";
-import {
-  getStages,
-  getStartingJourneys,
-  getJourneys,
-} from "@/lib/content";
+import { getStages, getJourneys } from "@/lib/content";
 
 export default function HomePage() {
   const stages = getStages();
-  const startingJourneys = getStartingJourneys();
+  const startingJourneys = getJourneys();
   const teaserJourneys = getJourneys().slice(0, 3);
 
   return (

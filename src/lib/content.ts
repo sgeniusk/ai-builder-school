@@ -91,14 +91,6 @@ export function getJourneys(): Journey[] {
   return journeys;
 }
 
-export function getStartingJourneys(): Journey[] {
-  return journeys.filter((j) => j.id !== "explorer");
-}
-
-export function getExplorerJourney(): Journey | undefined {
-  return journeys.find((j) => j.id === "explorer");
-}
-
 export function getJourneyBySlug(slug: string): Journey | undefined {
   return journeys.find((j) => j.slug === slug);
 }
