@@ -15,6 +15,7 @@ import { getBuilderRank } from "@/lib/builderRank";
 import { ACHIEVEMENTS, evaluateAchievements } from "@/lib/achievements";
 import { CharacterAvatar } from "./CharacterAvatar";
 import { AnimalPicker } from "./AnimalPicker";
+import { AccessoryPicker } from "./AccessoryPicker";
 
 type Props = {
   stages: Stage[];
@@ -33,7 +34,8 @@ export function CharacterProfile({
   projectKeyLessons,
   onClose,
 }: Props) {
-  const { character, setHandle, setAnimal, reset } = useCharacter();
+  const { character, setHandle, setAnimal, setAccessory, reset } =
+    useCharacter();
   const { journey, isLessonComplete } = useLessonProgress();
   const streak = useStreak();
   const [editing, setEditing] = useState(false);
@@ -187,6 +189,16 @@ export function CharacterProfile({
         <div className="char-profile__section">
           <div className="kicker">동물 친구</div>
           <AnimalPicker value={character.animal} onChange={setAnimal} />
+        </div>
+
+        <div className="char-profile__section">
+          <div className="kicker">액세서리 — 업적으로 잠금 해제</div>
+          <AccessoryPicker
+            value={character.accessory}
+            onChange={setAccessory}
+            earned={earned}
+            animal={character.animal}
+          />
         </div>
 
         <div className="char-profile__section">

@@ -2,6 +2,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import type { Accessory } from "@/lib/accessories";
 
 const STORAGE_KEY = "aibs:character:v1";
 const CHANGE_EVENT = "aibs:character:change";
@@ -29,6 +30,8 @@ export const ANIMAL_LABEL: Record<Animal, string> = {
 export type Character = {
   handle: string;
   animal: Animal;
+  /** 업적으로 잠금 해제한 액세서리 중 표시 중인 것. 없으면 미착용. */
+  accessory?: Accessory;
   createdAt: string; // ISO
 };
 
@@ -124,6 +127,16 @@ export function useCharacter() {
     [character],
   );
 
+  const setAccessory = useCallback(
+    (accessory: Accessory | undefined) => {
+      if (!character) return;
+      const next: Character = { ...character, accessory };
+      writeStorage(next);
+      setCharacter(next);
+    },
+    [character],
+  );
+
   const reset = useCallback(() => {
     if (typeof window === "undefined") return;
     try {
@@ -141,6 +154,7 @@ export function useCharacter() {
     create,
     setHandle,
     setAnimal,
+    setAccessory,
     reset,
   };
 }
