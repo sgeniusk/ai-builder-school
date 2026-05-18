@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Layout";
 import { PageHead, SectionHeading } from "@/components/Sections";
 import { ProjectCard } from "@/components/Cards";
-import { getProjects } from "@/lib/content";
+import { getProjects, getProjectReadinessRefs } from "@/lib/content";
 import { LEVEL_LABEL } from "@/lib/types";
 import type { Level } from "@/lib/types";
 
@@ -54,7 +54,11 @@ export default function ProjectsPage() {
               />
               <div className="proj-grid">
                 {items.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    keyLessonRefs={getProjectReadinessRefs(project)}
+                  />
                 ))}
               </div>
             </Container>

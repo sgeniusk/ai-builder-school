@@ -127,6 +127,27 @@ export function getProjectsByTemplate(slug: string): Project[] {
   return projects.filter((p) => p.templateSlugs.includes(slug));
 }
 
+/**
+ * 프로젝트 준비도 계산용 — keyLessons 를 진척 체크에 필요한 슬림 형태로.
+ * 준비도 = 완료한 keyLessons / 전체 keyLessons (완료 여부는 클라이언트가 판정).
+ */
+export function getProjectReadinessRefs(project: Project): {
+  id: string;
+  buildSteps: string[];
+  verificationChecklist: string[];
+  reflectionQuestions: string[];
+}[] {
+  return project.keyLessons
+    .map((slug) => getLessonBySlug(slug))
+    .filter((l): l is Lesson => Boolean(l))
+    .map((l) => ({
+      id: l.id,
+      buildSteps: l.buildSteps,
+      verificationChecklist: l.verificationChecklist,
+      reflectionQuestions: l.reflectionQuestions,
+    }));
+}
+
 export function getTemplates(): ContentTemplate[] {
   return templates;
 }

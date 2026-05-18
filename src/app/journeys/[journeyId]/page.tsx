@@ -10,6 +10,7 @@ import {
   getLessonBySlug,
   getStageBySlug,
   getProjectsByJourney,
+  getProjectReadinessRefs,
 } from "@/lib/content";
 
 export function generateStaticParams() {
@@ -98,7 +99,11 @@ export default async function JourneyDetailPage({
                 <div className="eyebrow">이 여정으로 만들게 될 것</div>
                 <div className="proj-grid">
                   {projects.map((p) => (
-                    <ProjectCard key={p.id} project={p} />
+                    <ProjectCard
+                      key={p.id}
+                      project={p}
+                      keyLessonRefs={getProjectReadinessRefs(p)}
+                    />
                   ))}
                 </div>
               </div>

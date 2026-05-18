@@ -7,7 +7,9 @@ import type {
   Project,
 } from "@/lib/types";
 import { getProjectsByTemplate } from "@/lib/content";
+import type { ProgressLesson } from "@/hooks/useLessonProgress";
 import { CodeBlock } from "./CodeBlock";
+import { ProjectReadiness } from "./ProjectReadiness";
 
 /* Lesson card — compact list-style card used on home's preview grid and inside stage detail. */
 export function LessonCard({ lesson, index }: { lesson: Lesson; index?: number }) {
@@ -57,8 +59,15 @@ export function JourneyCard({ journey }: { journey: Journey }) {
   );
 }
 
-/* Project card — /projects/[slug] 상세로 연결되는 링크 카드 (.proj-card) */
-export function ProjectCard({ project }: { project: Project }) {
+/* Project card — /projects/[slug] 상세로 연결되는 링크 카드 (.proj-card).
+   keyLessonRefs 를 주면 준비도 막대를 함께 보여준다. */
+export function ProjectCard({
+  project,
+  keyLessonRefs,
+}: {
+  project: Project;
+  keyLessonRefs?: ProgressLesson[];
+}) {
   return (
     <Link href={`/projects/${project.slug}`} className="proj-card">
       <div className="tag-row">
@@ -70,6 +79,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <div style={{ marginTop: 16, padding: "12px 14px", background: "var(--paper-2)", borderRadius: "var(--r-sm)", borderLeft: "3px solid var(--ink)", fontSize: 13, color: "var(--ink-2)" }}>
         <strong style={{ color: "var(--ink)" }}>최종 산출물 · </strong>{project.finalOutput}
       </div>
+      {keyLessonRefs && <ProjectReadiness lessons={keyLessonRefs} />}
       <div className="tfoot" style={{ marginTop: 16 }}>
         <span>빌드 가이드 보기</span>
         <span className="arrow mono">→</span>
