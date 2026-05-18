@@ -6,8 +6,13 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import type { Journey, Lesson, Stage } from "@/lib/types";
 import { useCharacter } from "@/hooks/useCharacter";
-import { useLessonProgress } from "@/hooks/useLessonProgress";
+import {
+  useLessonProgress,
+  type ProgressLesson,
+} from "@/hooks/useLessonProgress";
+import { useStreak } from "@/hooks/useStreak";
 import { getBuilderRank } from "@/lib/builderRank";
+import { ACHIEVEMENTS, evaluateAchievements } from "@/lib/achievements";
 import { CharacterAvatar } from "./CharacterAvatar";
 import { AnimalPicker } from "./AnimalPicker";
 
@@ -15,6 +20,7 @@ type Props = {
   stages: Stage[];
   journeys: Journey[];
   lessonsByStage: Record<string, Lesson[]>;
+  projectKeyLessons: ProgressLesson[][];
   onClose: () => void;
 };
 
@@ -24,10 +30,12 @@ export function CharacterProfile({
   stages,
   journeys,
   lessonsByStage,
+  projectKeyLessons,
   onClose,
 }: Props) {
   const { character, setHandle, setAnimal, reset } = useCharacter();
   const { journey, isLessonComplete } = useLessonProgress();
+  const streak = useStreak();
   const [editing, setEditing] = useState(false);
   const [draftHandle, setDraftHandle] = useState(character?.handle ?? "");
   const [confirmReset, setConfirmReset] = useState(false);
@@ -61,6 +69,25 @@ export function CharacterProfile({
   }
   const pct =
     totalLessons === 0 ? 0 : Math.round((doneLessons / totalLessons) * 100);
+
+  // 업적 컨텍스트 — 모두 진척에서 파생, 별도 저장 없음.
+  const allLessonsList = Object.values(lessonsByStage).flat();
+  const bySlug = new Map(allLessonsList.map((l) => [l.slug, l]));
+  const journeyLessons = (myJourney?.recommendedLessons ?? [])
+    .map((s) => bySlug.get(s))
+    .filter((l): l is Lesson => Boolean(l));
+  const journeyDone = journeyLessons.filter((l) => isLessonComplete(l)).length;
+  const readyProjects = projectKeyLessons.filter(
+    (refs) => refs.length > 0 && refs.every((l) => isLessonComplete(l)),
+  ).length;
+  const earned = evaluateAchievements({
+    doneLessons,
+    completedStages: completedStages.length,
+    bestStreak: streak?.best ?? 0,
+    readyProjects,
+    journeyDone,
+    journeyTotal: journeyLessons.length,
+  });
 
   const personaClass = myJourney ? `p-${myJourney.id}` : "";
   const createdAt = new Date(character.createdAt);
@@ -181,6 +208,30 @@ export function CharacterProfile({
               ))}
             </ul>
           )}
+        </div>
+
+        <div className="char-profile__section">
+          <div className="kicker">
+            업적{" "}
+            <span className="ach-count mono" suppressHydrationWarning>
+              {earned.size}/{ACHIEVEMENTS.length}
+            </span>
+          </div>
+          <ul className="ach-grid">
+            {ACHIEVEMENTS.map((a) => {
+              const got = earned.has(a.id);
+              return (
+                <li
+                  key={a.id}
+                  className={`ach-item${got ? " is-earned" : ""}`}
+                  suppressHydrationWarning
+                >
+                  <span className="ach-item__label">{a.label}</span>
+                  <span className="ach-item__desc">{a.description}</span>
+                </li>
+              );
+            })}
+          </ul>
         </div>
 
         <p className="char-modal__note">

@@ -2563,6 +2563,48 @@ body {
     color: var(--ink-3);
   }
 
+  /* ===== 업적 그리드 (CharacterProfile) ===== */
+  .ach-count {
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-left: 4px;
+  }
+  .ach-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .ach-item {
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--paper-2);
+    opacity: 0.5;
+    transition: opacity 0.15s var(--ease);
+  }
+  .ach-item.is-earned {
+    opacity: 1;
+    border-color: color-mix(in srgb, var(--p-from, var(--ink)) 45%, var(--line));
+    background: color-mix(in srgb, var(--p-from, var(--ink)) 9%, var(--card));
+  }
+  .ach-item__label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink-3);
+  }
+  .ach-item.is-earned .ach-item__label { color: var(--ink); }
+  .ach-item__desc {
+    display: block;
+    font-size: 10px;
+    color: var(--ink-4);
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
   .char-profile__reset {
     margin-top: 8px;
     padding-top: 12px;
