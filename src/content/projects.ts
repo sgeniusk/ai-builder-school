@@ -939,7 +939,245 @@ export const projects: Project[] = [
     ],
   },
 
+  {
+    id: "project-team-coding-workflow",
+    slug: "team-coding-workflow",
+    templateSlugs: [
+      "github-issue-brief-mission",
+      "claude-code-mission-template",
+      "pr-review-mission",
+      "test-writing-mission",
+    ],
+    title: "팀 협업 코딩 워크플로",
+    hook: "이슈는 한 줄, PR은 산더미입니다. 이슈를 AI 브리프로 풀고 PR을 AI 리뷰로 거르는 팀 코드 흐름을 만듭니다.",
+    targetLearner: "팀으로 코드를 다루는 엔지니어 — AI를 협업 흐름에 끼우기",
+    targetJourneys: ["engineer"],
+    difficulty: "intermediate",
+    estimatedDuration: "2주",
+    requiredStages: ["stage-5-delegate", "stage-6-build"],
+    keyLessons: [
+      "github-issue-to-ai-brief",
+      "letting-ai-read-codebase",
+      "write-tests-with-coding-agent",
+    ],
+    summary:
+      "모호한 이슈를 AI가 바로 작업할 브리프로, 올라온 PR을 AI 1차 리뷰로 거르는 팀 코딩 워크플로.",
+    problem:
+      "팀 코딩에서 시간은 코드보다 '맥락 정리'와 '리뷰 대기'에서 샌다. 이슈를 AI가 읽을 브리프로, PR을 AI 1차 리뷰로 만들면 사람은 판단에만 집중한다.",
+    finalOutput:
+      "이슈→AI 브리프 변환 + PR AI 리뷰 절차가 정착된 팀 코딩 워크플로 문서·템플릿",
+    suggestedStack: ["GitHub", "Claude Code / Codex", "코딩 에디터"],
+    milestones: [
+      {
+        title: "1단계 — 이슈를 브리프로",
+        description:
+          "한 줄짜리 모호한 이슈를 AI가 바로 작업할 수 있는 브리프로 바꾸는 절차를 만든다.",
+        firstStep:
+          "팀의 최근 이슈 하나를 골라, AI에게 그대로 던졌을 때 뭘 더 물어볼지 적어 보세요 — 그게 브리프에 채울 칸이에요.",
+        starterPrompt: `아래 GitHub 이슈를 코딩 에이전트가 바로 착수할 브리프로 바꿔줘.
+- 목표 한 줄
+- 건드릴 파일·범위 추정
+- 받아들임 기준(완료 조건)
+- 건드리면 안 되는 것
+빠진 정보는 "확인 필요"로 표시해.
+
+[이슈 본문]`,
+        fallbackLesson: "github-issue-to-ai-brief",
+      },
+      {
+        title: "2단계 — 브리프로 빌드",
+        description:
+          "브리프를 코딩 에이전트에게 넘겨 작은 변경 하나를 끝까지 빌드한다.",
+        firstStep:
+          "가장 작은 이슈 하나를 1단계 브리프로 만들어, 코딩 에이전트에게 통째로 맡겨 보세요.",
+        starterPrompt: `이 브리프대로 작업해줘. 먼저 건드릴 파일을 말하고,
+변경 후엔 테스트를 함께 추가해. 받아들임 기준을 하나씩 확인하며 진행해.
+
+[1단계 브리프]`,
+        fallbackLesson: "letting-ai-read-codebase",
+      },
+      {
+        title: "3단계 — PR AI 리뷰 게이트",
+        description:
+          "PR이 올라오면 AI가 1차 리뷰(버그·스타일·놓친 것)를 하고 사람이 최종 판단한다.",
+        firstStep:
+          "지난 PR 하나를 AI에게 리뷰시켜 보고, 사람 리뷰가 잡았던 것과 비교해 보세요.",
+        starterPrompt: `이 PR diff를 1차 리뷰해줘.
+- 버그·엣지 케이스
+- 빠진 테스트
+- 스타일·이름 일관성
+- 이슈 받아들임 기준 충족 여부
+사람이 꼭 봐야 할 항목만 따로 모아줘.
+
+[PR diff]`,
+        fallbackLesson: "write-tests-with-coding-agent",
+      },
+    ],
+    verification: [
+      "모호한 이슈가 AI 브리프로 일관되게 변환된다",
+      "브리프만으로 코딩 에이전트가 작은 변경을 끝낸다",
+      "PR마다 AI 1차 리뷰가 돌고, 사람은 판단에 집중한다",
+    ],
+    extensionIdeas: [
+      "AI 리뷰를 CI에 붙여 PR 열릴 때 자동 실행",
+      "이슈 라벨별로 브리프 템플릿 분기",
+    ],
+  },
+
+  {
+    id: "project-claude-code-weekend-app",
+    slug: "claude-code-weekend-app",
+    templateSlugs: [
+      "claude-code-mission-template",
+      "test-writing-mission",
+      "launch-readiness-checklist",
+    ],
+    title: "Claude Code 주말 앱",
+    hook: "아이디어는 늘 노트에만 있습니다. Claude Code로 주말 안에 작은 앱 하나를 배포까지 끝냅니다.",
+    targetLearner: "만들고 싶은 게 있는 파운더·1인 개발자 — 작게 끝까지",
+    targetJourneys: ["founder"],
+    difficulty: "intermediate",
+    estimatedDuration: "주말 (2~3일)",
+    requiredStages: ["stage-6-build", "stage-8-share"],
+    keyLessons: ["coding-agent-setup", "plan-with-ai", "connect-ai-api"],
+    summary:
+      "범위를 주말 크기로 좁힌 작은 앱 하나를 Claude Code로 빌드해 공개 URL까지 배포한다.",
+    problem:
+      "앱을 만들려면 환경 설정과 막막함에서 대부분 멈춘다. 범위를 주말 크기로 좁히고 Claude Code에 맡기면, 작아도 '배포된 것'이 손에 남는다.",
+    finalOutput: "공개 URL로 배포된 작은 앱 1개 + 빌드 과정 회고",
+    suggestedStack: ["Claude Code", "Next.js 또는 가벼운 프레임워크", "Vercel"],
+    milestones: [
+      {
+        title: "1단계 — 주말 크기로 압축",
+        description:
+          "만들고 싶은 것을 '주말 안에 끝나는' 한 가지 핵심 기능으로 좁힌다.",
+        firstStep:
+          "아이디어를 적고, 그중 '이것만 되면 일단 쓸 만하다'는 기능 하나에 동그라미 치세요 — 나머지는 다음에.",
+        starterPrompt: `내 앱 아이디어는 [아이디어]야.
+- 주말(2~3일)에 끝낼 수 있는 핵심 기능 하나
+- 그 기능을 위한 최소 화면·데이터
+- '이번엔 안 만들 것' 목록
+으로 좁혀줘.`,
+        fallbackLesson: "plan-with-ai",
+      },
+      {
+        title: "2단계 — Claude Code로 빌드",
+        description:
+          "좁힌 범위를 Claude Code에 맡겨 동작하는 앱으로 만든다.",
+        firstStep:
+          "Claude Code로 빈 프로젝트를 만들고, 1단계 핵심 기능의 첫 화면 하나만 띄우는 데까지 해보세요.",
+        starterPrompt: `[범위]대로 앱을 만들어줘.
+- 핵심 기능 하나가 입력→처리→화면까지 동작
+- 동작 위주로, 디자인은 최소
+- 기능마다 간단한 테스트 추가
+한 번에 다 하지 말고 화면 단위로 끊어서 진행해.`,
+        fallbackLesson: "coding-agent-setup",
+      },
+      {
+        title: "3단계 — 배포·회고",
+        description:
+          "공개 URL로 배포하고, 주말 빌드에서 배운 것을 회고로 남긴다.",
+        firstStep:
+          "기능을 더 붙이고 싶은 마음을 누르고 — 지금 상태 그대로 Vercel에 배포해 URL을 띄우세요.",
+        starterPrompt: `이 앱을 공개 배포할 거야.
+- 배포 전 점검할 것(환경변수·빌드 오류·깨진 링크)
+- 배포 절차
+그리고 '주말에 무엇이 됐나·안 됐나·다음 주말엔 무엇을' 회고 틀도 만들어줘.`,
+        fallbackLesson: "connect-ai-api",
+      },
+    ],
+    verification: [
+      "범위가 주말 크기 한 가지 기능으로 좁혀졌다",
+      "핵심 기능이 입력부터 화면까지 동작한다",
+      "공개 URL로 접속되고, 빌드 회고가 한 장 남았다",
+    ],
+    extensionIdeas: [
+      "회고에서 다음 기능 하나를 골라 다음 주말에 확장",
+      "GPT 래퍼 제품 등 더 큰 캡스톤의 출발점으로",
+    ],
+  },
+
   // ─── 심화 (advanced) ─────────────────────────────────────────
+  {
+    id: "project-codex-legacy-refactor",
+    slug: "codex-legacy-refactor",
+    templateSlugs: [
+      "codex-mission-template",
+      "test-writing-mission",
+      "bug-fix-mission",
+      "pr-review-mission",
+    ],
+    title: "Codex로 레거시 리팩터링",
+    hook: "손대기 무서운 낡은 코드. Codex 에이전트로 한 조각씩, 테스트로 안전망을 치며 개선합니다.",
+    targetLearner: "오래된 코드베이스를 떠안은 엔지니어",
+    targetJourneys: ["engineer"],
+    difficulty: "advanced",
+    estimatedDuration: "3주",
+    requiredStages: ["stage-5-delegate", "stage-6-build"],
+    keyLessons: [
+      "letting-ai-read-codebase",
+      "write-tests-with-coding-agent",
+      "bug-reproduction-loop",
+    ],
+    summary:
+      "테스트로 현재 동작을 고정한 뒤 Codex로 레거시 모듈 하나를 작은 단위씩 안전하게 리팩터링한다.",
+    problem:
+      "레거시는 고치고 싶어도 '뭐가 깨질지 몰라' 멈춘다. 테스트로 현재 동작을 고정하고, Codex로 작은 단위씩 리팩터링하면 두려움 없이 나아간다.",
+    finalOutput:
+      "테스트로 보호된 레거시 모듈 1개 + Codex 리팩터링 절차 기록",
+    suggestedStack: ["Codex", "테스트 러너", "버전 관리(Git)"],
+    milestones: [
+      {
+        title: "1단계 — 동작을 테스트로 고정",
+        description:
+          "리팩터링 전에, 모듈의 현재 동작을 캐릭터라이제이션 테스트로 묶는다.",
+        firstStep:
+          "리팩터링할 모듈을 하나 정하고, 지금 그게 무엇을 하는지 입력→출력 예시 3개를 적어 보세요.",
+        starterPrompt: `이 모듈의 현재 동작을 그대로 고정하는 테스트를 작성해줘.
+지금 동작이 '옳은지'는 따지지 말고, 있는 그대로를 기록하는 캐릭터라이제이션
+테스트로. 엣지 케이스도 포함해.
+
+[모듈 코드]`,
+        fallbackLesson: "write-tests-with-coding-agent",
+      },
+      {
+        title: "2단계 — 한 조각 리팩터링",
+        description:
+          "Codex로 작은 단위 하나만 리팩터링하고 테스트가 그대로 통과하는지 본다.",
+        firstStep:
+          "가장 읽기 힘든 함수 하나만 — Codex에게 '동작은 그대로, 구조만'이라고 명확히 못 박고 맡기세요.",
+        starterPrompt: `이 함수를 리팩터링해줘. 규칙은 두 가지야.
+1) 동작(입출력)은 절대 바꾸지 않는다 — 1단계 테스트가 그대로 통과해야 함
+2) 가독성·중복 제거만 — 새 기능 추가 금지
+바꾼 곳마다 왜 그렇게 했는지 한 줄로 설명해.
+
+[함수 코드]`,
+        fallbackLesson: "letting-ai-read-codebase",
+      },
+      {
+        title: "3단계 — 회귀 점검·반복",
+        description:
+          "테스트로 회귀를 확인하고, 한 조각씩 같은 절차를 반복한다.",
+        firstStep:
+          "리팩터링 후 테스트를 돌려, 깨진 게 있으면 '리팩터링이 틀린 것'으로 보고 되돌리는 기준을 정하세요.",
+        starterPrompt: `방금 리팩터링 후 테스트 결과야. 실패한 게 있으면
+원인이 리팩터링 때문인지, 원래 숨어 있던 버그인지 구분해줘.
+다음에 리팩터링할 후보 조각도 위험도 순으로 추천해줘.
+
+[테스트 결과 + 변경 diff]`,
+        fallbackLesson: "bug-reproduction-loop",
+      },
+    ],
+    verification: [
+      "리팩터링 전 모듈 동작이 테스트로 고정돼 있다",
+      "리팩터링 뒤에도 테스트가 그대로 통과한다",
+      "한 조각씩 진행한 절차가 기록돼 다음 모듈에 재사용된다",
+    ],
+    extensionIdeas: [
+      "팀 협업 코딩 워크플로의 PR 리뷰 게이트와 연결",
+      "리팩터링 절차를 모듈별 체크리스트로 표준화",
+    ],
+  },
   {
     id: "project-research-agent",
     slug: "personal-research-agent",
