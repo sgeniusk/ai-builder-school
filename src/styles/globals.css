@@ -822,13 +822,13 @@ body {
   .lesson-reader ul, .lesson-reader ol { font-size: 16px; line-height: 1.75; color: var(--ink-2); margin: 0 0 16px; padding-left: 20px; }
   .lesson-reader ul li, .lesson-reader ol li { margin-bottom: 6px; }
   .lesson-reader strong { color: var(--ink); font-weight: 600; }
-  .lesson-reader a:not(.btn):not(.btn-ink):not(.btn-ghost) {
+  .lesson-reader a:not(.btn):not(.btn-ink):not(.btn-ghost):not(.lesson-pager__link) {
     color: var(--ink);
     text-decoration: underline;
     text-decoration-color: var(--ink-4);
     text-underline-offset: 4px;
   }
-  .lesson-reader a:not(.btn):not(.btn-ink):not(.btn-ghost):hover {
+  .lesson-reader a:not(.btn):not(.btn-ink):not(.btn-ghost):not(.lesson-pager__link):hover {
     text-decoration-color: var(--ink);
   }
   .lesson-reader a.btn { color: var(--paper); text-decoration: none; }
@@ -1592,80 +1592,143 @@ body {
   }
 
   /* 형제 lesson 카드 */
-  .sibling-card {
+  /* ===== 여정 경로 카드 (JourneyPathCard) — 우측 사이드바 ===== */
+  .journey-path-card {
     background: var(--card);
     border: 1px solid color-mix(in srgb, var(--p-from, var(--line)) 35%, var(--line));
     border-radius: var(--r);
-    overflow: hidden;
+    padding: 14px 16px 16px;
   }
-  .sibling-card__header {
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--line);
+  .journey-path-card__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
   }
-  .sibling-card__list {
+  .journey-path-card__name {
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .journey-path-card__off {
+    margin: 0 0 10px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink-3);
+  }
+  .journey-path-card__off a {
+    color: var(--p-to, var(--ink));
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .journey-path-list {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: grid;
+    gap: 1px;
   }
-  .sib-item {
-    border-bottom: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+  .journey-path-list__more {
+    font-size: 11px;
+    color: var(--ink-4);
+    padding: 4px 8px;
   }
-  .sib-item:last-child { border-bottom: 0; }
-  .sib-item a {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 8px 14px;
-    color: var(--ink-3);
-    text-decoration: none;
-    transition: background 0.1s var(--ease), color 0.1s var(--ease);
-  }
-  .sib-item a:hover { background: var(--paper-2); color: var(--ink-2); }
-  .sib-item--current a { background: var(--paper-2); }
-  .sib-status {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    flex-shrink: 0;
-    margin-top: 1px;
-    border: 1px solid var(--line-2);
-    background: var(--card);
+  .jp-item a {
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
+    gap: 9px;
+    padding: 7px 8px;
+    border-radius: var(--r-sm);
+    color: var(--ink-3);
+    text-decoration: none;
+    transition: background 0.12s var(--ease), color 0.12s var(--ease);
   }
-  .sib-status--done {
+  .jp-item a:hover { background: var(--paper-2); color: var(--ink-2); }
+  .jp-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--line-2);
+    transition: background 0.15s var(--ease);
+  }
+  .jp-item--done .jp-dot {
     background: linear-gradient(135deg, var(--p-from, var(--ink-3)), var(--p-to, var(--ink-2)));
-    border-color: transparent;
   }
-  .sib-status--done::after {
-    content: "✓";
-    color: white;
-    font-size: 10px;
-    font-weight: 700;
+  .jp-item--current .jp-dot {
+    background: var(--p-to, var(--ink));
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--p-from, var(--ink-3)) 22%, transparent);
   }
-  .sib-status--current {
-    background: var(--ink);
-    border-color: var(--ink);
-  }
-  .sib-status--current::after {
-    content: "";
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 4px 0 4px 5px;
-    border-color: transparent transparent transparent white;
-    margin-left: 1px;
-  }
-  .sib-name {
-    font-size: 11px;
+  .jp-name {
+    font-size: 12px;
     line-height: 1.4;
-    color: inherit;
     word-break: keep-all;
   }
-  .sib-item--current .sib-name { color: var(--ink-2); font-weight: 500; }
-  .sib-item--done .sib-name { color: var(--ink-4); }
+  .jp-item--current a { background: var(--paper-2); }
+  .jp-item--current .jp-name { color: var(--ink); font-weight: 600; }
+  .jp-item--done .jp-name { color: var(--ink-4); }
+  .journey-path-card__full {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--ink-3);
+    text-decoration: none;
+  }
+  .journey-path-card__full:hover { color: var(--ink); }
+
+  /* ===== 레슨 본문 앞/뒤 내비 (LessonPager) ===== */
+  .lesson-pager { margin-top: 32px; }
+  .lesson-pager__tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--p-to, var(--ink-3));
+    margin-bottom: 8px;
+  }
+  .lesson-pager__nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .lesson-pager__link {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+    min-width: 180px;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    text-decoration: none;
+    transition: border-color 0.14s var(--ease), background 0.14s var(--ease);
+  }
+  .lesson-pager__link:hover {
+    border-color: var(--ink-3);
+    background: var(--paper-2);
+  }
+  .lesson-pager__link--next { text-align: right; }
+  .lesson-pager__dir {
+    font-size: 11px;
+    color: var(--ink-3);
+    font-family: var(--f-mono);
+  }
+  .lesson-pager__title {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .lesson-pager__empty {
+    flex: 1;
+    min-width: 180px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--ink-4);
+  }
 
   /* ===== Curriculum TOC (우측 사이드바, /curriculum 용) ===== */
   .curriculum-toc {

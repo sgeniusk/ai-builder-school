@@ -53,6 +53,8 @@ export function LessonShell({ lesson, stage, children }: Props) {
             currentLesson={lesson}
             currentStage={stage}
             siblingLessons={siblings}
+            journeys={journeys}
+            allLessons={allLessons}
           />
         </div>
       </div>
