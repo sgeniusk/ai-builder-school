@@ -6,6 +6,7 @@ import {
   getJourneys,
   getStageBySlug,
   getLessonBySlug,
+  getProjectsByJourney,
 } from "@/lib/content";
 import { JOURNEY_LABEL, JOURNEY_LABEL_KO, type JourneyId } from "@/lib/types";
 
@@ -79,6 +80,16 @@ export default function StartPage() {
                           </span>
                         </strong>
                         <small>{j.identity} — {j.targetLearner}</small>
+                        {(() => {
+                          const builds = getProjectsByJourney(j.id).slice(0, 2);
+                          if (builds.length === 0) return null;
+                          return (
+                            <small className="quiz-build">
+                              <span className="quiz-build__tag">만들 것</span>
+                              {builds.map((p) => p.title).join(" · ")}
+                            </small>
+                          );
+                        })()}
                       </div>
                     </div>
                     <span className="arrow mono">→</span>

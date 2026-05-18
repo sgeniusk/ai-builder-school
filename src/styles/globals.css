@@ -967,6 +967,21 @@ body {
   .quiz-options button:hover, .quiz-options a:hover { border-color: var(--ink); background: var(--paper); }
   .quiz-options strong { display: block; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
   .quiz-options small { display: block; font-size: 13px; color: var(--ink-3); margin-top: 4px; }
+  /* 여정 옵션 — 이 여정으로 만들게 될 프로젝트 티저 */
+  .quiz-options small.quiz-build {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 7px;
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+  .quiz-build__tag {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--p-to, var(--ink-3));
+  }
   .quiz-progress { display: flex; gap: 6px; margin: 0 0 24px; }
   .quiz-progress span { flex: 1; height: 3px; background: var(--line); border-radius: 2px; }
   .quiz-progress span.done { background: var(--ink); }
