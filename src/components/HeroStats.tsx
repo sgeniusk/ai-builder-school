@@ -2,7 +2,7 @@
 // 디자인(B7Qz_… 핸드오프)의 .glass-stat + count-up을 우리 구조로 옮긴 것.
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Stat = { value: number; suffix?: string; label: string };
 
@@ -47,16 +47,48 @@ function StatCard({ stat, active }: { stat: Stat; active: boolean }) {
 }
 
 export function HeroStats() {
+  const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
 
-  // 히어로는 페이지 최상단 — 마운트 직후 카운트업을 시작한다.
+  // 카운트업은 (1) stat 이 뷰포트에 들어오고 (2) 탭이 실제로 보일 때 한 번만 시작한다.
+  // 백그라운드 탭에서 로드되면 requestAnimationFrame 이 멈춰 숫자가 0 에 굳으므로,
+  // 탭이 보이는 순간(visibilitychange)까지 기다렸다가 시작한다.
   useEffect(() => {
-    const t = window.setTimeout(() => setActive(true), 250);
-    return () => window.clearTimeout(t);
-  }, []);
+    if (active) return;
+    const el = ref.current;
+    if (!el) return;
+
+    let inView = false;
+    const maybeStart = () => {
+      if (inView && !document.hidden) setActive(true);
+    };
+
+    const io =
+      typeof IntersectionObserver !== "undefined"
+        ? new IntersectionObserver(
+            (entries) => {
+              if (entries.some((e) => e.isIntersecting)) {
+                inView = true;
+                maybeStart();
+              }
+            },
+            { threshold: 0.4 },
+          )
+        : null;
+
+    if (io) io.observe(el);
+    else inView = true; // IO 미지원 — 바로 후보 처리
+    maybeStart();
+
+    document.addEventListener("visibilitychange", maybeStart);
+    return () => {
+      io?.disconnect();
+      document.removeEventListener("visibilitychange", maybeStart);
+    };
+  }, [active]);
 
   return (
-    <div className="hero-stats">
+    <div className="hero-stats" ref={ref}>
       {STATS.map((s) => (
         <StatCard key={s.label} stat={s} active={active} />
       ))}
