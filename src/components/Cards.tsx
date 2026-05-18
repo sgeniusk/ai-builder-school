@@ -36,7 +36,7 @@ export function LessonCard({ lesson, index }: { lesson: Lesson; index?: number }
 /* Journey card — 6 출발 여정 카드, 홈/여정 인덱스에서 사용 */
 export function JourneyCard({ journey }: { journey: Journey }) {
   return (
-    <Link href={`/journeys#${journey.slug}`} className={`p-${journey.id}`}>
+    <Link href={`/journeys/${journey.id}`} className={`p-${journey.id}`}>
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
         <span aria-hidden className="p-mark" />
         <div className="tper">{journey.titleKo}</div>

@@ -195,7 +195,7 @@ export function JourneyPicker({
       {journeys.map((j) => (
         <Link
           key={j.id}
-          href={`/journeys#${j.slug}`}
+          href={`/journeys/${j.id}`}
           className={`p-${j.id}`}
           style={{
             position: "relative",

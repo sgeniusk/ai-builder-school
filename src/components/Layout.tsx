@@ -42,7 +42,7 @@ function buildSearchIndex(): SearchItem[] {
       type: "여정",
       title: j.titleKo,
       subtitle: j.identity,
-      href: `/journeys#${j.slug}`,
+      href: `/journeys/${j.id}`,
       keywords:
         `${j.titleKo} ${j.title} ${j.identity} ${j.targetLearner}`.toLowerCase(),
     })),

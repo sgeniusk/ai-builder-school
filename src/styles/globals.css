@@ -1730,6 +1730,120 @@ body {
     color: var(--ink-4);
   }
 
+  /* ===== 여정 히어로 (JourneyHero) — 산을 바라보며 출발선에 선 장면 ===== */
+  .journey-hero {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 44px;
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--p-from, var(--paper)) 24%, var(--paper)),
+      var(--paper)
+    );
+  }
+  .journey-hero__scene {
+    position: relative;
+    height: clamp(248px, 38vw, 384px);
+  }
+  .journey-hero__land {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .journey-hero__char {
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    width: clamp(54px, 9vw, 84px);
+    height: clamp(54px, 9vw, 84px);
+    transform: translateX(-50%);
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
+  }
+  .journey-hero__copy {
+    max-width: 720px;
+    margin: -6px auto 0;
+    padding: 0 28px;
+    text-align: center;
+  }
+  .journey-hero__eyebrow {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    font-weight: 700;
+  }
+  .journey-hero__title {
+    font-size: clamp(30px, 5vw, 50px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    margin: 10px 0 12px;
+    color: var(--ink);
+  }
+  .journey-hero__identity {
+    font-size: 17px;
+    color: var(--ink-2);
+    margin: 0 0 6px;
+  }
+  .journey-hero__promise {
+    font-size: 15px;
+    color: var(--ink-3);
+    margin: 0;
+  }
+  .journey-hero__cta {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ===== 여정 상세 (히어로 아래) ===== */
+  .journey-detail {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .journey-detail__lead {
+    font-size: 17px;
+    color: var(--ink-2);
+    margin: 8px 0 4px;
+  }
+  .journey-detail__promise {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0;
+  }
+  .journey-detail__block { margin-top: 32px; }
+  .journey-detail__lessons {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: grid;
+    gap: 2px;
+  }
+  .journey-detail__lessons a {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: var(--r-sm);
+    text-decoration: none;
+    transition: background 0.12s var(--ease);
+  }
+  .journey-detail__lessons a:hover { background: var(--paper-2); }
+  .jd-num { font-size: 12px; color: var(--ink-4); flex-shrink: 0; }
+  .jd-title { font-size: 15px; color: var(--ink); }
+  .journey-detail__outcome {
+    margin-top: 32px;
+    padding: 16px 18px;
+    background: var(--paper-2);
+    border-radius: var(--r-sm);
+    border-left: 3px solid var(--p-from, var(--ink));
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  .journey-detail__outcome strong { color: var(--ink); }
+  .journey-detail__foot { margin-top: 32px; }
+
   /* ===== Curriculum TOC (우측 사이드바, /curriculum 용) ===== */
   .curriculum-toc {
     display: flex;
