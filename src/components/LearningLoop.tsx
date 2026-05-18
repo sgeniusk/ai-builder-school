@@ -39,11 +39,13 @@ export function LearningLoop() {
     return () => clearInterval(id);
   }, [paused]);
 
-  // active 가 바뀌면 항상 앞으로만 회전 — 점이 고리를 따라 매끄럽게 돈다.
+  // active 가 바뀌면 최단 경로로 회전 — 7→6 처럼 뒤로 가면 한 칸만 되돌린다.
   useEffect(() => {
-    const fwd =
-      (active - prevActive.current + LOOP_STEPS.length) % LOOP_STEPS.length;
-    if (fwd !== 0) setRotation((r) => r + fwd * STEP_ANGLE);
+    const n = LOOP_STEPS.length;
+    let delta = active - prevActive.current;
+    if (delta > n / 2) delta -= n;
+    if (delta < -n / 2) delta += n;
+    if (delta !== 0) setRotation((r) => r + delta * STEP_ANGLE);
     prevActive.current = active;
   }, [active]);
 
