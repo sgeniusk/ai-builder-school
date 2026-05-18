@@ -1914,6 +1914,92 @@ body {
   }
   .tmpl-usedby a:hover { color: var(--ink); }
 
+  /* ===== 프로젝트 준비도 (ProjectReadiness) ===== */
+  .proj-readiness {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .proj-readiness__bar {
+    flex: 1;
+    height: 5px;
+    background: var(--line);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .proj-readiness__fill {
+    display: block;
+    height: 100%;
+    border-radius: 99px;
+    background: var(--ink-3);
+    transition: width 0.32s var(--ease);
+  }
+  .proj-readiness__label {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-3);
+  }
+  .proj-readiness--ready .proj-readiness__fill {
+    background: linear-gradient(
+      90deg,
+      var(--p-from, var(--ink-2)),
+      var(--p-to, var(--ink))
+    );
+  }
+  .proj-readiness--ready .proj-readiness__label {
+    color: var(--p-to, var(--ink));
+    font-weight: 700;
+  }
+  .proj-readiness--progress .proj-readiness__fill { background: var(--ink-2); }
+
+  /* ===== 대시보드 — 내 프로젝트 섹션 ===== */
+  .dash-card__link {
+    font-size: 12px;
+    color: var(--ink-3);
+    text-decoration: none;
+  }
+  .dash-card__link:hover { color: var(--ink); }
+  .dash-projects__note {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.5;
+    margin: 0 0 12px;
+  }
+  .dash-projects {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .dash-project {
+    display: block;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    text-decoration: none;
+    transition:
+      border-color 0.14s var(--ease),
+      background 0.14s var(--ease);
+  }
+  .dash-project:hover {
+    border-color: var(--ink-3);
+    background: var(--paper-2);
+  }
+  .dash-project__top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dash-project__title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .dash-project .proj-readiness { margin-top: 10px; }
+
   /* ===== Curriculum TOC (우측 사이드바, /curriculum 용) ===== */
   .curriculum-toc {
     display: flex;

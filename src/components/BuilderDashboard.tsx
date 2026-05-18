@@ -8,9 +8,13 @@ import { CharacterAvatar } from "@/components/CharacterAvatar";
 import { ShareCardButton } from "@/components/ShareCardButton";
 import { getBuilderRank } from "@/lib/builderRank";
 import { useCharacter } from "@/hooks/useCharacter";
-import { useLessonProgress } from "@/hooks/useLessonProgress";
+import {
+  useLessonProgress,
+  type ProgressLesson,
+} from "@/hooks/useLessonProgress";
 import { useNotes } from "@/hooks/useNotes";
 import { useStreak } from "@/hooks/useStreak";
+import { ProjectReadiness } from "@/components/ProjectReadiness";
 
 export type DashStage = {
   id: string;
@@ -35,13 +39,27 @@ export type DashJourney = {
   recommendedLessons: string[];
 };
 
+export type DashProject = {
+  slug: string;
+  title: string;
+  difficultyLabel: string;
+  targetJourneys: string[];
+  keyLessonRefs: ProgressLesson[];
+};
+
 type Props = {
   stages: DashStage[];
   lessonsByStage: Record<string, DashLesson[]>;
   journeys: DashJourney[];
+  projects: DashProject[];
 };
 
-export function BuilderDashboard({ stages, lessonsByStage, journeys }: Props) {
+export function BuilderDashboard({
+  stages,
+  lessonsByStage,
+  journeys,
+  projects,
+}: Props) {
   const { mounted: pMounted, journey, isLessonComplete } = useLessonProgress();
   const { mounted: cMounted, character } = useCharacter();
   const streak = useStreak();
@@ -204,6 +222,50 @@ export function BuilderDashboard({ stages, lessonsByStage, journeys }: Props) {
             </div>
           </section>
         )}
+
+        {/* 내 프로젝트 — keyLessons 진척에서 파생한 준비도 */}
+        {(() => {
+          const mine = journey
+            ? projects.filter((p) => p.targetJourneys.includes(journey))
+            : projects;
+          if (mine.length === 0) return null;
+          const readiness = (p: DashProject) =>
+            p.keyLessonRefs.length === 0
+              ? 0
+              : p.keyLessonRefs.filter((l) => isLessonComplete(l)).length /
+                p.keyLessonRefs.length;
+          const ranked = [...mine].sort((a, b) => readiness(b) - readiness(a));
+          return (
+            <section className="dash-card">
+              <div className="dash-card__head">
+                <span className="rail-section-label">내 프로젝트</span>
+                <Link href="/projects" className="dash-card__link">
+                  전체 프로젝트 →
+                </Link>
+              </div>
+              <p className="dash-projects__note">
+                준비 레슨을 끝낼수록 프로젝트가 열려요. &lsquo;시작 가능&rsquo;이면
+                지금 만들 수 있어요.
+              </p>
+              <ul className="dash-projects">
+                {ranked.map((p) => (
+                  <li key={p.slug}>
+                    <Link
+                      href={`/projects/${p.slug}`}
+                      className="dash-project"
+                    >
+                      <div className="dash-project__top">
+                        <span className="chip">{p.difficultyLabel}</span>
+                        <span className="dash-project__title">{p.title}</span>
+                      </div>
+                      <ProjectReadiness lessons={p.keyLessonRefs} />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          );
+        })()}
 
         {/* Stage별 진척 */}
         <section className="dash-card">

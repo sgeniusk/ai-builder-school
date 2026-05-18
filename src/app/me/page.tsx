@@ -6,9 +6,17 @@ import {
   BuilderDashboard,
   type DashJourney,
   type DashLesson,
+  type DashProject,
   type DashStage,
 } from "@/components/BuilderDashboard";
-import { getJourneys, getLessons, getStages } from "@/lib/content";
+import {
+  getJourneys,
+  getLessons,
+  getProjects,
+  getProjectReadinessRefs,
+  getStages,
+} from "@/lib/content";
+import { LEVEL_LABEL } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "내 빌더 대시보드",
@@ -49,11 +57,20 @@ export default function MePage() {
     recommendedLessons: j.recommendedLessons,
   }));
 
+  const dashProjects: DashProject[] = getProjects().map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    difficultyLabel: LEVEL_LABEL[p.difficulty],
+    targetJourneys: p.targetJourneys,
+    keyLessonRefs: getProjectReadinessRefs(p),
+  }));
+
   return (
     <BuilderDashboard
       stages={dashStages}
       lessonsByStage={lessonsByStage}
       journeys={dashJourneys}
+      projects={dashProjects}
     />
   );
 }
