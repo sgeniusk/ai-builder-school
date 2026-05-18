@@ -4,6 +4,7 @@
 import { useState } from "react";
 import type { Journey, Lesson, Stage } from "@/lib/types";
 import { useCharacter } from "@/hooks/useCharacter";
+import type { ProgressLesson } from "@/hooks/useLessonProgress";
 import { CharacterAvatar } from "./CharacterAvatar";
 import { CharacterOnboarding } from "./CharacterOnboarding";
 import { CharacterProfile } from "./CharacterProfile";
@@ -12,9 +13,15 @@ type Props = {
   stages: Stage[];
   journeys: Journey[];
   lessonsByStage: Record<string, Lesson[]>;
+  projectKeyLessons: ProgressLesson[][];
 };
 
-export function CharacterShell({ stages, journeys, lessonsByStage }: Props) {
+export function CharacterShell({
+  stages,
+  journeys,
+  lessonsByStage,
+  projectKeyLessons,
+}: Props) {
   const { mounted, character } = useCharacter();
   const [profileOpen, setProfileOpen] = useState(false);
 
@@ -39,6 +46,7 @@ export function CharacterShell({ stages, journeys, lessonsByStage }: Props) {
           stages={stages}
           journeys={journeys}
           lessonsByStage={lessonsByStage}
+          projectKeyLessons={projectKeyLessons}
           onClose={() => setProfileOpen(false)}
         />
       )}
