@@ -45,6 +45,7 @@ function LessonRow({ lesson }: { lesson: Lesson }) {
           </div>
         </div>
         <span className="l-meta">
+          {Math.max(3, Math.round(lesson.estimatedMinutes * 0.4))}–
           {lesson.estimatedMinutes}분 · {LEVEL_LABEL[lesson.level].toUpperCase()}
         </span>
       </Link>

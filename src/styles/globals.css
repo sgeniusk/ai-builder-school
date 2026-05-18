@@ -852,6 +852,13 @@ body {
     border-left: 3px solid var(--ink);
   }
   .lesson-reader .callout .kicker { margin: 0 0 10px; color: var(--ink); }
+  /* 미션 건너뛰기 안내 — 시간 빠듯할 때의 가벼운 경로 */
+  .lesson-reader .lesson-skip {
+    margin: 0 0 16px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-3);
+  }
   .lesson-reader pre {
     background: #0D0D0D; color: #E6E4DE;
     padding: 20px 24px; border-radius: var(--r);
