@@ -52,11 +52,13 @@ export default async function LessonPage({
   const stageNumStr = stage ? String(stage.order).padStart(2, "0") : "--";
   const lessonNumStr = String(lesson.stageOrdinal ?? idx + 1).padStart(2, "0");
   const missionText = lesson.mission ?? lesson.claudeCodeMission;
+  // 시간 표기 — '최소(개념만 읽기)'와 '권장(미션까지)' 두 가지로.
+  const readMinutes = Math.max(3, Math.round(lesson.estimatedMinutes * 0.4));
 
   return (
     <article className="lesson-reader">
         <p className="kicker">
-          Stage {stageNumStr} · L{lessonNumStr} · {lesson.estimatedMinutes}분 · {LEVEL_LABEL[lesson.level]}
+          Stage {stageNumStr} · L{lessonNumStr} · 읽기 ~{readMinutes}분 · 미션까지 {lesson.estimatedMinutes}분 · {LEVEL_LABEL[lesson.level]}
         </p>
         <h1>{lesson.titleKo}</h1>
         <p className="lede">{lesson.hook ?? lesson.summary}</p>
@@ -75,8 +77,19 @@ export default async function LessonPage({
         ))}
 
         <h2 id="section-mission">3. 미션</h2>
+        <p className="lesson-skip">
+          미션까지 할 시간이 빠듯하면 — 개념만 챙기고 넘어가도 괜찮아요. 미션은
+          표시해 두고 나중에 돌아와 채우면 돼요
+          {next ? (
+            <>
+              {" · "}
+              <a href={`/lessons/${next.slug}`}>다음 레슨으로 건너뛰기 →</a>
+            </>
+          ) : null}
+          .
+        </p>
         <div className="callout">
-          <div className="kicker">Mission · {lesson.estimatedMinutes}분</div>
+          <div className="kicker">Mission · 권장 {lesson.estimatedMinutes}분</div>
           <p style={{ margin: 0, whiteSpace: "pre-line" }}>{missionText}</p>
         </div>
         {lesson.codexNote && (
