@@ -3,6 +3,7 @@
 "use client";
 
 import { useCharacter, type Animal } from "@/hooks/useCharacter";
+import type { Accessory } from "@/lib/accessories";
 
 type Props = {
   size?: number;
@@ -10,6 +11,8 @@ type Props = {
   ariaLabel?: string;
   /** 특정 동물을 강제로 그릴 때 (선택 UI 미리보기용). 없으면 내 캐릭터. */
   animal?: Animal;
+  /** 특정 액세서리를 강제로 그릴 때. 없으면 내 캐릭터의 액세서리. */
+  accessory?: Accessory;
 };
 
 export function CharacterAvatar({
@@ -17,12 +20,15 @@ export function CharacterAvatar({
   onClick,
   ariaLabel = "내 캐릭터",
   animal,
+  accessory,
 }: Props) {
   const { mounted, character } = useCharacter();
 
   // prop 우선 → 없으면 내 캐릭터 → SSR/첫 렌더는 강아지로 깜박임 방지.
   const shown: Animal =
     animal ?? (mounted && character ? character.animal : "puppy");
+  const shownAccessory: Accessory | undefined =
+    accessory ?? (mounted && character ? character.accessory : undefined);
 
   return (
     <button
@@ -32,13 +38,19 @@ export function CharacterAvatar({
       onClick={onClick}
       aria-label={ariaLabel}
     >
-      <AnimalSvg animal={shown} />
+      <AnimalSvg animal={shown} accessory={shownAccessory} />
     </button>
   );
 }
 
-/** 동물 한 종을 그리는 픽셀 아트 SVG. 32×32 그리드, crispEdges. */
-export function AnimalSvg({ animal }: { animal: Animal }) {
+/** 동물 한 종(+선택적 액세서리)을 그리는 픽셀 아트 SVG. 32×32 그리드, crispEdges. */
+export function AnimalSvg({
+  animal,
+  accessory,
+}: {
+  animal: Animal;
+  accessory?: Accessory;
+}) {
   return (
     <svg
       viewBox="0 0 32 32"
@@ -54,7 +66,70 @@ export function AnimalSvg({ animal }: { animal: Animal }) {
       {animal === "rabbit" && <RabbitArt />}
       {animal === "fox" && <FoxArt />}
       {animal === "penguin" && <PenguinArt />}
+      {accessory && <AccessoryArt id={accessory} />}
     </svg>
+  );
+}
+
+/** 액세서리 — 동물 위에 합성되는 작은 소품. */
+function AccessoryArt({ id }: { id: Accessory }) {
+  return (
+    <>
+      {id === "sprout" && (
+        <>
+          <rect x="15" y="1" width="2" height="5" fill="#5BA85C" />
+          <rect x="12" y="2" width="3" height="2" fill="#7BC97C" />
+          <rect x="17" y="3" width="3" height="2" fill="#7BC97C" />
+        </>
+      )}
+      {id === "glasses" && (
+        <>
+          <rect x="8" y="11" width="6" height="1" fill="#2A2A30" />
+          <rect x="8" y="16" width="6" height="1" fill="#2A2A30" />
+          <rect x="8" y="12" width="1" height="4" fill="#2A2A30" />
+          <rect x="13" y="12" width="1" height="4" fill="#2A2A30" />
+          <rect x="18" y="11" width="6" height="1" fill="#2A2A30" />
+          <rect x="18" y="16" width="6" height="1" fill="#2A2A30" />
+          <rect x="18" y="12" width="1" height="4" fill="#2A2A30" />
+          <rect x="23" y="12" width="1" height="4" fill="#2A2A30" />
+          <rect x="14" y="12" width="4" height="1" fill="#2A2A30" />
+        </>
+      )}
+      {id === "flame" && (
+        <>
+          <rect x="25" y="5" width="4" height="4" fill="#E8552E" />
+          <rect x="26" y="2" width="3" height="3" fill="#F08A3C" />
+          <rect x="27" y="0" width="2" height="2" fill="#F5C24A" />
+          <rect x="26" y="5" width="2" height="2" fill="#F5C24A" />
+        </>
+      )}
+      {id === "wrench" && (
+        <>
+          <rect x="25" y="18" width="4" height="4" fill="#9AA0AC" />
+          <rect x="26" y="19" width="2" height="2" fill="#6B6F78" />
+          <rect x="23" y="21" width="3" height="3" fill="#9AA0AC" />
+          <rect x="21" y="23" width="3" height="4" fill="#9AA0AC" />
+        </>
+      )}
+      {id === "crown" && (
+        <>
+          <rect x="9" y="5" width="14" height="3" fill="#E8B84B" />
+          <rect x="9" y="3" width="2" height="2" fill="#E8B84B" />
+          <rect x="15" y="2" width="2" height="3" fill="#E8B84B" />
+          <rect x="21" y="3" width="2" height="2" fill="#E8B84B" />
+          <rect x="15" y="6" width="2" height="1" fill="#F6DD96" />
+        </>
+      )}
+      {id === "star" && (
+        <>
+          <rect x="26" y="0" width="2" height="2" fill="#F4CC52" />
+          <rect x="23" y="2" width="8" height="2" fill="#F4CC52" />
+          <rect x="24" y="4" width="6" height="2" fill="#F4CC52" />
+          <rect x="24" y="6" width="2" height="2" fill="#F4CC52" />
+          <rect x="28" y="6" width="2" height="2" fill="#F4CC52" />
+        </>
+      )}
+    </>
   );
 }
 

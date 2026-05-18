@@ -2429,6 +2429,12 @@ body {
     color: var(--ink);
     font-weight: 600;
   }
+  /* 잠긴 액세서리 — 흐리게, 선택 불가 */
+  .animal-picker__item.is-locked {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .animal-picker__item.is-locked:hover { transform: none; }
   @media (prefers-reduced-motion: reduce) {
     .animal-picker__item:hover { transform: none; }
   }
