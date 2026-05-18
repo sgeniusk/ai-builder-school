@@ -9,8 +9,15 @@ import {
   getProjectBySlug,
   getProjects,
   getStageBySlug,
+  getTemplateBySlug,
 } from "@/lib/content";
 import { JOURNEY_LABEL_KO, LEVEL_LABEL } from "@/lib/types";
+
+const TEMPLATE_KIND_LABEL = {
+  prompt: "프롬프트",
+  mission: "미션",
+  checklist: "체크리스트",
+} as const;
 
 export function generateStaticParams() {
   return getProjects().map((p) => ({ slug: p.slug }));
@@ -45,6 +52,9 @@ export default async function ProjectDetailPage({
   const stages = project.requiredStages
     .map((s) => getStageBySlug(s))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
+  const projectTemplates = project.templateSlugs
+    .map((s) => getTemplateBySlug(s))
+    .filter((t): t is NonNullable<typeof t> => Boolean(t));
 
   return (
     <Container>
@@ -178,6 +188,31 @@ export default async function ProjectDetailPage({
             </span>
           ))}
         </div>
+
+        {projectTemplates.length > 0 && (
+          <>
+            <h2>이 프로젝트에 쓰는 템플릿</h2>
+            <p className="proj-templates__intro">
+              각 단계를 실행할 때 그대로 복사해 쓰는 재사용 자산이에요.
+            </p>
+            <ul className="proj-templates">
+              {projectTemplates.map((t) => (
+                <li key={t.id}>
+                  <Link
+                    href={`/templates#${t.slug}`}
+                    className="proj-templates__link"
+                  >
+                    <span className="proj-templates__kind">
+                      {TEMPLATE_KIND_LABEL[t.kind]}
+                    </span>
+                    <span className="proj-templates__title">{t.title}</span>
+                    <span className="arrow mono">→</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
 
         {project.extensionIdeas.length > 0 && (
           <>

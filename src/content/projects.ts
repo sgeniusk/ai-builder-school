@@ -10,6 +10,7 @@ export const projects: Project[] = [
   {
     id: "project-weekly-report",
     slug: "weekly-report-autopilot",
+    templateSlugs: ["four-axis-prompt", "output-format-prompt", "self-check-prompt", "prompt-quality-checklist"],
     title: "주간 보고서 자동 파이프라인",
     hook: "매주 금요일, 흩어진 메모로 주간 보고서를 백지에서 씁니다. 그 한 시간을 5분으로 줄입니다.",
     targetLearner: "주간 보고서를 매주 쓰는 직장인 — 코딩 없이 시작",
@@ -85,6 +86,7 @@ export const projects: Project[] = [
   {
     id: "project-meeting-bot",
     slug: "meeting-notes-bot",
+    templateSlugs: ["meeting-notes-prompt", "output-format-prompt", "self-check-prompt", "prompt-quality-checklist"],
     title: "회의록 자동 정리 봇",
     hook: "회의는 끝났는데 회의록은 아직입니다. 녹취와 메모만 던지면 결정·할 일이 구조화돼 나오게 만듭니다.",
     targetLearner: "실무자·도입자·탐험가 — 코딩 없이 만드는 첫 자동화",
@@ -158,6 +160,7 @@ export const projects: Project[] = [
   {
     id: "project-prompt-library",
     slug: "prompt-library-starter-kit",
+    templateSlugs: ["four-axis-prompt", "role-persona-prompt", "prompt-debug-prompt", "prompt-quality-checklist"],
     title: "팀 프롬프트 라이브러리 키트",
     hook: "좋은 프롬프트를 한 번 쓰고 채팅창에 흘려보냅니다. 그걸 모아 동료가 바로 쓰는 키트로 만듭니다.",
     targetLearner: "배운 걸 동료·팀과 나누고 싶은 학생-교육자·실무자",
@@ -231,6 +234,7 @@ export const projects: Project[] = [
   {
     id: "project-ai-guideline",
     slug: "internal-ai-usage-guideline",
+    templateSlugs: ["ai-judgment-checklist", "output-verification-checklist", "ai-service-security-checklist"],
     title: "내부 AI 사용 가이드라인 v1",
     hook: "팀이 AI를 쓰기 시작했는데 규칙이 없습니다. 무엇이 되고 안 되는지 한 장으로 정리합니다.",
     targetLearner: "조직에 AI를 들여오는 기획자·매니저",
@@ -306,6 +310,7 @@ export const projects: Project[] = [
   {
     id: "project-shop-calendar",
     slug: "local-shop-content-calendar",
+    templateSlugs: ["four-axis-prompt", "role-persona-prompt", "few-shot-prompt"],
     title: "동네 가게 콘텐츠 캘린더",
     hook: "가게 SNS에 뭘 올릴지 매일 고민합니다. 한 달치 콘텐츠 캘린더를 AI와 함께 한 번에 짭니다.",
     targetLearner: "가게·로컬 비즈니스를 운영하며 SNS를 직접 챙기는 사람",
@@ -385,6 +390,7 @@ export const projects: Project[] = [
   {
     id: "project-content-pipeline",
     slug: "blog-to-shortform",
+    templateSlugs: ["four-axis-prompt", "few-shot-prompt", "output-format-prompt"],
     title: "블로그→쇼츠 자동 파이프라인",
     hook: "블로그 글 하나를 쇼츠·뉴스레터·이미지 브리프로 다시 가공하느라 또 반나절을 씁니다. 그 재가공을 자동화합니다.",
     targetLearner: "크리에이터 — 콘텐츠 한 편을 여러 채널 포맷으로",
@@ -458,6 +464,7 @@ export const projects: Project[] = [
   {
     id: "project-newsletter-desk",
     slug: "newsletter-ai-desk",
+    templateSlugs: ["long-doc-summary-prompt", "role-persona-prompt", "self-check-prompt", "output-verification-checklist"],
     title: "뉴스레터 AI 편집부",
     hook: "뉴스레터를 매주 보내려면 소재 찾고 쓰고 다듬는 전 과정이 부담입니다. AI를 편집부 동료로 두고 그 과정을 시스템으로 만듭니다.",
     targetLearner: "뉴스레터·정기 콘텐츠를 운영하는 크리에이터",
@@ -547,6 +554,7 @@ export const projects: Project[] = [
   {
     id: "project-doc-qa",
     slug: "document-qa-bot",
+    templateSlugs: ["rag-checklist", "output-format-prompt", "output-verification-checklist"],
     title: "문서 Q&A 봇",
     hook: "PDF·노트가 쌓여 있는데 정작 필요할 때 못 찾습니다. 내 문서에 자연어로 묻고 출처와 함께 답받는 앱을 만듭니다.",
     targetLearner: "엔지니어·파운더 — 내 문서에 답하는 첫 RAG 앱",
@@ -615,6 +623,7 @@ export const projects: Project[] = [
   {
     id: "project-onboarding-bot",
     slug: "team-onboarding-bot",
+    templateSlugs: ["rag-checklist", "ai-service-security-checklist", "output-verification-checklist"],
     title: "팀 온보딩 봇",
     hook: "신규 입사자는 같은 질문을 반복하고, 답하는 사람도 반복합니다. 사내 지식에 답하는 온보딩 봇으로 그 반복을 끝냅니다.",
     targetLearner: "도입자·파운더·엔지니어 — 사내 지식을 봇으로",
@@ -685,6 +694,7 @@ export const projects: Project[] = [
   {
     id: "project-gpt-wrapper",
     slug: "gpt-wrapper-product",
+    templateSlugs: ["claude-code-mission-template", "codex-mission-template", "output-format-prompt", "launch-readiness-checklist", "ai-cost-checklist"],
     title: "특정 직군용 GPT 래퍼 제품",
     hook: "특정 직군이 매일 겪는 한 가지 불편을 AI로 푸는 작은 제품을 만들고, 시장에 내놓습니다.",
     targetLearner: "AI로 작은 제품을 띄우려는 1인 창업자·인디 해커",
@@ -776,6 +786,7 @@ export const projects: Project[] = [
   {
     id: "project-research-agent",
     slug: "personal-research-agent",
+    templateSlugs: ["agent-checklist", "step-reasoning-prompt", "claude-code-mission-template", "long-doc-summary-prompt"],
     title: "개인 리서치 에이전트",
     hook: "리서치 질문 하나를 던지면, 검색·요약·출처 정리까지 알아서 도는 에이전트를 만듭니다.",
     targetLearner: "엔지니어·파운더 — 도구를 쓰는 자율 에이전트",
@@ -849,6 +860,7 @@ export const projects: Project[] = [
   {
     id: "project-rag-analytics",
     slug: "rag-with-evals",
+    templateSlugs: ["rag-checklist", "output-verification-checklist", "ai-cost-checklist"],
     title: "Evals 대시보드가 붙은 RAG",
     hook: "RAG는 만들기는 쉬워도 잘 되고 있는지는 안 보입니다. 품질·비용을 관측 가능한 RAG 시스템을 만듭니다.",
     targetLearner: "엔지니어 — 운영·평가까지 갖춘 RAG 시스템",
@@ -934,6 +946,7 @@ CI에서 자동으로 도는 형태면 좋아.`,
   {
     id: "project-ai-saas-mvp",
     slug: "ai-saas-mvp",
+    templateSlugs: ["claude-code-mission-template", "codex-mission-template", "bug-fix-mission", "test-writing-mission", "compare-options-prompt", "launch-readiness-checklist", "ai-cost-checklist"],
     title: "AI 코어 SaaS MVP",
     hook: "아이디어 단계의 AI 제품을, 4주 안에 결제까지 되는 진짜 MVP로 끝까지 밀어붙입니다.",
     targetLearner: "AI를 코어로 한 SaaS를 띄우려는 창업자",

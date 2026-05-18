@@ -6,6 +6,8 @@ import type {
   Lesson,
   Project,
 } from "@/lib/types";
+import { getProjectsByTemplate } from "@/lib/content";
+import { CodeBlock } from "./CodeBlock";
 
 /* Lesson card — compact list-style card used on home's preview grid and inside stage detail. */
 export function LessonCard({ lesson, index }: { lesson: Lesson; index?: number }) {
@@ -80,8 +82,10 @@ export function ProjectCard({ project }: { project: Project }) {
 export function TemplateCard({ template }: { template: ContentTemplate }) {
   const kindLabel =
     template.kind === "prompt" ? "프롬프트" : template.kind === "mission" ? "미션" : "체크리스트";
+  // 역방향 연결 — 이 템플릿을 쓰는 프로젝트
+  const usedBy = getProjectsByTemplate(template.slug);
   return (
-    <article className="proj-card">
+    <article className="proj-card" id={template.slug} style={{ scrollMarginTop: 96 }}>
       <div className="tag-row">
         <span className="chip">{kindLabel}</span>
         {template.tags.slice(0, 2).map((t) => (
@@ -90,9 +94,19 @@ export function TemplateCard({ template }: { template: ContentTemplate }) {
       </div>
       <h3>{template.title}</h3>
       <p>{template.summary}</p>
-      <pre style={{ marginTop: 20, maxHeight: 240, overflow: "auto", fontSize: 12 }}>
-        <code>{template.body}</code>
-      </pre>
+      <CodeBlock style={{ marginTop: 20, maxHeight: 240, overflow: "auto", fontSize: 12 }}>
+        {template.body}
+      </CodeBlock>
+      {usedBy.length > 0 && (
+        <div className="tmpl-usedby">
+          <span className="tmpl-usedby__tag">쓰는 프로젝트</span>
+          {usedBy.map((p) => (
+            <Link key={p.id} href={`/projects/${p.slug}`}>
+              {p.title}
+            </Link>
+          ))}
+        </div>
+      )}
     </article>
   );
 }
