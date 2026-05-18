@@ -89,7 +89,7 @@ export function JourneyPathCard({ journeys, allLessons, currentSlug }: Props) {
       </ol>
 
       <Link
-        href={`/journeys#${journey.slug}`}
+        href={`/journeys/${journey.id}`}
         className="journey-path-card__full"
       >
         전체 여정 보기 <span className="arrow">→</span>
