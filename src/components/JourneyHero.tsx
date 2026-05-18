@@ -5,6 +5,7 @@
 import type { Journey } from "@/lib/types";
 import { useCharacter } from "@/hooks/useCharacter";
 import { AnimalBack } from "./AnimalBack";
+import { JourneyLandmark } from "./JourneyLandmark";
 import { JourneySelectButton } from "./JourneySelectButton";
 
 // 여정별 먼 능선 봉우리 높이 프로필 (0~1) — 여정마다 다른 스카이라인을 만든다.
@@ -81,6 +82,9 @@ export function JourneyHero({ journey }: { journey: Journey }) {
             opacity="0.5"
           />
         </svg>
+        <div className="journey-hero__landmark">
+          <JourneyLandmark journey={journey.id} />
+        </div>
         <div className="journey-hero__char">
           <AnimalBack animal={animal} />
         </div>

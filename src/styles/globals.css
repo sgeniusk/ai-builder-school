@@ -1788,6 +1788,15 @@ body {
     transform: translateX(-50%);
     filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
   }
+  .journey-hero__landmark {
+    position: absolute;
+    left: 26%;
+    bottom: 9%;
+    width: clamp(40px, 6.5vw, 62px);
+    height: clamp(40px, 6.5vw, 62px);
+    transform: translateX(-50%);
+    filter: drop-shadow(0 4px 7px rgba(0, 0, 0, 0.16));
+  }
   .journey-hero__copy {
     max-width: 720px;
     margin: -6px auto 0;
