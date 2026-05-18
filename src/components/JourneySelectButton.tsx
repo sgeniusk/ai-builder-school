@@ -34,9 +34,9 @@ export function JourneySelectButton({ journeyId, firstLessonSlug }: Props) {
       style={{ marginTop: 16 }}
     >
       {justSet
-        ? "여정 선택 완료 →"
+        ? "여정 선택 완료"
         : isActive
-          ? "현재 여정 (다시 선택)"
+          ? "이 여정 이어가기"
           : firstLessonSlug
             ? "이 여정으로 시작"
             : "이 여정 선택"}
