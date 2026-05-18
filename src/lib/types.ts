@@ -238,6 +238,8 @@ export interface Project {
   requiredStages: string[];
   /** 이 프로젝트를 준비시키는 핵심 lesson slug 목록. 상세에서 링크로 노출. */
   keyLessons: string[];
+  /** 이 프로젝트를 실행할 때 쓰는 템플릿 slug 목록. */
+  templateSlugs: string[];
   summary: string;
   /** 왜 이걸 만드나 — 어떤 빈자리를 채우는가. 2~3문장. */
   problem: string;

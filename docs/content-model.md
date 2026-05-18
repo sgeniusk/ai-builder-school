@@ -120,6 +120,7 @@ Phase / `phaseId` / `recommendedPhases` / `requiredPhases`는 **legacy로 보존
 | `estimatedDuration` | `string` — "1주", "4주" 등 |
 | `requiredStages` | `string[]` — stage slug |
 | `keyLessons` | `string[]` — lesson slug |
+| `templateSlugs` | `string[]` — 이 프로젝트가 쓰는 template slug |
 | `summary` | `string` |
 | `problem` | `string` — 왜 만드나 |
 | `finalOutput` | `string` |
@@ -170,6 +171,7 @@ v0.4 (Stage):
 - 모든 `project.requiredStages`는 반드시 존재하는 `Stage.slug`.
 - 모든 `project.keyLessons`는 반드시 존재하는 `Lesson.slug`.
 - 모든 `project.milestones[].fallbackLesson`(존재 시)은 반드시 존재하는 `Lesson.slug`.
+- 모든 `project.templateSlugs`는 반드시 존재하는 `ContentTemplate.slug`.
 - Stage 4·6의 `subGroups[].lessonSlugs` 합 = `stage.lessonSlugs` (어느 sub-그룹에도 빠지지 않고, 중복도 없음).
 - Lesson 분포는 stage-redesign.md 매핑 그대로 — 4-5-4-14-8-13-6-7 = 61.
 - 모든 `journey.recommendedStages`는 반드시 존재하는 `Stage.slug`.

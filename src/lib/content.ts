@@ -123,8 +123,16 @@ export function getProjectsByStageSlug(slug: string): Project[] {
   return projects.filter((p) => p.requiredStages.includes(slug));
 }
 
+export function getProjectsByTemplate(slug: string): Project[] {
+  return projects.filter((p) => p.templateSlugs.includes(slug));
+}
+
 export function getTemplates(): ContentTemplate[] {
   return templates;
+}
+
+export function getTemplateBySlug(slug: string): ContentTemplate | undefined {
+  return templates.find((t) => t.slug === slug);
 }
 
 export interface ContentIntegrityIssue {
@@ -322,6 +330,20 @@ export function validateContent(): ContentIntegrityIssue[] {
           kind: "project.milestone.fallbackLesson",
           ref: project.slug,
           message: `Project "${project.slug}" milestone "${m.title}" references missing lesson "${m.fallbackLesson}"`,
+        });
+      }
+    }
+  }
+
+  // 11) project.templateSlugs가 실제 template을 가리키는지
+  const templateSlugSet = new Set(templates.map((t) => t.slug));
+  for (const project of projects) {
+    for (const slug of project.templateSlugs) {
+      if (!templateSlugSet.has(slug)) {
+        issues.push({
+          kind: "project.templateSlug",
+          ref: project.slug,
+          message: `Project "${project.slug}" references missing template "${slug}"`,
         });
       }
     }

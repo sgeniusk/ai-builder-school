@@ -84,9 +84,36 @@ export function CodeBlock({
           type="button"
           className={`code-copy-btn${copied ? " is-copied" : ""}`}
           onClick={handleCopy}
-          aria-label={copied ? "복사됨" : "코드 복사"}
+          aria-label={copied ? "복사됨" : "복사"}
+          title={copied ? "복사됨" : "복사"}
         >
-          {copied ? "복사됨" : "복사"}
+          {copied ? (
+            <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden>
+              <path
+                d="M6.2 10.8 3.6 8.2l-1.1 1.1 3.7 3.7 7.3-7.3-1.1-1.1z"
+                fill="currentColor"
+              />
+            </svg>
+          ) : (
+            <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden>
+              <rect
+                x="5.5"
+                y="5.5"
+                width="8.5"
+                height="8.5"
+                rx="1.6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M10.5 3.4V2.8A1.3 1.3 0 0 0 9.2 1.5H3.3A1.3 1.3 0 0 0 2 2.8v6a1.3 1.3 0 0 0 1.3 1.3h.6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+            </svg>
+          )}
         </button>
       </div>
       <pre {...props} className={preClass}>

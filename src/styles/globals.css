@@ -822,13 +822,13 @@ body {
   .lesson-reader ul, .lesson-reader ol { font-size: 16px; line-height: 1.75; color: var(--ink-2); margin: 0 0 16px; padding-left: 20px; }
   .lesson-reader ul li, .lesson-reader ol li { margin-bottom: 6px; }
   .lesson-reader strong { color: var(--ink); font-weight: 600; }
-  .lesson-reader a:not(.btn):not(.btn-ink):not(.btn-ghost):not(.lesson-pager__link) {
+  .lesson-reader a:not(.btn):not(.btn-ink):not(.btn-ghost):not(.lesson-pager__link):not(.proj-templates__link) {
     color: var(--ink);
     text-decoration: underline;
     text-decoration-color: var(--ink-4);
     text-underline-offset: 4px;
   }
-  .lesson-reader a:not(.btn):not(.btn-ink):not(.btn-ghost):not(.lesson-pager__link):hover {
+  .lesson-reader a:not(.btn):not(.btn-ink):not(.btn-ghost):not(.lesson-pager__link):not(.proj-templates__link):hover {
     text-decoration-color: var(--ink);
   }
   .lesson-reader a.btn { color: var(--paper); text-decoration: none; }
@@ -876,6 +876,9 @@ body {
     cursor: pointer; opacity: 0.55;
     transition: opacity 0.14s ease, background 0.14s ease, color 0.14s ease;
   }
+  /* 복사 버튼은 아이콘 — 정사각형에 가깝게 */
+  .code-copy-btn { padding: 5px 6px; }
+  .code-copy-btn svg { display: block; }
   .code-block:hover .code-copy-btn,
   .code-block:hover .code-wrap-btn { opacity: 1; }
   .code-copy-btn:hover, .code-wrap-btn:hover { background: rgba(255, 255, 255, 0.16); }
@@ -1843,6 +1846,73 @@ body {
   }
   .journey-detail__outcome strong { color: var(--ink); }
   .journey-detail__foot { margin-top: 32px; }
+
+  /* ===== 프로젝트 상세 — 쓰는 템플릿 ===== */
+  .lesson-reader .proj-templates__intro {
+    margin: 4px 0 14px;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+  .lesson-reader ul.proj-templates {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .lesson-reader ul.proj-templates li { margin: 0; }
+  .proj-templates__link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--card);
+    transition:
+      border-color 0.14s var(--ease),
+      background 0.14s var(--ease);
+  }
+  .proj-templates__link:hover {
+    border-color: var(--ink-3);
+    background: var(--paper-2);
+  }
+  .proj-templates__kind {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
+  .proj-templates__title { flex: 1; font-size: 14px; color: var(--ink); }
+  .proj-templates__link .arrow { color: var(--ink-3); }
+
+  /* ===== 템플릿 카드 — 쓰는 프로젝트 역링크 ===== */
+  .tmpl-usedby {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 10px;
+    font-size: 12px;
+  }
+  .tmpl-usedby__tag {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink-3);
+  }
+  .tmpl-usedby a {
+    color: var(--ink-2);
+    text-decoration: underline;
+    text-decoration-color: var(--line-2);
+    text-underline-offset: 3px;
+  }
+  .tmpl-usedby a:hover { color: var(--ink); }
 
   /* ===== Curriculum TOC (우측 사이드바, /curriculum 용) ===== */
   .curriculum-toc {
