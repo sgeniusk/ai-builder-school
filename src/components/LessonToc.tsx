@@ -1,8 +1,7 @@
-// 레슨 페이지 우측 사이드바 — 3개 카드(읽기 레일 / 빌드·검증·회고 3-section 진행률 / 형제 lesson).
+// 레슨 페이지 우측 사이드바 — 3개 카드(읽기 레일 / 빌드·검증·회고 3-section 진행률 / 여정 경로).
 "use client";
 
-import Link from "next/link";
-import type { Lesson, Stage } from "@/lib/types";
+import type { Journey, Lesson, Stage } from "@/lib/types";
 import {
   SECTIONS,
   SECTION_WEIGHTS,
@@ -10,6 +9,7 @@ import {
   type Section,
 } from "@/hooks/useLessonProgress";
 import { ReadingRail } from "./ReadingRail";
+import { JourneyPathCard } from "./JourneyPathCard";
 
 const SECTION_META: Record<Section, { label: string; anchorId: string }> = {
   build: { label: "빌드", anchorId: "section-build" },
@@ -27,9 +27,17 @@ type Props = {
   currentLesson: Lesson;
   currentStage: Stage | undefined;
   siblingLessons: Lesson[];
+  journeys: Journey[];
+  allLessons: Lesson[];
 };
 
-export function LessonToc({ currentLesson, currentStage, siblingLessons }: Props) {
+export function LessonToc({
+  currentLesson,
+  currentStage,
+  siblingLessons,
+  journeys,
+  allLessons,
+}: Props) {
   const { mounted, getSectionPct, getWeightedPct, isLessonComplete } =
     useLessonProgress();
 
@@ -115,46 +123,12 @@ export function LessonToc({ currentLesson, currentStage, siblingLessons }: Props
         )}
       </div>
 
-      {/* 3. 형제 lesson 카드 — status box */}
-      {siblingLessons.length > 0 && currentStage && (
-        <div className="sibling-card">
-          <span className="rail-section-label sibling-card__header">
-            Stage {String(currentStage.order).padStart(2, "0")} 레슨
-          </span>
-          <ul className="sibling-card__list">
-            {siblingLessons.map((sib) => {
-              const isDone = mounted && isLessonComplete(sib);
-              const isCurrent = sib.id === currentLesson.id;
-              return (
-                <li
-                  key={sib.id}
-                  className={[
-                    "sib-item",
-                    isCurrent && "sib-item--current",
-                    isDone && "sib-item--done",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                >
-                  <Link href={`/lessons/${sib.slug}`}>
-                    <span
-                      className={[
-                        "sib-status",
-                        isDone && "sib-status--done",
-                        isCurrent && "sib-status--current",
-                      ]
-                        .filter(Boolean)
-                        .join(" ")}
-                      aria-hidden
-                    />
-                    <span className="sib-name">{sib.titleKo}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
+      {/* 3. 여정 경로 카드 — 여정 추천 레슨 순서 내비게이션 */}
+      <JourneyPathCard
+        journeys={journeys}
+        allLessons={allLessons}
+        currentSlug={currentLesson.slug}
+      />
     </aside>
   );
 }

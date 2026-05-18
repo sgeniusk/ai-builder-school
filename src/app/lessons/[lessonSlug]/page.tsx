@@ -3,10 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SectionChecklist } from "@/components/SectionChecklist";
 import { LessonNotes } from "@/components/LessonNotes";
+import { LessonPager } from "@/components/LessonPager";
 import {
   getLessonBySlug,
   getLessons,
   getStageById,
+  getJourneys,
 } from "@/lib/content";
 import { getLessonBody } from "@/content/lesson-bodies";
 import { mdxElements } from "@/components/mdx-elements";
@@ -167,28 +169,13 @@ export default async function LessonPage({
           </Link>
         </div>
 
-        <nav
-          style={{
-            marginTop: 32,
-            display: "flex",
-            justifyContent: "space-between",
-            fontSize: 14,
-            color: "var(--ink-3)",
-            gap: 16,
-            flexWrap: "wrap",
-          }}
-        >
-          {prev ? (
-            <Link href={`/lessons/${prev.slug}`} style={{ color: "inherit" }}>
-              ← {prev.titleKo}
-            </Link>
-          ) : <span style={{ color: "var(--ink-4)" }}>첫 레슨입니다</span>}
-          {next ? (
-            <Link href={`/lessons/${next.slug}`} style={{ color: "inherit" }}>
-              {next.titleKo} →
-            </Link>
-          ) : <span style={{ color: "var(--ink-4)" }}>마지막 레슨입니다</span>}
-        </nav>
+        <LessonPager
+          journeys={getJourneys()}
+          allLessons={all}
+          currentSlug={lesson.slug}
+          fallbackPrev={prev ? { slug: prev.slug, titleKo: prev.titleKo } : null}
+          fallbackNext={next ? { slug: next.slug, titleKo: next.titleKo } : null}
+        />
     </article>
   );
 }
