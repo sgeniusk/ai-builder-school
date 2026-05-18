@@ -177,7 +177,7 @@ export function SiteFooter() {
         >
           <span>© {new Date().getFullYear()} AI Builder School</span>
           <span className="mono" style={{ fontSize: 12, color: "var(--ink-4)" }}>
-            v1.0 · calm editorial
+            v1.0.1 · calm editorial
           </span>
         </div>
       </Container>
