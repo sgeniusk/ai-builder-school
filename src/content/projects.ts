@@ -386,6 +386,86 @@ export const projects: Project[] = [
     ],
   },
 
+  {
+    id: "project-nano-banana-kit",
+    slug: "nano-banana-image-kit",
+    templateSlugs: [
+      "four-axis-prompt",
+      "role-persona-prompt",
+      "few-shot-prompt",
+      "prompt-quality-checklist",
+    ],
+    title: "나노바나나 콘텐츠 이미지 키트",
+    hook: "블로그·SNS에 올릴 이미지를 매번 새로 헤맵니다. 나노바나나로 톤이 통일된 이미지 세트를 한 번에 만듭니다.",
+    targetLearner: "콘텐츠에 쓸 이미지를 직접 만드는 크리에이터·1인 운영자 — 코딩 없이 시작",
+    targetJourneys: ["creator"],
+    difficulty: "beginner",
+    estimatedDuration: "1주",
+    requiredStages: ["stage-2-ask", "stage-4-collaborate"],
+    keyLessons: [
+      "structure-of-good-prompts",
+      "design-visual-prompt-system",
+      "local-business-content-calendar",
+    ],
+    summary:
+      "내 콘텐츠의 톤·구도·색을 고정한 이미지 프롬프트 세트 — 나노바나나로 매번 비슷한 결의 이미지를 빠르게 뽑는다.",
+    problem:
+      "이미지 생성 도구는 한 장은 잘 나와도, 다음 장은 톤이 어긋난다. 채널의 이미지가 들쭉날쭉하면 콘텐츠 정체성이 흐려진다. 프롬프트를 한 번 고정해두면 매번 그 결로 뽑힌다.",
+    finalOutput:
+      "용도별 이미지 프롬프트 5개 이상 + 톤·색·구도 가이드 (재사용 키트)",
+    suggestedStack: ["나노바나나 (이미지 생성)", "Notion 또는 Markdown"],
+    milestones: [
+      {
+        title: "1단계 — 톤 정의",
+        description:
+          "내 채널 이미지의 톤·색·구도를 말로 정리해 고정 기준으로 만든다.",
+        firstStep:
+          "마음에 드는 내 기존 이미지(또는 레퍼런스) 3장을 모아, 공통점을 색·구도·분위기 세 단어로 적어 보세요.",
+        starterPrompt: `아래 이미지들의 공통 스타일을 분석해줘.
+색감·구도·분위기·질감을 각각 한 줄로 정리하고,
+이미지 생성 프롬프트에 넣을 '스타일 문장' 하나로 압축해줘.
+
+[레퍼런스 이미지 3장 첨부 또는 설명]`,
+        fallbackLesson: "design-visual-prompt-system",
+      },
+      {
+        title: "2단계 — 용도별 프롬프트",
+        description:
+          "썸네일·본문 삽화·SNS 카드 등 용도별 이미지 프롬프트를 4축으로 작성한다.",
+        firstStep:
+          "가장 자주 쓰는 용도 하나(예: 블로그 썸네일)부터 — 1단계 스타일 문장을 넣어 나노바나나로 한 장 뽑아 보세요.",
+        starterPrompt: `[용도]에 쓸 이미지 프롬프트를 만들어줘.
+- 무엇을 그릴지(주제)
+- [스타일 문장](1단계 결과)
+- 구도·비율
+- 피할 것
+나노바나나에 바로 넣을 수 있는 한 덩어리로.`,
+        fallbackLesson: "structure-of-good-prompts",
+      },
+      {
+        title: "3단계 — 키트로 정리",
+        description:
+          "프롬프트 5개 이상을 톤 가이드와 함께 재사용 키트로 묶는다.",
+        firstStep:
+          "뽑은 이미지와 프롬프트를 한 문서에 모아, 어떤 용도에 어떤 프롬프트인지 한 줄씩 라벨을 붙이세요.",
+        starterPrompt: `아래 이미지 프롬프트들을 팀(또는 미래의 나)이 바로 쓸 키트로 정리해줘.
+- 용도별 분류
+- 각 프롬프트에 예시 결과 한 줄 설명
+- 톤이 어긋났을 때 점검할 체크리스트`,
+        fallbackLesson: "local-business-content-calendar",
+      },
+    ],
+    verification: [
+      "용도별 프롬프트가 5개 이상 정리돼 있다",
+      "프롬프트로 뽑은 이미지들의 톤이 한 결로 통일된다",
+      "처음 보는 사람이 키트만 보고 같은 결의 이미지를 뽑을 수 있다",
+    ],
+    extensionIdeas: [
+      "콘텐츠 캘린더와 연결해 게시물마다 이미지 자동 배정",
+      "미드저니 등 다른 도구용 프롬프트로 확장",
+    ],
+  },
+
   // ─── 중급 (intermediate) ─────────────────────────────────────
   {
     id: "project-content-pipeline",
@@ -779,6 +859,83 @@ export const projects: Project[] = [
     extensionIdeas: [
       "피드백 기반 v2 이터레이션",
       "유료 전환 실험",
+    ],
+  },
+
+  {
+    id: "project-midjourney-brand",
+    slug: "midjourney-brand-visuals",
+    templateSlugs: [
+      "four-axis-prompt",
+      "role-persona-prompt",
+      "few-shot-prompt",
+      "compare-options-prompt",
+    ],
+    title: "미드저니 브랜드 비주얼 세트",
+    hook: "로고는 여기, 썸네일은 저기 — 비주얼이 따로 놉니다. 미드저니로 무드·썸네일·일러스트를 하나의 톤으로 묶습니다.",
+    targetLearner: "브랜드·채널의 비주얼을 직접 만드는 크리에이터·1인 사업자",
+    targetJourneys: ["creator"],
+    difficulty: "intermediate",
+    estimatedDuration: "2주",
+    requiredStages: ["stage-2-ask", "stage-4-collaborate"],
+    keyLessons: [
+      "structure-of-good-prompts",
+      "design-visual-prompt-system",
+      "thumbnail-and-title-ab-test",
+    ],
+    summary:
+      "미드저니로 무드보드·썸네일·일러스트를 한 톤으로 만든, 재현 가능한 브랜드 비주얼 시스템.",
+    problem:
+      "비주얼을 그때그때 만들면 채널이 누더기가 된다. 한 번 톤을 잡고 그 톤을 미드저니 파라미터로 고정하면, 누가 만들어도 같은 브랜드로 보인다.",
+    finalOutput:
+      "무드보드 + 용도별 미드저니 프롬프트(스타일 파라미터 고정) + 비주얼 가이드 1장",
+    suggestedStack: ["Midjourney", "Figma 또는 Notion"],
+    milestones: [
+      {
+        title: "1단계 — 무드 잡기",
+        description:
+          "브랜드의 분위기를 형용사와 레퍼런스로 좁혀 무드보드로 만든다.",
+        firstStep:
+          "브랜드를 형용사 5개로 적고, 그중 어긋나는 2개를 지워 3개로 좁히세요 — 비주얼의 나침반이에요.",
+        starterPrompt: `내 브랜드는 [형용사 3개]야. 미드저니 무드보드를 만들려고 해.
+- 이 분위기를 살리는 색 팔레트
+- 어울리는 구도·질감 키워드
+- 무드보드용 이미지 프롬프트 3개
+를 제안해줘.`,
+        fallbackLesson: "design-visual-prompt-system",
+      },
+      {
+        title: "2단계 — 스타일 파라미터 고정",
+        description:
+          "미드저니의 스타일·비율·시드 파라미터를 실험해 브랜드 톤으로 고정한다.",
+        firstStep:
+          "같은 프롬프트를 파라미터만 바꿔 4번 돌려, 가장 브랜드다운 한 장의 설정을 기록하세요.",
+        starterPrompt: `미드저니 프롬프트 [프롬프트]를 브랜드 톤으로 고정하고 싶어.
+--style, --ar, --stylize 같은 파라미터를 어떻게 조합하면 좋을지,
+실험해볼 조합 4가지를 비교해서 추천해줘.`,
+        fallbackLesson: "structure-of-good-prompts",
+      },
+      {
+        title: "3단계 — 비주얼 가이드",
+        description:
+          "용도별 프롬프트와 고정 파라미터를 비주얼 가이드 한 장으로 묶는다.",
+        firstStep:
+          "썸네일·배너·일러스트 각 용도로 한 장씩 뽑아, 어떤 프롬프트·파라미터를 썼는지 옆에 적어 두세요.",
+        starterPrompt: `아래 미드저니 프롬프트·파라미터들을 비주얼 가이드로 정리해줘.
+- 용도별 분류
+- 각 항목의 고정 파라미터
+- 톤이 흔들렸을 때 되돌리는 점검 순서`,
+        fallbackLesson: "thumbnail-and-title-ab-test",
+      },
+    ],
+    verification: [
+      "무드보드가 형용사·색·구도로 정의돼 있다",
+      "용도별 프롬프트가 고정 파라미터와 함께 정리됐다",
+      "뽑은 비주얼들이 한 브랜드로 보일 만큼 톤이 일관된다",
+    ],
+    extensionIdeas: [
+      "나노바나나 이미지 키트와 톤을 맞춰 도구별로 분업",
+      "썸네일 A/B 테스트로 어떤 비주얼이 더 눌리는지 검증",
     ],
   },
 
