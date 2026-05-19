@@ -146,7 +146,7 @@ export interface LessonDeliverable {
   format: string;
 }
 
-export interface Lesson {
+export interface Lesson extends NodeMeta {
   id: string;
   slug: string;
   /**
@@ -220,7 +220,7 @@ export interface ProjectMilestone {
   fallbackLesson?: string;
 }
 
-export interface Project {
+export interface Project extends NodeMeta {
   id: string;
   slug: string;
   title: string;
@@ -255,7 +255,7 @@ export interface Project {
 
 export type TemplateKind = "prompt" | "mission" | "checklist";
 
-export interface ContentTemplate {
+export interface ContentTemplate extends NodeMeta {
   id: string;
   slug: string;
   title: string;
@@ -264,4 +264,97 @@ export interface ContentTemplate {
   summary: string;
   body: string;
   tags: string[];
+}
+
+// ── 2.0 지식 그래프 레이어 ──────────────────────────────
+// 설계 근거 — docs/specs/2026-05-19-builder-school-2.0-architecture.md
+
+/** 노드의 휘발성 — 항상성 장치 (스펙 §2-1) */
+export type Volatility = "evergreen" | "evolving" | "volatile";
+
+/** 노드 게시 상태 (스펙 §2-2) */
+export type NodeStatus = "draft" | "published" | "archived";
+
+/**
+ * 모든 노드 콘텐츠 타입에 옵셔널로 합쳐지는 공통 메타.
+ * 각 콘텐츠 객체가 단일 진실 공급원 — ontology 레지스트리는 중복 저장하지 않는다.
+ */
+export interface NodeMeta {
+  /** 미지정 시 마이그레이션 기본값(evolving)이 적용된다 */
+  volatility?: Volatility;
+  /** ISO 날짜. volatility === "volatile"이면 필수 */
+  reviewBy?: string;
+  /** 미지정 시 "published"로 간주 */
+  status?: NodeStatus;
+}
+
+/** 그래프 노드 종류 */
+export type NodeKind = "concept" | "lesson" | "special" | "project" | "template";
+
+/** Concept — 원자적 지식 단위, 위키 항목 (스펙 §2 신규 노드) */
+export interface Concept extends NodeMeta {
+  id: string;
+  slug: string;
+  titleKo: string;
+  titleEn?: string;
+  summary: string;
+  tags: string[];
+}
+
+/** Special — 특강. 제품·버전 종속 휘발성 노드 (스펙 §2 신규 노드) */
+export interface Special extends NodeMeta {
+  id: string;
+  slug: string;
+  titleKo: string;
+  titleEn?: string;
+  summary: string;
+  /** 다루는 제품·서비스 (예 "Codex Cloud") */
+  product: string;
+  format: "interactive-slides";
+  estimatedMinutes: number;
+  /** Special은 항상 volatile → 필수 */
+  reviewBy: string;
+  tags: string[];
+}
+
+/** 엣지 종류 (스펙 §3) */
+export type EdgeType =
+  | "prerequisite"
+  | "teaches"
+  | "demonstrates"
+  | "deepens"
+  | "appliesTo"
+  | "relatedTo"
+  | "supersedes"
+  | "partOfJourney";
+
+/** 그래프 엣지. from·to는 "{kind}:{slug}" 형식 노드 id (스펙 §2-5) */
+export interface Edge {
+  from: string;
+  to: string;
+  type: EdgeType;
+}
+
+/** 렌즈 — 그래프를 선형으로 보여주는 뷰 (Stage·Journey) */
+export interface Lens {
+  id: string;
+  kind: "stage" | "journey";
+  title: string;
+  /** 순서 있는 "{kind}:{slug}" 노드 id 목록 */
+  nodeIds: string[];
+}
+
+/**
+ * 그래프 노드 레지스트리 항목.
+ * 콘텐츠 본문은 원본 배열(lessons 등)에 있고, 여기엔 id·kind·메타만 정규화해 담는다.
+ */
+export interface GraphNode {
+  /** "{kind}:{slug}" */
+  id: string;
+  kind: NodeKind;
+  slug: string;
+  title: string;
+  volatility: Volatility;
+  status: NodeStatus;
+  reviewBy?: string;
 }

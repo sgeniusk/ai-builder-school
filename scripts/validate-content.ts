@@ -45,51 +45,72 @@ try {
     templates: templates.length,
   };
 
-  if (issues.length === 0) {
-    const summary = Object.entries(stats)
-      .map(([k, v]) => `${k} ${v}`)
-      .join(" · ");
-    console.log(color(COLORS.green + COLORS.bold, "✓ Content OK"));
-    console.log(color(COLORS.dim, `  ${summary}`));
-    process.exit(0);
-  }
+  const summary = Object.entries(stats)
+    .map(([k, v]) => `${k} ${v}`)
+    .join(" · ");
 
-  console.log(
-    color(
-      COLORS.red + COLORS.bold,
-      `✗ ${issues.length}건의 무결성 이슈가 발견되었습니다.`,
-    ),
-  );
-  console.log("");
+  // severity 미지정은 error로 간주 (content.ts 계약)
+  const errors = issues.filter((i) => i.severity !== "warning");
+  const warnings = issues.filter((i) => i.severity === "warning");
 
-  // 종류별 그룹화
-  const byKind = new Map<string, typeof issues>();
-  for (const issue of issues) {
-    const arr = byKind.get(issue.kind) ?? [];
-    arr.push(issue);
-    byKind.set(issue.kind, arr);
-  }
-
-  for (const [kind, list] of byKind) {
-    console.log(color(COLORS.yellow + COLORS.bold, `[${kind}]`));
+  // 종류별 그룹화해 출력
+  function printGroup(list: typeof issues): void {
+    const byKind = new Map<string, typeof issues>();
     for (const issue of list) {
-      console.log(
-        `  ${color(COLORS.cyan, issue.ref)}  ${issue.message}`,
-      );
+      const arr = byKind.get(issue.kind) ?? [];
+      arr.push(issue);
+      byKind.set(issue.kind, arr);
     }
-    console.log("");
+    for (const [kind, items] of byKind) {
+      console.log(color(COLORS.yellow + COLORS.bold, `[${kind}]`));
+      for (const issue of items) {
+        console.log(`  ${color(COLORS.cyan, issue.ref)}  ${issue.message}`);
+      }
+      console.log("");
+    }
   }
 
-  console.log(
-    color(
-      COLORS.dim,
-      "복구 힌트:\n" +
-        "  - 누락된 slug를 추가하거나, 잘못된 참조를 제거하세요.\n" +
-        "  - 자동 수정하지 마세요. 콘텐츠 변경은 사람이 확인 후 커밋합니다.",
-    ),
-  );
+  if (errors.length > 0) {
+    console.log(
+      color(
+        COLORS.red + COLORS.bold,
+        `✗ ${errors.length}건의 무결성 이슈가 발견되었습니다.`,
+      ),
+    );
+    console.log("");
+    printGroup(errors);
+  }
 
-  process.exit(1);
+  if (warnings.length > 0) {
+    console.log(
+      color(
+        COLORS.yellow + COLORS.bold,
+        `⚠ ${warnings.length}건의 경고 (게이트는 통과합니다).`,
+      ),
+    );
+    console.log("");
+    printGroup(warnings);
+  }
+
+  if (errors.length > 0) {
+    console.log(
+      color(
+        COLORS.dim,
+        "복구 힌트:\n" +
+          "  - 누락된 slug를 추가하거나, 잘못된 참조를 제거하세요.\n" +
+          "  - 자동 수정하지 마세요. 콘텐츠 변경은 사람이 확인 후 커밋합니다.",
+      ),
+    );
+    process.exit(1);
+  }
+
+  const okLabel =
+    warnings.length > 0
+      ? `✓ Content OK (경고 ${warnings.length}건)`
+      : "✓ Content OK";
+  console.log(color(COLORS.green + COLORS.bold, okLabel));
+  console.log(color(COLORS.dim, `  ${summary}`));
+  process.exit(0);
 } catch (err) {
   console.error(
     color(COLORS.red + COLORS.bold, "✗ Validation script crashed:"),
