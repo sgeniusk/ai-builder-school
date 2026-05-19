@@ -9,12 +9,12 @@
  *   npm run validate
  *
  * 종료 코드:
- *   0 — 모든 검증 통과
- *   1 — 1건 이상 무결성 이슈 발견
+ *   0 — error 0건 (warning은 출력하되 게이트를 막지 않는다 — 스펙 §4-4)
+ *   1 — error 1건 이상 발견
  *   2 — 스크립트 자체 실행 오류
  */
 
-import { validateContent } from "../src/lib/content";
+import { validateContent, type ContentIntegrityIssue } from "../src/lib/content";
 import { phases } from "../src/content/phases";
 import { lessons } from "../src/content/lessons";
 import { journeys } from "../src/content/journeys";
@@ -35,8 +35,28 @@ function color(code: string, text: string): string {
   return process.stdout.isTTY ? `${code}${text}${COLORS.reset}` : text;
 }
 
+/** 종류별로 그룹화해 출력한다 */
+function printGrouped(issues: ContentIntegrityIssue[]): void {
+  const byKind = new Map<string, ContentIntegrityIssue[]>();
+  for (const issue of issues) {
+    const arr = byKind.get(issue.kind) ?? [];
+    arr.push(issue);
+    byKind.set(issue.kind, arr);
+  }
+  for (const [kind, list] of byKind) {
+    console.log(color(COLORS.yellow + COLORS.bold, `[${kind}]`));
+    for (const issue of list) {
+      console.log(`  ${color(COLORS.cyan, issue.ref)}  ${issue.message}`);
+    }
+    console.log("");
+  }
+}
+
 try {
   const issues = validateContent();
+  const errors = issues.filter((i) => i.severity !== "warning");
+  const warnings = issues.filter((i) => i.severity === "warning");
+
   const stats = {
     phases: phases.length,
     lessons: lessons.length,
@@ -45,39 +65,42 @@ try {
     templates: templates.length,
   };
 
-  if (issues.length === 0) {
+  if (errors.length === 0) {
     const summary = Object.entries(stats)
       .map(([k, v]) => `${k} ${v}`)
       .join(" · ");
     console.log(color(COLORS.green + COLORS.bold, "✓ Content OK"));
     console.log(color(COLORS.dim, `  ${summary}`));
+
+    if (warnings.length > 0) {
+      console.log("");
+      console.log(
+        color(
+          COLORS.yellow + COLORS.bold,
+          `⚠ ${warnings.length}건의 경고 (비차단 — 게이트를 막지 않습니다)`,
+        ),
+      );
+      console.log("");
+      printGrouped(warnings);
+    }
     process.exit(0);
   }
 
   console.log(
     color(
       COLORS.red + COLORS.bold,
-      `✗ ${issues.length}건의 무결성 이슈가 발견되었습니다.`,
+      `✗ ${errors.length}건의 무결성 오류가 발견되었습니다.`,
     ),
   );
   console.log("");
+  printGrouped(errors);
 
-  // 종류별 그룹화
-  const byKind = new Map<string, typeof issues>();
-  for (const issue of issues) {
-    const arr = byKind.get(issue.kind) ?? [];
-    arr.push(issue);
-    byKind.set(issue.kind, arr);
-  }
-
-  for (const [kind, list] of byKind) {
-    console.log(color(COLORS.yellow + COLORS.bold, `[${kind}]`));
-    for (const issue of list) {
-      console.log(
-        `  ${color(COLORS.cyan, issue.ref)}  ${issue.message}`,
-      );
-    }
+  if (warnings.length > 0) {
+    console.log(
+      color(COLORS.yellow + COLORS.bold, `⚠ 추가로 ${warnings.length}건의 경고:`),
+    );
     console.log("");
+    printGrouped(warnings);
   }
 
   console.log(
