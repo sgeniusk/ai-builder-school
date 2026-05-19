@@ -3,6 +3,7 @@ import { lessons } from "@/content/lessons";
 import { journeys } from "@/content/journeys";
 import { projects } from "@/content/projects";
 import { templates } from "@/content/templates";
+import { graphEdges, graphLenses, nodeById } from "@/content/ontology";
 import type {
   Journey,
   JourneyId,
@@ -10,6 +11,10 @@ import type {
   Phase,
   Project,
   ContentTemplate,
+  Edge,
+  EdgeType,
+  GraphNode,
+  Lens,
 } from "./types";
 
 export function getPhases(): Phase[] {
@@ -154,4 +159,45 @@ export function validateContent(): ContentIntegrityIssue[] {
   }
 
   return issues;
+}
+
+// ── 2.0 그래프 질의 헬퍼 ──────────────────────────────
+
+/** id로 노드 조회 */
+export function getNode(id: string): GraphNode | undefined {
+  return nodeById.get(id);
+}
+
+/** 특정 노드에서 나가는 엣지 (옵션 — 타입 필터) */
+export function getOutEdges(nodeIdValue: string, type?: EdgeType): Edge[] {
+  return graphEdges.filter(
+    (e) => e.from === nodeIdValue && (type ? e.type === type : true),
+  );
+}
+
+/** 특정 노드로 들어오는 엣지 (옵션 — 타입 필터) */
+export function getInEdges(nodeIdValue: string, type?: EdgeType): Edge[] {
+  return graphEdges.filter(
+    (e) => e.to === nodeIdValue && (type ? e.type === type : true),
+  );
+}
+
+/**
+ * 위키 역참조 — 이 Concept를 가르치는 레슨 노드들.
+ * teaches 엣지의 반대 방향.
+ */
+export function getBacklinks(conceptNodeId: string): GraphNode[] {
+  return getInEdges(conceptNodeId, "teaches")
+    .map((e) => nodeById.get(e.from))
+    .filter((n): n is GraphNode => Boolean(n));
+}
+
+/** 렌즈 조회 */
+export function getLens(lensId: string): Lens | undefined {
+  return graphLenses.find((l) => l.id === lensId);
+}
+
+/** 모든 렌즈 */
+export function getLenses(): Lens[] {
+  return graphLenses;
 }
