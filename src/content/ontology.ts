@@ -5,6 +5,8 @@ import { projects } from "./projects";
 import { templates } from "./templates";
 import { concepts } from "./concepts";
 import { specials } from "./specials";
+import { journeys } from "./journeys";
+import { phases } from "./phases";
 import type {
   Edge,
   GraphNode,
@@ -57,3 +59,92 @@ export const graphNodes: GraphNode[] = [
 export const nodeById = new Map<string, GraphNode>(
   graphNodes.map((n) => [n.id, n]),
 );
+
+// ── 엣지 ────────────────────────────────────────────────
+
+const lessonSlugSet = new Set(lessons.map((l) => l.slug));
+
+/** prerequisite 엣지 — Lesson.prerequisites(slug 목록)에서 유도 */
+const prerequisiteEdges: Edge[] = lessons.flatMap((l) =>
+  l.prerequisites
+    .filter((slug) => lessonSlugSet.has(slug))
+    .map((slug) => ({
+      from: nodeId("lesson", slug),
+      to: nodeId("lesson", l.slug),
+      type: "prerequisite" as const,
+    })),
+);
+
+/**
+ * partOfJourney 엣지 — Lesson.targetJourneys에서 유도 (읽기 전용 파생물).
+ *
+ * 주의 — `journey:{slug}` 타깃은 합성 네임스페이스다. Journey는 노드가 아니라
+ * 렌즈이므로 이 타깃은 graphNodes에 없고 nodeById로 resolve되지 않는다.
+ * 무결성 검증(content.ts §4-4)은 journeyIdSet으로 이 타깃을 별도 확인한다.
+ * 렌즈 자체의 id는 `lens:journey:{slug}` 형식으로 따로 있다(graphLenses 참조).
+ */
+const partOfJourneyEdges: Edge[] = lessons.flatMap((l) =>
+  l.targetJourneys.map((jid) => ({
+    from: nodeId("lesson", l.slug),
+    to: `journey:${jid}`,
+    type: "partOfJourney" as const,
+  })),
+);
+
+/** teaches 엣지 — Lesson → Concept. 수동 선언 (스펙 §3) */
+const teachesEdges: Edge[] = [
+  { from: nodeId("lesson", "common-skills-of-future-proof-people"), to: nodeId("concept", "human-in-the-loop"), type: "teaches" },
+  { from: nodeId("lesson", "hallucination-verification"), to: nodeId("concept", "hallucination"), type: "teaches" },
+  { from: nodeId("lesson", "checks-before-trusting-ai-output"), to: nodeId("concept", "human-in-the-loop"), type: "teaches" },
+  { from: nodeId("lesson", "structure-of-good-prompts"), to: nodeId("concept", "prompt-structure"), type: "teaches" },
+  { from: nodeId("lesson", "feeding-long-documents"), to: nodeId("concept", "context-engineering"), type: "teaches" },
+  { from: nodeId("lesson", "understanding-embeddings"), to: nodeId("concept", "embedding"), type: "teaches" },
+  { from: nodeId("lesson", "grounded-rag-answers"), to: nodeId("concept", "rag"), type: "teaches" },
+  { from: nodeId("lesson", "function-calling"), to: nodeId("concept", "tool-use"), type: "teaches" },
+  { from: nodeId("lesson", "mini-agent-loop"), to: nodeId("concept", "agent-loop"), type: "teaches" },
+  { from: nodeId("lesson", "prompt-injection-defense"), to: nodeId("concept", "prompt-injection"), type: "teaches" },
+];
+
+/** relatedTo 엣지 — Concept ↔ Concept. 위키식 횡적 연결 */
+const relatedToEdges: Edge[] = [
+  { from: nodeId("concept", "hallucination"), to: nodeId("concept", "human-in-the-loop"), type: "relatedTo" },
+  { from: nodeId("concept", "rag"), to: nodeId("concept", "embedding"), type: "relatedTo" },
+  { from: nodeId("concept", "rag"), to: nodeId("concept", "hallucination"), type: "relatedTo" },
+  { from: nodeId("concept", "tool-use"), to: nodeId("concept", "agent-loop"), type: "relatedTo" },
+  { from: nodeId("concept", "prompt-structure"), to: nodeId("concept", "context-engineering"), type: "relatedTo" },
+];
+
+/** 그래프의 모든 엣지 */
+export const graphEdges: Edge[] = [
+  ...prerequisiteEdges,
+  ...partOfJourneyEdges,
+  ...teachesEdges,
+  ...relatedToEdges,
+];
+
+// ── 렌즈 ────────────────────────────────────────────────
+
+/** Phase 렌즈 — phases.ts의 lessonSlugs에서 유도 */
+const phaseLenses: Lens[] = [...phases]
+  .sort((a, b) => a.order - b.order)
+  .map((p) => ({
+    id: `lens:phase:${p.slug}`,
+    kind: "phase" as const,
+    title: p.titleKo,
+    nodeIds: p.lessonSlugs
+      .filter((slug) => lessonSlugSet.has(slug))
+      .map((slug) => nodeId("lesson", slug)),
+  }));
+
+/** Journey 렌즈 — journeys.ts의 recommendedLessons에서 유도 */
+const journeyLenses: Lens[] = journeys.map((j) => ({
+  id: `lens:journey:${j.slug}`,
+  kind: "journey" as const,
+  title: j.titleKo,
+  nodeIds: j.recommendedLessons
+    .filter((slug) => lessonSlugSet.has(slug))
+    .map((slug) => nodeId("lesson", slug)),
+}));
+
+/** 그래프의 모든 렌즈 */
+export const graphLenses: Lens[] = [...phaseLenses, ...journeyLenses];
