@@ -51,6 +51,24 @@ const faqs = [
   },
 ];
 
+const visionPillars = [
+  {
+    n: "01",
+    title: "살아있는 지식 그래프",
+    body: "AI Builder School은 정적 커리큘럼이 아니라 입력으로 자라는 지식 그래프입니다. 레슨·개념·특강이 노드로, 관계가 엣지로 이어집니다.",
+  },
+  {
+    n: "02",
+    title: "항구적 코어 + 휘발성 엣지",
+    body: "원리(레슨·개념)는 변하지 않고, 제품에 묶인 특강만 갈립니다. 그래서 6개월마다 뒤집히는 AI 시장에서도 학교의 코어는 흔들리지 않습니다.",
+  },
+  {
+    n: "03",
+    title: "성장 엔진",
+    body: "새 강의 자료가 들어오면 정제·분류 후 노드로 등록되고, 그래프가 나머지 페이지로 전파합니다. 그 사이에는 항상 사람의 검토가 있습니다.",
+  },
+];
+
 export default function AboutPage() {
   return (
     <>
@@ -118,6 +136,35 @@ export default function AboutPage() {
               </details>
             ))}
           </div>
+        </Container>
+      </section>
+
+      <section className="sec">
+        <Container>
+          <div className="eyebrow" style={{ marginBottom: 12 }}>2.0 Vision</div>
+          <h2 className="section-title" style={{ fontSize: "clamp(28px, 3.6vw, 40px)" }}>
+            급변하는 시장에서 항상성을 지키는 학교
+          </h2>
+          <p className="section-lede">
+            AI Builder School 2.0은 한 번 만들고 끝나는 커리큘럼이 아닙니다. 입력으로 자라고, 원리는 남기고, 낡은 것만 갈아 끼우는 시스템입니다.
+          </p>
+
+          <div
+            className="principles-list"
+            style={{ gridTemplateColumns: "repeat(3, 1fr)", marginTop: 24 }}
+          >
+            {visionPillars.map((p) => (
+              <article key={p.n}>
+                <div className="n">{p.n}</div>
+                <h3>{p.title}</h3>
+                <p>{p.body}</p>
+              </article>
+            ))}
+          </div>
+
+          <p style={{ marginTop: 32, fontSize: 14, color: "var(--ink-3)" }}>
+            디자인 지식의 형제 학교 Design System School도 같은 그래프 모델 위에 서 있습니다. 두 학교의 상호 링크는 배포 후 연결됩니다.
+          </p>
         </Container>
       </section>
 
