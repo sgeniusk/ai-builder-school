@@ -3119,13 +3119,18 @@ body {
     border: 1px solid var(--line);
     border-radius: var(--r-lg);
     background: var(--card);
-    min-height: clamp(380px, 52vh, 540px);
+    /* 화면비 고정 — 콘텐츠 양에 따라 높이가 흔들리지 않도록 */
+    aspect-ratio: 16 / 9;
     display: flex;
+    flex-direction: column;
     overflow: auto;
+  }
+  @media (max-width: 700px) {
+    .slide-deck__stage { aspect-ratio: 9 / 16; }
   }
   .slide {
     width: 100%;
-    padding: clamp(28px, 5vw, 60px);
+    padding: clamp(24px, 5vw, 56px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -3214,6 +3219,9 @@ body {
   }
   .slide-deck__slide-anim {
     width: 100%;
+    /* flex-column 부모 안에서 main-axis(세로)에 auto 마진 — 짧은 슬라이드는
+       중앙 정렬, 긴 슬라이드는 마진 0으로 접혀 stage가 위에서 스크롤된다. */
+    margin: auto;
     animation: slide-fade-in 0.32s var(--ease) both;
   }
   @media (prefers-reduced-motion: reduce) {
