@@ -1,0 +1,279 @@
+{/* 특강 본문 — 2026-05 프런티어 AI 지형. 휘발성 노드(스펙 3). reviewBy 2026-11-30 */}
+{/* 사실관계 출처는 각 슬라이드의 Source 주석 참조. 검토 시한이 지나면 갱신·보관 대상. */}
+
+<SlideDeck>
+
+<Slide title="표지 — 프런티어 AI 지형 2026">
+
+<TitleBlock
+  eyebrow="특강 · 2026-05"
+  bigTitle="프런티어 AI 지형 2026"
+  subtitle="Google I/O 2026 + Claude Opus 4.7 + GPT-5.5 — 한 달 반 사이에 일어난 일을 빌더 관점에서 정리합니다."
+  chips={[
+    { icon: "sparkles", label: "Gemini 3.5 Flash" },
+    { icon: "zap", label: "GPT-5.5" },
+    { icon: "pen-tool", label: "Claude Opus 4.7" },
+    { icon: "shield", label: "Builder's view" },
+  ]}
+/>
+
+</Slide>
+
+<Slide title="한 달 반 만에 바뀐 판">
+
+## 한 달 반 만에 바뀐 판
+
+2026년 4월 16일부터 5월 19일까지 — **딱 한 달 반** 사이에 일어난 일입니다.
+
+<TimelineBlock
+  steps={[
+    { icon: "pen-tool", title: "4/16 — Claude Opus 4.7", description: "Anthropic, 가장 어려운 SWE 작업 강화 + 첫 고해상도 비전" },
+    { icon: "zap", title: "4/23 — GPT-5.5", description: "OpenAI, 14개 벤치마크 SOTA · 1M 컨텍스트 · Codex 통합" },
+    { icon: "file-text", title: "5/6 — Code with Claude", description: "Anthropic, 신규 플래그십 모델 없이 개발자 키노트" },
+    { icon: "shield", title: "5/7 — GPT-5.5-Cyber", description: "OpenAI, 보안 특화 모델을 검증된 보안팀에 출시" },
+    { icon: "sparkles", title: "5/19 — Google I/O 2026", description: "Google, Gemini 3.5 Flash GA · Spark 에이전트 · AI Ultra $100 · Android XR" },
+  ]}
+/>
+
+예전엔 분기·연 단위였던 모델 경쟁이 이제 **주·월 단위**로 돌아갑니다.
+
+{/* Source · NEWS · CNBC "OpenAI announces GPT-5.5" (2026-04-23) — https://www.cnbc.com/2026/04/23/openai-announces-latest-artificial-intelligence-model.html */}
+{/* Source · NEWS · Anthropic "Introducing Claude Opus 4.7" — https://www.anthropic.com/news/claude-opus-4-7 */}
+
+</Slide>
+
+<Slide title="이 특강은 6개월 뒤 낡습니다">
+
+## 이 특강은 6개월 뒤 낡습니다 — 일부러 그렇습니다
+
+이 슬라이드에 적힌 모델 이름·버전·벤치마크 순위는 **반년 안에 전부 옛것**이 됩니다.
+
+그래서 이건 **레슨이 아니라 특강**입니다. AI Builder School 2.0은 콘텐츠를 두 층으로 나눕니다.
+
+- **항구적 코어 (레슨)** — LLM의 모양별 강약 같은 변하지 않는 원리
+- **휘발성 엣지 (특강)** — 제품·버전·시장 동향. 검토 시한(`reviewBy`)이 붙고, 낡으면 교체·보관됩니다
+
+이 특강의 검토 시한은 **2026년 11월 30일**입니다. 그때 다시 씁니다.
+
+</Slide>
+
+<Slide title="Google — I/O 2026">
+
+## Google — I/O 2026
+
+5월 19일 키노트의 헤드라인은 **Gemini 3.5 Flash · Gemini Spark · AI Ultra**였습니다.
+
+<CardGridBlock
+  columns={3}
+  cards={[
+    { icon: "sparkles", label: "Model", title: "Gemini 3.5 Flash",
+      description: "5/19 GA. 3.1 Pro를 코딩·에이전트·멀티모달에서 능가, 출력 토큰 4× 빠름(최적화판 12×). Terminal-Bench 2.1 76.2%, MCP Atlas 83.6%. 3.5 Pro는 다음달, Omni(영상 생성)도 발표." },
+    { icon: "zap", label: "Agent", title: "Gemini Spark",
+      description: "Gmail·Drive·Calendar·Docs·YouTube·Maps 통합 24/7 개인 에이전트. Gemini 3.5 Flash 위에서 동작. 미국 AI Ultra 구독자에 다음주 베타." },
+    { icon: "eye", label: "Distribution", title: "AI Ultra $100 · Android XR",
+      description: "Ultra 월 $100(Gemini 사용량 5×), 일일 프롬프트 한도 → **컴퓨트 기반 과금** 전환. Android XR 안경·Intelligent Eyewear 공개." },
+  ]}
+/>
+
+Google의 베팅은 **"빠른 Flash + 사용자 컨텍스트 장악"** — Flash가 SOTA 후보로 올라오고, Spark가 Gmail·Drive·Calendar를 가로지르는 액션 에이전트로 묶입니다.
+
+{/* Source · BLOG · Google "Gemini 3.5: frontier intelligence with action" — https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/ */}
+{/* Source · NEWS · CNBC "Google debuts new AI models, personal AI agents" (2026-05-19) — https://www.cnbc.com/2026/05/19/google-ai-ultra-gemini-spark-omni.html */}
+{/* Source · NEWS · TechCrunch "Google introduces Gemini Spark" (2026-05-19) — https://techcrunch.com/2026/05/19/google-introduces-gemini-spark-a-24-7-agentic-assistant-with-gmail-integration/ */}
+{/* Source · NEWS · 9to5google "Everything Google announced at I/O 2026" — https://9to5google.com/2026/05/19/google-io-2026-news/ */}
+
+</Slide>
+
+<Slide title="OpenAI — GPT-5.5">
+
+## OpenAI — GPT-5.5
+
+OpenAI는 4월 23일 **GPT-5.5**를 공개했습니다.
+
+<CardGridBlock
+  columns={3}
+  cards={[
+    { icon: "zap", label: "Model", title: "GPT-5.5",
+      description: "코딩·컴퓨터 사용·심층 리서치 향상, 14개 벤치마크 SOTA 주장 · 1M 토큰 컨텍스트." },
+    { icon: "terminal", label: "Runtime", title: "Codex 통합",
+      description: "ChatGPT·Codex로 유료 구독자(Plus·Pro·Business·Enterprise)에 배포." },
+    { icon: "shield", label: "Vertical", title: "GPT-5.5-Cyber (5/7)",
+      description: "보안 특화 모델을 검증된 보안팀에 별도 출시." },
+  ]}
+/>
+
+OpenAI의 베팅은 **"에이전트 런타임"** — 모델이 직접 컴퓨터를 쓰고 도구를 굴리는 쪽입니다.
+
+{/* Source · NEWS · CNBC "OpenAI announces GPT-5.5" (2026-04-23) — https://www.cnbc.com/2026/04/23/openai-announces-latest-artificial-intelligence-model.html */}
+{/* Source · NEWS · CNBC "OpenAI rolls out GPT-5.5-Cyber" (2026-05-07) — https://www.cnbc.com/2026/05/07/openai-rolls-out-new-gpt-5point5-cyber-to-vetted-cybersecurity-teams.html */}
+
+</Slide>
+
+<Slide title="Anthropic — Opus 4.7, 그리고 Mythos">
+
+## Anthropic — Claude Opus 4.7, 그리고 Mythos
+
+4월 16일 **Claude Opus 4.7**을 GA로 내놨습니다.
+
+<CardGridBlock
+  columns={3}
+  cards={[
+    { icon: "pen-tool", label: "Model", title: "Opus 4.7",
+      description: "가장 어려운 SWE 작업에서 4.6 대비 향상. 가격은 동일 — 입력 100만 토큰 $5 / 출력 $25." },
+    { icon: "image", label: "Vision", title: "고해상도 입력",
+      description: "첫 고해상도 이미지 입력 지원 — 최대 2576px / 3.75MP." },
+    { icon: "lock", label: "Next", title: "Mythos (미공개·gated)",
+      description: "Opus 4.7이 미공개 차세대 모델 Mythos에 뒤진다고 자체 발표. Code with Claude(5/6)에서는 신규 플래그십 없음." },
+  ]}
+/>
+
+{/* Source · DOC · Anthropic "What's new in Claude Opus 4.7" — https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7 */}
+{/* Source · NEWS · Axios "Anthropic releases Claude Opus 4.7, concedes it trails unreleased Mythos" (2026-04-16) — https://www.axios.com/2026/04/16/anthropic-claude-opus-model-mythos */}
+
+</Slide>
+
+<Slide title="3사 한 장 비교 (탭)">
+
+## 3사를 한 장으로
+
+같은 "에이전트" 경쟁이지만 셋의 **무게중심이 다릅니다.**
+
+<TabsBlock
+  tabs={[
+    {
+      label: "Google",
+      panel: {
+        heading: "Google — Gemini 3.5 + Spark 에이전트",
+        columns: [
+          { heading: "대표 라인업", bullets: [
+            { text: "Gemini 3.5 Flash · 5/19 GA · 출력 4× 빠름", emphasis: true },
+            { text: "Gemini 3.5 Pro · 다음달 공개 예정" },
+            { text: "Gemini Spark · Gmail/Drive 통합 24/7 에이전트" },
+            { text: "Gemini Omni · 영상 입력→출력 멀티모달" },
+            { text: "Android XR · Intelligent Eyewear" },
+          ]},
+          { heading: "베팅의 축", bullets: [
+            { text: "Flash 라인이 SOTA 후보로 — 빠르고 싸고 좋은 모델 전략", emphasis: true },
+            { text: "Gmail·Drive·Calendar 통합으로 사용자 컨텍스트 장악" },
+            { text: "AI Ultra $100 + 컴퓨트 기반 과금으로 사용량 모델 전환" },
+          ]},
+        ],
+      },
+    },
+    {
+      label: "OpenAI",
+      panel: {
+        heading: "OpenAI — 에이전트 런타임",
+        columns: [
+          { heading: "대표 라인업", bullets: [
+            { text: "GPT-5.5 · 14개 벤치마크 SOTA · 1M 컨텍스트", emphasis: true },
+            { text: "GPT-5.5-Cyber — 보안 특화" },
+            { text: "ChatGPT · Codex 배포" },
+          ]},
+          { heading: "베팅의 축", bullets: [
+            { text: "모델이 직접 컴퓨터를 쓰고 도구를 굴리는 에이전트 런타임" },
+            { text: "범용 에이전트 → 버티컬 모델로 확장" },
+          ]},
+        ],
+      },
+    },
+    {
+      label: "Anthropic",
+      panel: {
+        heading: "Anthropic — 신뢰 가능한 추론·코딩",
+        columns: [
+          { heading: "대표 라인업", bullets: [
+            { text: "Claude Opus 4.7 (4/16 GA)", emphasis: true },
+            { text: "Mythos — 미공개 차세대" },
+            { text: "Claude · Claude Code · API" },
+          ]},
+          { heading: "베팅의 축", bullets: [
+            { text: "가장 어려운 소프트웨어 엔지니어링" },
+            { text: "발표 페이스보다 깊이 — Code with Claude에서 신모델 미발표" },
+          ]},
+        ],
+      },
+    },
+  ]}
+/>
+
+{/* Source · NEWS · VentureBeat "OpenAI's GPT-5.5 ... vs Claude Mythos Preview on Terminal-Bench 2.0" — https://venturebeat.com/ai/openais-gpt-5-5-is-here-and-its-no-potato-narrowly-beats-anthropics-claude-mythos-preview-on-terminal-bench-2-0 */}
+
+</Slide>
+
+<Slide title="변하는 것 vs 변하지 않는 것">
+
+## 빌더 관점 — 매달 바뀌는 것과 바뀌지 않는 것
+
+<TwoColumnListBlock
+  left={{
+    heading: "휘발성 — 매달 바뀐다",
+    icon: "rotate-cw",
+    items: [
+      { text: "어느 모델이 어느 벤치마크 1위인가" },
+      { text: "모델 이름·버전 번호" },
+      { text: "토큰 가격, 컨텍스트 길이 상한" },
+      { text: "누가 먼저 무엇을 발표했는가" },
+      { text: "1위는 발표마다 엎치락뒤치락한다", emphasis: true },
+    ],
+  }}
+  right={{
+    heading: "항구 — 변하지 않는다",
+    icon: "shield",
+    items: [
+      { text: "LLM은 형태 변환·요약·분류에 구조적으로 강하다" },
+      { text: "결정적 계산·최신 사실·정확한 인용에 구조적으로 약하다" },
+      { text: "사람의 검증(human-in-the-loop)은 사라지지 않는다", emphasis: true },
+      { text: "내 평가셋(evals)이 발표 수치보다 신뢰 가능하다" },
+      { text: "모델 호출 추상화 계층은 교체 비용을 줄인다" },
+    ],
+  }}
+/>
+
+이 원리가 이 특강이 심화하는 항구적 레슨입니다 — [LLM이 잘하는 일과 못하는 일](/lessons/what-llms-are-good-and-bad-at).
+
+</Slide>
+
+<Slide title="그래서 빌더는 무엇을 하나">
+
+## 그래서 빌더는 무엇을 하나
+
+판이 주·월 단위로 흔들릴 때 흔들리지 않는 자세.
+
+- **벤치마크 1위가 아니라 내 일의 모양에 맞는 모델**을 고른다
+- 모델 호출에 **추상화 계층**을 둔다 — 모델 교체가 한 줄 수정이 되도록
+- 새 모델이 나오면 **내 평가셋(evals)으로 직접 검증**한다. 발표 수치를 믿지 않는다
+- 제품·버전 지식은 특강처럼 다룬다 — 갱신 시한을 정해 두고 주기적으로 새로 본다
+
+다음 검토 — **2026년 11월 30일**. 그때 이 지형은 또 바뀌어 있을 겁니다.
+
+</Slide>
+
+<Slide title="자주 묻는 것 (FAQ)">
+
+## 자주 묻는 것
+
+<AccordionBlock
+  items={[
+    {
+      question: "오늘 코딩 작업에 GPT-5.5 / Opus 4.7 / Gemini 3.5 Flash 중 뭘 써야 하나요?",
+      answer: "정답은 \"내 평가셋으로 셋 다 돌려 봐라\"입니다.\n\n공개 벤치마크는 평균치라 내 작업과 다릅니다. 가장 자주 하는 5개 작업을 10건씩 모아 세 모델에 같이 돌려 비교하세요. 1~2시간이면 끝납니다.\n\n경향만 보자면 — GPT-5.5는 에이전트·컴퓨터 사용·속도, Opus 4.7은 가장 어려운 SWE·신중한 추론, Gemini 3.5 Flash는 속도·비용·멀티모달(Terminal-Bench 2.1 76.2% 등 3.1 Pro 능가)이 강점으로 보고됩니다. 세 모델 다 \"에이전트형 코딩\"으로 수렴 중이라 차이는 좁아지고 있어요.",
+    },
+    {
+      question: "Mythos가 풀리면 다 갈아엎나요?",
+      answer: "갈아엎지 않습니다.\n\n레슨(원리)은 그대로 두고, 이 특강이 보관(archived)되고 새 특강이 deepens로 매달립니다. 학습자가 보는 코어는 손대지 않아요.\n\n바로 그게 v2.0이 항구·휘발을 분리하는 이유입니다.",
+    },
+    {
+      question: "Gemini Spark와 Gemini 3.5 Flash는 빌더가 어떻게 접근하나요?",
+      answer: "Gemini 3.5 Flash는 5/19부터 Gemini API에서 바로 호출할 수 있습니다 — 같이 Gemini 앱·검색에도 배포됐어요.\n\nGemini Spark는 미국 AI Ultra 구독자(월 $100/$200 tier)에 다음주 베타로 풀립니다. 빌더용 SDK는 아직 공개되지 않아서, 통합형 에이전트 자체는 우선 소비자 제품으로 사용해 평가하세요. 한 가지 더 — Gemini 앱 과금이 일일 프롬프트 한도에서 **컴퓨트 기반**으로 전환됐습니다.",
+    },
+    {
+      question: "벤치마크 순위는 얼마나 믿나요?",
+      answer: "지표로만 보고, 의사결정엔 쓰지 마세요.\n\n발표 직후 며칠 뒤 다른 모델이 같은 벤치마크를 갈아치우는 일이 흔합니다. 빌더가 신뢰할 마지막 평가는 \"내 작업 + 내 데이터 + 내 평가셋\"입니다.",
+    },
+  ]}
+/>
+
+</Slide>
+
+</SlideDeck>

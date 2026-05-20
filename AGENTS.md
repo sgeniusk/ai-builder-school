@@ -206,4 +206,5 @@ For lesson additions, also confirm:
 - `docs/harness-engineering-spec.md` — full Harness Engineering spec for this repo
 - `docs/implementation-plan.md` — MVP plan
 - `docs/assumptions.md` — open decisions
-- `docs/future-roadmap.md` — post-v0.1
+- `docs/roadmap.md` — single roadmap (v1.0 record + 2.0 plan)
+- `docs/specs/` · `docs/plans/` — 2.0 architecture spec & implementation plans
