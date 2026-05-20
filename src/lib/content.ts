@@ -3,6 +3,7 @@ import { journeys } from "@/content/journeys";
 import { projects } from "@/content/projects";
 import { templates } from "@/content/templates";
 import { stages } from "@/content/stages";
+import { specials } from "@/content/specials";
 import {
   lessonStageMapping,
   EXPECTED_STAGE_DISTRIBUTION,
@@ -13,6 +14,7 @@ import {
   graphEdges,
   graphLenses,
   nodeById,
+  nodeId,
 } from "@/content/ontology";
 import type {
   Journey,
@@ -21,6 +23,7 @@ import type {
   Project,
   Stage,
   ContentTemplate,
+  Special,
   Edge,
   EdgeType,
   GraphNode,
@@ -156,6 +159,29 @@ export function getTemplates(): ContentTemplate[] {
 
 export function getTemplateBySlug(slug: string): ContentTemplate | undefined {
   return templates.find((t) => t.slug === slug);
+}
+
+// ─── 2.0 특강(Special) 헬퍼 (스펙 3) ─────────────────────────────
+
+/** 게시 상태와 무관하게 모든 특강 */
+export function getSpecials(): Special[] {
+  return specials;
+}
+
+export function getSpecialBySlug(slug: string): Special | undefined {
+  return specials.find((s) => s.slug === slug);
+}
+
+/**
+ * 이 레슨을 deepens로 심화하는 특강 목록 — 레슨 페이지 역참조용.
+ * deepens 엣지의 from이 special인 경우만 추린다 (lesson→lesson deepens는 제외).
+ */
+export function getSpecialsDeepening(lessonSlug: string): Special[] {
+  const target = nodeId("lesson", lessonSlug);
+  return getInEdges(target, "deepens")
+    .filter((e) => e.from.startsWith("special:"))
+    .map((e) => specials.find((s) => nodeId("special", s.slug) === e.from))
+    .filter((s): s is Special => Boolean(s));
 }
 
 export interface ContentIntegrityIssue {

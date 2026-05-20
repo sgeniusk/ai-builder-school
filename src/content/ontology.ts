@@ -123,12 +123,21 @@ const relatedToEdges: Edge[] = [
   { from: nodeId("concept", "prompt-structure"), to: nodeId("concept", "context-engineering"), type: "relatedTo" },
 ];
 
+/**
+ * deepens 엣지 — Special·Lesson → Lesson. 휘발성 특강이 어느 항구적 레슨을 심화하는가.
+ * 수동 선언 (스펙 3 §5). supersedes는 둘째 특강부터 등장한다.
+ */
+const deepensEdges: Edge[] = [
+  { from: nodeId("special", "frontier-ai-landscape-2026-05"), to: nodeId("lesson", "what-llms-are-good-and-bad-at"), type: "deepens" },
+];
+
 /** 그래프의 모든 엣지 */
 export const graphEdges: Edge[] = [
   ...prerequisiteEdges,
   ...partOfJourneyEdges,
   ...teachesEdges,
   ...relatedToEdges,
+  ...deepensEdges,
 ];
 
 // ── 렌즈 ────────────────────────────────────────────────

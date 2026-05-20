@@ -7,6 +7,7 @@ import {
   getJourneys,
   getLessons,
   getProjects,
+  getSpecials,
   getStages,
   getTemplates,
 } from "@/lib/content";
@@ -53,6 +54,16 @@ function buildSearchIndex(): SearchItem[] {
       href: "/templates",
       keywords: `${t.title} ${t.summary} ${t.tags.join(" ")}`.toLowerCase(),
     })),
+    ...getSpecials()
+      .filter((s) => (s.status ?? "published") !== "archived")
+      .map((s) => ({
+        type: "특강",
+        title: s.titleKo,
+        subtitle: s.summary,
+        href: `/specials/${s.slug}`,
+        keywords:
+          `${s.titleKo} ${s.titleEn ?? ""} ${s.summary} ${s.product} ${s.tags.join(" ")}`.toLowerCase(),
+      })),
   ];
 }
 
@@ -70,6 +81,7 @@ const navLinks = [
   { href: "/stages", label: "커리큘럼" },
   { href: "/journeys", label: "여정" },
   { href: "/projects", label: "프로젝트" },
+  { href: "/specials", label: "특강" },
   { href: "/templates", label: "템플릿" },
   { href: "/about", label: "소개" },
 ];
@@ -149,6 +161,7 @@ export function SiteFooter() {
           <FooterCol
             title="자료"
             links={[
+              { href: "/specials", label: "특강" },
               { href: "/templates", label: "템플릿" },
               { href: "/about", label: "소개" },
             ]}

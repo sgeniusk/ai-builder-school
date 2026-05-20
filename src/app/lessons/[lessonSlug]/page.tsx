@@ -10,6 +10,7 @@ import {
   getLessons,
   getStageById,
   getJourneys,
+  getSpecialsDeepening,
 } from "@/lib/content";
 import { getLessonBody } from "@/content/lesson-bodies";
 import { mdxElements } from "@/components/mdx-elements";
@@ -55,6 +56,8 @@ export default async function LessonPage({
   const missionText = lesson.mission ?? lesson.claudeCodeMission;
   // 시간 표기 — '최소(개념만 읽기)'와 '권장(미션까지)' 두 가지로.
   const readMinutes = Math.max(3, Math.round(lesson.estimatedMinutes * 0.4));
+  // 이 레슨을 deepens로 심화하는 휘발성 특강 (스펙 3 §7)
+  const relatedSpecials = getSpecialsDeepening(lesson.slug);
 
   return (
     <article className="lesson-reader">
@@ -158,6 +161,48 @@ export default async function LessonPage({
                 <li key={i}>{i}</li>
               ))}
             </ul>
+          </>
+        )}
+
+        {relatedSpecials.length > 0 && (
+          <>
+            <h2>관련 특강 · 심화</h2>
+            <p>
+              이 레슨의 원리는 그대로 두고, 최신 제품·버전 동향만 다루는 특강이
+              곁에 있습니다. 특강은 검토 시한이 지나면 갱신·교체됩니다.
+            </p>
+            {relatedSpecials.map((s) => (
+              <Link
+                key={s.slug}
+                href={`/specials/${s.slug}`}
+                style={{
+                  display: "block",
+                  margin: "12px 0",
+                  padding: "16px 20px",
+                  border: "1px solid var(--line)",
+                  borderRadius: "var(--r)",
+                  background: "var(--card)",
+                  textDecoration: "none",
+                }}
+              >
+                <div
+                  className="kicker mono"
+                  style={{ fontSize: 11, margin: 0, color: "var(--ink-3)" }}
+                >
+                  특강 · {s.product}
+                </div>
+                <div
+                  style={{
+                    marginTop: 6,
+                    fontSize: 16,
+                    fontWeight: 600,
+                    color: "var(--ink)",
+                  }}
+                >
+                  {s.titleKo}
+                </div>
+              </Link>
+            ))}
           </>
         )}
 

@@ -14,12 +14,14 @@
  *   2 — 스크립트 자체 실행 오류
  */
 
+import { readdirSync } from "node:fs";
 import { validateContent } from "../src/lib/content";
 import { stages } from "../src/content/stages";
 import { lessons } from "../src/content/lessons";
 import { journeys } from "../src/content/journeys";
 import { projects } from "../src/content/projects";
 import { templates } from "../src/content/templates";
+import { specials } from "../src/content/specials";
 
 const COLORS = {
   reset: "\x1b[0m",
@@ -37,12 +39,41 @@ function color(code: string, text: string): string {
 
 try {
   const issues = validateContent();
+
+  // 특강 ↔ MDX 본문 파일 정합 (스펙 3 §8).
+  // content.ts는 MDX를 import하지 않으므로(tsx가 MDX를 컴파일 못 함)
+  // 본문 정합은 파일시스템으로 게이트 스크립트에서 확인한다.
+  const specialMdx = new Set(
+    readdirSync("src/content/specials")
+      .filter((f) => f.endsWith(".mdx"))
+      .map((f) => f.replace(/\.mdx$/, "")),
+  );
+  for (const s of specials) {
+    if (!specialMdx.has(s.slug)) {
+      issues.push({
+        kind: "special.body.missing",
+        ref: s.slug,
+        message: `Special "${s.slug}" has no MDX body at src/content/specials/${s.slug}.mdx`,
+      });
+    }
+  }
+  for (const slug of specialMdx) {
+    if (!specials.some((s) => s.slug === slug)) {
+      issues.push({
+        kind: "special.body.orphan",
+        ref: slug,
+        message: `src/content/specials/${slug}.mdx has no matching Special in specials.ts`,
+      });
+    }
+  }
+
   const stats = {
     stages: stages.length,
     lessons: lessons.length,
     journeys: journeys.length,
     projects: projects.length,
     templates: templates.length,
+    specials: specials.length,
   };
 
   const summary = Object.entries(stats)
