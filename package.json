@@ -10,6 +10,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "validate": "tsx scripts/validate-content.ts",
+    "list:lessons": "tsx scripts/list-lessons.ts",
     "new-lesson": "tsx scripts/new-lesson.ts",
     "eval": "tsx scripts/eval-lesson-quality.ts && tsx scripts/journey-route-check.ts",
     "eval:lessons": "tsx scripts/eval-lesson-quality.ts",
