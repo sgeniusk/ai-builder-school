@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/Layout";
+import { JourneyFilter } from "@/components/JourneyFilter";
 import {
   getStages,
   getStageBySlug,
@@ -42,7 +43,7 @@ const JOURNEY_ORDER = [
 
 function LessonRow({ lesson }: { lesson: Lesson }) {
   return (
-    <li>
+    <li data-journeys={lesson.targetJourneys.join(" ")}>
       <Link href={`/lessons/${lesson.slug}`}>
         <span className="l-num">
           {lesson.stageOrdinal ? String(lesson.stageOrdinal).padStart(2, "0") : "—"}
@@ -232,6 +233,7 @@ export default async function StageDetailPage({
           <h2 className="section-title" style={{ fontSize: "clamp(28px, 3.6vw, 40px)" }}>
             이 단계의 레슨
           </h2>
+          <JourneyFilter />
           {stage.subGroups ? (
             stage.subGroups.map((sub) => {
               const subLessons = sub.lessonSlugs

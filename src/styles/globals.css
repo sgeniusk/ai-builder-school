@@ -787,6 +787,59 @@ body {
   .lessons-list .l-num { font-family: var(--f-mono); font-size: 13px; color: var(--ink-3); }
   .lessons-list .l-title { font-size: 17px; font-weight: 500; letter-spacing: -0.015em; color: var(--ink); }
   .lessons-list .l-meta { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); }
+  /* ===== 여정 필터 (Stage 상세) ===== */
+  .journey-filter {
+    margin: 28px 0 12px;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    background: var(--card);
+  }
+  .journey-filter__head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; margin-bottom: 12px;
+  }
+  .journey-filter__label {
+    font-family: var(--f-mono); font-size: 12px;
+    letter-spacing: 0.08em; color: var(--ink-3); text-transform: uppercase;
+  }
+  .journey-filter__clear {
+    font-size: 12px; color: var(--ink-3); background: transparent;
+    border: 1px solid var(--line-2); border-radius: 999px;
+    padding: 4px 10px; cursor: pointer;
+    transition: border-color .15s var(--ease), color .15s var(--ease);
+  }
+  .journey-filter__clear:hover { border-color: var(--ink); color: var(--ink); }
+  .journey-filter__buttons {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .journey-filter__btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 8px 14px; border-radius: 999px;
+    border: 1px solid var(--line-2); background: transparent;
+    color: var(--ink-2); font-size: 13px; font-weight: 500; cursor: pointer;
+    transition: border-color .15s var(--ease), background .15s var(--ease), color .15s var(--ease);
+  }
+  .journey-filter__btn:hover { border-color: var(--ink-3); color: var(--ink); }
+  .journey-filter__btn .journey-filter__dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--p-from), var(--p-to));
+  }
+  .journey-filter__btn.is-active {
+    background: linear-gradient(135deg, var(--p-from), var(--p-to));
+    color: var(--paper); border-color: transparent;
+  }
+  .journey-filter__btn.is-active .journey-filter__dot { background: var(--paper); }
+
+  /* 여정 필터 활성 시 — 해당 여정에 속하지 않는 레슨 행을 흐리게 */
+  body[data-active-journey] .lessons-list li { transition: opacity .25s var(--ease); }
+  body[data-active-journey="practitioner"] .lessons-list li:not([data-journeys~="practitioner"]) { opacity: 0.22; }
+  body[data-active-journey="adopter"]      .lessons-list li:not([data-journeys~="adopter"])      { opacity: 0.22; }
+  body[data-active-journey="creator"]      .lessons-list li:not([data-journeys~="creator"])      { opacity: 0.22; }
+  body[data-active-journey="founder"]      .lessons-list li:not([data-journeys~="founder"])      { opacity: 0.22; }
+  body[data-active-journey="engineer"]     .lessons-list li:not([data-journeys~="engineer"])     { opacity: 0.22; }
+  body[data-active-journey="explorer"]     .lessons-list li:not([data-journeys~="explorer"])     { opacity: 0.22; }
+
   /* 여정 점 — 6개 페르소나 도트로 이 레슨이 어느 여정에 속하는지 표시 */
   .l-journeys { display: inline-flex; gap: 5px; align-items: center; }
   .l-journey-dot {
@@ -3447,6 +3500,9 @@ body {
   }
   .sb-tabs__panel {
     padding: 20px 16px 12px;
+    /* 탭 전환 시 박스 크기가 흔들리지 않도록 최소 높이 고정.
+       3사 탭 중 가장 긴 패널(보통 Google)이 들어갈 만큼의 여유를 준다. */
+    min-height: 320px;
     animation: slide-fade-in 0.22s var(--ease) both;
   }
   .sb-tabs__panel-head {
