@@ -50,11 +50,11 @@ This repo enforces the Harness Engineering principles it teaches. Every coding a
 
 ## Branch policy
 
-- `main` = production reference. 직접 push 금지. PR로만 머지.
-- 모든 작업은 `claude/v<version>-<topic>` feature branch에서 진행.
-- 새 워크트리는 `main`이 아니라 작업 중인 feature branch에서 분기.
-- lefthook이 commit/push 시점에 typecheck·validate·build 자동 게이트.
-- push 후 GitHub Actions CI + Vercel preview URL 자동 생성.
+- **`main` 직접 작업** — 솔로 운영 단순화를 위해 feature 브랜치·PR 절차 생략.
+- **매 push가 Vercel production 자동 배포** — push 전 `npm run check` 반드시 그린 확인.
+- 매 commit·push 시점에 lefthook이 typecheck·validate·build 자동 게이트 (모든 브랜치 동일).
+- 파괴적·실험적 변경은 로컬에서 충분히 검증한 뒤 한 번에 push.
+- 외부 협업자가 합류하거나 큰 멀티-PR 리팩터(예 84레슨 통합)는 필요 시 임시로 feature 브랜치 + PR로 전환. 끝나면 다시 main 직접 작업으로 복귀.
 
 ## Stop points (ask before proceeding)
 
