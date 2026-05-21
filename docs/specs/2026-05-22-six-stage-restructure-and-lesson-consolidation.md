@@ -30,16 +30,18 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 
 | 새 # | 새 이름 | 옛 매핑 | 트랙 | 페르소나 | 1차 목표 레슨 수 | 시간 |
 |---|---|---|---|---|---|---|
-| **1** | 만나기 | S1 | 누구나 | 6명 | 5 | ~7h |
-| **2** | 묻고 다듬기 | S2 + S3 통합 | 누구나 | 6명 | 11 | ~14h |
+| **1** | 만나기 | S1 + 원리 신규 2 + what-llms 이동 | 누구나 | 6명 | **7** (1a 원리 4 · 1b 도구 3) | ~10h |
+| **2** | 묻고 다듬기 | S2 + S3 통합 (what-llms 빠짐) | 누구나 | 6명 | 10 | ~13h |
 | **3** | 함께 일하기 | S4 | 누구나(엔지니어 빠짐) | 5명 | 11 | ~13h |
 | **── 빌더 분기점 (UI 시각화) ──** ||||||||
-| **4** | 코딩 에이전트 | S5 | 빌더 | 3명 | 8 | ~13h |
+| **4** | 코딩 에이전트 | S5 + zero-coding 유입 | 빌더 | 3명 | 9 | ~14h |
 | **5** | 시스템 빌드 | S6 | 빌더 | 2명 | 11 | ~17h |
 | **── 합류 ──** ||||||||
 | **6** | 운영·공유 | S7 + S8 통합 | 누구나(혼합) | 6명 | 15 | ~24h |
 
-**합** — 61 레슨 · ~88시간(현 66h, +5h 깊이 보강 가정 시 70h 내외)
+**합** — 63 레슨 · ~91시간
+
+**Stage 1 재구성 메모 (2026-05-22 검토)** — "AI와 만나다"의 원래 약속은 "AI를 만나는 것"인데 v1·v2 초안 모두 도구·태도 7개로 채워져 있어 LLM 원리 자체를 한 마디도 안 가르쳤다. 정정 — Stage 1은 1a 원리(4)·1b 도구(3) sub-group으로 나누고, 신규 원리 레슨 2개(`what-is-an-llm`, `tokens-context-and-cost`)를 작성하고, 코어 `what-llms-are-good-and-bad-at`(특강 #1 deepens 대상)을 옛 S3에서 새 Stage 1로 끌어올린다. 코딩 에이전트 오리엔테이션(`zero-coding-orientation`)은 코딩 맥락이 진짜로 시작되는 새 Stage 4로 이동.
 
 설계 직관
 
@@ -84,9 +86,9 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 
 | 새 Stage | 슬러그 | 보존 이유 |
 |---|---|---|
+| 1 | `what-llms-are-good-and-bad-at` | 특강 #1 `deepens` — 입문 코어. 옛 S3에서 새 Stage 1로 끌어올림 |
 | 1 | `common-skills-of-future-proof-people` | 사이트 정체성 |
 | 2 | `structure-of-good-prompts` | 프롬프트 코어 |
-| 2 | `what-llms-are-good-and-bad-at` | 특강 #1 `deepens` |
 | 4 | `harness-engineering-roadmap` | Harness Engineering 정체성 |
 | 4 | `claude-md-four-principles` | Karpathy 65줄 코어 원칙 |
 | 5 | `function-calling` | 도구 사용 원리 |
@@ -113,15 +115,27 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 
 ## 6. 새 Stage별 통합 매핑
 
-### 새 Stage 1 만나기 (옛 S1: 7 → 5)
+### 새 Stage 1 만나기 (옛 S1: 7 → 새 7, 1a 원리 + 1b 도구)
 
+**1a · LLM 원리 (신규 sub-group, 4 레슨)**
 | 변화 | 옛 | 새 | 이유 |
 |---|---|---|---|
-| 통합 | `ai-delegation-decision` + `ai-collaboration-mindset` | `ai-delegation-and-team-adoption` | 개인 위임 → 팀 도입은 같은 결정의 두 면 |
-| 이동 | `cost-monitoring-in-production` → 새 Stage 6 | — | 운영 주제 |
-| 보존 | `zero-coding-orientation` · `terminal-first-day` · `ai-tool-account-and-cost` · `common-skills-of-future-proof-people` ⭐ | | |
+| 신규 | — | `what-is-an-llm` | LLM이 다음 토큰 예측 기계라는 단 하나의 사실에서 강약·환각·비용이 다 나옴. 이걸 0순위로. |
+| 신규 | — | `tokens-context-and-cost` | 토큰은 모델의 입력 단위이자 과금·컨텍스트 단위. 도구를 켜기 전에 이 단위를 안다. |
+| 이동 | `what-llms-are-good-and-bad-at`(옛 S3) → 새 Stage 1 ⭐ | (그대로 슬러그) | 모양별 강약은 코어. 특강 #1이 deepens. 입문 단계에서 안 만나면 늦다 |
+| 보존 | `common-skills-of-future-proof-people` ⭐ | (그대로) | 사이트 정체성 |
 
-### 새 Stage 2 묻고 다듬기 (옛 S2+S3: 15 → 11)
+**1b · 첫 도구·태도 (3 레슨)**
+| 변화 | 옛 | 새 | 이유 |
+|---|---|---|---|
+| 통합 | `ai-delegation-decision` + `ai-collaboration-mindset` | `ai-delegation-and-team-adoption` | 개인 위임 → 팀 도입은 같은 결정 |
+| 이동 | `cost-monitoring-in-production` → 새 Stage 6 | — | 운영 주제 |
+| 이동 | `zero-coding-orientation` → 새 Stage 4 (코딩 에이전트) | — | "코딩 에이전트가 뭔지"는 그 맥락이 시작되는 Stage에 |
+| 보존 | `terminal-first-day` · `ai-tool-account-and-cost` | (그대로) | |
+
+**Stage 1 합계 — 7 레슨** (1a 원리 4 + 1b 도구 3)
+
+### 새 Stage 2 묻고 다듬기 (옛 S2+S3: 15 → 10, what-llms는 새 Stage 1로 빠짐)
 
 | 변화 | 옛 | 새 | 이유 |
 |---|---|---|---|
@@ -129,7 +143,8 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 | 흡수 | `enforcing-output-format`(S2) → `structure-of-good-prompts` ⭐ | (코어에 흡수) | 형식 강제는 좋은 프롬프트의 한 절 |
 | 이동 | `api-rate-limiting-and-batching`(S2) → 새 Stage 6 | — | 운영 주제 |
 | 통합 | `hallucination-verification`(S3) + `checks-before-trusting-ai-output`(S3) | `verifying-ai-output` | 환각·신뢰성 검증은 같은 능력 |
-| 보존 | `structure-of-good-prompts` ⭐ · `reasoning-vs-instruct-prompting` · `feeding-long-documents` · `multimodal-prompting` · `build-personal-prompt-library` · `ai-concept-learning-framework` · `what-llms-are-good-and-bad-at` ⭐ · `fallback-strategy-when-ai-fails` · `privacy-and-academic-ethics` | | |
+| **이동** | `what-llms-are-good-and-bad-at`(S3) → **새 Stage 1** ⭐ | — | 입문 코어로 끌어올림 |
+| 보존 | `structure-of-good-prompts` ⭐ · `reasoning-vs-instruct-prompting` · `feeding-long-documents` · `multimodal-prompting` · `build-personal-prompt-library` · `ai-concept-learning-framework` · `fallback-strategy-when-ai-fails` · `privacy-and-academic-ethics` | | |
 
 ### 새 Stage 3 함께 일하기 (옛 S4: 17 → 11)
 
@@ -154,12 +169,13 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 | 통합 | `crm-segmentation-with-ai` + `dashboard-narrative-and-qa` | `data-curation-and-narrative` | AI로 데이터→사람 친화 산출물 |
 | 보존 | `sql-with-ai-verification` · `ab-test-decision-memo` | | |
 
-### 새 Stage 4 코딩 에이전트 (옛 S5: 11 → 8) — **빌더 분기점**
+### 새 Stage 4 코딩 에이전트 (옛 S5: 11 → 9) — **빌더 분기점**
 
 | 변화 | 옛 | 새 | 이유 |
 |---|---|---|---|
 | 통합 | `write-tests-with-coding-agent` + `bug-reproduction-loop` | `tdd-and-bug-loop-with-agent` | TDD·버그 재현은 같은 루프 |
 | 유입 | `ralph-loop-codex-goal`(S6c → 새 Stage 4) | — | "자율 코딩의 진화" 자리는 빌더 입문에 가까움 |
+| **유입** | `zero-coding-orientation`(S1 → 새 Stage 4) | — | 코딩 에이전트가 뭔지의 진짜 맥락. Stage 4 첫 레슨으로 적합 |
 | 보존 | `coding-agent-setup` · `github-issue-to-ai-brief` · `letting-ai-read-codebase` · `plan-with-ai` · `pr-review-with-ai` · `claude-md-four-principles` ⭐ · `agent-hooks-automation` · `subagent-context-design` · `harness-engineering-roadmap` ⭐ | | |
 
 ### 새 Stage 5 시스템 빌드 (옛 S6: 16 → 11)
@@ -204,7 +220,7 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 
 | # | 옛 S | 옛 슬러그 | 결정 | 새 S | 새 슬러그 또는 비고 |
 |---|---|---|---|---|---|
-| 1 | 1 | zero-coding-orientation | 보존 | 1 | — |
+| 1 | 1 | zero-coding-orientation | **이동** | 4 | 코딩 에이전트 입문으로 |
 | 2 | 1 | terminal-first-day | 보존 | 1 | — |
 | 3 | 1 | ai-tool-account-and-cost | 보존 | 1 | — |
 | 4 | 1 | cost-monitoring-in-production | **이동+흡수됨** | 6 | `ai-cost-operations`에 |
@@ -221,7 +237,7 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 | 15 | 2 | api-rate-limiting-and-batching | **이동+흡수됨** | 6 | `token-and-rate-optimization`에 |
 | 16 | 2 | build-personal-prompt-library | 보존 | 2 | — |
 | 17 | 2 | ai-concept-learning-framework | 보존 | 2 | — |
-| 18 | 3 | what-llms-are-good-and-bad-at ⭐ | 보존(코어) | 2 | 특강 #1 deepens 대상 |
+| 18 | 3 | what-llms-are-good-and-bad-at ⭐ | **이동**(코어) | **1** | 입문 코어로 끌어올림. 특강 #1 deepens 대상 |
 | 19 | 3 | hallucination-verification | 통합 | 2 | `verifying-ai-output`로 |
 | 20 | 3 | checks-before-trusting-ai-output | 흡수됨 | 2 | `verifying-ai-output`로 |
 | 21 | 3 | fallback-strategy-when-ai-fails | 보존 | 2 | — |
@@ -288,16 +304,19 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 | 82 | 8 | early-user-recruitment-for-ai-products | 보존 | 6 | — |
 | 83 | 8 | claude-skills-authoring ⭐ | 보존(코어) | 6 | — |
 | 84 | 8 | portfolio-and-retrospective | 흡수됨 | 6 | `capstone-launch-and-retrospective`로 |
+| **85** | — | **(신규)** `what-is-an-llm` | 신규 원본 | **1a** | LLM 본질 = 다음 토큰 예측 기계 |
+| **86** | — | **(신규)** `tokens-context-and-cost` | 신규 원본 | **1a** | 토큰 = 입력·과금·컨텍스트 단위 |
 
 ### 요약 통계
 
 - **보존(코어 포함)** — 38개 그대로 + 6개 흡수받음 = **44개**
 - **통합(새 슬러그)** — 12개 (각각 2~3개 흡수)
 - **흡수됨** — 17개 (다른 레슨으로 사라짐)
-- **이동(Stage만 변경)** — 4개 (cost-monitoring · rate-limiting · cost-estimation-roi · ralph)
-- **새 레슨 슬러그 12개 신설** — office-document-pipelines · research-to-writing-pipeline · content-repurposing-pipeline · visual-prompt-and-ui-pipeline · data-curation-and-narrative · ai-delegation-and-team-adoption · prompt-iteration-loop · verifying-ai-output · tdd-and-bug-loop-with-agent · response-handling-streaming-and-structured · user-and-memory-state · embeddings-and-chunking-for-rag · ai-cost-operations · pm-eval-and-policy · token-and-rate-optimization · capstone-scope-and-build · capstone-launch-and-retrospective (실제로는 17 — 위 12개 + 5 추가)
+- **이동(Stage만 변경)** — 6개 (cost-monitoring · rate-limiting · cost-estimation-roi · ralph · **zero-coding-orientation → S4** · **what-llms-are-good-and-bad-at → S1**)
+- **신규 통합 슬러그** — 17개 (office-document-pipelines · research-to-writing-pipeline · content-repurposing-pipeline · visual-prompt-and-ui-pipeline · data-curation-and-narrative · ai-delegation-and-team-adoption · prompt-iteration-loop · verifying-ai-output · tdd-and-bug-loop-with-agent · response-handling-streaming-and-structured · user-and-memory-state · embeddings-and-chunking-for-rag · ai-cost-operations · pm-eval-and-policy · token-and-rate-optimization · capstone-scope-and-build · capstone-launch-and-retrospective)
+- **신규 원본 슬러그 2개** — `what-is-an-llm` · `tokens-context-and-cost` (Stage 1 1a 원리 sub-group)
 
-**결과 — 84 → 61 레슨 (-27%)**, 그중 17개는 신규 통합 슬러그.
+**결과 — 84 → 63 레슨 (-25%)**, 그중 19개가 신규 슬러그(통합 17 + 원본 2).
 
 ---
 
