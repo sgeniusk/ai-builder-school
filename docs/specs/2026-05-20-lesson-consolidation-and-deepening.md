@@ -1,6 +1,12 @@
-# AI Builder School 2.0 — 레슨 통합·심화 스펙
+# AI Builder School 2.0 — 레슨 통합·심화 스펙 (v1, 8-Stage 안)
 
-> 상태 — 초안 · 작성 2026-05-20 · 범위 2순위 레슨 심화(스펙 2)
+> ⚠ **상태 — SUPERSEDED**. 2026-05-22 검토에서 8 Stage 자체를 6 Stage로 통합하기로 결정.
+> 후속 — [`2026-05-22-six-stage-restructure-and-lesson-consolidation.md`](./2026-05-22-six-stage-restructure-and-lesson-consolidation.md) (v2)
+> 역사 자료로만 유지. 이 문서의 통합 매핑은 v2에서 그대로 재사용되며, Stage 라벨만 재정렬됨.
+>
+> ---
+>
+> 원본 메타 — 초안 · 작성 2026-05-20 · 범위 2순위 레슨 심화(스펙 2)
 > 상위 — `docs/specs/2026-05-19-builder-school-2.0-architecture.md` (§0.3 · §10 · §11이 위임)
 > 선행 — §0 토대(완료) · 스펙 3 특강(구현됨)
 > 베이스 — `claude/2.0-foundation-v2`(머지 후 `main` 기준 재분기)

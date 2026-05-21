@@ -22,16 +22,73 @@
 
 ## 한 달 반 만에 일어난 일
 
-2026년 4월 16일부터 5월 19일까지 — 딱 한 달 반입니다.
+2026년 4월 16일부터 5월 19일까지 — 딱 한 달 반입니다. 회사별로 펼쳐 보세요.
 
-<TimelineBlock
-  steps={[
-    { icon: "pen-tool", title: "4월 — Anthropic 선공",
-      description: "4/16 Opus 4.7 GA · SWE 부문에서 다른 모든 모델을 따돌림. 5/6 Code with Claude 컨퍼런스로 Claude Code·툴 생태계 확장." },
-    { icon: "zap", title: "4–5월 — OpenAI 반격",
-      description: "4/23 GPT-5.5 · 1M 토큰 컨텍스트와 컴퓨터 사용. 5/7 ChatGPT iOS에 Codex 원격 세션 + GPT-5.5-Cyber 버티컬 모델." },
-    { icon: "sparkles", title: "5/19 — Google 마무리",
-      description: "I/O 2026에서 Gemini 3.5 Flash가 3.1 Pro를 능가. Spark가 Gmail·Drive·Calendar에 묶이는 24/7 에이전트로 발표." },
+<TabsBlock
+  tabs={[
+    {
+      label: "4월 · Anthropic",
+      panel: {
+        heading: "Anthropic — 4/16 ~ 5/6 · 선공",
+        columns: [
+          { heading: "주요 발표", bullets: [
+            { text: "4/16 — Claude Opus 4.7 GA", emphasis: true },
+            { text: "가장 어려운 SWE 작업에서 4.6 대비 향상" },
+            { text: "고해상도 비전 입력 (최대 2576px / 3.75MP)" },
+            { text: "5/6 — Code with Claude 컨퍼런스", emphasis: true },
+            { text: "Claude Code · 툴·플러그인 생태계 확장" },
+            { text: "신규 플래그십 미공개 · 차세대 Mythos 언급" },
+          ]},
+          { heading: "빌더 관점 신호", bullets: [
+            { text: "성능 1위 굳히기 — SWE 부문에서 다른 모든 모델을 따돌림", emphasis: true },
+            { text: "출력 토큰 $25/M — 다회차 에이전트 워크플로에 비용 부담" },
+            { text: "발표 페이스보다 \"도구 두께\"에 베팅" },
+          ]},
+        ],
+      },
+    },
+    {
+      label: "4–5월 · OpenAI",
+      panel: {
+        heading: "OpenAI — 4/23 ~ 5/7 · 반격",
+        columns: [
+          { heading: "주요 발표", bullets: [
+            { text: "4/23 — GPT-5.5 공개", emphasis: true },
+            { text: "14개 벤치마크 SOTA 주장 · 1M 토큰 컨텍스트" },
+            { text: "코딩·컴퓨터 사용·심층 리서치 향상" },
+            { text: "5/7 — ChatGPT iOS × Codex 원격 세션", emphasis: true },
+            { text: "모바일 앱에서 데스크탑 코드 에이전트 호출" },
+            { text: "5/7 — GPT-5.5-Cyber 보안 특화 모델" },
+          ]},
+          { heading: "빌더 관점 신호", bullets: [
+            { text: "모델 + 런타임 + 배포 채널의 수직 통합", emphasis: true },
+            { text: "OpenClaw·Claude Code 류 흐름에 정면 대응" },
+            { text: "범용 → 버티컬(보안 등) 모델 라인 확장" },
+          ]},
+        ],
+      },
+    },
+    {
+      label: "5/19 · Google",
+      panel: {
+        heading: "Google — I/O 2026 · 마무리",
+        columns: [
+          { heading: "주요 발표", bullets: [
+            { text: "Gemini 3.5 Flash GA — 3.1 Pro 능가, 출력 4× 빠름", emphasis: true },
+            { text: "Terminal-Bench 2.1 76.2%" },
+            { text: "Gemini 3.5 Pro · Omni 멀티모달 예고" },
+            { text: "Gemini Spark — 24/7 개인 에이전트", emphasis: true },
+            { text: "Gmail·Drive·Calendar 통합 · AI Ultra 베타" },
+            { text: "AI Ultra $100 · Android XR Intelligent Eyewear" },
+          ]},
+          { heading: "빌더 관점 신호", bullets: [
+            { text: "Flash 라인이 SOTA 후보로 — 빠르고 싸고 좋게", emphasis: true },
+            { text: "Gmail·Drive·Calendar 통합으로 사용자 컨텍스트 장악" },
+            { text: "컴퓨트 기반 과금으로 사용량 모델 전환" },
+          ]},
+        ],
+      },
+    },
   ]}
 />
 
