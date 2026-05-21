@@ -75,7 +75,8 @@ src/lib/
 - `docs/content-model.md`
 - `docs/implementation-plan.md`
 - `docs/assumptions.md`
-- `docs/future-roadmap.md`
+- `docs/roadmap.md` — 단일 로드맵 (v1.0 기록 + 2.0 계획)
+- `docs/specs/` · `docs/plans/` — 2.0 아키텍처 스펙·구현 계획
 
 ## 디자인 방향
 
