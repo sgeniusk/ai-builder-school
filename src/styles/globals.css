@@ -3119,8 +3119,10 @@ body {
     border: 1px solid var(--line);
     border-radius: var(--r-lg);
     background: var(--card);
-    /* 화면비 고정 — 콘텐츠 양에 따라 높이가 흔들리지 않도록 */
-    aspect-ratio: 16 / 9;
+    /* 화면비 고정 — 콘텐츠 양에 따라 높이가 흔들리지 않도록.
+       데스크톱 4:3은 두 열 리스트·카드 그리드·FAQ 아코디언 같은
+       콘텐츠가 잘리지 않을 만큼의 세로 여유를 준다. */
+    aspect-ratio: 4 / 3;
     display: flex;
     flex-direction: column;
     overflow: auto;
@@ -3342,11 +3344,11 @@ body {
     display: grid; gap: 14px; grid-template-columns: 1fr;
   }
   @media (min-width: 640px) {
-    .sb-cardgrid--c2 { grid-template-columns: repeat(2, 1fr); }
-    .sb-cardgrid--c3 { grid-template-columns: repeat(2, 1fr); }
+    .sb-cardgrid.sb-cardgrid--c2 { grid-template-columns: repeat(2, 1fr); }
+    .sb-cardgrid.sb-cardgrid--c3 { grid-template-columns: repeat(2, 1fr); }
   }
   @media (min-width: 960px) {
-    .sb-cardgrid--c3 { grid-template-columns: repeat(3, 1fr); }
+    .sb-cardgrid.sb-cardgrid--c3 { grid-template-columns: repeat(3, 1fr); }
   }
   .sb-cardgrid__item {
     padding: 22px; border: 1px solid var(--line);
@@ -3375,7 +3377,7 @@ body {
   }
   .sb-timeline--h { grid-template-columns: 1fr; }
   @media (min-width: 700px) {
-    .sb-timeline--h { grid-template-columns: repeat(3, 1fr); }
+    .sb-timeline.sb-timeline--h { grid-template-columns: repeat(3, 1fr); }
   }
   .sb-timeline--v { grid-template-columns: 1fr; }
   .sb-timeline__item {
