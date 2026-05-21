@@ -778,7 +778,7 @@ body {
 
   .lessons-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
   .lessons-list li {
-    display: grid; grid-template-columns: 72px 1fr auto; gap: 20px; align-items: center;
+    display: grid; grid-template-columns: 72px 1fr auto auto; gap: 20px; align-items: center;
     padding: 20px 0; border-bottom: 1px solid var(--line);
     cursor: pointer; transition: padding-left .2s var(--ease);
   }
@@ -787,6 +787,23 @@ body {
   .lessons-list .l-num { font-family: var(--f-mono); font-size: 13px; color: var(--ink-3); }
   .lessons-list .l-title { font-size: 17px; font-weight: 500; letter-spacing: -0.015em; color: var(--ink); }
   .lessons-list .l-meta { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); }
+  /* 여정 점 — 6개 페르소나 도트로 이 레슨이 어느 여정에 속하는지 표시 */
+  .l-journeys { display: inline-flex; gap: 5px; align-items: center; }
+  .l-journey-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    border: 1px solid var(--line-2); background: transparent;
+    transition: transform .15s var(--ease);
+  }
+  .l-journey-dot.is-on {
+    background: linear-gradient(135deg, var(--p-from), var(--p-to));
+    border-color: transparent;
+  }
+  .lessons-list li:hover .l-journey-dot.is-on { transform: scale(1.15); }
+  @media (max-width: 700px) {
+    /* 모바일에서 6점이 줄을 차지하지 않도록 한 칸 더 작게 */
+    .l-journey-dot { width: 7px; height: 7px; }
+    .l-journeys { gap: 4px; }
+  }
   /* 레슨 행 — 산출물 우선 ('이걸 끝내면 손에 남는 것'을 앞세움) */
   .l-deliverable {
     display: flex;

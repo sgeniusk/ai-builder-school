@@ -30,6 +30,16 @@ export async function generateMetadata({
   };
 }
 
+// 6 페르소나 여정의 정본 순서. 색은 globals.css의 .p-{id} 토큰을 쓴다.
+const JOURNEY_ORDER = [
+  "practitioner",
+  "adopter",
+  "creator",
+  "founder",
+  "engineer",
+  "explorer",
+] as const;
+
 function LessonRow({ lesson }: { lesson: Lesson }) {
   return (
     <li>
@@ -44,6 +54,21 @@ function LessonRow({ lesson }: { lesson: Lesson }) {
             <span>{lesson.deliverable.title}</span>
           </div>
         </div>
+        <span
+          className="l-journeys"
+          aria-label="이 레슨이 속한 여정"
+        >
+          {JOURNEY_ORDER.map((j) => {
+            const on = lesson.targetJourneys.includes(j);
+            return (
+              <span
+                key={j}
+                className={`l-journey-dot p-${j}${on ? " is-on" : ""}`}
+                title={`${JOURNEY_LABEL[j]}${on ? "" : " · 비대상"}`}
+              />
+            );
+          })}
+        </span>
         <span className="l-meta">
           {Math.max(3, Math.round(lesson.estimatedMinutes * 0.4))}–
           {lesson.estimatedMinutes}분 · {LEVEL_LABEL[lesson.level].toUpperCase()}
