@@ -929,6 +929,79 @@ body {
     line-height: 1.65;
     color: var(--ink-3);
   }
+
+  /* ===== Terminal mockup — 레슨/특강 본문용 ===== */
+  /* 사이트 테마(라이트/다크) 무관하게 항상 다크 — '진짜 터미널'을 흉내 */
+  .lesson-terminal {
+    margin: 24px 0;
+    border-radius: var(--r);
+    background: #1e1e1f;
+    border: 1px solid #2a2a2c;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  .lesson-terminal__chrome {
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 14px;
+    background: #2a2a2c;
+    border-bottom: 1px solid #353537;
+  }
+  .lesson-terminal__dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .lesson-terminal__dot--red    { background: #ff5f57; }
+  .lesson-terminal__dot--yellow { background: #febc2e; }
+  .lesson-terminal__dot--green  { background: #28c840; }
+  .lesson-terminal__title {
+    margin: 0 auto;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: #a9a9af;
+    letter-spacing: 0.02em;
+  }
+  .lesson-terminal__body {
+    margin: 0;
+    padding: 18px 22px;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    line-height: 1.75;
+    color: #e8e8ea;
+    overflow-x: auto;
+    white-space: pre;
+    background: transparent;
+  }
+  .lesson-terminal__line {
+    display: block;
+    white-space: pre;
+  }
+  .lesson-terminal__line--prompt { color: #c8c8cc; }
+  .lesson-terminal__sigil {
+    display: inline-block;
+    width: 14px;
+    color: #50fa7b; /* mac 터미널 prompt 같은 초록 */
+    user-select: none;
+    margin-right: 6px;
+  }
+
+  /* ===== Figure — 캡션 있는 이미지 ===== */
+  .lesson-figure {
+    margin: 32px 0;
+    text-align: center;
+  }
+  .lesson-figure__image {
+    max-width: 100%; height: auto;
+    border-radius: var(--r);
+    border: 1px solid var(--line);
+  }
+  .lesson-figure__caption {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-3);
+  }
+  .lesson-figure--bleed {
+    /* 본문 폭(720px lesson-reader)을 좌우로 살짝 넘게 */
+    margin-left: clamp(-40px, -4vw, -10px);
+    margin-right: clamp(-40px, -4vw, -10px);
+  }
   /* 타이핑 효과 커서 */
   .type-caret {
     display: inline-block;

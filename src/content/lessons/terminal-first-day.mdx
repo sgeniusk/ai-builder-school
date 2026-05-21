@@ -6,6 +6,13 @@
 
 터미널은 컴퓨터에게 텍스트로 명령하는 창일 뿐이다. 잘못 입력해도 `Ctrl+C`로 멈추거나 `cd ~`로 홈으로 돌아오면 된다. 파일을 실수로 삭제하지 않는 한 터미널 명령어로 컴퓨터가 망가지지 않는다.
 
+<Terminal title="처음 열었을 때" lines={[
+  "Last login: Wed May 22 10:24:18 on ttys000",
+  "$",
+]} />
+
+처음 열면 이 정도다. 'Last login'은 마지막 접속 시각, `$`는 명령을 받을 준비가 됐다는 신호. 그 뿐이다.
+
 ---
 
 ## 터미널 열기
@@ -117,30 +124,25 @@ Ctrl+C
 
 ## 실습 순서
 
-터미널을 열고 아래를 순서대로 입력한다.
+터미널을 열고 아래를 순서대로 따라 친다. 실제 화면은 이런 모양이다.
 
-```bash
-# 1. 지금 어디에 있는지 확인
-pwd
+<Terminal title="my-ai-builder-lab — zsh" lines={[
+  "$ pwd",
+  "/Users/yohan",
+  "$ cd ~",
+  "$ ls",
+  "Applications  Desktop  Documents  Downloads  Music  ...",
+  "$ mkdir my-ai-builder-lab",
+  "$ cd my-ai-builder-lab",
+  "$ touch README.md",
+  "$ ls -la",
+  "total 0",
+  "drwxr-xr-x   3 yohan  staff   96 May 22 10:25 .",
+  "drwxr-xr-x  18 yohan  staff  576 May 22 10:25 ..",
+  "-rw-r--r--   1 yohan  staff    0 May 22 10:25 README.md",
+]} />
 
-# 2. 홈으로 이동
-cd ~
-
-# 3. 폴더 목록 확인
-ls
-
-# 4. 실습 폴더 생성
-mkdir my-ai-builder-lab
-
-# 5. 폴더로 이동
-cd my-ai-builder-lab
-
-# 6. README 파일 생성
-touch README.md
-
-# 7. 파일 목록 확인 (README.md가 보이면 성공)
-ls -la
-```
+마지막에 `README.md`가 목록에 보이면 성공. 빈 파일이라 용량이 0이지만, 첫 실습 산출물은 만들어진 것이다.
 
 ---
 
