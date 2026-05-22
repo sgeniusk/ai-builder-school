@@ -7,6 +7,8 @@ import type { Journey } from "@/lib/types";
  *
  * Practitioner / Adopter / Creator / Founder / Engineer 는 같은 차원의 출발 정체성.
  * Explorer 는 "아직 정하지 못한 사람을 위한 30초 진단" 의 메타 입구.
+ *
+ * 2026-05-22 — 옛 8 Stage 슬러그에서 새 6 Stage 슬러그로 매핑 + dedupe.
  */
 export const journeys: Journey[] = [
   {
@@ -21,10 +23,9 @@ export const journeys: Journey[] = [
       "내 업무를 AI로 운영해서, 반복은 줄이고 판단에 시간을 씁니다.",
     recommendedStages: [
       "stage-1-meet",
-      "stage-2-ask",
-      "stage-3-verify",
-      "stage-4-collaborate",
-      "stage-7-operate",
+      "stage-2-ask-and-refine",
+      "stage-3-collaborate",
+      "stage-6-operate-and-share",
     ],
     recommendedLessons: [
       "common-skills-of-future-proof-people",
@@ -53,11 +54,9 @@ export const journeys: Journey[] = [
       "조직에 AI를 안전하게 들여오고, 위험과 품질을 함께 운영합니다.",
     recommendedStages: [
       "stage-1-meet",
-      "stage-2-ask",
-      "stage-3-verify",
-      "stage-4-collaborate",
-      "stage-7-operate",
-      "stage-8-share",
+      "stage-2-ask-and-refine",
+      "stage-3-collaborate",
+      "stage-6-operate-and-share",
     ],
     recommendedLessons: [
       "checks-before-trusting-ai-output",
@@ -87,10 +86,9 @@ export const journeys: Journey[] = [
       "AI를 부속으로 쓰지 않고, 표현의 폭을 넓히는 도구로 다룹니다.",
     recommendedStages: [
       "stage-1-meet",
-      "stage-2-ask",
-      "stage-3-verify",
-      "stage-4-collaborate",
-      "stage-8-share",
+      "stage-2-ask-and-refine",
+      "stage-3-collaborate",
+      "stage-6-operate-and-share",
     ],
     recommendedLessons: [
       "structure-of-good-prompts",
@@ -119,13 +117,11 @@ export const journeys: Journey[] = [
       "AI를 코어로 한 작은 제품을 직접 손으로 만들고, 시장에 내놓습니다.",
     recommendedStages: [
       "stage-1-meet",
-      "stage-2-ask",
-      "stage-3-verify",
-      "stage-4-collaborate",
-      "stage-5-delegate",
-      "stage-6-build",
-      "stage-7-operate",
-      "stage-8-share",
+      "stage-2-ask-and-refine",
+      "stage-3-collaborate",
+      "stage-4-coding-agent",
+      "stage-5-build-systems",
+      "stage-6-operate-and-share",
     ],
     recommendedLessons: [
       "coding-agent-setup",
@@ -155,12 +151,10 @@ export const journeys: Journey[] = [
       "평가·보안까지 포함된, 운영 가능한 AI 시스템을 짓는 엔지니어가 됩니다.",
     recommendedStages: [
       "stage-1-meet",
-      "stage-2-ask",
-      "stage-3-verify",
-      "stage-5-delegate",
-      "stage-6-build",
-      "stage-7-operate",
-      "stage-8-share",
+      "stage-2-ask-and-refine",
+      "stage-4-coding-agent",
+      "stage-5-build-systems",
+      "stage-6-operate-and-share",
     ],
     recommendedLessons: [
       "plan-with-ai",
@@ -190,9 +184,8 @@ export const journeys: Journey[] = [
       "흡수하면서 동시에 나눕니다. 매일 배우고 매일 가르치는 빌더가 되는 길.",
     recommendedStages: [
       "stage-1-meet",
-      "stage-2-ask",
-      "stage-3-verify",
-      "stage-4-collaborate",
+      "stage-2-ask-and-refine",
+      "stage-3-collaborate",
     ],
     recommendedLessons: [
       "common-skills-of-future-proof-people",

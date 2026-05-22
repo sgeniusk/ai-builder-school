@@ -1,6 +1,8 @@
-// v0.4 — Stage 도입/마무리 에세이 MDX 레지스트리.
-// stages.ts의 introEssaySlug·outroEssaySlug가 이 맵의 키를 가리킨다.
-// 8 Stage 전부 등록 (2026-05-22 — 누락 5~8 추가).
+// v2.0 — Stage 도입/마무리 에세이 MDX 레지스트리. 6 Stage 기준.
+// 2026-05-22 — 옛 8 Stage에서 6 Stage로 통합 시 stage-2/6 intro는 새 통합 콘텐츠로
+// 덮어쓰고, stage-3/4/5 intro는 옛 stage-4/5/6 콘텐츠를 shift. 옛 stage-7/8 intro/outro는
+// 더 이상 가리키는 stage가 없어 등록에서 제거 (파일은 stages/ 폴더에 남음).
+// 옛 stage-2~6 outro 콘텐츠는 옛 stage 번호 기준이라 Phase A2에서 다시 작성될 TODO.
 import type { ComponentType } from "react";
 
 import Stage1Intro from "./stages/stage-1-intro.mdx";
@@ -15,10 +17,6 @@ import Stage5Intro from "./stages/stage-5-intro.mdx";
 import Stage5Outro from "./stages/stage-5-outro.mdx";
 import Stage6Intro from "./stages/stage-6-intro.mdx";
 import Stage6Outro from "./stages/stage-6-outro.mdx";
-import Stage7Intro from "./stages/stage-7-intro.mdx";
-import Stage7Outro from "./stages/stage-7-outro.mdx";
-import Stage8Intro from "./stages/stage-8-intro.mdx";
-import Stage8Outro from "./stages/stage-8-outro.mdx";
 
 const stageBodies: Record<string, ComponentType> = {
   "stage-1-intro": Stage1Intro,
@@ -33,10 +31,6 @@ const stageBodies: Record<string, ComponentType> = {
   "stage-5-outro": Stage5Outro,
   "stage-6-intro": Stage6Intro,
   "stage-6-outro": Stage6Outro,
-  "stage-7-intro": Stage7Intro,
-  "stage-7-outro": Stage7Outro,
-  "stage-8-intro": Stage8Intro,
-  "stage-8-outro": Stage8Outro,
 };
 
 export function getStageBody(slug: string | undefined): ComponentType | null {

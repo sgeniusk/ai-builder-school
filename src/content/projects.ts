@@ -17,7 +17,7 @@ export const projects: Project[] = [
     targetJourneys: ["practitioner"],
     difficulty: "beginner",
     estimatedDuration: "1주",
-    requiredStages: ["stage-2-ask", "stage-4-collaborate"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-3-collaborate"],
     keyLessons: [
       "structure-of-good-prompts",
       "build-personal-prompt-library",
@@ -93,7 +93,7 @@ export const projects: Project[] = [
     targetJourneys: ["practitioner", "adopter", "explorer"],
     difficulty: "beginner",
     estimatedDuration: "1주",
-    requiredStages: ["stage-2-ask", "stage-4-collaborate"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-3-collaborate"],
     keyLessons: [
       "structure-of-good-prompts",
       "meeting-notes-pipeline",
@@ -167,7 +167,7 @@ export const projects: Project[] = [
     targetJourneys: ["explorer", "practitioner"],
     difficulty: "beginner",
     estimatedDuration: "1주",
-    requiredStages: ["stage-2-ask", "stage-3-verify"],
+    requiredStages: ["stage-2-ask-and-refine"],
     keyLessons: [
       "structure-of-good-prompts",
       "build-personal-prompt-library",
@@ -241,7 +241,7 @@ export const projects: Project[] = [
     targetJourneys: ["adopter"],
     difficulty: "beginner",
     estimatedDuration: "1~2주",
-    requiredStages: ["stage-3-verify", "stage-7-operate"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-6-operate-and-share"],
     keyLessons: [
       "checks-before-trusting-ai-output",
       "privacy-and-academic-ethics",
@@ -317,7 +317,7 @@ export const projects: Project[] = [
     targetJourneys: ["creator", "practitioner"],
     difficulty: "beginner",
     estimatedDuration: "1주",
-    requiredStages: ["stage-2-ask", "stage-4-collaborate"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-3-collaborate"],
     keyLessons: [
       "structure-of-good-prompts",
       "local-business-content-calendar",
@@ -401,7 +401,7 @@ export const projects: Project[] = [
     targetJourneys: ["creator"],
     difficulty: "beginner",
     estimatedDuration: "1주",
-    requiredStages: ["stage-2-ask", "stage-4-collaborate"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-3-collaborate"],
     keyLessons: [
       "structure-of-good-prompts",
       "design-visual-prompt-system",
@@ -477,7 +477,7 @@ export const projects: Project[] = [
     targetJourneys: ["creator"],
     difficulty: "intermediate",
     estimatedDuration: "2주",
-    requiredStages: ["stage-2-ask", "stage-4-collaborate"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-3-collaborate"],
     keyLessons: [
       "blog-writing-pipeline",
       "blog-to-shorts-pipeline",
@@ -551,7 +551,7 @@ export const projects: Project[] = [
     targetJourneys: ["creator"],
     difficulty: "intermediate",
     estimatedDuration: "2~3주",
-    requiredStages: ["stage-2-ask", "stage-3-verify", "stage-4-collaborate"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-3-collaborate"],
     keyLessons: [
       "research-workflow",
       "blog-writing-pipeline",
@@ -641,7 +641,7 @@ export const projects: Project[] = [
     targetJourneys: ["engineer", "founder"],
     difficulty: "intermediate",
     estimatedDuration: "2~3주",
-    requiredStages: ["stage-2-ask", "stage-6-build"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-5-build-systems"],
     keyLessons: [
       "understanding-embeddings",
       "document-chunking-strategy",
@@ -710,7 +710,7 @@ export const projects: Project[] = [
     targetJourneys: ["adopter", "founder", "engineer"],
     difficulty: "intermediate",
     estimatedDuration: "3주",
-    requiredStages: ["stage-2-ask", "stage-6-build"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-5-build-systems"],
     keyLessons: [
       "document-chunking-strategy",
       "grounded-rag-answers",
@@ -781,7 +781,7 @@ export const projects: Project[] = [
     targetJourneys: ["founder"],
     difficulty: "intermediate",
     estimatedDuration: "3~4주",
-    requiredStages: ["stage-2-ask", "stage-6-build", "stage-8-share"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-5-build-systems", "stage-6-operate-and-share"],
     keyLessons: [
       "ai-product-brief",
       "connect-ai-api",
@@ -877,7 +877,7 @@ export const projects: Project[] = [
     targetJourneys: ["creator"],
     difficulty: "intermediate",
     estimatedDuration: "2주",
-    requiredStages: ["stage-2-ask", "stage-4-collaborate"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-3-collaborate"],
     keyLessons: [
       "structure-of-good-prompts",
       "design-visual-prompt-system",
@@ -954,7 +954,7 @@ export const projects: Project[] = [
     targetJourneys: ["engineer"],
     difficulty: "intermediate",
     estimatedDuration: "2주",
-    requiredStages: ["stage-5-delegate", "stage-6-build"],
+    requiredStages: ["stage-4-coding-agent", "stage-5-build-systems"],
     keyLessons: [
       "github-issue-to-ai-brief",
       "letting-ai-read-codebase",
@@ -1038,7 +1038,7 @@ export const projects: Project[] = [
     targetJourneys: ["founder"],
     difficulty: "intermediate",
     estimatedDuration: "주말 (2~3일)",
-    requiredStages: ["stage-6-build", "stage-8-share"],
+    requiredStages: ["stage-5-build-systems", "stage-6-operate-and-share"],
     keyLessons: ["coding-agent-setup", "plan-with-ai", "connect-ai-api"],
     summary:
       "범위를 주말 크기로 좁힌 작은 앱 하나를 Claude Code로 빌드해 공개 URL까지 배포한다.",
@@ -1113,7 +1113,7 @@ export const projects: Project[] = [
     targetJourneys: ["engineer"],
     difficulty: "advanced",
     estimatedDuration: "3주",
-    requiredStages: ["stage-5-delegate", "stage-6-build"],
+    requiredStages: ["stage-4-coding-agent", "stage-5-build-systems"],
     keyLessons: [
       "letting-ai-read-codebase",
       "write-tests-with-coding-agent",
@@ -1188,7 +1188,7 @@ export const projects: Project[] = [
     targetJourneys: ["engineer", "founder"],
     difficulty: "advanced",
     estimatedDuration: "3~4주",
-    requiredStages: ["stage-2-ask", "stage-5-delegate", "stage-6-build"],
+    requiredStages: ["stage-2-ask-and-refine", "stage-4-coding-agent", "stage-5-build-systems"],
     keyLessons: [
       "mini-agent-loop",
       "tool-permission-safeguards",
@@ -1262,7 +1262,7 @@ export const projects: Project[] = [
     targetJourneys: ["engineer"],
     difficulty: "advanced",
     estimatedDuration: "4주",
-    requiredStages: ["stage-6-build", "stage-7-operate", "stage-8-share"],
+    requiredStages: ["stage-5-build-systems", "stage-6-operate-and-share"],
     keyLessons: [
       "grounded-rag-answers",
       "llm-observability-and-regression",
@@ -1348,7 +1348,7 @@ CI에서 자동으로 도는 형태면 좋아.`,
     targetJourneys: ["founder"],
     difficulty: "advanced",
     estimatedDuration: "4주",
-    requiredStages: ["stage-6-build", "stage-7-operate", "stage-8-share"],
+    requiredStages: ["stage-5-build-systems", "stage-6-operate-and-share"],
     keyLessons: [
       "ai-product-brief",
       "connect-ai-api",

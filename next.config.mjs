@@ -39,6 +39,22 @@ const withMDX = createMDX({
   },
 });
 
+/**
+ * v2.0 — 옛 8 Stage slug → 새 6 Stage slug 영구 리디렉트 (2026-05-22).
+ * 외부 링크(SNS·검색 결과 등)가 깨지지 않도록 308 redirect. GitHub Pages 정적 export
+ * 모드는 redirects()를 지원하지 않으므로 Vercel·로컬 dev에서만 동작 — GH Pages 측은
+ * 검색 인덱스 갱신을 기다린다.
+ */
+const stageSlugRedirects = [
+  { source: "/stages/stage-2-ask", destination: "/stages/stage-2-ask-and-refine", permanent: true },
+  { source: "/stages/stage-3-verify", destination: "/stages/stage-2-ask-and-refine", permanent: true },
+  { source: "/stages/stage-4-collaborate", destination: "/stages/stage-3-collaborate", permanent: true },
+  { source: "/stages/stage-5-delegate", destination: "/stages/stage-4-coding-agent", permanent: true },
+  { source: "/stages/stage-6-build", destination: "/stages/stage-5-build-systems", permanent: true },
+  { source: "/stages/stage-7-operate", destination: "/stages/stage-6-operate-and-share", permanent: true },
+  { source: "/stages/stage-8-share", destination: "/stages/stage-6-operate-and-share", permanent: true },
+];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -53,7 +69,11 @@ const nextConfig = {
         trailingSlash: true,
         images: { unoptimized: true },
       }
-    : {}),
+    : {
+        async redirects() {
+          return stageSlugRedirects;
+        },
+      }),
 };
 
 export default withMDX(nextConfig);
