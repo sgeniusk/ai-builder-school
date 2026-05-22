@@ -10,14 +10,23 @@ export interface LessonStageInfo {
 }
 
 export const lessonStageMapping: Record<string, LessonStageInfo> = {
-  // ===== Stage 1 · AI와 만나다 (7) =====
-  "zero-coding-orientation": { stageId: "stage-1", stageOrdinal: 1 },
-  "terminal-first-day": { stageId: "stage-1", stageOrdinal: 2 },
-  "ai-tool-account-and-cost": { stageId: "stage-1", stageOrdinal: 3 },
-  "cost-monitoring-in-production": { stageId: "stage-1", stageOrdinal: 4 },
-  "common-skills-of-future-proof-people": { stageId: "stage-1", stageOrdinal: 5 },
-  "ai-delegation-decision": { stageId: "stage-1", stageOrdinal: 6 },
-  "ai-collaboration-mindset": { stageId: "stage-1", stageOrdinal: 7 },
+  // ===== Stage 1 · AI와 만나다 (13, sub 1a/1b/1c — v2.0 확장) =====
+  // 1a 원리 (5) — 터미널 켜기 전에 AI 자체를 이해
+  "what-is-an-llm": { stageId: "stage-1", stageOrdinal: 1, stageSubGroupId: "1a" },
+  "tokens-context-and-cost": { stageId: "stage-1", stageOrdinal: 2, stageSubGroupId: "1a" },
+  "ai-service-landscape": { stageId: "stage-1", stageOrdinal: 3, stageSubGroupId: "1a" },
+  "ai-chat-features-basics": { stageId: "stage-1", stageOrdinal: 4, stageSubGroupId: "1a" },
+  "common-skills-of-future-proof-people": { stageId: "stage-1", stageOrdinal: 5, stageSubGroupId: "1a" },
+  // 1b 도구·환경 (6) — 손에 잡고 매일 쓰는 도구
+  "zero-coding-orientation": { stageId: "stage-1", stageOrdinal: 6, stageSubGroupId: "1b" },
+  "terminal-first-day": { stageId: "stage-1", stageOrdinal: 7, stageSubGroupId: "1b" },
+  "git-basics-and-terminology": { stageId: "stage-1", stageOrdinal: 8, stageSubGroupId: "1b" },
+  "github-essentials": { stageId: "stage-1", stageOrdinal: 9, stageSubGroupId: "1b" },
+  "ai-tool-account-and-cost": { stageId: "stage-1", stageOrdinal: 10, stageSubGroupId: "1b" },
+  "cost-monitoring-in-production": { stageId: "stage-1", stageOrdinal: 11, stageSubGroupId: "1b" },
+  // 1c 함께 일하는 판단 (2)
+  "ai-delegation-decision": { stageId: "stage-1", stageOrdinal: 12, stageSubGroupId: "1c" },
+  "ai-collaboration-mindset": { stageId: "stage-1", stageOrdinal: 13, stageSubGroupId: "1c" },
 
   // ===== Stage 2 · 묻고 다듬기 (15 = 옛 S2 10 + S3 5) =====
   // 묻는 면 (옛 Stage 2)
@@ -119,16 +128,16 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
 
 /**
  * Stage 분포 표. v2.0 6 Stage 구조 기준.
- * - 새 Stage 1: 7 (옛 S1 그대로)
+ * - 새 Stage 1: 13 (옛 7 + 신규 6 — AI 원리 4 + git/github 2)
  * - 새 Stage 2: 15 (옛 S2 10 + S3 5)
  * - 새 Stage 3: 17 (옛 S4 그대로 shift)
  * - 새 Stage 4: 11 (옛 S5 그대로 shift)
  * - 새 Stage 5: 16 (옛 S6 그대로 shift)
  * - 새 Stage 6: 18 (옛 S7 9 + S8 9)
- * - 합 = 84 (옛 합과 동일 — lessons.ts 자체는 안 건드림)
+ * - 합 = 90
  */
 export const EXPECTED_STAGE_DISTRIBUTION = {
-  "stage-1": 7,
+  "stage-1": 13,
   "stage-2": 15,
   "stage-3": 17,
   "stage-4": 11,
@@ -136,4 +145,4 @@ export const EXPECTED_STAGE_DISTRIBUTION = {
   "stage-6": 18,
 } as const;
 
-export const EXPECTED_TOTAL_LESSONS = 84;
+export const EXPECTED_TOTAL_LESSONS = 90;

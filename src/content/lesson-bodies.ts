@@ -85,6 +85,14 @@ import TerminalFirstDayBody from "./lessons/terminal-first-day.mdx";
 import AiToolAccountAndCostBody from "./lessons/ai-tool-account-and-cost.mdx";
 import PrivacyAndAcademicEthicsBody from "./lessons/privacy-and-academic-ethics.mdx";
 
+// Stage 1 — AI 원리 & 도구 (v2.0 신규)
+import WhatIsAnLlmBody from "./lessons/what-is-an-llm.mdx";
+import TokensContextAndCostBody from "./lessons/tokens-context-and-cost.mdx";
+import AiServiceLandscapeBody from "./lessons/ai-service-landscape.mdx";
+import AiChatFeaturesBasicsBody from "./lessons/ai-chat-features-basics.mdx";
+import GitBasicsAndTerminologyBody from "./lessons/git-basics-and-terminology.mdx";
+import GithubEssentialsBody from "./lessons/github-essentials.mdx";
+
 // Evals, Security & Responsible AI
 import EvalsForAiCodedPrsBody from "./lessons/evals-for-ai-coded-prs.mdx";
 import LlmObservabilityAndRegressionBody from "./lessons/llm-observability-and-regression.mdx";
@@ -216,6 +224,13 @@ export const lessonBodies: Record<string, MdxBody | undefined> = {
   "user-feedback-collection-for-ai-products": UserFeedbackCollectionForAiProductsBody,
   "early-user-recruitment-for-ai-products": EarlyUserRecruitmentForAiProductsBody,
   "claude-skills-authoring": ClaudeSkillsAuthoringBody,
+  // Stage 1 — AI 원리 & 도구 (v2.0 신규)
+  "what-is-an-llm": WhatIsAnLlmBody,
+  "tokens-context-and-cost": TokensContextAndCostBody,
+  "ai-service-landscape": AiServiceLandscapeBody,
+  "ai-chat-features-basics": AiChatFeaturesBasicsBody,
+  "git-basics-and-terminology": GitBasicsAndTerminologyBody,
+  "github-essentials": GithubEssentialsBody,
 };
 
 export function getLessonBody(slug: string): MdxBody | null {

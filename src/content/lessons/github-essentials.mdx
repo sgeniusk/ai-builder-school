@@ -1,0 +1,163 @@
+## Git ≠ GitHub
+
+자주 헷갈린다. **git은 도구**다 — 폴더의 시간을 기록하는 명령어 집합. **GitHub는 서비스**다 — 그 git 저장소를 클라우드에 두는 가장 큰 호스팅 사이트.
+
+Git 없이 GitHub는 못 쓰지만, GitHub 없이 git은 쓸 수 있다 (혼자만 쓰면).
+
+그런데 AI 빌더에게 GitHub가 결정적인 이유는 다섯 가지다.
+
+1. **백업** — 내 노트북이 망가져도 코드와 글이 살아남는다
+2. **공유** — 동료에게 URL 한 줄로 코드 보여준다
+3. **포트폴리오** — 캡스톤 산출물을 공개 URL로 둔다
+4. **무료 정적 사이트(GitHub Pages)** — `.html` 파일을 올리면 그대로 공개 사이트
+5. **AI 에이전트 통합** — Claude Code, Codex 같은 코딩 에이전트가 GitHub Issue·PR과 직접 일한다
+
+다른 클라우드 git 호스팅(GitLab, Bitbucket)도 있지만, AI 빌더 생태계는 압도적으로 GitHub 중심이다.
+
+## 핵심 개념 7개
+
+### 1. Repository (repo)
+
+git 저장소를 GitHub에 둔 것. 한 프로젝트가 한 repo.
+
+- **Public** — 누구나 볼 수 있다. 포트폴리오·오픈소스에 권장. 무료
+- **Private** — 본인과 초대된 사람만. 회사 코드·실험에 권장. 개인 무료
+
+언제 어느 쪽? **공개해도 좋은 것은 공개**가 빌더의 기본. 그런데 **API 키·.env·고객 데이터는 절대 public이면 안 된다** (아래 .gitignore 참조).
+
+### 2. Push · Pull · Clone — 내 컴퓨터 ↔ GitHub 트래픽
+
+| 명령 | 방향 | 언제 |
+|---|---|---|
+| `git push` | local → GitHub | 내 변경을 클라우드로 |
+| `git pull` | GitHub → local | 클라우드의 변경(다른 사람 작업)을 내 컴퓨터로 |
+| `git clone <URL>` | GitHub → local (처음) | 새 컴퓨터·새 프로젝트로 받기 |
+
+push 전에 pull을 안 하면 충돌이 잘 난다. **항상 작업 시작은 `git pull`로**.
+
+### 3. Issue — 할 일·버그 트래킹
+
+"이거 고쳐야 함", "이 기능 추가하고 싶음" 같은 항목을 적어두는 곳. 혼자 써도 좋다 — 메모장 대신.
+
+AI 빌더 관점에서 더 중요한 건 — **코딩 에이전트가 Issue를 읽고 직접 작업**한다. Issue를 잘 적는 능력이 곧 코딩 에이전트를 잘 부리는 능력. Stage 4의 `github-issue-to-ai-brief` 레슨에서 본격 다룬다.
+
+### 4. Pull Request (PR)
+
+"이 변경을 main 브랜치에 합쳐주세요"라는 제안. 브랜치에서 작업한 결과를 main에 가져오는 공식 절차.
+
+PR의 진짜 가치는 **리뷰**. 다른 사람(또는 미래의 나)이 변경을 보고 코멘트하고 승인한 뒤 머지. AI가 만든 코드는 머지 전에 PR로 리뷰하는 게 표준.
+
+혼자 쓸 때도 셀프 PR이 의미 있다 — 잠시 멈춰서 자기 변경을 한 번 더 보는 강제 게이트.
+
+### 5. README.md — 프로젝트의 첫인상
+
+repo 루트에 두는 마크다운 파일. GitHub가 자동으로 메인에 렌더한다.
+
+좋은 README의 5가지
+
+1. 이 프로젝트가 **무엇을 하는가** (한 줄)
+2. **왜 만들었나** (한 단락)
+3. **어떻게 쓰나** (설치·실행)
+4. **무엇을 배웠나** (회고 — 포트폴리오용)
+5. **스크린샷·데모 URL**
+
+캡스톤 발표 자료가 README면 충분하다.
+
+### 6. GitHub Pages — 무료 정적 사이트
+
+repo의 HTML·CSS·JS를 그대로 공개 URL로 서빙해준다. 무료. 도메인은 `<username>.github.io/<repo>`. 커스텀 도메인도 가능.
+
+**언제 쓰나** — 포트폴리오 사이트, 캡스톤 데모, 정적 문서. Next.js·React 같은 SPA도 빌드해서 올릴 수 있다.
+
+> 이 학교(AI Builder School) 자체가 GitHub Pages로 호스팅된 사이트 중 하나다. main 브랜치에 push하면 1~2분 안에 자동 배포된다.
+
+### 7. `.gitignore` — 안 올릴 파일 목록
+
+repo 루트에 두는 텍스트 파일. 여기 적힌 패턴의 파일들은 git이 무시한다 — `git add`로도 안 잡힌다.
+
+**반드시 넣어야 할 것**
+
+```gitignore
+# 환경변수와 API 키
+.env
+.env.local
+.env.*.local
+
+# 의존성
+node_modules/
+
+# 빌드 산출물
+dist/
+build/
+.next/
+
+# OS·에디터
+.DS_Store
+.vscode/
+*.swp
+```
+
+**왜 중요한가** — API 키가 들어 있는 `.env`를 실수로 push하면, GitHub의 봇이 자동으로 수집해 그 키로 요청을 보낸다. 1년 청구서 폭탄의 시작. 새 repo 만들면 `.gitignore` 먼저.
+
+OpenAI·Anthropic 같은 회사들은 secret scanning을 돌려 누출된 키를 자동으로 무효화하지만, 그 사이에 누가 썼는지는 책임자 본인.
+
+## AI 에이전트 통합 — 짧게
+
+Claude Code·Codex 같은 코딩 에이전트는 GitHub와 직접 일한다.
+
+- **Issue → 작업** — Issue 번호를 주면 에이전트가 그 Issue를 읽고 코드 변경 시작
+- **PR 자동 생성** — 작업 끝나면 에이전트가 PR로 묶어 제출
+- **PR 리뷰 코멘트** — 에이전트가 자기 또는 다른 사람의 PR을 리뷰
+
+Stage 4의 [코딩 에이전트 셋업](/lessons/coding-agent-setup)에서 본격. 지금은 "Issue·PR이 그 기반"임만 잡아두기.
+
+## 그래서 오늘 할 일
+
+GitHub 계정 + 첫 public repo + 셀프 PR까지.
+
+**작업 1 — 계정·첫 repo (10분)**
+
+1. [github.com](https://github.com) 가입 (이미 있으면 스킵). username은 포트폴리오에 평생 따라다니므로 신중히
+2. 우상단 `+` → New repository
+3. 이름 — `my-ai-builder-lab` (이 학교의 표준 실습 저장소)
+4. Public, "Add a README" 체크 → Create
+5. 새 repo URL을 복사해 둔다
+
+**작업 2 — local과 연결 (10분)**
+
+이미 [git 첫 commit](/lessons/git-basics-and-terminology)으로 `my-first-repo`가 있다면 그걸 GitHub에 push.
+
+<Terminal title="GitHub로 push — bash" lines={[
+  "$ cd my-first-repo",
+  "$ git remote add origin https://github.com/<username>/my-first-repo.git",
+  "$ git branch -M main",
+  "$ git push -u origin main",
+  "Enumerating objects: 3, done.",
+  "...",
+  "To https://github.com/<username>/my-first-repo.git",
+  " * [new branch]      main -> main",
+]} />
+
+GitHub 페이지 새로고침 → 파일이 보이면 성공.
+
+**작업 3 — .gitignore + 첫 Issue + 셀프 PR (20분)**
+
+1. `.gitignore` 파일 만들기 (위 템플릿 그대로)
+2. GitHub UI에서 새 Issue — "README 보강" 같은 한 줄
+3. 새 branch `chore/readme` 만들기 → README 업데이트 → commit → push
+4. GitHub UI에서 PR 생성 → 자기 자신이 리뷰 → merge
+
+`my-github-cheatsheet.md` 한 장에 자기 username·첫 repo URL·자주 헷갈리는 명령 3개 메모.
+
+## 흔한 함정
+
+- **.env 실수 push** — 가장 흔한 사고. `.gitignore`를 첫 commit 전에 만들어야 100% 예방.
+- **public인데 비공개 정보** — 회사 코드명, 고객 이름, 내부 URL을 무의식적으로 commit. **public repo는 모두가 본다**고 항상 의식.
+- **`git pull` 안 하고 push** — 충돌. 협업 시 작업 시작은 항상 pull부터.
+- **README 안 적음** — 공개 repo인데 README가 없으면 포트폴리오 가치 0. 한 단락이라도.
+
+---
+
+## 다음 레슨
+
+git·GitHub가 손에 들어왔다. 이제 **AI 도구 계정과 비용**을 본격 셋업. 이 레슨에서 .env·.gitignore 패턴을 익혔으니, 다음 레슨의 API 키 안전 저장 부분이 한결 빠르게 잡힌다. [AI 도구 계정 세팅과 비용 관리](/lessons/ai-tool-account-and-cost).

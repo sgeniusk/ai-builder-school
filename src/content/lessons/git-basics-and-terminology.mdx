@@ -1,0 +1,159 @@
+## "어디서부터 잘못된 거지?"
+
+AI에게 코드 100줄을 바꾸라고 시켰다. 잘 돌아간다 — 처음엔. 한 시간 뒤에 보니 한 함수가 깨졌다. 어디서부터 잘못된 건지 모른다. 어제 잘 되던 코드로 돌아갈 방법도 모른다.
+
+이런 일은 AI 빌더에게 매일 일어난다. **버전 관리(version control)** 없이는 AI 시대를 못 산다. 더 정확히 말하면, AI를 안전하게 쓰려면 git이 안전망이어야 한다.
+
+이 레슨은 git을 처음 만나는 사람용이다. 명령어 외우기가 아니라 **개념·용어**를 잡는 데 집중한다. 명령어는 AI에게 물어보면 된다 — 무엇을 묻는지 알아야 묻지.
+
+## Git이란 무엇인가
+
+한 줄로 — **git은 폴더의 시간을 기록하는 도구다.** 어제 5시의 상태, 오늘 점심의 상태, 방금 전 상태를 모두 저장해두고 언제든 그 시점으로 돌아갈 수 있다.
+
+Word의 "변경 기록"과 비슷하지만, **여러 사람이 동시에 갈라져 작업하다가 합칠 수 있다**는 게 결정적인 차이다. 그래서 git은 코드뿐 아니라 문서·프롬프트·설정 같은 모든 텍스트 파일에 쓰인다.
+
+## 핵심 용어 — 7개로 끝
+
+### 1. Repository (저장소, "repo")
+
+한 프로젝트의 모든 시간 기록이 담긴 폴더. 보통 `.git/` 숨김 폴더가 그 안에 있다. `git init`으로 만든다.
+
+### 2. Working tree · Staging · Repository — 변경의 3단계
+
+git의 가장 헷갈리는 부분. 파일이 바뀌면 세 곳을 지나간다.
+
+```text
+┌──────────────┐   git add    ┌──────────────┐   git commit   ┌──────────────┐
+│ Working tree │ ───────────► │   Staging    │ ─────────────► │  Repository  │
+│  (편집 중)   │              │  (예약된 변경) │                │  (영구 기록)  │
+└──────────────┘              └──────────────┘                └──────────────┘
+```
+
+파일을 수정하면 Working tree에 있다. `git add`로 Staging에 올린다. `git commit`으로 Repository에 새 시점으로 박는다. 한 번에 한 단계씩.
+
+- **Working tree** — 지금 내가 편집기로 보는 상태
+- **Staging area** — "이번 commit에 이걸 포함하겠다"고 표시해둔 변경 묶음
+- **Repository** — 영구히 기록된 시점들의 모음
+
+### 3. Commit (커밋)
+
+변경의 한 스냅샷. **무엇이 바뀌었나 + 왜 바꿨나(메시지)** 가 한 묶음. 한 번 commit하면 영구 기록 — 나중에 그 시점으로 돌아올 수 있다.
+
+좋은 commit 메시지의 모양
+
+```
+fix(login): handle empty password field
+```
+
+타입(`fix`/`feat`/`docs`) + 영역(`login`) + 무엇을 했나. AI에게 commit 메시지 작성을 시켜도 OK.
+
+### 4. Branch (브랜치)
+
+**평행 우주.** main 브랜치에서 시작해 새 브랜치를 만들면, 그 브랜치는 main과 분리된 시간선을 따로 가진다. 실험·신기능·버그 수정을 안전한 공간에서 해볼 수 있다.
+
+```
+main:       o---o---o---o---o
+                    \
+feature:             o---o---o
+```
+
+**언제 branch?** — 무언가를 시도하기 전. AI에게 큰 변경을 시킬 때. 망쳐도 main은 무사하다.
+
+### 5. Merge
+
+두 브랜치를 합치는 것. feature 브랜치에서 일이 끝나면 main으로 합친다. 깔끔히 합쳐지면 fast-forward. 양쪽에서 같은 줄을 바꿨으면 **충돌(conflict)** 이 나서 손으로 풀어야 한다.
+
+### 6. Remote · Origin
+
+내 컴퓨터(local) vs 다른 곳(remote)에 있는 같은 저장소. 보통 GitHub에 두는 클라우드 사본을 `origin`이라고 부른다.
+
+- `git push` — 내 변경을 origin으로 올림
+- `git pull` — origin의 변경을 내 컴퓨터로 가져옴
+- `git clone` — origin을 처음 받아 내 컴퓨터에 만듦
+
+다음 레슨 [GitHub 본질](/lessons/github-essentials)에서 본격 다룬다.
+
+### 7. HEAD
+
+"지금 내가 보고 있는 시점". 보통 현재 브랜치의 가장 최근 commit을 가리킨다. 옛 시점을 보면 HEAD가 그쪽으로 잠시 이동한다.
+
+## 5분 첫 commit
+
+이 레슨에서 손에 익혀야 하는 단 5개의 명령어.
+
+<Terminal title="첫 git repo — bash" lines={[
+  "$ mkdir my-first-repo && cd my-first-repo",
+  "$ git init",
+  "Initialized empty Git repository in /Users/yohan/my-first-repo/.git/",
+  "$ echo 'Hello, git' > README.md",
+  "$ git add README.md",
+  "$ git commit -m 'docs: first commit'",
+  "[main (root-commit) abc1234] docs: first commit",
+  " 1 file changed, 1 insertion(+)",
+  "$ git log --oneline",
+  "abc1234 (HEAD -> main) docs: first commit",
+]} />
+
+`git init` (저장소 만들기) → 파일 수정 → `git add` (Staging) → `git commit -m "..."` (Repository에 박기) → `git log` (기록 보기). 이 흐름이 git 전부의 70%다.
+
+## 망쳐도 괜찮은 작업
+
+5분 안에 끝낼 첫 branch + merge 시나리오.
+
+<Terminal title="branch 만들기 — bash" lines={[
+  "$ git checkout -b experiment",
+  "Switched to a new branch 'experiment'",
+  "$ echo '실험 한 줄' >> README.md",
+  "$ git add README.md && git commit -m 'try: 실험 한 줄 추가'",
+  "$ git checkout main",
+  "Switched to branch 'main'",
+  "$ cat README.md",
+  "Hello, git",
+  "$ git merge experiment",
+  "Updating abc1234..def5678",
+  "Fast-forward",
+  " README.md | 1 +",
+]} />
+
+branch를 만들고, 거기서 작업하고, main으로 돌아와 확인하고, merge로 가져왔다. 5분이면 git의 핵심 흐름이 손에 잡힌다.
+
+## "실수했을 때" — git의 진짜 가치
+
+git은 실수했을 때 빛난다. 자주 쓰이는 안전망
+
+- `git status` — 지금 뭐가 바뀌어 있나
+- `git diff` — 정확히 어떤 줄이 바뀌었나
+- `git restore <파일>` — 마지막 commit 상태로 파일 되돌리기
+- `git reset --soft HEAD~1` — 마지막 commit 취소 (변경은 남김)
+- `git revert <hash>` — 그 commit의 변경만 반대로 되돌리는 새 commit
+
+> AI 코딩 에이전트에게 큰 변경을 맡기기 **전에는 반드시 commit**. 그래야 결과가 마음에 안 들 때 `git restore` 한 번으로 돌아갈 수 있다.
+
+## 그래서 오늘 할 일
+
+위 두 시나리오를 직접 실행.
+
+**작업 (15~25분)**
+
+1. `my-first-repo` 만들기 + `git init` + 첫 commit (5분)
+2. `experiment` 브랜치 만들기 + 변경 + main에 merge (10분)
+3. 일부러 실수해보기 — 파일 망친 다음 `git restore`로 복구. `git log`로 시간선 확인 (10분)
+
+`git-basics-cheatsheet.md` 한 장에 자기가 자주 헷갈리는 명령 3개만 메모.
+
+## 흔한 함정
+
+- **첫 commit 안 만들기** — AI에게 변경 시키고 후회. `git init` 직후 무조건 첫 commit.
+- **`git push --force` 가볍게 쓰기** — 동료 작업 날아간다. 협업 브랜치에는 절대 금지.
+- **merge conflict 무서워 외면** — 모르면 무서울 뿐. 한 번 풀어보면 단순함. AI에게 "이 conflict 어떻게 푸나" 그대로 물어도 된다.
+
+## 더 깊이 보기
+
+- [Pro Git Book](https://git-scm.com/book/ko/v2) — 공식 한국어 책. 무료. Chapter 1~3만 봐도 충분.
+- [Git 공식 명령어 reference](https://git-scm.com/docs)
+
+---
+
+## 다음 레슨
+
+git이 손에 잡혔다. 이제 **그 저장소를 클라우드에 두고 협업·공유·포트폴리오로 쓰는 GitHub** 차례. [GitHub 본질](/lessons/github-essentials).

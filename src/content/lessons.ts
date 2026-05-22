@@ -7837,4 +7837,541 @@ export const lessons: Lesson[] = [
       },
     ],
   },
+  // ─── Stage 1 v2 신규 — 2026-05-22 ──────────────────────────────
+  // 1a 원리 · 1b 도구의 사다리 보강 (스펙 docs/specs/2026-05-22-six-stage-restructure-and-lesson-consolidation.md)
+  {
+    id: "lesson-108",
+    slug: "what-is-an-llm",
+    titleKo: "LLM은 무엇을 하는 기계인가",
+    titleEn: "What an LLM actually does",
+    hook: "ChatGPT 창을 열고 '왜 잘 못해?'부터 묻기 전에, 그게 뭘 하는 기계인지 한 문장으로 잡아두면 짜증의 절반이 사라집니다.",
+    summary:
+      "LLM의 본질을 한 줄로 — 다음 토큰을 확률로 예측하는 기계. 학습/추론 분리, 자신감 있는 거짓말이 왜 나오는지, 같은 질문에 매번 다른 답이 나오는 이유를 한 단락으로 정리합니다.",
+    level: "beginner",
+    estimatedMinutes: 25,
+    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    prerequisites: [],
+    learningGoals: [
+      "LLM이 다음 토큰을 확률로 예측하는 기계라는 사실을 한 문장으로 설명한다",
+      "학습 단계와 추론 단계가 분리돼 있음을 이해한다",
+      "환각·최신 정보 약점·매번 다른 답이 같은 메커니즘에서 나옴을 안다",
+      "'AI에게 왜 못해?'를 묻기 전에 '뭘 하는 기계인지'부터 짚는 습관을 잡는다",
+    ],
+    problemScenario:
+      "지난주에 Claude에게 30페이지 회의록을 던졌더니 5분 만에 깔끔한 요약이 왔어요. \"와 이거 나보다 잘하네.\" 같은 날 오후, 두 자릿수 합계를 시켰는데 틀려 있었어요. 같은 모델, 같은 사람이 시킨 건데 왜 갈릴까요. 답은 단순해요 — LLM의 본질은 '얼마나 똑똑한가'가 아니라 '뭘 하는 기계인가'에 있습니다.",
+    coreConcepts: [
+      {
+        term: "다음 토큰 예측 (Next-token prediction)",
+        explanation:
+          "LLM이 하는 일 단 한 가지. 직전까지의 텍스트를 보고 다음 한 토큰의 확률 분포를 계산해 그중 하나를 뽑는다. 그것을 입력에 붙여 다시 다음 토큰을 뽑는다. 무한 반복. 강함도 약함도 환각도 비용도 모두 이 한 줄에서 나온다.",
+      },
+      {
+        term: "학습 (Training) vs 추론 (Inference)",
+        explanation:
+          "학습 — 인터넷·책·코드를 한 번 읽으며 단어 패턴을 가중치에 압축하는 단계. 수개월·수억 달러. 한 번 끝나면 가중치 고정. 추론 — 그 고정된 가중치로 한 토큰씩 답을 만드는 단계. 당신이 메시지를 보낼 때마다 일어나는 일. 모델은 새로 배우지 않는다.",
+      },
+      {
+        term: "가중치 (Weights)",
+        explanation:
+          "학습이 끝난 결과. 인터넷 전체에서 추출한 단어 사이의 통계 패턴을 압축한 수십~수천억 개의 숫자. Claude·GPT·Gemini는 다 같은 모양의 기계지만 가중치가 다르다.",
+      },
+      {
+        term: "확률 분포에서 뽑기 (Sampling)",
+        explanation:
+          "다음 토큰을 확률 분포에서 뽑는다는 사실 자체가 같은 질문에 매번 다른 답이 나오는 이유. temperature 설정이 이 변동성을 조절한다 — 0에 가까우면 가장 높은 확률만, 1에 가까우면 다양한 답.",
+      },
+    ],
+    mission:
+      "직접 관찰로 본질을 잡는다.\n\n**작업 1 — 같은 질문 두 번 (5분):** ChatGPT/Claude/Gemini 중 하나에 같은 질문(예 '커피 한 잔의 의미를 한 문단으로')을 두 번 던지고 답의 미세한 차이 관찰. 같은 분포에서 다른 토큰을 뽑는다는 걸 직접 본다.\n\n**작업 2 — 시점 너머 질문 (5분):** '오늘 환율이 얼마지?' 또는 '내일 비가 오나?'를 던져 본다. 모델이 모른다고 말하거나 그럴듯한 거짓을 만드는지 본다. 학습 시점이라는 벽을 본다.\n\n**작업 3 — 내 말로 한 단락 (10분):** 위 두 관찰을 바탕으로 \"LLM은 ___ 기계다\"의 빈칸을 자기 말로 적기. 토큰·확률·학습 시점 중 하나는 들어가면 좋다. `what-is-an-llm-note.md`에 저장.",
+    codexNote:
+      "이 한 단락이 손에 있으면 다음 모든 레슨이 빠르게 잡힌다. 환각·비용·context window·temperature 같은 용어가 다 같은 한 줄에서 나오기 때문이다.",
+    buildSteps: [
+      "같은 질문을 두 번 던지고 답의 차이 관찰",
+      "학습 시점 너머의 질문 던지기",
+      "'LLM은 ___ 기계다' 한 단락 자기 말로 적기",
+      "`what-is-an-llm-note.md`로 저장",
+    ],
+    verificationChecklist: [
+      "LLM이 무엇을 하는 기계인지 한 문장으로 말할 수 있는가",
+      "같은 질문에 매번 다른 답이 나오는 이유를 알고 있는가",
+      "학습과 추론이 분리돼 있음을 이해했는가",
+      "내 말로 적은 한 단락이 노트에 있는가",
+    ],
+    deliverable: {
+      title: "what-is-an-llm-note.md",
+      description: "LLM이 무엇을 하는 기계인지 자기 말로 정리한 한 단락 메모. 토큰·확률·학습 시점 중 하나는 들어가면 좋다.",
+      format: "Markdown 노트 (1단락)",
+    },
+    reflectionQuestions: [
+      "LLM의 본질이 '다음 토큰 예측'이라는 걸 알고 나니 짜증의 모양이 어떻게 바뀌었나요?",
+      "지금 자기 일에서 LLM이 '강한 모양'으로 쓰이는 경우 하나, '약한 모양'으로 쓰이는 경우 하나를 말할 수 있나요?",
+      "다음 모델이 발표되면 이 한 단락이 바뀔까요? 무엇이 바뀌고 무엇이 그대로일까요?",
+    ],
+    extensionIdeas: [
+      "Anthropic·OpenAI·Google의 'how it works' 공식 페이지 한 번 훑어보기",
+      "Karpathy의 'Let's build GPT' 영상으로 토큰 예측의 내부를 더 깊이 보기",
+    ],
+    tags: ["foundation", "llm", "mental-model", "principle"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "what-is-an-llm-note.md",
+        title: "LLM 한 단락 메모",
+        kind: "note",
+      },
+    ],
+  },
+  {
+    id: "lesson-109",
+    slug: "tokens-context-and-cost",
+    titleKo: "토큰·컨텍스트·비용 — 한 단어가 쓰는 세 모자",
+    titleEn: "Tokens, context, and cost — one unit wears three hats",
+    hook: "왜 같은 문장이 다른 비용으로 청구되나? 왜 긴 문서가 잘리나? '토큰'이라는 한 단어가 사실 세 가지 모자를 동시에 쓰기 때문입니다.",
+    summary:
+      "토큰은 (1) 모델의 입력 단위, (2) API 과금 단위, (3) 컨텍스트 길이 단위를 동시에 결정한다. tokenizer로 직접 세 보고, 모델별 가격을 비교하고, 자기 자주 쓰는 작업의 토큰·비용 표를 만든다.",
+    level: "beginner",
+    estimatedMinutes: 35,
+    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    prerequisites: ["what-is-an-llm"],
+    learningGoals: [
+      "토큰이 단어가 아니라 단어 조각임을 안다",
+      "토큰이 입력·과금·컨텍스트의 세 단위를 동시에 결정한다는 사실을 이해한다",
+      "한국어가 영어보다 평균 1.5~2배 많은 토큰을 쓴다는 점을 직접 확인한다",
+      "자기 자주 쓰는 작업 5개의 모델별 비용 표를 손에 갖는다",
+    ],
+    problemScenario:
+      "API로 자동화를 시작했는데 한 달 만에 청구서가 $200이 나왔어요. 분명히 가벼운 작업만 시켰는데. 또 다른 날엔 긴 문서를 통째로 던졌더니 \"입력이 너무 깁니다\"가 떴어요. 토큰 한 단어가 세 곳을 결정한다는 걸 모르면 매번 사고가 납니다.",
+    coreConcepts: [
+      {
+        term: "토큰 (Token)",
+        explanation:
+          "모델이 보는 텍스트의 최소 조각. 단어가 아니라 단어 조각. 영어는 약 4글자 = 1 토큰, 한국어는 1 음절 ≈ 1~3 토큰. OpenAI Tokenizer로 직접 세 볼 수 있다.",
+      },
+      {
+        term: "입력 단위",
+        explanation:
+          "모델은 단어가 아니라 토큰 단위로 텍스트를 본다. '안녕하세요'가 '안', '녕', '하세요' 같은 조각으로 분해돼 들어간다. 그래서 어떤 단어는 1 토큰, 어떤 단어는 5 토큰.",
+      },
+      {
+        term: "과금 단위",
+        explanation:
+          "API는 토큰 단위로 돈을 매긴다. 입력보다 출력이 5~10배 비싸다. 모델이 답하는 동안 토큰을 하나씩 만들어내야 하므로 계산 비용이 더 든다. 루프 잘못 짜면 하루에 $500 청구도 흔하다.",
+      },
+      {
+        term: "컨텍스트 윈도우 (Context window)",
+        explanation:
+          "모델이 한 번에 볼 수 있는 토큰 수의 상한. Gemini Flash·GPT-5.5는 1M, Opus는 200K. 시스템 프롬프트·도구 정의·대화 기록·새 질문·답이 모두 이 안에 들어가야 한다. 넘으면 잘림.",
+      },
+    ],
+    mission:
+      "토큰 → 비용을 손에 잡히는 표 한 장으로.\n\n**작업 1 — Tokenizer로 직접 세기 (10분):** OpenAI Tokenizer 또는 Anthropic Tokenizer에서 자기 자주 쓰는 프롬프트 1개를 한국어와 영어 번역으로 각각 붙여 토큰 수 비교. 보통 한국어가 1.5~2배 많다는 걸 직접 확인.\n\n**작업 2 — 내 작업 비용표 (20분):** `cost-per-task-cheatsheet.md` 한 장 만들기. 자주 하는 작업 5개를 정해 각각의 입력·출력 토큰 추정 + Flash·GPT-5.5·Opus 모델 비용 계산. 5개만 채워도 \"이건 Flash로 / 저건 Opus로\"의 직관이 생긴다.\n\n**작업 3 — Spending cap 걸기 (5분):** API를 쓸 계획이면 console에서 monthly spend limit을 무조건 $5~$10으로 걸어둠. 루프 폭주 안전망.",
+    codexNote:
+      "출력이 입력보다 5~10배 비싸므로, 프롬프트에 '한 단락으로 답하라' '5줄 이내'  같은 길이 제약을 넣는 게 비용 절감의 가장 빠른 방법입니다. 가독성까지 같이 올라갑니다.",
+    buildSteps: [
+      "OpenAI/Anthropic Tokenizer로 토큰 직접 세 보기",
+      "한국어·영어 비교로 토큰 비율 확인",
+      "`cost-per-task-cheatsheet.md` 작업 5개 비용표 작성",
+      "API를 쓰면 monthly spend limit $5~$10 설정",
+    ],
+    verificationChecklist: [
+      "토큰이 무엇이며 왜 단어가 아닌지 설명할 수 있는가",
+      "한 단어 '토큰'이 입력·과금·컨텍스트 세 모자를 동시에 쓴다는 걸 이해했는가",
+      "내 작업 5개의 모델별 비용표가 손에 있는가",
+      "API 쓰는 경우 spending cap이 걸려 있는가",
+    ],
+    deliverable: {
+      title: "cost-per-task-cheatsheet.md",
+      description: "자기 자주 쓰는 작업 5개의 입력·출력 토큰 수와 모델별 비용을 한 표로 정리한 cheatsheet.",
+      format: "Markdown 표",
+    },
+    reflectionQuestions: [
+      "내 작업 중 무거운 모델(Opus)이 정말 필요한 것은 몇 개였나요?",
+      "한국어 토큰 효율을 개선하려면 어떤 작업부터 영어 프롬프트로 바꿔볼까요?",
+      "한 달 비용을 절반으로 줄인다면 어디서 시작할 수 있을까요?",
+    ],
+    extensionIdeas: [
+      "Vercel AI Gateway·LangChain의 모델 라우팅 패턴 한 번 훑어보기",
+      "프롬프트 캐싱(prompt caching)이 비용에 미치는 영향 실험",
+    ],
+    tags: ["foundation", "cost", "tokens", "context-window", "principle"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "cost-per-task-cheatsheet.md",
+        title: "내 작업 비용 cheatsheet",
+        kind: "checklist",
+      },
+    ],
+  },
+  {
+    id: "lesson-110",
+    slug: "ai-service-landscape",
+    titleKo: "AI 서비스 지도 — 자체모델 vs 통합, 구독 vs API",
+    titleEn: "AI service landscape — own model vs aggregator, subscription vs API",
+    hook: "ChatGPT·Claude·Gemini가 같아 보이는데, Cursor·Perplexity는 또 뭐고, 결제는 매번 따로 해야 하나? 두 축의 지도가 손에 있으면 매월 $80을 흩뿌리지 않습니다.",
+    summary:
+      "AI 서비스는 두 축으로 갈린다 — (1) 자체 모델 vs API 통합, (2) 구독제 vs API. 각 사례와 차이를 정리하고, 자기 주간 작업을 \"구독으로 충분 / API가 필요\"로 분류하는 service-rule을 만든다.",
+    level: "beginner",
+    estimatedMinutes: 30,
+    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    prerequisites: ["tokens-context-and-cost"],
+    learningGoals: [
+      "자체 모델 서비스(ChatGPT/Claude/Gemini)와 API 통합 서비스(Cursor/Perplexity/Lindy)의 차이를 안다",
+      "같은 회사의 구독제와 API가 별개 시스템임을 이해한다",
+      "구독제와 API의 강점·약점·언제 어느 것을 쓰는지 판단 기준이 있다",
+      "내 주간 작업을 두 트랙으로 분류한 service-rule.md를 갖는다",
+    ],
+    problemScenario:
+      "Claude Pro $20, ChatGPT Plus $20, Gemini Advanced $20, Cursor $20, Perplexity $20 — 매월 $100을 5곳에 흩뿌리고 있어요. 그런데도 정작 자동화하려고 API를 쓰니 또 따로 결제. \"Plus면 API도 무료 아닌가?\" 했다가 청구서를 보고 놀랐어요. 지도가 없으면 매번 새 가입, 매월 새 사고입니다.",
+    coreConcepts: [
+      {
+        term: "자체 모델 서비스",
+        explanation:
+          "ChatGPT(OpenAI), Claude(Anthropic), Gemini(Google) — 자기 회사가 만든 모델 + 자기 UI. 모델·UI 일관성과 안정성이 강점. 모델을 갈아탈 자유가 적은 게 단점.",
+      },
+      {
+        term: "API 통합 서비스 (Aggregator)",
+        explanation:
+          "Cursor·Perplexity·Lindy·v0·Bolt.new 등 — 여러 회사의 모델을 골라 쓰는 UI. 작업별 최적 모델 선택이 강점. 추상화 계층이 한 겹 더 있어 디버깅이 까다롭고 비용이 합산됨.",
+      },
+      {
+        term: "구독제",
+        explanation:
+          "월정액($20~$200) 브라우저·앱 채팅 UI. 일·주별 한도 있음. 일상 사용·즉시 시작에 강점. 한도 도달하면 강제 대기.",
+      },
+      {
+        term: "API",
+        explanation:
+          "토큰 단위 사용량 과금. 내 코드에서 호출. spending cap만 걸면 무한. 자동화·시스템 빌드·대량 호출에 강점. 루프 폭주 시 청구서 폭탄.",
+      },
+    ],
+    mission:
+      "지도 한 장을 손에.\n\n**작업 1 — 지금 쓰는 서비스 분류 (5분):** 결제 중이거나 정기 사용 중인 AI 서비스 모두 적기. 각각 (자체모델 / 통합) · (구독제 / API / 무료 한도) 분류.\n\n**작업 2 — `service-rule.md` 만들기 (20분):** 자기 주간 작업 5개를 \"구독제로 충분 / API가 필요\" 로 분류해 표로. 각 작업에 추천 서비스 적기.\n\n**작업 3 — 통합 서비스 1개 무료 체험 (10분):** Cursor·Perplexity·Lindy·v0·Bolt 중 하나 무료 체험 → \"여기서는 어떤 모델을 어떻게 쓰나\" 한 줄 관찰.",
+    codexNote:
+      "구독제와 API의 가장 큰 함정은 \"Plus면 API도 무료\" 오해입니다. 둘은 별개 시스템 — 결제도 따로, 한도도 따로, 인터페이스도 따로. 헷갈리면 각 사 docs 다시 확인.",
+    buildSteps: [
+      "지금 쓰는 AI 서비스 모두 적고 두 축으로 분류",
+      "주간 작업 5개를 구독제/API 분류한 service-rule.md 작성",
+      "통합 서비스 1개 무료 체험 + 관찰 노트",
+    ],
+    verificationChecklist: [
+      "자체 모델과 통합 서비스의 차이를 한 줄로 말할 수 있는가",
+      "구독제와 API가 별개 시스템임을 이해했는가",
+      "내 주간 작업의 service-rule이 손에 있는가",
+      "통합 서비스 한 곳을 직접 써 봤는가",
+    ],
+    deliverable: {
+      title: "service-rule.md",
+      description: "주간 작업 5개를 구독제/API로 분류하고 각각 어떤 서비스를 쓸지 정리한 개인 룰북.",
+      format: "Markdown 분류표",
+    },
+    reflectionQuestions: [
+      "지금 결제 중인 서비스 중 진짜로 매월 가치를 받는 곳은 몇 개인가요?",
+      "어떤 작업은 통합 서비스가 더 잘 풀까요? 어떤 작업은 자체 모델이 더 깔끔할까요?",
+      "API 자동화로 옮기면 한 달 비용이 어떻게 바뀔까요?",
+    ],
+    extensionIdeas: [
+      "특강 — 프런티어 AI 지형 2026에서 3사의 무게중심 차이를 확인",
+      "Cursor·Perplexity·v0·Bolt 중 자기 일에 가장 가까운 한 곳을 한 달 본격 사용 후 회고",
+    ],
+    tags: ["service", "landscape", "subscription-vs-api", "vendor"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "service-rule.md",
+        title: "서비스 분류 룰북",
+        kind: "checklist",
+      },
+    ],
+  },
+  {
+    id: "lesson-111",
+    slug: "ai-chat-features-basics",
+    titleKo: "챗봇 공통 기능 — Projects · Memory · CLI · Artifacts",
+    titleEn: "Chatbot common features — Projects, Memory, CLI, Artifacts",
+    hook: "Claude의 Projects, ChatGPT의 GPTs, Gemini의 Gems — 다 같은 거야 다른 거야? 6개 공통 기능의 이름을 한 번 정리해두면 어디로 옮겨가도 5분 안에 적응합니다.",
+    summary:
+      "Projects·GPTs·Gems, Memory, CLI/Desktop, Artifacts/Canvas, Custom Instructions, MCP/Actions — 챗봇 6개 공통 기능을 정리한다. 자기 챗봇에서 위치를 찾고, Project 하나를 만들어 Custom Instructions까지 등록한다.",
+    level: "beginner",
+    estimatedMinutes: 40,
+    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    prerequisites: ["ai-service-landscape"],
+    learningGoals: [
+      "Projects·GPTs·Gems의 공통점과 차이를 안다",
+      "Memory·CLI·Artifacts·Custom Instructions·MCP의 의미와 언제 쓰는지 안다",
+      "자기가 쓰는 챗봇에서 6개 기능 위치를 직접 찾아본다",
+      "첫 Project + Custom Instructions를 만들어 평소 작업에 적용한다",
+    ],
+    problemScenario:
+      "ChatGPT에서 잘 쓰던 GPTs가 있는데 Claude로 옮기면 어디 있는지 모르겠어요. Claude의 Projects가 같은 건지 아닌지도 헷갈리고요. Memory를 켰는데 어떤 정보가 누적되는지 모르겠어서 불안하기도 합니다. 공통 기능의 이름이 다 다르니 매번 처음부터 헤맵니다.",
+    coreConcepts: [
+      {
+        term: "작업 공간 (Projects · GPTs · Gems)",
+        explanation:
+          "대화마다 컨텍스트를 다시 설명하지 않게 해주는 묶음. 파일·지시문·이전 대화를 저장. Claude Projects는 단순한 묶음, ChatGPT GPTs와 Gemini Gems는 공유 가능한 정형화된 어시스턴트.",
+      },
+      {
+        term: "장기 기억 (Memory)",
+        explanation:
+          "사용자의 사실(이름·취향·진행 중 프로젝트)을 누적해 다음 대화에 자동 반영. ChatGPT가 가장 적극적, Claude는 베타·제한적. 민감 정보가 새지 않게 정기 점검이 필수.",
+      },
+      {
+        term: "CLI · 데스크탑 (Claude Code · Codex CLI · Desktop)",
+        explanation:
+          "브라우저 채팅창 밖에서 모델을 쓰는 길. 코드 작업·파일 시스템 접근·외부 도구 호출에 필요. Stage 4(코딩 에이전트)에서 본격 다룬다.",
+      },
+      {
+        term: "사이드 캔버스 (Artifacts · Canvas)",
+        explanation:
+          "대화창 옆에 코드·문서를 따로 그려놓고 반복 수정하는 패널. 한 번 답으로 끝나지 않는 산출물(글·코드·디자인)을 다룰 때.",
+      },
+      {
+        term: "Custom Instructions (시스템 지시)",
+        explanation:
+          "매 대화에 자동 적용되는 사용자 지시. '한국어로 답하라', '각 주장에 출처' 같은 글로벌 룰. 모순된 지시('간결' + '충분히 자세히')를 넣으면 모델이 헷갈린다.",
+      },
+      {
+        term: "도구·데이터 연결 (MCP · Actions)",
+        explanation:
+          "모델이 외부 도구·데이터(Calendar·Drive·API·사내 시스템)에 접근하는 길. Claude MCP는 표준 프로토콜 — 한 번 만들면 여러 클라이언트에서 재사용. Stage 4·5에서 본격.",
+      },
+    ],
+    mission:
+      "자기 챗봇에서 6개 기능 위치를 직접 찾고, Project 한 개를 본격 사용까지.\n\n**작업 1 — 6개 위치 찾기 (10분):** 자주 쓰는 챗봇 1개 선택 → 위 6개 기능을 UI에서 직접 찾기. 어디 메뉴에 있는지 메모. 못 찾는 것은 \"이 챗봇에는 없음/약함\"으로 표시.\n\n**작업 2 — Project 만들기 (20분):** 자기 일과 가장 관련된 주제로 Project 1개 생성 (예 \"회의록 정리\", \"주간 보고서\") + Custom Instructions 한 줄 등록 + 그 Project에서 평소 작업 1개 해보기.\n\n**작업 3 — Memory 검토 (10분, Memory 쓰는 사람만):** Memory에 어떤 사실이 저장돼 있는지 확인 → 민감 정보 삭제 → 향후 들어가지 않을 정보 정리.",
+    codexNote:
+      "Memory의 가장 흔한 사고는 민감 정보 누적입니다 — 주민번호, 사내 프로젝트 코드명, 고객 이름 등. 정기 점검 습관을 만드세요. 또 Custom Instructions에 \"간결\" + \"충분히 자세히\" 같은 모순된 지시는 절대 금물.",
+    buildSteps: [
+      "자기 챗봇에서 6개 공통 기능 위치 찾기",
+      "Project 1개 + Custom Instructions 등록",
+      "Memory 내용 검토 + 민감 정보 정리",
+      "`my-chat-features.md`에 위치·첫 Project 정리",
+    ],
+    verificationChecklist: [
+      "Projects·GPTs·Gems가 같은 종류라는 걸 이해했는가",
+      "Memory의 위험과 정기 점검의 필요성을 안 채로 쓰는가",
+      "Project + Custom Instructions가 자기 일에 등록돼 있는가",
+      "6개 기능의 위치를 메모로 가지고 있는가",
+    ],
+    deliverable: {
+      title: "my-chat-features.md",
+      description: "내 챗봇 6개 공통 기능의 위치와 첫 Project URL을 정리한 메모.",
+      format: "Markdown 노트",
+    },
+    reflectionQuestions: [
+      "지금까지 매번 새 대화에 컨텍스트를 다시 설명하느라 낭비한 시간은 얼마였나요?",
+      "Memory가 기억해두면 좋을 것 1가지, 절대 기억해서 안 될 것 1가지는 무엇인가요?",
+      "Artifacts·Canvas를 잘 쓰면 어떤 작업이 가장 빨라질까요?",
+    ],
+    extensionIdeas: [
+      "여러 챗봇을 같은 작업에 시도하면서 Project·Memory 동작 차이 비교",
+      "MCP 서버 한 개 설치해 Claude Desktop에 붙여보기 (Stage 5에서 본격)",
+    ],
+    tags: ["chatbot", "projects", "memory", "features"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "my-chat-features.md",
+        title: "내 챗봇 기능 지도",
+        kind: "note",
+      },
+    ],
+  },
+  {
+    id: "lesson-112",
+    slug: "git-basics-and-terminology",
+    titleKo: "Git 기본과 용어 — 버전 관리는 AI 빌더의 안전망",
+    titleEn: "Git basics and terminology — version control as AI builder's safety net",
+    hook: "AI에게 코드 100줄 바꾸라 시켰는데 한 줄이 깨졌어요. 어디서부터 잘못된 건지 모르고, 어제 상태로 돌아갈 방법도 모릅니다. git 없이는 AI 시대를 못 삽니다.",
+    summary:
+      "Git의 본질을 '폴더의 시간 기록'으로 잡고, 핵심 용어 7개(Repository·Working tree·Staging·Repository·Commit·Branch·Merge·Remote·HEAD)와 첫 commit·branch·merge를 직접 한다. 명령어 외우기가 아니라 개념을 잡는 데 집중.",
+    level: "beginner",
+    estimatedMinutes: 50,
+    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    prerequisites: ["terminal-first-day"],
+    learningGoals: [
+      "Git이 '폴더의 시간 기록 도구'임을 이해한다",
+      "Repository·Commit·Branch·Merge·Remote·HEAD 등 핵심 용어 7개의 의미를 안다",
+      "Working tree → Staging → Repository의 3단계 흐름을 직접 손에 익힌다",
+      "첫 commit과 branch·merge 시나리오를 끝까지 돌려본다",
+      "AI에 코드 변경 맡기기 전에 commit하는 안전 습관을 잡는다",
+    ],
+    problemScenario:
+      "Claude Code에 \"이 리팩토링 한 번에 해줘\" 시켰더니 100파일이 바뀌었고, 한 함수가 미묘하게 깨졌어요. 어디서부터 잘못된 건지 git diff를 안 본 채로 작업을 이어갔다가 결국 폴더 전체를 백업본으로 덮어쓰기로 복구했습니다. 시간이 4시간 날아갔어요. git을 알았다면 `git revert` 한 줄이었을 일입니다.",
+    coreConcepts: [
+      {
+        term: "Repository (저장소)",
+        explanation:
+          "한 프로젝트의 모든 시간 기록이 담긴 폴더. `.git/` 숨김 폴더가 그 안에 있다. `git init`으로 만든다.",
+      },
+      {
+        term: "Working tree · Staging · Repository — 변경의 3단계",
+        explanation:
+          "파일이 바뀌면 세 곳을 지나간다. Working tree(편집기로 보는 상태) → `git add`로 Staging(commit 후보) → `git commit`으로 Repository(영구 기록). git의 가장 헷갈리는 부분이자 핵심.",
+      },
+      {
+        term: "Commit (커밋)",
+        explanation:
+          "변경의 한 스냅샷. 무엇이 바뀌었나 + 왜 바꿨나(메시지)가 한 묶음. 좋은 메시지 형식: `fix(login): handle empty password`. AI에게 commit 메시지 작성을 시켜도 좋다.",
+      },
+      {
+        term: "Branch (브랜치)",
+        explanation:
+          "평행 우주. main에서 시작해 새 브랜치를 만들면 별개 시간선이 된다. 실험·신기능·버그 수정을 안전한 공간에서 시도. 망쳐도 main은 무사.",
+      },
+      {
+        term: "Merge",
+        explanation:
+          "두 브랜치를 합치는 것. 깔끔히 합쳐지면 fast-forward, 양쪽에서 같은 줄을 바꿨으면 충돌(conflict). 충돌은 손으로 푸는데, 처음엔 무서울 뿐 한 번 풀어보면 단순.",
+      },
+      {
+        term: "Remote · Origin",
+        explanation:
+          "내 컴퓨터(local) vs 다른 곳(remote)에 있는 같은 저장소. GitHub에 두는 클라우드 사본이 보통 `origin`. `git push`로 올리고 `git pull`로 받는다.",
+      },
+      {
+        term: "HEAD",
+        explanation:
+          "\"지금 내가 보고 있는 시점.\" 보통 현재 브랜치의 가장 최근 commit을 가리킨다. 옛 시점을 보면 HEAD가 그쪽으로 잠시 이동한다.",
+      },
+    ],
+    mission:
+      "5분 첫 commit + 10분 branch·merge.\n\n**작업 1 — 첫 commit (5분):** `mkdir my-first-repo && cd my-first-repo` → `git init` → README.md 만들고 `git add` → `git commit -m 'docs: first commit'` → `git log --oneline`로 확인.\n\n**작업 2 — branch + merge (10분):** `git checkout -b experiment` → 변경하고 commit → `git checkout main` → `git merge experiment`. branch가 평행 우주라는 걸 손으로 확인.\n\n**작업 3 — 일부러 실수 + 복구 (10분):** 파일을 망친 다음 `git restore <파일>`로 복구. `git log`로 시간선 확인. AI에게 큰 변경 시키기 전에 commit하는 습관의 가치를 직접 본다.",
+    codexNote:
+      "AI 코딩 에이전트에게 큰 변경을 맡기기 전에는 반드시 commit. 그래야 결과가 마음에 안 들 때 `git restore` 한 번으로 돌아갈 수 있습니다. `git push --force`는 협업 브랜치에 절대 금지 — 동료 작업이 날아갑니다.",
+    buildSteps: [
+      "`git init` + 첫 README commit",
+      "branch 만들고 변경 + main에 merge",
+      "일부러 실수 + `git restore`로 복구 시나리오",
+      "자주 헷갈리는 명령 3개 cheatsheet 작성",
+    ],
+    verificationChecklist: [
+      "Git의 본질이 '폴더 시간 기록'임을 이해했는가",
+      "Working tree → Staging → Repository 3단계를 직접 손에 익혔는가",
+      "branch + merge 시나리오를 끝까지 돌렸는가",
+      "AI에 변경 맡기기 전 commit 습관을 만들었는가",
+    ],
+    deliverable: {
+      title: "my-first-repo · git-basics-cheatsheet.md",
+      description: "직접 만든 첫 git repo + 자주 헷갈리는 명령 3개를 정리한 cheatsheet.",
+      format: "Git 저장소 + Markdown 노트",
+    },
+    reflectionQuestions: [
+      "Git 없이 작업했을 때 가장 큰 사고는 무엇이었나요?",
+      "branch가 평행 우주라는 비유가 와닿았나요?",
+      "AI에 변경을 맡기는 자기 워크플로우에 commit을 어디에 넣을까요?",
+    ],
+    extensionIdeas: [
+      "[Pro Git Book](https://git-scm.com/book/ko/v2) Chapter 1~3 정독",
+      "GitHub 1년 활동을 `git log --since='1 year ago' --oneline | wc -l`로 회고",
+    ],
+    tags: ["foundation", "git", "version-control", "safety-net"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "git-basics-cheatsheet.md",
+        title: "Git cheatsheet",
+        kind: "checklist",
+      },
+    ],
+  },
+  {
+    id: "lesson-113",
+    slug: "github-essentials",
+    titleKo: "GitHub 본질 — git 위에 얹는 협업·공유 인프라",
+    titleEn: "GitHub essentials — collaboration and sharing infrastructure on top of git",
+    hook: "내 AI 프로젝트를 백업하고, 동료와 공유하고, 캡스톤 포트폴리오로 보여주고 싶다. 그 모든 게 한 도구로 — GitHub.",
+    summary:
+      "Git과 GitHub의 차이를 잡고, 핵심 7개(Repository·Push/Pull/Clone·Issue·PR·README·GitHub Pages·.gitignore)를 직접 사용한다. 첫 public repo + .gitignore + Issue + 셀프 PR까지. AI 코딩 에이전트가 Issue·PR과 직접 일하는 시대의 진입점.",
+    level: "beginner",
+    estimatedMinutes: 50,
+    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    prerequisites: ["git-basics-and-terminology"],
+    learningGoals: [
+      "Git ≠ GitHub를 이해한다 (도구 vs 호스팅 서비스)",
+      "Repository public/private 선택의 기준을 안다",
+      "Push·Pull·Clone로 local과 GitHub 사이 트래픽을 직접 흘린다",
+      "Issue·PR·README의 의미와 실제 사용을 손에 익힌다",
+      ".gitignore로 API 키·민감 정보를 안전하게 격리한다",
+      "GitHub Pages로 무료 정적 사이트를 띄울 수 있음을 안다",
+    ],
+    problemScenario:
+      "캡스톤이 끝나가는데 \"포트폴리오를 어디에 둘까\"가 막막해요. 노트북이 망가지면 다 날아갑니다. 친구에게 보여주려면 zip으로 압축해 메일? AI 코딩 에이전트가 \"GitHub Issue를 만들어주세요\" 했는데 Issue가 뭔지 모르겠어요. GitHub가 뭘 하는 곳인지 한 번 정리하고 가야 합니다.",
+    coreConcepts: [
+      {
+        term: "Git vs GitHub",
+        explanation:
+          "Git은 도구(폴더 시간 기록 명령어 집합). GitHub는 그 git 저장소를 클라우드에 두는 가장 큰 호스팅 서비스. Git 없이 GitHub는 못 쓰지만, GitHub 없이 git은 쓸 수 있다(혼자만 쓰면).",
+      },
+      {
+        term: "Repository (public · private)",
+        explanation:
+          "Public — 누구나 볼 수 있다. 포트폴리오·오픈소스. 무료. Private — 본인과 초대된 사람만. 회사 코드·실험. 개인 무료. API 키·.env·고객 데이터는 절대 public 금지.",
+      },
+      {
+        term: "Push · Pull · Clone",
+        explanation:
+          "Push: local → GitHub. Pull: GitHub → local. Clone: GitHub → local (처음 받기). push 전 항상 pull, 작업 시작은 항상 pull부터.",
+      },
+      {
+        term: "Issue",
+        explanation:
+          "할 일·버그·기능 요청을 적어두는 곳. 혼자 써도 메모장 대신 좋다. 더 중요한 건 — AI 코딩 에이전트가 Issue를 읽고 직접 작업한다는 사실. Issue를 잘 쓰는 능력이 곧 AI 에이전트를 잘 부리는 능력.",
+      },
+      {
+        term: "Pull Request (PR)",
+        explanation:
+          "\"이 변경을 main에 합쳐 주세요\" 제안. 브랜치 작업 결과를 공식 절차로 main에 가져오는 길. 진짜 가치는 리뷰 — 다른 사람(또는 미래의 나)이 변경을 보고 코멘트하고 승인. AI가 만든 코드는 머지 전 PR로 리뷰가 표준.",
+      },
+      {
+        term: "README.md · GitHub Pages",
+        explanation:
+          "README — repo 루트의 마크다운 파일, GitHub가 자동 렌더. 프로젝트의 첫인상. GitHub Pages — repo의 HTML·CSS·JS를 무료 공개 URL로 서빙. 포트폴리오·캡스톤 데모에 무료 인프라.",
+      },
+      {
+        term: ".gitignore",
+        explanation:
+          "안 올릴 파일 목록. `.env`, `node_modules/`, `dist/` 등. API 키가 든 .env를 실수로 push하면 GitHub의 봇이 자동 수집해 그 키로 요청을 보낸다. 새 repo 만들면 .gitignore 먼저.",
+      },
+    ],
+    mission:
+      "계정 → 첫 public repo → 셀프 PR까지.\n\n**작업 1 — 계정·첫 repo (10분):** github.com 가입(이미 있으면 스킵) → New repository → 이름 `my-ai-builder-lab`, Public, Add README 체크 → Create.\n\n**작업 2 — local과 연결 (10분):** [Git 첫 commit](/lessons/git-basics-and-terminology)에서 만든 `my-first-repo`를 `git remote add origin ...` + `git push -u origin main`으로 올리기.\n\n**작업 3 — .gitignore + Issue + 셀프 PR (25분):** `.gitignore` 만들고 `.env` 추가. GitHub UI에서 Issue 한 줄. 새 branch `chore/readme`에서 README 업데이트 → push → GitHub에서 PR 생성 → 자기 리뷰 → merge.",
+    codexNote:
+      ".env를 .gitignore에 추가하기 전 commit·push는 절대 금지. 한 번 GitHub에 올라간 키는 즉시 무효화하고 새로 발급해야 합니다. OpenAI·Anthropic은 secret scanning으로 자동 무효화하지만 그 사이의 사용 책임은 본인.",
+    buildSteps: [
+      "GitHub 가입 + my-ai-builder-lab repo 생성",
+      "local repo에 origin 추가 + 첫 push",
+      ".gitignore 만들고 .env 추가",
+      "Issue 1개 + 셀프 PR 시나리오",
+      "README 한 단락이라도 작성",
+    ],
+    verificationChecklist: [
+      "Git과 GitHub의 차이를 한 줄로 설명할 수 있는가",
+      "push·pull·clone 흐름을 직접 했는가",
+      ".env가 .gitignore에 들어 있고 push되지 않았음을 git status로 확인했는가",
+      "셀프 PR 시나리오를 끝까지 돌렸는가",
+    ],
+    deliverable: {
+      title: "github.com/<username>/my-ai-builder-lab",
+      description: "공개 GitHub repo + .gitignore + README + 셀프 PR 한 번. 캡스톤·포트폴리오의 기반.",
+      format: "공개 URL",
+    },
+    reflectionQuestions: [
+      "GitHub username을 신중히 골랐나요? 포트폴리오에 평생 따라다닙니다.",
+      "Issue를 잘 적는 능력이 왜 AI 에이전트를 잘 부리는 능력과 같을까요?",
+      ".env 사고를 본 적이 있나요? 자기 워크플로우의 어느 지점이 가장 위험한가요?",
+    ],
+    extensionIdeas: [
+      "GitHub Pages로 정적 포트폴리오 사이트 1개 띄우기 (15분)",
+      "Stage 4의 [코딩 에이전트 셋업](/lessons/coding-agent-setup)으로 가서 Issue → AI 작업 흐름 체험",
+    ],
+    tags: ["foundation", "github", "git", "collaboration", "portfolio"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "github.com/<username>/my-ai-builder-lab",
+        title: "내 첫 public repo",
+        kind: "note",
+      },
+    ],
+  },
 ];
