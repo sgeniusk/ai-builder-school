@@ -30,7 +30,7 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 
 | 새 # | 새 이름 | 옛 매핑 | 트랙 | 페르소나 | 1차 목표 레슨 수 | 시간 |
 |---|---|---|---|---|---|---|
-| **1** | 만나기 | S1 + 원리 신규 2 + git/github 신규 2 + what-llms 이동 | 누구나 | 6명 | **9** (1a 원리 4 · 1b 도구 5) | ~14h |
+| **1** | 만나기 | S1 + 원리 신규 2 + 서비스 지도 신규 2 + git/github 신규 2 + what-llms 이동 | 누구나 | 6명 | **11** (1a 원리 4 · 1b 도구 7) | ~17h |
 | **2** | 묻고 다듬기 | S2 + S3 통합 (what-llms 빠짐) | 누구나 | 6명 | 10 | ~13h |
 | **3** | 함께 일하기 | S4 | 누구나(엔지니어 빠짐) | 5명 | 11 | ~13h |
 | **── 빌더 분기점 (UI 시각화) ──** ||||||||
@@ -39,15 +39,19 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 | **── 합류 ──** ||||||||
 | **6** | 운영·공유 | S7 + S8 통합 | 누구나(혼합) | 6명 | 15 | ~24h |
 
-**합** — 65 레슨 · ~95시간
+**합** — 67 레슨 · ~98시간
 
 **Stage 1 재구성 메모 (2026-05-22 검토)** — "AI와 만나다"의 원래 약속은 "AI를 만나는 것"인데 v1·v2 초안 모두 도구·태도 7개로 채워져 있어 LLM 원리 자체를 한 마디도 안 가르쳤다. 정정
-- 1a 원리(4)·1b 도구(5) sub-group으로 분할.
+- 1a 원리(4)·1b 도구(7) sub-group으로 분할.
 - 신규 원리 레슨 2개 — `what-is-an-llm`, `tokens-context-and-cost`.
 - 코어 `what-llms-are-good-and-bad-at`(특강 #1 deepens 대상)을 옛 S3에서 새 Stage 1로 끌어올림.
-- 신규 도구 레슨 2개 — `git-basics-and-terminology`, `github-essentials`. 현 `ai-tool-account-and-cost`가 GitHub·`.gitignore`를 이미 사용하면서 git/github가 뭔지는 안 가르치는 모순 해결.
+- 신규 도구 레슨 4개
+  - `ai-service-landscape` — 자체모델(ChatGPT·Claude·Gemini) vs API 통합(Cursor·Perplexity 등), 구독제 vs API 장단점
+  - `ai-chat-features-basics` — Projects · Memory · CLI · Artifacts 등 챗봇 공통 기능
+  - `git-basics-and-terminology` — 버전 관리 개념·용어
+  - `github-essentials` — git 호스팅·협업·`.gitignore`
 - 코딩 에이전트 오리엔테이션(`zero-coding-orientation`)은 코딩 맥락이 진짜로 시작되는 새 Stage 4로 이동.
-- 1b 도구의 순서는 `terminal → git → github → ai-account → delegation`. `ai-account`에서 `.env`/`.gitignore` 패턴 쓰려면 git/github가 먼저.
+- 1b 도구의 순서는 `service-landscape → chat-features → terminal → git → github → ai-account → delegation`. 결제·키 관리 전에 (1) 서비스 지도와 (2) 공통 기능을 먼저 알아야 결제 판단이 합리적. `ai-account`의 `.env`/`.gitignore` 패턴은 git/github가 먼저 와야 의미.
 
 설계 직관
 
@@ -131,18 +135,20 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 | 이동 | `what-llms-are-good-and-bad-at`(옛 S3) → 새 Stage 1 ⭐ | (그대로 슬러그) | 모양별 강약은 코어. 특강 #1이 deepens. 입문 단계에서 안 만나면 늦다 |
 | 보존 | `common-skills-of-future-proof-people` ⭐ | (그대로) | 사이트 정체성 |
 
-**1b · 첫 도구·태도 (5 레슨, 순서 — terminal → git → github → ai-account → delegation)**
+**1b · 첫 도구·태도 (7 레슨, 순서 — service-landscape → chat-features → terminal → git → github → ai-account → delegation)**
 | 변화 | 옛 | 새 | 이유 |
 |---|---|---|---|
-| 보존 | `terminal-first-day` | (그대로) | 1b의 첫 진입점 |
-| **신규** | — | `git-basics-and-terminology` | 버전 관리는 AI 빌더의 필수 안전망. 코드·프롬프트·문서 모두 git이 받쳐줌 |
-| **신규** | — | `github-essentials` | git ≠ GitHub. 호스팅·협업·포트폴리오·AI 에이전트 통합의 진입점. `ai-account`에서 GitHub 가입 시키기 전에 무엇인지 가르침 |
-| 보존 | `ai-tool-account-and-cost` | (그대로 + 의존성 갱신) | git/github 레슨이 앞에 옴 → `.env`/`.gitignore` 설명은 짧게 인용만 |
+| **신규** | — | `ai-service-landscape` | 자체모델(ChatGPT/Claude/Gemini) vs API 통합(Cursor/Perplexity/Lindy/v0). 구독제 vs API 장단점. 결제 전에 지형부터 |
+| **신규** | — | `ai-chat-features-basics` | Projects · GPTs · Memory · CLI/Desktop · Artifacts · Custom instructions 공통 기능을 한 번 정리 |
+| 보존 | `terminal-first-day` | (그대로) | 작업 환경 |
+| **신규** | — | `git-basics-and-terminology` | 버전 관리는 AI 빌더의 필수 안전망 |
+| **신규** | — | `github-essentials` | git ≠ GitHub. 호스팅·협업·포트폴리오·AI 에이전트 통합의 진입점 |
+| 보존 | `ai-tool-account-and-cost` | (그대로 + 의존성 갱신) | 서비스 지형·git 알고 와서 결제 판단이 합리적. `.env`/`.gitignore` 설명은 git/github 인용으로 짧게 |
 | 통합 | `ai-delegation-decision` + `ai-collaboration-mindset` | `ai-delegation-and-team-adoption` | 개인 위임 → 팀 도입은 같은 결정 |
 | 이동 | `cost-monitoring-in-production` → 새 Stage 6 | — | 운영 주제 |
 | 이동 | `zero-coding-orientation` → 새 Stage 4 (코딩 에이전트) | — | "코딩 에이전트가 뭔지"는 그 맥락이 시작되는 Stage에 |
 
-**Stage 1 합계 — 9 레슨** (1a 원리 4 + 1b 도구 5). 무겁지만 sub-group 분할로 인지 부담 적음. MVP 8주 경로에서 1주차는 1a 원리 우선 + 1b 도구는 자기 페이스.
+**Stage 1 합계 — 11 레슨** (1a 원리 4 + 1b 도구 7). 무겁지만 진입 Stage라 정당. MVP 8주 경로에서 1주차는 1a 원리 우선 + 1b 도구는 자기 페이스.
 
 ### 새 Stage 2 묻고 다듬기 (옛 S2+S3: 15 → 10, what-llms는 새 Stage 1로 빠짐)
 
@@ -317,6 +323,8 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 | **86** | — | **(신규)** `tokens-context-and-cost` | 신규 원본 | **1a** | 토큰 = 입력·과금·컨텍스트 단위 |
 | **87** | — | **(신규)** `git-basics-and-terminology` | 신규 원본 | **1b** | 버전 관리 개념·용어 (repo·commit·branch·merge…) |
 | **88** | — | **(신규)** `github-essentials` | 신규 원본 | **1b** | GitHub 도구 (계정·repo·PR·Issue·Pages·`.gitignore`) |
+| **89** | — | **(신규)** `ai-service-landscape` | 신규 원본 | **1b** | 자체모델 vs 통합 서비스, 구독제 vs API 장단점 |
+| **90** | — | **(신규)** `ai-chat-features-basics` | 신규 원본 | **1b** | Projects · GPTs · Memory · CLI · Artifacts 등 챗봇 공통 기능 |
 
 ### 요약 통계
 
@@ -325,9 +333,9 @@ v2의 답은 **8 → 6 Stage 통합 + 빌더 분기점 명시 + 여정 필터로
 - **흡수됨** — 17개 (다른 레슨으로 사라짐)
 - **이동(Stage만 변경)** — 6개 (cost-monitoring · rate-limiting · cost-estimation-roi · ralph · **zero-coding-orientation → S4** · **what-llms-are-good-and-bad-at → S1**)
 - **신규 통합 슬러그** — 17개 (office-document-pipelines · research-to-writing-pipeline · content-repurposing-pipeline · visual-prompt-and-ui-pipeline · data-curation-and-narrative · ai-delegation-and-team-adoption · prompt-iteration-loop · verifying-ai-output · tdd-and-bug-loop-with-agent · response-handling-streaming-and-structured · user-and-memory-state · embeddings-and-chunking-for-rag · ai-cost-operations · pm-eval-and-policy · token-and-rate-optimization · capstone-scope-and-build · capstone-launch-and-retrospective)
-- **신규 원본 슬러그 4개** — `what-is-an-llm` · `tokens-context-and-cost` (1a 원리) · `git-basics-and-terminology` · `github-essentials` (1b 도구)
+- **신규 원본 슬러그 6개** — `what-is-an-llm` · `tokens-context-and-cost` (1a 원리) · `ai-service-landscape` · `ai-chat-features-basics` · `git-basics-and-terminology` · `github-essentials` (1b 도구)
 
-**결과 — 84 → 65 레슨 (-23%)**, 그중 21개가 신규 슬러그(통합 17 + 원본 4).
+**결과 — 84 → 67 레슨 (-20%)**, 그중 23개가 신규 슬러그(통합 17 + 원본 6).
 
 ---
 
