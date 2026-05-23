@@ -2,15 +2,6 @@
 // /templates 페이지가 kind별로 묶어 렌더한다.
 import type { ContentTemplate } from "@/lib/types";
 
-const ALL_JOURNEYS = [
-  "practitioner",
-  "practitioner",
-  "creator",
-  "founder",
-  "engineer",
-  "native",
-] as const;
-
 export const templates: ContentTemplate[] = [
   // ─── 프롬프트 ────────────────────────────────────────────────
   {
