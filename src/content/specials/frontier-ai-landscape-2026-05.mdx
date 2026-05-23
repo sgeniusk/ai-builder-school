@@ -3,11 +3,11 @@
 
 <SlideDeck>
 
-<Slide title="표지 — 모델 1위는 한 달짜리다">
+<Slide title="모델 1위는 한 달짜리 정보다">
 
 <TitleBlock
   bigTitle="모델 1위는 한 달짜리 정보다"
-  subtitle="라우팅·오케스트레이션이 빌더의 새 척추다."
+  subtitle="라우팅·오케스트레이션이 빌더의 새 척추다"
   chips={[
     { icon: "layers", label: "추상화" },
     { icon: "check-circle", label: "평가셋" },
@@ -18,24 +18,24 @@
 
 </Slide>
 
-<Slide title="한 달 반에 SWE 1위가 세 번 바뀌었다">
+<Slide title="35일에 SWE 1위가 세 번 바뀌었다">
 
-## 한 달 반에 SWE 1위가 세 번 바뀌었다
+## 35일에 SWE 1위가 세 번 바뀌었다
 
-2026년 4월 16일부터 5월 19일까지, **딱 35일** 사이의 일입니다.
+2026년 4월 16일부터 5월 19일까지, **딱 35일** 사이의 일입니다. 4월 16일에 "Opus 4.7로 통일하자"라고 결정했다면, 그 결정은 **35일 뒤 무효가 됐습니다.**
 
 <TimelineBlock
   steps={[
-    { icon: "pen-tool", title: "4/16 · Anthropic",
-      description: "Opus 4.7 GA — SWE 부문에서 다른 모든 모델을 따돌림" },
-    { icon: "zap", title: "4/23 · OpenAI",
-      description: "GPT-5.5 공개 — 14개 벤치마크 SOTA 주장 · 1M 토큰" },
-    { icon: "sparkles", title: "5/19 · Google",
-      description: "Gemini 3.5 Flash — Terminal-Bench 2.1에서 76.2%, 3.1 Pro 능가" },
+    { icon: "pen-tool", title: "4/16 · Opus 4.7",
+      description: "Anthropic — SWE SOTA" },
+    { icon: "zap", title: "4/23 · GPT-5.5",
+      description: "OpenAI — 14개 벤치 SOTA·1M" },
+    { icon: "sparkles", title: "5/19 · Gemini 3.5",
+      description: "Google — Terminal-Bench 76.2%" },
   ]}
 />
 
-빌더가 4월 16일에 "Opus 4.7로 통일하자"라고 결정했다면, 그 결정은 **35일 뒤 무효가 됐습니다.** 분기·연 단위였던 경쟁이 이제 주·월 단위로 흔들립니다.
+분기·연 단위였던 경쟁이 이제 주·월 단위로 흔들립니다. 빌더가 "최강 하나"를 고르는 결정은 한 달짜리 자산이 됐습니다.
 
 {/* Source · NEWS · Anthropic "Introducing Claude Opus 4.7" (2026-04-16) — https://www.anthropic.com/news/claude-opus-4-7 */}
 {/* Source · NEWS · CNBC "OpenAI announces GPT-5.5" (2026-04-23) — https://www.cnbc.com/2026/04/23/openai-announces-latest-artificial-intelligence-model.html */}
@@ -43,42 +43,9 @@
 
 </Slide>
 
-<Slide title="빌더의 함정 — 최강 하나 정하자">
+<Slide title="Anthropic의 메시지 — 라우팅을 가르치다">
 
-## 빌더가 흔히 빠지는 함정
-
-이 흔들림 앞에서 가장 자주 하는 생각 — **"최강 모델 하나 정해서 거기에 다 맡기자"**.
-
-<TwoColumnListBlock
-  left={{
-    heading: "흔한 생각",
-    icon: "alert-triangle",
-    items: [
-      { text: "\"Claude로 다 풀자, 가장 똑똑하니까.\"" },
-      { text: "\"GPT로 통일하자, 자료가 많으니까.\"" },
-      { text: "\"Gemini로 옮기자, 가장 싸니까.\"" },
-      { text: "단일 모델로 모든 작업을 처리하겠다는 발상", emphasis: true },
-    ],
-  }}
-  right={{
-    heading: "현실",
-    icon: "shield",
-    items: [
-      { text: "35일 안에 1위가 또 바뀐다 — 결정은 한 달 안에 무효", emphasis: true },
-      { text: "추상화가 없으면 갈아탈 때 코드 전체를 다시 짠다" },
-      { text: "어떤 모델도 모든 작업에서 1위가 아니다 — Opus는 SWE 최강이지만 출력 $25/M로 라이트 작업 비용 폭탄" },
-      { text: "내 워크플로는 보통 5~10가지 다른 모양의 작업으로 쪼개진다" },
-    ],
-  }}
-/>
-
-**"내 작업"이라는 단일한 게 없습니다.** 모든 작업에 최강인 모델은 존재하지 않습니다.
-
-</Slide>
-
-<Slide title="Anthropic의 발신 — 라우팅을 가르치다">
-
-## Anthropic의 발신 — 라우팅을 가르치다
+## Anthropic의 메시지 — 라우팅을 가르치다
 
 4월 16일 Opus 4.7을 GA로 낸 뒤, 5월 6일 **Code with Claude** 컨퍼런스가 있었습니다. 헤드라인이 무엇이었는가 — **신규 플래그십 모델이 없었습니다.**
 
@@ -101,9 +68,9 @@
 
 </Slide>
 
-<Slide title="OpenAI의 발신 — 모델 × 런타임 × 도메인">
+<Slide title="OpenAI의 메시지 — 모델 × 런타임 × 도메인">
 
-## OpenAI의 발신 — 모델 × 런타임 × 도메인
+## OpenAI의 메시지 — 모델 × 런타임 × 도메인
 
 4월 23일 GPT-5.5를 공개하고 멈추지 않았습니다. 한 달 안에 **방향이 다른 세 가지**를 동시에 풀었습니다.
 
@@ -127,9 +94,9 @@
 
 </Slide>
 
-<Slide title="Google의 발신 — 라인업 자체를 분화">
+<Slide title="Google의 메시지 — 라인업 자체를 분화">
 
-## Google의 발신 — 라인업 자체를 분화
+## Google의 메시지 — 라인업 자체를 분화
 
 I/O 2026 키노트의 카드 구성 자체가 신호입니다 — 한 모델이 아니라 **라인업 분화**.
 
@@ -354,8 +321,6 @@ I/O 2026 키노트의 카드 구성 자체가 신호입니다 — 한 모델이 
 />
 
 **모델이 부품이라면, 빌더는 그 부품을 조립하는 설계자입니다.** 이 강의가 끝났을 때 가져갈 것은 어떤 모델의 이름이 아니라, **그 부품들을 어떻게 조립하는가**에 대한 다섯 가지 척추입니다.
-
-검토 시한 — 2026-11-30. 그날 이후 새 사실로 다시 씁니다.
 
 </Slide>
 

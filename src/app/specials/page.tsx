@@ -19,6 +19,7 @@ function isStale(reviewBy: string): boolean {
 
 function SpecialCard({ special }: { special: Special }) {
   const stale = isStale(special.reviewBy);
+  const isExternal = special.kind === "external" && Boolean(special.source);
   return (
     <Link
       href={`/specials/${special.slug}`}
@@ -29,7 +30,7 @@ function SpecialCard({ special }: { special: Special }) {
         className="kicker mono"
         style={{ fontSize: 12, letterSpacing: "0.08em", color: "var(--ink-3)" }}
       >
-        특강 · {special.product}
+        특강 · {isExternal ? "외부 큐레이션" : "내부 강의"} · {special.product}
       </div>
       <h3
         style={{
@@ -42,6 +43,19 @@ function SpecialCard({ special }: { special: Special }) {
       >
         {special.titleKo}
       </h3>
+      {isExternal && special.source && (
+        <p
+          style={{
+            margin: "0 0 10px",
+            fontSize: 12,
+            color: "var(--ink-3)",
+            fontStyle: "italic",
+          }}
+        >
+          원전 — {special.source.author}
+          {special.source.channel ? ` (${special.source.channel})` : ""}
+        </p>
+      )}
       <p style={{ margin: 0, fontSize: 14, lineHeight: 1.7, color: "var(--ink-3)" }}>
         {special.summary}
       </p>

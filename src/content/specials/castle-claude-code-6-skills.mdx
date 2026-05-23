@@ -1,0 +1,328 @@
+{/* 외부 특강 — 캐슬 "클로드 코드를 제대로 쓰는 6가지 스킬" 큐레이션. */}
+{/* 원전 thesis "모델은 실행, 사람은 결정. 6스킬은 그 결정을 선명하게 만드는 도구"를 따른다. */}
+{/* narrative 1차 원고 — docs/specials/castle-claude-code-6-skills-narrative.md */}
+{/* Source — https://youtu.be/lo9VmozeTxg (캐슬·아는 개발자, 2026-05) + 41p PDF */}
+
+<SlideDeck>
+
+<Slide title="모델은 실행하고, 사람은 결정한다">
+
+<TitleBlock
+  bigTitle="모델은 실행하고, 사람은 결정한다"
+  subtitle="6가지 스킬은 그 결정을 선명하게 만드는 도구다"
+  chips={[
+    { icon: "help-circle", label: "grill-me" },
+    { icon: "file-text", label: "to-prd" },
+    { icon: "git-branch", label: "to-issues" },
+    { icon: "zap", label: "caveman" },
+    { icon: "arrow-right", label: "handoff" },
+    { icon: "refresh-cw", label: "improve" },
+  ]}
+/>
+
+</Slide>
+
+<Slide title="한 줄 요청에서 200줄 사고가 난다">
+
+## 한 줄 요청에서 200줄 사고가 난다
+
+진짜 문제는 모델 능력이 아니라 **요청자도 자신이 뭘 원하는지 흐릿하다**는 점입니다. 이걸 해결하는 6단계 루틴.
+
+<TwoColumnListBlock
+  left={{
+    heading: "기획 — 의도를 굳힌다",
+    icon: "help-circle",
+    items: [
+      { text: "**1 · grill-me** — 의도 캐묻기 (질문 3~10개)", emphasis: true },
+      { text: "**2 · to-prd** — 합의를 PRD 한 페이지로 굳힌다" },
+      { text: "**3 · to-issues** — 수직 슬라이스로 쪼갠다" },
+    ],
+  }}
+  right={{
+    heading: "실행·정리 — 결과를 유지한다",
+    icon: "refresh-cw",
+    items: [
+      { text: "**4 · caveman** — 응답 토큰 75% 절감", emphasis: true },
+      { text: "**5 · handoff** — HANDOFF.md로 세션 인계" },
+      { text: "**6 · improve-codebase** — Deep module로 정리" },
+    ],
+  }}
+/>
+
+</Slide>
+
+<Slide title="01 · grill-me — 받자마자 코드 대신 질문">
+
+## 01 · `grill-me` — 받자마자 코드 대신 질문
+
+코드를 쓰기 전, AI가 사용자에게 거꾸로 핵심 질문 3~10개를 던집니다. 답이 모이면 그제서야 의도가 명료해집니다.
+
+<TwoColumnListBlock
+  left={{
+    heading: "BAD · grill 없이",
+    icon: "alert-triangle",
+    items: [
+      { text: "사용자 — \"결제 페이지 만들어줘\"" },
+      { text: "→ 모델이 바로 코딩 시작" },
+      { text: "→ 카드·계좌·페이팔 다 구현" },
+      { text: "→ 사용자 \"PG는 토스만 쓸 건데...\"", emphasis: true },
+      { text: "→ 절반 재작성" },
+    ],
+  }}
+  right={{
+    heading: "GOOD · grill-me 발동",
+    icon: "compass",
+    items: [
+      { text: "모델 — \"PG 정해졌나? 결제 수단 몇 개? 모바일·PC 둘 다? 정기결제?\"", emphasis: true },
+      { text: "→ 사용자 30초 답변" },
+      { text: "→ 토스 단일, 카드만, PC만" },
+      { text: "→ 정확한 범위로 코딩", emphasis: true },
+      { text: "앞에서 30초, 뒤에서 30분 절약" },
+    ],
+  }}
+/>
+
+핵심 질문 4축 — **누가** 쓸 것인가 · **성공 기준**은 무엇인가 · **빼도 되는 건** 무엇인가 · 이미 **비슷한 게** 있나.
+
+</Slide>
+
+<Slide title="02 · to-prd — 말로 한 합의는 휘발된다">
+
+## 02 · `to-prd` — 말로 한 합의는 휘발된다
+
+<TabsBlock
+  tabs={[
+    {
+      label: "왜 필요한가",
+      panel: {
+        heading: "PRD는 모델과 사람 모두의 외부 메모리",
+        columns: [
+          { heading: "휘발 시나리오", bullets: [
+            { text: "채팅으로 합의한 건 1시간 뒤면 흐려진다", emphasis: true },
+            { text: "코딩 시작하면 \"어 그게 뭐였지\" 다시 물어보게 됨" },
+            { text: "문서 없으면 모델은 매 세션마다 처음부터 추측" },
+            { text: "사람 휴가 가면 인수인계 불가" },
+          ]},
+          { heading: "PRD의 역할", bullets: [
+            { text: "모델과 사람 공통의 외부 메모리", emphasis: true },
+            { text: "새 세션은 PRD 파일 하나 읽고 시작" },
+            { text: "\"범위 밖\" 명시 — 모델 임의 확장 차단", emphasis: true },
+          ]},
+        ],
+      },
+    },
+    {
+      label: "무엇을 담는가",
+      panel: {
+        heading: "PRD 한 페이지 마크다운 — 5요소",
+        columns: [
+          { heading: "구조", bullets: [
+            { text: "**목표** — 무엇을 달성하는가", emphasis: true },
+            { text: "**사용자 시나리오** — 누가 어떻게 쓰는가" },
+            { text: "**기능 명세** — 무엇을 만드는가" },
+            { text: "**범위 밖 (Non-goals)** — 무엇은 안 만드는가", emphasis: true },
+            { text: "**성공 기준** — 어떤 상태가 되면 끝인가" },
+          ]},
+          { heading: "샘플 — 결제 페이지 v1", bullets: [
+            { text: "목표 — 비회원도 카드 결제로 강의 1건 구매" },
+            { text: "PG — 토스페이먼츠 단일" },
+            { text: "범위 밖 — 정기결제, 환불, 쿠폰", emphasis: true },
+            { text: "성공 — 카드 결제 성공률 95%+" },
+          ]},
+        ],
+      },
+    },
+    {
+      label: "언제 쓰는가",
+      panel: {
+        heading: "이럴 때 문서화",
+        columns: [
+          { heading: "쓴다", bullets: [
+            { text: "grill-me 직후 — 합의가 휘발되기 전", emphasis: true },
+            { text: "기능 크기가 1일 이상 걸릴 때" },
+            { text: "여러 세션에 걸쳐 작업할 때" },
+            { text: "팀원과 공유해야 할 때" },
+          ]},
+          { heading: "안 쓴다", bullets: [
+            { text: "30분짜리 단발 작업엔 과하다" },
+            { text: "단, 다시 들춰볼 일이 있으면 그래도 쓴다", emphasis: true },
+          ]},
+        ],
+      },
+    },
+  ]}
+/>
+
+</Slide>
+
+<Slide title="03 · to-issues — 수평 X · 수직 ✓">
+
+## 03 · `to-issues` — 수평 X · 수직 ✓
+
+PRD가 만들어진 직후 작업 단위로 쪼갭니다. **200줄 PR 1개보다 20줄 PR 10개가 안전.**
+
+<TwoColumnListBlock
+  left={{
+    heading: "수평 분해 · BAD",
+    icon: "alert-triangle",
+    items: [
+      { text: "Issue 1 — API만" },
+      { text: "Issue 2 — UI만" },
+      { text: "Issue 3 — DB만" },
+      { text: "→ 다 합쳐야만 동작", emphasis: true },
+      { text: "→ 중간 진행도 0 또는 100" },
+    ],
+  }}
+  right={{
+    heading: "수직 슬라이스 · GOOD",
+    icon: "check-circle",
+    items: [
+      { text: "Issue 1 — 비로그인 결제 차단" },
+      { text: "Issue 2 — 카드 결제 1건" },
+      { text: "Issue 3 — 결제 실패 메시지" },
+      { text: "→ 각자 끝나면 그것만으로 동작", emphasis: true },
+      { text: "→ 매 슬라이스가 머지 가능", emphasis: true },
+    ],
+  }}
+/>
+
+**효과** — PR 리뷰 시간 1/5 · 매일 production에 진척 · 실패해도 한 슬라이스만 되돌리면 끝.
+
+</Slide>
+
+<Slide title="04 · caveman — 같은 답, 4분의 1 길이">
+
+## 04 · `caveman` — 같은 답, 4분의 1 길이
+
+Julius Brussee 케이스 — fluff를 제거해 응답 토큰 75% 절감. "동굴인 말투"로 응답.
+
+<TwoColumnListBlock
+  left={{
+    heading: "BEFORE · 일반 모드 ~280토큰",
+    icon: "alert-triangle",
+    items: [
+      { text: "\"Sure! I'd be happy to help you with that.\"" },
+      { text: "\"The issue is likely an off-by-one error in the auth middleware...\"" },
+      { text: "fluff가 한 세션에서 수십 KB 누적", emphasis: true },
+      { text: "컨텍스트도, 비용도, 속도도 손해" },
+    ],
+  }}
+  right={{
+    heading: "AFTER · caveman full ~60토큰",
+    icon: "zap",
+    items: [
+      { text: "\"Bug in auth middleware.\"" },
+      { text: "\"Token expiry check use `<` not `<=`. Fix:\"", emphasis: true },
+      { text: "제거 — a/an/the, pleasantries", emphasis: true },
+      { text: "유지 — 기술 용어·코드·에러 메시지 (정확성 100%)" },
+      { text: "토글 — `/caveman lite | full | ultra`" },
+    ],
+  }}
+/>
+
+코드·커밋·PR은 정상 문체로 유지 — 캐주얼 모드는 꺼집니다.
+
+</Slide>
+
+<Slide title="05 · handoff — 긴 세션은 결국 잃어버린다">
+
+## 05 · `handoff` — 긴 세션은 결국 잃어버린다
+
+컨텍스트가 가득 차기 전, 현재 세션 상태를 `HANDOFF.md` 한 파일에 정리. 새 세션은 이 파일 읽고 시작.
+
+<TwoColumnListBlock
+  left={{
+    heading: "왜 잃어버리나",
+    icon: "alert-triangle",
+    items: [
+      { text: "세션 길어지면 컨텍스트 자동 압축 → 정보 손실", emphasis: true },
+      { text: "모델이 앞 단계 의도 잊고 같은 결정을 다시 추측" },
+      { text: "\"방금 결정한 거 다시 알려줘\" 반복" },
+      { text: "새 세션 시작이 인지 비용 0이 아니다" },
+    ],
+  }}
+  right={{
+    heading: "HANDOFF.md 4섹션",
+    icon: "arrow-right",
+    items: [
+      { text: "**지금까지 한 것** — 완료된 항목", emphasis: true },
+      { text: "**어디까지 됐는가** — 진행 중 작업의 정확한 상태", emphasis: true },
+      { text: "**다음 차례** — 즉시 할 다음 액션" },
+      { text: "**주의사항·미해결 질문** — 함정과 결정 대기 항목" },
+      { text: "발동 시점 — 컨텍스트 60% 이상, 작업 자연 멈춤, 인수인계" },
+    ],
+  }}
+/>
+
+세션 길이 한계가 실질적으로 무력화 · 협업 시 인수인계 비용 1/10 · 모델 응답 품질 유지.
+
+</Slide>
+
+<Slide title="06 · improve-codebase — Deep module 원칙">
+
+## 06 · `improve-codebase` — Deep module 원칙
+
+John Ousterhout, *A Philosophy of Software Design*. 좋은 모듈은 **바깥에 노출되는 면이 작고, 안에서 하는 일이 많다.**
+
+<TwoColumnListBlock
+  left={{
+    heading: "Shallow module · BAD",
+    icon: "alert-triangle",
+    items: [
+      { text: "많은 함수 노출" },
+      { text: "각 함수는 단순 래퍼" },
+      { text: "호출자가 내부를 다 알아야 함", emphasis: true },
+      { text: "→ 추상화가 적자", emphasis: true },
+    ],
+  }}
+  right={{
+    heading: "Deep module · GOOD",
+    icon: "check-circle",
+    items: [
+      { text: "한두 개 함수만 노출", emphasis: true },
+      { text: "내부에서 복잡도를 흡수" },
+      { text: "호출자는 인터페이스만 알면 됨" },
+      { text: "→ 추상화가 흑자", emphasis: true },
+    ],
+  }}
+/>
+
+**사용 시점** — 큰 PR 끝났을 때 정기 점검 · 비슷한 코드가 3곳에서 보일 때 · 디렉터리 구조가 직관과 어긋날 때. 예시 명령 — `improve-codebase: shallow한 모듈·중복 패턴·죽은 코드 찾아서 리포트만. 수정은 다음 단계.`
+
+</Slide>
+
+<Slide title="결국 한 줄로 — 빌더 스쿨이 더하는 한 줄">
+
+## 결국 한 줄로
+
+> **"모델은 실행하고, 사람은 결정한다. 6가지 스킬은 그 결정을 선명하게 만드는 도구다."** — 캐슬
+
+<TwoColumnListBlock
+  left={{
+    heading: "6스킬 ↔ 빌더 스쿨 Stage 매핑",
+    icon: "radio",
+    items: [
+      { text: "grill-me · to-prd → Stage 2 \"Ask & Refine\"의 핵심 도구", emphasis: true },
+      { text: "to-issues → Stage 3 \"Collaborate\"의 작업 분해" },
+      { text: "caveman → Stage 4 \"Build & Verify\"의 응답 최적화", emphasis: true },
+      { text: "handoff → 학습 사이클이 길어졌을 때 그대로 적용" },
+      { text: "improve-codebase → Stage 5 \"Ship\" 또는 프로젝트 주기적 정비" },
+    ],
+  }}
+  right={{
+    heading: "이 특강 후 추천 액션",
+    icon: "compass",
+    items: [
+      { text: "오늘 — 다음 새 기능 시작 시 grill-me 4축 묻기", emphasis: true },
+      { text: "이번 주 — 진행 중 프로젝트에 PRD.md 한 페이지 작성" },
+      { text: "이번 달 — 큰 PR 끝나면 improve-codebase로 정기 점검 1회" },
+      { text: "장기 — 세션 60% 차면 HANDOFF.md 습관화", emphasis: true },
+    ],
+  }}
+/>
+
+원전 — [캐슬 · 바이브 코딩 필수 스킬 6개](https://youtu.be/lo9VmozeTxg) · 41페이지 슬라이드 PDF (2026-05).
+
+</Slide>
+
+</SlideDeck>

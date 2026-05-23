@@ -71,9 +71,13 @@ export default async function SpecialPage({
     .map((e) => getLessonBySlug(e.to.replace(/^lesson:/, "")))
     .filter((l): l is NonNullable<typeof l> => Boolean(l));
 
+  const isExternal = special.kind === "external" && Boolean(special.source);
+
   return (
     <article className="lesson-reader" style={{ maxWidth: 880 }}>
-      <p className="kicker">특강 · {special.product}</p>
+      <p className="kicker">
+        특강 · {isExternal ? "외부 큐레이션" : "내부 강의"} · {special.product}
+      </p>
       <h1>{special.titleKo}</h1>
       <p className="lede">{special.summary}</p>
       <p
@@ -82,6 +86,52 @@ export default async function SpecialPage({
       >
         슬라이드 ~{special.estimatedMinutes}분 · 검토 시한 {special.reviewBy}
       </p>
+
+      {isExternal && special.source && (
+        <div
+          style={{
+            marginTop: 18,
+            padding: "16px 20px",
+            border: "1px solid var(--line)",
+            borderLeft: "3px solid var(--ink)",
+            borderRadius: "var(--r)",
+            background: "var(--card)",
+          }}
+        >
+          <div className="kicker" style={{ marginBottom: 6 }}>
+            원전 — {special.source.medium === "video" ? "영상" :
+                  special.source.medium === "lecture" ? "강의" :
+                  special.source.medium === "paper" ? "논문" :
+                  special.source.medium === "blog" ? "블로그" :
+                  special.source.medium === "podcast" ? "팟캐스트" :
+                  "콘퍼런스"}
+          </div>
+          <p style={{ margin: 0, fontSize: 14, lineHeight: 1.7 }}>
+            <strong>{special.source.author}</strong>
+            {special.source.channel ? ` · ${special.source.channel}` : ""}
+            {special.source.publishedAt ? ` · ${special.source.publishedAt}` : ""}
+            <br />
+            <a
+              href={special.source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "var(--ink)", textDecoration: "underline" }}
+            >
+              {special.source.originalTitle}
+            </a>
+          </p>
+          <p
+            style={{
+              margin: "10px 0 0",
+              fontSize: 12,
+              color: "var(--ink-3)",
+              lineHeight: 1.6,
+            }}
+          >
+            이 슬라이드는 빌더 스쿨이 원전을 정리·시각화한 큐레이션입니다. thesis와 표현은 원전 화자의 것을 따릅니다.
+          </p>
+        </div>
+      )}
 
       {isArchived && (
         <div

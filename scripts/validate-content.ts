@@ -22,6 +22,7 @@ import { journeys } from "../src/content/journeys";
 import { projects } from "../src/content/projects";
 import { templates } from "../src/content/templates";
 import { specials } from "../src/content/specials";
+import { checkSpecialSlideDensity } from "./lib/slide-density";
 
 const COLORS = {
   reset: "\x1b[0m",
@@ -65,6 +66,13 @@ try {
         message: `src/content/specials/${slug}.mdx has no matching Special in specials.ts`,
       });
     }
+  }
+
+  // 특강 슬라이드 밀도 휴리스틱 — 한 슬라이드에 콘텐츠가 너무 몰리거나 stage 4:3 칸을
+  // 벗어날 가능성이 높은 케이스를 자동 경고한다. 모두 severity=warning이라 게이트는 통과.
+  for (const s of specials) {
+    const densityIssues = checkSpecialSlideDensity(s.slug);
+    for (const i of densityIssues) issues.push(i);
   }
 
   const stats = {
