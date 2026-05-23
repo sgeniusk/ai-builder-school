@@ -1,26 +1,62 @@
 import type { Journey } from "@/lib/types";
 
 /**
- * 6개의 출발 여정.
+ * 5개의 출발 여정.
  *
  * 학교의 약속 — "출발점이 어디든, 빌더가 됩니다."
  *
- * Practitioner / Adopter / Creator / Founder / Engineer 는 같은 차원의 출발 정체성.
- * Explorer 는 "아직 정하지 못한 사람을 위한 30초 진단" 의 메타 입구.
+ * 2026-05-23 — 6 → 5 정비
+ *   - Adopter는 Practitioner의 "팀 확장 모드"로 흡수 (학습 경로가 동일)
+ *   - Explorer는 "처음부터 AI를 모국어로 빌더가 되는" 정체성 Native로 대체
  *
- * 2026-05-22 — 옛 8 Stage 슬러그에서 새 6 Stage 슬러그로 매핑 + dedupe.
+ * Native 는 위치 없음(입문)의 자리, 나머지 4개(Practitioner / Creator / Founder / Engineer)
+ * 는 이미 어느 위치를 가진 사람의 자리. 5개의 색이 합쳐지면 brand 무지개 conic 마크가 됩니다.
  */
 export const journeys: Journey[] = [
+  {
+    id: "native",
+    slug: "native",
+    title: "Native",
+    titleKo: "네이티브",
+    identity: "AI를 모국어로 처음 빌더가 되는 사람",
+    targetLearner:
+      "코딩·콘텐츠·사업 — 어디서든 빌더에 처음 입문하는 사람. 비전공·career changer·학생·은퇴자·취미 빌더. 기존 워크플로우가 없고, 처음부터 AI를 도구로 익히는 사람.",
+    promise:
+      "선행 학습 없이, AI를 모국어 삼아 첫 산출물을 손에 쥡니다.",
+    recommendedStages: [
+      "stage-1-meet",
+      "stage-2-ask-and-refine",
+      "stage-3-collaborate",
+    ],
+    recommendedLessons: [
+      "what-is-an-llm",
+      "ai-service-landscape",
+      "ai-chat-features-basics",
+      "zero-coding-orientation",
+      "terminal-first-day",
+      "git-basics-and-terminology",
+      "ai-tool-account-and-cost",
+      "common-skills-of-future-proof-people",
+      "ai-delegation-decision",
+    ],
+    capstoneIdeas: [
+      "내 손으로 만든 첫 마이크로 사이트 (GitHub Pages 1장)",
+      "첫 AI 어시스턴트 — ChatGPT/Claude 프로젝트로 만든 나만의 GPT 1개",
+      "일상 자동화 1개 — 매일 반복하던 작업을 AI 파이프라인으로",
+    ],
+    expectedOutcome:
+      "AI를 모국어로 만든 첫 산출물 1개 + 다음 여정(Practitioner/Creator/Founder/Engineer) 중 자기 자리를 발견.",
+  },
   {
     id: "practitioner",
     slug: "practitioner",
     title: "Practitioner",
     titleKo: "실무자",
-    identity: "일에 AI를 붙이는 사람",
+    identity: "일과 조직에 AI를 붙이는 사람",
     targetLearner:
-      "보고서·이메일·회의록·리서치를 매일 다루는 직장인. AI를 자기 일에 깔아 시간을 되찾고 싶은 사람.",
+      "보고서·이메일·회의록·리서치를 매일 다루는 직장인. 자기 일에 AI를 깔아 시간을 되찾고, 그 결과를 팀·조직으로 확장하는 사람. (옛 Adopter의 정책·평가 영역도 여기 포함)",
     promise:
-      "내 업무를 AI로 운영해서, 반복은 줄이고 판단에 시간을 씁니다.",
+      "내 업무를 AI로 운영하고, 그 결과를 팀에 안전하게 확산합니다.",
     recommendedStages: [
       "stage-1-meet",
       "stage-2-ask-and-refine",
@@ -30,49 +66,22 @@ export const journeys: Journey[] = [
     recommendedLessons: [
       "common-skills-of-future-proof-people",
       "structure-of-good-prompts",
+      "checks-before-trusting-ai-output",
       "automate-report-drafts",
       "meeting-notes-pipeline",
       "research-workflow",
+      "ai-output-eval-for-pms",
+      "responsible-ai-policy-template",
+      "ai-app-cost-and-usage",
     ],
     capstoneIdeas: [
       "주간 보고서 초안 자동 파이프라인",
       "팀 회의록 자동 정리 봇",
       "사내 위키 기반 5분 Q&A 노트",
+      "팀 단위 AI 도입 12주 로드맵 + 사내 AI 사용 가이드라인 v1",
     ],
     expectedOutcome:
-      "AI 업무 플레이북 + 팀에 공유 가능한 프롬프트 세트, 매주 5시간 이상의 시간 회복.",
-  },
-  {
-    id: "adopter",
-    slug: "adopter",
-    title: "Adopter",
-    titleKo: "도입자",
-    identity: "조직에 AI를 들여오는 사람",
-    targetLearner:
-      "조직의 의사결정·프로세스·정책을 다루는 기획자/매니저. AI를 팀과 회사에 들여오는 책임을 지는 사람.",
-    promise:
-      "조직에 AI를 안전하게 들여오고, 위험과 품질을 함께 운영합니다.",
-    recommendedStages: [
-      "stage-1-meet",
-      "stage-2-ask-and-refine",
-      "stage-3-collaborate",
-      "stage-6-operate-and-share",
-    ],
-    recommendedLessons: [
-      "checks-before-trusting-ai-output",
-      "ai-output-eval-for-pms",
-      "research-workflow",
-      "ai-app-cost-and-usage",
-      "prompt-injection-defense",
-      "responsible-ai-policy-template",
-    ],
-    capstoneIdeas: [
-      "내부 AI 사용 가이드라인 v1",
-      "팀 단위 AI 도입 12주 로드맵",
-      "사내 정책 문서 기반 Q&A 봇",
-    ],
-    expectedOutcome:
-      "조직 맞춤 AI 도입 플레이북 + 평가·보안 체크리스트 + 첫 파일럿 팀의 도입 사례.",
+      "AI 업무 플레이북 + 팀에 공유 가능한 프롬프트 세트 + 매주 5시간 이상의 시간 회복. 필요하면 사내 도입 가이드까지.",
   },
   {
     id: "creator",
@@ -171,35 +180,5 @@ export const journeys: Journey[] = [
     ],
     expectedOutcome:
       "검증·보안·배포가 모두 포함된 심화 캡스톤 + 회고 문서.",
-  },
-  {
-    id: "explorer",
-    slug: "explorer",
-    title: "Explorer",
-    titleKo: "탐험가",
-    identity: "매일 배우고 매일 나누는 학생-교육자",
-    targetLearner:
-      "AI를 진지하게 처음 배우는 사람, 다섯 여정 중 어디에 정착할지 아직 모르는 호기심형 학습자. 또는 배운 것을 곧바로 누군가에게 가르치는 학생-교육자.",
-    promise:
-      "흡수하면서 동시에 나눕니다. 매일 배우고 매일 가르치는 빌더가 되는 길.",
-    recommendedStages: [
-      "stage-1-meet",
-      "stage-2-ask-and-refine",
-      "stage-3-collaborate",
-    ],
-    recommendedLessons: [
-      "common-skills-of-future-proof-people",
-      "what-llms-are-good-and-bad-at",
-      "hallucination-verification",
-      "checks-before-trusting-ai-output",
-      "structure-of-good-prompts",
-    ],
-    capstoneIdeas: [
-      "한 달 AI 학습 일지 → 동료 5명에게 공유",
-      "내가 처음 배운 5개 프롬프트 → 사내 5분 발표",
-      "Stage 1·2 회고를 블로그에 공개 — 누군가의 입구가 되기",
-    ],
-    expectedOutcome:
-      "Stage 1·2를 마친 뒤 다섯 정체성 중 자기 자리를 자신 있게 고름 + 첫 학습 결과를 한 사람 이상에게 가르침으로 환원.",
   },
 ];

@@ -4,11 +4,11 @@ import type { ContentTemplate } from "@/lib/types";
 
 const ALL_JOURNEYS = [
   "practitioner",
-  "adopter",
+  "practitioner",
   "creator",
   "founder",
   "engineer",
-  "explorer",
+  "native",
 ] as const;
 
 export const templates: ContentTemplate[] = [
@@ -18,7 +18,7 @@ export const templates: ContentTemplate[] = [
     slug: "four-axis-prompt",
     title: "4축 프롬프트 템플릿",
     kind: "prompt",
-    targetJourneys: [...ALL_JOURNEYS],
+    targetJourneys: [],
     summary: "Task / Context / Constraints / Output을 분리해 쓰는 재현 가능한 프롬프트.",
     body: `# Task
 (AI가 해야 하는 최종 결과물)
@@ -43,7 +43,7 @@ export const templates: ContentTemplate[] = [
     slug: "role-persona-prompt",
     title: "역할 지정 프롬프트",
     kind: "prompt",
-    targetJourneys: [...ALL_JOURNEYS],
+    targetJourneys: [],
     summary: "AI에게 역할을 부여해 답의 관점과 깊이를 고정하는 프롬프트.",
     body: `# 역할
 너는 <전문 역할 — 예: 10년차 데이터 분석가>다.
@@ -88,7 +88,7 @@ export const templates: ContentTemplate[] = [
     slug: "step-reasoning-prompt",
     title: "단계적 추론 프롬프트",
     kind: "prompt",
-    targetJourneys: [...ALL_JOURNEYS],
+    targetJourneys: [],
     summary: "결론 전에 근거를 단계로 펼치게 해 성급한 답을 막는 프롬프트.",
     body: `# 문제
 <판단·계산이 필요한 문제>
@@ -110,7 +110,7 @@ export const templates: ContentTemplate[] = [
     slug: "few-shot-prompt",
     title: "예시 기반(Few-shot) 프롬프트",
     kind: "prompt",
-    targetJourneys: [...ALL_JOURNEYS],
+    targetJourneys: [],
     summary: "예시 2~3개로 원하는 패턴을 보여줘 일관된 출력을 끌어내는 프롬프트.",
     body: `# 작업
 아래 예시와 같은 방식으로 마지막 입력을 처리한다.
@@ -133,7 +133,7 @@ export const templates: ContentTemplate[] = [
     slug: "self-check-prompt",
     title: "자기 검증 프롬프트",
     kind: "prompt",
-    targetJourneys: [...ALL_JOURNEYS],
+    targetJourneys: [],
     summary: "AI가 자기 답을 한 번 더 비판·검증하게 만드는 2단 프롬프트.",
     body: `# 1단계 — 초안
 <원래 작업 지시>
@@ -155,7 +155,7 @@ export const templates: ContentTemplate[] = [
     slug: "long-doc-summary-prompt",
     title: "긴 문서 요약 프롬프트",
     kind: "prompt",
-    targetJourneys: ["practitioner", "adopter", "creator", "explorer"],
+    targetJourneys: ["practitioner", "creator", "native"],
     summary: "긴 문서를 목적에 맞춰 행동 항목까지 뽑아내는 요약 프롬프트.",
     body: `# 문서
 <여기에 문서를 붙여넣거나 첨부>
@@ -175,7 +175,7 @@ export const templates: ContentTemplate[] = [
     slug: "compare-options-prompt",
     title: "옵션 비교 프롬프트",
     kind: "prompt",
-    targetJourneys: ["practitioner", "adopter", "founder", "engineer"],
+    targetJourneys: ["practitioner", "founder", "engineer"],
     summary: "두세 선택지를 같은 기준으로 표 비교하고 추천까지 받는 프롬프트.",
     body: `# 결정할 것
 <무엇을 고르는가>
@@ -198,7 +198,7 @@ export const templates: ContentTemplate[] = [
     slug: "meeting-notes-prompt",
     title: "회의록 정리 프롬프트",
     kind: "prompt",
-    targetJourneys: ["practitioner", "adopter", "explorer"],
+    targetJourneys: ["practitioner", "native"],
     summary: "녹취·메모를 결정·할 일 중심 회의록으로 구조화하는 프롬프트.",
     body: `# 입력
 <회의 녹취 또는 메모>
@@ -223,7 +223,7 @@ export const templates: ContentTemplate[] = [
     slug: "prompt-debug-prompt",
     title: "프롬프트 디버깅 프롬프트",
     kind: "prompt",
-    targetJourneys: [...ALL_JOURNEYS],
+    targetJourneys: [],
     summary: "원하는 답이 안 나오는 프롬프트를 AI에게 진단·교정받는 프롬프트.",
     body: `# 안 되는 프롬프트
 <원래 프롬프트 원문>
@@ -416,7 +416,7 @@ export const templates: ContentTemplate[] = [
     slug: "ai-service-security-checklist",
     title: "AI 서비스 보안 체크리스트",
     kind: "checklist",
-    targetJourneys: ["engineer", "adopter", "founder"],
+    targetJourneys: ["engineer", "practitioner", "founder"],
     summary: "AI 제품을 공개하기 전 기본적인 보안·프라이버시 점검.",
     body: `- [ ] 키/시크릿이 서버에만 존재
 - [ ] 사용자 입력 PII 마스킹 정책
@@ -432,7 +432,7 @@ export const templates: ContentTemplate[] = [
     slug: "ai-judgment-checklist",
     title: "AI 사용 판단 체크리스트",
     kind: "checklist",
-    targetJourneys: [...ALL_JOURNEYS],
+    targetJourneys: [],
     summary: "AI 결과를 업무에 쓸지 말지 5분 안에 결정하기 위한 질문.",
     body: `- [ ] 이 결과를 내가 직접 검증했는가
 - [ ] 출처가 있는가 / 출처를 확인했는가
@@ -448,7 +448,7 @@ export const templates: ContentTemplate[] = [
     slug: "prompt-quality-checklist",
     title: "프롬프트 품질 체크리스트",
     kind: "checklist",
-    targetJourneys: [...ALL_JOURNEYS],
+    targetJourneys: [],
     summary: "프롬프트를 라이브러리에 넣기 전 좋은 프롬프트인지 점검.",
     body: `- [ ] 작업(Task)이 한 문장으로 분명한가
 - [ ] 맥락(Context)이 충분하되 군더더기는 없는가
@@ -464,7 +464,7 @@ export const templates: ContentTemplate[] = [
     slug: "output-verification-checklist",
     title: "AI 출력 검증 체크리스트",
     kind: "checklist",
-    targetJourneys: [...ALL_JOURNEYS],
+    targetJourneys: [],
     summary: "AI 결과를 실제로 쓰기 전 무엇을 어떻게 확인할지의 절차.",
     body: `- [ ] 수치·날짜·고유명사를 원본과 대조했는가
 - [ ] 인용·출처가 실재하는지 직접 확인했는가
@@ -496,7 +496,7 @@ export const templates: ContentTemplate[] = [
     slug: "ai-cost-checklist",
     title: "AI 비용 점검 체크리스트",
     kind: "checklist",
-    targetJourneys: ["founder", "engineer", "adopter"],
+    targetJourneys: ["founder", "engineer", "practitioner"],
     summary: "AI 기능의 비용이 새지 않는지 매주 5분에 점검.",
     body: `- [ ] 이번 주 토큰 사용량·비용을 확인했다
 - [ ] 가장 비싼 호출 경로가 무엇인지 안다

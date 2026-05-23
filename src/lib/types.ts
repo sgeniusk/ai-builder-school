@@ -1,60 +1,58 @@
 /**
- * 6개의 출발 여정 (Journeys).
+ * 5개의 출발 여정 (Journeys).
  * Builder는 학교의 도착점이지 여정이 아닙니다 — 어느 출발점에서든 모두 빌더가 됩니다.
  *
  * 페르소나·트랙으로 분리되어 있던 이전 모델을 통합한 결과:
  *   Journey = (학습자 정체성) + (그 정체성에 맞춘 학습 경로)
+ *
+ * 2026-05-23 — 6→5 정비. Adopter는 Practitioner의 팀 확장 모드로 흡수, Explorer는
+ * "처음부터 AI를 모국어로 빌더가 되는" 정체성 Native로 대체.
  */
 export type JourneyId =
+  | "native"
   | "practitioner"
-  | "adopter"
   | "creator"
   | "founder"
-  | "engineer"
-  | "explorer";
+  | "engineer";
 
 export type Level = "beginner" | "intermediate" | "advanced";
 
 export const JOURNEY_LABEL: Record<JourneyId, string> = {
+  native: "Native",
   practitioner: "Practitioner",
-  adopter: "Adopter",
   creator: "Creator",
   founder: "Founder",
   engineer: "Engineer",
-  explorer: "Explorer",
 };
 
 export const JOURNEY_LABEL_KO: Record<JourneyId, string> = {
+  native: "네이티브",
   practitioner: "실무자",
-  adopter: "도입자",
   creator: "크리에이터",
   founder: "파운더",
   engineer: "엔지니어",
-  explorer: "탐험가",
 };
 
 export const JOURNEY_IDENTITY: Record<JourneyId, string> = {
-  practitioner: "일에 AI를 붙이는 사람",
-  adopter: "조직에 AI를 들여오는 사람",
+  native: "AI를 모국어로 처음 빌더가 되는 사람",
+  practitioner: "일과 조직에 AI를 붙이는 사람",
   creator: "AI로 콘텐츠를 만드는 사람",
   founder: "AI로 제품·사업을 띄우는 사람",
   engineer: "AI 시스템을 깊게 짓는 사람",
-  explorer: "매일 배우고 매일 나누는 학생-교육자",
 };
 
 /**
- * 여정별 색 테마. 6 여정의 색이 합쳐지면 brand 무지개 conic 마크가 됩니다.
+ * 여정별 색 테마. 5 여정의 색이 모이면 brand 무지개 conic 마크가 됩니다.
  */
 export const JOURNEY_COLORS: Record<
   JourneyId,
   { from: string; to: string; label: string }
 > = {
+  native:       { from: "oklch(72% 0.18 140)", to: "oklch(48% 0.16 150)", label: "라임→포레스트" },
   practitioner: { from: "oklch(82% 0.10 230)", to: "oklch(58% 0.18 250)", label: "하늘→파랑" },
-  adopter:      { from: "oklch(72% 0.16 290)", to: "oklch(52% 0.20 275)", label: "라벤더→인디고" },
   creator:      { from: "oklch(78% 0.16 20)",  to: "oklch(65% 0.22 0)",   label: "코랄→로즈" },
   founder:      { from: "oklch(85% 0.14 85)",  to: "oklch(70% 0.18 55)",  label: "샌드→앰버" },
   engineer:     { from: "oklch(75% 0.12 195)", to: "oklch(45% 0.06 230)", label: "사이안→슬레이트" },
-  explorer:     { from: "oklch(82% 0.12 165)", to: "oklch(60% 0.10 150)", label: "민트→세이지" },
 };
 
 export const LEVEL_LABEL: Record<Level, string> = {
@@ -301,6 +299,38 @@ export interface Concept extends NodeMeta {
   tags: string[];
 }
 
+/**
+ * Special의 출처 분류.
+ * - "internal" — 빌더 스쿨이 직접 작성한 thesis·narrative 기반 특강
+ * - "external" — 외부 강의·영상·논문·블로그를 큐레이션한 특강 (원전 화자의 thesis를 따름)
+ */
+export type SpecialKind = "internal" | "external";
+
+/** 외부 원전의 매체 분류. */
+export type SpecialSourceMedium =
+  | "lecture"
+  | "video"
+  | "paper"
+  | "blog"
+  | "podcast"
+  | "conference";
+
+/** 외부 특강(kind === "external")의 원전 메타데이터. */
+export interface SpecialSource {
+  /** 원전 화자·저자 이름 (예 "Jay Choi", "Andrej Karpathy") */
+  author: string;
+  /** 원전 제목 (한국어든 영어든 원문 그대로) */
+  originalTitle: string;
+  /** 원전 URL (YouTube·블로그·논문 등) */
+  url: string;
+  /** 원전 매체 분류 */
+  medium: SpecialSourceMedium;
+  /** 원전 게시일 (YYYY-MM-DD 또는 YYYY-MM, 선택) */
+  publishedAt?: string;
+  /** 원전 발신처·채널명 (예 "인디해커 라이프", "Latent Space Podcast", 선택) */
+  channel?: string;
+}
+
 /** Special — 특강. 제품·버전 종속 휘발성 노드 (스펙 §2 신규 노드) */
 export interface Special extends NodeMeta {
   id: string;
@@ -315,6 +345,10 @@ export interface Special extends NodeMeta {
   /** Special은 항상 volatile → 필수 */
   reviewBy: string;
   tags: string[];
+  /** 출처 분류 — internal(자체 thesis) vs external(외부 큐레이션). 생략 시 internal로 간주. */
+  kind?: SpecialKind;
+  /** kind === "external"일 때만 채운다. 표지 아래 출처 박스로 자동 렌더링된다. */
+  source?: SpecialSource;
 }
 
 /** 엣지 종류 (스펙 §3) */

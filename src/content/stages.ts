@@ -18,7 +18,7 @@ export const stages: Stage[] = [
       "AI Builder가 되는 사다리의 첫 칸. 세 단계로 펼쳐진다. (1a) **원리** — LLM이 무엇이고, 토큰·맥락·비용은 어떻게 엮이고, 서비스는 어떻게 나뉘고, 챗봇의 기본 기능과 사람-AI 분업의 큰 그림. (1b) **도구·환경** — 코딩 에이전트가 왜 터미널을 쓰고, git/GitHub로 작업을 어떻게 안전망에 둬야 하며, 계정·API 키·비용을 어떻게 관리하는지. (1c) **판단** — 어떤 일을 AI에 맡길지, 사람으로 남는 협업 마인드셋. 끝나는 시점에 매일 쓰는 AI 도구 1개와 첫 git repo, 자기 업무용 위임 체크리스트가 손에 남는다.",
     level: "beginner",
     estimatedHours: 13,
-    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
     outcomes: [
       "LLM이 다음 토큰을 예측하는 기계임을 알고, 잘하는 일/못하는 일을 구분한다",
       "토큰·맥락·비용의 관계를 이해해 청구서 쇼크를 예방한다",
@@ -114,7 +114,7 @@ export const stages: Stage[] = [
       "좋은 프롬프트는 부탁이 아니라 명세(spec)다. 일관되게 답한다고 해서 옳은 답은 아니다. 이 단계는 두 면을 같이 익힌다 — 묻는 면(프롬프트 4축·모델 종류·출력 형식·긴 문서·이미지·반복 루프·배치)과 다듬는 면(LLM 강약 지도·환각 검증·빠른 점검·차선책·안전 경계). 끝나는 시점에 재현 가능한 프롬프트 라이브러리 한 벌과 검증 루프 하나가 손에 남는다.",
     level: "beginner",
     estimatedHours: 19,
-    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
     outcomes: [
       "작업/맥락/제약/출력을 분리하고 모델 종류에 맞춰 프롬프트를 쓴다",
       "출력 형식을 강제하고, 실패한 프롬프트를 4축으로 진단한다",
@@ -179,7 +179,7 @@ export const stages: Stage[] = [
       "AI를 도구에서 '동료'로 격상시키는 단계. 업무 자동화(3a), 콘텐츠·미디어 파이프라인(3b), 데이터 분석(3c) 세 갈래로 나뉘며, 각 갈래에서 한 가지 이상 자기 도메인 산출물을 만든다. 개별 파이프라인을 넘어 재사용 어시스턴트로 묶고, 여러 파이프라인을 한 루틴으로 오케스트레이션하고, 자동화의 ROI까지 따져 보는 — 같은 패턴을 다른 업무에도 옮겨 쓸 수 있는 수준이 목표.",
     level: "beginner",
     estimatedHours: 17,
-    targetJourneys: ["practitioner", "adopter", "creator", "founder", "explorer"],
+    targetJourneys: ["practitioner", "creator", "founder", "native"],
     outcomes: [
       "보고서·회의록·리서치·블로그 같은 반복 업무를 AI 파이프라인으로 운영한다",
       "반복 업무를 재사용 어시스턴트로 묶고 여러 파이프라인을 한 루틴으로 엮는다",
@@ -426,7 +426,7 @@ export const stages: Stage[] = [
       "만든 게 작동했다 ≠ 운영된다. 그리고 공개는 단순히 '링크를 올리는' 게 아니라 피드백을 받는 일이다. 이 단계는 두 축을 같이 간다. 운영 축은 PR Eval 게이트·LLM 관측·에이전트 실패 패턴·MCP 운영·PM Eval·사용자 피드백·정책·비용·토큰 관리. 공유 축은 제품 브리프·랜딩·가격·캡스톤(범위·빌드·런칭)·첫 사용자 모집·Skill 패키징·포트폴리오 회고. 끝나는 시점에 운영 SLO 한 장과 공개된 URL, 그리고 회고 글 하나가 손에 남는다.",
     level: "advanced",
     estimatedHours: 30,
-    targetJourneys: ["practitioner", "adopter", "creator", "founder", "engineer", "explorer"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
     outcomes: [
       "AI 코드 PR에 Eval 게이트를 박고 프롬프트 회귀를 관측한다",
       "에이전트 실패 패턴을 미리 알고 guardrail로 예방한다",

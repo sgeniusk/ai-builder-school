@@ -116,7 +116,7 @@ export default async function JourneyDetailPage({
 
             <div className="journey-detail__foot">
               <Link href="/journeys" className="btn ghost">
-                ← 여섯 여정 모두 보기
+                ← 다섯 여정 모두 보기
               </Link>
             </div>
           </div>
