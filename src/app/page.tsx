@@ -63,7 +63,7 @@ export default function HomePage() {
                 아직 모르겠어요 · 30초 진단 <span className="arrow">→</span>
               </Link>
               <Link href="/journeys" className="btn ghost">
-                다섯 여정 자세히 보기
+                여섯 여정 자세히 보기
               </Link>
             </div>
           </Container>
@@ -85,7 +85,7 @@ export default function HomePage() {
             </div>
             <div style={{ marginTop: 28 }}>
               <Link href="/journeys" className="btn ghost">
-                다섯 여정 모두 보기 <span className="arrow">→</span>
+                여섯 여정 모두 보기 <span className="arrow">→</span>
               </Link>
             </div>
           </Container>

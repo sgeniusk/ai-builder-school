@@ -1,58 +1,65 @@
 /**
- * 5개의 출발 여정 (Journeys).
+ * 6개의 출발 여정 (Journeys).
  * Builder는 학교의 도착점이지 여정이 아닙니다 — 어느 출발점에서든 모두 빌더가 됩니다.
  *
- * 페르소나·트랙으로 분리되어 있던 이전 모델을 통합한 결과:
- *   Journey = (학습자 정체성) + (그 정체성에 맞춘 학습 경로)
+ * 구조 — 입문(Starter) → 특화 4(Practitioner/Creator/Founder/Engineer) → 마스터(AI Native)
  *
- * 2026-05-23 — 6→5 정비. Adopter는 Practitioner의 팀 확장 모드로 흡수, Explorer는
- * "처음부터 AI를 모국어로 빌더가 되는" 정체성 Native로 대체.
+ * 2026-05-24 — "Native" 의미 정리. 옛 Native(입문)는 Starter로 명확화하고,
+ * "AI 모국어 수준"의 마스터 정체성을 AI Native로 신설. 종착점이 명시되어
+ * "어디서 출발하든 빌더가 된다"가 시각·여정 양쪽으로 완결.
  */
 export type JourneyId =
-  | "native"
+  | "starter"
   | "practitioner"
   | "creator"
   | "founder"
-  | "engineer";
+  | "engineer"
+  | "ai-native";
 
 export type Level = "beginner" | "intermediate" | "advanced";
 
 export const JOURNEY_LABEL: Record<JourneyId, string> = {
-  native: "Native",
+  starter: "Starter",
   practitioner: "Practitioner",
   creator: "Creator",
   founder: "Founder",
   engineer: "Engineer",
+  "ai-native": "AI Native",
 };
 
 export const JOURNEY_LABEL_KO: Record<JourneyId, string> = {
-  native: "네이티브",
+  starter: "스타터",
   practitioner: "실무자",
   creator: "크리에이터",
   founder: "파운더",
   engineer: "엔지니어",
+  "ai-native": "AI 네이티브",
 };
 
 export const JOURNEY_IDENTITY: Record<JourneyId, string> = {
-  native: "AI를 모국어로 처음 빌더가 되는 사람",
+  starter: "AI 빌더 여정에 처음 들어서는 사람",
   practitioner: "일과 조직에 AI를 붙이는 사람",
   creator: "AI로 콘텐츠를 만드는 사람",
   founder: "AI로 제품·사업을 띄우는 사람",
   engineer: "AI 시스템을 깊게 짓는 사람",
+  "ai-native": "AI 빌더 생태계 전체를 모국어처럼 다루는 마스터 빌더",
 };
 
 /**
- * 여정별 색 테마. 5 여정의 색이 모이면 brand 무지개 conic 마크가 됩니다.
+ * 여정별 색 테마. 6 여정의 색이 모이면 brand 무지개 conic 마크가 됩니다.
+ * Starter(라임→포레스트, 새싹) 와 AI Native(라일락→딥 바이올렛, 큰 나무)가
+ * 시각적으로 호응 — 씨앗이 자라 나무가 된다.
  */
 export const JOURNEY_COLORS: Record<
   JourneyId,
   { from: string; to: string; label: string }
 > = {
-  native:       { from: "oklch(72% 0.18 140)", to: "oklch(48% 0.16 150)", label: "라임→포레스트" },
+  starter:      { from: "oklch(72% 0.18 140)", to: "oklch(48% 0.16 150)", label: "라임→포레스트" },
   practitioner: { from: "oklch(82% 0.10 230)", to: "oklch(58% 0.18 250)", label: "하늘→파랑" },
   creator:      { from: "oklch(78% 0.16 20)",  to: "oklch(65% 0.22 0)",   label: "코랄→로즈" },
   founder:      { from: "oklch(85% 0.14 85)",  to: "oklch(70% 0.18 55)",  label: "샌드→앰버" },
   engineer:     { from: "oklch(75% 0.12 195)", to: "oklch(45% 0.06 230)", label: "사이안→슬레이트" },
+  "ai-native":  { from: "oklch(72% 0.18 290)", to: "oklch(45% 0.20 305)", label: "라일락→딥 바이올렛" },
 };
 
 export const LEVEL_LABEL: Record<Level, string> = {

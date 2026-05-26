@@ -7,11 +7,12 @@ import { useEffect, useState } from "react";
 const STORAGE_KEY = "abs:active-journey";
 
 const JOURNEYS = [
-  { id: "native", label: "네이티브" },
+  { id: "starter", label: "스타터" },
   { id: "practitioner", label: "실무자" },
   { id: "creator", label: "크리에이터" },
   { id: "founder", label: "파운더" },
   { id: "engineer", label: "엔지니어" },
+  { id: "ai-native", label: "AI 네이티브" },
 ] as const;
 
 type JourneyId = (typeof JOURNEYS)[number]["id"];

@@ -12,16 +12,17 @@ export function JourneyLandmark({ journey }: { journey: string }) {
       height="100%"
       aria-hidden
     >
-      {journey === "native" && <Seedling />}
+      {journey === "starter" && <Seedling />}
       {journey === "practitioner" && <Signpost />}
       {journey === "creator" && <Easel />}
       {journey === "founder" && <Flag />}
       {journey === "engineer" && <Tower />}
+      {journey === "ai-native" && <Tree />}
     </svg>
   );
 }
 
-/** Native — 새싹. 처음 솟아오르는 빌더의 첫 잎. */
+/** Starter — 새싹. 처음 솟아오르는 빌더의 첫 잎. AI Native(큰 나무)와 호응. */
 function Seedling() {
   return (
     <>
@@ -132,3 +133,31 @@ function Tower() {
   );
 }
 
+/** AI Native — 큰 나무. Starter의 새싹이 자라 종착점에 닿은 모습. 두꺼운 줄기 + 두 단 잎. */
+function Tree() {
+  return (
+    <>
+      {/* 흙·뿌리 두덩 */}
+      <rect x="4" y="27" width="24" height="2" fill="#8A6F4F" />
+      <rect x="6" y="25" width="20" height="2" fill="#A8895F" />
+      {/* 두꺼운 줄기 */}
+      <rect x="14" y="14" width="4" height="11" fill="#7A5A3A" />
+      <rect x="14" y="14" width="1" height="11" fill="#5A4028" opacity="0.7" />
+      {/* 아래단 잎 — 넓게 */}
+      <rect x="3" y="13" width="26" height="4" fill="var(--p-to)" />
+      <rect x="5" y="11" width="22" height="2" fill="var(--p-to)" />
+      <rect x="7" y="17" width="18" height="1" fill="var(--p-to)" opacity="0.7" />
+      {/* 위단 잎 — 좁게 */}
+      <rect x="7" y="7" width="18" height="4" fill="var(--p-from)" />
+      <rect x="9" y="5" width="14" height="2" fill="var(--p-from)" />
+      <rect x="11" y="3" width="10" height="2" fill="var(--p-from)" />
+      {/* 꼭대기 새순 */}
+      <rect x="14" y="1" width="4" height="2" fill="var(--p-from)" />
+      {/* 잎 사이 빛 점 */}
+      <rect x="11" y="9" width="1" height="1" fill="#F4E9C8" />
+      <rect x="18" y="8" width="1" height="1" fill="#F4E9C8" />
+      <rect x="13" y="14" width="1" height="1" fill="#F4E9C8" />
+      <rect x="20" y="15" width="1" height="1" fill="#F4E9C8" />
+    </>
+  );
+}

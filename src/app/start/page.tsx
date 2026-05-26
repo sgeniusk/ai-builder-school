@@ -8,7 +8,7 @@ import { JOURNEY_LABEL, JOURNEY_LABEL_KO } from "@/lib/types";
 export const metadata: Metadata = {
   title: "학습 시작 · 내 여정 찾기",
   description:
-    "30초면 충분해요. 5개 여정 중 지금 가장 가까운 하나를 고르면, 그 여정의 모험이 시작돼요.",
+    "30초면 충분해요. 6개 여정 중 지금 가장 가까운 하나를 고르면, 그 여정의 모험이 시작돼요.",
 };
 
 export default function StartPage() {
@@ -90,10 +90,10 @@ export default function StartPage() {
             여정이 이미 정해져 있다면
           </h2>
           <p className="section-lede" style={{ marginBottom: 24 }}>
-            다섯 여정의 비교와 추천 Stage는 여정 페이지에서 한눈에 볼 수 있어요.
+            여섯 여정의 비교와 추천 Stage는 여정 페이지에서 한눈에 볼 수 있어요.
           </p>
           <Link href="/journeys" className="btn ghost">
-            다섯 여정 비교 <span className="arrow">→</span>
+            여섯 여정 비교 <span className="arrow">→</span>
           </Link>
         </Container>
       </section>

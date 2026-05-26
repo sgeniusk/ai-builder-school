@@ -31,13 +31,14 @@ export async function generateMetadata({
   };
 }
 
-// 5 페르소나 여정의 정본 순서. 색은 globals.css의 .p-{id} 토큰을 쓴다.
+// 6 페르소나 여정의 정본 순서. 색은 globals.css의 .p-{id} 토큰을 쓴다.
 const JOURNEY_ORDER = [
-  "native",
+  "starter",
   "practitioner",
   "creator",
   "founder",
   "engineer",
+  "ai-native",
 ] as const;
 
 function LessonRow({ lesson }: { lesson: Lesson }) {

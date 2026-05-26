@@ -10,7 +10,7 @@ export const lessons: Lesson[] = [
     summary: "AI 시대에 대체되지 않는 사람들이 공통으로 가진 판단·검증·학습 습관을 정리합니다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: [],
     learningGoals: [
       "'AI를 쓰는 사람'과 'AI로 만드는 사람'의 차이를 한 문장으로 설명할 수 있다",
@@ -89,7 +89,7 @@ export const lessons: Lesson[] = [
     summary: "LLM이 구조적으로 잘하는 작업과 구조적으로 취약한 작업을 분리해 내 업무에 매핑하는 지도를 만듭니다.",
     level: "beginner",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["common-skills-of-future-proof-people"],
     learningGoals: [
       "LLM이 구조적으로 강한 영역 4가지를 예시로 설명할 수 있다",
@@ -173,7 +173,7 @@ export const lessons: Lesson[] = [
     summary: "그럴듯하지만 틀린 답을 실무 직전 단계에서 걸러내는 4단 검증 루프를 만들고, 재사용 가능한 템플릿으로 저장합니다.",
     level: "beginner",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["what-llms-are-good-and-bad-at"],
     learningGoals: [
       "환각이 구조적으로 발생하는 3가지 상황을 안다",
@@ -257,7 +257,7 @@ export const lessons: Lesson[] = [
     summary: "AI 산출물을 실무에 쓰기 직전, 5분 안에 돌릴 수 있는 5축 자기 체크 루틴(FOSCB)을 만들고 매일 호출 가능한 위치에 저장합니다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["hallucination-verification"],
     learningGoals: [
       "5축 트러스트 체크(사실/출처/가정/범위/편향)를 1분 단위로 분배해 5분 안에 돌린다",
@@ -346,7 +346,7 @@ export const lessons: Lesson[] = [
     summary: "Task / Context / Constraints / Output 4축으로 프롬프트를 분리해 재현 가능한 작업지시서로 바꾸고, 가장 자주 쓰는 3개 패턴을 개인 템플릿으로 만듭니다.",
     level: "beginner",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["checks-before-trusting-ai-output"],
     learningGoals: [
       "프롬프트의 4축(Task/Context/Constraints/Output)을 한 문장씩 설명할 수 있다",
@@ -435,7 +435,7 @@ export const lessons: Lesson[] = [
     summary: "프롬프트 + API 스키마 강제 + 파싱 실패 재시도의 3단 방어선으로 LLM 출력을 자동화 가능한 수준으로 고정합니다. Zod/Pydantic 런타임 검증까지 한 폴더에 모아 다음 자동화에서 복사해 쓸 수 있게 만듭니다.",
     level: "beginner",
     estimatedMinutes: 50,
-    targetJourneys: ["practitioner", "engineer", "founder"],
+    targetJourneys: ["practitioner", "engineer", "founder", "ai-native"],
     prerequisites: ["structure-of-good-prompts"],
     learningGoals: [
       "구조화 출력의 3단 방어선(프롬프트 / API 스키마 / 재시도)을 설명할 수 있다",
@@ -549,7 +549,7 @@ export const lessons: Lesson[] = [
     summary: "Full / Map-Reduce / Selective 세 가지 장문 처리 전략을 같은 문서·같은 질문으로 비교해 어느 작업에 어느 전략이 맞는지 손에 익힙니다. RAG로 가는 다리이자 입력 엔지니어링의 첫 한 장.",
     level: "beginner",
     estimatedMinutes: 50,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["structure-of-good-prompts"],
     learningGoals: [
       "컨텍스트 윈도우는 \"메모리\"가 아니라 한 호출에 보는 종이 크기임을 설명할 수 있다",
@@ -647,7 +647,7 @@ export const lessons: Lesson[] = [
     summary: "Front Matter 메타데이터 + 카테고리 폴더 + 변수 치환 도구 + 공유 README 4축으로 v1 한 장을 v2 폴더로 진화시킵니다. 5개 이상 템플릿을 이관하고, 팀이 30분 안에 새 템플릿을 추가할 수 있는 구조를 만듭니다.",
     level: "beginner",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["structure-of-good-prompts"],
     learningGoals: [
       "v1 한 장 라이브러리의 4가지 한계(버전·변수·카테고리·공유)를 자기 사례로 설명할 수 있다",
@@ -751,7 +751,7 @@ export const lessons: Lesson[] = [
     summary: "과거 보고서 2~3개를 컨텍스트로 주입해 AI가 \"우리 양식\"을 학습하게 하고(Template Grounding), 초안 → 자기 검토 → 사람 검수 3단 파이프라인으로 매주 반복되는 보고서를 자동화합니다. 수치 검증 체크리스트까지 한 폴더에 담아 매주 금요일의 시작점으로 씁니다.",
     level: "beginner",
     estimatedMinutes: 50,
-    targetJourneys: ["practitioner", "founder"],
+    targetJourneys: ["practitioner", "founder", "ai-native"],
     prerequisites: ["structure-of-good-prompts"],
     learningGoals: [
       "과거 보고서 2~3개를 컨텍스트로 주입해 AI가 우리 팀 템플릿을 학습하게 한다 (Template Grounding)",
@@ -855,7 +855,7 @@ export const lessons: Lesson[] = [
     summary: "비정형 회의 녹취/메모를 결정 사항 · Action Item · 오픈 이슈 3섹션으로 구조화하고, JSON 출력으로 Notion/Slack 자동 연결까지 이어지는 파이프라인을 만듭니다. L06의 3단 방어선을 회의록이라는 비정형 입력에 적용합니다.",
     level: "beginner",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "founder"],
+    targetJourneys: ["practitioner", "founder", "ai-native"],
     prerequisites: ["enforcing-output-format"],
     learningGoals: [
       "회의 메모를 결정 사항 · Action Item · 오픈 이슈 3섹션으로 분류하는 프롬프트를 작성한다",
@@ -959,7 +959,7 @@ export const lessons: Lesson[] = [
     summary: "질문 분해 / 인용 강제 검색 → 근거 표 정리 → 종합 → 사람 검수의 5단계 리서치 파이프라인을 설계합니다. 프롬프트에서 인용을 강제하고, 근거 표로 약한 근거와 반박 근거를 가시화해 AI 리서치의 가장 큰 약점인 출처 부재를 구조적으로 해결합니다.",
     level: "beginner",
     estimatedMinutes: 50,
-    targetJourneys: ["practitioner", "creator", "founder", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "starter", "ai-native"],
     prerequisites: ["feeding-long-documents"],
     learningGoals: [
       "큰 리서치 질문을 검증 가능한 하위 질문 5개로 분해한다 (Question Decomposition)",
@@ -1062,7 +1062,7 @@ export const lessons: Lesson[] = [
     summary: "내 글 샘플을 컨텍스트로 주입해 AI가 내 문체를 학습하게 하고, 아웃라인 / 초안 / 구조 검토 / 톤 검토 4단 편집 루틴으로 AI의 속도를 살리면서 내 목소리를 유지하는 블로그 글쓰기 파이프라인을 만듭니다.",
     level: "beginner",
     estimatedMinutes: 50,
-    targetJourneys: ["creator", "practitioner", "founder", "native"],
+    targetJourneys: ["creator", "practitioner", "founder", "starter", "ai-native"],
     prerequisites: ["structure-of-good-prompts"],
     learningGoals: [
       "내 글 2~3개를 컨텍스트로 넣어 AI에게 내 문체 특징 5가지를 분석시킨다 (Voice Preservation)",
@@ -1166,7 +1166,7 @@ export const lessons: Lesson[] = [
     summary: "Claude Code · Codex CLI · Cursor를 비교하고, 허용 목록 기반 권한 설계 + CLAUDE.md/AGENTS.md 프로젝트 규약 + .env 비밀 관리 정책을 세팅해 에이전트를 안전하게 실행할 수 있는 환경을 만듭니다.",
     level: "beginner",
     estimatedMinutes: 45,
-    targetJourneys: ["engineer", "founder", "practitioner"],
+    targetJourneys: ["engineer", "founder", "practitioner", "ai-native"],
     prerequisites: [],
     learningGoals: [
       "코딩 에이전트(Claude Code, Codex CLI, Cursor)의 핵심 차이(권한/UI/MCP)를 비교 설명한다",
@@ -1269,7 +1269,7 @@ export const lessons: Lesson[] = [
     summary: "GitHub 이슈 본문을 코딩 에이전트가 첫 시도부터 올바른 방향으로 움직일 수 있는 4축 브리프(Task·Context·Constraints·Output)로 변환합니다. 이슈 템플릿 + 변환 스크립트를 한 폴더에 모아 팀 전체의 이슈 품질을 올립니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "founder", "practitioner"],
+    targetJourneys: ["engineer", "founder", "practitioner", "ai-native"],
     prerequisites: ["coding-agent-setup", "structure-of-good-prompts"],
     learningGoals: [
       "일반 이슈와 AI 브리프의 차이(재현 스텝·수용 조건·영향 범위·검증 명령)를 설명한다",
@@ -1378,7 +1378,7 @@ export const lessons: Lesson[] = [
     summary: "컨텍스트 윈도우보다 큰 코드베이스를 에이전트에게 효과적으로 전달하는 3가지 방법(Repomix 평탄화 / CLAUDE.md 상시 지도 / 계층적 README)을 비교하고, L07의 Full·Map-Reduce·Selective 전략을 코드베이스에 적용합니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["engineer", "founder", "practitioner"],
+    targetJourneys: ["engineer", "founder", "practitioner", "ai-native"],
     prerequisites: ["coding-agent-setup", "feeding-long-documents"],
     learningGoals: [
       "L07의 3 전략(Full/Map-Reduce/Selective)이 코드베이스에서 어떻게 적용되는지 설명한다",
@@ -1483,7 +1483,7 @@ export const lessons: Lesson[] = [
       "코딩 에이전트에게 실행을 시키기 전에 Plan Mode와 implementation-plan.md 패턴으로 변경 파일·테스트 전략·롤백 포인트·Stop Points를 합의하고, plan-then-execute 사이클 한 건을 기록합니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["engineer", "founder", "practitioner"],
+    targetJourneys: ["engineer", "founder", "practitioner", "ai-native"],
     prerequisites: ["github-issue-to-ai-brief"],
     learningGoals: [
       "코드를 짜기 전에 AI와 구현 계획을 먼저 합의하는 이유를 설명한다",
@@ -1572,7 +1572,7 @@ export const lessons: Lesson[] = [
     summary: "AI에게 실패 테스트부터 요구해 Red→Green→Refactor 사이클을 사람·AI 역할로 나눠 돌리고, 의도 주석으로 테스트 신뢰도를 커버리지보다 앞에 둡니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["plan-with-ai"],
     learningGoals: [
       "테스트 의도를 자연어로 먼저 정의한다",
@@ -1669,7 +1669,7 @@ export const lessons: Lesson[] = [
     summary: "애매한 버그를 재현 → 최소화 → AI 가설 → 수정 → 회귀 테스트의 5단 루프로 표준화하고, 같은 버그가 다시 돌아오는 시간을 줄입니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["write-tests-with-coding-agent"],
     learningGoals: [
       "버그 리포트를 재현 가능한 단계로 바꾼다",
@@ -1764,7 +1764,7 @@ export const lessons: Lesson[] = [
     summary: "Next.js 서버 라우트로 API 키를 숨기고, 타임아웃·리트라이·에러 분리를 갖춘 첫 AI API 연결을 만듭니다. 프론트엔드에서 직접 호출하지 않는 이유부터 Rate Limit 기본 구조까지.",
     level: "intermediate",
     estimatedMinutes: 60,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["coding-agent-setup"],
     learningGoals: [
       "브라우저에서 API 키를 직접 노출하면 안 되는 이유를 설명한다",
@@ -1865,7 +1865,7 @@ export const lessons: Lesson[] = [
     summary: "SSE 기반 토큰 스트리밍 라우트와 React 누적 렌더링 UI를 만들고, AbortController로 중단 가능한 사용자 경험을 갖춘 미니 챗 인터페이스를 완성합니다.",
     level: "intermediate",
     estimatedMinutes: 55,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["connect-ai-api"],
     learningGoals: [
       "SSE와 토큰 단위 전송의 기본 흐름을 설명한다",
@@ -1961,7 +1961,7 @@ export const lessons: Lesson[] = [
     summary: "L06의 3단 방어선을 React 앱 상태 경계까지 확장합니다. Zod 스키마로 서버·클라이언트 타입을 공유하고, safeParse·fallback UI·스키마 진화 전략까지 갖춘 미니 앱을 만듭니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["enforcing-output-format", "connect-ai-api"],
     learningGoals: [
       "L06의 구조화 출력 방어선을 앱 상태 경계로 확장한다",
@@ -2057,7 +2057,7 @@ export const lessons: Lesson[] = [
     summary: "Session/Message/Summary 3-테이블 스키마로 대화를 영속화하고, Summary Rolling으로 비용·품질을 동시에 관리합니다. SQLite/Postgres/Redis 선택 기준과 개인정보 보존·삭제 정책까지 한 폴더에 정리.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["connect-ai-api"],
     learningGoals: [
       "대화를 Session/Message/Summary 구조로 나눈다",
@@ -2153,7 +2153,7 @@ export const lessons: Lesson[] = [
     summary: "토큰과 임베딩의 차이를 직관으로 잡고, 본인 도메인 문장으로 코사인 유사도 실험을 돌려 의미 검색이 키워드 검색을 어디서 이기고 어디서 안 이기는지 손에 익힙니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["connect-ai-api"],
     learningGoals: [
       "토큰과 임베딩의 차이를 설명한다",
@@ -2250,7 +2250,7 @@ export const lessons: Lesson[] = [
     summary: "고정 크기·구조 기반·의미 기반 3가지 청킹 전략을 같은 문서에 적용해 검색 품질을 직접 비교하고, Anthropic Contextual Retrieval까지 시도해 본인 도메인의 시작점 가이드를 만듭니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["understanding-embeddings"],
     learningGoals: [
       "청킹이 검색 품질에 미치는 영향을 설명한다",
@@ -2346,7 +2346,7 @@ export const lessons: Lesson[] = [
     summary: "pgvector / Pinecone / Chroma 비교부터 시작해 미니 벡터 검색 파이프라인을 만들고, Top-K · Hybrid Search · Recall@K · MRR 평가까지 한 폴더에 정리합니다.",
     level: "intermediate",
     estimatedMinutes: 60,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["document-chunking-strategy"],
     learningGoals: [
       "벡터 DB가 벡터 저장소와 검색 인덱스를 함께 제공하는 이유를 설명한다",
@@ -2443,7 +2443,7 @@ export const lessons: Lesson[] = [
     summary: "L23-L25의 검색 파이프라인 위에 인용 강제 시스템 프롬프트와 Abstain Policy를 얹어, 답마다 출처가 따라붙고 근거 없으면 거절하는 end-to-end RAG 앱을 완성합니다.",
     level: "intermediate",
     estimatedMinutes: 55,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["vector-search-basics"],
     learningGoals: [
       "RAG에서도 환각이 생기는 세 경로를 설명한다",
@@ -2540,7 +2540,7 @@ export const lessons: Lesson[] = [
     summary: "JSON Schema로 도구를 정의해 LLM에 등록하고, 모델의 호출 요청을 받아 인자를 검증한 뒤 실제 함수를 실행하고 결과를 돌려주는 단발 Function Calling 전체 흐름을 동작하는 코드로 구현합니다. Anthropic Tool Use와 OpenAI Function Calling의 포맷 차이를 비교하고, MCP로 도구를 표준 공유하는 개념까지 익힙니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["structured-output-handling"],
     learningGoals: [
       "Function Calling의 4단계 흐름(스키마 등록 → 모델 판단 → 개발자 실행 → 결과 반환)을 설명할 수 있다",
@@ -2630,7 +2630,7 @@ export const lessons: Lesson[] = [
     summary: "ReAct 스타일 Thought/Action/Observation 루프를 5-15회 반복하는 미니 에이전트를 만들고, 종료 조건·관찰 로그·디버그 UI까지 한 폴더에 정리합니다.",
     level: "advanced",
     estimatedMinutes: 60,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["function-calling"],
     learningGoals: [
       "단발 function calling과 에이전트 루프의 차이를 설명한다",
@@ -2728,7 +2728,7 @@ export const lessons: Lesson[] = [
     summary: "도구를 Read-Only / Write / External Side-Effect 3등급으로 분류하고, Allow-List · Human-in-the-Loop · 샌드박스 · 감사 로그 4축으로 안전한 에이전트 권한 정책을 설계합니다.",
     level: "advanced",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["mini-agent-loop"],
     learningGoals: [
       "도구를 Read-Only/Write/External Side-Effect로 분류한다",
@@ -2826,7 +2826,7 @@ export const lessons: Lesson[] = [
     summary: "Direct/Indirect prompt injection을 구분하고, 역할 고정 · 권한 분리 · 입력 검사 · 출력 검증의 4단 방어를 설계해 공격 패턴 5가지를 회귀 테스트로 등록합니다.",
     level: "advanced",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "founder", "practitioner"],
+    targetJourneys: ["engineer", "founder", "practitioner", "ai-native"],
     prerequisites: ["tool-permission-safeguards"],
     learningGoals: [
       "Direct와 Indirect prompt injection을 구분한다",
@@ -2924,7 +2924,7 @@ export const lessons: Lesson[] = [
     summary: "LLM API의 인풋/아웃풋 토큰 단가 구조를 이해하고, 프롬프트 캐싱·응답 캐싱·모델 라우팅·사용자별 예산 제한의 4가지 전략으로 비용을 최적화합니다. 호출마다 토큰·비용을 로깅하고 일별 리포트를 뽑는 cost-tracker를 만들어, 청구서가 아니라 데이터로 비용을 관리하는 기반을 세웁니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["founder", "practitioner", "engineer"],
+    targetJourneys: ["founder", "practitioner", "engineer", "ai-native"],
     prerequisites: ["connect-ai-api"],
     learningGoals: [
       "인풋 토큰과 아웃풋 토큰의 단가 차이를 설명하고, 비용이 어디서 발생하는지 구분할 수 있다",
@@ -2978,7 +2978,7 @@ export const lessons: Lesson[] = [
     summary: "지금까지의 모든 Stage에서 만든 산출물을 하나의 캡스톤 프로젝트로 묶고, Narrow MVP 범위 + 4주 실행 계획 + 첫 사용자 피드백 + 런칭 회고로 \"공개된 결과물\" 을 만듭니다.",
     level: "advanced",
     estimatedMinutes: 120,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: [
       "grounded-rag-answers",
       "mini-agent-loop",
@@ -3089,7 +3089,7 @@ export const lessons: Lesson[] = [
     summary: "새 AI 용어를 만날 때마다 흔들리지 않는 3가지 질문 프레임워크(왜 이름·기존 문제·해결법)를 손에 익히고, RAG·MCP·Agent로 직접 분해 적용해 한 장짜리 학습 노트를 만듭니다.",
     level: "beginner",
     estimatedMinutes: 30,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["common-skills-of-future-proof-people"],
     learningGoals: [
       "새 AI 용어가 와도 흔들리지 않는 3가지 질문 프레임워크를 설명한다",
@@ -3181,7 +3181,7 @@ export const lessons: Lesson[] = [
     summary: "Andrej Karpathy의 65줄 CLAUDE.md를 풀어 AI 3대 고질병(잘못된 가정·코드 부풀림·멋대로 고침)과 4원칙(Think Before Coding · Simplicity First · Surgical Changes · Goal-Driven Execution)을 본인 프로젝트에 적용합니다.",
     level: "intermediate",
     estimatedMinutes: 40,
-    targetJourneys: ["engineer", "founder", "practitioner"],
+    targetJourneys: ["engineer", "founder", "practitioner", "ai-native"],
     prerequisites: ["coding-agent-setup"],
     learningGoals: [
       "AI 코딩의 3가지 고질병(잘못된 가정·코드 부풀림·멋대로 고침)을 자기 사례로 설명한다",
@@ -3279,7 +3279,7 @@ export const lessons: Lesson[] = [
     summary: "Anthropic·OpenAI·LangChain·Mitchell Hashimoto·HumanLayer 등 글로벌 14개 글에서 추출한 하네스 엔지니어링 6단계(CLAUDE.md → 도구 → 세션 → 검증 → 멀티 에이전트 → 유지보수) 로드맵을 본인 프로젝트에 매핑합니다.",
     level: "intermediate",
     estimatedMinutes: 60,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["coding-agent-setup", "claude-md-four-principles"],
     learningGoals: [
       "하네스 엔지니어링의 6단계 축을 설명한다 (CLAUDE.md / 도구 / 세션 / 검증 / 멀티 / 유지보수)",
@@ -3386,7 +3386,7 @@ export const lessons: Lesson[] = [
     summary: "Ralph Loop의 5줄 bash 원형 → Anthropic 공식 플러그인 → Codex /goal 정형화의 3단계 진화를 따라가고, 5단계 라이프사이클(Activation/Planning/Execution/Verification/Soft Stop)과 4중 안전장치를 본인 프로젝트에 적용해 한 번 자율 루프를 돌립니다.",
     level: "intermediate",
     estimatedMinutes: 60,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["mini-agent-loop", "tool-permission-safeguards"],
     learningGoals: [
       "Ralph Loop의 3단계 진화(원형 5줄 bash → Anthropic 플러그인 → Codex /goal)를 설명한다",
@@ -3485,7 +3485,7 @@ export const lessons: Lesson[] = [
     summary: "Claude Code의 매 메시지 전체 재로딩 메커니즘을 이해하고, 외부 52가지 팁에서 추린 12가지 핵심(/clear, .claudeignore, CLAUDE.md 다이어트, 스킬 분리, 5규칙, 병렬화, 서브에이전트, QMD, read-once, 3 에이전트 팀, 훅 자동화)을 본인 프로젝트에 진단표로 적용합니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["coding-agent-setup", "ai-app-cost-and-usage"],
     learningGoals: [
       "Claude Code의 매 메시지 전체 재로딩 메커니즘을 설명한다",
@@ -3584,7 +3584,7 @@ export const lessons: Lesson[] = [
     summary: "롱폼 콘텐츠 1개(블로그 글 또는 영상 대본)에서 쇼츠 스크립트 5개, 뉴스레터 1개, 카드뉴스 한 세트, SNS 캡션 묶음까지 같은 톤으로 자동 재가공하는 6단계 파이프라인을 만듭니다. 채널별 호흡 차이 · 톤 보존 · CTA 일관성을 잡는 프롬프트 라이브러리 + 발행 캘린더 + 검증 체크리스트를 한 폴더로 묶어 매주 같은 루틴으로 운영 가능하게 합니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["creator", "practitioner", "founder"],
+    targetJourneys: ["creator", "practitioner", "founder", "ai-native"],
     prerequisites: ["blog-writing-pipeline", "build-personal-prompt-library"],
     learningGoals: [
       "롱폼 1개에서 핵심 비트 7-10개를 뽑는 추출 프롬프트를 만든다",
@@ -3698,7 +3698,7 @@ export const lessons: Lesson[] = [
     summary: "디자이너가 본인 브랜드 톤(또는 클라이언트 톤)을 *시각 어휘 사전*으로 분해하고, 색상·폼·텍스처·무드·라이팅·구도 6 카테고리의 프롬프트 모듈을 조합해 호출하는 시각 프롬프트 시스템을 만듭니다. Midjourney·Stable Diffusion 어디에 던져도 같은 톤이 나오는 *브랜드 시각 일관성* 도구가 됩니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["creator", "founder"],
+    targetJourneys: ["creator", "founder", "ai-native"],
     prerequisites: ["build-personal-prompt-library", "structure-of-good-prompts"],
     learningGoals: [
       "브랜드 톤을 색상·폼·텍스처·무드·라이팅·구도 6 카테고리로 분해한다",
@@ -3802,7 +3802,7 @@ export const lessons: Lesson[] = [
     summary: "유튜브 영상 1개를 위한 주제 → 리서치 → 아웃라인 → 후크 후보 → 촬영 큐시트 5단계 파이프라인을 만듭니다. 출처 검증 · 후크 강도 · B-roll 메모를 한 폴더로 묶어 매주 같은 패턴으로 영상을 기획 가능하게 합니다. L11(리서치 워크플로우)의 근거 표와 L12(블로그 파이프라인)의 톤 보존을 영상 제작에 결합합니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["creator", "founder", "practitioner"],
+    targetJourneys: ["creator", "founder", "practitioner", "ai-native"],
     prerequisites: ["research-workflow", "blog-writing-pipeline"],
     learningGoals: [
       "영상 주제 1개를 검증 가능한 하위 질문 + 출처 표로 분해한다",
@@ -3906,7 +3906,7 @@ export const lessons: Lesson[] = [
     summary: "Figma 컴포넌트 1개를 시작점으로 변형 축 → 변형 규칙(토큰) → AI 명세 생성 → Figma 반영 → 접근성 검증 5단계 워크플로우를 만듭니다. 디자인 토큰 · 상태 매트릭스 · 접근성 체크를 한 폴더로 묶어 같은 디자인 시스템을 빠르게 확장 가능하게 합니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["creator", "founder"],
+    targetJourneys: ["creator", "founder", "ai-native"],
     prerequisites: ["design-visual-prompt-system", "structure-of-good-prompts"],
     learningGoals: [
       "한 컴포넌트의 변형 축(사이즈·상태·테마·변종)을 명시적으로 정의한다",
@@ -4010,7 +4010,7 @@ export const lessons: Lesson[] = [
     summary: "콘텐츠 1개(영상/포스트/광고)의 썸네일·제목을 후크 각도별로 5세트 생성 → 사전 평가 → 발행 A/B → 결과 회고 → 다음 콘텐츠 반영의 5단계 루프를 만듭니다. 후크 각도 매트릭스 · 평가 기준 · 실험 로그를 한 폴더로 묶어 클릭률을 데이터로 개선 가능하게 합니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["creator", "founder", "practitioner"],
+    targetJourneys: ["creator", "founder", "practitioner", "ai-native"],
     prerequisites: ["youtube-script-research-to-outline", "structure-of-good-prompts"],
     learningGoals: [
       "한 콘텐츠의 후크 각도(호기심·통증·결과·반전·권위)를 명시적으로 정의한다",
@@ -4114,7 +4114,7 @@ export const lessons: Lesson[] = [
     summary: "매장(카페·식당·소매점) 운영자가 메뉴/제품 사진 1장에서 인스타 캡션, 네이버 플레이스 소식, 단골 안내문, 이벤트 문구, 리뷰 답글까지 한 달치 콘텐츠를 채우는 캘린더 틀을 만듭니다. 코드 없이 AI 챗봇만으로 — 프롬프트 모음 · 월간 캘린더 · 검토 체크리스트를 한 폴더로 묶어 매달 같은 패턴으로 운영 가능하게 합니다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["creator", "native"],
+    targetJourneys: ["creator", "starter", "ai-native"],
     prerequisites: ["structure-of-good-prompts"],
     learningGoals: [
       "메뉴/제품 사진 1장에서 채널 5종(인스타·네이버·단골 안내·이벤트·리뷰 답글)의 콘텐츠를 뽑는다",
@@ -4219,7 +4219,7 @@ export const lessons: Lesson[] = [
     summary: "데이터 분석가나 SQL을 다루는 실무자가 AI와 SQL 쿼리를 공동 작성하고, 생성된 쿼리를 검증하는 루프를 구성합니다. 스키마 주입 → 쿼리 생성 → AI 셀프 리뷰 → 소규모 테스트 데이터 검증 → 실행 순서로 진행하며, AI가 스키마 없이 컬럼명을 지어내는 환각 패턴을 직접 경험하고 방어합니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "engineer"],
+    targetJourneys: ["practitioner", "engineer", "ai-native"],
     prerequisites: ["hallucination-verification"],
     learningGoals: [
       "스키마(테이블 구조)를 AI에 주입해야 정확한 쿼리가 나오는 이유를 이해한다",
@@ -4317,7 +4317,7 @@ export const lessons: Lesson[] = [
     summary: "마케터나 데이터 분석가가 CRM 데이터(이메일 오픈율, 구매 이력, 접속 빈도 등)를 기반으로 고객 세그먼트 규칙을 AI와 함께 설계하고, CSV 또는 시트에서 대량 레이블링을 자동화합니다. 규칙 문서화 → 엣지 케이스 정의 → 배치 레이블링 프롬프트 → 샘플 검증 순서로 진행합니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner"],
+    targetJourneys: ["practitioner", "ai-native"],
     prerequisites: ["structure-of-good-prompts", "hallucination-verification"],
     learningGoals: [
       "비즈니스 목표에서 세그먼트 기준을 역으로 도출하는 방법을 익힌다",
@@ -4414,7 +4414,7 @@ export const lessons: Lesson[] = [
     summary: "KPI 대시보드의 숫자를 경영진이나 비기술 팀원이 이해할 수 있는 서술로 변환하는 작업을 AI로 자동화합니다. AI가 생성한 분석 코멘트에서 근거 있는 인사이트와 지어낸 인사이트를 구분하는 QA 체크리스트를 만들고, 신뢰할 수 있는 서술 생성 프롬프트를 구성합니다.",
     level: "intermediate",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "founder"],
+    targetJourneys: ["practitioner", "founder", "ai-native"],
     prerequisites: ["hallucination-verification", "checks-before-trusting-ai-output"],
     learningGoals: [
       "숫자(사실)와 해석(추론)을 구분하는 서술 생성 프롬프트를 작성한다",
@@ -4512,7 +4512,7 @@ export const lessons: Lesson[] = [
     summary: "A/B 테스트 결과(통계 수치)를 의사결정 메모(배포할까, 말까)로 변환하는 AI 보조 워크플로를 구성합니다. p-value와 신뢰구간의 올바른 해석, 통계적 유의미성과 실용적 유의미성의 차이, AI가 낙관적으로 해석하는 패턴을 다루며 실제 의사결정에 쓸 수 있는 메모 형식을 만듭니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "founder"],
+    targetJourneys: ["practitioner", "founder", "ai-native"],
     prerequisites: ["hallucination-verification", "checks-before-trusting-ai-output"],
     learningGoals: [
       "p-value와 신뢰구간을 AI로 번역하되 과잉 해석을 방지하는 프롬프트를 작성한다",
@@ -4611,7 +4611,7 @@ export const lessons: Lesson[] = [
     summary: "AI 코딩 에이전트(Codex, Claude Code 등)가 생성한 코드를 머지 전에 검증하는 Eval 게이트를 구성합니다. 유닛 테스트만으로는 잡기 어려운 AI 코드 특유의 문제(환각 API 호출, 보안 취약 패턴, 의도 불일치)를 체크리스트와 간단한 Eval 스크립트로 잡는 방법을 다룹니다.",
     level: "advanced",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "practitioner"],
+    targetJourneys: ["engineer", "practitioner", "ai-native"],
     prerequisites: ["hallucination-verification", "write-tests-with-coding-agent", "bug-reproduction-loop"],
     learningGoals: [
       "AI 생성 코드에서 흔히 발생하는 오류 패턴(환각 API, 보안 취약, 의도 불일치)을 파악한다",
@@ -4709,7 +4709,7 @@ export const lessons: Lesson[] = [
     summary: "LLM 기반 기능의 출력을 로그로 기록하고, 프롬프트 변경 전후를 비교하는 회귀 테스트 루프를 구성합니다. 복잡한 Observability 툴 없이 구조화된 로그 + 골든 셋 비교만으로도 프롬프트 드리프트를 감지하는 방법을 다룹니다.",
     level: "advanced",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "practitioner"],
+    targetJourneys: ["engineer", "practitioner", "ai-native"],
     prerequisites: ["evals-for-ai-coded-prs", "function-calling"],
     learningGoals: [
       "LLM 출력을 구조화된 로그로 기록하는 패턴을 익힌다",
@@ -4807,7 +4807,7 @@ export const lessons: Lesson[] = [
     summary: "PM과 비개발 직군이 AI 기능의 출력 품질을 평가하는 기준을 정의하고 문서화합니다. 코드 없이 스프레드시트와 AI 채팅만으로 Eval 루브릭을 만들고, 개발팀에게 명확한 품질 기준을 전달하는 방법을 다룹니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "founder"],
+    targetJourneys: ["practitioner", "founder", "ai-native"],
     prerequisites: ["checks-before-trusting-ai-output", "hallucination-verification"],
     learningGoals: [
       "AI 기능의 출력 품질을 코드 없이 정의하는 Eval 루브릭을 만든다",
@@ -4905,7 +4905,7 @@ export const lessons: Lesson[] = [
     summary: "팀 또는 조직에서 AI를 책임감 있게 사용하기 위한 정책 템플릿을 만듭니다. 금지/허용/필수 검토 세 레이어로 구분하고, 과의존·개인정보·저작권·AI 산출물 표시 같은 핵심 이슈를 다룹니다. 1~2페이지 분량의 실용적인 정책 문서를 완성합니다.",
     level: "intermediate",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "founder"],
+    targetJourneys: ["practitioner", "founder", "ai-native"],
     prerequisites: ["checks-before-trusting-ai-output", "hallucination-verification", "prompt-injection-defense"],
     learningGoals: [
       "팀 AI 사용의 허용/금지/필수 검토 레이어를 정의한다",
@@ -5004,7 +5004,7 @@ export const lessons: Lesson[] = [
     summary: "AI Builder School의 첫 번째 레슨. 코딩 에이전트(Codex, Claude Code)가 무엇인지, 터미널이 왜 필요한지, AI가 코드를 짜면 사람은 무엇을 하는지 큰 그림을 잡습니다. 코드를 전혀 모르는 입문자가 다음 레슨으로 넘어갈 수 있는 멘탈 모델을 만드는 것이 목표입니다.",
     level: "beginner",
     estimatedMinutes: 20,
-    targetJourneys: ["practitioner", "creator", "native", "founder"],
+    targetJourneys: ["practitioner", "creator", "starter", "founder", "ai-native"],
     prerequisites: [],
     learningGoals: [
       "코딩 에이전트가 무엇인지, 일반 AI 챗봇과 어떻게 다른지 설명할 수 있다",
@@ -5085,7 +5085,7 @@ export const lessons: Lesson[] = [
     summary: "완전 초보자가 터미널을 처음 열었을 때 필요한 최소 명령어 10개를 실습합니다. 이론보다 실제로 따라 치는 것이 목표입니다. AI 코딩 에이전트를 쓰기 위해 반드시 알아야 하는 명령어만 선별했습니다.",
     level: "beginner",
     estimatedMinutes: 30,
-    targetJourneys: ["practitioner", "creator", "native", "engineer"],
+    targetJourneys: ["practitioner", "creator", "starter", "engineer", "ai-native"],
     prerequisites: ["zero-coding-orientation"],
     learningGoals: [
       "터미널을 열고 현재 위치를 확인할 수 있다",
@@ -5169,7 +5169,7 @@ export const lessons: Lesson[] = [
     summary: "Stage 1~4를 결제 없이 따라갈 무료 한도 트랙(GitHub + AI 챗봇 1개)을 먼저 세팅하고, 각 도구의 무료/유료 경계를 이해합니다. API 키·.env·spending limit 같은 유료 API 트랙은 Stage 5 준비물로 정리해, 코드로 AI를 호출하게 될 때 안전하게 시작하도록 합니다.",
     level: "beginner",
     estimatedMinutes: 35,
-    targetJourneys: ["practitioner", "creator", "native", "founder", "engineer"],
+    targetJourneys: ["practitioner", "creator", "starter", "founder", "engineer", "ai-native"],
     prerequisites: ["terminal-first-day"],
     learningGoals: [
       "Stage 1~4를 결제 없이 따라갈 무료 한도 트랙(GitHub + AI 챗봇)을 세팅한다",
@@ -5256,7 +5256,7 @@ export const lessons: Lesson[] = [
     summary: "AI를 사용할 때 반드시 알아야 하는 윤리 기초를 다룹니다. 개인정보 처리 경계, AI 생성 콘텐츠의 저작권, 표절과 AI 보조 작업의 경계, 그리고 AI 출력을 무비판적으로 믿는 위험을 짧고 실용적으로 정리합니다. Stage 1의 마지막 레슨으로, 이후 모든 실습에서 의식적으로 적용할 습관을 만듭니다.",
     level: "beginner",
     estimatedMinutes: 25,
-    targetJourneys: ["practitioner", "creator", "native", "founder", "engineer"],
+    targetJourneys: ["practitioner", "creator", "starter", "founder", "engineer", "ai-native"],
     prerequisites: ["zero-coding-orientation"],
     learningGoals: [
       "어떤 데이터를 AI에 입력하면 안 되는지 기준을 갖는다",
@@ -5339,7 +5339,7 @@ export const lessons: Lesson[] = [
     summary: "AI 제품 아이디어를 문제·페르소나·Narrow MVP·가장 위험한 가정 4축으로 압축해 1페이지 브리프를 만듭니다. 브리프가 있으면 코딩 에이전트에게 '이것만 먼저 만들어줘'라고 정확하게 지시할 수 있습니다.",
     level: "intermediate",
     estimatedMinutes: 40,
-    targetJourneys: ["founder", "practitioner", "creator"],
+    targetJourneys: ["founder", "practitioner", "creator", "ai-native"],
     prerequisites: ["capstone-plan-and-launch"],
     learningGoals: [
       "AI 제품 아이디어를 문제 중심으로 재정의한다",
@@ -5412,7 +5412,7 @@ export const lessons: Lesson[] = [
     summary: "Hook-Problem-Solution-Social Proof-CTA 5단 구조로 AI 제품 랜딩 페이지를 설계합니다. AI로 카피를 생성하고, 직접 검토·수정해서 '실제로 클릭하고 싶은 페이지'를 만드는 과정을 익힙니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["founder", "creator", "practitioner"],
+    targetJourneys: ["founder", "creator", "practitioner", "ai-native"],
     prerequisites: ["ai-product-brief"],
     learningGoals: [
       "Hook-Problem-Solution-Social Proof-CTA 5단 구조를 설명한다",
@@ -5485,7 +5485,7 @@ export const lessons: Lesson[] = [
     summary: "Freemium, 구독, 사용량 기반 세 가지 모델의 트레이드오프를 비교하고, AI API 비용을 가격에 반영하는 계산법을 익힙니다. 내 제품에 맞는 가격 구조를 설계하고 처음 유료 전환을 이끄는 업그레이드 트리거를 찾습니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["founder", "practitioner"],
+    targetJourneys: ["founder", "practitioner", "ai-native"],
     prerequisites: ["ai-app-cost-and-usage", "landing-page-for-ai-product"],
     learningGoals: [
       "Freemium·구독·사용량 기반 세 모델의 장단점을 비교한다",
@@ -5559,7 +5559,7 @@ export const lessons: Lesson[] = [
     summary: "지금까지의 모든 Stage 산출물을 돌아보며 캡스톤 후보 3개를 찾고, 실현 가능성·임팩트·학습 가치 3축 매트릭스로 1개를 선택합니다. 선택된 프로젝트의 범위를 4주 안에 공개 가능한 수준으로 압축하는 방법을 익힙니다.",
     level: "advanced",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["capstone-plan-and-launch"],
     learningGoals: [
       "지금까지의 모든 Stage 산출물에서 캡스톤 후보를 발굴한다",
@@ -5633,7 +5633,7 @@ export const lessons: Lesson[] = [
     summary: "Day 1-28 캡스톤 빌드를 주 단위 루프(Spec→Build→Test→Ship)로 운영하는 방법을 익힙니다. 코딩 에이전트에게 일일 태스크를 지시하는 패턴, 막혔을 때 탈출 루틴, 중간 배포로 모멘텀을 유지하는 전략을 다룹니다.",
     level: "advanced",
     estimatedMinutes: 50,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["capstone-scope-selection"],
     learningGoals: [
       "4주 빌드를 주별 Spec→Build→Test→Ship 루프로 운영한다",
@@ -5706,7 +5706,7 @@ export const lessons: Lesson[] = [
     summary: "캡스톤 프로젝트를 포트폴리오 형태로 공개하고, AI vs 사람 비율 분석이 담긴 회고 문서를 작성합니다. README 작성, GitHub 공개, 커뮤니티 발표, 회고 구조화까지의 전 과정을 익힙니다.",
     level: "advanced",
     estimatedMinutes: 60,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["capstone-build-loop", "capstone-plan-and-launch"],
     learningGoals: [
       "포트폴리오용 README를 무엇·왜·어떻게·데모 4구조로 작성한다",
@@ -5782,7 +5782,7 @@ export const lessons: Lesson[] = [
       "AI 도구·API의 사용량과 비용을 매주 5분 안에 점검하는 모니터링 루프를 만듭니다. 사용량 알림, 지출 한도(budget cap), 주간 리뷰 체크리스트를 한 장으로 묶어 \"청구서 쇼크\"를 예방합니다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["ai-tool-account-and-cost"],
     learningGoals: [
       "AI 비용이 \"천천히\"가 아니라 \"한 번에\" 터지는 구조적 이유를 설명한다",
@@ -5872,7 +5872,7 @@ export const lessons: Lesson[] = [
       "Anthropic의 AI Fluency 4D 프레임워크 중 Delegation(위임)을 빌려, 어떤 일을 AI에 맡기고 어떤 일은 직접 할지 판단하는 개인 기준표를 만듭니다. 위험·되돌릴 수 있음·검증 비용 세 축으로 일을 분류합니다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["common-skills-of-future-proof-people"],
     learningGoals: [
       "AI에 일을 맡길지 판단하는 세 축(위험·되돌릴 수 있음·검증 비용)을 설명한다",
@@ -5962,7 +5962,7 @@ export const lessons: Lesson[] = [
       "개인이 AI를 익힌 다음 마주하는 벽 — 팀의 저항 — 을 다룹니다. 저항의 세 가지 진짜 이유(불안·불신·불편)를 구분하고, 강요 대신 작은 성공 사례로 확산시키는 도입 계획 한 장을 만듭니다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["common-skills-of-future-proof-people", "ai-delegation-decision"],
     learningGoals: [
       "팀이 AI 도입에 저항하는 세 가지 진짜 이유(불안·불신·불편)를 구분한다",
@@ -6052,7 +6052,7 @@ export const lessons: Lesson[] = [
       "추론 모델(reasoning)과 일반 모델(instruct)이 왜 다른 프롬프트를 요구하는지 익힙니다. 일반 모델엔 단계를 쪼개 주고, 추론 모델엔 목표만 주는 — 모델 종류별 프롬프트 전환 규칙을 만듭니다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["structure-of-good-prompts"],
     learningGoals: [
       "추론 모델과 일반 모델의 차이를 \"생각을 모델이 하나 내가 하나\"로 설명한다",
@@ -6141,7 +6141,7 @@ export const lessons: Lesson[] = [
       "프롬프트가 실패했을 때 무작정 다시 쓰지 않고, Task·Context·Constraints·Output 4축 중 어디가 약했는지 진단하는 디버깅 루프를 익힙니다. 실패를 패턴으로 모으는 디버그 노트를 만듭니다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["structure-of-good-prompts", "enforcing-output-format"],
     learningGoals: [
       "프롬프트 실패를 \"운\"이 아니라 \"진단 가능한 결함\"으로 본다",
@@ -6230,7 +6230,7 @@ export const lessons: Lesson[] = [
       "텍스트만 쓰던 프롬프트를 이미지·음성 입력까지 확장합니다. 스크린샷·표·손글씨·차트를 AI에 먹이는 법, 멀티모달이 강한 작업과 약한 작업을 구분하는 법을 익힙니다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["structure-of-good-prompts", "feeding-long-documents"],
     learningGoals: [
       "텍스트 대신 이미지를 입력하는 게 더 나은 상황을 구분한다",
@@ -6319,7 +6319,7 @@ export const lessons: Lesson[] = [
       "AI의 첫 출력을 그대로 받지 않고, 기준으로 평가한 뒤 구체적 피드백으로 다듬는 refine 루프를 익힙니다. \"좋다/별로다\"가 아니라 항목별로 평가하는 개인 채점표를 만듭니다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["structure-of-good-prompts", "enforcing-output-format"],
     learningGoals: [
       "AI 첫 출력을 \"완성\"이 아니라 \"초안\"으로 다루는 습관을 잡는다",
@@ -6408,7 +6408,7 @@ export const lessons: Lesson[] = [
       "같은 작업을 여러 건 반복할 때 하나씩 묻지 않고 배치로 처리하는 법을 익힙니다. 배치 프롬프팅 패턴, 속도 제한(rate limit)을 피하는 법, 비용을 줄이는 선택을 정리합니다.",
     level: "beginner",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["enforcing-output-format", "feeding-long-documents"],
     learningGoals: [
       "같은 작업을 반복할 때 \"하나씩\"이 왜 비싸고 느린지 설명한다",
@@ -6497,7 +6497,7 @@ export const lessons: Lesson[] = [
       "환각을 잡고 출력을 검증하는 법을 배웠다면, 그다음 — \"틀린 걸 발견했을 때 무엇을 하는가\" — 를 다룹니다. 재질문·사람 개입·대체 경로·작업 중단의 4가지 차선책을 자기 업무에 맞게 정해둡니다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["hallucination-verification", "checks-before-trusting-ai-output"],
     learningGoals: [
       "검증은 \"실패를 발견하는 일\"이고, 그다음 \"실패를 처리하는 일\"이 따로 있음을 안다",
@@ -6587,7 +6587,7 @@ export const lessons: Lesson[] = [
       "자주 쓰는 프롬프트·맥락·예시를 Custom GPT 또는 Projects 같은 재사용 어시스턴트로 묶는 법을 익힙니다. 코드 없이 만드는 나만의 업무 전용 AI 도우미 하나를 완성합니다.",
     level: "beginner",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["build-personal-prompt-library", "automate-report-drafts"],
     learningGoals: [
       "매번 프롬프트를 복붙하는 일과 재사용 어시스턴트의 차이를 설명한다",
@@ -6677,7 +6677,7 @@ export const lessons: Lesson[] = [
       "보고서·회의록·리서치·콘텐츠 같은 개별 AI 파이프라인들을 하나의 주간 루틴으로 엮는 법을 익힙니다. 무엇을 언제 어떤 순서로 돌릴지, 한 파이프라인의 출력이 다음 입력이 되게 연결하는 설계도를 만듭니다.",
     level: "intermediate",
     estimatedMinutes: 50,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["automate-report-drafts", "meeting-notes-pipeline", "custom-gpt-builder"],
     learningGoals: [
       "개별 파이프라인을 따로 돌리는 일과 오케스트레이션의 차이를 설명한다",
@@ -6767,7 +6767,7 @@ export const lessons: Lesson[] = [
       "AI 자동화 하나하나가 실제로 시간·비용 면에서 이득인지 계산하는 법을 익힙니다. 업무별 AI 비용과 절약 시간을 같이 놓고, 어떤 자동화에 더 투자하고 어떤 건 접을지 판단하는 ROI 시트를 만듭니다.",
     level: "beginner",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["cost-monitoring-in-production", "automate-report-drafts"],
     learningGoals: [
       "자동화의 가치를 \"느낌\"이 아니라 시간·비용 숫자로 본다",
@@ -6857,7 +6857,7 @@ export const lessons: Lesson[] = [
       "AI가 만든 PR을 머지 전에 점검하는 리뷰 루프를 만듭니다. AI에게 자기 코드를 1차 셀프 리뷰시키고, 사람이 봐야 할 지점을 체크리스트로 고정해, \"빠르게 짠 코드\"가 \"빠르게 사고 친 코드\"가 되지 않게 합니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["engineer", "founder", "practitioner"],
+    targetJourneys: ["engineer", "founder", "practitioner", "ai-native"],
     prerequisites: ["bug-reproduction-loop", "write-tests-with-coding-agent"],
     learningGoals: [
       "AI가 짠 코드의 리뷰가 사람 코드 리뷰와 무엇이 다른지 설명한다",
@@ -6947,7 +6947,7 @@ export const lessons: Lesson[] = [
       "코딩 에이전트의 hook으로 \"항상 거치는 자동 게이트\"를 만듭니다. 작업 전후에 lint·typecheck·테스트가 자동으로 돌게 걸어, 검증을 \"기억\"이 아니라 \"구조\"로 만듭니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["coding-agent-setup", "claude-md-four-principles"],
     learningGoals: [
       "검증을 \"사람이 기억하는 일\"에서 \"자동으로 걸리는 게이트\"로 바꾼다",
@@ -7037,7 +7037,7 @@ export const lessons: Lesson[] = [
       "하나의 에이전트로는 버거운 큰 작업을, 컨텍스트가 격리된 서브에이전트로 나눠 맡기는 법을 익힙니다. 무엇을 분리하고 무엇을 메인에 남길지, 서브에이전트에 무엇을 넘기고 무엇을 돌려받을지 설계합니다.",
     level: "advanced",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["coding-agent-setup", "plan-with-ai"],
     learningGoals: [
       "한 에이전트의 컨텍스트가 엉키는 신호를 알아챈다",
@@ -7127,7 +7127,7 @@ export const lessons: Lesson[] = [
       "AI 앱에 사용자 인증과 세션을 붙입니다. 로그인·세션 유지·사용자별 데이터 격리의 기본 구조를 익혀, \"누구나\"의 앱을 \"누가\"를 아는 앱으로 만듭니다.",
     level: "intermediate",
     estimatedMinutes: 55,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["connect-ai-api", "conversation-storage-design"],
     learningGoals: [
       "AI 앱에 인증이 필요해지는 시점을 설명한다",
@@ -7217,7 +7217,7 @@ export const lessons: Lesson[] = [
       "대화 저장을 넘어, AI가 사용자에 대한 사실을 장기 기억으로 쌓고 다음 대화에 활용하는 구조를 만듭니다. 무엇을 기억하고·요약하고·잊을지 정하는 메모리 설계를 익힙니다.",
     level: "advanced",
     estimatedMinutes: 55,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["conversation-storage-design", "auth-and-user-sessions"],
     learningGoals: [
       "대화 저장과 장기 기억의 차이를 설명한다",
@@ -7307,7 +7307,7 @@ export const lessons: Lesson[] = [
       "내 도구·데이터를 MCP(Model Context Protocol) 서버로 감싸, 여러 AI 클라이언트가 표준 방식으로 호출하게 만듭니다. Function Calling을 넘어 \"재사용 가능한 도구\"로 가는 단계입니다.",
     level: "advanced",
     estimatedMinutes: 60,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["function-calling", "tool-permission-safeguards"],
     learningGoals: [
       "Function Calling과 MCP의 차이를 \"앱 전용 vs 표준 플러그\"로 설명한다",
@@ -7397,7 +7397,7 @@ export const lessons: Lesson[] = [
       "운영 중인 AI 에이전트가 실패하는 전형적 패턴(루프 폭주·도구 오용·목표 표류·조용한 실패)을 정리하고, 각 패턴을 미리 잡는 guardrail을 자기 시스템에 매핑합니다.",
     level: "advanced",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["mini-agent-loop", "llm-observability-and-regression"],
     learningGoals: [
       "에이전트가 일반 코드와 다르게 실패하는 이유를 설명한다",
@@ -7487,7 +7487,7 @@ export const lessons: Lesson[] = [
       "Stage 6에서 만든 MCP 서버를 운영 단계로 끌어올립니다. 인증·버전 관리·에러 처리·관측을 붙여, 데모용 도구를 팀이 신뢰하고 쓰는 서비스로 만듭니다.",
     level: "advanced",
     estimatedMinutes: 50,
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     prerequisites: ["build-mcp-server", "llm-observability-and-regression"],
     learningGoals: [
       "MCP 서버를 만드는 것과 운영하는 것의 차이를 설명한다",
@@ -7577,7 +7577,7 @@ export const lessons: Lesson[] = [
       "내부 Eval만으로는 안 보이는 \"실제 사용자 만족도\"를 모으는 피드백 루프를 만듭니다. 인앱 피드백 장치·비즈니스 지표·주간 회고로, 운영 중인 AI 제품의 진짜 신호를 잡습니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["practitioner", "founder", "engineer"],
+    targetJourneys: ["practitioner", "founder", "engineer", "ai-native"],
     prerequisites: ["evals-for-ai-coded-prs", "ai-output-eval-for-pms"],
     learningGoals: [
       "내부 Eval과 사용자 피드백이 서로 못 보는 것을 설명한다",
@@ -7667,7 +7667,7 @@ export const lessons: Lesson[] = [
       "AI 제품을 런칭한 뒤 첫 사용자 5명을 실제로 모으는 법을 익힙니다. 어디서·어떻게·무엇을 말하며 찾을지 정하고, 그 5명에게서 진짜 피드백을 받는 계획을 만듭니다.",
     level: "beginner",
     estimatedMinutes: 45,
-    targetJourneys: ["founder", "creator", "practitioner", "native"],
+    targetJourneys: ["founder", "creator", "practitioner", "starter", "ai-native"],
     prerequisites: ["capstone-plan-and-launch", "ai-product-brief"],
     learningGoals: [
       "\"만들면 온다\"가 왜 거짓인지 설명한다",
@@ -7757,7 +7757,7 @@ export const lessons: Lesson[] = [
       "지금까지 쌓은 워크플로우·프롬프트·체크리스트를 재사용 가능한 Skill로 패키징하는 법을 익힙니다. SKILL.md 한 장으로 노하우를 자산화하고, 팀이나 커뮤니티에 공유합니다.",
     level: "intermediate",
     estimatedMinutes: 45,
-    targetJourneys: ["engineer", "founder", "creator", "practitioner"],
+    targetJourneys: ["engineer", "founder", "creator", "practitioner", "ai-native"],
     prerequisites: ["build-personal-prompt-library", "claude-md-four-principles"],
     learningGoals: [
       "한 번 쓰고 마는 워크플로우와 재사용 Skill의 차이를 설명한다",
@@ -7849,7 +7849,7 @@ export const lessons: Lesson[] = [
       "LLM의 본질을 한 줄로 — 다음 토큰을 확률로 예측하는 기계. 학습/추론 분리, 자신감 있는 거짓말이 왜 나오는지, 같은 질문에 매번 다른 답이 나오는 이유를 한 단락으로 정리합니다.",
     level: "beginner",
     estimatedMinutes: 25,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: [],
     learningGoals: [
       "LLM이 다음 토큰을 확률로 예측하는 기계라는 사실을 한 문장으로 설명한다",
@@ -7931,7 +7931,7 @@ export const lessons: Lesson[] = [
       "토큰은 (1) 모델의 입력 단위, (2) API 과금 단위, (3) 컨텍스트 길이 단위를 동시에 결정한다. tokenizer로 직접 세 보고, 모델별 가격을 비교하고, 자기 자주 쓰는 작업의 토큰·비용 표를 만든다.",
     level: "beginner",
     estimatedMinutes: 35,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["what-is-an-llm"],
     learningGoals: [
       "토큰이 단어가 아니라 단어 조각임을 안다",
@@ -8013,7 +8013,7 @@ export const lessons: Lesson[] = [
       "AI 서비스는 두 축으로 갈린다 — (1) 자체 모델 vs API 통합, (2) 구독제 vs API. 각 사례와 차이를 정리하고, 자기 주간 작업을 \"구독으로 충분 / API가 필요\"로 분류하는 service-rule을 만든다.",
     level: "beginner",
     estimatedMinutes: 30,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["tokens-context-and-cost"],
     learningGoals: [
       "자체 모델 서비스(ChatGPT/Claude/Gemini)와 API 통합 서비스(Cursor/Perplexity/Lindy)의 차이를 안다",
@@ -8094,7 +8094,7 @@ export const lessons: Lesson[] = [
       "Projects·GPTs·Gems, Memory, CLI/Desktop, Artifacts/Canvas, Custom Instructions, MCP/Actions — 챗봇 6개 공통 기능을 정리한다. 자기 챗봇에서 위치를 찾고, Project 하나를 만들어 Custom Instructions까지 등록한다.",
     level: "beginner",
     estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["ai-service-landscape"],
     learningGoals: [
       "Projects·GPTs·Gems의 공통점과 차이를 안다",
@@ -8186,7 +8186,7 @@ export const lessons: Lesson[] = [
       "Git의 본질을 '폴더의 시간 기록'으로 잡고, 핵심 용어 7개(Repository·Working tree·Staging·Repository·Commit·Branch·Merge·Remote·HEAD)와 첫 commit·branch·merge를 직접 한다. 명령어 외우기가 아니라 개념을 잡는 데 집중.",
     level: "beginner",
     estimatedMinutes: 50,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["terminal-first-day"],
     learningGoals: [
       "Git이 '폴더의 시간 기록 도구'임을 이해한다",
@@ -8284,7 +8284,7 @@ export const lessons: Lesson[] = [
       "Git과 GitHub의 차이를 잡고, 핵심 7개(Repository·Push/Pull/Clone·Issue·PR·README·GitHub Pages·.gitignore)를 직접 사용한다. 첫 public repo + .gitignore + Issue + 셀프 PR까지. AI 코딩 에이전트가 Issue·PR과 직접 일하는 시대의 진입점.",
     level: "beginner",
     estimatedMinutes: 50,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "native"],
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["git-basics-and-terminology"],
     learningGoals: [
       "Git ≠ GitHub를 이해한다 (도구 vs 호스팅 서비스)",

@@ -8,11 +8,12 @@ const config: Config = {
   ],
   safelist: [
     // 동적으로 생성되는 페르소나 색 클래스 — 정적 분석에 안 잡히므로 명시.
-    "p-native",
+    "p-starter",
     "p-practitioner",
     "p-creator",
     "p-founder",
     "p-engineer",
+    "p-ai-native",
     "p-text",
     "p-mark",
     "p-bar",

@@ -1,28 +1,33 @@
 import type { Journey } from "@/lib/types";
 
 /**
- * 5개의 출발 여정.
+ * 6개의 출발 여정.
  *
  * 학교의 약속 — "출발점이 어디든, 빌더가 됩니다."
  *
- * 2026-05-23 — 6 → 5 정비
- *   - Adopter는 Practitioner의 "팀 확장 모드"로 흡수 (학습 경로가 동일)
- *   - Explorer는 "처음부터 AI를 모국어로 빌더가 되는" 정체성 Native로 대체
+ * 구조 — 입문 → 특화 4갈래 → 마스터
+ *   1. Starter      (입문)        — 처음 들어서서 첫 산출물을 손에 쥠
+ *   2. Practitioner (특화: 직장)   — 일과 조직에 AI를 붙임
+ *   3. Creator      (특화: 콘텐츠) — 표현과 발행 빈도 증폭
+ *   4. Founder      (특화: 사업)   — AI 코어 제품을 시장에 내놓음
+ *   5. Engineer     (특화: 시스템) — RAG·Agents·Evals 깊은 시스템 구축
+ *   6. AI Native    (마스터)      — 전 영역 마스터 + 다음 세대 빌더 양성
  *
- * Native 는 위치 없음(입문)의 자리, 나머지 4개(Practitioner / Creator / Founder / Engineer)
- * 는 이미 어느 위치를 가진 사람의 자리. 5개의 색이 합쳐지면 brand 무지개 conic 마크가 됩니다.
+ * 2026-05-24 — "Native"의 의미 정리. 옛 Native(입문)는 Starter로 명확화하고,
+ * "AI 모국어 수준"의 마스터 정체성을 AI Native로 신설. Starter(새싹) ↔ AI Native(큰 나무)
+ * 가 시각으로 호응하며 학교의 약속을 완결.
  */
 export const journeys: Journey[] = [
   {
-    id: "native",
-    slug: "native",
-    title: "Native",
-    titleKo: "네이티브",
-    identity: "AI를 모국어로 처음 빌더가 되는 사람",
+    id: "starter",
+    slug: "starter",
+    title: "Starter",
+    titleKo: "스타터",
+    identity: "AI 빌더 여정에 처음 들어서는 사람",
     targetLearner:
       "코딩·콘텐츠·사업 — 어디서든 빌더에 처음 입문하는 사람. 비전공·career changer·학생·은퇴자·취미 빌더. 기존 워크플로우가 없고, 처음부터 AI를 도구로 익히는 사람.",
     promise:
-      "선행 학습 없이, AI를 모국어 삼아 첫 산출물을 손에 쥡니다.",
+      "선행 학습 없이, 첫 산출물을 손에 쥐는 빌더가 됩니다.",
     recommendedStages: [
       "stage-1-meet",
       "stage-2-ask-and-refine",
@@ -45,7 +50,7 @@ export const journeys: Journey[] = [
       "일상 자동화 1개 — 매일 반복하던 작업을 AI 파이프라인으로",
     ],
     expectedOutcome:
-      "AI를 모국어로 만든 첫 산출물 1개 + 다음 여정(Practitioner/Creator/Founder/Engineer) 중 자기 자리를 발견.",
+      "AI 빌더로서의 첫 산출물 1개 + 다음 여정(Practitioner/Creator/Founder/Engineer/AI Native) 중 자기 자리를 발견.",
   },
   {
     id: "practitioner",
@@ -54,9 +59,9 @@ export const journeys: Journey[] = [
     titleKo: "실무자",
     identity: "일과 조직에 AI를 붙이는 사람",
     targetLearner:
-      "보고서·이메일·회의록·리서치를 매일 다루는 직장인. 자기 일에 AI를 깔아 시간을 되찾고, 그 결과를 팀·조직으로 확장하는 사람. (옛 Adopter의 정책·평가 영역도 여기 포함)",
+      "보고서·이메일·회의록·리서치를 매일 다루는 직장인. 자기 일에 AI를 깔아 시간을 되찾고, 그 결과를 팀·조직으로 확장하는 사람.",
     promise:
-      "내 업무를 AI로 운영하고, 그 결과를 팀에 안전하게 확산합니다.",
+      "직장의 반복은 AI에 맡기고, 사람의 결정에 시간을 씁니다.",
     recommendedStages: [
       "stage-1-meet",
       "stage-2-ask-and-refine",
@@ -180,5 +185,47 @@ export const journeys: Journey[] = [
     ],
     expectedOutcome:
       "검증·보안·배포가 모두 포함된 심화 캡스톤 + 회고 문서.",
+  },
+  {
+    id: "ai-native",
+    slug: "ai-native",
+    title: "AI Native",
+    titleKo: "AI 네이티브",
+    identity: "AI 빌더 생태계 전체를 모국어처럼 다루는 마스터 빌더",
+    targetLearner:
+      "한 특화 여정을 끝낸 사람, 또는 처음부터 풀 마스터를 목표로 하는 사람. 풀타임 빌더·AI 교육자·컨설턴트·다음 세대 빌더를 키우는 사람.",
+    promise:
+      "AI 빌더 생태계 전 영역을 자유롭게 다루고, 그 노하우를 다음 세대에게 전합니다.",
+    recommendedStages: [
+      "stage-1-meet",
+      "stage-2-ask-and-refine",
+      "stage-3-collaborate",
+      "stage-4-coding-agent",
+      "stage-5-build-systems",
+      "stage-6-operate-and-share",
+    ],
+    recommendedLessons: [
+      "ai-concept-learning-framework",
+      "claude-md-four-principles",
+      "harness-engineering-roadmap",
+      "subagent-context-design",
+      "agent-hooks-automation",
+      "build-mcp-server",
+      "mcp-production-patterns",
+      "claude-skills-authoring",
+      "ralph-loop-codex-goal",
+      "evals-for-ai-coded-prs",
+      "llm-observability-and-regression",
+      "responsible-ai-policy-template",
+      "claude-code-token-saving",
+      "portfolio-and-retrospective",
+    ],
+    capstoneIdeas: [
+      "자기 도메인의 풀 AI 시스템 (운영·평가·문서화·런칭 포함) 1개",
+      "재사용 Skill 패키지 + 워크숍·강의 자료 1세트 — 빌더 자산화",
+      "다음 세대 빌더 5명 멘토링 — 학습 회고와 커리큘럼 회고",
+    ],
+    expectedOutcome:
+      "어떤 AI 문제든 모국어처럼 풀어내는 마스터 빌더 + 자기 노하우를 가르침·자산으로 환원해 다음 세대 빌더를 만드는 학생-교육자.",
   },
 ];

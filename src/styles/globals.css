@@ -26,8 +26,8 @@
 
   /* ===== Persona color themes ===== */
   /* 6개의 페르소나 색이 합쳐지면 brand 무지개 conic 마크가 됩니다. */
-  --persona-native-from:       oklch(72% 0.18 140);
-  --persona-native-to:         oklch(48% 0.16 150);
+  --persona-starter-from:      oklch(72% 0.18 140);
+  --persona-starter-to:        oklch(48% 0.16 150);
   --persona-practitioner-from: oklch(82% 0.10 230);
   --persona-practitioner-to:   oklch(58% 0.18 250);
   --persona-creator-from:      oklch(78% 0.16 20);
@@ -36,6 +36,8 @@
   --persona-founder-to:        oklch(70% 0.18 55);
   --persona-engineer-from:     oklch(75% 0.12 195);
   --persona-engineer-to:       oklch(45% 0.06 230);
+  --persona-ai-native-from:    oklch(72% 0.18 290);
+  --persona-ai-native-to:      oklch(45% 0.20 305);
 }
 
 /* ===== 다크(야간) 모드 — 따뜻한 톤의 어두운 종이 ===== */
@@ -150,11 +152,12 @@ body {
    * --p-from / --p-to / --p-mid 변수를 통해 페르소나 색을 사용합니다.
    * 자식: .p-mark (작은 원), .p-bar (좌측 4px 라인), .p-text (그라디언트 글자), .p-tint (10% 배경)
    */
-  .p-native       { --p-from: var(--persona-native-from);       --p-to: var(--persona-native-to); }
+  .p-starter      { --p-from: var(--persona-starter-from);      --p-to: var(--persona-starter-to); }
   .p-practitioner { --p-from: var(--persona-practitioner-from); --p-to: var(--persona-practitioner-to); }
   .p-creator      { --p-from: var(--persona-creator-from);      --p-to: var(--persona-creator-to); }
   .p-founder      { --p-from: var(--persona-founder-from);      --p-to: var(--persona-founder-to); }
   .p-engineer     { --p-from: var(--persona-engineer-from);     --p-to: var(--persona-engineer-to); }
+  .p-ai-native    { --p-from: var(--persona-ai-native-from);    --p-to: var(--persona-ai-native-to); }
 
   .p-mark {
     width: 18px; height: 18px; border-radius: 50%;
@@ -830,13 +833,14 @@ body {
 
   /* 여정 필터 활성 시 — 해당 여정에 속하지 않는 레슨 행을 흐리게 */
   body[data-active-journey] .lessons-list li { transition: opacity .25s var(--ease); }
-  body[data-active-journey="native"]       .lessons-list li:not([data-journeys~="native"])       { opacity: 0.22; }
+  body[data-active-journey="starter"]      .lessons-list li:not([data-journeys~="starter"])      { opacity: 0.22; }
   body[data-active-journey="practitioner"] .lessons-list li:not([data-journeys~="practitioner"]) { opacity: 0.22; }
   body[data-active-journey="creator"]      .lessons-list li:not([data-journeys~="creator"])      { opacity: 0.22; }
   body[data-active-journey="founder"]      .lessons-list li:not([data-journeys~="founder"])      { opacity: 0.22; }
   body[data-active-journey="engineer"]     .lessons-list li:not([data-journeys~="engineer"])     { opacity: 0.22; }
+  body[data-active-journey="ai-native"]    .lessons-list li:not([data-journeys~="ai-native"])    { opacity: 0.22; }
 
-  /* 여정 점 — 5개 페르소나 도트로 이 레슨이 어느 여정에 속하는지 표시 */
+  /* 여정 점 — 6개 페르소나 도트로 이 레슨이 어느 여정에 속하는지 표시 */
   .l-journeys { display: inline-flex; gap: 5px; align-items: center; }
   .l-journey-dot {
     width: 8px; height: 8px; border-radius: 50%;

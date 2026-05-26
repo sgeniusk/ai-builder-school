@@ -10,11 +10,12 @@ import { JourneySelectButton } from "./JourneySelectButton";
 
 // 여정별 먼 능선 봉우리 높이 프로필 (0~1) — 여정마다 다른 스카이라인을 만든다.
 const JOURNEY_PEAKS: Record<string, number[]> = {
-  native: [0.3, 0.42, 0.36, 0.52, 0.46, 0.58, 0.5], // 부드럽게 자라는 새 능선
+  starter: [0.3, 0.42, 0.36, 0.52, 0.46, 0.58, 0.5], // 부드럽게 자라는 새 능선
   practitioner: [0.44, 0.62, 0.48, 0.7, 0.5, 0.64, 0.46], // 꾸준한 능선
   creator: [0.55, 0.88, 0.4, 0.96, 0.46, 0.82, 0.58], // 극적인 변주
   founder: [0.34, 0.5, 0.72, 1.0, 0.6, 0.42, 0.3], // 하나의 정상
   engineer: [0.62, 0.8, 0.66, 0.92, 0.7, 0.86, 0.6], // 날카롭고 높게
+  "ai-native": [0.78, 0.9, 0.84, 0.96, 0.88, 0.94, 0.82], // 마스터의 고원 — 모두 정상에 가깝게
 };
 const NEAR_PEAKS = [0.52, 0.34, 0.6, 0.4, 0.56, 0.36, 0.5];
 const DEFAULT_PEAKS = JOURNEY_PEAKS.practitioner as number[];

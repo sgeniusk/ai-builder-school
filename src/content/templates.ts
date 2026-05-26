@@ -57,7 +57,7 @@ export const templates: ContentTemplate[] = [
     slug: "output-format-prompt",
     title: "출력 형식 강제 프롬프트",
     kind: "prompt",
-    targetJourneys: ["practitioner", "founder", "engineer"],
+    targetJourneys: ["practitioner", "founder", "engineer", "ai-native"],
     summary: "AI 답을 정해진 구조(표·JSON·스키마)로만 받게 강제하는 프롬프트.",
     body: `# 작업
 <처리할 입력과 원하는 결과>
@@ -146,7 +146,7 @@ export const templates: ContentTemplate[] = [
     slug: "long-doc-summary-prompt",
     title: "긴 문서 요약 프롬프트",
     kind: "prompt",
-    targetJourneys: ["practitioner", "creator", "native"],
+    targetJourneys: ["practitioner", "creator", "starter", "ai-native"],
     summary: "긴 문서를 목적에 맞춰 행동 항목까지 뽑아내는 요약 프롬프트.",
     body: `# 문서
 <여기에 문서를 붙여넣거나 첨부>
@@ -166,7 +166,7 @@ export const templates: ContentTemplate[] = [
     slug: "compare-options-prompt",
     title: "옵션 비교 프롬프트",
     kind: "prompt",
-    targetJourneys: ["practitioner", "founder", "engineer"],
+    targetJourneys: ["practitioner", "founder", "engineer", "ai-native"],
     summary: "두세 선택지를 같은 기준으로 표 비교하고 추천까지 받는 프롬프트.",
     body: `# 결정할 것
 <무엇을 고르는가>
@@ -189,7 +189,7 @@ export const templates: ContentTemplate[] = [
     slug: "meeting-notes-prompt",
     title: "회의록 정리 프롬프트",
     kind: "prompt",
-    targetJourneys: ["practitioner", "native"],
+    targetJourneys: ["practitioner", "starter", "ai-native"],
     summary: "녹취·메모를 결정·할 일 중심 회의록으로 구조화하는 프롬프트.",
     body: `# 입력
 <회의 녹취 또는 메모>
@@ -238,7 +238,7 @@ export const templates: ContentTemplate[] = [
     slug: "codex-mission-template",
     title: "Codex 미션 템플릿",
     kind: "mission",
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     summary: "Codex에게 주는 실행 가능한 작업지시서.",
     body: `# Goal
 무엇을 완료해야 하는가.
@@ -265,7 +265,7 @@ export const templates: ContentTemplate[] = [
     slug: "claude-code-mission-template",
     title: "Claude Code 미션 템플릿",
     kind: "mission",
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     summary: "Claude Code에게 주는 계획→구현→검증 미션 프롬프트.",
     body: `# Claude Code Mission
 - Target: <작업 이름>
@@ -286,7 +286,7 @@ export const templates: ContentTemplate[] = [
     slug: "github-issue-brief-mission",
     title: "이슈 → AI 브리프 미션",
     kind: "mission",
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     summary: "거친 GitHub 이슈를 코딩 에이전트가 실행 가능한 브리프로 바꾸는 미션.",
     body: `# 입력 — 원본 이슈
 <이슈 제목 + 본문 붙여넣기>
@@ -307,7 +307,7 @@ export const templates: ContentTemplate[] = [
     slug: "bug-fix-mission",
     title: "버그 수정 미션",
     kind: "mission",
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     summary: "버그를 재현→원인→최소 수정→검증 순으로 처리하는 미션.",
     body: `# 버그
 - 증상: <무엇이 잘못되나>
@@ -329,7 +329,7 @@ export const templates: ContentTemplate[] = [
     slug: "test-writing-mission",
     title: "테스트 작성 미션",
     kind: "mission",
-    targetJourneys: ["engineer"],
+    targetJourneys: ["engineer", "ai-native"],
     summary: "코딩 에이전트에게 의미 있는 테스트를 작성시키는 미션.",
     body: `# 대상
 <테스트할 함수/모듈/기능>
@@ -351,7 +351,7 @@ export const templates: ContentTemplate[] = [
     slug: "pr-review-mission",
     title: "PR 리뷰 미션",
     kind: "mission",
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     summary: "AI가 만든(또는 받은) PR을 체계적으로 리뷰하게 하는 미션.",
     body: `# 입력
 <PR diff 또는 변경 파일 목록>
@@ -375,7 +375,7 @@ export const templates: ContentTemplate[] = [
     slug: "rag-checklist",
     title: "RAG 품질 체크리스트",
     kind: "checklist",
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     summary: "RAG 앱이 배포 가능한지 검사하는 기본 체크리스트.",
     body: `- [ ] 모든 답에 최소 1개 출처가 표시됨
 - [ ] 출처가 실제 청크와 일치
@@ -391,7 +391,7 @@ export const templates: ContentTemplate[] = [
     slug: "agent-checklist",
     title: "에이전트 안전 체크리스트",
     kind: "checklist",
-    targetJourneys: ["engineer", "founder"],
+    targetJourneys: ["engineer", "founder", "ai-native"],
     summary: "도구 사용 에이전트를 배포 전에 확인할 항목.",
     body: `- [ ] 도구별 권한이 allow/deny 리스트로 명시됨
 - [ ] 위험 동작 앞에 사람 확인 단계가 있음
@@ -407,7 +407,7 @@ export const templates: ContentTemplate[] = [
     slug: "ai-service-security-checklist",
     title: "AI 서비스 보안 체크리스트",
     kind: "checklist",
-    targetJourneys: ["engineer", "practitioner", "founder"],
+    targetJourneys: ["engineer", "practitioner", "founder", "ai-native"],
     summary: "AI 제품을 공개하기 전 기본적인 보안·프라이버시 점검.",
     body: `- [ ] 키/시크릿이 서버에만 존재
 - [ ] 사용자 입력 PII 마스킹 정책
@@ -470,7 +470,7 @@ export const templates: ContentTemplate[] = [
     slug: "launch-readiness-checklist",
     title: "AI 앱 런칭 전 체크리스트",
     kind: "checklist",
-    targetJourneys: ["founder", "engineer"],
+    targetJourneys: ["founder", "engineer", "ai-native"],
     summary: "AI 제품을 공개 URL로 내놓기 전 마지막 점검.",
     body: `- [ ] 핵심 사용자 흐름 1개가 끝까지 동작한다
 - [ ] API 키·시크릿이 클라이언트에 노출되지 않는다
@@ -487,7 +487,7 @@ export const templates: ContentTemplate[] = [
     slug: "ai-cost-checklist",
     title: "AI 비용 점검 체크리스트",
     kind: "checklist",
-    targetJourneys: ["founder", "engineer", "practitioner"],
+    targetJourneys: ["founder", "engineer", "practitioner", "ai-native"],
     summary: "AI 기능의 비용이 새지 않는지 매주 5분에 점검.",
     body: `- [ ] 이번 주 토큰 사용량·비용을 확인했다
 - [ ] 가장 비싼 호출 경로가 무엇인지 안다
