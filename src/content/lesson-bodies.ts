@@ -86,6 +86,7 @@ import AiToolAccountAndCostBody from "./lessons/ai-tool-account-and-cost.mdx";
 import PrivacyAndAcademicEthicsBody from "./lessons/privacy-and-academic-ethics.mdx";
 
 // Stage 1 — AI 원리 & 도구 (v2.0 신규)
+import AiStrengthSelfCheckBody from "./lessons/ai-strength-self-check.mdx";
 import WhatIsAnLlmBody from "./lessons/what-is-an-llm.mdx";
 import TokensContextAndCostBody from "./lessons/tokens-context-and-cost.mdx";
 import AiServiceLandscapeBody from "./lessons/ai-service-landscape.mdx";
@@ -225,6 +226,7 @@ export const lessonBodies: Record<string, MdxBody | undefined> = {
   "early-user-recruitment-for-ai-products": EarlyUserRecruitmentForAiProductsBody,
   "claude-skills-authoring": ClaudeSkillsAuthoringBody,
   // Stage 1 — AI 원리 & 도구 (v2.0 신규)
+  "ai-strength-self-check": AiStrengthSelfCheckBody,
   "what-is-an-llm": WhatIsAnLlmBody,
   "tokens-context-and-cost": TokensContextAndCostBody,
   "ai-service-landscape": AiServiceLandscapeBody,

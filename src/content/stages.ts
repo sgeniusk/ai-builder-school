@@ -17,7 +17,7 @@ export const stages: Stage[] = [
     longDescription:
       "AI Builder가 되는 사다리의 첫 칸. 13개의 가벼운 레슨이 셋으로 묶여 들어옵니다. **1A 원리(5)** — LLM이 뭔지, 토큰은 뭐고 비용은 왜 그렇게 매겨지는지. AI의 강함과 약함이 어디서 오는지 그 뿌리를 짚는다. **1B 도구·환경(6)** — 매일 쓸 AI 도구 하나, 첫 git 저장소, 비용 안 새도록 한 잠금장치까지 손에 잡히는 환경. **1C 판단(2)** — 무엇을 AI에 맡기고 무엇은 직접 결정할지. 끝나는 시점에 매일 쓰는 AI 도구 1개, 첫 git repo, 그리고 **\"AI 강약 판단지 v1\"** 한 장이 손에 남는다. Stage 2에서 본격적으로 다듬을 판단의 첫 윤곽.",
     level: "beginner",
-    estimatedHours: 13,
+    estimatedHours: 14,
     targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     outcomes: [
       "LLM이 다음 토큰을 예측하는 기계임을 알고, 잘하는 일/못하는 일의 윤곽을 잡는다",
@@ -38,7 +38,8 @@ export const stages: Stage[] = [
       "사람-AI 협업 마인드셋",
     ],
     lessonSlugs: [
-      // 1a 원리
+      // 1a 출발점 + 원리
+      "ai-strength-self-check",
       "what-is-an-llm",
       "tokens-context-and-cost",
       "ai-service-landscape",
@@ -58,10 +59,11 @@ export const stages: Stage[] = [
     subGroups: [
       {
         id: "1a",
-        label: "AI를 이해하다",
-        shortDescription: "LLM·토큰·맥락·비용·서비스 지형·챗봇 기본 기능 — 터미널을 켜기 전에 AI 자체를 안다.",
-        deliverable: "자기 말로 LLM 한 단락",
+        label: "출발점과 원리",
+        shortDescription: "오늘의 자가진단으로 본인 위치를 잡고, LLM·토큰·맥락·비용·서비스 지형·챗봇 기본 기능까지 — AI 자체를 안다.",
+        deliverable: "AI 강약 판단지 v1 시작점 + 자기 말로 LLM 한 단락",
         lessonSlugs: [
+          "ai-strength-self-check",
           "what-is-an-llm",
           "tokens-context-and-cost",
           "ai-service-landscape",

@@ -7842,7 +7842,7 @@ export const lessons: Lesson[] = [
   {
     id: "lesson-108",
     slug: "what-is-an-llm",
-    titleKo: "LLM은 무엇을 하는 기계인가",
+    titleKo: "LLM은 다음 토큰을 예측하는 기계다",
     titleEn: "What an LLM actually does",
     hook: "ChatGPT 창을 열고 '왜 잘 못해?'부터 묻기 전에, 그게 뭘 하는 기계인지 한 문장으로 잡아두면 짜증의 절반이 사라집니다.",
     summary:
@@ -7924,7 +7924,7 @@ export const lessons: Lesson[] = [
   {
     id: "lesson-109",
     slug: "tokens-context-and-cost",
-    titleKo: "토큰·컨텍스트·비용 — 한 단어가 쓰는 세 모자",
+    titleKo: "토큰이 비용·컨텍스트·맥락을 한꺼번에 결정한다",
     titleEn: "Tokens, context, and cost — one unit wears three hats",
     hook: "왜 같은 문장이 다른 비용으로 청구되나? 왜 긴 문서가 잘리나? '토큰'이라는 한 단어가 사실 세 가지 모자를 동시에 쓰기 때문입니다.",
     summary:
@@ -8006,7 +8006,7 @@ export const lessons: Lesson[] = [
   {
     id: "lesson-110",
     slug: "ai-service-landscape",
-    titleKo: "AI 서비스 지도 — 자체모델 vs 통합, 구독 vs API",
+    titleKo: "AI 서비스는 자체 모델과 API 통합으로 갈린다",
     titleEn: "AI service landscape — own model vs aggregator, subscription vs API",
     hook: "ChatGPT·Claude·Gemini가 같아 보이는데, Cursor·Perplexity는 또 뭐고, 결제는 매번 따로 해야 하나? 두 축의 지도가 손에 있으면 매월 $80을 흩뿌리지 않습니다.",
     summary:
@@ -8087,7 +8087,7 @@ export const lessons: Lesson[] = [
   {
     id: "lesson-111",
     slug: "ai-chat-features-basics",
-    titleKo: "챗봇 공통 기능 — Projects · Memory · CLI · Artifacts",
+    titleKo: "Projects·Memory·CLI·Artifacts — 챗봇 공통 6기능이 매일 도구를 결정한다",
     titleEn: "Chatbot common features — Projects, Memory, CLI, Artifacts",
     hook: "Claude의 Projects, ChatGPT의 GPTs, Gemini의 Gems — 다 같은 거야 다른 거야? 6개 공통 기능의 이름을 한 번 정리해두면 어디로 옮겨가도 5분 안에 적응합니다.",
     summary:
@@ -8179,7 +8179,7 @@ export const lessons: Lesson[] = [
   {
     id: "lesson-112",
     slug: "git-basics-and-terminology",
-    titleKo: "Git 기본과 용어 — 버전 관리는 AI 빌더의 안전망",
+    titleKo: "Git은 AI 시대의 안전망이다",
     titleEn: "Git basics and terminology — version control as AI builder's safety net",
     hook: "AI에게 코드 100줄 바꾸라 시켰는데 한 줄이 깨졌어요. 어디서부터 잘못된 건지 모르고, 어제 상태로 돌아갈 방법도 모릅니다. git 없이는 AI 시대를 못 삽니다.",
     summary:
@@ -8277,7 +8277,7 @@ export const lessons: Lesson[] = [
   {
     id: "lesson-113",
     slug: "github-essentials",
-    titleKo: "GitHub 본질 — git 위에 얹는 협업·공유 인프라",
+    titleKo: "GitHub는 빌더의 포트폴리오이자 협업의 공통어다",
     titleEn: "GitHub essentials — collaboration and sharing infrastructure on top of git",
     hook: "내 AI 프로젝트를 백업하고, 동료와 공유하고, 캡스톤 포트폴리오로 보여주고 싶다. 그 모든 게 한 도구로 — GitHub.",
     summary:
@@ -8371,6 +8371,92 @@ export const lessons: Lesson[] = [
         filename: "github.com/<username>/my-ai-builder-lab",
         title: "내 첫 public repo",
         kind: "note",
+      },
+    ],
+  },
+  {
+    id: "lesson-114",
+    slug: "ai-strength-self-check",
+    titleKo: "5주 뒤 비교할 오늘의 AI 강약 자가진단",
+    titleEn: "Today's AI Self-diagnosis — Compare in 5 Weeks",
+    hook: "5주 뒤 당신은 분명 달라져 있어요. 그런데 얼마나 달라졌는지 보려면, 출발점이 기록돼 있어야 합니다.",
+    summary:
+      "Stage 1의 13 레슨에 들어가기 전, 6 항목 자가진단으로 본인 위치를 한 페이지에 잡습니다. 이 진단지가 곧 Stage 1의 통합 산출물 \"AI 강약 판단지 v1\"의 시작점입니다.",
+    level: "beginner",
+    estimatedMinutes: 10,
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
+    prerequisites: [],
+    learningGoals: [
+      "본인의 현재 AI 사용·도구·판단 수준을 6 항목으로 자가진단한다",
+      "점수로부터 가까운 여정(Starter ~ AI Native)을 추정한다",
+      "Stage 1의 13 레슨 중 어디부터 깊이 봐야 할지 본인이 정한다",
+      "5주 뒤 같은 표를 다시 채우기로 약속해 변화를 측정 가능하게 만든다",
+    ],
+    problemScenario:
+      "강의를 들으려고 자리에 앉았는데, 내가 어디서부터 시작해야 할지 모르겠어요. 13개 레슨 다 봐야 하나요, 골라 봐야 하나요. 그리고 5주가 지난 뒤 내가 정말 달라졌는지를 어떻게 알 수 있을까요. 답은 출발점 기록 한 장입니다. 점수가 아니라 위치 지도예요.",
+    coreConcepts: [
+      {
+        term: "자가진단 (Self-diagnosis)",
+        explanation:
+          "외부 시험이 아니라 본인이 본인 행동·도구·판단을 점검하는 방식. 정답이 없으므로 솔직한 ❌가 깔끔한 ✅보다 가치 있다. 약점이 또렷해야 학습 방향이 잡힌다.",
+      },
+      {
+        term: "위치 지도 vs 점수",
+        explanation:
+          "점수 자체는 의미가 약하다. 본인이 '어디부터 깊이 봐야 할지'의 힌트로 쓰는 위치 지도가 핵심. 6 여정과의 매핑도 같은 맥락 — 정체성 강요가 아니라 학습 강도 추천.",
+      },
+      {
+        term: "시간 축 메타 (Time-axis meta)",
+        explanation:
+          "오늘 답과 5주 뒤 답을 같은 표로 비교하는 장치. 학습이 추상적이지 않게 되고, 본인이 본인 변화를 데이터로 본다. \"AI 강약 판단지 v1\"의 시작점.",
+      },
+      {
+        term: "통합 산출물 (Stage Deliverable)",
+        explanation:
+          "Stage 1 13 레슨이 모이는 한 파일 — `my-ai-judgment-v1.md`. 자가진단으로 시작해 1C 판단 sub-group에서 \"맡길 일 / 직접 할 일\" 기준이 추가된다. Stage 1 끝나는 시점에 본인 업무용 위임 체크리스트 한 장.",
+      },
+    ],
+    mission:
+      "10분 안에 끝납니다. 산출물 = `my-ai-judgment-v1.md` 한 파일.\n\n**작업 1 — GitHub repo 준비 (2분):** `my-ai-builder-lab` 같은 학습용 폴더 한 개. 이미 있으면 그대로 사용.\n\n**작업 2 — 6 항목 표 채우기 (5분):** `my-ai-judgment-v1.md` 만들고 본문 표의 6 항목에 ✅ / △ / ❌ 표시. 자신 없는 항목엔 한 줄 메모.\n\n**작업 3 — 점수 합산 + 가까운 여정 (1분):** ✅=1, △=0.5, ❌=0 합산. 0~1.5 Starter / 2~3 Practitioner·Creator / 3.5~4.5 Founder·Engineer / 5~6 AI Native. \"오늘의 위치: ___점 / ___ 여정에 가깝다\" 적기.\n\n**작업 4 — 목표 한 문장 + 5주 후 날짜 (2분):** \"Stage 1이 끝났을 때 (___)을 할 수 있게 되고 싶다\" 한 문장 + 오늘 + 5주 = ___ 날짜 적기. commit해서 GitHub에 올리기.",
+    codexNote:
+      "이 진단지는 Stage 1의 통합 산출물 \"AI 강약 판단지 v1\"의 시작점이다. 1C(함께 일하는 판단)에서 동일 파일에 \"맡길 일 / 직접 할 일\" 기준이 추가된다. Stage 1 끝나는 시점에 본인 업무용 위임 체크리스트 v1이 된다.",
+    buildSteps: [
+      "GitHub 학습용 repo 준비",
+      "`my-ai-judgment-v1.md` 생성",
+      "6 항목 표에 ✅/△/❌ 표시",
+      "점수 합산 + 가까운 여정 표시",
+      "목표 한 문장 + 5주 후 날짜 적기",
+      "commit + push",
+    ],
+    verificationChecklist: [
+      "6 항목 표가 모두 채워졌는가",
+      "점수가 합산되고 가까운 여정이 표시됐는가",
+      "목표 한 문장이 25자 이상 구체적인가",
+      "5주 후 약속 날짜가 명시됐는가",
+      "GitHub에 commit·push됐는가",
+    ],
+    deliverable: {
+      title: "my-ai-judgment-v1.md",
+      description: "Stage 1의 통합 산출물 \"AI 강약 판단지 v1\"의 시작점. 6 항목 자가진단 + 점수 + 가까운 여정 + 목표 + 5주 후 비교 약속.",
+      format: "Markdown 파일 (GitHub commit)",
+    },
+    reflectionQuestions: [
+      "여섯 항목 중 가장 낮은 점수가 나온 항목은 무엇이고, 왜라고 생각하나요?",
+      "오늘 본인이 추정한 여정과 본인이 가고 싶은 여정이 같은가요? 다르다면 그 차이가 학습의 방향을 어떻게 잡아주나요?",
+      "5주 뒤 가장 바뀌어 있었으면 하는 항목 하나는 무엇인가요?",
+    ],
+    extensionIdeas: [
+      "팀원 또는 동료와 같은 표를 채워 비교 — 공유된 출발점이 학습 효율을 높입니다",
+      "본인 진단을 public repo로 올려 동료가 보게 — 자기 진단의 계기가 됩니다 (선택)",
+      "5주 뒤뿐 아니라 매주 1번 한 줄 변화 메모를 같은 파일에 추가",
+    ],
+    tags: ["foundation", "self-diagnosis", "stage-deliverable", "starting-point"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "my-ai-judgment-v1.md",
+        title: "AI 강약 판단지 v1 — 시작점",
+        kind: "checklist",
       },
     ],
   },
