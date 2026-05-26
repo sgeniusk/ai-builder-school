@@ -138,6 +138,12 @@ export interface Stage {
   weekInMvpPath?: number | null;
   introEssaySlug?: string; // 도입부 에세이 (D-content-scaffold에서 채움)
   outroEssaySlug?: string; // 마무리 에세이
+  /**
+   * 이 Stage의 통합 산출물에 해당하는 template slug.
+   * 있으면 Stage 페이지 hero에 "📋 통합 산출물 → 양식 보기" 칩이 노출되고,
+   * intro/outro에서 마크다운 링크로 함께 참조한다.
+   */
+  deliverableTemplateSlug?: string;
 }
 
 export interface CoreConcept {

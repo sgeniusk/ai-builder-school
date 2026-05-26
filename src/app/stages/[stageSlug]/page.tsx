@@ -8,6 +8,7 @@ import {
   getStages,
   getStageBySlug,
   getLessonsByStageId,
+  getTemplateBySlug,
 } from "@/lib/content";
 import { getStageBody } from "@/content/stage-bodies";
 import { LEVEL_LABEL, JOURNEY_LABEL } from "@/lib/types";
@@ -101,6 +102,11 @@ export default async function StageDetailPage({
   const IntroEssay = getStageBody(stage.introEssaySlug);
   const OutroEssay = getStageBody(stage.outroEssaySlug);
 
+  // Layer 3 — Stage 통합 산출물 template 칩. deliverableTemplateSlug가 있을 때만 렌더.
+  const deliverableTemplate = stage.deliverableTemplateSlug
+    ? getTemplateBySlug(stage.deliverableTemplateSlug)
+    : null;
+
   return (
     <>
       <section className="page-head">
@@ -145,6 +151,36 @@ export default async function StageDetailPage({
               <div className="val">{stage.estimatedHours}</div>
             </div>
           </div>
+
+          {deliverableTemplate && (
+            <Link
+              href={`/templates#${deliverableTemplate.slug}`}
+              style={{
+                marginTop: 20,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 12,
+                padding: "12px 18px",
+                border: "1px solid var(--line)",
+                borderLeft: "3px solid var(--ink)",
+                borderRadius: "var(--r)",
+                background: "var(--card)",
+                color: "var(--ink)",
+                textDecoration: "none",
+                fontSize: 14,
+                lineHeight: 1.5,
+              }}
+            >
+              <span aria-hidden style={{ fontSize: 18 }}>📋</span>
+              <span>
+                <strong>이 Stage의 통합 산출물</strong>
+                {" — "}
+                <span style={{ color: "var(--ink-2)" }}>{deliverableTemplate.title}</span>
+                {" "}
+                <span style={{ color: "var(--ink-3)", fontSize: 13 }}>· 양식 보기 →</span>
+              </span>
+            </Link>
+          )}
         </Container>
       </section>
 
