@@ -193,11 +193,21 @@ export interface Lesson extends NodeMeta {
    * 통합 미션 사용 시 Codex에서 달라지는 부분만 주석으로 기록.
    */
   codexNote?: string;
+  /**
+   * 빌드 단계 들어가기 전 한 단락 강사 멘트. 본문(MDX) → 체크리스트(빌드) 사이의 호흡.
+   * 없으면 생략.
+   */
+  buildIntro?: string;
   buildSteps: string[];
   verificationChecklist: string[];
   deliverable: LessonDeliverable;
   reflectionQuestions: string[];
   extensionIdeas: string[];
+  /**
+   * 회고·다음 시도 끝에 다는 강사 마무리 한 단락. 강의를 따뜻하게 닫는 자리.
+   * 없으면 생략.
+   */
+  reflectionOutro?: string;
   tags: string[];
   /**
    * true이면 src/content/lessons/[slug].mdx 본문을 가져와 함께 렌더링.

@@ -67,55 +67,97 @@ export default async function LessonPage({
         <h1>{lesson.titleKo}</h1>
         <p className="lede">{lesson.hook ?? lesson.summary}</p>
 
-        {MdxBody && <MdxBody components={mdxElements} />}
-
-        <h2 id="section-problem">1. 문제 이해</h2>
-        <p style={{ whiteSpace: "pre-line" }}>{lesson.problemScenario}</p>
-
-        <h2 id="section-concepts">2. 최소 개념</h2>
-        {lesson.coreConcepts.map((c) => (
-          <div key={c.term} style={{ margin: "16px 0" }}>
-            <h3 style={{ margin: "12px 0 4px" }}>{c.term}</h3>
-            <p style={{ margin: 0 }}>{c.explanation}</p>
-          </div>
-        ))}
-
-        <h2 id="section-mission">3. 미션</h2>
-        <p className="lesson-skip">
-          미션까지 할 시간이 빠듯하면 — 개념만 챙기고 넘어가도 괜찮아요. 미션은
-          표시해 두고 나중에 돌아와 채우면 돼요
-          {next ? (
-            <>
-              {" · "}
-              <a href={`/lessons/${next.slug}`}>다음 레슨으로 건너뛰기 →</a>
-            </>
-          ) : null}
-          .
-        </p>
-        <div className="callout">
-          <div className="kicker">Mission · 권장 {lesson.estimatedMinutes}분</div>
-          <Typewriter text={missionText ?? ""} />
-        </div>
-        {lesson.codexNote && (
-          <div
+        {/* 산출물 칩 — 처음부터 목표를 보여줌 */}
+        {lesson.deliverable?.title && (
+          <p
+            className="lesson-deliverable-chip"
             style={{
-              margin: "16px 0",
-              padding: "14px 18px",
-              border: "1px dashed var(--line-2)",
+              margin: "18px 0 8px",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              padding: "10px 16px",
+              border: "1px solid var(--line)",
+              borderLeft: "3px solid var(--ink)",
               borderRadius: "var(--r-sm)",
               background: "var(--paper-2)",
+              fontSize: 14,
+              lineHeight: 1.5,
             }}
           >
-            <div className="kicker" style={{ marginBottom: 6 }}>Codex 참고</div>
-            <p style={{ margin: 0, fontSize: 14, color: "var(--ink-3)", lineHeight: 1.7 }}>
-              {lesson.codexNote}
-            </p>
-          </div>
+            <span aria-hidden style={{ fontSize: 16 }}>📦</span>
+            <span>
+              <span style={{ color: "var(--ink-3)" }}>손에 남는 것 — </span>
+              <strong style={{ color: "var(--ink)" }}>{lesson.deliverable.title}</strong>
+            </span>
+          </p>
         )}
 
+        {/* 본문 — MDX가 있으면 MDX가 정본, 없으면 problemScenario + coreConcepts fallback */}
+        {MdxBody ? (
+          <MdxBody components={mdxElements} />
+        ) : (
+          <>
+            <h2 id="section-problem">문제 이해</h2>
+            <p style={{ whiteSpace: "pre-line" }}>{lesson.problemScenario}</p>
+
+            <h2 id="section-concepts">최소 개념</h2>
+            {lesson.coreConcepts.map((c) => (
+              <div key={c.term} style={{ margin: "16px 0" }}>
+                <h3 style={{ margin: "12px 0 4px" }}>{c.term}</h3>
+                <p style={{ margin: 0 }}>{c.explanation}</p>
+              </div>
+            ))}
+          </>
+        )}
+
+        {/* 빌드 단계 — 강사 멘트(buildIntro) → 미션 콜아웃 → Codex 참고 → 체크박스 */}
         {lesson.buildSteps.length > 0 && (
           <>
-            <h2 id="section-build">4. 빌드 단계</h2>
+            <h2 id="section-build">빌드 단계</h2>
+            {lesson.buildIntro && (
+              <p
+                style={{
+                  margin: "12px 0 18px",
+                  color: "var(--ink-2)",
+                  lineHeight: 1.8,
+                  fontSize: 16,
+                }}
+              >
+                {lesson.buildIntro}
+              </p>
+            )}
+            <p className="lesson-skip">
+              미션까지 할 시간이 빠듯하면 — 개념만 챙기고 넘어가도 괜찮아요. 미션은
+              표시해 두고 나중에 돌아와 채우면 돼요
+              {next ? (
+                <>
+                  {" · "}
+                  <a href={`/lessons/${next.slug}`}>다음 레슨으로 건너뛰기 →</a>
+                </>
+              ) : null}
+              .
+            </p>
+            <div className="callout">
+              <div className="kicker">Mission · 권장 {lesson.estimatedMinutes}분</div>
+              <Typewriter text={missionText ?? ""} />
+            </div>
+            {lesson.codexNote && (
+              <div
+                style={{
+                  margin: "16px 0",
+                  padding: "14px 18px",
+                  border: "1px dashed var(--line-2)",
+                  borderRadius: "var(--r-sm)",
+                  background: "var(--paper-2)",
+                }}
+              >
+                <div className="kicker" style={{ marginBottom: 6 }}>Codex 참고</div>
+                <p style={{ margin: 0, fontSize: 14, color: "var(--ink-3)", lineHeight: 1.7 }}>
+                  {lesson.codexNote}
+                </p>
+              </div>
+            )}
             <SectionChecklist
               lessonId={lesson.id}
               section="build"
@@ -125,28 +167,18 @@ export default async function LessonPage({
           </>
         )}
 
-        <h2 id="section-verify">5. 검증 체크리스트</h2>
+        <h2 id="section-verify">검증</h2>
         <SectionChecklist
           lessonId={lesson.id}
           section="verify"
           items={lesson.verificationChecklist}
         />
 
-        <h2 id="section-deliverable">6. 산출물</h2>
-        <div className="callout">
-          <div className="kicker">Deliverable</div>
-          <p style={{ margin: 0, fontSize: 17, fontWeight: 600, color: "var(--ink)" }}>
-            {lesson.deliverable.title}
-          </p>
-          <p style={{ margin: "6px 0 0" }}>{lesson.deliverable.description}</p>
-          <p style={{ margin: "8px 0 0", fontFamily: "var(--f-mono)", fontSize: 12, color: "var(--ink-3)" }}>
-            형식: {lesson.deliverable.format}
-          </p>
-        </div>
-
+        {/* 산출물은 헤더 칩에서 이미 안내. 여기서는 outputs 파일 블록만 (있을 때) */}
         <OutputsBlock lesson={lesson} />
 
-        <h2 id="section-reflection">7. 회고 (3문)</h2>
+        {/* 회고 · 다음 시도 — 자기 질문 → 다음 시도 → 강사 마무리 */}
+        <h2 id="section-reflection">회고 · 다음 시도</h2>
         <SectionChecklist
           lessonId={lesson.id}
           section="reflect"
@@ -154,14 +186,30 @@ export default async function LessonPage({
         />
 
         {lesson.extensionIdeas.length > 0 && (
-          <>
-            <h2>확장 아이디어</h2>
-            <ul>
+          <div style={{ marginTop: 24 }}>
+            <div className="kicker" style={{ marginBottom: 8 }}>다음 시도</div>
+            <ul style={{ marginTop: 0 }}>
               {lesson.extensionIdeas.map((i) => (
                 <li key={i}>{i}</li>
               ))}
             </ul>
-          </>
+          </div>
+        )}
+
+        {lesson.reflectionOutro && (
+          <p
+            style={{
+              margin: "28px 0 8px",
+              padding: "16px 20px",
+              borderLeft: "3px solid var(--ink)",
+              background: "var(--paper-2)",
+              color: "var(--ink-2)",
+              fontSize: 16,
+              lineHeight: 1.8,
+            }}
+          >
+            {lesson.reflectionOutro}
+          </p>
         )}
 
         {relatedSpecials.length > 0 && (
