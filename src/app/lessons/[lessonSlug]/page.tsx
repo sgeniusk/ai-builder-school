@@ -93,6 +93,25 @@ export default async function LessonPage({
           </p>
         )}
 
+        {/* 본문 anchor — ReadingRail이 4단계(본문/빌드/검증/회고)로 추적하기 위한 hidden h2 */}
+        <h2
+          id="section-body"
+          style={{
+            position: "absolute",
+            width: 1,
+            height: 1,
+            margin: -1,
+            padding: 0,
+            overflow: "hidden",
+            clip: "rect(0,0,0,0)",
+            whiteSpace: "nowrap",
+            border: 0,
+          }}
+          aria-hidden="true"
+        >
+          본문
+        </h2>
+
         {/* 본문 — MDX가 있으면 MDX가 정본, 없으면 problemScenario + coreConcepts fallback */}
         {MdxBody ? (
           <MdxBody components={mdxElements} />
