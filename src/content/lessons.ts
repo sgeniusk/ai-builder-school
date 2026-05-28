@@ -8185,7 +8185,7 @@ export const lessons: Lesson[] = [
     summary:
       "Git의 본질을 '폴더의 시간 기록'으로 잡고, 핵심 용어 7개(Repository·Working tree·Staging·Repository·Commit·Branch·Merge·Remote·HEAD)와 첫 commit·branch·merge를 직접 한다. 명령어 외우기가 아니라 개념을 잡는 데 집중.",
     level: "beginner",
-    estimatedMinutes: 50,
+    estimatedMinutes: 30,
     targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["terminal-first-day"],
     learningGoals: [
@@ -8283,7 +8283,7 @@ export const lessons: Lesson[] = [
     summary:
       "Git과 GitHub의 차이를 잡고, 핵심 7개(Repository·Push/Pull/Clone·Issue·PR·README·GitHub Pages·.gitignore)를 직접 사용한다. 첫 public repo + .gitignore + Issue + 셀프 PR까지. AI 코딩 에이전트가 Issue·PR과 직접 일하는 시대의 진입점.",
     level: "beginner",
-    estimatedMinutes: 50,
+    estimatedMinutes: 40,
     targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["git-basics-and-terminology"],
     learningGoals: [
