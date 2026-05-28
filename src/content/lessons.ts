@@ -41,6 +41,8 @@ export const lessons: Lesson[] = [
       "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 40분 안에 끝내는 걸 목표로 하세요.\n\n작업: 당신의 실제 업무 맥락을 반영한 `judgment-checklist.md`를 만듭니다.\n\n포함해야 할 섹션:\n1. \"AI에게 맡겨도 되는 일\" (예: 초안, 요약, 리서치 확장)\n2. \"AI에게 맡기면 위험한 일\" (예: 숫자 계산, 법적 문구, 사실 검증)\n3. \"내가 반드시 검토해야 하는 지점\" — 체크리스트 5개 이상\n4. \"이번 주 회고 양식\" — 'AI가 한 것 / 내가 바로잡은 것 / 다음에 바꿀 것' 3문\n\n에이전트에게 '당신의 업무'가 무엇인지 3문장 이내로 설명해 주세요. 그래야 일반론이 아니라 내 것에 붙는 체크리스트가 나옵니다.",
     codexNote:
       "Codex CLI에서는 파일 생성을 위해 `codex file create judgment-checklist.md` 형태로 명시적으로 요청하면 출력이 안정적입니다. 이후 대화에서 Codex가 같은 파일을 '다시 쓰지 않도록' 경로를 명시하세요.",
+    buildIntro:
+      "공통 역량 5개를 본인의 일에 매핑할 차례. 어디가 강하고 어디가 비어 있는지 가벼운 자가진단으로 시작하세요.",
     buildSteps: [
       "오늘 내가 AI에게 맡긴 일 3가지를 기록한다",
       "각 항목에 대해 '가장 위험한 실수 지점'을 한 줄로 적는다",
@@ -70,6 +72,8 @@ export const lessons: Lesson[] = [
       "체크리스트를 Claude Code 커스텀 슬래시 명령으로 저장해 매번 한 줄로 불러옵니다",
       "월 1회 '환각 발견 사례' 모음집을 만들어 회고 입력으로 씁니다",
     ],
+    reflectionOutro:
+      "역량은 한 번 익히고 끝이 아니라 매주 쌓이는 것. 이번 주 한 가지만 의식해서 써 보세요 — 한 달 뒤 5개가 모두 자연스러워집니다.",
     tags: ["literacy", "mindset", "checklist"],
     hasMdxBody: true,
     outputs: [
@@ -5040,6 +5044,8 @@ export const lessons: Lesson[] = [
       "이 레슨은 읽고 이해하는 것이 목표입니다. 실행할 코드는 없어요.\n\n**작업 1 — 큰 그림 잡기 (10분):** 아래 세 가지를 AI(Claude 또는 ChatGPT)에게 질문하고 답을 메모하세요.\n- '코딩 에이전트와 일반 AI 챗봇의 차이가 뭔가요?'\n- '터미널이 뭔가요? 왜 필요한가요?'\n- 'AI Builder School에서 나는 코딩을 배우는 건가요, 아니면 AI를 지시하고 검토하는 법을 배우는 건가요?'\n\n**작업 2 — 내 목표 한 줄 쓰기 (10분):** AI Builder School을 마쳤을 때 내가 만들거나 자동화하고 싶은 것을 한 줄로 적으세요. 이 한 줄이 앞으로 모든 레슨의 나침반이 됩니다.",
     codexNote:
       "코딩 에이전트를 처음 접할 때 가장 흔한 실수는 '모든 코드를 이해하려는 것'입니다. 이해하지 않아도 됩니다. AI가 만든 코드가 '내가 원하는 대로 동작하는가'를 판단하는 것이 목표입니다. 의사가 MRI 기계 작동 원리를 몰라도 영상을 읽고 판단하듯이.",
+    buildIntro:
+      "코딩 에이전트가 왜 터미널과 git을 쓰는지 글로 잡았으면, 이제 본인 컴퓨터에 자리를 마련합니다. 셋업 자체는 짧아요.",
     buildSteps: [
       "코딩 에이전트 vs 일반 AI 챗봇 차이 AI에게 질문 + 메모",
       "터미널이 무엇인지, 왜 필요한지 AI에게 질문 + 메모",
@@ -5066,6 +5072,8 @@ export const lessons: Lesson[] = [
       "L53(터미널 첫날)으로 바로 이어가기 — 실제 터미널을 열어보는 첫 경험",
       "AI Builder School 12개 Phase 지도를 한 번 훑어보고 어떤 Phase가 가장 기대되는지 표시",
     ],
+    reflectionOutro:
+      "\"코딩 에이전트의 환경\"이 머릿속에 있으면, 다음 레슨(터미널·git)이 그 환경을 채우는 조각으로 보이기 시작합니다. 큰 그림 → 작은 조각 순서예요.",
     tags: ["orientation", "beginner", "mental-model", "no-code"],
     hasMdxBody: true,
     outputs: [
@@ -5117,6 +5125,8 @@ export const lessons: Lesson[] = [
       "터미널을 열고 아래 명령어를 순서대로 직접 입력해보세요. 30분 안에 완성하는 것을 목표로 합니다.\n\n**Mac: Terminal 앱 / Windows: PowerShell 또는 Git Bash**\n\n```bash\n# 1. 현재 위치 확인\npwd\n\n# 2. 폴더 목록 보기\nls          # Mac/Linux\ndir         # Windows\n\n# 3. 폴더 이동\ncd Documents\n\n# 4. 상위 폴더로\ncd ..\n\n# 5. 홈 디렉토리로\ncd ~\n\n# 6. 새 폴더 만들기\nmkdir my-ai-builder-lab\n\n# 7. 만든 폴더로 이동\ncd my-ai-builder-lab\n\n# 8. 빈 파일 만들기\ntouch README.md     # Mac/Linux\nnew-item README.md  # Windows PowerShell\n\n# 9. 파일 목록 확인\nls -la     # Mac/Linux\ndir        # Windows\n\n# 10. 현재 폴더를 VS Code로 열기 (VS Code 설치 시)\ncode .\n```\n\n에러가 나면 에러 메시지를 AI에게 붙여넣고 물어보세요. 이게 실제 워크플로우입니다.",
     codexNote:
       "터미널에서 가장 흔한 실수는 대소문자와 공백입니다. `cd Documents`와 `cd documents`는 다릅니다. 에러가 나면 먼저 대소문자를 확인하세요. 그래도 모르면 에러 메시지 전체를 AI에게 복사 붙여넣기 하면 됩니다. 이 방법으로 거의 모든 터미널 에러가 해결됩니다.",
+    buildIntro:
+      "10개 명령어를 본인 키보드로 직접 칠 차례. 모르는 키 조합은 옆에 적어두고 — 다음 주에는 안 보고 쳐집니다.",
     buildSteps: [
       "터미널 열기 (Mac: Terminal, Windows: PowerShell/Git Bash)",
       "10개 명령어 순서대로 입력",
@@ -5145,6 +5155,8 @@ export const lessons: Lesson[] = [
       "터미널 단축키 익히기 — Tab 자동완성, 위 화살표 이전 명령어",
       "oh-my-zsh 같은 터미널 꾸미기 도구로 가독성 향상",
     ],
+    reflectionOutro:
+      "터미널이 익숙해지면 컴퓨터가 갑자기 \"명령 가능한\" 기계로 바뀝니다. 처음엔 어색해도, 한 주만 쓰면 마우스보다 키보드가 빨라져요.",
     tags: ["terminal", "beginner", "setup", "cli"],
     hasMdxBody: true,
     outputs: [
@@ -5205,6 +5217,8 @@ export const lessons: Lesson[] = [
       "무료 한도 트랙부터 끝내고, 유료 API 트랙은 읽어만 둡니다. 무료 트랙은 20분 안에 마치는 것을 목표로 합니다.\n\n**작업 1 — 무료 계정 2개 만들기 (10분)**\n- [ ] GitHub 계정 (github.com) — 카드 등록 없음\n- [ ] AI 챗봇 1개 무료 가입 — Claude(claude.ai) / ChatGPT(chatgpt.com) / Gemini(gemini.google.com) 중 하나\n\n**작업 2 — 무료/유료 경계 정리 (10분)**\n- 가입한 AI 챗봇에게 '내가 고른 도구의 무료 한도와, 유료가 필요해지는 시점을 표로 정리해줘'라고 요청하고 메모로 남깁니다.\n\n**작업 3 — 유료 API 트랙은 Stage 5에서 (지금은 선택)**\n- Stage 5(코딩 에이전트)부터 코드에서 AI를 호출하면 API 키가 필요합니다. 그때 이 레슨으로 돌아와 `.env`·spending limit을 설정하면 됩니다. 지금 미리 해두고 싶다면 본문의 '유료 API 트랙' 절을 따라 하세요.",
     codexNote:
       "API 키는 절대 코드 안에 직접 쓰지 마세요. `ANTHROPIC_API_KEY = 'sk-ant-...'` 이런 식으로 파이썬 파일에 넣으면 GitHub에 올라가는 순간 봇이 자동으로 수집합니다. 반드시 `.env` 파일 → `python-dotenv` 또는 `os.environ`으로 불러오는 패턴을 쓰세요. 첫날 이 습관을 만들면 나중에 걱정이 없습니다.",
+    buildIntro:
+      "계정 만들기는 5분, 비용 한도 거는 게 핵심. 무료 한도 안에서 시작해도 OK — 결정적인 건 한도가 걸려 있다는 것.",
     buildSteps: [
       "GitHub 계정 생성 (카드 등록 없음)",
       "AI 챗봇 1개 무료 가입 — Claude / ChatGPT / Gemini 중 하나",
@@ -5232,6 +5246,8 @@ export const lessons: Lesson[] = [
       "VS Code + GitHub Copilot 연동 설정",
       "1Password 또는 Bitwarden으로 API 키 암호화 저장",
     ],
+    reflectionOutro:
+      "계정과 한도가 깔리면 다음 레슨(비용 모니터링)이 그 위에서 매주 5분 점검 루틴으로 펼쳐집니다. 사고는 한도 없는 계정에서만 일어나요.",
     tags: ["setup", "api-key", "security", "cost-management", "beginner"],
     hasMdxBody: true,
     outputs: [
@@ -5820,6 +5836,8 @@ export const lessons: Lesson[] = [
       "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 40분 안에 끝내는 걸 목표로 하세요.\n\n작업: 당신이 실제로 쓰는 AI 도구·API를 반영한 `cost-monitor.md` 한 장을 만듭니다.\n\n포함해야 할 섹션:\n1. \"내 AI 지출 목록\" — 쓰고 있는 도구·API를 표로. 각 항목에 월 예산·알림 설정 여부·한도 설정 여부\n2. \"알림·한도 설정 체크리스트\" — 각 도구 콘솔에서 사용량 알림(50/80/100%)과 지출 한도를 거는 단계\n3. \"주간 5분 점검 루틴\" — 매주 무엇을 어떤 순서로 확인하는지. 캘린더에 넣을 고정 슬롯 1개\n4. \"비용 급증 대응 절차\" — 예상의 N배가 찍혔을 때 1) 키 회수 2) 로그 확인 3) 원인 분류(자동화/오용/정상증가)\n\n에이전트에게 당신이 쓰는 도구를 3~5개 알려주세요(예: Claude, ChatGPT Plus, OpenAI API). 그래야 일반론이 아니라 당신 계정에 바로 거는 체크리스트가 나옵니다.",
     codexNote:
       "Codex CLI에서는 `codex file create cost-monitor.md`로 파일을 명시적으로 만들게 한 뒤 섹션을 채우라고 지시하면 출력이 안정적입니다.",
+    buildIntro:
+      "본인 도구 목록 + 알림·한도 설정 + 주간 점검 슬롯 — 세 가지를 한 장(`cost-monitor.md`)에 묶는 일입니다.",
     buildSteps: [
       "쓰고 있는 AI 도구·API를 빠짐없이 적는다 (구독·종량제 모두)",
       "각 도구 콘솔에서 사용량 알림을 50/80/100%로 건다",
@@ -5852,6 +5870,8 @@ export const lessons: Lesson[] = [
       "월말 비용 회고를 만들어 \"이번 달 가장 비쌌던 작업\"을 기록하기",
       "API 호출에 비용 추정 로그를 붙여 작업 단위 원가를 추적하기",
     ],
+    reflectionOutro:
+      "이 한 장이 있으면 청구서 쇼크는 사라집니다. 점검 슬롯 5분을 캘린더에 박아두는 게 핵심 — 안 정해두면 안 보게 됩니다.",
     tags: ["literacy", "cost", "monitoring", "checklist"],
     hasMdxBody: true,
     outputs: [
@@ -5910,6 +5930,8 @@ export const lessons: Lesson[] = [
       "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 40분 안에 끝내는 걸 목표로 하세요.\n\n작업: 당신의 실제 업무를 분류한 `delegation-rule.md` 한 장을 만듭니다.\n\n포함해야 할 섹션:\n1. \"판단 3축\" — 위험도·되돌릴 수 있음·검증 비용을 각각 한 줄로 정의\n2. \"내 업무 분류표\" — 당신이 이번 주에 한 일 10개를 표로. 각 일에 3축 점수(상/중/하)와 결론(맡김/함께/직접)\n3. \"맡김 일의 검토 지점\" — \"맡김\"으로 분류한 일마다 사람이 어디서 확인하는지 한 줄\n4. \"3초 규칙\" — 새 일이 들어왔을 때 이 표 없이 빠르게 판단하는 질문 1~2개\n\n에이전트에게 당신의 직무와 이번 주 실제 업무 몇 개를 알려주세요. 그래야 일반론이 아니라 당신 일에 붙는 기준표가 나옵니다.",
     codexNote:
       "Codex CLI에서는 표 생성 시 Markdown 표 형식을 명시적으로 요청하면 출력이 깔끔합니다.",
+    buildIntro:
+      "본인이 이번 주에 한 일 10개를 3축(위험·되돌릴 수 있음·검증)으로 평가할 차례입니다. 실제 본인 업무로 채워야 기준이 살아 있어요.",
     buildSteps: [
       "판단 3축(위험도·되돌릴 수 있음·검증 비용)을 각각 한 줄로 정의한다",
       "이번 주에 실제로 한 일 10개를 적는다",
@@ -5942,6 +5964,8 @@ export const lessons: Lesson[] = [
       "맡김 일의 검토 지점을 체크리스트 슬래시 명령으로 저장하기",
       "분기마다 분류표를 다시 보며 \"이제 맡겨도 되는 일\"이 늘었는지 점검하기",
     ],
+    reflectionOutro:
+      "위임 판단은 처음엔 표를 보고 결정하지만, 한 달이면 머릿속 3초로 자동화됩니다. 본인의 `my-ai-judgment-v1.md`가 그 자동화의 출발점이에요.",
     tags: ["literacy", "delegation", "ai-fluency", "decision"],
     hasMdxBody: true,
     outputs: [
@@ -6000,6 +6024,8 @@ export const lessons: Lesson[] = [
       "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 40분 안에 끝내는 걸 목표로 하세요.\n\n작업: 당신의 팀 맥락을 반영한 `team-ai-rollout.md` 한 장을 만듭니다.\n\n포함해야 할 섹션:\n1. \"우리 팀 저항 지도\" — 팀원들의 예상 저항을 불안/불신/불편으로 분류하고, 각각에 맞는 대응 한 줄\n2. \"첫 작은 성공 후보\" — 가장 먼저 AI로 시간을 아낄 수 있는 구체 업무 1~2개 + 그 일을 맡을 얼리어답터 1명\n3. \"30일 확산 경로\" — 1주: 나/얼리어답터 시범 → 2주: 사례 공유 → 3~4주: 관심 보인 사람에게 1:1 도움\n4. \"심리적 안전 장치\" — \"틀려도 괜찮다\"를 팀에 어떻게 신호할지 한 가지\n\n에이전트에게 당신의 팀 규모·분위기·이미 보인 반응을 알려주세요. 그래야 일반론이 아니라 당신 팀에 맞는 계획이 나옵니다.",
     codexNote:
       "Codex CLI에서는 계획 문서를 단계별 섹션으로 나눠 요청하면 30일 경로가 더 구체적으로 나옵니다.",
+    buildIntro:
+      "본인 팀의 저항 지도를 그리는 일. 추상적 \"저항\"이 아니라, 실제 동료 이름·실제 반응으로 채워야 다음 행동이 보입니다.",
     buildSteps: [
       "팀원들이 이미 보였거나 보일 법한 저항 반응을 적는다",
       "각 반응을 불안/불신/불편 중 하나로 분류한다",
@@ -6032,6 +6058,8 @@ export const lessons: Lesson[] = [
       "팀 AI 사용 가이드라인 초안으로 확장하기 (Stage 7 정책 레슨과 연결)",
       "저항이 가장 큰 한 사람과 1:1로 그의 실제 업무 하나를 함께 자동화해 보기",
     ],
+    reflectionOutro:
+      "Stage 1을 마친 당신은 이제 AI를 쓰는 사람이자, AI를 옆으로 번지게 하는 사람이에요. 도구가 아니라 사람을 다루는 일 — 그게 진짜 다음 단계입니다.",
     tags: ["literacy", "team", "adoption", "change-management"],
     hasMdxBody: true,
     outputs: [
@@ -7885,6 +7913,8 @@ export const lessons: Lesson[] = [
       "직접 관찰로 본질을 잡는다.\n\n**작업 1 — 같은 질문 두 번 (5분):** ChatGPT/Claude/Gemini 중 하나에 같은 질문(예 '커피 한 잔의 의미를 한 문단으로')을 두 번 던지고 답의 미세한 차이 관찰. 같은 분포에서 다른 토큰을 뽑는다는 걸 직접 본다.\n\n**작업 2 — 시점 너머 질문 (5분):** '오늘 환율이 얼마지?' 또는 '내일 비가 오나?'를 던져 본다. 모델이 모른다고 말하거나 그럴듯한 거짓을 만드는지 본다. 학습 시점이라는 벽을 본다.\n\n**작업 3 — 내 말로 한 단락 (10분):** 위 두 관찰을 바탕으로 \"LLM은 ___ 기계다\"의 빈칸을 자기 말로 적기. 토큰·확률·학습 시점 중 하나는 들어가면 좋다. `what-is-an-llm-note.md`에 저장.",
     codexNote:
       "이 한 단락이 손에 있으면 다음 모든 레슨이 빠르게 잡힌다. 환각·비용·context window·temperature 같은 용어가 다 같은 한 줄에서 나오기 때문이다.",
+    buildIntro:
+      "LLM이 뭘 하는 기계인지 글로 잡았으면, 이제 손으로 확인할 차례입니다. 3개 작업이 15~20분 안에 끝나요. 본문에서 본 \"확률 분포\"와 \"학습 시점\"을 직접 관찰하는 게 목표예요.",
     buildSteps: [
       "같은 질문을 두 번 던지고 답의 차이 관찰",
       "학습 시점 너머의 질문 던지기",
@@ -7911,6 +7941,8 @@ export const lessons: Lesson[] = [
       "Anthropic·OpenAI·Google의 'how it works' 공식 페이지 한 번 훑어보기",
       "Karpathy의 'Let's build GPT' 영상으로 토큰 예측의 내부를 더 깊이 보기",
     ],
+    reflectionOutro:
+      "이 한 단락이 손에 있으면, 다음 레슨부터 모든 게 빠르게 잡힙니다. 환각도 비용도 컨텍스트도 모두 \"다음 토큰 예측\"이라는 한 줄에서 나오니까요. 헷갈리는 게 생기면 본인이 적은 한 단락으로 돌아오세요 — 거기에 답이 있을 거예요.",
     tags: ["foundation", "llm", "mental-model", "principle"],
     hasMdxBody: true,
     outputs: [
@@ -7967,6 +7999,8 @@ export const lessons: Lesson[] = [
       "토큰 → 비용을 손에 잡히는 표 한 장으로.\n\n**작업 1 — Tokenizer로 직접 세기 (10분):** OpenAI Tokenizer 또는 Anthropic Tokenizer에서 자기 자주 쓰는 프롬프트 1개를 한국어와 영어 번역으로 각각 붙여 토큰 수 비교. 보통 한국어가 1.5~2배 많다는 걸 직접 확인.\n\n**작업 2 — 내 작업 비용표 (20분):** `cost-per-task-cheatsheet.md` 한 장 만들기. 자주 하는 작업 5개를 정해 각각의 입력·출력 토큰 추정 + Flash·GPT-5.5·Opus 모델 비용 계산. 5개만 채워도 \"이건 Flash로 / 저건 Opus로\"의 직관이 생긴다.\n\n**작업 3 — Spending cap 걸기 (5분):** API를 쓸 계획이면 console에서 monthly spend limit을 무조건 $5~$10으로 걸어둠. 루프 폭주 안전망.",
     codexNote:
       "출력이 입력보다 5~10배 비싸므로, 프롬프트에 '한 단락으로 답하라' '5줄 이내'  같은 길이 제약을 넣는 게 비용 절감의 가장 빠른 방법입니다. 가독성까지 같이 올라갑니다.",
+    buildIntro:
+      "토큰의 세 모자(입력·과금·컨텍스트)를 글로 봤으면, 이제 본인 작업으로 옮길 차례입니다. 30분 안에 본인 비용 감각이 잡혀요. 본인이 자주 쓰는 한 문장으로 직접 토큰 수를 세 보는 게 핵심이에요.",
     buildSteps: [
       "OpenAI/Anthropic Tokenizer로 토큰 직접 세 보기",
       "한국어·영어 비교로 토큰 비율 확인",
@@ -7993,6 +8027,8 @@ export const lessons: Lesson[] = [
       "Vercel AI Gateway·LangChain의 모델 라우팅 패턴 한 번 훑어보기",
       "프롬프트 캐싱(prompt caching)이 비용에 미치는 영향 실험",
     ],
+    reflectionOutro:
+      "비용표가 손에 있으면 다음에 \"이거 Opus로 돌릴까 Flash로 돌릴까\"가 3초 안에 결정됩니다. 모델 선택은 직관이 아니라 데이터로 — 그 첫 데이터가 오늘 만든 시트예요.",
     tags: ["foundation", "cost", "tokens", "context-window", "principle"],
     hasMdxBody: true,
     outputs: [
@@ -8049,6 +8085,8 @@ export const lessons: Lesson[] = [
       "지도 한 장을 손에.\n\n**작업 1 — 지금 쓰는 서비스 분류 (5분):** 결제 중이거나 정기 사용 중인 AI 서비스 모두 적기. 각각 (자체모델 / 통합) · (구독제 / API / 무료 한도) 분류.\n\n**작업 2 — `service-rule.md` 만들기 (20분):** 자기 주간 작업 5개를 \"구독제로 충분 / API가 필요\" 로 분류해 표로. 각 작업에 추천 서비스 적기.\n\n**작업 3 — 통합 서비스 1개 무료 체험 (10분):** Cursor·Perplexity·Lindy·v0·Bolt 중 하나 무료 체험 → \"여기서는 어떤 모델을 어떻게 쓰나\" 한 줄 관찰.",
     codexNote:
       "구독제와 API의 가장 큰 함정은 \"Plus면 API도 무료\" 오해입니다. 둘은 별개 시스템 — 결제도 따로, 한도도 따로, 인터페이스도 따로. 헷갈리면 각 사 docs 다시 확인.",
+    buildIntro:
+      "자체 모델 vs API 통합, 구독 vs API — 네 갈래의 차이를 본문에서 봤으니, 본인이 쓰는 도구를 그 사분면에 직접 놓아 보세요. 한 번 분류해두면 새 도구가 나와도 자리가 빠르게 잡힙니다.",
     buildSteps: [
       "지금 쓰는 AI 서비스 모두 적고 두 축으로 분류",
       "주간 작업 5개를 구독제/API 분류한 service-rule.md 작성",
@@ -8074,6 +8112,8 @@ export const lessons: Lesson[] = [
       "특강 — 프런티어 AI 지형 2026에서 3사의 무게중심 차이를 확인",
       "Cursor·Perplexity·v0·Bolt 중 자기 일에 가장 가까운 한 곳을 한 달 본격 사용 후 회고",
     ],
+    reflectionOutro:
+      "도구는 매년 바뀝니다. 지금 익힌 4 분면 프레임은 새 도구가 나와도 그대로 적용돼요. \"이거 어느 분면이지\" 한 번만 물으면 본인 결정이 빨라집니다.",
     tags: ["service", "landscape", "subscription-vs-api", "vendor"],
     hasMdxBody: true,
     outputs: [
@@ -8140,6 +8180,8 @@ export const lessons: Lesson[] = [
       "자기 챗봇에서 6개 기능 위치를 직접 찾고, Project 한 개를 본격 사용까지.\n\n**작업 1 — 6개 위치 찾기 (10분):** 자주 쓰는 챗봇 1개 선택 → 위 6개 기능을 UI에서 직접 찾기. 어디 메뉴에 있는지 메모. 못 찾는 것은 \"이 챗봇에는 없음/약함\"으로 표시.\n\n**작업 2 — Project 만들기 (20분):** 자기 일과 가장 관련된 주제로 Project 1개 생성 (예 \"회의록 정리\", \"주간 보고서\") + Custom Instructions 한 줄 등록 + 그 Project에서 평소 작업 1개 해보기.\n\n**작업 3 — Memory 검토 (10분, Memory 쓰는 사람만):** Memory에 어떤 사실이 저장돼 있는지 확인 → 민감 정보 삭제 → 향후 들어가지 않을 정보 정리.",
     codexNote:
       "Memory의 가장 흔한 사고는 민감 정보 누적입니다 — 주민번호, 사내 프로젝트 코드명, 고객 이름 등. 정기 점검 습관을 만드세요. 또 Custom Instructions에 \"간결\" + \"충분히 자세히\" 같은 모순된 지시는 절대 금물.",
+    buildIntro:
+      "6 기능을 본인이 매일 쓰는 챗봇에 매핑할 차례입니다. 같은 기능을 본인 도구에서 찾는 활동만으로도 충분히 익숙해져요.",
     buildSteps: [
       "자기 챗봇에서 6개 공통 기능 위치 찾기",
       "Project 1개 + Custom Instructions 등록",
@@ -8166,6 +8208,8 @@ export const lessons: Lesson[] = [
       "여러 챗봇을 같은 작업에 시도하면서 Project·Memory 동작 차이 비교",
       "MCP 서버 한 개 설치해 Claude Desktop에 붙여보기 (Stage 5에서 본격)",
     ],
+    reflectionOutro:
+      "Projects·Memory·Artifacts 같은 기능들은 처음엔 안 써도 일이 됩니다. 그런데 한 번 쓰기 시작하면 안 쓰던 시절로 돌아가기 어려워요. 오늘 그 첫 자리 하나만 잡으세요.",
     tags: ["chatbot", "projects", "memory", "features"],
     hasMdxBody: true,
     outputs: [
@@ -8238,6 +8282,8 @@ export const lessons: Lesson[] = [
       "5분 첫 commit + 10분 branch·merge.\n\n**작업 1 — 첫 commit (5분):** `mkdir my-first-repo && cd my-first-repo` → `git init` → README.md 만들고 `git add` → `git commit -m 'docs: first commit'` → `git log --oneline`로 확인.\n\n**작업 2 — branch + merge (10분):** `git checkout -b experiment` → 변경하고 commit → `git checkout main` → `git merge experiment`. branch가 평행 우주라는 걸 손으로 확인.\n\n**작업 3 — 일부러 실수 + 복구 (10분):** 파일을 망친 다음 `git restore <파일>`로 복구. `git log`로 시간선 확인. AI에게 큰 변경 시키기 전에 commit하는 습관의 가치를 직접 본다.",
     codexNote:
       "AI 코딩 에이전트에게 큰 변경을 맡기기 전에는 반드시 commit. 그래야 결과가 마음에 안 들 때 `git restore` 한 번으로 돌아갈 수 있습니다. `git push --force`는 협업 브랜치에 절대 금지 — 동료 작업이 날아갑니다.",
+    buildIntro:
+      "git의 7 핵심 용어를 본인 손으로 직접 만져볼 차례. 한 번 실수해보고 `git restore`로 복구해보면, 그때부터 git이 친구가 됩니다.",
     buildSteps: [
       "`git init` + 첫 README commit",
       "branch 만들고 변경 + main에 merge",
@@ -8337,6 +8383,8 @@ export const lessons: Lesson[] = [
       "계정 → 첫 public repo → 셀프 PR까지.\n\n**작업 1 — 계정·첫 repo (10분):** github.com 가입(이미 있으면 스킵) → New repository → 이름 `my-ai-builder-lab`, Public, Add README 체크 → Create.\n\n**작업 2 — local과 연결 (10분):** [Git 첫 commit](/lessons/git-basics-and-terminology)에서 만든 `my-first-repo`를 `git remote add origin ...` + `git push -u origin main`으로 올리기.\n\n**작업 3 — .gitignore + Issue + 셀프 PR (25분):** `.gitignore` 만들고 `.env` 추가. GitHub UI에서 Issue 한 줄. 새 branch `chore/readme`에서 README 업데이트 → push → GitHub에서 PR 생성 → 자기 리뷰 → merge.",
     codexNote:
       ".env를 .gitignore에 추가하기 전 commit·push는 절대 금지. 한 번 GitHub에 올라간 키는 즉시 무효화하고 새로 발급해야 합니다. OpenAI·Anthropic은 secret scanning으로 자동 무효화하지만 그 사이의 사용 책임은 본인.",
+    buildIntro:
+      "GitHub 계정과 첫 public repo, 그리고 셀프 PR까지. 40분 안에 본인 빌더 포트폴리오의 첫 자리를 만드는 일이에요.",
     buildSteps: [
       "GitHub 가입 + my-ai-builder-lab repo 생성",
       "local repo에 origin 추가 + 첫 push",
