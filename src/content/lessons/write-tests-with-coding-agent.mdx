@@ -134,22 +134,3 @@ test("runs without error", () => {
 | 깨뜨리기 확인 | 핵심 로직 한 줄 주석 처리 → 테스트 빨간불 확인 |
 
 이 한 폴더가 생기면 다음부터 "테스트요? 나중에 짤게요"가 사라집니다. **테스트가 먼저고, 구현이 나중이에요.**
-
-## 다음 레슨
-
-테스트가 새 기능의 가드레일이라면, 이미 터진 버그에는 또 다른 루프가 필요해요. [다음 레슨](/lessons/bug-reproduction-loop)에서는 재현 → 최소 예제 → 가설 → 수정 → 회귀 테스트의 5단 루프로 같은 버그가 두 번 오지 않게 만드는 법을 다룹니다.
-
-## 더 깊이 보기
-
-**TDD 원전**
-- Kent Beck — *Test-Driven Development: By Example* (2002) · Red → Green → Refactor 사이클의 원전. 20년 넘은 책이지만 AI 시대에 오히려 더 잘 맞는 패턴
-
-**코딩 에이전트 공식 문서**
-- Anthropic — [Claude Code overview](https://docs.claude.com/en/docs/claude-code/) · 에이전트에게 테스트 우선 작성을 지시하는 패턴
-- Anthropic — [Extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) · 복잡한 엣지 케이스 추론에 활용
-
-**이전 레슨 연결**
-- [LLM이 잘하는 일과 못하는 일](/lessons/what-llms-are-good-and-bad-at) · 자연어 ↔ 코드 변환이 왜 강한지
-- [AI와 함께 구현 계획 세우기](/lessons/plan-with-ai) · 테스트 전에 계획을 합의하는 패턴
-
-> _참고: 본문의 `calculateTotal` 예시는 학습 효과를 위한 가상 사례입니다. **2단계 테스트 요청** 패턴(Golden Path → Edge Cases)과 **의도 주석** 관행은 소프트웨어 엔지니어링의 일반 관행을 이 학교 운영자가 한국어로 정리한 것이며, 외부 표준명은 아닙니다. TDD 사이클(Red-Green-Refactor)은 Kent Beck의 원전을 참고하세요._

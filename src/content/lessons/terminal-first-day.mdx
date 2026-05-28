@@ -4,134 +4,59 @@
 
 전부 오해다.
 
-터미널은 컴퓨터에게 텍스트로 명령하는 창일 뿐이다. 잘못 입력해도 `Ctrl+C`로 멈추거나 `cd ~`로 홈으로 돌아오면 된다. 파일을 실수로 삭제하지 않는 한 터미널 명령어로 컴퓨터가 망가지지 않는다.
+터미널은 컴퓨터에게 텍스트로 명령하는 창일 뿐이다. 잘못 입력해도 `Ctrl+C`로 멈추거나 `cd ~`로 홈으로 돌아오면 된다. **파일을 실수로 삭제하지 않는 한 터미널 명령어로 컴퓨터가 망가지지 않는다.**
 
 <Terminal title="처음 열었을 때" lines={[
   "Last login: Wed May 22 10:24:18 on ttys000",
   "$",
 ]} />
 
-처음 열면 이 정도다. 'Last login'은 마지막 접속 시각, `$`는 명령을 받을 준비가 됐다는 신호. 그 뿐이다.
-
----
+`$`는 명령을 받을 준비가 됐다는 신호. 그 뿐이다.
 
 ## 터미널 열기
 
-**Mac:** Spotlight(`Cmd+Space`) → "Terminal" 검색 → Enter. 이걸로 끝이다.
+- **Mac** — Spotlight(`Cmd+Space`) → "Terminal" 검색 → Enter. 끝.
+- **Windows** — [git-scm.com](https://git-scm.com)에서 Git 설치 → 시작 메뉴 "Git Bash" 실행. **Git Bash 권장** (이 학교 명령어가 Mac과 똑같이 동작). PowerShell·WSL은 명령어가 다르거나 설정 부담이 큼.
 
-**Windows:** Windows는 터미널이 여러 종류다. 아래에서 하나만 고른다.
-
-| 터미널 | 언제 고르나 | 여는 법 |
-|--------|-----------|--------|
-| **Git Bash** (권장) | 이 학교 명령어를 Mac과 똑같이 쓰고 싶다 | [git-scm.com](https://git-scm.com)에서 Git 설치 → 시작 메뉴 "Git Bash" |
-| PowerShell | 이미 깔려 있는 걸 그대로 쓰고 싶다 | 시작 메뉴 → "PowerShell" 검색 → Enter |
-| WSL | 나중에 본격적으로 개발할 계획이다 | 지금은 건너뛴다 — Stage 5에서 다시 다룬다 |
-
-**Windows 학습자는 Git Bash를 권한다.** 이 학교의 명령어 예시는 Mac/Linux 기준인데, Git Bash는 그 명령어(`ls` `touch` `cat` 등)를 Windows에서 그대로 쓰게 해준다. PowerShell을 쓰면 일부 명령어가 달라(`ls`는 되지만 `touch` 대신 `new-item`) 매번 바꿔야 한다.
-
-> Git Bash를 설치했다면, 이후 이 레슨의 모든 명령어를 Mac 사용자와 똑같이 따라 하면 된다. PowerShell을 골랐다면 아래 명령어마다 붙은 "Windows PowerShell" 표기를 보고 따라 한다.
-
----
+이후 모든 명령어는 Mac/Git Bash 기준.
 
 ## 생존 명령어 10개
 
-### 1. 현재 위치 확인
+### 1. `pwd` — 현재 위치
+지금 어느 폴더에 있는지. 길 잃으면 가장 먼저 친다.
 
-```bash
-pwd
-```
+### 2. `ls` — 폴더 목록
+현재 폴더 내용. `ls -la`는 숨김 파일까지 상세.
 
-"Print Working Directory". 지금 어느 폴더에 있는지 보여준다. 길을 잃으면 가장 먼저 친다.
+### 3. `cd <폴더>` — 폴더 이동
+폴더 이름은 `Tab` 키로 자동완성. 예 — `cd Doc<Tab>` → `cd Documents/`.
 
-### 2. 폴더 목록 보기
+### 4. `cd ..` — 상위 폴더
+점 두 개(`..`)는 '한 단계 위'.
 
-```bash
-ls          # Mac / Linux
-dir         # Windows PowerShell
-```
+### 5. `cd ~` — 홈으로
+어디서든 홈(내 사용자 폴더)으로 돌아온다. 길 잃었을 때.
 
-현재 폴더 안에 무엇이 있는지 보여준다.
+### 6. `mkdir <이름>` — 새 폴더 만들기
 
-```bash
-ls -la      # 숨김 파일 포함, 상세 정보
-```
+### 7. `touch <파일>` — 빈 파일 만들기
+예 — `touch README.md`.
 
-### 3. 폴더 이동
+### 8. `cat <파일>` — 파일 내용 보기
+짧은 텍스트 파일 출력. 긴 파일에는 부적합.
 
-```bash
-cd Documents
-cd my-ai-builder-lab
-```
+### 9. `code .` — VS Code로 현재 폴더 열기
+점(`.`)은 '현재 폴더'. VS Code 설치되어 있어야 한다.
 
-"Change Directory". 폴더 이름을 Tab 키로 자동완성할 수 있다.
-
-### 4. 상위 폴더로
-
-```bash
-cd ..
-```
-
-점 두 개(`..`)는 '한 단계 위'를 의미한다.
-
-### 5. 홈 디렉토리로
-
-```bash
-cd ~
-```
-
-어디서든 홈(내 사용자 폴더)으로 돌아온다. 길을 잃었을 때.
-
-### 6. 새 폴더 만들기
-
-```bash
-mkdir my-ai-builder-lab
-```
-
-"Make Directory". 폴더를 만든다.
-
-### 7. 빈 파일 만들기
-
-```bash
-touch README.md          # Mac / Linux
-new-item README.md       # Windows PowerShell
-```
-
-### 8. 파일 내용 보기
-
-```bash
-cat README.md
-```
-
-파일 내용을 터미널에 출력한다.
-
-### 9. VS Code로 현재 폴더 열기
-
-```bash
-code .
-```
-
-점(`.`)은 '현재 폴더'를 의미한다. VS Code가 설치되어 있어야 한다.
-
-### 10. 명령 중단
-
-```bash
-Ctrl+C
-```
-
-실행 중인 명령을 강제로 멈춘다. 뭔가 잘못됐을 때 제일 먼저 시도한다.
-
----
+### 10. `Ctrl+C` — 명령 중단
+실행 중인 명령 강제 멈춤. 뭔가 잘못됐을 때 제일 먼저.
 
 ## 실습 순서
 
-터미널을 열고 아래를 순서대로 따라 친다. 실제 화면은 이런 모양이다.
+터미널을 열고 아래를 순서대로 친다.
 
 <Terminal title="my-ai-builder-lab — zsh" lines={[
-  "$ pwd",
-  "/Users/yohan",
   "$ cd ~",
-  "$ ls",
-  "Applications  Desktop  Documents  Downloads  Music  ...",
   "$ mkdir my-ai-builder-lab",
   "$ cd my-ai-builder-lab",
   "$ touch README.md",
@@ -142,49 +67,38 @@ Ctrl+C
   "-rw-r--r--   1 yohan  staff    0 May 22 10:25 README.md",
 ]} />
 
-마지막에 `README.md`가 목록에 보이면 성공. 빈 파일이라 용량이 0이지만, 첫 실습 산출물은 만들어진 것이다.
+마지막에 `README.md`가 목록에 보이면 성공. 빈 파일이지만 **첫 실습 산출물**은 만들어진 것이다.
 
----
+## 에러는 정보다
 
-## 에러가 났을 때
+터미널 에러는 무서운 신호가 아니라 단서. 두 종류가 90%를 차지.
 
-터미널 에러는 정보다. 무서워하지 말고 읽는다.
+- `No such file or directory` — 폴더·파일 이름이 틀렸거나 대소문자 다름. `ls`로 확인 후 다시.
+- `command not found` — 도구가 설치 안 됐거나 이름 오타.
 
-**가장 흔한 에러:**
-
-```
-No such file or directory
-```
-→ 폴더 이름이 틀렸거나 대소문자가 다른 것. `ls`로 폴더 이름을 확인하고 다시 시도.
+**해결 방법은 거의 하나** — 에러 메시지를 통째로 AI에 붙여넣고 묻는다.
 
 ```
-command not found
-```
-→ 해당 도구가 설치 안 됐거나 이름이 틀린 것.
-
-**해결 방법:** 에러 메시지를 AI에게 통째로 붙여넣는다.
-
-```
-이 에러가 떴어요:
-No such file or directory: 'Documents/my-project'
-Mac 터미널에서 cd 명령어를 쓰고 있어요. 어떻게 해결하나요?
+이 에러가 떴어요: No such file or directory: 'Documents/my-project'
+Mac 터미널에서 cd 명령어 쓰고 있어요. 어떻게 해결하나요?
 ```
 
-이 방법으로 거의 모든 터미널 에러가 해결된다.
+이 패턴으로 거의 모든 터미널 에러가 해결된다.
 
----
-
-## 기억할 것
+## 시간을 아끼는 4 단축키
 
 | 단축키 | 기능 |
 |--------|------|
-| `Tab` | 폴더·파일 이름 자동완성 |
-| `↑` (위 화살표) | 이전에 입력한 명령어 |
+| `Tab` | 폴더·파일 이름 자동완성 (오타 방지의 핵심) |
+| `↑` | 이전 명령어 (재실행할 때) |
 | `Ctrl+C` | 실행 중인 명령 중단 |
 | `Ctrl+L` | 화면 지우기 |
 
-`Tab` 자동완성을 쓰면 오타가 줄어든다. 폴더 이름 첫 몇 글자만 치고 Tab을 누른다.
+`Tab` 자동완성을 쓰면 거의 모든 오타가 사라진다.
 
-## 다음 레슨
+## 흔한 함정
 
-터미널이 손에 익었다면, 이제 그 안에서 쓸 도구를 준비할 차례다. [다음 레슨](/lessons/ai-tool-account-and-cost)에서는 AI 도구 계정과 API 키를 발급하고, 무엇을 언제 돈 내고 쓰는지 정리한다.
+- **명령어 외우려고 함** — 처음엔 10개만. 나머지는 필요할 때 AI에게 묻는다.
+- **에러 보고 멈춤** — 에러는 정보다. 통째로 복사해 AI에 묻는다.
+- **공백·대소문자 무시** — 터미널은 둘 다 엄격. `cd Documents`와 `cd documents`는 다르다.
+- **`rm -rf` 함부로** — 이건 진짜로 컴퓨터를 망가뜨릴 수 있다. 다음 레슨(git)을 익힌 다음에 손댄다.
