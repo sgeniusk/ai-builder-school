@@ -5,7 +5,6 @@ import type { MDXComponents } from "mdx/types";
 export type MdxBody = ComponentType<{ components?: MDXComponents }>;
 
 // AI Literacy
-import CommonSkillsBody from "./lessons/common-skills-of-future-proof-people.mdx";
 import WhatLlmsBody from "./lessons/what-llms-are-good-and-bad-at.mdx";
 import HallucinationVerificationBody from "./lessons/hallucination-verification.mdx";
 import ChecksBeforeTrustingBody from "./lessons/checks-before-trusting-ai-output.mdx";
@@ -32,6 +31,7 @@ import McpProductionPatternsBody from "./lessons/mcp-production-patterns.mdx";
 import UserFeedbackCollectionForAiProductsBody from "./lessons/user-feedback-collection-for-ai-products.mdx";
 import EarlyUserRecruitmentForAiProductsBody from "./lessons/early-user-recruitment-for-ai-products.mdx";
 import ClaudeSkillsAuthoringBody from "./lessons/claude-skills-authoring.mdx";
+import WhatItMeansToUseAiBody from "./lessons/what-it-means-to-use-ai.mdx";
 
 // Prompt & Context Engineering
 import StructureOfGoodPromptsBody from "./lessons/structure-of-good-prompts.mdx";
@@ -89,7 +89,6 @@ import PrivacyAndAcademicEthicsBody from "./lessons/privacy-and-academic-ethics.
 import WhatIsAnLlmBody from "./lessons/what-is-an-llm.mdx";
 import TokensContextAndCostBody from "./lessons/tokens-context-and-cost.mdx";
 import AiServiceLandscapeBody from "./lessons/ai-service-landscape.mdx";
-import AiChatFeaturesBasicsBody from "./lessons/ai-chat-features-basics.mdx";
 import GitBasicsAndTerminologyBody from "./lessons/git-basics-and-terminology.mdx";
 import GithubEssentialsBody from "./lessons/github-essentials.mdx";
 
@@ -128,7 +127,6 @@ import ClaudeCodeTokenSavingBody from "./lessons/claude-code-token-saving.mdx";
  */
 export const lessonBodies: Record<string, MdxBody | undefined> = {
   // AI Literacy
-  "common-skills-of-future-proof-people": CommonSkillsBody,
   "what-llms-are-good-and-bad-at": WhatLlmsBody,
   "hallucination-verification": HallucinationVerificationBody,
   "checks-before-trusting-ai-output": ChecksBeforeTrustingBody,
@@ -228,9 +226,9 @@ export const lessonBodies: Record<string, MdxBody | undefined> = {
   "what-is-an-llm": WhatIsAnLlmBody,
   "tokens-context-and-cost": TokensContextAndCostBody,
   "ai-service-landscape": AiServiceLandscapeBody,
-  "ai-chat-features-basics": AiChatFeaturesBasicsBody,
   "git-basics-and-terminology": GitBasicsAndTerminologyBody,
   "github-essentials": GithubEssentialsBody,
+  "what-it-means-to-use-ai": WhatItMeansToUseAiBody,
 };
 
 export function getLessonBody(slug: string): MdxBody | null {

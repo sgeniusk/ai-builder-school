@@ -13,13 +13,14 @@ export const stages: Stage[] = [
     titleEn: "Meet AI",
     positionChange: "AI를 이해하고 도구를 손에 잡는다",
     deliverable: "매일 쓰는 AI 도구 1개 + 첫 git repo + AI 강약 판단지 v1",
-    shortDescription: "LLM 원리부터 git·GitHub까지 13개의 가벼운 레슨. 끝나면 매일 쓰는 AI 도구 1개와 \"AI 강약 판단지 v1\"이 손에 남는다.",
+    shortDescription: "\"AI를 쓴다는 것\"부터 LLM 원리, git·GitHub까지 10개의 가벼운 레슨. 끝나면 매일 쓰는 AI 도구 1개와 \"AI 강약 판단지 v1\"이 손에 남는다.",
     longDescription:
-      "AI Builder가 되는 사다리의 첫 칸. 13개의 가벼운 레슨이 셋으로 묶여 들어옵니다. **1A 원리(5)** — LLM이 뭔지, 토큰은 뭐고 비용은 왜 그렇게 매겨지는지. AI의 강함과 약함이 어디서 오는지 그 뿌리를 짚는다. **1B 도구·환경(6)** — 매일 쓸 AI 도구 하나, 첫 git 저장소, 비용 안 새도록 한 잠금장치까지 손에 잡히는 환경. **1C 판단(2)** — 무엇을 AI에 맡기고 무엇은 직접 결정할지. 끝나는 시점에 매일 쓰는 AI 도구 1개, 첫 git repo, 그리고 **\"AI 강약 판단지 v1\"** 한 장이 손에 남는다. Stage 2에서 본격적으로 다듬을 판단의 첫 윤곽.",
+      "AI Builder가 되는 사다리의 첫 칸. 10개의 가벼운 레슨이 셋으로 묶여 들어옵니다. **1A 원리(4)** — AI를 쓴다는 게 일상에서 어디까지인지부터, LLM이 뭔지, 토큰·비용은 어떻게 매겨지는지, AI 도구는 어떻게 고르고 익히는지. AI의 강함과 약함이 어디서 오는지 그 뿌리를 짚는다. **1B 도구·환경(5)** — 매일 쓸 AI 도구 하나, 첫 git 저장소, 계정·비용까지 손에 잡히는 환경. **1C 판단(1)** — 무엇을 AI에 맡기고 무엇은 직접 결정할지. 끝나는 시점에 매일 쓰는 AI 도구 1개, 첫 git repo, 그리고 **\"AI 강약 판단지 v1\"** 한 장이 손에 남는다. Stage 2에서 본격적으로 다듬을 판단의 첫 윤곽.",
     level: "beginner",
-    estimatedHours: 13,
+    estimatedHours: 10,
     targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     outcomes: [
+      "\"AI를 쓴다\"는 게 일상에서 어디까지인지, 다양한 실례로 큰 그림을 잡는다",
       "LLM이 다음 토큰을 예측하는 기계임을 알고, 잘하는 일/못하는 일의 윤곽을 잡는다",
       "토큰·맥락·비용의 관계를 이해해 청구서 쇼크를 예방한다",
       "자기 모델 서비스와 API 애그리게이터의 차이를 알고 도구를 고른다",
@@ -39,34 +40,30 @@ export const stages: Stage[] = [
     ],
     lessonSlugs: [
       // 1a 원리 — 시작 전 자가진단은 template /templates/ai-strength-self-check 으로 분리
+      "what-it-means-to-use-ai",
       "what-is-an-llm",
       "tokens-context-and-cost",
       "ai-service-landscape",
-      "ai-chat-features-basics",
-      "common-skills-of-future-proof-people",
       // 1b 도구·환경
       "zero-coding-orientation",
       "terminal-first-day",
       "git-basics-and-terminology",
       "github-essentials",
       "ai-tool-account-and-cost",
-      "cost-monitoring-in-production",
       // 1c 함께 일하는 판단
       "ai-delegation-decision",
-      "ai-collaboration-mindset",
     ],
     subGroups: [
       {
         id: "1a",
         label: "AI를 이해하다",
-        shortDescription: "LLM·토큰·맥락·비용·서비스 지형·챗봇 기본 기능 — 터미널을 켜기 전에 AI 자체를 안다.",
+        shortDescription: "AI의 범위·LLM 원리·토큰·비용·도구 고르고 익히기 — 터미널을 켜기 전에 AI 자체를 안다.",
         deliverable: "자기 말로 LLM 한 단락",
         lessonSlugs: [
+          "what-it-means-to-use-ai",
           "what-is-an-llm",
           "tokens-context-and-cost",
           "ai-service-landscape",
-          "ai-chat-features-basics",
-          "common-skills-of-future-proof-people",
         ],
       },
       {
@@ -80,7 +77,6 @@ export const stages: Stage[] = [
           "git-basics-and-terminology",
           "github-essentials",
           "ai-tool-account-and-cost",
-          "cost-monitoring-in-production",
         ],
       },
       {
@@ -90,7 +86,6 @@ export const stages: Stage[] = [
         deliverable: "위임 체크리스트 v1",
         lessonSlugs: [
           "ai-delegation-decision",
-          "ai-collaboration-mindset",
         ],
       },
     ],
@@ -463,6 +458,7 @@ export const stages: Stage[] = [
       "responsible-ai-policy-template",
       "ai-app-cost-and-usage",
       "claude-code-token-saving",
+      "cost-monitoring-in-production",
       // 공유 축 (옛 Stage 8)
       "ai-product-brief",
       "landing-page-for-ai-product",
@@ -473,6 +469,7 @@ export const stages: Stage[] = [
       "early-user-recruitment-for-ai-products",
       "claude-skills-authoring",
       "portfolio-and-retrospective",
+      "ai-collaboration-mindset",
     ],
     recommendedTools: ["Evals SDK", "Promptfoo", "Langfuse", "Framer", "Vercel", "Stripe", "GitHub"],
     nextStageSlug: null,

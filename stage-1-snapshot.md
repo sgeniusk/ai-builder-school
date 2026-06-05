@@ -1,0 +1,442 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "AI Builder School" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e7]: AI Builder School
+      - navigation "주요 메뉴" [ref=e8]:
+        - link "커리큘럼" [ref=e9] [cursor=pointer]:
+          - /url: /stages
+        - link "여정" [ref=e10] [cursor=pointer]:
+          - /url: /journeys
+        - link "프로젝트" [ref=e11] [cursor=pointer]:
+          - /url: /projects
+        - link "특강" [ref=e12] [cursor=pointer]:
+          - /url: /specials
+        - link "템플릿" [ref=e13] [cursor=pointer]:
+          - /url: /templates
+        - link "소개" [ref=e14] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e15]:
+        - button "검색" [ref=e16] [cursor=pointer]:
+          - img [ref=e17]
+        - button "다크 모드로 전환" [ref=e417] [cursor=pointer]:
+          - img [ref=e418]
+        - link "학습 시작 →" [ref=e21] [cursor=pointer]:
+          - /url: /start
+          - text: 학습 시작
+          - generic [ref=e22]: →
+        - button "씩씩한이슬 — 프로필 열기" [ref=e420] [cursor=pointer]:
+          - img [ref=e421]
+  - main [ref=e24]:
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - generic [ref=e28]: STAGE 1
+        - generic [ref=e29]: ·
+        - generic [ref=e30]: 입문
+        - generic [ref=e31]: ·
+        - generic [ref=e32]: 13H
+      - heading "Stage 1 · AI와 만나다" [level=1] [ref=e33]
+      - paragraph [ref=e34]: LLM이 뭔지부터 터미널·git·GitHub까지, AI를 일에 들이기 전에 알아야 할 원리와 도구를 한 사다리로 잡는다.
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - generic [ref=e37]: 학습자 위치
+          - generic [ref=e38]: AI를 이해하고 도구를 손에 잡는다
+        - generic [ref=e39]:
+          - generic [ref=e40]: 손에 남는 것
+          - generic [ref=e41]: 매일 쓰는 AI 도구 1개 + 첫 git repo
+        - generic [ref=e42]:
+          - generic [ref=e43]: Lessons
+          - generic [ref=e44]: "13"
+        - generic [ref=e45]:
+          - generic [ref=e46]: Hours
+          - generic [ref=e47]: "13"
+    - generic [ref=e49]:
+      - generic [ref=e50]: 도입
+      - article [ref=e51]:
+        - heading "AI와 만나다" [level=2] [ref=e52]
+        - paragraph [ref=e53]: AI를 처음 진지하게 마주할 때, 사람들은 보통 두 가지를 동시에 느낍니다. 하나는 설렘 — "이걸 잘 쓰면 일이 달라지겠다." 다른 하나는 불안 — "이게 내 자리를 대신하면 어쩌지."
+        - paragraph [ref=e54]:
+          - text: 이 단계는 그 두 감정을 다 안고 시작합니다. 그리고 한 가지를 분명히 합니다.
+          - strong [ref=e55]: AI는 당신의 능력을 빼앗지 않습니다. 다만 당신이 판단해야 할 지점을 더 적나라하게 드러냅니다.
+        - paragraph [ref=e56]: AI가 초안을 1분에 써주면, 남는 건 "이 초안이 맞는가"를 판단하는 일이에요. AI가 코드를 짜주면, 남는 건 "이 코드를 신뢰할까"를 판단하는 일입니다. 도구가 빨라질수록 판단의 비중이 커져요. 그래서 이 학교의 첫 단계는 화려한 기능이 아니라, 판단의 기초를 다지는 데 씁니다.
+        - paragraph [ref=e57]: 일곱 개의 레슨이 당신을 이렇게 데려갑니다. 먼저 도구를 켜고(코딩 에이전트·터미널), 그 도구에 드는 비용을 통제하고(계정·예산·모니터링), AI 시대에 흔들리지 않는 공통 역량을 짚고, 무엇을 AI에 맡길지 판단하는 기준을 세우고, 마지막으로 그 역량을 팀으로 번지게 합니다.
+        - paragraph [ref=e58]: 끝나는 시점에 당신 손에 남는 건 "매일 쓰는 AI 도구 하나"입니다. 거창하지 않아요. 하지만 그 하나를 두려움 없이, 비용 걱정 없이, 판단 기준을 가지고 쓴다는 것 — 그게 빌더가 되는 사다리의 첫 칸입니다.
+    - generic [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]: 이 단계는
+        - paragraph [ref=e64]: AI Builder가 되는 사다리의 첫 칸. 세 단계로 펼쳐진다. (1a) **원리** — LLM이 무엇이고, 토큰·맥락·비용은 어떻게 엮이고, 서비스는 어떻게 나뉘고, 챗봇의 기본 기능과 사람-AI 분업의 큰 그림. (1b) **도구·환경** — 코딩 에이전트가 왜 터미널을 쓰고, git/GitHub로 작업을 어떻게 안전망에 둬야 하며, 계정·API 키·비용을 어떻게 관리하는지. (1c) **판단** — 어떤 일을 AI에 맡길지, 사람으로 남는 협업 마인드셋. 끝나는 시점에 매일 쓰는 AI 도구 1개와 첫 git repo, 자기 업무용 위임 체크리스트가 손에 남는다.
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - generic [ref=e67]: Outcomes
+          - list [ref=e68]:
+            - listitem [ref=e69]: LLM이 다음 토큰을 예측하는 기계임을 알고, 잘하는 일/못하는 일을 구분한다
+            - listitem [ref=e70]: 토큰·맥락·비용의 관계를 이해해 청구서 쇼크를 예방한다
+            - listitem [ref=e71]: 자기 모델 서비스와 API 애그리게이터의 차이를 알고 도구를 고른다
+            - listitem [ref=e72]: 터미널 기본 명령어 10개를 두려움 없이 사용한다
+            - listitem [ref=e73]: git으로 작업을 시점 기록하고 GitHub에 첫 repo를 만든다
+            - listitem [ref=e74]: AI 비용을 주간 루프로 모니터링하는 습관을 잡는다
+            - listitem [ref=e75]: 어떤 일을 AI에 맡길지 판단하는 개인 기준표를 갖는다
+        - generic [ref=e76]:
+          - generic [ref=e77]: 다루는 주제
+          - generic [ref=e78]:
+            - generic [ref=e79]: LLM 원리·토큰·맥락·비용
+            - generic [ref=e80]: AI 서비스 지형·챗봇 공통 기능
+            - generic [ref=e81]: 터미널·CLI 기초
+            - generic [ref=e82]: git·GitHub·.gitignore
+            - generic [ref=e83]: AI 도구 계정·비용 모니터링
+            - generic [ref=e84]: 위임 판단 (AI Fluency Delegation)
+            - generic [ref=e85]: 사람-AI 협업 마인드셋
+        - generic [ref=e86]:
+          - generic [ref=e87]: 대상 여정
+          - generic [ref=e88]:
+            - generic [ref=e89]: Practitioner
+            - generic [ref=e90]: Adopter
+            - generic [ref=e91]: Creator
+            - generic [ref=e92]: Founder
+            - generic [ref=e93]: Engineer
+            - generic [ref=e94]: Explorer
+        - generic [ref=e95]:
+          - generic [ref=e96]: 추천 도구
+          - generic [ref=e97]:
+            - generic [ref=e98]: Claude
+            - generic [ref=e99]: ChatGPT
+            - generic [ref=e100]: Codex CLI
+            - generic [ref=e101]: Claude Code
+            - generic [ref=e102]: git
+            - generic [ref=e103]: GitHub
+    - generic [ref=e105]:
+      - generic [ref=e106]: Lessons · 13
+      - heading "이 단계의 레슨" [level=2] [ref=e107]
+      - generic [ref=e108]:
+        - generic [ref=e109]:
+          - generic [ref=e110]: 내 여정으로 보기
+          - button "여정 필터 해제" [ref=e443] [cursor=pointer]: 전체 보기 ✕
+        - generic [ref=e111]:
+          - button "실무자" [ref=e112] [cursor=pointer]:
+            - generic [ref=e114]: 실무자
+          - button "도입자" [ref=e115] [cursor=pointer]:
+            - generic [ref=e117]: 도입자
+          - button "크리에이터" [ref=e118] [cursor=pointer]:
+            - generic [ref=e120]: 크리에이터
+          - button "파운더" [ref=e121] [cursor=pointer]:
+            - generic [ref=e123]: 파운더
+          - button "엔지니어" [ref=e124] [cursor=pointer]:
+            - generic [ref=e126]: 엔지니어
+          - button "탐험가" [pressed] [ref=e127] [cursor=pointer]:
+            - generic [ref=e129]: 탐험가
+      - generic [ref=e130]:
+        - generic [ref=e131]:
+          - heading "1AAI를 이해하다" [level=3] [ref=e132]
+          - generic [ref=e133]: → 자기 말로 LLM 한 단락
+        - paragraph [ref=e134]: LLM·토큰·맥락·비용·서비스 지형·챗봇 기본 기능 — 터미널을 켜기 전에 AI 자체를 안다.
+        - list [ref=e135]:
+          - listitem [ref=e136] [cursor=pointer]:
+            - link "01 LLM은 무엇을 하는 기계인가 남는 것 what-is-an-llm-note.md 이 레슨이 속한 여정 10–25분 · 입문" [ref=e137]:
+              - /url: /lessons/what-is-an-llm
+              - generic [ref=e138]: "01"
+              - generic [ref=e139]:
+                - generic [ref=e140]: LLM은 무엇을 하는 기계인가
+                - generic [ref=e141]:
+                  - generic [ref=e142]: 남는 것
+                  - generic [ref=e143]: what-is-an-llm-note.md
+              - generic "이 레슨이 속한 여정" [ref=e144]:
+                - generic "Practitioner" [ref=e145]
+                - generic "Adopter" [ref=e146]
+                - generic "Creator" [ref=e147]
+                - generic "Founder" [ref=e148]
+                - generic "Engineer" [ref=e149]
+                - generic "Explorer" [ref=e150]
+              - generic [ref=e151]: 10–25분 · 입문
+          - listitem [ref=e152] [cursor=pointer]:
+            - link "02 토큰·컨텍스트·비용 — 한 단어가 쓰는 세 모자 남는 것 cost-per-task-cheatsheet.md 이 레슨이 속한 여정 14–35분 · 입문" [ref=e153]:
+              - /url: /lessons/tokens-context-and-cost
+              - generic [ref=e154]: "02"
+              - generic [ref=e155]:
+                - generic [ref=e156]: 토큰·컨텍스트·비용 — 한 단어가 쓰는 세 모자
+                - generic [ref=e157]:
+                  - generic [ref=e158]: 남는 것
+                  - generic [ref=e159]: cost-per-task-cheatsheet.md
+              - generic "이 레슨이 속한 여정" [ref=e160]:
+                - generic "Practitioner" [ref=e161]
+                - generic "Adopter" [ref=e162]
+                - generic "Creator" [ref=e163]
+                - generic "Founder" [ref=e164]
+                - generic "Engineer" [ref=e165]
+                - generic "Explorer" [ref=e166]
+              - generic [ref=e167]: 14–35분 · 입문
+          - listitem [ref=e168] [cursor=pointer]:
+            - link "03 AI 서비스 지도 — 자체모델 vs 통합, 구독 vs API 남는 것 service-rule.md 이 레슨이 속한 여정 12–30분 · 입문" [ref=e169]:
+              - /url: /lessons/ai-service-landscape
+              - generic [ref=e170]: "03"
+              - generic [ref=e171]:
+                - generic [ref=e172]: AI 서비스 지도 — 자체모델 vs 통합, 구독 vs API
+                - generic [ref=e173]:
+                  - generic [ref=e174]: 남는 것
+                  - generic [ref=e175]: service-rule.md
+              - generic "이 레슨이 속한 여정" [ref=e176]:
+                - generic "Practitioner" [ref=e177]
+                - generic "Adopter" [ref=e178]
+                - generic "Creator" [ref=e179]
+                - generic "Founder" [ref=e180]
+                - generic "Engineer" [ref=e181]
+                - generic "Explorer" [ref=e182]
+              - generic [ref=e183]: 12–30분 · 입문
+          - listitem [ref=e184] [cursor=pointer]:
+            - link "04 챗봇 공통 기능 — Projects · Memory · CLI · Artifacts 남는 것 my-chat-features.md 이 레슨이 속한 여정 16–40분 · 입문" [ref=e185]:
+              - /url: /lessons/ai-chat-features-basics
+              - generic [ref=e186]: "04"
+              - generic [ref=e187]:
+                - generic [ref=e188]: 챗봇 공통 기능 — Projects · Memory · CLI · Artifacts
+                - generic [ref=e189]:
+                  - generic [ref=e190]: 남는 것
+                  - generic [ref=e191]: my-chat-features.md
+              - generic "이 레슨이 속한 여정" [ref=e192]:
+                - generic "Practitioner" [ref=e193]
+                - generic "Adopter" [ref=e194]
+                - generic "Creator" [ref=e195]
+                - generic "Founder" [ref=e196]
+                - generic "Engineer" [ref=e197]
+                - generic "Explorer" [ref=e198]
+              - generic [ref=e199]: 16–40분 · 입문
+          - listitem [ref=e200] [cursor=pointer]:
+            - link "05 AI 시대에 뒤쳐지지 않는 사람들의 공통 역량 남는 것 AI 사용 판단 체크리스트 v1 이 레슨이 속한 여정 16–40분 · 입문" [ref=e201]:
+              - /url: /lessons/common-skills-of-future-proof-people
+              - generic [ref=e202]: "05"
+              - generic [ref=e203]:
+                - generic [ref=e204]: AI 시대에 뒤쳐지지 않는 사람들의 공통 역량
+                - generic [ref=e205]:
+                  - generic [ref=e206]: 남는 것
+                  - generic [ref=e207]: AI 사용 판단 체크리스트 v1
+              - generic "이 레슨이 속한 여정" [ref=e208]:
+                - generic "Practitioner" [ref=e209]
+                - generic "Adopter" [ref=e210]
+                - generic "Creator" [ref=e211]
+                - generic "Founder" [ref=e212]
+                - generic "Engineer" [ref=e213]
+                - generic "Explorer" [ref=e214]
+              - generic [ref=e215]: 16–40분 · 입문
+      - generic [ref=e216]:
+        - generic [ref=e217]:
+          - heading "1B도구·환경을 손에 잡다" [level=3] [ref=e218]
+          - generic [ref=e219]: → 첫 git repo + AI 도구 1개
+        - paragraph [ref=e220]: 터미널·git·GitHub·계정·비용 — 안전망 위에서 AI 도구를 매일 쓸 수 있는 환경을 만든다.
+        - list [ref=e221]:
+          - listitem [ref=e222] [cursor=pointer]:
+            - link "06 코딩 에이전트 오리엔테이션 — 터미널이 왜 필요한가 남는 것 오리엔테이션 메모 이 레슨이 속한 여정 8–20분 · 입문" [ref=e223]:
+              - /url: /lessons/zero-coding-orientation
+              - generic [ref=e224]: "06"
+              - generic [ref=e225]:
+                - generic [ref=e226]: 코딩 에이전트 오리엔테이션 — 터미널이 왜 필요한가
+                - generic [ref=e227]:
+                  - generic [ref=e228]: 남는 것
+                  - generic [ref=e229]: 오리엔테이션 메모
+              - generic "이 레슨이 속한 여정" [ref=e230]:
+                - generic "Practitioner · 비대상" [ref=e231]
+                - generic "Adopter" [ref=e232]
+                - generic "Creator" [ref=e233]
+                - generic "Founder" [ref=e234]
+                - generic "Engineer · 비대상" [ref=e235]
+                - generic "Explorer" [ref=e236]
+              - generic [ref=e237]: 8–20분 · 입문
+          - listitem [ref=e238] [cursor=pointer]:
+            - 'link "07 터미널 첫날 — 겁먹지 않고 살아남는 10개 명령어 남는 것 `my-ai-builder-lab` 폴더 이 레슨이 속한 여정 12–30분 · 입문" [ref=e239]':
+              - /url: /lessons/terminal-first-day
+              - generic [ref=e240]: "07"
+              - generic [ref=e241]:
+                - generic [ref=e242]: 터미널 첫날 — 겁먹지 않고 살아남는 10개 명령어
+                - generic [ref=e243]:
+                  - generic [ref=e244]: 남는 것
+                  - generic [ref=e245]: "`my-ai-builder-lab` 폴더"
+              - generic "이 레슨이 속한 여정" [ref=e246]:
+                - generic "Practitioner" [ref=e247]
+                - generic "Adopter" [ref=e248]
+                - generic "Creator" [ref=e249]
+                - generic "Founder · 비대상" [ref=e250]
+                - generic "Engineer" [ref=e251]
+                - generic "Explorer" [ref=e252]
+              - generic [ref=e253]: 12–30분 · 입문
+          - listitem [ref=e254] [cursor=pointer]:
+            - link "08 Git 기본과 용어 — 버전 관리는 AI 빌더의 안전망 남는 것 my-first-repo · git-basics-cheatsheet.md 이 레슨이 속한 여정 20–50분 · 입문" [ref=e255]:
+              - /url: /lessons/git-basics-and-terminology
+              - generic [ref=e256]: "08"
+              - generic [ref=e257]:
+                - generic [ref=e258]: Git 기본과 용어 — 버전 관리는 AI 빌더의 안전망
+                - generic [ref=e259]:
+                  - generic [ref=e260]: 남는 것
+                  - generic [ref=e261]: my-first-repo · git-basics-cheatsheet.md
+              - generic "이 레슨이 속한 여정" [ref=e262]:
+                - generic "Practitioner" [ref=e263]
+                - generic "Adopter" [ref=e264]
+                - generic "Creator" [ref=e265]
+                - generic "Founder" [ref=e266]
+                - generic "Engineer" [ref=e267]
+                - generic "Explorer" [ref=e268]
+              - generic [ref=e269]: 20–50분 · 입문
+          - listitem [ref=e270] [cursor=pointer]:
+            - link "09 GitHub 본질 — git 위에 얹는 협업·공유 인프라 남는 것 github.com/<username>/my-ai-builder-lab 이 레슨이 속한 여정 20–50분 · 입문" [ref=e271]:
+              - /url: /lessons/github-essentials
+              - generic [ref=e272]: "09"
+              - generic [ref=e273]:
+                - generic [ref=e274]: GitHub 본질 — git 위에 얹는 협업·공유 인프라
+                - generic [ref=e275]:
+                  - generic [ref=e276]: 남는 것
+                  - generic [ref=e277]: github.com/<username>/my-ai-builder-lab
+              - generic "이 레슨이 속한 여정" [ref=e278]:
+                - generic "Practitioner" [ref=e279]
+                - generic "Adopter" [ref=e280]
+                - generic "Creator" [ref=e281]
+                - generic "Founder" [ref=e282]
+                - generic "Engineer" [ref=e283]
+                - generic "Explorer" [ref=e284]
+              - generic [ref=e285]: 20–50분 · 입문
+          - listitem [ref=e286] [cursor=pointer]:
+            - link "10 AI 도구 계정 세팅과 비용 관리 — 무엇을 언제 돈 내고 쓰는가 남는 것 무료 한도 트랙 세팅 완료 이 레슨이 속한 여정 14–35분 · 입문" [ref=e287]:
+              - /url: /lessons/ai-tool-account-and-cost
+              - generic [ref=e288]: "10"
+              - generic [ref=e289]:
+                - generic [ref=e290]: AI 도구 계정 세팅과 비용 관리 — 무엇을 언제 돈 내고 쓰는가
+                - generic [ref=e291]:
+                  - generic [ref=e292]: 남는 것
+                  - generic [ref=e293]: 무료 한도 트랙 세팅 완료
+              - generic "이 레슨이 속한 여정" [ref=e294]:
+                - generic "Practitioner" [ref=e295]
+                - generic "Adopter" [ref=e296]
+                - generic "Creator" [ref=e297]
+                - generic "Founder" [ref=e298]
+                - generic "Engineer" [ref=e299]
+                - generic "Explorer" [ref=e300]
+              - generic [ref=e301]: 14–35분 · 입문
+          - listitem [ref=e302] [cursor=pointer]:
+            - 'link "11 프로덕션 비용 모니터링 — 청구서가 터지기 전에 남는 것 AI 비용 모니터링 시트 (`cost-monitor.md`) 이 레슨이 속한 여정 16–40분 · 입문" [ref=e303]':
+              - /url: /lessons/cost-monitoring-in-production
+              - generic [ref=e304]: "11"
+              - generic [ref=e305]:
+                - generic [ref=e306]: 프로덕션 비용 모니터링 — 청구서가 터지기 전에
+                - generic [ref=e307]:
+                  - generic [ref=e308]: 남는 것
+                  - generic [ref=e309]: "AI 비용 모니터링 시트 (`cost-monitor.md`)"
+              - generic "이 레슨이 속한 여정" [ref=e310]:
+                - generic "Practitioner" [ref=e311]
+                - generic "Adopter" [ref=e312]
+                - generic "Creator" [ref=e313]
+                - generic "Founder" [ref=e314]
+                - generic "Engineer" [ref=e315]
+                - generic "Explorer" [ref=e316]
+              - generic [ref=e317]: 16–40분 · 입문
+      - generic [ref=e318]:
+        - generic [ref=e319]:
+          - heading "1C함께 일하는 판단" [level=3] [ref=e320]
+          - generic [ref=e321]: → 위임 체크리스트 v1
+        - paragraph [ref=e322]: 어떤 일을 AI에 맡기고 무엇은 사람이 결정해야 하는지의 기준을 잡는다.
+        - list [ref=e323]:
+          - listitem [ref=e324] [cursor=pointer]:
+            - 'link "12 AI에 맡길까 말까 — 위임 판단의 기준 남는 것 AI 위임 판단 기준표 (`delegation-rule.md`) 이 레슨이 속한 여정 16–40분 · 입문" [ref=e325]':
+              - /url: /lessons/ai-delegation-decision
+              - generic [ref=e326]: "12"
+              - generic [ref=e327]:
+                - generic [ref=e328]: AI에 맡길까 말까 — 위임 판단의 기준
+                - generic [ref=e329]:
+                  - generic [ref=e330]: 남는 것
+                  - generic [ref=e331]: "AI 위임 판단 기준표 (`delegation-rule.md`)"
+              - generic "이 레슨이 속한 여정" [ref=e332]:
+                - generic "Practitioner" [ref=e333]
+                - generic "Adopter" [ref=e334]
+                - generic "Creator" [ref=e335]
+                - generic "Founder" [ref=e336]
+                - generic "Engineer" [ref=e337]
+                - generic "Explorer" [ref=e338]
+              - generic [ref=e339]: 16–40분 · 입문
+          - listitem [ref=e340] [cursor=pointer]:
+            - 'link "13 팀에 AI를 들이는 법 — 저항을 다루는 마인드셋 남는 것 팀 AI 도입 계획 (`team-ai-rollout.md`) 이 레슨이 속한 여정 16–40분 · 입문" [ref=e341]':
+              - /url: /lessons/ai-collaboration-mindset
+              - generic [ref=e342]: "13"
+              - generic [ref=e343]:
+                - generic [ref=e344]: 팀에 AI를 들이는 법 — 저항을 다루는 마인드셋
+                - generic [ref=e345]:
+                  - generic [ref=e346]: 남는 것
+                  - generic [ref=e347]: "팀 AI 도입 계획 (`team-ai-rollout.md`)"
+              - generic "이 레슨이 속한 여정" [ref=e348]:
+                - generic "Practitioner" [ref=e349]
+                - generic "Adopter" [ref=e350]
+                - generic "Creator" [ref=e351]
+                - generic "Founder" [ref=e352]
+                - generic "Engineer" [ref=e353]
+                - generic "Explorer" [ref=e354]
+              - generic [ref=e355]: 16–40분 · 입문
+    - generic [ref=e357]:
+      - generic [ref=e358]: 마무리
+      - article [ref=e359]:
+        - heading "여기까지 온 당신" [level=2] [ref=e360]
+        - paragraph [ref=e361]: Stage 1을 시작할 때 당신은 AI 앞에서 설렘 반 불안 반이었습니다. 이제는 다릅니다.
+        - paragraph [ref=e362]: 당신은 터미널을 두려워하지 않습니다. AI 도구 계정을 만들었고, 그 비용이 새지 않게 매주 점검하는 루프를 가졌어요. 무엇을 AI에 맡기고 무엇을 직접 할지, 세 축으로 3초 안에 판단할 수 있습니다. 그리고 그 역량을 혼자 쥐고 있지 않고, 팀으로 번지게 하는 계획까지 세웠어요.
+        - paragraph [ref=e363]:
+          - text: 한 문장으로 줄이면 —
+          - strong [ref=e364]: 이제 당신은 AI가 틀렸을 때를 더 빨리 알아채는 사람이 되었습니다.
+          - text: 이건 작아 보이지만 결정적인 변화예요. 다음 단계부터 당신은 AI에게 점점 더 큰 일을 맡기게 됩니다. 그 일이 안전하려면, 틀림을 빨리 알아채는 눈이 먼저 있어야 합니다. Stage 1이 그 눈을 만들었어요.
+        - paragraph [ref=e365]:
+          - text: 다음은
+          - link "Stage 2 · AI에게 묻고 답하다" [ref=e366] [cursor=pointer]:
+            - /url: /lessons/structure-of-good-prompts
+          - text: 입니다. 도구를 켰으니, 이제 그 도구에서 의도한 답을 일관되게 끌어내고, 그 답을 검증하는 기술로 넘어갑니다. 만나는 단계는 끝났고, 대화하는 단계가 시작됩니다.
+    - generic [ref=e370]:
+      - generic [ref=e371]:
+        - generic [ref=e372]: Next stage
+        - link "Stage 2 · AI에게 묻고 답하다" [ref=e373] [cursor=pointer]:
+          - /url: /stages/stage-2-ask-and-refine
+        - paragraph [ref=e374]: 재현 가능한 명세로 묻고, 받은 답을 검증·다듬어 일관된 결과를 얻는다.
+      - link "이어서 보기 →" [ref=e375] [cursor=pointer]:
+        - /url: /stages/stage-2-ask-and-refine
+        - text: 이어서 보기
+        - generic [ref=e376]: →
+  - contentinfo [ref=e377]:
+    - generic [ref=e378]:
+      - generic [ref=e379]:
+        - generic [ref=e380]:
+          - generic [ref=e383]: AI Builder School
+          - paragraph [ref=e384]: Codex와 Claude Code로 배우고, 만들고, 검증하고, 배포하는 AI 실전 학교. 한국어 기반, 빌더 중심, 과장 없이.
+        - generic [ref=e385]:
+          - heading "학습" [level=4] [ref=e386]
+          - list [ref=e387]:
+            - listitem [ref=e388]:
+              - link "학습 시작" [ref=e389] [cursor=pointer]:
+                - /url: /start
+            - listitem [ref=e390]:
+              - link "커리큘럼" [ref=e391] [cursor=pointer]:
+                - /url: /stages
+            - listitem [ref=e392]:
+              - link "여정" [ref=e393] [cursor=pointer]:
+                - /url: /journeys
+            - listitem [ref=e394]:
+              - link "프로젝트" [ref=e395] [cursor=pointer]:
+                - /url: /projects
+        - generic [ref=e396]:
+          - heading "자료" [level=4] [ref=e397]
+          - list [ref=e398]:
+            - listitem [ref=e399]:
+              - link "특강" [ref=e400] [cursor=pointer]:
+                - /url: /specials
+            - listitem [ref=e401]:
+              - link "템플릿" [ref=e402] [cursor=pointer]:
+                - /url: /templates
+            - listitem [ref=e403]:
+              - link "소개" [ref=e404] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e405]:
+          - heading "원칙" [level=4] [ref=e406]
+          - list [ref=e407]:
+            - listitem [ref=e408]:
+              - link "빌더 중심" [ref=e409] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e410]:
+              - link "도구 중립" [ref=e411] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e412]:
+              - link "과장 금지" [ref=e413] [cursor=pointer]:
+                - /url: /about
+      - generic [ref=e414]:
+        - generic [ref=e415]: © 2026 AI Builder School
+        - generic [ref=e416]: v1.0.1 · calm editorial
+  - button "Open Next.js Dev Tools" [ref=e449] [cursor=pointer]:
+    - img [ref=e450]
+  - alert [ref=e453]

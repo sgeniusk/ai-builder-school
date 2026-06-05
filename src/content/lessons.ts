@@ -2,89 +2,6 @@ import type { Lesson } from "@/lib/types";
 
 export const lessons: Lesson[] = [
   {
-    id: "lesson-105",
-    slug: "common-skills-of-future-proof-people",
-    titleKo: "AI 시대에 뒤쳐지지 않는 사람들의 공통 역량",
-    titleEn: "Common skills of future-proof people",
-    hook: "AI가 더 잘하는 일에 내 시간을 쓰지 않는 것 — 이것이 버티는 사람의 첫 번째 기술입니다.",
-    summary: "AI 시대에 대체되지 않는 사람들이 공통으로 가진 판단·검증·학습 습관을 정리합니다.",
-    level: "beginner",
-    estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
-    prerequisites: [],
-    learningGoals: [
-      "'AI를 쓰는 사람'과 'AI로 만드는 사람'의 차이를 한 문장으로 설명할 수 있다",
-      "자기만의 AI 판단 체크리스트 v1을 작성한다",
-      "주 1회 이상 돌릴 AI 사용 회고 루틴을 세운다",
-    ],
-    problemScenario:
-      "\"AI 쓰면 되는 거 아냐?\" 라는 말은 요즘 회식 자리마다 나옵니다. 그런데 막상 중요한 보고서를 받아보면 \"근거가 없네\", \"이거 사실이야?\" 같은 한 마디에 폐기됩니다. AI를 '쓰기는' 했는데 실무에 붙지 않는 이 틈 — 여기서부터 대화를 시작합니다.",
-    coreConcepts: [
-      {
-        term: "Human-in-the-loop",
-        explanation: "AI 산출물의 품질은 결국 사람의 검토 지점에서 결정됩니다. 어디에 사람을 끼울지 미리 정해둡니다.",
-      },
-      {
-        term: "근거 요구 습관",
-        explanation: "답을 받을 때 '출처·가정·한계'를 함께 요구하면 환각이 급격히 줄어듭니다.",
-      },
-      {
-        term: "AI 사용 회고",
-        explanation: "'AI가 잘한 것'과 '내가 바로잡은 것'을 매주 기록하면, 다음 주 프롬프트가 저절로 좋아집니다.",
-      },
-    ],
-    codexMission:
-      "Codex에게 '오늘 내가 AI에게 맡긴 일 3가지를 표로 정리하고, 각 항목에 대해 AI가 실수할 가능성이 가장 큰 포인트를 한 줄씩 적어달라'고 요청한다. 출력 형식을 Markdown 표로 고정한다.",
-    claudeCodeMission:
-      "Claude Code에게 `judgment-checklist.md` 파일을 만들고, 아래 섹션을 포함하도록 지시한다: 1) AI에게 맡길 때 위험한 일, 2) 내가 반드시 검토해야 하는 지점, 3) 이번 주 회고 양식.",
-    mission:
-      "Claude Code(또는 선호하는 코딩 에이전트)에게 아래 작업을 맡깁니다. 40분 안에 끝내는 걸 목표로 하세요.\n\n작업: 당신의 실제 업무 맥락을 반영한 `judgment-checklist.md`를 만듭니다.\n\n포함해야 할 섹션:\n1. \"AI에게 맡겨도 되는 일\" (예: 초안, 요약, 리서치 확장)\n2. \"AI에게 맡기면 위험한 일\" (예: 숫자 계산, 법적 문구, 사실 검증)\n3. \"내가 반드시 검토해야 하는 지점\" — 체크리스트 5개 이상\n4. \"이번 주 회고 양식\" — 'AI가 한 것 / 내가 바로잡은 것 / 다음에 바꿀 것' 3문\n\n에이전트에게 '당신의 업무'가 무엇인지 3문장 이내로 설명해 주세요. 그래야 일반론이 아니라 내 것에 붙는 체크리스트가 나옵니다.",
-    codexNote:
-      "Codex CLI에서는 파일 생성을 위해 `codex file create judgment-checklist.md` 형태로 명시적으로 요청하면 출력이 안정적입니다. 이후 대화에서 Codex가 같은 파일을 '다시 쓰지 않도록' 경로를 명시하세요.",
-    buildIntro:
-      "공통 역량 5개를 본인의 일에 매핑할 차례. 어디가 강하고 어디가 비어 있는지 가벼운 자가진단으로 시작하세요.",
-    buildSteps: [
-      "오늘 내가 AI에게 맡긴 일 3가지를 기록한다",
-      "각 항목에 대해 '가장 위험한 실수 지점'을 한 줄로 적는다",
-      "판단 체크리스트 초안을 Markdown으로 작성한다 (위 미션 프롬프트 사용)",
-      "회고 양식을 만들고 이번 주 금요일 오후 시간에 미리 넣어둔다",
-      "동료 한 명에게 체크리스트를 보내고 한 줄 코멘트를 받는다",
-    ],
-    verificationChecklist: [
-      "체크리스트가 최소 5개 항목을 포함하는가",
-      "AI가 틀릴 수 있는 구체 시나리오가 적혀 있는가 (추상적 표현 아님)",
-      "내가 검토해야 할 단계가 업무 흐름과 연결되어 있는가",
-      "회고 주기와 실제 캘린더 슬롯이 정해져 있는가",
-      "이 체크리스트를 내일 아침 실제로 적용할 수 있는가",
-    ],
-    deliverable: {
-      title: "AI 사용 판단 체크리스트 v1",
-      description: "개인 작업 맥락에 맞춘 판단 체크리스트 + 주간 회고 양식 한 장.",
-      format: "Markdown 파일(.md) · 1페이지 이내",
-    },
-    reflectionQuestions: [
-      "AI가 내 역할 중 대체할 수 있는 부분과, 절대 대체할 수 없는 부분은 무엇인가요?",
-      "이번 주 AI의 답 중 가장 위험했던 것은 무엇이었나요?",
-      "다음 주에는 어떤 단계에서 '사람 검토 지점'을 추가할 건가요?",
-    ],
-    extensionIdeas: [
-      "팀 공용 체크리스트로 확장해 공유합니다",
-      "체크리스트를 Claude Code 커스텀 슬래시 명령으로 저장해 매번 한 줄로 불러옵니다",
-      "월 1회 '환각 발견 사례' 모음집을 만들어 회고 입력으로 씁니다",
-    ],
-    reflectionOutro:
-      "역량은 한 번 익히고 끝이 아니라 매주 쌓이는 것. 이번 주 한 가지만 의식해서 써 보세요 — 한 달 뒤 5개가 모두 자연스러워집니다.",
-    tags: ["literacy", "mindset", "checklist"],
-    hasMdxBody: true,
-    outputs: [
-      {
-        filename: "judgment-checklist.md",
-        title: "AI 사용 판단 체크리스트 v1 템플릿",
-        kind: "checklist",
-      },
-    ],
-  },
-  {
     id: "lesson-301",
     slug: "what-llms-are-good-and-bad-at",
     titleKo: "LLM이 잘하는 일과 못하는 일",
@@ -94,7 +11,7 @@ export const lessons: Lesson[] = [
     level: "beginner",
     estimatedMinutes: 45,
     targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
-    prerequisites: ["common-skills-of-future-proof-people"],
+    prerequisites: [],
     learningGoals: [
       "LLM이 구조적으로 강한 영역 4가지를 예시로 설명할 수 있다",
       "LLM이 구조적으로 약한 영역 4가지를 예시로 설명할 수 있다",
@@ -3094,7 +3011,7 @@ export const lessons: Lesson[] = [
     level: "beginner",
     estimatedMinutes: 30,
     targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
-    prerequisites: ["common-skills-of-future-proof-people"],
+    prerequisites: [],
     learningGoals: [
       "새 AI 용어가 와도 흔들리지 않는 3가지 질문 프레임워크를 설명한다",
       "용어 안에 들어 있는 동작 순서를 추출한다 (RAG = Retrieve+Augment+Generate)",
@@ -5002,84 +4919,86 @@ export const lessons: Lesson[] = [
   {
     id: "lesson-101",
     slug: "zero-coding-orientation",
-    titleKo: "코딩 에이전트 오리엔테이션 — 터미널이 왜 필요한가",
-    titleEn: "Coding agent orientation — why the terminal matters",
-    hook: "AI한테 코드 짜달라고 했는데 '터미널에서 실행하세요'가 나왔어요. 터미널이 뭔지도 모르는데요. 딱 이 레슨 하나로 '코딩 에이전트가 뭔지, 내가 왜 터미널을 알아야 하는지' 그림이 잡힙니다.",
-    summary: "AI Builder School의 첫 번째 레슨. 코딩 에이전트(Codex, Claude Code)가 무엇인지, 터미널이 왜 필요한지, AI가 코드를 짜면 사람은 무엇을 하는지 큰 그림을 잡습니다. 코드를 전혀 모르는 입문자가 다음 레슨으로 넘어갈 수 있는 멘탈 모델을 만드는 것이 목표입니다.",
+    titleKo: "AI를 쓰는 네 가지 환경",
+    titleEn: "Four places you work with AI — web, desktop, IDE, CLI",
+    hook: "ChatGPT는 브라우저에서, Claude Code는 까만 터미널에서… 같은 AI인데 왜 사는 곳이 다를까요? AI를 만나는 네 군데를 한눈에 정리하면 '나는 어디서 시작하면 되는지'가 또렷해져요.",
+    summary:
+      "AI를 쓰는 환경을 넷(웹앱·데스크탑앱·IDE·CLI/코딩 에이전트)으로 펼쳐 각자 무엇에 강한지 잡고, 대화만 하는 챗봇과 실제로 파일을 만드는 코딩 에이전트가 어떻게 다른지, 왜 터미널이 등장하는지까지 큰 그림을 그린다.",
     level: "beginner",
-    estimatedMinutes: 20,
+    estimatedMinutes: 25,
     targetJourneys: ["practitioner", "creator", "starter", "founder", "ai-native"],
     prerequisites: [],
     learningGoals: [
-      "코딩 에이전트가 무엇인지, 일반 AI 챗봇과 어떻게 다른지 설명할 수 있다",
-      "터미널이 왜 필요한지 한 문장으로 설명할 수 있다",
-      "AI가 코드를 짜고 사람이 검토·방향 설정을 하는 협업 구조를 이해한다",
-      "AI Builder School에서 배울 내용의 전체 지도를 파악한다",
+      "AI를 쓰는 네 환경(웹앱·데스크탑·IDE·CLI)이 각각 무엇에 강한지 구분한다",
+      "'대화만 하는 챗봇'과 '실제로 파일을 만드는 코딩 에이전트'의 차이를 설명한다",
+      "코딩 에이전트가 왜 터미널(CLI)에 사는지, 사람의 역할은 무엇인지 이해한다",
+      "내 목표에 맞는 시작 환경을 하나 고른다",
     ],
     problemScenario:
-      "AI로 뭔가를 만들고 싶어서 유튜브에서 Codex 영상을 봤는데, 첫 5분부터 '터미널을 열고' '레포를 클론하고' 'npm install을 실행하라'는 말이 나왔어요. 아무것도 모르겠어서 닫아버렸어요. 코딩을 배우러 온 건 아닌데, AI를 쓰려면 이런 걸 알아야 하나요? 어디서부터 시작해야 할지 모르겠어요.",
+      "AI로 뭔가 만들고 싶어 유튜브에서 Codex 영상을 봤는데, 첫 5분부터 '터미널을 열고' 'npm install을 실행하라'는 말이 나와요. 아무것도 모르겠어서 닫아버렸죠. 그런데 다른 사람은 그냥 브라우저 ChatGPT로 잘만 쓰던데요. 같은 'AI'인데 왜 누구는 검은 화면이고 누구는 채팅창일까요. 환경의 지도가 없으면 어디서 시작할지부터 막힙니다.",
     coreConcepts: [
       {
-        term: "코딩 에이전트 (Coding Agent)",
+        term: "AI를 쓰는 네 환경",
         explanation:
-          "ChatGPT처럼 대화만 하는 AI가 아니라, 실제로 파일을 만들고 코드를 실행하고 에러를 고치는 AI. Codex, Claude Code가 대표적. '말하는 AI'가 아니라 '일하는 AI'다.",
+          "웹앱(브라우저 챗봇) · 데스크탑앱 · IDE(코드 편집기) · CLI(터미널의 코딩 에이전트). 같은 모델이라도 어디서 만나느냐에 따라 할 수 있는 일이 달라진다. 위로 갈수록 '대화'에서 '실제로 일하는 직원'에 가까워진다.",
       },
       {
-        term: "터미널 (Terminal)",
+        term: "대화형 챗봇 vs 코딩 에이전트",
         explanation:
-          "컴퓨터에게 텍스트로 명령하는 창. 마우스 클릭 대신 글자로 명령한다. AI가 만든 코드를 실행하고, 파일을 관리하고, 코딩 에이전트를 시작하는 곳. 무서워 보이지만 필요한 명령어는 10개 이내다.",
+          "챗봇(ChatGPT 웹, Claude.ai)은 '이렇게 하세요'라고 말해 준다. 코딩 에이전트(Claude Code, Codex)는 실제로 파일을 만들고 코드를 실행하고 에러까지 고친다. 말하는 AI와 일하는 AI의 차이다.",
       },
       {
-        term: "AI-사람 협업 구조",
+        term: "터미널 (CLI)",
         explanation:
-          "AI가 코드를 짜면 사람이 '이게 내가 원하는 건지' 판단하고, 방향을 잡고, 결과를 검토한다. AI는 속도를, 사람은 목적과 판단을 담당한다. 코딩을 배우는 게 아니라 AI를 잘 지시하고 검토하는 법을 배우는 것이다.",
+          "마우스 클릭 대신 텍스트로 컴퓨터에 명령하는 창. 코딩 에이전트가 바로 여기에 산다. 무서워 보이지만, 시작하는 데 필요한 명령어는 10개 이내다. (다음 레슨에서 직접 연다.)",
       },
       {
-        term: "실습 저장소 (Lab Repository)",
+        term: "AI-사람 협업 루프",
         explanation:
-          "AI Builder School 실습 전용 GitHub 저장소. 모든 레슨의 결과물이 여기에 쌓인다. 나중에 포트폴리오가 되기도 한다. 이름은 `my-ai-builder-lab`으로 통일.",
+          "사람이 목표·방향을 정하고 → AI가 만들고 → 사람이 '이게 내가 원하는 건가' 판단하고 → 다음 지시. AI는 속도를, 사람은 목적과 판단을 맡는다. 코딩을 배우는 게 아니라 이 루프를 잘 돌리는 법을 배운다.",
       },
     ],
     mission:
-      "이 레슨은 읽고 이해하는 것이 목표입니다. 실행할 코드는 없어요.\n\n**작업 1 — 큰 그림 잡기 (10분):** 아래 세 가지를 AI(Claude 또는 ChatGPT)에게 질문하고 답을 메모하세요.\n- '코딩 에이전트와 일반 AI 챗봇의 차이가 뭔가요?'\n- '터미널이 뭔가요? 왜 필요한가요?'\n- 'AI Builder School에서 나는 코딩을 배우는 건가요, 아니면 AI를 지시하고 검토하는 법을 배우는 건가요?'\n\n**작업 2 — 내 목표 한 줄 쓰기 (10분):** AI Builder School을 마쳤을 때 내가 만들거나 자동화하고 싶은 것을 한 줄로 적으세요. 이 한 줄이 앞으로 모든 레슨의 나침반이 됩니다.",
+      "자, 이번엔 'AI를 어디서 쓸 수 있는지' 네 환경의 지도를 직접 그려 볼 거예요. 20분이면 충분해요.\n\n1. 네 환경 표 채우기 (8분)\n웹앱 · 데스크탑앱 · IDE · CLI, 이 네 칸에 각각 내가 들어 봤거나 써 본 도구를 적어 보세요. 잘 모르는 칸은 비워 둬도 돼요. 옆에 '나에게 익숙한 정도'도 표시해 보세요.\n\n2. 챗봇 vs 코딩 에이전트 직접 물어보기 (7분)\nAI(ChatGPT·Claude)에게 '대화형 챗봇이랑 코딩 에이전트가 뭐가 달라?'라고 물어보고, 돌아온 답을 내 말 한 줄로 줄여 적어 보세요.\n\n3. 내 시작 환경 + 목표 한 줄 (10분)\n'나는 우선 ___ 환경에서 시작한다' 한 줄, 그리고 '이 코스를 마치면 ___을 만들거나 자동화하고 싶다' 한 줄을 적으세요. 다 쓰면 ai-env-map.md로 저장하면 끝!",
     codexNote:
-      "코딩 에이전트를 처음 접할 때 가장 흔한 실수는 '모든 코드를 이해하려는 것'입니다. 이해하지 않아도 됩니다. AI가 만든 코드가 '내가 원하는 대로 동작하는가'를 판단하는 것이 목표입니다. 의사가 MRI 기계 작동 원리를 몰라도 영상을 읽고 판단하듯이.",
+      "처음 코딩 에이전트를 볼 때 가장 흔한 실수는 '모든 코드를 이해하려는 것'이에요. 안 그래도 돼요. AI가 만든 결과가 '내가 원하는 대로 도는가'만 판단하면 됩니다. 의사가 MRI 원리를 몰라도 영상을 읽고 판단하듯이요.",
     buildIntro:
-      "코딩 에이전트가 왜 터미널과 git을 쓰는지 글로 잡았으면, 이제 본인 컴퓨터에 자리를 마련합니다. 셋업 자체는 짧아요.",
+      "자, 네 환경을 글로 봤으니 이제 그 지도를 내 손으로 그려 볼 차례예요. 내가 어디에 서 있고 어디서 시작할지를 적어 두면, 다음 레슨(터미널)이 훨씬 덜 무섭게 다가와요.",
     buildSteps: [
-      "코딩 에이전트 vs 일반 AI 챗봇 차이 AI에게 질문 + 메모",
-      "터미널이 무엇인지, 왜 필요한지 AI에게 질문 + 메모",
-      "AI Builder School에서 내가 배울 것의 큰 그림 정리",
-      "내 목표 한 줄 작성 (다음 레슨들의 나침반)",
+      "웹앱·데스크탑·IDE·CLI 네 칸에 아는 도구 채우기",
+      "챗봇 vs 코딩 에이전트 차이 AI에게 묻고 한 줄 정리",
+      "'나는 ___ 환경에서 시작한다' + 목표 한 줄",
+      "ai-env-map.md로 저장",
     ],
     verificationChecklist: [
-      "코딩 에이전트와 ChatGPT의 차이를 한 문장으로 말할 수 있는가",
-      "터미널이 왜 필요한지 설명할 수 있는가",
-      "AI가 코드를 짜고 내가 하는 역할이 무엇인지 이해했는가",
-      "내 목표 한 줄이 적혀 있는가",
+      "AI를 쓰는 네 환경을 이름과 함께 댈 수 있는가",
+      "대화형 챗봇과 코딩 에이전트의 차이를 한 문장으로 말할 수 있는가",
+      "코딩 에이전트가 왜 터미널에 사는지 설명할 수 있는가",
+      "내 시작 환경과 목표 한 줄이 적혀 있는가",
     ],
     deliverable: {
-      title: "오리엔테이션 메모",
-      description: "코딩 에이전트·터미널·AI-사람 협업 구조 이해 메모 + 내 목표 한 줄. 파일이 아니라 노트나 메모앱에 적어도 된다.",
-      format: "자유 형식 메모 (노트앱, 종이, 메모장 모두 OK)",
+      title: "ai-env-map.md",
+      description:
+        "AI를 쓰는 네 환경에 내가 아는 도구를 채우고, 내 시작 환경과 목표 한 줄을 적은 한 장짜리 지도.",
+      format: "Markdown 노트",
     },
     reflectionQuestions: [
-      "코딩 에이전트를 쓰면 어떤 일을 AI에게 맡기고 싶은가요?",
-      "터미널에 대한 첫인상은 어떤가요? 여전히 무섭거나 낯선가요?",
-      "AI Builder School을 마쳤을 때 만들거나 자동화하고 싶은 것이 구체화됐나요?",
+      "네 환경 중 지금 가장 손에 익은 곳과, 가장 낯선 곳은 어디인가요?",
+      "'대화만 하는 AI'에서 '실제로 일하는 AI'로 넘어가는 게 나에게 어떤 의미인가요?",
+      "이 코스를 마쳤을 때 만들거나 자동화하고 싶은 것이 조금 더 구체화됐나요?",
     ],
     extensionIdeas: [
-      "L53(터미널 첫날)으로 바로 이어가기 — 실제 터미널을 열어보는 첫 경험",
-      "AI Builder School 12개 Phase 지도를 한 번 훑어보고 어떤 Phase가 가장 기대되는지 표시",
+      "다음 레슨(터미널 첫날)으로 바로 이어가 — 네 번째 환경(CLI)을 직접 열어 보기",
+      "전체 6 Stage 지도를 한 번 훑어보고 어떤 Stage가 가장 기대되는지 표시해 보기",
     ],
     reflectionOutro:
-      "\"코딩 에이전트의 환경\"이 머릿속에 있으면, 다음 레슨(터미널·git)이 그 환경을 채우는 조각으로 보이기 시작합니다. 큰 그림 → 작은 조각 순서예요.",
-    tags: ["orientation", "beginner", "mental-model", "no-code"],
+      "AI를 쓰는 네 군데가 머릿속에 들어왔다면, 다음 레슨(터미널)이 그 네 번째 칸을 직접 열어 보는 자리가 됩니다. 큰 지도를 먼저, 그다음 한 칸씩이에요.",
+    tags: ["orientation", "environments", "mental-model", "no-code"],
     hasMdxBody: true,
     outputs: [
       {
-        filename: "orientation/README.md",
-        title: "오리엔테이션 메모 템플릿",
+        filename: "ai-env-map.md",
+        title: "내 AI 환경 지도",
         kind: "note",
       },
     ],
@@ -5893,7 +5812,7 @@ export const lessons: Lesson[] = [
     level: "beginner",
     estimatedMinutes: 40,
     targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
-    prerequisites: ["common-skills-of-future-proof-people"],
+    prerequisites: [],
     learningGoals: [
       "AI에 일을 맡길지 판단하는 세 축(위험·되돌릴 수 있음·검증 비용)을 설명한다",
       "내 실제 업무 10개를 \"맡김 / 함께 / 직접\" 세 칸으로 분류한다",
@@ -5987,7 +5906,7 @@ export const lessons: Lesson[] = [
     level: "beginner",
     estimatedMinutes: 40,
     targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
-    prerequisites: ["common-skills-of-future-proof-people", "ai-delegation-decision"],
+    prerequisites: ["ai-delegation-decision"],
     learningGoals: [
       "팀이 AI 도입에 저항하는 세 가지 진짜 이유(불안·불신·불편)를 구분한다",
       "저항 유형마다 다른 대응이 필요한 이유를 설명한다",
@@ -7870,7 +7789,7 @@ export const lessons: Lesson[] = [
   {
     id: "lesson-108",
     slug: "what-is-an-llm",
-    titleKo: "LLM은 다음 토큰을 예측하는 기계다",
+    titleKo: "LLM의 원리 이해하기",
     titleEn: "What an LLM actually does",
     hook: "ChatGPT 창을 열고 '왜 잘 못해?'부터 묻기 전에, 그게 뭘 하는 기계인지 한 문장으로 잡아두면 짜증의 절반이 사라집니다.",
     summary:
@@ -7910,11 +7829,11 @@ export const lessons: Lesson[] = [
       },
     ],
     mission:
-      "직접 관찰로 본질을 잡는다.\n\n**작업 1 — 같은 질문 두 번 (5분):** ChatGPT/Claude/Gemini 중 하나에 같은 질문(예 '커피 한 잔의 의미를 한 문단으로')을 두 번 던지고 답의 미세한 차이 관찰. 같은 분포에서 다른 토큰을 뽑는다는 걸 직접 본다.\n\n**작업 2 — 시점 너머 질문 (5분):** '오늘 환율이 얼마지?' 또는 '내일 비가 오나?'를 던져 본다. 모델이 모른다고 말하거나 그럴듯한 거짓을 만드는지 본다. 학습 시점이라는 벽을 본다.\n\n**작업 3 — 내 말로 한 단락 (10분):** 위 두 관찰을 바탕으로 \"LLM은 ___ 기계다\"의 빈칸을 자기 말로 적기. 토큰·확률·학습 시점 중 하나는 들어가면 좋다. `what-is-an-llm-note.md`에 저장.",
+      "자, 머리로 끄덕였으면 이제 손으로 확인할 차례예요. 셋 다 합쳐도 20분이면 충분하니까 부담 갖지 말고 가볍게 따라와 보세요.\n\n1. 같은 질문, 두 번 (5분)\nChatGPT든 Claude든 Gemini든 아무거나 하나 골라서, 똑같은 질문을 두 번 던져 보세요. '커피 한 잔의 의미를 한 문단으로 써 줘' 정도면 딱 좋아요. 두 답이 미묘하게 다를 거예요. 그게 바로 같은 확률 분포에서 매번 다른 토큰을 뽑는 장면이에요.\n\n2. 시점 너머의 질문 (5분)\n이번엔 '오늘 환율 얼마야?'나 '내일 비 와?'처럼 모델이 도저히 알 수 없는 걸 물어보세요. 솔직하게 모른다고 하는지, 아니면 천연덕스럽게 지어내는지 지켜보는 거예요. 학습이 멈춘 그 벽이 어디쯤인지 손에 잡힐 거예요.\n\n3. 내 말로 한 단락 (10분)\n마지막이에요. 앞의 두 관찰을 떠올리면서 'LLM은 ___ 기계다'의 빈칸을 직접 채워 보세요. 정답은 없어요. 토큰이든 확률이든 학습 시점이든, 그중 하나만 녹아 있으면 충분해요. 다 쓰면 what-is-an-llm-note.md로 저장해 두면 끝!",
     codexNote:
-      "이 한 단락이 손에 있으면 다음 모든 레슨이 빠르게 잡힌다. 환각·비용·context window·temperature 같은 용어가 다 같은 한 줄에서 나오기 때문이다.",
+      "작업 3을 쓰다 막히면 ChatGPT나 Claude한테 '내가 이렇게 이해한 거 맞아?' 하고 슬쩍 되물어 봐도 좋아요. 단, 그 대답마저도 결국 확률로 뽑아낸 문장이라는 거, 그것만 잊지 마세요.",
     buildIntro:
-      "LLM이 뭘 하는 기계인지 글로 잡았으면, 이제 손으로 확인할 차례입니다. 3개 작업이 15~20분 안에 끝나요. 본문에서 본 \"확률 분포\"와 \"학습 시점\"을 직접 관찰하는 게 목표예요.",
+      "자, 여기까지는 글로 따라온 거예요. 머리로 끄덕인 건 손으로 한 번 만져 봐야 비로소 내 것이 됩니다. 본문에서 본 '확률로 뽑는다'랑 '배운 뒤로는 멈춰 있다', 이 두 장면을 직접 모델한테 시켜 보는 게 오늘 미션이에요.",
     buildSteps: [
       "같은 질문을 두 번 던지고 답의 차이 관찰",
       "학습 시점 너머의 질문 던지기",
@@ -7942,7 +7861,7 @@ export const lessons: Lesson[] = [
       "Karpathy의 'Let's build GPT' 영상으로 토큰 예측의 내부를 더 깊이 보기",
     ],
     reflectionOutro:
-      "이 한 단락이 손에 있으면, 다음 레슨부터 모든 게 빠르게 잡힙니다. 환각도 비용도 컨텍스트도 모두 \"다음 토큰 예측\"이라는 한 줄에서 나오니까요. 헷갈리는 게 생기면 본인이 적은 한 단락으로 돌아오세요 — 거기에 답이 있을 거예요.",
+      "'AI가 왜 이래?'가 'AI라서 이렇구나'로 한 뼘 바뀌었다면, 오늘 레슨은 제 할 일을 다 한 거예요. 적어 둔 그 한 단락, 절대 버리지 말고 곁에 두세요. 다음 레슨부터 바로 그 한 줄 위에 비용이며 컨텍스트를 한 층씩 올려 나갈 거니까요.",
     tags: ["foundation", "llm", "mental-model", "principle"],
     hasMdxBody: true,
     outputs: [
@@ -8042,180 +7961,92 @@ export const lessons: Lesson[] = [
   {
     id: "lesson-110",
     slug: "ai-service-landscape",
-    titleKo: "AI 서비스는 자체 모델과 API 통합으로 갈린다",
-    titleEn: "AI service landscape — own model vs aggregator, subscription vs API",
-    hook: "ChatGPT·Claude·Gemini가 같아 보이는데, Cursor·Perplexity는 또 뭐고, 결제는 매번 따로 해야 하나? 두 축의 지도가 손에 있으면 매월 $80을 흩뿌리지 않습니다.",
+    titleKo: "AI 도구 고르고 익히기",
+    titleEn: "Choosing and learning your AI tools",
+    hook: "ChatGPT·Claude·Gemini에 Cursor·Perplexity까지, 다 비슷해 보이죠? 도구를 어떻게 고르고 고른 뒤엔 뭘 먼저 익혀야 하는지 한 번 정리하면, 어디로 옮겨가도 5분이면 적응해요.",
     summary:
-      "AI 서비스는 두 축으로 갈린다 — (1) 자체 모델 vs API 통합, (2) 구독제 vs API. 각 사례와 차이를 정리하고, 자기 주간 작업을 \"구독으로 충분 / API가 필요\"로 분류하는 service-rule을 만든다.",
+      "AI 도구를 고르는 두 갈래(자체 모델 vs 통합 서비스)를 잡고, 어느 걸 고르든 공통으로 있는 6개 기능(작업공간·기억·CLI·캔버스·시스템지시·도구연결)을 익혀, 매일 쓸 도구 하나를 정해 Project까지 직접 만든다.",
     level: "beginner",
-    estimatedMinutes: 30,
+    estimatedMinutes: 40,
     targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
     prerequisites: ["tokens-context-and-cost"],
     learningGoals: [
-      "자체 모델 서비스(ChatGPT/Claude/Gemini)와 API 통합 서비스(Cursor/Perplexity/Lindy)의 차이를 안다",
-      "같은 회사의 구독제와 API가 별개 시스템임을 이해한다",
-      "구독제와 API의 강점·약점·언제 어느 것을 쓰는지 판단 기준이 있다",
-      "내 주간 작업을 두 트랙으로 분류한 service-rule.md를 갖는다",
+      "자체 모델 서비스(ChatGPT/Claude/Gemini)와 API 통합 서비스(Cursor/Perplexity)의 차이를 안다",
+      "어떤 챗봇이든 공통으로 있는 6개 기능(작업공간·기억·CLI·캔버스·시스템지시·도구연결)의 이름을 정리한다",
+      "내가 매일 쓸 도구 하나를 정하고, 그 안에서 Project 하나를 직접 만든다",
+      "Memory에 민감 정보가 새지 않게 점검하는 습관을 잡는다",
     ],
     problemScenario:
-      "Claude Pro $20, ChatGPT Plus $20, Gemini Advanced $20, Cursor $20, Perplexity $20 — 매월 $100을 5곳에 흩뿌리고 있어요. 그런데도 정작 자동화하려고 API를 쓰니 또 따로 결제. \"Plus면 API도 무료 아닌가?\" 했다가 청구서를 보고 놀랐어요. 지도가 없으면 매번 새 가입, 매월 새 사고입니다.",
+      "Claude Pro에 ChatGPT Plus, Gemini까지 결제는 흩뿌리는데, 정작 각 도구의 기능은 절반도 안 써요. Projects가 뭔지, Memory를 켜도 되는지, Artifacts는 또 뭔지… 도구는 늘었는데 손에 붙는 건 없는 상태죠. 그래서 둘 다 필요해요 — 고르는 기준 하나와, 익히는 순서 하나.",
     coreConcepts: [
       {
         term: "자체 모델 서비스",
         explanation:
-          "ChatGPT(OpenAI), Claude(Anthropic), Gemini(Google) — 자기 회사가 만든 모델 + 자기 UI. 모델·UI 일관성과 안정성이 강점. 모델을 갈아탈 자유가 적은 게 단점.",
+          "ChatGPT(OpenAI)·Claude(Anthropic)·Gemini(Google) — 자기 회사가 만든 모델 + 자기 UI. 모델·UI 일관성과 안정성이 강점. 모델을 갈아탈 자유가 적은 게 단점.",
       },
       {
         term: "API 통합 서비스 (Aggregator)",
         explanation:
-          "Cursor·Perplexity·Lindy·v0·Bolt.new 등 — 여러 회사의 모델을 골라 쓰는 UI. 작업별 최적 모델 선택이 강점. 추상화 계층이 한 겹 더 있어 디버깅이 까다롭고 비용이 합산됨.",
+          "Cursor·Perplexity·v0·Bolt 등 — 여러 회사의 모델을 골라 쓰는 UI. 작업별 최적 모델 선택이 강점. 추상화 계층이 한 겹 더 있어 디버깅이 까다롭고 비용이 합산됨.",
       },
       {
-        term: "구독제",
+        term: "구독제 vs API",
         explanation:
-          "월정액($20~$200) 브라우저·앱 채팅 UI. 일·주별 한도 있음. 일상 사용·즉시 시작에 강점. 한도 도달하면 강제 대기.",
+          "같은 회사가 보통 둘 다 제공하는데 별개 시스템이다. 구독제는 월정액 채팅 UI(일상 사용), API는 토큰 과금 코드 호출(자동화). \"Plus면 API도 무료\"는 흔한 오해 — 결제도 한도도 따로. 실제 계정·비용 세팅은 다음 '계정·비용' 레슨에서.",
       },
       {
-        term: "API",
+        term: "공통 6기능",
         explanation:
-          "토큰 단위 사용량 과금. 내 코드에서 호출. spending cap만 걸면 무한. 자동화·시스템 빌드·대량 호출에 강점. 루프 폭주 시 청구서 폭탄.",
+          "이름만 다를 뿐 챗봇마다 거의 같다 — 작업공간(Projects·GPTs·Gems), 장기기억(Memory), CLI·데스크탑, 사이드 캔버스(Artifacts·Canvas), 시스템 지시(Custom Instructions), 도구·데이터 연결(MCP·Actions). 이 6개 이름만 잡으면 어떤 챗봇도 금방 적응한다.",
+      },
+      {
+        term: "Memory 위생",
+        explanation:
+          "장기기억이 켜진 채로 민감 정보(주민번호·고객 이름·내부 코드명)를 던지면 다음 대화에 새어 나올 수 있다. 무엇이 저장됐는지 정기적으로 확인·삭제하는 습관이 필요하다.",
       },
     ],
     mission:
-      "지도 한 장을 손에.\n\n**작업 1 — 지금 쓰는 서비스 분류 (5분):** 결제 중이거나 정기 사용 중인 AI 서비스 모두 적기. 각각 (자체모델 / 통합) · (구독제 / API / 무료 한도) 분류.\n\n**작업 2 — `service-rule.md` 만들기 (20분):** 자기 주간 작업 5개를 \"구독제로 충분 / API가 필요\" 로 분류해 표로. 각 작업에 추천 서비스 적기.\n\n**작업 3 — 통합 서비스 1개 무료 체험 (10분):** Cursor·Perplexity·Lindy·v0·Bolt 중 하나 무료 체험 → \"여기서는 어떤 모델을 어떻게 쓰나\" 한 줄 관찰.",
+      "자, 이번엔 내 메인 도구 하나를 정하고 그 속을 직접 열어 볼 거예요. 35분이면 충분해요.\n\n1. 지금 쓰는 도구 분류하고 하나 정하기 (8분)\n결제 중이거나 자주 쓰는 AI 도구를 다 적고, 각각 자체 모델 / 통합 서비스로 표시해 보세요. 그중 '앞으로 매일 쓸 메인' 하나를 정합니다. 너무 고민 말고 지금 손에 익은 걸로요.\n\n2. 6개 기능 위치 찾기 (12분)\n정한 도구에서 작업공간·장기기억·CLI/데스크탑·사이드 캔버스·시스템 지시·도구 연결, 이 6개가 UI 어디에 있는지 직접 찾아 메모하세요. 없는 기능은 '없음/약함'으로 표시하면 돼요.\n\n3. Project 하나 만들기 (15분)\n내 일과 가장 가까운 주제로 작업공간(Project) 1개를 만들고, 시스템 지시 한 줄('답변은 항상 한국어로' 같은)을 걸어 보세요. 그 안에서 평소 작업 하나를 돌려 봅니다. Memory를 쓴다면 저장된 내용에 민감 정보가 없는지도 점검하세요. 다 되면 ai-tool-map.md로 저장하면 끝!",
     codexNote:
-      "구독제와 API의 가장 큰 함정은 \"Plus면 API도 무료\" 오해입니다. 둘은 별개 시스템 — 결제도 따로, 한도도 따로, 인터페이스도 따로. 헷갈리면 각 사 docs 다시 확인.",
+      "통합 서비스를 고를 땐 ChatGPT나 Claude한테 '내 작업이 ○○인데 Cursor·Perplexity·v0 중 뭐가 맞을까?'라고 물어봐도 좋아요. 단, 도구 추천은 6개월이면 바뀌니 '왜 그런지' 이유만 챙기세요.",
     buildIntro:
-      "자체 모델 vs API 통합, 구독 vs API — 네 갈래의 차이를 본문에서 봤으니, 본인이 쓰는 도구를 그 사분면에 직접 놓아 보세요. 한 번 분류해두면 새 도구가 나와도 자리가 빠르게 잡힙니다.",
+      "자, 고르는 두 갈래와 공통 6기능을 글로 봤으니 이제 내 도구 하나를 직접 열어 볼 차례예요. 메뉴를 눈으로 찾아 Project까지 만들어 보면, 다른 도구로 옮겨가도 같은 자리를 금방 찾게 됩니다.",
     buildSteps: [
-      "지금 쓰는 AI 서비스 모두 적고 두 축으로 분류",
-      "주간 작업 5개를 구독제/API 분류한 service-rule.md 작성",
-      "통합 서비스 1개 무료 체험 + 관찰 노트",
+      "쓰는 도구 분류 + 매일 쓸 메인 하나 정하기",
+      "정한 도구에서 6개 기능 위치 찾아 메모",
+      "내 일 관련 Project 1개 + 시스템 지시 한 줄 + 작업 1개",
+      "ai-tool-map.md로 저장 (Memory 점검 포함)",
     ],
     verificationChecklist: [
-      "자체 모델과 통합 서비스의 차이를 한 줄로 말할 수 있는가",
+      "자체 모델 서비스와 통합 서비스의 차이를 한 줄로 말할 수 있는가",
       "구독제와 API가 별개 시스템임을 이해했는가",
-      "내 주간 작업의 service-rule이 손에 있는가",
-      "통합 서비스 한 곳을 직접 써 봤는가",
+      "공통 6기능의 이름을 댈 수 있는가",
+      "내 메인 도구에서 6기능 위치를 찾아 적었는가",
+      "Project 하나를 만들고 그 안에서 작업을 해 봤는가",
     ],
     deliverable: {
-      title: "service-rule.md",
-      description: "주간 작업 5개를 구독제/API로 분류하고 각각 어떤 서비스를 쓸지 정리한 개인 룰북.",
-      format: "Markdown 분류표",
-    },
-    reflectionQuestions: [
-      "지금 결제 중인 서비스 중 진짜로 매월 가치를 받는 곳은 몇 개인가요?",
-      "어떤 작업은 통합 서비스가 더 잘 풀까요? 어떤 작업은 자체 모델이 더 깔끔할까요?",
-      "API 자동화로 옮기면 한 달 비용이 어떻게 바뀔까요?",
-    ],
-    extensionIdeas: [
-      "특강 — 프런티어 AI 지형 2026에서 3사의 무게중심 차이를 확인",
-      "Cursor·Perplexity·v0·Bolt 중 자기 일에 가장 가까운 한 곳을 한 달 본격 사용 후 회고",
-    ],
-    reflectionOutro:
-      "도구는 매년 바뀝니다. 지금 익힌 4 분면 프레임은 새 도구가 나와도 그대로 적용돼요. \"이거 어느 분면이지\" 한 번만 물으면 본인 결정이 빨라집니다.",
-    tags: ["service", "landscape", "subscription-vs-api", "vendor"],
-    hasMdxBody: true,
-    outputs: [
-      {
-        filename: "service-rule.md",
-        title: "서비스 분류 룰북",
-        kind: "checklist",
-      },
-    ],
-  },
-  {
-    id: "lesson-111",
-    slug: "ai-chat-features-basics",
-    titleKo: "Projects·Memory·CLI·Artifacts — 챗봇 공통 6기능이 매일 도구를 결정한다",
-    titleEn: "Chatbot common features — Projects, Memory, CLI, Artifacts",
-    hook: "Claude의 Projects, ChatGPT의 GPTs, Gemini의 Gems — 다 같은 거야 다른 거야? 6개 공통 기능의 이름을 한 번 정리해두면 어디로 옮겨가도 5분 안에 적응합니다.",
-    summary:
-      "Projects·GPTs·Gems, Memory, CLI/Desktop, Artifacts/Canvas, Custom Instructions, MCP/Actions — 챗봇 6개 공통 기능을 정리한다. 자기 챗봇에서 위치를 찾고, Project 하나를 만들어 Custom Instructions까지 등록한다.",
-    level: "beginner",
-    estimatedMinutes: 40,
-    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
-    prerequisites: ["ai-service-landscape"],
-    learningGoals: [
-      "Projects·GPTs·Gems의 공통점과 차이를 안다",
-      "Memory·CLI·Artifacts·Custom Instructions·MCP의 의미와 언제 쓰는지 안다",
-      "자기가 쓰는 챗봇에서 6개 기능 위치를 직접 찾아본다",
-      "첫 Project + Custom Instructions를 만들어 평소 작업에 적용한다",
-    ],
-    problemScenario:
-      "ChatGPT에서 잘 쓰던 GPTs가 있는데 Claude로 옮기면 어디 있는지 모르겠어요. Claude의 Projects가 같은 건지 아닌지도 헷갈리고요. Memory를 켰는데 어떤 정보가 누적되는지 모르겠어서 불안하기도 합니다. 공통 기능의 이름이 다 다르니 매번 처음부터 헤맵니다.",
-    coreConcepts: [
-      {
-        term: "작업 공간 (Projects · GPTs · Gems)",
-        explanation:
-          "대화마다 컨텍스트를 다시 설명하지 않게 해주는 묶음. 파일·지시문·이전 대화를 저장. Claude Projects는 단순한 묶음, ChatGPT GPTs와 Gemini Gems는 공유 가능한 정형화된 어시스턴트.",
-      },
-      {
-        term: "장기 기억 (Memory)",
-        explanation:
-          "사용자의 사실(이름·취향·진행 중 프로젝트)을 누적해 다음 대화에 자동 반영. ChatGPT가 가장 적극적, Claude는 베타·제한적. 민감 정보가 새지 않게 정기 점검이 필수.",
-      },
-      {
-        term: "CLI · 데스크탑 (Claude Code · Codex CLI · Desktop)",
-        explanation:
-          "브라우저 채팅창 밖에서 모델을 쓰는 길. 코드 작업·파일 시스템 접근·외부 도구 호출에 필요. Stage 4(코딩 에이전트)에서 본격 다룬다.",
-      },
-      {
-        term: "사이드 캔버스 (Artifacts · Canvas)",
-        explanation:
-          "대화창 옆에 코드·문서를 따로 그려놓고 반복 수정하는 패널. 한 번 답으로 끝나지 않는 산출물(글·코드·디자인)을 다룰 때.",
-      },
-      {
-        term: "Custom Instructions (시스템 지시)",
-        explanation:
-          "매 대화에 자동 적용되는 사용자 지시. '한국어로 답하라', '각 주장에 출처' 같은 글로벌 룰. 모순된 지시('간결' + '충분히 자세히')를 넣으면 모델이 헷갈린다.",
-      },
-      {
-        term: "도구·데이터 연결 (MCP · Actions)",
-        explanation:
-          "모델이 외부 도구·데이터(Calendar·Drive·API·사내 시스템)에 접근하는 길. Claude MCP는 표준 프로토콜 — 한 번 만들면 여러 클라이언트에서 재사용. Stage 4·5에서 본격.",
-      },
-    ],
-    mission:
-      "자기 챗봇에서 6개 기능 위치를 직접 찾고, Project 한 개를 본격 사용까지.\n\n**작업 1 — 6개 위치 찾기 (10분):** 자주 쓰는 챗봇 1개 선택 → 위 6개 기능을 UI에서 직접 찾기. 어디 메뉴에 있는지 메모. 못 찾는 것은 \"이 챗봇에는 없음/약함\"으로 표시.\n\n**작업 2 — Project 만들기 (20분):** 자기 일과 가장 관련된 주제로 Project 1개 생성 (예 \"회의록 정리\", \"주간 보고서\") + Custom Instructions 한 줄 등록 + 그 Project에서 평소 작업 1개 해보기.\n\n**작업 3 — Memory 검토 (10분, Memory 쓰는 사람만):** Memory에 어떤 사실이 저장돼 있는지 확인 → 민감 정보 삭제 → 향후 들어가지 않을 정보 정리.",
-    codexNote:
-      "Memory의 가장 흔한 사고는 민감 정보 누적입니다 — 주민번호, 사내 프로젝트 코드명, 고객 이름 등. 정기 점검 습관을 만드세요. 또 Custom Instructions에 \"간결\" + \"충분히 자세히\" 같은 모순된 지시는 절대 금물.",
-    buildIntro:
-      "6 기능을 본인이 매일 쓰는 챗봇에 매핑할 차례입니다. 같은 기능을 본인 도구에서 찾는 활동만으로도 충분히 익숙해져요.",
-    buildSteps: [
-      "자기 챗봇에서 6개 공통 기능 위치 찾기",
-      "Project 1개 + Custom Instructions 등록",
-      "Memory 내용 검토 + 민감 정보 정리",
-      "`my-chat-features.md`에 위치·첫 Project 정리",
-    ],
-    verificationChecklist: [
-      "Projects·GPTs·Gems가 같은 종류라는 걸 이해했는가",
-      "Memory의 위험과 정기 점검의 필요성을 안 채로 쓰는가",
-      "Project + Custom Instructions가 자기 일에 등록돼 있는가",
-      "6개 기능의 위치를 메모로 가지고 있는가",
-    ],
-    deliverable: {
-      title: "my-chat-features.md",
-      description: "내 챗봇 6개 공통 기능의 위치와 첫 Project URL을 정리한 메모.",
+      title: "ai-tool-map.md",
+      description:
+        "내가 쓰는 AI 도구를 자체모델/통합으로 분류하고, 정한 메인 도구의 6기능 위치 + 첫 Project를 기록한 한 장짜리 지도.",
       format: "Markdown 노트",
     },
     reflectionQuestions: [
-      "지금까지 매번 새 대화에 컨텍스트를 다시 설명하느라 낭비한 시간은 얼마였나요?",
-      "Memory가 기억해두면 좋을 것 1가지, 절대 기억해서 안 될 것 1가지는 무엇인가요?",
-      "Artifacts·Canvas를 잘 쓰면 어떤 작업이 가장 빨라질까요?",
+      "지금 결제 중인 도구 중 진짜로 매월 가치를 받는 곳은 몇 개인가요?",
+      "내 메인 도구에서 그동안 한 번도 안 써 본 기능은 무엇이었나요?",
+      "Memory에 절대 들어가면 안 되는 내 정보는 무엇인가요?",
     ],
     extensionIdeas: [
-      "여러 챗봇을 같은 작업에 시도하면서 Project·Memory 동작 차이 비교",
-      "MCP 서버 한 개 설치해 Claude Desktop에 붙여보기 (Stage 5에서 본격)",
+      "Cursor·Perplexity·v0·Bolt 중 내 일에 가장 가까운 한 곳을 무료로 체험하고 메인 도구와 비교해 보기",
+      "특강 — 프런티어 AI 지형 2026에서 3사의 무게중심 차이를 확인하기",
     ],
     reflectionOutro:
-      "Projects·Memory·Artifacts 같은 기능들은 처음엔 안 써도 일이 됩니다. 그런데 한 번 쓰기 시작하면 안 쓰던 시절로 돌아가기 어려워요. 오늘 그 첫 자리 하나만 잡으세요.",
-    tags: ["chatbot", "projects", "memory", "features"],
+      "도구는 매년 바뀌지만, 오늘 잡은 '두 갈래로 고르고 6기능으로 익힌다'는 틀은 그대로 남아요. 새 도구가 나와도 '어느 갈래지, 6기능은 어디 있지' 두 가지만 물으면 5분이면 적응합니다.",
+    tags: ["service", "features", "tooling", "onboarding"],
     hasMdxBody: true,
     outputs: [
       {
-        filename: "my-chat-features.md",
-        title: "내 챗봇 기능 지도",
+        filename: "ai-tool-map.md",
+        title: "내 AI 도구 지도",
         kind: "note",
       },
     ],
@@ -8418,6 +8249,94 @@ export const lessons: Lesson[] = [
       {
         filename: "github.com/<username>/my-ai-builder-lab",
         title: "내 첫 public repo",
+        kind: "note",
+      },
+    ],
+  },
+  {
+    id: "lesson-114",
+    slug: "what-it-means-to-use-ai",
+    titleKo: "AI와의 첫 만남",
+    titleEn: "Your first encounter with AI",
+    hook: "'AI' 한 단어에 우리는 바둑 두는 알파고도, 챗봇도, 자율주행도 다 욱여넣어요. 그래서 첫 단추는 이거예요 — 우리가 말하는 AI는 도대체 어디까지일까.",
+    summary:
+      "'AI'라 부르는 것의 넓은 범위를 먼저 펼쳐 보고, 그 밑에 깔린 머신러닝·학습·파운데이션 모델 개념으로 왜 지금 AI가 폭발했는지, 그리고 AGI를 향한 앞으로의 방향까지 한 장의 큰 지도를 그린다.",
+    level: "beginner",
+    estimatedMinutes: 25,
+    targetJourneys: ["practitioner", "creator", "founder", "engineer", "starter", "ai-native"],
+    prerequisites: [],
+    learningGoals: [
+      "'AI'가 챗봇이나 알파고 한 종류가 아니라 골라주기·인식·생성·행동까지 아우르는 넓은 우산임을 안다",
+      "머신러닝·학습·파운데이션 모델이 무엇인지, 규칙을 짜 넣던 옛 방식과 어떻게 다른지 한 문장으로 설명한다",
+      "데이터·연산력·구조(Transformer)가 겹치며 왜 지금 AI가 폭발했는지 큰 그림으로 안다",
+      "AGI와 에이전트로 향하는 흐름 속에서 '쓰는 사람'을 넘어 '만드는 사람'으로 설 자리를 가늠한다",
+    ],
+    problemScenario:
+      "누가 'AI'를 말할 때, 어떤 사람은 바둑으로 이세돌을 이긴 알파고를, 어떤 사람은 ChatGPT를, 또 누구는 자율주행차나 로봇청소기를 떠올려요. 다 맞는데, 다 일부예요. 정작 '그래서 AI가 뭔데?'에는 쉽게 답이 안 나오죠. 게다가 어느 날 갑자기 세상을 덮은 것처럼 보이지만, 사실 수십 년 쌓인 흐름이 임계점을 넘은 거예요. 그 큰 지도를 한 번 펼쳐 두면, 앞으로 배울 모든 게 제자리를 찾습니다.",
+    coreConcepts: [
+      {
+        term: "머신러닝 (기계학습)",
+        explanation:
+          "규칙을 사람이 일일이 짜 넣는 대신, 수많은 예시(데이터)를 보여 주고 패턴을 스스로 익히게 하는 방식. 오늘날 우리가 'AI'라 부르는 거의 모든 것의 공통 엔진이다.",
+      },
+      {
+        term: "학습 (Training)",
+        explanation:
+          "그 패턴을 익히는 과정. 예시를 보며 모델 내부의 수많은 숫자를 조금씩 조정해, 틀린 답과 맞는 답 사이의 거리를 좁혀 간다. 이 과정이 끝나야 비로소 '쓸 수 있는' 모델이 된다.",
+      },
+      {
+        term: "파운데이션 모델 (Foundation model)",
+        explanation:
+          "한 가지 일만 하던 좁은 AI와 달리, 방대한 데이터로 한 번 크게 학습해 번역·요약·코딩·대화 등 여러 일에 두루 갖다 쓰는 범용 토대 모델. GPT·Claude·Gemini가 대표적이다.",
+      },
+      {
+        term: "AGI (범용 인공지능)",
+        explanation:
+          "특정 작업이 아니라 사람처럼 폭넓은 일을 두루 해내는 AI. 아직 도달하지 못했고 언제 올지도 논쟁 중이지만, 업계가 향하는 방향을 가리키는 북극성 같은 말이다.",
+      },
+    ],
+    mission:
+      "자, 이번엔 읽은 걸 머릿속에만 두지 말고 'AI의 범위'를 직접 펼쳐 볼 거예요. 20분이면 충분해요.\n\n1. 'AI' 떠오르는 대로 다 적고 묶기 (7분)\n'AI' 하면 떠오르는 걸 가능한 한 많이 적어 보세요. 그런 다음 골라주는 것 / 알아보는 것(인식) / 만들어 내는 것 / 스스로 움직이는 것(로봇·자율주행)처럼 종류별로 묶어 보세요. 'AI'가 얼마나 넓은 우산인지 눈으로 확인하는 단계예요.\n\n2. 결이 다른 AI 둘 만져보기 (8분)\n챗봇 하나(ChatGPT·Claude)와, 결이 다른 AI 하나(이미지 생성·번역·음성 받아쓰기 중 택1)에 같은 주제를 던져 보세요. 둘이 어떻게 다른지 한 줄로 적어요. 같은 '파운데이션 모델' 시대의 도구라도 손맛이 다르다는 걸 느끼는 단계예요.\n\n3. 두 줄 남기기 (5분)\n'나에게 AI란 ___이다' 한 줄, 그리고 '사람처럼 두루 잘하는 AI(AGI)가 정말 온다면, 내 일에서 가장 먼저 바뀔 건 ___' 한 줄을 적어요. 다 쓰면 ai-first-encounter.md로 저장하면 끝!",
+    codexNote:
+      "1번이 막히면 ChatGPT한테 '네가 아는 AI의 종류를 분야별로 쭉 나열해 줘'라고 시켜 보고, 그중 내가 몰랐던 걸 골라 지도에 더해도 좋아요. 단, 그 목록도 한 번 의심하며 받으세요.",
+    buildIntro:
+      "자, 큰 그림을 봤으니 이제 그 지도를 내 손으로 한 번 그려 볼 차례예요. 머리로 읽은 '범위'는 직접 적고 만져 봐야 비로소 진짜 감이 옵니다.",
+    buildSteps: [
+      "'AI' 떠오르는 대로 적고 종류별로 묶기",
+      "결이 다른 AI 둘에 같은 주제 던져 차이 적기",
+      "'나에게 AI란 ___' + 'AGI가 오면 먼저 바뀔 일 ___' 두 줄",
+      "ai-first-encounter.md로 저장",
+    ],
+    verificationChecklist: [
+      "'AI'가 한 종류가 아니라 여러 갈래의 우산임을 예로 들 수 있는가",
+      "머신러닝이 옛 '규칙 짜 넣기'와 어떻게 다른지 한 문장으로 말할 수 있는가",
+      "파운데이션 모델이 왜 '범용'인지 설명할 수 있는가",
+      "왜 지금 AI가 폭발했는지 한두 가지 이유를 댈 수 있는가",
+      "AGI가 대략 무엇을 뜻하는지 내 말로 말할 수 있는가",
+    ],
+    deliverable: {
+      title: "ai-first-encounter.md",
+      description:
+        "내가 떠올린 AI의 범위 지도, 종류가 다른 AI를 직접 만져 본 메모, 그리고 'AI란'과 'AGI가 오면'에 대한 내 두 줄이 담긴 한 장짜리 노트.",
+      format: "Markdown 노트",
+    },
+    reflectionQuestions: [
+      "오늘 펼쳐 보기 전, 나는 'AI'를 몇 가지 종류로만 좁게 보고 있었나요?",
+      "AI가 '갑자기' 온 게 아니라 데이터·연산력·구조가 쌓여 터진 거라면, 다음 임계점은 어디서 올 것 같나요?",
+      "AGI가 정말 온다면 기대되는 점과 걱정되는 점은 각각 무엇인가요?",
+    ],
+    extensionIdeas: [
+      "관심 분야(의료·교육·예술 등) 하나를 골라 'AI가 거기서 무엇을 하고 있나' 5분만 찾아보기",
+      "10년 전·지금·10년 후의 AI를 한 줄씩 상상해 적고, 무엇이 그대로일지 표시해 보기",
+    ],
+    reflectionOutro:
+      "AI라는 우산이 이렇게 넓다는 걸 봤다면 첫 만남은 충분해요. 다음 레슨부터는 그 우산 아래 요즘 가장 뜨거운 한 칸, 챗봇을 움직이는 'LLM'의 속을 열어 봅니다. 오늘 그린 지도는 코스 내내 곁에 두고 칸을 채워 나가면 돼요.",
+    tags: ["foundation", "ai-literacy", "overview", "machine-learning", "agi"],
+    hasMdxBody: true,
+    outputs: [
+      {
+        filename: "ai-first-encounter.md",
+        title: "내 AI 첫 만남 지도",
         kind: "note",
       },
     ],

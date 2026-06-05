@@ -6,12 +6,12 @@
 import { useCallback, useEffect, useState } from "react";
 
 // h2 id → 짧은 라벨. DOM 에 없는 섹션은 자동으로 빠진다.
-// 새 4단계 — 본문 → 빌드 → 검증 → 회고.
+// 새 4단계 — 본문 → 빌드 → 검증 → 나아가기.
 const SECTION_LABELS: Record<string, string> = {
   "section-body": "본문",
   "section-build": "빌드",
   "section-verify": "검증",
-  "section-reflection": "회고",
+  "section-reflection": "나아가기",
   // legacy fallback (hasMdxBody=false 옛 레슨에서만 노출)
   "section-problem": "문제 이해",
   "section-concepts": "최소 개념",

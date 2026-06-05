@@ -59,7 +59,7 @@ export function Hero() {
         <div className="orb orb-4" />
       </div>
       <Container>
-        <p className="eyebrow">AI Builder School · v1.0</p>
+        <p className="eyebrow">지음 · v1.0</p>
         <h1 className="hero-h">
           AI를 쓰는 사람에서,
           <br />
@@ -372,7 +372,7 @@ export function BuilderPrinciples() {
         >
           이 조건들에는 공통점이 있습니다. <strong style={{ color: "var(--ink-2)" }}>어느 것도 AI가 대체하지 못하는 것</strong>이라는 점입니다.
           판단, 취향, 설계 감각, 용기, 의심, 책임감. AI가 강해질수록 인간 빌더에게 요구되는 것은 더 <strong style={{ color: "var(--ink-2)" }}>인간적인 능력들</strong>입니다.
-          AI Builder School의 모든 레슨은 이 세 층위 중 하나를 단단하게 만드는 작업입니다.
+          지음의 모든 레슨은 이 세 층위 중 하나를 단단하게 만드는 작업입니다.
         </p>
       </Container>
     </section>

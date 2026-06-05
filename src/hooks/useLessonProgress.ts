@@ -57,7 +57,11 @@ function writeStorage(state: ProgressState) {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     // same-tab 안 모든 훅 인스턴스 동기화. (storage event 는 다른 탭에서만 발화.)
-    window.dispatchEvent(new Event(CHANGE_EVENT));
+    // writeStorage 가 setState 업데이터 안에서 호출되므로, 동기 dispatch 는
+    // 다른 인스턴스의 setState 를 렌더 도중에 일으킨다 → 커밋 이후로 미룬다.
+    const sync = () => window.dispatchEvent(new Event(CHANGE_EVENT));
+    if (typeof queueMicrotask === "function") queueMicrotask(sync);
+    else setTimeout(sync, 0);
   } catch {
     // 용량 초과 등은 조용히 무시
   }

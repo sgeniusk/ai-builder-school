@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og";
 // output: export(GitHub Pages) 빌드에서 빌드 타임 정적 생성하도록 강제.
 export const dynamic = "force-static";
 
-export const alt = "AI Builder School — from AI user to AI builder";
+export const alt = "지음 (Jieum) — 쓰는 사람에서, 짓는 사람으로";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -33,7 +33,7 @@ export default function OpengraphImage() {
             textTransform: "uppercase",
           }}
         >
-          AI Builder School
+          JIEUM
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div

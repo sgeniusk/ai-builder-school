@@ -9,7 +9,7 @@ import type { Level } from "@/lib/types";
 export const metadata: Metadata = {
   title: "프로젝트 · 캡스톤 아이디어",
   description:
-    "AI Builder School 학습자가 도전할 수 있는 포트폴리오급 캡스톤 프로젝트 모음. 난이도별로 빌드 단계·전제 레슨·완료 기준까지.",
+    "지음 학습자가 도전할 수 있는 포트폴리오급 캡스톤 프로젝트 모음. 난이도별로 빌드 단계·전제 레슨·완료 기준까지.",
 };
 
 const GROUPS: { level: Level; eyebrow: string; description: string }[] = [

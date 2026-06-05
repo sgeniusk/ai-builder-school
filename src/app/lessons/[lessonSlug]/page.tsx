@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SectionChecklist } from "@/components/SectionChecklist";
+import { MissionChecklist, type MissionTask } from "@/components/MissionChecklist";
+import { ReviewJumps } from "@/components/ReviewJumps";
 import { LessonNotes } from "@/components/LessonNotes";
 import { LessonPager } from "@/components/LessonPager";
 import { Typewriter } from "@/components/Typewriter";
@@ -54,6 +56,8 @@ export default async function LessonPage({
   const stageNumStr = stage ? String(stage.order).padStart(2, "0") : "--";
   const lessonNumStr = String(lesson.stageOrdinal ?? idx + 1).padStart(2, "0");
   const missionText = lesson.mission ?? lesson.claudeCodeMission;
+  // 미션에 번호 과제(1. 2. 3.)가 있으면 콜아웃 안에서 바로 체크. 없으면 기존 방식 폴백.
+  const missionTasks = parseMissionTasks(missionText);
   // 시간 표기 — '최소(개념만 읽기)'와 '권장(미션까지)' 두 가지로.
   const readMinutes = Math.max(3, Math.round(lesson.estimatedMinutes * 0.4));
   // 이 레슨을 deepens로 심화하는 휘발성 특강 (스펙 3 §7)
@@ -130,8 +134,8 @@ export default async function LessonPage({
           </>
         )}
 
-        {/* 빌드 단계 — 강사 멘트(buildIntro) → 미션 콜아웃 → Codex 참고 → 체크박스 */}
-        {lesson.buildSteps.length > 0 && (
+        {/* 빌드 단계 — 강사 멘트(buildIntro) → 미션 콜아웃(번호 미션은 인라인 체크) → Codex 참고 */}
+        {(lesson.buildSteps.length > 0 || missionTasks) && (
           <>
             <h2 id="section-build">빌드 단계</h2>
             {lesson.buildIntro && (
@@ -159,7 +163,16 @@ export default async function LessonPage({
             </p>
             <div className="callout">
               <div className="kicker">Mission · 권장 {lesson.estimatedMinutes}분</div>
-              <Typewriter text={missionText ?? ""} />
+              {missionTasks ? (
+                <>
+                  {missionTasks.intro && (
+                    <p className="mission-intro">{missionTasks.intro}</p>
+                  )}
+                  <MissionChecklist lessonId={lesson.id} tasks={missionTasks.tasks} />
+                </>
+              ) : (
+                <Typewriter text={missionText ?? ""} />
+              )}
             </div>
             {lesson.codexNote && (
               <div
@@ -177,16 +190,21 @@ export default async function LessonPage({
                 </p>
               </div>
             )}
-            <SectionChecklist
-              lessonId={lesson.id}
-              section="build"
-              items={lesson.buildSteps}
-              ordered
-            />
+            {/* 번호 미션이 콜아웃 안에서 바로 체크되므로, 폴백 레슨만 별도 체크리스트 */}
+            {!missionTasks && (
+              <SectionChecklist
+                lessonId={lesson.id}
+                section="build"
+                items={lesson.buildSteps}
+                ordered
+              />
+            )}
           </>
         )}
 
         <h2 id="section-verify">검증</h2>
+        {/* 검증 = 본문·빌드에서 배운 걸 다시 짚어보는 단계 → 헷갈리면 그 단락으로 바로 점프 */}
+        <ReviewJumps />
         <SectionChecklist
           lessonId={lesson.id}
           section="verify"
@@ -196,8 +214,9 @@ export default async function LessonPage({
         {/* 산출물은 헤더 칩에서 이미 안내. 여기서는 outputs 파일 블록만 (있을 때) */}
         <OutputsBlock lesson={lesson} />
 
-        {/* 회고 · 다음 시도 — 자기 질문 → 다음 시도 → 강사 마무리 */}
-        <h2 id="section-reflection">회고 · 다음 시도</h2>
+        {/* 나아가기 = 복습이 아니라 더 생각해보기 + 해볼 만한 다음 한 걸음 */}
+        <h2 id="section-reflection">나아가기</h2>
+        <div className="kicker" style={{ margin: "0 0 10px" }}>생각할 거리</div>
         <SectionChecklist
           lessonId={lesson.id}
           section="reflect"
@@ -205,8 +224,11 @@ export default async function LessonPage({
         />
 
         {lesson.extensionIdeas.length > 0 && (
-          <div style={{ marginTop: 24 }}>
-            <div className="kicker" style={{ marginBottom: 8 }}>다음 시도</div>
+          <div style={{ marginTop: 28 }}>
+            <div className="kicker" style={{ marginBottom: 8 }}>다음 한 걸음</div>
+            <p style={{ margin: "0 0 8px", color: "var(--ink-3)", fontSize: 15 }}>
+              전부 다 할 필요 없어요. 이 중 가장 끌리는 하나만 골라 지금 해보세요.
+            </p>
             <ul style={{ marginTop: 0 }}>
               {lesson.extensionIdeas.map((i) => (
                 <li key={i}>{i}</li>
@@ -304,6 +326,34 @@ export default async function LessonPage({
         />
     </article>
   );
+}
+
+// 미션 문자열에서 "1. 제목\n설명" 패턴을 파싱 → {intro, tasks[]}.
+// 번호 항목이 2개 미만이면 null (이전 형식 레슨은 기존 Typewriter 콜아웃으로 폴백).
+function parseMissionTasks(
+  mission: string | undefined,
+): { intro: string; tasks: MissionTask[] } | null {
+  if (!mission) return null;
+  const numRe = /^\s*\d+\.\s+(.*)$/;
+  const introLines: string[] = [];
+  const tasks: { title: string; detail: string[] }[] = [];
+  let cur: { title: string; detail: string[] } | null = null;
+  for (const line of mission.split("\n")) {
+    const m = line.match(numRe);
+    if (m) {
+      cur = { title: m[1].trim(), detail: [] };
+      tasks.push(cur);
+    } else if (cur) {
+      cur.detail.push(line);
+    } else if (line.trim()) {
+      introLines.push(line.trim());
+    }
+  }
+  if (tasks.length < 2) return null;
+  return {
+    intro: introLines.join(" ").trim(),
+    tasks: tasks.map((t) => ({ title: t.title, detail: t.detail.join("\n").trim() })),
+  };
 }
 
 function OutputsBlock({ lesson }: { lesson: Lesson }) {

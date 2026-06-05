@@ -7,7 +7,7 @@ import { getJourneys } from "@/lib/content";
 export const metadata: Metadata = {
   title: "여정 · 6개 학습 경로",
   description:
-    "AI Builder School의 6개 여정. 어디서 출발하든 모두 빌더가 됩니다 — 스타터·실무자·크리에이터·파운더·엔지니어·AI 네이티브.",
+    "지음의 6개 여정. 어디서 출발하든 모두 빌더가 됩니다 — 스타터·실무자·크리에이터·파운더·엔지니어·AI 네이티브.",
 };
 
 export default function JourneysPage() {

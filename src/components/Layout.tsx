@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { CharacterChrome } from "./CharacterChrome";
 import { ThemeToggle } from "./ThemeToggle";
 import { SiteSearch, type SearchItem } from "./SiteSearch";
+import { LockupH } from "./brand/Wordmark";
 import {
   getJourneys,
   getLessons,
@@ -92,9 +93,8 @@ export function SiteHeader() {
     <header className="site-header">
       <Container>
         <div className="row">
-          <Link href="/" className="brand">
-            <span aria-hidden className="brand-mark" />
-            <span className="brand-text-hide-sm">AI Builder School</span>
+          <Link href="/" className="brand" aria-label="지음 홈">
+            <LockupH variant="house" treatment="sans" scale={0.5} showRoman={false} color="var(--ink)" />
           </Link>
           <nav className="nav" aria-label="주요 메뉴">
             {navLinks.map((link) => (
@@ -131,10 +131,7 @@ export function SiteFooter() {
         >
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <span aria-hidden className="brand-mark" />
-              <span style={{ fontSize: 15, fontWeight: 600, color: "var(--ink)" }}>
-                AI Builder School
-              </span>
+              <LockupH variant="house" treatment="serif" scale={0.72} color="var(--jic)" />
             </div>
             <p
               style={{
@@ -188,7 +185,7 @@ export function SiteFooter() {
             gap: 8,
           }}
         >
-          <span>© {new Date().getFullYear()} AI Builder School</span>
+          <span>© {new Date().getFullYear()} 지음 (Jieum) — formerly AI Builder School</span>
           <span className="mono" style={{ fontSize: 12, color: "var(--ink-4)" }}>
             v1.0.1 · calm editorial
           </span>

@@ -102,7 +102,7 @@ const partOfJourneyEdges: Edge[] = [
 
 /** teaches 엣지 — Lesson → Concept. 수동 선언 (스펙 §3) */
 const teachesEdges: Edge[] = [
-  { from: nodeId("lesson", "common-skills-of-future-proof-people"), to: nodeId("concept", "human-in-the-loop"), type: "teaches" },
+  { from: nodeId("lesson", "ai-delegation-decision"), to: nodeId("concept", "human-in-the-loop"), type: "teaches" },
   { from: nodeId("lesson", "hallucination-verification"), to: nodeId("concept", "hallucination"), type: "teaches" },
   { from: nodeId("lesson", "checks-before-trusting-ai-output"), to: nodeId("concept", "human-in-the-loop"), type: "teaches" },
   { from: nodeId("lesson", "structure-of-good-prompts"), to: nodeId("concept", "prompt-structure"), type: "teaches" },

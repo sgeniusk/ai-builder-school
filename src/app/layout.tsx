@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { SiteFooter, SiteHeader } from "@/components/Layout";
+import { SiteChrome } from "@/components/SiteChrome";
 import { SITE_NAME, SITE_ORIGIN, SITE_URL } from "@/lib/site";
 
 const DESCRIPTION =
@@ -10,13 +11,15 @@ export const metadata: Metadata = {
   // metadataBase는 호스트만 — basePath(/ai-builder-school)가 서브경로를 붙인다.
   metadataBase: new URL(SITE_ORIGIN),
   title: {
-    default: "AI Builder School · AI로 만드는 사람으로",
-    template: "%s · AI Builder School",
+    default: "지음 · 쓰는 사람에서, 짓는 사람으로",
+    template: "%s · 지음",
   },
   description: DESCRIPTION,
   keywords: [
-    "AI Builder School",
-    "AI 빌더 스쿨",
+    "지음",
+    "Jieum",
+    "지음 AI",
+    "AI 빌더",
     "Codex",
     "Claude Code",
     "AI 교육",
@@ -26,9 +29,9 @@ export const metadata: Metadata = {
     "AI 앱 개발",
   ],
   openGraph: {
-    title: "AI Builder School · AI로 만드는 사람으로",
+    title: "지음 · 쓰는 사람에서, 짓는 사람으로",
     description:
-      "AI를 쓰는 사람에서 AI로 만드는 사람으로. Codex/Claude Code 기반 한국어 실전 커리큘럼.",
+      "쓰는 사람에서, 짓는 사람으로. 나를 알아주는 AI 곁에서 글·서비스·자동화를 한 채씩 짓는 한국어 실전 학교.",
     siteName: SITE_NAME,
     url: SITE_URL,
     locale: "ko_KR",
@@ -36,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Builder School · AI로 만드는 사람으로",
+    title: "지음 · 쓰는 사람에서, 짓는 사람으로",
     description:
-      "AI를 쓰는 사람에서 AI로 만드는 사람으로. Codex/Claude Code 기반 한국어 실전 커리큘럼.",
+      "쓰는 사람에서, 짓는 사람으로. 나를 알아주는 AI 곁에서 글·서비스·자동화를 한 채씩 짓는 한국어 실전 학교.",
   },
 };
 
@@ -58,9 +61,9 @@ export default function RootLayout({
               "(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();",
           }}
         />
-        <SiteHeader />
-        <main>{children}</main>
-        <SiteFooter />
+        <SiteChrome header={<SiteHeader />} footer={<SiteFooter />}>
+          {children}
+        </SiteChrome>
       </body>
     </html>
   );

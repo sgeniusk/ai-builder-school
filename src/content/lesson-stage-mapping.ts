@@ -10,23 +10,20 @@ export interface LessonStageInfo {
 }
 
 export const lessonStageMapping: Record<string, LessonStageInfo> = {
-  // ===== Stage 1 · AI와 만나다 (13, sub 1a/1b/1c — v2.0 확장) =====
-  // 1a 원리 (5) — 터미널 켜기 전에 AI 자체를 이해 — 자가진단은 template /templates/ai-strength-self-check 으로 분리
-  "what-is-an-llm": { stageId: "stage-1", stageOrdinal: 1, stageSubGroupId: "1a" },
-  "tokens-context-and-cost": { stageId: "stage-1", stageOrdinal: 2, stageSubGroupId: "1a" },
-  "ai-service-landscape": { stageId: "stage-1", stageOrdinal: 3, stageSubGroupId: "1a" },
-  "ai-chat-features-basics": { stageId: "stage-1", stageOrdinal: 4, stageSubGroupId: "1a" },
-  "common-skills-of-future-proof-people": { stageId: "stage-1", stageOrdinal: 5, stageSubGroupId: "1a" },
-  // 1b 도구·환경 (6) — 손에 잡고 매일 쓰는 도구
-  "zero-coding-orientation": { stageId: "stage-1", stageOrdinal: 6, stageSubGroupId: "1b" },
-  "terminal-first-day": { stageId: "stage-1", stageOrdinal: 7, stageSubGroupId: "1b" },
-  "git-basics-and-terminology": { stageId: "stage-1", stageOrdinal: 8, stageSubGroupId: "1b" },
-  "github-essentials": { stageId: "stage-1", stageOrdinal: 9, stageSubGroupId: "1b" },
-  "ai-tool-account-and-cost": { stageId: "stage-1", stageOrdinal: 10, stageSubGroupId: "1b" },
-  "cost-monitoring-in-production": { stageId: "stage-1", stageOrdinal: 11, stageSubGroupId: "1b" },
-  // 1c 함께 일하는 판단 (2)
-  "ai-delegation-decision": { stageId: "stage-1", stageOrdinal: 12, stageSubGroupId: "1c" },
-  "ai-collaboration-mindset": { stageId: "stage-1", stageOrdinal: 13, stageSubGroupId: "1c" },
+  // ===== Stage 1 · AI와 만나다 (10, sub 1a/1b/1c — v2.3: 서비스+챗봇기능 병합) =====
+  // 1a 원리 (4) — "AI를 쓴다는 것"부터 LLM·도구까지. (ai-chat-features → ai-service-landscape로 병합)
+  "what-it-means-to-use-ai": { stageId: "stage-1", stageOrdinal: 1, stageSubGroupId: "1a" },
+  "what-is-an-llm": { stageId: "stage-1", stageOrdinal: 2, stageSubGroupId: "1a" },
+  "tokens-context-and-cost": { stageId: "stage-1", stageOrdinal: 3, stageSubGroupId: "1a" },
+  "ai-service-landscape": { stageId: "stage-1", stageOrdinal: 4, stageSubGroupId: "1a" },
+  // 1b 도구·환경 (5) — 손에 잡고 매일 쓰는 도구 (cost-monitoring → S6 운영으로 이동)
+  "zero-coding-orientation": { stageId: "stage-1", stageOrdinal: 5, stageSubGroupId: "1b" },
+  "terminal-first-day": { stageId: "stage-1", stageOrdinal: 6, stageSubGroupId: "1b" },
+  "git-basics-and-terminology": { stageId: "stage-1", stageOrdinal: 7, stageSubGroupId: "1b" },
+  "github-essentials": { stageId: "stage-1", stageOrdinal: 8, stageSubGroupId: "1b" },
+  "ai-tool-account-and-cost": { stageId: "stage-1", stageOrdinal: 9, stageSubGroupId: "1b" },
+  // 1c 함께 일하는 판단 (1) — ai-collaboration-mindset → S6 공유로 이동
+  "ai-delegation-decision": { stageId: "stage-1", stageOrdinal: 10, stageSubGroupId: "1c" },
 
   // ===== Stage 2 · 묻고 다듬기 (15 = 옛 S2 10 + S3 5) =====
   // 묻는 면 (옛 Stage 2)
@@ -124,6 +121,9 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
   "early-user-recruitment-for-ai-products": { stageId: "stage-6", stageOrdinal: 16 },
   "claude-skills-authoring": { stageId: "stage-6", stageOrdinal: 17 },
   "portfolio-and-retrospective": { stageId: "stage-6", stageOrdinal: 18 },
+  // Stage 1에서 이동 (2026-05-29) — 운영·공유 주제라 S6가 맞음
+  "cost-monitoring-in-production": { stageId: "stage-6", stageOrdinal: 19 },
+  "ai-collaboration-mindset": { stageId: "stage-6", stageOrdinal: 20 },
 };
 
 /**
@@ -137,12 +137,12 @@ export const lessonStageMapping: Record<string, LessonStageInfo> = {
  * - 합 = 90
  */
 export const EXPECTED_STAGE_DISTRIBUTION = {
-  "stage-1": 13,
+  "stage-1": 10,
   "stage-2": 15,
   "stage-3": 17,
   "stage-4": 11,
   "stage-5": 16,
-  "stage-6": 18,
+  "stage-6": 20,
 } as const;
 
-export const EXPECTED_TOTAL_LESSONS = 90;
+export const EXPECTED_TOTAL_LESSONS = 89;

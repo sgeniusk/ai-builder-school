@@ -51,8 +51,8 @@ export function LessonShellMobile() {
           aria-expanded={mode === "toc"}
           aria-controls="lesson-toc-drawer"
         >
-          <span aria-hidden>≡</span>
-          <span>이 레슨</span>
+          <span aria-hidden>知</span>
+          <span>지음</span>
         </button>
       </div>
 

@@ -36,12 +36,10 @@ export const journeys: Journey[] = [
     recommendedLessons: [
       "what-is-an-llm",
       "ai-service-landscape",
-      "ai-chat-features-basics",
       "zero-coding-orientation",
       "terminal-first-day",
       "git-basics-and-terminology",
       "ai-tool-account-and-cost",
-      "common-skills-of-future-proof-people",
       "ai-delegation-decision",
     ],
     capstoneIdeas: [
@@ -69,7 +67,6 @@ export const journeys: Journey[] = [
       "stage-6-operate-and-share",
     ],
     recommendedLessons: [
-      "common-skills-of-future-proof-people",
       "structure-of-good-prompts",
       "checks-before-trusting-ai-output",
       "automate-report-drafts",

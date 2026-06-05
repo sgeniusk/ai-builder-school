@@ -44,7 +44,7 @@ export function CharacterOnboarding({ onDone }: { onDone: () => void }) {
           </div>
           <h2 className="char-modal__title">반가워요</h2>
           <p className="char-modal__sub">
-            AI Builder School 의 첫 캐릭터를 만들어 학습 여정을 함께 갈 친구를
+            지음 의 첫 캐릭터를 만들어 학습 여정을 함께 갈 친구를
             정해주세요.
           </p>
         </div>

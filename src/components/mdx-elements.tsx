@@ -6,13 +6,40 @@
 // import된 MDX 본문에는 루트 mdx-components.tsx 자동 적용이 닿지 않아,
 // 레슨 페이지가 <MdxBody components={mdxElements} />로 직접 주입한다.
 import type { MDXComponents } from "mdx/types";
-import type { AnchorHTMLAttributes } from "react";
+import type { AnchorHTMLAttributes, ReactNode } from "react";
 import Link from "next/link";
 import { CodeBlock } from "@/components/CodeBlock";
 import { Terminal, Figure } from "@/components/lesson-blocks";
 
+// 본문 헤딩에서 텍스트만 추출 (인라인 code 등 중첩 노드 대응)
+function nodeText(node: ReactNode): string {
+  if (node == null || node === false || node === true) return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(nodeText).join("");
+  if (typeof node === "object" && "props" in node) {
+    return nodeText((node as { props: { children?: ReactNode } }).props.children);
+  }
+  return "";
+}
+
+// 헤딩 텍스트 → 앵커 id (한글 보존). 검증 섹션의 "다시 보기" 점프 타깃이 된다.
+function slugify(text: string): string {
+  return text
+    .trim()
+    .toLowerCase()
+    .replace(/['"“”‘’`]/g, "")
+    .replace(/[^\p{L}\p{N}\s-]/gu, "")
+    .replace(/\s+/g, "-");
+}
+
 export const mdxElements: MDXComponents = {
   pre: CodeBlock,
+  h2: ({ children }: { children?: ReactNode }) => (
+    <h2 id={slugify(nodeText(children))}>{children}</h2>
+  ),
+  h3: ({ children }: { children?: ReactNode }) => (
+    <h3 id={slugify(nodeText(children))}>{children}</h3>
+  ),
   a: ({
     href,
     children,

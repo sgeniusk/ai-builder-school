@@ -14,7 +14,7 @@ import { JourneyPathCard } from "./JourneyPathCard";
 const SECTION_META: Record<Section, { label: string; anchorId: string }> = {
   build: { label: "빌드", anchorId: "section-build" },
   verify: { label: "검증", anchorId: "section-verify" },
-  reflect: { label: "회고", anchorId: "section-reflection" },
+  reflect: { label: "나아가기", anchorId: "section-reflection" },
 };
 
 function sectionItems(lesson: Lesson, section: Section): string[] {

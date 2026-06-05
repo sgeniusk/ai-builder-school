@@ -7,7 +7,7 @@ import { getTemplates } from "@/lib/content";
 export const metadata: Metadata = {
   title: "템플릿 · 프롬프트·미션·체크리스트",
   description:
-    "AI Builder School 레슨에서 바로 재사용할 수 있는 프롬프트, 미션, 체크리스트 템플릿 모음.",
+    "지음 레슨에서 바로 재사용할 수 있는 프롬프트, 미션, 체크리스트 템플릿 모음.",
 };
 
 export default function TemplatesPage() {

@@ -7,7 +7,7 @@ import { getLessons, getStages } from "@/lib/content";
 export const metadata: Metadata = {
   title: "커리큘럼 · 8단계 사다리",
   description:
-    "AI Builder School의 8단계 커리큘럼. AI와 만나는 첫 칸부터 AI 시스템을 공유하는 마지막 칸까지, 한 칸마다 산출물 하나가 손에 남습니다.",
+    "지음의 8단계 커리큘럼. AI와 만나는 첫 칸부터 AI 시스템을 공유하는 마지막 칸까지, 한 칸마다 산출물 하나가 손에 남습니다.",
 };
 
 export default function StagesPage() {

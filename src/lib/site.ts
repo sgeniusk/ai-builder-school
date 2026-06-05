@@ -7,5 +7,6 @@
 //   필요한 곳에서 쓴다.
 export const SITE_ORIGIN = "https://sgeniusk.github.io";
 export const SITE_URL = `${SITE_ORIGIN}/ai-builder-school`;
-export const SITE_NAME = "AI Builder School";
-export const SITE_TAGLINE = "AI를 쓰는 사람에서, AI로 만드는 사람으로";
+// 지음(Jieum) 리브랜딩 — 표시 이름만 변경, 배포 경로(SITE_URL/basePath)는 유지.
+export const SITE_NAME = "지음";
+export const SITE_TAGLINE = "쓰는 사람에서, 짓는 사람으로";

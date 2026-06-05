@@ -4,9 +4,9 @@ import { Container } from "@/components/Layout";
 import { PageHead } from "@/components/Sections";
 
 export const metadata: Metadata = {
-  title: "소개 · 왜 AI Builder School인가",
+  title: "소개 · 왜 지음인가",
   description:
-    "AI Builder School은 한국어 기반의 실전형 AI 빌더 스쿨입니다. 철학, 학습 방식, 기여 방법을 소개합니다.",
+    "지음은 한국어 기반의 실전형 AI 빌더 스쿨입니다. 철학, 학습 방식, 기여 방법을 소개합니다.",
 };
 
 const principles = [
@@ -39,7 +39,7 @@ const faqs = [
   },
   {
     q: "Codex와 Claude Code 중 무엇을 써야 하나요?",
-    a: "현재 AI Builder School의 미션은 Claude Code 기준으로 작성되어 있고, Codex 특이사항은 별도 주석으로 제공됩니다. 기본적으로는 Claude Code 하나로 전 과정이 돌아갑니다.",
+    a: "현재 지음의 미션은 Claude Code 기준으로 작성되어 있고, Codex 특이사항은 별도 주석으로 제공됩니다. 기본적으로는 Claude Code 하나로 전 과정이 돌아갑니다.",
   },
   {
     q: "8주 안에 정말 끝낼 수 있나요?",
@@ -55,7 +55,7 @@ const visionPillars = [
   {
     n: "01",
     title: "살아있는 지식 그래프",
-    body: "AI Builder School은 정적 커리큘럼이 아니라 입력으로 자라는 지식 그래프입니다. 레슨·개념·특강이 노드로, 관계가 엣지로 이어집니다.",
+    body: "지음은 정적 커리큘럼이 아니라 입력으로 자라는 지식 그래프입니다. 레슨·개념·특강이 노드로, 관계가 엣지로 이어집니다.",
   },
   {
     n: "02",
@@ -75,7 +75,7 @@ export default function AboutPage() {
       <PageHead
         eyebrow="About"
         title={<>AI는 쓰는 도구가 아니라,<br />만드는 팀원입니다.</>}
-        lede="AI Builder School은 한국어 학습자를 위한 실전형 AI 빌더 스쿨입니다. 수동적인 강의가 아니라, Codex와 Claude Code를 파트너로 두고 매 주 하나의 산출물을 만들게 합니다."
+        lede="지음은 한국어 학습자를 위한 실전형 AI 빌더 스쿨입니다. 수동적인 강의가 아니라, Codex와 Claude Code를 파트너로 두고 매 주 하나의 산출물을 만들게 합니다."
       />
 
       <section className="sec">
@@ -146,7 +146,7 @@ export default function AboutPage() {
             급변하는 시장에서 항상성을 지키는 학교
           </h2>
           <p className="section-lede">
-            AI Builder School 2.0은 한 번 만들고 끝나는 커리큘럼이 아닙니다. 입력으로 자라고, 원리는 남기고, 낡은 것만 갈아 끼우는 시스템입니다.
+            지음 2.0은 한 번 만들고 끝나는 커리큘럼이 아닙니다. 입력으로 자라고, 원리는 남기고, 낡은 것만 갈아 끼우는 시스템입니다.
           </p>
 
           <div
