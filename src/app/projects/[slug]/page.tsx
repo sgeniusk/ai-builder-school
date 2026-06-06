@@ -1,4 +1,4 @@
-// 프로젝트 상세 — 빌드 단계·전제 레슨·완료 기준까지 펼치는 캡스톤 가이드.
+// 프로젝트 상세 — 빌드 단계·구제 레슨·완료 기준까지 펼치는 작업장.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -77,14 +77,13 @@ export default async function ProjectDetailPage({
         </p>
 
         <div className="capstone-note">
-          <div className="capstone-note__tag">이건 캡스톤이에요</div>
+          <div className="capstone-note__tag">지금 바로 짓기 시작</div>
           <p>
-            프로젝트는 레슨처럼 한 줄씩 따라 하는 가이드가 아니라, 배운 걸 혼자
-            적용하는 졸업 과제예요. 아래 <strong>준비시키는 레슨</strong>을 먼저
-            끝내면 훨씬 수월해요. 각 빌드 단계에는 막막함을 덜어 줄{" "}
-            <strong>먼저 할 것</strong>과 복사해 쓰는{" "}
-            <strong>시작 프롬프트</strong>가 있어요 — 거기서 출발해 당신의 상황에
-            맞게 키워 가세요.
+            먼저 다 배우고 오지 않아도 돼요. 아래 첫 빌드 단계의{" "}
+            <strong>먼저 할 것</strong>과 복사해 쓰는 <strong>시작 프롬프트</strong>로
+            오늘 첫 삽을 뜨고, 막히는 곳이 나오면 그때 딱 그 레슨을 펴 보세요. 각
+            단계엔 막혔을 때 펼치는 <strong>구제 레슨</strong>이 붙어 있어요 — 완벽하지
+            않아도 괜찮아요, 일단 한 삽.
           </p>
         </div>
 
@@ -149,7 +148,7 @@ export default async function ProjectDetailPage({
           ))}
         </ul>
 
-        <h2>이 프로젝트를 준비시키는 레슨</h2>
+        <h2>막힐 때 펴 보는 레슨</h2>
         <ul className="lessons-list" style={{ marginTop: 16 }}>
           {lessons.map((lesson, idx) => (
             <li key={lesson.id}>

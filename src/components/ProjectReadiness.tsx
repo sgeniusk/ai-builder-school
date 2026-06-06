@@ -1,4 +1,4 @@
-// 프로젝트 준비도 — keyLessons 완료 비율로 잠김·준비 중·시작 가능을 보여준다.
+// 프로젝트의 구제 레슨(keyLessons) 중 몇 개를 이미 봤는지 보여준다 (막대 색으로 상태 표시).
 // 새 추적 장치 없음 — 레슨 진척(localStorage)에서 파생.
 "use client";
 
@@ -13,14 +13,10 @@ export function ProjectReadiness({ lessons }: { lessons: ProgressLesson[] }) {
   const done = mounted ? lessons.filter((l) => isLessonComplete(l)).length : 0;
   const pct = total === 0 ? 0 : Math.round((done / total) * 100);
   const state = done === 0 ? "locked" : done >= total ? "ready" : "progress";
+  // 빌드-우선 — keyLessons는 "막힐 때 보는 구제 레슨". 잠금·시작가능 프레이밍을 걷어내고
+  // 몇 개를 이미 봤는지만 보여준다(상태는 막대 색으로만 남긴다).
   const label =
-    total === 0
-      ? "준비 레슨 없음"
-      : state === "ready"
-        ? "시작 가능"
-        : state === "locked"
-          ? `준비 레슨 0/${total}`
-          : `준비 중 ${done}/${total}`;
+    total === 0 ? "구제 레슨 없음" : `구제 레슨 ${done}/${total}`;
 
   return (
     <div className={`proj-readiness proj-readiness--${state}`}>

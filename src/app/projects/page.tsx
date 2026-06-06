@@ -7,9 +7,9 @@ import { LEVEL_LABEL } from "@/lib/types";
 import type { Level } from "@/lib/types";
 
 export const metadata: Metadata = {
-  title: "프로젝트 · 캡스톤 아이디어",
+  title: "프로젝트 · 오늘 지을 것",
   description:
-    "지음 학습자가 도전할 수 있는 포트폴리오급 캡스톤 프로젝트 모음. 난이도별로 빌드 단계·전제 레슨·완료 기준까지.",
+    "지음 학습자가 오늘 바로 시작할 수 있는 프로젝트 모음. 먼저 다 배우지 않아도 돼요 — 만들다 막히면 그때 레슨을 부릅니다.",
 };
 
 const GROUPS: { level: Level; eyebrow: string; description: string }[] = [
@@ -37,8 +37,8 @@ export default function ProjectsPage() {
     <>
       <PageHead
         eyebrow={<>Projects · {projects.length}</>}
-        title={<>만든 것이<br />포트폴리오가 됩니다.</>}
-        lede="각 프로젝트는 특정 Stage 세트를 전제로 하며, 배포 가능한 결과물이 목표입니다. 카드를 누르면 빌드 단계·전제 레슨·완료 기준이 펼쳐집니다. 입문은 위쪽, 심화는 아래쪽 — 자기 수준에서 시작하세요."
+        title={<>만들고 싶은 것에서<br />시작합니다.</>}
+        lede="먼저 다 배우고 오지 않아도 돼요. 만들고 싶은 것 하나를 골라 오늘 첫 삽을 뜨고, 막히는 곳마다 그때 필요한 레슨을 부르세요. 입문은 위쪽, 심화는 아래쪽 — 자기 수준에서 시작하세요."
       />
 
       {GROUPS.map((group) => {
