@@ -91,6 +91,34 @@ export default async function LessonPage({
           </p>
         )}
 
+        {lesson.conceptDepth && (
+          <details className="concept-depth">
+            <summary className="concept-depth__summary">
+              📐 개념 깊이 — 비유 · 실무 · 구현 · 원리 (필요한 만큼만)
+            </summary>
+            <div className="concept-depth__rungs">
+              <div className="concept-depth__rung">
+                <span className="concept-depth__label mono">비유</span>
+                <p>{lesson.conceptDepth.explainLikeTwelve}</p>
+              </div>
+              <div className="concept-depth__rung">
+                <span className="concept-depth__label mono">실무</span>
+                <p>{lesson.conceptDepth.practicalExplanation}</p>
+              </div>
+              <div className="concept-depth__rung">
+                <span className="concept-depth__label mono">구현</span>
+                <p>{lesson.conceptDepth.implementationNotes}</p>
+              </div>
+              {lesson.conceptDepth.deeperTheory && (
+                <div className="concept-depth__rung">
+                  <span className="concept-depth__label mono">원리</span>
+                  <p>{lesson.conceptDepth.deeperTheory}</p>
+                </div>
+              )}
+            </div>
+          </details>
+        )}
+
         {/* 산출물 칩 — 처음부터 목표를 보여줌 */}
         {lesson.deliverable?.title && (
           <p

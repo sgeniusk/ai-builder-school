@@ -34,6 +34,17 @@ export function buildHandoffPrompt({ lesson, journeyKo, note, question }: Handof
   if (note && note.trim()) {
     lines.push("", "[내가 적어둔 메모]", note.trim());
   }
+  if (lesson.conceptDepth) {
+    const cd = lesson.conceptDepth;
+    lines.push(
+      "",
+      "[개념 깊이 4단 — 내가 막힌 깊이까지 단계별로 풀어줘]",
+      `· 비유: ${cd.explainLikeTwelve}`,
+      `· 실무: ${cd.practicalExplanation}`,
+      `· 구현: ${cd.implementationNotes}`,
+    );
+    if (cd.deeperTheory) lines.push(`· 원리: ${cd.deeperTheory}`);
+  }
   lines.push("", "[되묻기]", question);
   return lines.join("\n");
 }
@@ -42,6 +53,7 @@ export function buildHandoffPrompt({ lesson, journeyKo, note, question }: Handof
 export function buildQuestionChips(lesson: Lesson, hasNote: boolean): string[] {
   const chips: string[] = [];
   if (lesson.deliverable?.title) chips.push(`오늘 미션 같이 시작하자`);
+  if (lesson.conceptDepth) chips.push("개념을 비유부터 원리까지 풀어줘");
   for (const q of (lesson.reflectionQuestions ?? []).slice(0, 2)) chips.push(q);
   if (hasNote) chips.push("내 메모 이어서 다듬자");
   chips.push("이 레슨, 한마디로 정리해줘");

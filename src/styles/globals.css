@@ -646,6 +646,28 @@ body::before {
   .lesson-reader p { font-size: 17px; line-height: 1.9; color: var(--ink-2); margin: 0 0 18px; }
   .lesson-reader ul, .lesson-reader ol { font-size: 17px; line-height: 1.9; color: var(--ink-2); margin: 0 0 18px; padding-left: 20px; }
   .lesson-reader ul li, .lesson-reader ol li { margin-bottom: 8px; }
+  /* 개념 깊이 4단 아코디언 (conceptDepth) */
+  .concept-depth {
+    margin: 14px 0 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--paper-2);
+    overflow: hidden;
+  }
+  .concept-depth__summary {
+    cursor: pointer;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-2);
+    list-style: none;
+  }
+  .concept-depth__summary::-webkit-details-marker { display: none; }
+  .concept-depth[open] .concept-depth__summary { border-bottom: 1px solid var(--line); }
+  .concept-depth__rungs { padding: 12px 16px 14px; display: grid; gap: 12px; }
+  .concept-depth__rung { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: start; }
+  .concept-depth__label { font-size: 11px; font-weight: 700; color: var(--ink-3); padding-top: 3px; }
+  .lesson-reader .concept-depth__rung p { margin: 0; font-size: 14px; line-height: 1.7; color: var(--ink-2); }
   /* ===== 레슨 본문 읽기 리듬 — Pretendard, 넉넉한 행간·문단 간격 ===== */
   .lesson-reader p { font-size: 18px; line-height: 2.1; margin-bottom: 26px; }
   .lesson-reader ul, .lesson-reader ol { font-size: 18px; line-height: 2.1; }

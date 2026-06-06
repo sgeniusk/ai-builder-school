@@ -155,6 +155,18 @@ export interface CoreConcept {
   explanation: string;
 }
 
+/** 개념 깊이 4단 사다리 — 재귀 튜터가 단계별로 읽어 비유→실무→구현→원리로 설명. */
+export interface ConceptDepth {
+  /** 12세에게 설명하듯 쉬운 비유 한 단락. */
+  explainLikeTwelve: string;
+  /** 실무 개념 — 일하면서 쓰는 수준. */
+  practicalExplanation: string;
+  /** 구현 — 코드·도구로 어떻게 되는가. */
+  implementationNotes: string;
+  /** 원리 — 왜 그렇게 동작하는가(선택). */
+  deeperTheory?: string;
+}
+
 export interface LessonDeliverable {
   title: string;
   description: string;
@@ -226,6 +238,8 @@ export interface Lesson extends NodeMeta {
    * 왜 지금 이걸 보는지 한 줄로 알려준다. 없으면 헤더 생략.
    */
   neededWhen?: string;
+  /** 개념 깊이 4단. 있으면 레슨 상단 아코디언 + 컴패니언 핸드오프에 주입. */
+  conceptDepth?: ConceptDepth;
   /**
    * outputs/ 폴더에 함께 제공되는 파일들. 학습자가 다운로드하거나 복사할 수 있음.
    */
