@@ -10,11 +10,11 @@
 - **D-d** Stage 재서술 = 카피 + "이 역량을 쓰는 프로젝트" 노출. StageLadder 시각 컴포넌트는 유지(전면 재디자인 별도).
 
 ## 태스크
-- [ ] **P1-1 Stage 사다리 → 지도 재서술** — `stages/page.tsx` lede + `stages/[stageSlug]/page.tsx`에 `getProjectsByStageSlug` 프로젝트 노출. 데이터 변경 없음.
-- [ ] **P1-2 데이터 모델 foundation** — `types.ts`: `Blocker`, `Project.blockers?`, `Lesson.conceptDepth?`, `Template.usedWhen?/relatedBlockers?`, `Journey.fastStartProject?/primaryProjects?` (전부 옵셔널, validate 안전).
-- [ ] **P1-3 Project 막힘 토글 + blocker 백필** — `projects/[slug]/page.tsx`에 "여기서 막혔나요?" 섹션. blockers 백필 3~4개(document-qa-bot·gpt-wrapper-product·team-onboarding-bot·weekly-report-autopilot). 링크에 `?from=` 부착.
-- [ ] **P1-4 /build 네비게이터** — `app/build/page.tsx` 신규. 산출물 카테고리 → 프로젝트 라우팅(Start BUILD_GOALS 확장). 홈 히어로 CTA → `/build`.
-- [ ] **P1-5 ProjectReadiness 톤 완화** — `--locked` 빨강/잠금 인상 제거(중립 진척 색).
+- [x] **P1-1 Stage 사다리 → 지도 재서술** (`b693e53`) — stages 카피 + Stage별 "이 역량으로 짓는 프로젝트"(`getProjectsByStageSlug`).
+- [x] **P1-2 데이터 모델 foundation** (`f50eb46`) — `Blocker` + `Project.blockers?`만 추가(YAGNI — conceptDepth·Template·Journey 필드는 쓸 때 추가).
+- [x] **P1-3 Project 막힘 토글 + blocker 백필** (`f50eb46`) — "여기서 막혔나요?" 섹션 + 4개 프로젝트 백필. 링크 `?from=` 부착.
+- [x] **P1-4 /build 네비게이터** (`027a9db`) — 7 빌드 목표 → 프로젝트. 히어로·헤더·푸터 배선. `.gitignore` `build`→`/build` 수정(라우트가 무시되던 버그).
+- [x] **P1-5 ProjectReadiness 톤 완화** — 불필요(no-op). `--locked` 빨강 CSS가 애초에 없음, P0 라벨 변경으로 이미 중립.
 
 ## 남김(다음 차례)
 - 미사용 CSS 정리(.hero/.usp-*/.principles-* — `.tfoot`·`.cta-box` 등 공유 클래스 주의, per-class 사용 확인 필수)
