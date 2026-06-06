@@ -1,6 +1,7 @@
 // 빌더 카드 — 학습 진척을 1080×1080 PNG로 그린다 (canvas).
 // SNS 공유·학습 인증샷용. 항상 라이트(paper/ink) 톤으로 — 공유 이미지는
 // 사용자 테마와 무관하게 일관돼야 한다.
+import { SITE_NAME, SITE_TAGLINE } from "@/lib/site";
 
 export type BuilderCardData = {
   handle: string;
@@ -9,6 +10,7 @@ export type BuilderCardData = {
   done: number;
   total: number;
   completedStages: number;
+  totalStages: number;
   streak: number;
 };
 
@@ -36,7 +38,7 @@ export function drawBuilderCard(
   // 상단 라벨
   ctx.fillStyle = gray;
   ctx.font = `500 26px ${FONT}`;
-  ctx.fillText("AI BUILDER SCHOOL", 90, 132);
+  ctx.fillText(`${SITE_NAME} · 知音`, 90, 132);
 
   // 핸들
   ctx.fillStyle = ink;
@@ -77,7 +79,7 @@ export function drawBuilderCard(
   ctx.fillStyle = gray;
   ctx.font = `400 30px ${FONT}`;
   ctx.fillText(
-    `8 Stage 중 ${d.completedStages}개 완주   ·   🔥 ${d.streak}일 연속`,
+    `${d.totalStages} Stage 중 ${d.completedStages}개 완주   ·   🔥 ${d.streak}일 연속`,
     cx,
     862,
   );
@@ -92,5 +94,5 @@ export function drawBuilderCard(
   ctx.stroke();
   ctx.fillStyle = gray;
   ctx.font = `400 25px ${FONT}`;
-  ctx.fillText("AI를 쓰는 사람에서, AI로 만드는 사람으로", 90, 1012);
+  ctx.fillText(SITE_TAGLINE, 90, 1012);
 }

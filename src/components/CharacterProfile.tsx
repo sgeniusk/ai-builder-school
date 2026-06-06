@@ -158,8 +158,8 @@ export function CharacterProfile({
             {myJourney ? myJourney.titleKo : "여정 미정"} · 시작 {createdStr}
           </p>
           <p className="char-modal__rank">
-            <span aria-hidden>{getBuilderRank(doneLessons).emoji}</span>{" "}
-            {getBuilderRank(doneLessons).label}
+            <span aria-hidden>{getBuilderRank(doneLessons, totalLessons).emoji}</span>{" "}
+            {getBuilderRank(doneLessons, totalLessons).label}
           </p>
         </div>
 

@@ -81,7 +81,7 @@ export function BuilderDashboard({
   const total = allLessons.length;
   const done = allLessons.filter((l) => isLessonComplete(l)).length;
   const pct = total === 0 ? 0 : Math.round((done / total) * 100);
-  const rank = getBuilderRank(done);
+  const rank = getBuilderRank(done, total);
 
   const stageStats = stages.map((s) => {
     const list = lessonsByStage[s.id] ?? [];
@@ -143,6 +143,7 @@ export function BuilderDashboard({
             done={done}
             total={total}
             completedStages={completedStages}
+            totalStages={stageStats.length}
             streak={streak?.current ?? 0}
           />
         </header>
@@ -158,7 +159,7 @@ export function BuilderDashboard({
               <span className="dash-bar__fill" style={{ width: `${pct}%` }} />
             </div>
             <p className="dash-overall__line">
-              84 레슨 중 <strong>{done}</strong>개 완료 · 8 Stage 중{" "}
+              {total} 레슨 중 <strong>{done}</strong>개 완료 · {stageStats.length} Stage 중{" "}
               <strong>{completedStages}</strong>개 완주
             </p>
           </div>
@@ -199,7 +200,7 @@ export function BuilderDashboard({
             </>
           ) : (
             <p className="dash-next__done">
-              🎉 84개 레슨을 모두 완료했어요. 이제 당신은 빌더입니다.
+              🎉 {total}개 레슨을 모두 완료했어요. 이제 당신은 빌더입니다.
             </p>
           )}
         </section>
@@ -271,7 +272,7 @@ export function BuilderDashboard({
         <section className="dash-card">
           <div className="dash-card__head">
             <span className="rail-section-label">Stage별 진척</span>
-            <span className="mono dash-frac">{completedStages}/8 완주</span>
+            <span className="mono dash-frac">{completedStages}/{stageStats.length} 완주</span>
           </div>
           <ul className="dash-stages">
             {stageStats.map((s) => {

@@ -1,4 +1,4 @@
-// 사이트맵 — 정적 라우트 + 8 stage + 84 lesson. 빌드 시 sitemap.xml로 생성된다.
+// 사이트맵 — 정적 라우트 + 전체 stage·lesson. 빌드 시 sitemap.xml로 생성된다.
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { getLessons, getStages } from "@/lib/content";
