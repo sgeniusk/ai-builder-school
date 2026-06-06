@@ -7,6 +7,11 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-4axis-prompt",
     slug: "four-axis-prompt",
+    projectStepUsage: [
+      { projectSlug: "weekly-report-autopilot", milestoneIndex: 1 },
+      { projectSlug: "blog-to-shortform", milestoneIndex: 1 },
+      { projectSlug: "midjourney-brand-visuals", milestoneIndex: 1 },
+    ],
     title: "4축 프롬프트 템플릿",
     kind: "prompt",
     targetJourneys: [],
@@ -33,6 +38,10 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-role-persona-prompt",
     slug: "role-persona-prompt",
+    projectStepUsage: [
+      { projectSlug: "local-shop-content-calendar", milestoneIndex: 2 },
+      { projectSlug: "newsletter-ai-desk", milestoneIndex: 1 },
+    ],
     title: "역할 지정 프롬프트",
     kind: "prompt",
     targetJourneys: [],
@@ -56,6 +65,10 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-output-format-prompt",
     slug: "output-format-prompt",
+    projectStepUsage: [
+      { projectSlug: "weekly-report-autopilot", milestoneIndex: 0 },
+      { projectSlug: "meeting-notes-bot", milestoneIndex: 0 },
+    ],
     title: "출력 형식 강제 프롬프트",
     kind: "prompt",
     targetJourneys: ["practitioner", "founder", "engineer", "ai-native"],
@@ -101,6 +114,10 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-few-shot-prompt",
     slug: "few-shot-prompt",
+    projectStepUsage: [
+      { projectSlug: "blog-to-shortform", milestoneIndex: 1 },
+      { projectSlug: "nano-banana-image-kit", milestoneIndex: 1 },
+    ],
     title: "예시 기반(Few-shot) 프롬프트",
     kind: "prompt",
     targetJourneys: [],
@@ -124,6 +141,9 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-self-check-prompt",
     slug: "self-check-prompt",
+    projectStepUsage: [
+      { projectSlug: "newsletter-ai-desk", milestoneIndex: 2 },
+    ],
     title: "자기 검증 프롬프트",
     kind: "prompt",
     targetJourneys: [],
@@ -189,6 +209,9 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-meeting-notes-prompt",
     slug: "meeting-notes-prompt",
+    projectStepUsage: [
+      { projectSlug: "meeting-notes-bot", milestoneIndex: 1 },
+    ],
     title: "회의록 정리 프롬프트",
     kind: "prompt",
     targetJourneys: ["practitioner", "starter", "ai-native"],
@@ -265,6 +288,10 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-claude-mission",
     slug: "claude-code-mission-template",
+    projectStepUsage: [
+      { projectSlug: "claude-code-weekend-app", milestoneIndex: 1 },
+      { projectSlug: "team-coding-workflow", milestoneIndex: 1 },
+    ],
     title: "Claude Code 미션 템플릿",
     kind: "mission",
     targetJourneys: ["engineer", "founder", "ai-native"],
@@ -286,6 +313,9 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-issue-brief-mission",
     slug: "github-issue-brief-mission",
+    projectStepUsage: [
+      { projectSlug: "team-coding-workflow", milestoneIndex: 0 },
+    ],
     title: "이슈 → AI 브리프 미션",
     kind: "mission",
     targetJourneys: ["engineer", "founder", "ai-native"],
@@ -329,6 +359,9 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-test-writing-mission",
     slug: "test-writing-mission",
+    projectStepUsage: [
+      { projectSlug: "codex-legacy-refactor", milestoneIndex: 0 },
+    ],
     title: "테스트 작성 미션",
     kind: "mission",
     targetJourneys: ["engineer", "ai-native"],
@@ -351,6 +384,9 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-pr-review-mission",
     slug: "pr-review-mission",
+    projectStepUsage: [
+      { projectSlug: "team-coding-workflow", milestoneIndex: 2 },
+    ],
     title: "PR 리뷰 미션",
     kind: "mission",
     targetJourneys: ["engineer", "founder", "ai-native"],
@@ -375,6 +411,11 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-rag-checklist",
     slug: "rag-checklist",
+    projectStepUsage: [
+      { projectSlug: "document-qa-bot", milestoneIndex: 0 },
+      { projectSlug: "team-onboarding-bot", milestoneIndex: 0 },
+      { projectSlug: "rag-with-evals", milestoneIndex: 0 },
+    ],
     title: "RAG 품질 체크리스트",
     kind: "checklist",
     targetJourneys: ["engineer", "founder", "ai-native"],
@@ -392,6 +433,9 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-agent-checklist",
     slug: "agent-checklist",
+    projectStepUsage: [
+      { projectSlug: "personal-research-agent", milestoneIndex: 1 },
+    ],
     title: "에이전트 안전 체크리스트",
     kind: "checklist",
     targetJourneys: ["engineer", "founder", "ai-native"],
@@ -458,6 +502,10 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-output-verification-checklist",
     slug: "output-verification-checklist",
+    projectStepUsage: [
+      { projectSlug: "document-qa-bot", milestoneIndex: 1 },
+      { projectSlug: "rag-with-evals", milestoneIndex: 1 },
+    ],
     title: "AI 출력 검증 체크리스트",
     kind: "checklist",
     targetJourneys: [],
@@ -474,6 +522,11 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-launch-readiness-checklist",
     slug: "launch-readiness-checklist",
+    projectStepUsage: [
+      { projectSlug: "claude-code-weekend-app", milestoneIndex: 2 },
+      { projectSlug: "gpt-wrapper-product", milestoneIndex: 2 },
+      { projectSlug: "ai-saas-mvp", milestoneIndex: 2 },
+    ],
     title: "AI 앱 런칭 전 체크리스트",
     kind: "checklist",
     targetJourneys: ["founder", "engineer", "ai-native"],
@@ -492,6 +545,10 @@ export const templates: ContentTemplate[] = [
   {
     id: "tpl-ai-cost-checklist",
     slug: "ai-cost-checklist",
+    projectStepUsage: [
+      { projectSlug: "rag-with-evals", milestoneIndex: 2 },
+      { projectSlug: "ai-saas-mvp", milestoneIndex: 2 },
+    ],
     title: "AI 비용 점검 체크리스트",
     kind: "checklist",
     targetJourneys: ["founder", "engineer", "practitioner", "ai-native"],

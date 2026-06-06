@@ -162,6 +162,18 @@ export function getTemplateBySlug(slug: string): ContentTemplate | undefined {
   return templates.find((t) => t.slug === slug);
 }
 
+/** 특정 프로젝트의 특정 milestone(0-based)에서 쓰는 템플릿 — 빌드 중 그 자리에서 직접 호출. */
+export function getTemplatesByProjectStep(
+  projectSlug: string,
+  milestoneIndex: number,
+): ContentTemplate[] {
+  return templates.filter((t) =>
+    (t.projectStepUsage ?? []).some(
+      (u) => u.projectSlug === projectSlug && u.milestoneIndex === milestoneIndex,
+    ),
+  );
+}
+
 // ─── 2.0 특강(Special) 헬퍼 (스펙 3) ─────────────────────────────
 
 /** 게시 상태와 무관하게 모든 특강 */

@@ -10,6 +10,7 @@ import {
   getProjects,
   getStageBySlug,
   getTemplateBySlug,
+  getTemplatesByProjectStep,
 } from "@/lib/content";
 import { JOURNEY_LABEL_KO, LEVEL_LABEL } from "@/lib/types";
 
@@ -106,10 +107,11 @@ export default async function ProjectDetailPage({
           바꿔 가세요.
         </p>
         <ol className="proj-milestones">
-          {project.milestones.map((m) => {
+          {project.milestones.map((m, index) => {
             const fallback = m.fallbackLesson
               ? getLessonBySlug(m.fallbackLesson)
               : undefined;
+            const stepTemplates = getTemplatesByProjectStep(project.slug, index);
             return (
               <li key={m.title} className="proj-milestone">
                 <h3 className="proj-milestone__title">{m.title}</h3>
@@ -135,6 +137,23 @@ export default async function ProjectDetailPage({
                     </Link>{" "}
                     레슨으로
                   </p>
+                )}
+
+                {stepTemplates.length > 0 && (
+                  <div className="proj-ms-tools">
+                    <span className="proj-ms-tag">이 단계 양식</span>
+                    <div className="proj-ms-tools__list">
+                      {stepTemplates.map((t) => (
+                        <Link
+                          key={t.slug}
+                          href={`/templates/${t.slug}`}
+                          className="proj-ms-tool"
+                        >
+                          📋 {t.title} <span className="arrow">→</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 )}
               </li>
             );

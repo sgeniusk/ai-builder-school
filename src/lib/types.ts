@@ -310,6 +310,8 @@ export interface ContentTemplate extends NodeMeta {
   summary: string;
   /** "이럴 때 꺼내 쓴다" — 템플릿을 도구로 만드는 한 줄 맥락. */
   usedWhen?: string;
+  /** 어느 프로젝트 몇 단계(0-based milestone index)에서 쓰는가 — 빌드 중 그 자리에서 직접 호출. */
+  projectStepUsage?: { projectSlug: string; milestoneIndex: number }[];
   body: string;
   tags: string[];
 }

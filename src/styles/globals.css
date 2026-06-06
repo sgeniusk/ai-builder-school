@@ -470,6 +470,22 @@ body::before {
   .proj-ms-prompt { margin-top: 12px; }
   .proj-ms-prompt .proj-ms-tag { margin-bottom: 2px; }
   .proj-ms-prompt .code-block { margin: 4px 0 0; }
+  .proj-ms-tools { margin-top: 14px; }
+  .proj-ms-tools__list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .proj-ms-tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    font-size: 13px;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    background: var(--paper-2);
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: border-color .2s var(--ease), color .2s var(--ease);
+  }
+  .proj-ms-tool:hover { border-color: var(--ink-3); color: var(--ink); }
   .lesson-reader .proj-ms-fallback {
     margin: 12px 0 0;
     font-size: 13px;
