@@ -3,6 +3,8 @@
 > **For agentic workers:** 이 레포의 검증 루프는 단위 테스트가 아니라 `npm run check`(lint·typecheck·validate·build) + 시각 확인이다(Harness Contract). writing-plans의 TDD 단계를 그 게이트로 치환했다. 단계는 `- [ ]` 체크박스로 추적한다.
 > 근거 — [review §5 Data Model · §6 Page개편 · §8 P2](./2026-06-06-topdown-transition-review.md). P0([p0-plan](./2026-06-06-topdown-p0-plan.md))·P1([p1-checklist](./2026-06-06-topdown-p1-checklist.md)) 완료·push됨.
 > 작성 2026-06-07 · 검토 대상 main 최신.
+>
+> ✅ **실행 완료** 2026-06-07 — Task 1~4 전부 커밋(`be03f29`·`862cb5d`·`54ad545`·`dd5a190`). 로컬 `npm run check`(lint·typecheck·validate·build 139p) 전부 그린. 아직 push 안 함(prod 배포 승인 대기).
 
 **Goal** — P1 "남김" 세 작업(blocker 전 프로젝트 확대 + Journey 필드 · Template `projectStepUsage` · `conceptDepth` 4단 사다리)을 적용해, top-down 엔진의 마지막 미연결부(막힘 전수화·단계별 도구 호출·개념 깊이)를 운전석에 잇는다.
 
