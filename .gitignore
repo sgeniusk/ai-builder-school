@@ -12,8 +12,8 @@ coverage
 out
 next-env.d.ts
 
-# production
-build
+# production (루트 빌드 산출물만 — src/app/build 라우트는 추적)
+/build
 
 # misc
 .DS_Store

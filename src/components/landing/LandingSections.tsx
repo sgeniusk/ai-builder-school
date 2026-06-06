@@ -45,7 +45,7 @@ export function LandingHero({ journeys }: { journeys: Journey[] }) {
               AI와 함께 무엇이든 짓는 법. 나를 알아주는 AI 곁에서 글·서비스·자동화를 한 채씩 지어요.
             </p>
             <div className="lp-hero__ctas">
-              <Link href="/projects" className="btn">
+              <Link href="/build" className="btn">
                 무엇을 지을지 고르기 <span className="arrow">→</span>
               </Link>
               <Link href="/start" className="btn ghost">
