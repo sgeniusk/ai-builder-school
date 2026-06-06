@@ -104,6 +104,12 @@ export function TemplateCard({ template }: { template: ContentTemplate }) {
       </div>
       <h3>{template.title}</h3>
       <p>{template.summary}</p>
+      {template.usedWhen && (
+        <p style={{ fontSize: 13, color: "var(--ink-2)", margin: "-4px 0 4px" }}>
+          <span style={{ color: "var(--ink-3)" }}>이럴 때 — </span>
+          {template.usedWhen}
+        </p>
+      )}
       <CodeBlock style={{ marginTop: 20, maxHeight: 240, overflow: "auto", fontSize: 12 }}>
         {template.body}
       </CodeBlock>

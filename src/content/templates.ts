@@ -11,6 +11,7 @@ export const templates: ContentTemplate[] = [
     kind: "prompt",
     targetJourneys: [],
     summary: "Task / Context / Constraints / Output을 분리해 쓰는 재현 가능한 프롬프트.",
+    usedWhen: "프롬프트가 매번 다른 답을 내서 결과를 못 믿을 때.",
     body: `# Task
 (AI가 해야 하는 최종 결과물)
 
@@ -59,6 +60,7 @@ export const templates: ContentTemplate[] = [
     kind: "prompt",
     targetJourneys: ["practitioner", "founder", "engineer", "ai-native"],
     summary: "AI 답을 정해진 구조(표·JSON·스키마)로만 받게 강제하는 프롬프트.",
+    usedWhen: "AI 답을 앱에서 파싱해 써야 하는데 형식이 흔들릴 때.",
     body: `# 작업
 <처리할 입력과 원하는 결과>
 
@@ -377,6 +379,7 @@ export const templates: ContentTemplate[] = [
     kind: "checklist",
     targetJourneys: ["engineer", "founder", "ai-native"],
     summary: "RAG 앱이 배포 가능한지 검사하는 기본 체크리스트.",
+    usedWhen: "RAG 봇을 배포하기 전 빠진 게 없는지 훑을 때.",
     body: `- [ ] 모든 답에 최소 1개 출처가 표시됨
 - [ ] 출처가 실제 청크와 일치
 - [ ] 근거 없는 질문에 답을 거부
@@ -409,6 +412,7 @@ export const templates: ContentTemplate[] = [
     kind: "checklist",
     targetJourneys: ["engineer", "practitioner", "founder", "ai-native"],
     summary: "AI 제품을 공개하기 전 기본적인 보안·프라이버시 점검.",
+    usedWhen: "봇·앱을 공개하기 전 민감정보·인젝션을 점검할 때.",
     body: `- [ ] 키/시크릿이 서버에만 존재
 - [ ] 사용자 입력 PII 마스킹 정책
 - [ ] 출력에 PII/민감정보가 반복 저장되지 않음
@@ -441,6 +445,7 @@ export const templates: ContentTemplate[] = [
     kind: "checklist",
     targetJourneys: [],
     summary: "프롬프트를 라이브러리에 넣기 전 좋은 프롬프트인지 점검.",
+    usedWhen: "프롬프트를 팀 라이브러리에 넣기 전 마지막 점검할 때.",
     body: `- [ ] 작업(Task)이 한 문장으로 분명한가
 - [ ] 맥락(Context)이 충분하되 군더더기는 없는가
 - [ ] 출력 형식이 지정됐는가
@@ -457,6 +462,7 @@ export const templates: ContentTemplate[] = [
     kind: "checklist",
     targetJourneys: [],
     summary: "AI 결과를 실제로 쓰기 전 무엇을 어떻게 확인할지의 절차.",
+    usedWhen: "AI 결과를 발행·제출하기 직전 검증할 때.",
     body: `- [ ] 수치·날짜·고유명사를 원본과 대조했는가
 - [ ] 인용·출처가 실재하는지 직접 확인했는가
 - [ ] 단정적 주장에 근거가 붙어 있는가
@@ -472,6 +478,7 @@ export const templates: ContentTemplate[] = [
     kind: "checklist",
     targetJourneys: ["founder", "engineer", "ai-native"],
     summary: "AI 제품을 공개 URL로 내놓기 전 마지막 점검.",
+    usedWhen: "제품을 공개 URL로 내놓기 직전 마지막 점검할 때.",
     body: `- [ ] 핵심 사용자 흐름 1개가 끝까지 동작한다
 - [ ] API 키·시크릿이 클라이언트에 노출되지 않는다
 - [ ] spending limit·레이트 리밋이 설정됐다
@@ -489,6 +496,7 @@ export const templates: ContentTemplate[] = [
     kind: "checklist",
     targetJourneys: ["founder", "engineer", "practitioner", "ai-native"],
     summary: "AI 기능의 비용이 새지 않는지 매주 5분에 점검.",
+    usedWhen: "비용이 새는지 매주 5분 점검이 필요할 때.",
     body: `- [ ] 이번 주 토큰 사용량·비용을 확인했다
 - [ ] 가장 비싼 호출 경로가 무엇인지 안다
 - [ ] 루프·재시도가 호출 수를 폭증시키지 않는다

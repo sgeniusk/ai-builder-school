@@ -304,6 +304,8 @@ export interface ContentTemplate extends NodeMeta {
   kind: TemplateKind;
   targetJourneys: JourneyId[];
   summary: string;
+  /** "이럴 때 꺼내 쓴다" — 템플릿을 도구로 만드는 한 줄 맥락. */
+  usedWhen?: string;
   body: string;
   tags: string[];
 }
