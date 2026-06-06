@@ -4,6 +4,7 @@ import { projects } from "@/content/projects";
 import { templates } from "@/content/templates";
 import { stages } from "@/content/stages";
 import { specials } from "@/content/specials";
+import { concepts } from "@/content/concepts";
 import {
   lessonStageMapping,
   EXPECTED_STAGE_DISTRIBUTION,
@@ -502,6 +503,32 @@ export function validateContent(): ContentIntegrityIssue[] {
   for (const n of graphNodes) {
     if (n.volatility === "volatile" && !n.reviewBy) {
       issues.push({ kind: "graph.volatileNoReviewBy", ref: n.id, message: `volatile 노드는 reviewBy가 필수입니다` });
+    }
+  }
+
+  // 규칙 7 — Top-down P2: blocker·journey 신규 slug 참조 무결성
+  for (const project of projects) {
+    for (const b of project.blockers ?? []) {
+      if (b.rescueLesson && !getLessonBySlug(b.rescueLesson)) {
+        issues.push({ kind: "ref.blockerRescueLesson", ref: `project:${project.slug}`, message: `blocker.rescueLesson "${b.rescueLesson}" 미존재` });
+      }
+      if (b.rescueTemplate && !getTemplateBySlug(b.rescueTemplate)) {
+        issues.push({ kind: "ref.blockerRescueTemplate", ref: `project:${project.slug}`, message: `blocker.rescueTemplate "${b.rescueTemplate}" 미존재` });
+      }
+      if (b.rescueSpecial && !getSpecialBySlug(b.rescueSpecial)) {
+        issues.push({ kind: "ref.blockerRescueSpecial", ref: `project:${project.slug}`, message: `blocker.rescueSpecial "${b.rescueSpecial}" 미존재` });
+      }
+      if (b.conceptSlug && !concepts.some((c) => c.slug === b.conceptSlug)) {
+        issues.push({ kind: "ref.blockerConcept", ref: `project:${project.slug}`, message: `blocker.conceptSlug "${b.conceptSlug}" 미존재` });
+      }
+    }
+  }
+  for (const journey of journeys) {
+    const projectRefs = [journey.fastStartProject, ...(journey.primaryProjects ?? [])].filter(Boolean) as string[];
+    for (const slug of projectRefs) {
+      if (!getProjectBySlug(slug)) {
+        issues.push({ kind: "ref.journeyProject", ref: `journey:${journey.id}`, message: `primaryProjects/fastStartProject "${slug}" 미존재` });
+      }
     }
   }
 

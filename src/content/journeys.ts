@@ -49,6 +49,8 @@ export const journeys: Journey[] = [
     ],
     expectedOutcome:
       "AI 빌더로서의 첫 산출물 1개 + 다음 여정(Practitioner/Creator/Founder/Engineer/AI Native) 중 자기 자리를 발견.",
+    fastStartProject: "meeting-notes-bot",
+    primaryProjects: ["meeting-notes-bot", "prompt-library-starter-kit"],
   },
   {
     id: "practitioner",
@@ -84,6 +86,8 @@ export const journeys: Journey[] = [
     ],
     expectedOutcome:
       "AI 업무 플레이북 + 팀에 공유 가능한 프롬프트 세트 + 매주 5시간 이상의 시간 회복. 필요하면 사내 도입 가이드까지.",
+    fastStartProject: "weekly-report-autopilot",
+    primaryProjects: ["weekly-report-autopilot", "meeting-notes-bot", "internal-ai-usage-guideline"],
   },
   {
     id: "creator",
@@ -115,6 +119,8 @@ export const journeys: Journey[] = [
     ],
     expectedOutcome:
       "콘텐츠 자동화 파이프라인 1개 + 내 스타일 가이드 + 발행 빈도 2배.",
+    fastStartProject: "blog-to-shortform",
+    primaryProjects: ["blog-to-shortform", "newsletter-ai-desk", "local-shop-content-calendar"],
   },
   {
     id: "founder",
@@ -149,6 +155,8 @@ export const journeys: Journey[] = [
     ],
     expectedOutcome:
       "공개 URL로 배포된 제품 1개 + 비용 시뮬레이션 + 런칭 회고 + 첫 사용자 피드백 수집.",
+    fastStartProject: "claude-code-weekend-app",
+    primaryProjects: ["claude-code-weekend-app", "gpt-wrapper-product", "ai-saas-mvp"],
   },
   {
     id: "engineer",
@@ -182,6 +190,8 @@ export const journeys: Journey[] = [
     ],
     expectedOutcome:
       "검증·보안·배포가 모두 포함된 심화 캡스톤 + 회고 문서.",
+    fastStartProject: "document-qa-bot",
+    primaryProjects: ["document-qa-bot", "rag-with-evals", "team-coding-workflow"],
   },
   {
     id: "ai-native",
@@ -224,5 +234,7 @@ export const journeys: Journey[] = [
     ],
     expectedOutcome:
       "어떤 AI 문제든 모국어처럼 풀어내는 마스터 빌더 + 자기 노하우를 가르침·자산으로 환원해 다음 세대 빌더를 만드는 학생-교육자.",
+    fastStartProject: "personal-research-agent",
+    primaryProjects: ["ai-saas-mvp", "personal-research-agent", "rag-with-evals"],
   },
 ];

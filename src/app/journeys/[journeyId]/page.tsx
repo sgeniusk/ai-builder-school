@@ -10,6 +10,7 @@ import {
   getLessonBySlug,
   getStageBySlug,
   getProjectsByJourney,
+  getProjectBySlug,
   getProjectReadinessRefs,
 } from "@/lib/content";
 
@@ -46,7 +47,13 @@ export default async function JourneyDetailPage({
   const lessons = journey.recommendedLessons
     .map((slug) => getLessonBySlug(slug))
     .filter((l): l is NonNullable<typeof l> => Boolean(l));
-  const projects = getProjectsByJourney(journey.id);
+  const fastStart = journey.fastStartProject
+    ? getProjectBySlug(journey.fastStartProject)
+    : undefined;
+  const primarySet = new Set(journey.primaryProjects ?? []);
+  const projects = [...getProjectsByJourney(journey.id)].sort(
+    (a, b) => (primarySet.has(b.slug) ? 1 : 0) - (primarySet.has(a.slug) ? 1 : 0),
+  );
 
   return (
     <>
@@ -91,6 +98,27 @@ export default async function JourneyDetailPage({
                     </li>
                   ))}
                 </ul>
+              </div>
+            )}
+
+            {fastStart && (
+              <div className="journey-detail__block">
+                <div className="eyebrow">이 여정, 여기서 출발</div>
+                <Link
+                  href={`/projects/${fastStart.slug}`}
+                  className="journey-faststart"
+                >
+                  <span className="journey-faststart__label mono">
+                    ▶ 첫 프로젝트 · 오늘 첫 삽
+                  </span>
+                  <span className="journey-faststart__title">
+                    {fastStart.title}
+                  </span>
+                  <span className="journey-faststart__hook">{fastStart.hook}</span>
+                  <span className="journey-faststart__cta">
+                    바로 시작하기 <span className="arrow">→</span>
+                  </span>
+                </Link>
               </div>
             )}
 

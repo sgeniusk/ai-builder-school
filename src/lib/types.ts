@@ -96,6 +96,10 @@ export interface Journey {
   capstoneIdeas: string[];
   /** 여정 끝났을 때 손에 남는 것 한 줄 */
   expectedOutcome: string;
+  /** 이 여정에서 가장 먼저 권하는 단 1개 프로젝트 slug — 상세 상단 "여기서 출발" 카드. */
+  fastStartProject?: string;
+  /** capstoneIdeas(문자열)를 실제 project slug로 묶은 주력 프로젝트 목록. */
+  primaryProjects?: string[];
 }
 
 /**
