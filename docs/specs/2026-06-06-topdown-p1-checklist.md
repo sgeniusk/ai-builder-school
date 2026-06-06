@@ -15,8 +15,11 @@
 - [x] **P1-3 Project 막힘 토글 + blocker 백필** (`f50eb46`) — "여기서 막혔나요?" 섹션 + 4개 프로젝트 백필. 링크 `?from=` 부착.
 - [x] **P1-4 /build 네비게이터** (`027a9db`) — 7 빌드 목표 → 프로젝트. 히어로·헤더·푸터 배선. `.gitignore` `build`→`/build` 수정(라우트가 무시되던 버그).
 - [x] **P1-5 ProjectReadiness 톤 완화** — 불필요(no-op). `--locked` 빨강 CSS가 애초에 없음, P0 라벨 변경으로 이미 중립.
+- [x] **P1-6 neededWhen 확대** (`65b146f`) — blocker 구제 레슨 6개 추가 → 총 12개. 모든 막힘 링크가 JIT 헤더 있는 레슨으로 착지.
+- [x] **P1-7 죽은 CSS·파일 정리** (`527bb96`) — globals.css −334줄 + HeroStats·LearningLoop 파일 삭제. 살아있는 클래스 전수 보존.
+- [x] **P1-8 Template usedWhen** (`1883168`) — "이럴 때 꺼내 쓴다" 8개 백필 + TemplateCard 노출.
 
-## 남김(다음 차례)
-- 미사용 CSS 정리(.hero/.usp-*/.principles-* — `.tfoot`·`.cta-box` 등 공유 클래스 주의, per-class 사용 확인 필수)
-- Template `projectStepUsage` + milestone 단계별 직접 호출
-- `conceptDepth`·`neededWhen` 추가 백필, blocker 전 프로젝트 확대
+## 남김(다음 차례 — 큰 작업, 별도 배치)
+- **Template `projectStepUsage`** — 템플릿을 milestone 단계에 바인딩해 빌드 중 그 자리에서 직접 호출(UI 개편 포함). usedWhen(P1-8)은 끝남.
+- **`conceptDepth` 4단 사다리** — 비유→실무→구현→원리 콘텐츠 작성 + 레슨 아코디언 UI + 컴패니언 연동(가장 큼).
+- **blocker 전 프로젝트 확대** — 현재 4개 → 18개 + Journey `fastStartProject`/`primaryProjects` 필드.
