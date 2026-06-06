@@ -8,16 +8,21 @@ import {
   LandingJourneyMap,
   LandingValue,
 } from "@/components/landing/LandingSections";
-import { getJourneys } from "@/lib/content";
+import { LandingProjects } from "@/components/landing/LandingProjects";
+import { getJourneys, getProjects } from "@/lib/content";
 
 export default function HomePage() {
   const journeys = getJourneys();
+  const projects = getProjects();
 
   return (
     <>
       <LandingHero journeys={journeys} />
       <Reveal>
         <LandingValue />
+      </Reveal>
+      <Reveal>
+        <LandingProjects projects={projects} />
       </Reveal>
       <Reveal>
         <LandingJourneyMap journeys={journeys} />

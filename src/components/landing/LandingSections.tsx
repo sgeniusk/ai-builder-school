@@ -45,15 +45,15 @@ export function LandingHero({ journeys }: { journeys: Journey[] }) {
               AI와 함께 무엇이든 짓는 법. 나를 알아주는 AI 곁에서 글·서비스·자동화를 한 채씩 지어요.
             </p>
             <div className="lp-hero__ctas">
-              <Link href="/start" className="btn">
-                30초 진단 시작 <span className="arrow">→</span>
+              <Link href="/projects" className="btn">
+                무엇을 지을지 고르기 <span className="arrow">→</span>
               </Link>
-              <Link href="/stages" className="btn ghost">
-                여섯 단계 둘러보기
+              <Link href="/start" className="btn ghost">
+                30초 진단으로 길 찾기
               </Link>
             </div>
             <div className="lp-cap" style={{ marginTop: 26 }}>
-              선행 지식 0 · 입문에서 마스터까지 한 길
+              선행 지식 0 · 짓다가 배웁니다
             </div>
           </div>
           <div className="lp-emblem">
