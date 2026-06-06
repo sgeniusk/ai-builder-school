@@ -6,7 +6,7 @@ import { SITE_NAME, SITE_ORIGIN, SITE_URL } from "@/lib/site";
 import { getLessons, getStages } from "@/lib/content";
 
 // 카운트는 콘텐츠에서 파생한다 — Stage·레슨 수가 바뀌어도 메타 설명이 자동으로 맞춰진다.
-const DESCRIPTION = `Codex와 Claude Code로 배우고, 만들고, 검증하고, 배포하는 한국어 기반 AI 실전 학교. ${getStages().length} Stage 사다리 커리큘럼과 ${getLessons().length}개 레슨으로 구성됩니다.`;
+const DESCRIPTION = `Codex와 Claude Code로 배우고, 만들고, 검증하고, 배포하는 한국어 기반 AI 실전 학교. ${getStages().length} Stage 역량 커리큘럼과 ${getLessons().length}개 레슨으로 구성됩니다.`;
 
 export const metadata: Metadata = {
   // metadataBase는 호스트만 — basePath(/ai-builder-school)가 서브경로를 붙인다.

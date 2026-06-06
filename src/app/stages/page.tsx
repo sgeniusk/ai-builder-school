@@ -28,7 +28,7 @@ export default function StagesPage() {
         }
         lede={
           <>
-            {STAGE_COUNT}단계는 수직 진척의 사다리입니다. 한 칸을 오를 때마다 학습자의 위치가 바뀌고, 손에 산출물 하나가 남습니다. 자기 위치를 늘 알 수 있도록 설계했어요.
+            {STAGE_COUNT}단계는 순서가 아니라 역량 지도예요. 필요한 칸부터 들어가도 되고, 프로젝트를 짓다 막히면 그 칸의 레슨을 꺼내 씁니다. 한 칸을 오를 때마다 손에 산출물 하나가 남아요.
           </>
         }
       />
@@ -36,9 +36,9 @@ export default function StagesPage() {
       <section className="sec">
         <Container>
           <SectionHeading
-            eyebrow={`${STAGE_COUNT}-stage ladder`}
-            title={`${STAGE_COUNT}단계 사다리`}
-            description="각 단계의 학습자 위치 변화와 손에 남는 산출물이 카드에 요약되어 있습니다."
+            eyebrow={`${STAGE_COUNT}-stage map`}
+            title={`${STAGE_COUNT}단계 역량 지도`}
+            description="순서가 아니라 지도예요. 필요한 칸부터 들어가도 되고, 각 칸엔 학습자 위치 변화와 손에 남는 산출물이 요약돼 있어요."
           />
           <div style={{ marginTop: 32 }}>
             <StageLadder stages={stages} />

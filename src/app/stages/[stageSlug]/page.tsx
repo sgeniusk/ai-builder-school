@@ -1,13 +1,15 @@
-// v0.4 — Stage 상세 페이지. 8-Stage 사다리의 한 칸을 렌더링한다.
+// Stage 상세 — 역량 지도의 한 칸. 이 단계의 레슨과, 그 역량으로 짓는 프로젝트를 함께 보여준다.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/Layout";
 import { JourneyFilter } from "@/components/JourneyFilter";
+import { ProjectCard } from "@/components/Cards";
 import {
   getStages,
   getStageBySlug,
   getLessonsByStageId,
+  getProjectsByStageSlug,
   getTemplateBySlug,
 } from "@/lib/content";
 import { getStageBody } from "@/content/stage-bodies";
@@ -90,6 +92,7 @@ export default async function StageDetailPage({
   if (!stage) notFound();
 
   const lessons = getLessonsByStageId(stage.id);
+  const stageProjects = getProjectsByStageSlug(stage.slug);
   const stagesByOrder = getStages();
   const nextStage = stage.nextStageSlug
     ? getStageBySlug(stage.nextStageSlug)
@@ -316,6 +319,25 @@ export default async function StageDetailPage({
           )}
         </Container>
       </section>
+
+      {stageProjects.length > 0 && (
+        <section className="sec">
+          <Container>
+            <div className="eyebrow" style={{ marginBottom: 12 }}>이 역량으로 짓는 것</div>
+            <h2 className="section-title" style={{ fontSize: "clamp(24px, 3vw, 34px)" }}>
+              이 단계 역량을 쓰는 프로젝트
+            </h2>
+            <p className="section-lede" style={{ marginBottom: 24 }}>
+              순서대로 다 밟지 않아도 돼요. 아래 프로젝트를 짓다 막히면, 그때 이 단계의 레슨을 꺼내 보세요.
+            </p>
+            <div className="proj-grid">
+              {stageProjects.map((p) => (
+                <ProjectCard key={p.id} project={p} />
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
 
       {OutroEssay && (
         <section className="sec">
