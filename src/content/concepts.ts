@@ -1,4 +1,4 @@
-// AI Builder School 2.0 — Concept 노드 시드.
+// 지음 2.0 — Concept 노드 시드.
 // 위키 항목 집필은 별도 콘텐츠 작업. 여기선 그래프 연결용 초안 10개만 둔다.
 import type { Concept } from "@/lib/types";
 

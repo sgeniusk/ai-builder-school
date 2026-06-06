@@ -1,6 +1,6 @@
 # 5-Minute Trust Check — trust-check.md
 
-> 이 파일은 AI Builder School · Lesson 04에서 제공되는 출발 템플릿입니다.
+> 이 파일은 지음 · Lesson 04에서 제공되는 출발 템플릿입니다.
 > 매일 같은 시간·같은 위치에서 호출하는 것이 핵심입니다. 저장 위치를 한 곳으로 고정하세요.
 
 ## 0. 호출 약속

@@ -1,6 +1,6 @@
 # Function Calling 4단계 흐름 가이드
 
-> 이 파일은 AI Builder School · Stage 6c "Function Calling 이해하기" 의 출발 템플릿입니다.
+> 이 파일은 지음 · Stage 6c "Function Calling 이해하기" 의 출발 템플릿입니다.
 > 도구를 만들 때 이 4단계를 따라가세요.
 
 ## 1. 도구 스키마

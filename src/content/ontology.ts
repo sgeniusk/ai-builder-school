@@ -1,4 +1,4 @@
-// AI Builder School 2.0 지식 그래프 — 단일 진실 공급원.
+// 지음 2.0 지식 그래프 — 단일 진실 공급원.
 // 설계 — docs/specs/2026-05-19-builder-school-2.0-architecture.md
 import { lessons } from "./lessons";
 import { projects } from "./projects";

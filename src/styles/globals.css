@@ -211,13 +211,7 @@ body {
   }
   .p-glow > * { position: relative; z-index: 1; }
 
-  /* ===== Brand mark (AI rainbow conic) ===== */
-  .brand-mark {
-    width: 24px; height: 24px; border-radius: 50%;
-    background: conic-gradient(from 210deg,
-      oklch(72% 0.18 25), oklch(82% 0.16 135), oklch(62% 0.2 230), oklch(65% 0.24 335), oklch(72% 0.18 25));
-    flex-shrink: 0;
-  }
+  /* brand-mark(구 conic 마크) 제거 — JieumMark(한옥 SVG)로 대체 */
 
   /* ===== Rainbow gradients ===== */
   .grad-ai {

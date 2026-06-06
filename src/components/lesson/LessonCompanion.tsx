@@ -106,6 +106,7 @@ export function LessonCompanion({ lesson, journeys }: Props) {
                 href={claudeUrl(prompt)}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={copy}
               >
                 Claude로 열기 ↗
               </a>
@@ -114,6 +115,7 @@ export function LessonCompanion({ lesson, journeys }: Props) {
                 href={chatgptUrl(prompt)}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={copy}
               >
                 ChatGPT ↗
               </a>
@@ -126,7 +128,7 @@ export function LessonCompanion({ lesson, journeys }: Props) {
       </div>
 
       <div className="companion__foot mono">
-        지음은 내 진도·말투·목표를 알고, 내 AI 도구로 이어줘요
+        열면 자동 복사돼요 — 붙여넣기만. 지음은 내 진도·말투·목표를 알아요.
       </div>
     </aside>
   );

@@ -5008,7 +5008,7 @@ export const lessons: Lesson[] = [
     slug: "terminal-first-day",
     titleKo: "터미널 첫날 — 겁먹지 않고 살아남는 10개 명령어",
     titleEn: "Terminal first day — 10 commands to survive without fear",
-    hook: "터미널 창을 열었어요. 검은 화면에 커서만 깜빡입니다. 뭘 입력해야 할지 모르겠어요. 10개 명령어만 알면 AI Builder School의 모든 실습을 진행할 수 있어요.",
+    hook: "터미널 창을 열었어요. 검은 화면에 커서만 깜빡입니다. 뭘 입력해야 할지 모르겠어요. 10개 명령어만 알면 지음의 모든 실습을 진행할 수 있어요.",
     summary: "완전 초보자가 터미널을 처음 열었을 때 필요한 최소 명령어 10개를 실습합니다. 이론보다 실제로 따라 치는 것이 목표입니다. AI 코딩 에이전트를 쓰기 위해 반드시 알아야 하는 명령어만 선별했습니다.",
     level: "beginner",
     estimatedMinutes: 30,
@@ -5061,7 +5061,7 @@ export const lessons: Lesson[] = [
     ],
     deliverable: {
       title: "`my-ai-builder-lab` 폴더",
-      description: "로컬에 `my-ai-builder-lab/README.md` 가 있는 상태. 이 폴더가 AI Builder School 모든 실습의 작업 공간이 된다.",
+      description: "로컬에 `my-ai-builder-lab/README.md` 가 있는 상태. 이 폴더가 지음 모든 실습의 작업 공간이 된다.",
       format: "로컬 폴더 (터미널로 생성)",
     },
     reflectionQuestions: [
@@ -5687,7 +5687,7 @@ export const lessons: Lesson[] = [
       format: "GitHub 저장소 + 공개 URL",
     },
     reflectionQuestions: [
-      "AI Builder School을 마치고 만든 프로젝트 중 다음에 가장 발전시키고 싶은 것은 무엇인가요?",
+      "지음을 마치고 만든 프로젝트 중 다음에 가장 발전시키고 싶은 것은 무엇인가요?",
       "AI가 한 일과 내가 한 일을 나눠보니 어떤 패턴이 보이나요?",
       "다음 프로젝트에서 AI에게 더 위임하고 싶은 것은 무엇인가요?",
       "공개 발표 후 가장 예상치 못한 반응은 무엇이었나요?",

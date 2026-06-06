@@ -1,4 +1,4 @@
-// AI Builder School 2.0 — Special(특강) 노드.
+// 지음 2.0 — Special(특강) 노드.
 // 제품·버전 종속 휘발성 노드. 항상 volatile이며 reviewBy가 필수다 (스펙 3).
 // kind — "internal"은 빌더 스쿨 자체 thesis, "external"은 외부 강의·영상 큐레이션.
 import type { Special } from "@/lib/types";
