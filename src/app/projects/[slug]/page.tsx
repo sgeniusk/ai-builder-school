@@ -141,6 +141,46 @@ export default async function ProjectDetailPage({
           })}
         </ol>
 
+        {project.blockers && project.blockers.length > 0 && (
+          <>
+            <h2>여기서 막혔나요?</h2>
+            <p className="proj-ms-intro">
+              자주 막히는 지점이에요. 증상에 맞는 레슨·양식을 바로 펴 보세요.
+            </p>
+            <ul style={{ listStyle: "none", padding: 0, margin: "16px 0 0", display: "grid", gap: 10 }}>
+              {project.blockers.map((b) => {
+                const bl = b.rescueLesson ? getLessonBySlug(b.rescueLesson) : undefined;
+                const bt = b.rescueTemplate ? getTemplateBySlug(b.rescueTemplate) : undefined;
+                return (
+                  <li
+                    key={b.symptom}
+                    style={{
+                      padding: "14px 16px",
+                      border: "1px solid var(--line)",
+                      borderRadius: "var(--r-sm)",
+                      background: "var(--paper-2)",
+                    }}
+                  >
+                    <div style={{ fontSize: 15, color: "var(--ink)", marginBottom: 8 }}>
+                      &ldquo;{b.symptom}&rdquo;
+                    </div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 12, fontSize: 14 }}>
+                      {bl && (
+                        <Link href={`/lessons/${bl.slug}?from=${project.slug}`}>
+                          📘 {bl.titleKo}
+                        </Link>
+                      )}
+                      {bt && (
+                        <Link href={`/templates#${bt.slug}`}>📋 {bt.title}</Link>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        )}
+
         <h2>완료 기준</h2>
         <ul className="checklist">
           {project.verification.map((v) => (

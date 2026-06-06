@@ -246,6 +246,20 @@ export interface ProjectMilestone {
   fallbackLesson?: string;
 }
 
+/** 프로젝트에서 자주 막히는 지점 → 구제 레슨·템플릿으로 잇는 1급 데이터 (Top-down §5). */
+export interface Blocker {
+  /** 학습자가 겪는 증상 한 줄 ("검색이 엉뚱한 청크를 가져와요"). */
+  symptom: string;
+  /** 막혔을 때 펴 볼 lesson slug. */
+  rescueLesson?: string;
+  /** 그 자리에서 복사해 쓰는 template slug. */
+  rescueTemplate?: string;
+  /** 선택적 심화 special slug. */
+  rescueSpecial?: string;
+  /** 개념 위키로 점프할 concept slug. */
+  conceptSlug?: string;
+}
+
 export interface Project extends NodeMeta {
   id: string;
   slug: string;
@@ -266,6 +280,8 @@ export interface Project extends NodeMeta {
   keyLessons: string[];
   /** 이 프로젝트를 실행할 때 쓰는 템플릿 slug 목록. */
   templateSlugs: string[];
+  /** 자주 막히는 지점 → 구제 레슨·템플릿. 있으면 상세에 "여기서 막혔나요?" 노출. */
+  blockers?: Blocker[];
   summary: string;
   /** 왜 이걸 만드나 — 어떤 빈자리를 채우는가. 2~3문장. */
   problem: string;
