@@ -90,6 +90,19 @@ body {
   text-wrap: pretty;
 }
 
+/* 한지 종이 질감 — 라이트 모드 전역 옅은 그레인 (E 시안). 다크에선 끔. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url("/landing/hanji-texture.jpg") center / cover no-repeat;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+[data-theme="dark"] body::before { display: none; }
+
 ::selection { background: var(--ink); color: var(--paper); }
 
 :focus-visible {
