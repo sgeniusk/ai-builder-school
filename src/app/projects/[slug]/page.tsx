@@ -130,7 +130,7 @@ export default async function ProjectDetailPage({
                 {fallback && (
                   <p className="proj-ms-fallback">
                     <span aria-hidden>↩</span> 막히면{" "}
-                    <Link href={`/lessons/${fallback.slug}`}>
+                    <Link href={`/lessons/${fallback.slug}?from=${project.slug}`}>
                       {fallback.titleKo}
                     </Link>{" "}
                     레슨으로

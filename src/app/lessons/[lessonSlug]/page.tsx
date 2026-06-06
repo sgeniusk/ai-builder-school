@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import { LessonBackToProject } from "@/components/LessonBackToProject";
 import { SectionChecklist } from "@/components/SectionChecklist";
 import { MissionChecklist, type MissionTask } from "@/components/MissionChecklist";
 import { ReviewJumps } from "@/components/ReviewJumps";
@@ -70,6 +72,24 @@ export default async function LessonPage({
         </p>
         <h1>{lesson.titleKo}</h1>
         <p className="lede">{lesson.hook ?? lesson.summary}</p>
+
+        {lesson.neededWhen && (
+          <p
+            className="lesson-needed-when"
+            style={{
+              margin: "16px 0 0",
+              padding: "12px 16px",
+              borderLeft: "3px solid var(--ink)",
+              background: "var(--paper-2)",
+              fontSize: 14,
+              lineHeight: 1.6,
+              color: "var(--ink-2)",
+            }}
+          >
+            <span style={{ color: "var(--ink-3)" }}>⏱ 이 레슨이 필요한 순간 — </span>
+            {lesson.neededWhen}
+          </p>
+        )}
 
         {/* 산출물 칩 — 처음부터 목표를 보여줌 */}
         {lesson.deliverable?.title && (
@@ -307,6 +327,9 @@ export default async function LessonPage({
             flexWrap: "wrap",
           }}
         >
+          <Suspense fallback={null}>
+            <LessonBackToProject />
+          </Suspense>
           {stage && (
             <Link href={`/stages/${stage.slug}`} className="btn">
               Stage {stage.order} · {stage.label}로 돌아가기 <span className="arrow">→</span>

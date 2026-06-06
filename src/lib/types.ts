@@ -218,6 +218,11 @@ export interface Lesson extends NodeMeta {
    */
   hook?: string;
   /**
+   * JIT 헤더 — "이 레슨이 필요한 순간". 프로젝트에서 막혀 들어온 학습자에게
+   * 왜 지금 이걸 보는지 한 줄로 알려준다. 없으면 헤더 생략.
+   */
+  neededWhen?: string;
+  /**
    * outputs/ 폴더에 함께 제공되는 파일들. 학습자가 다운로드하거나 복사할 수 있음.
    */
   outputs?: Array<{
