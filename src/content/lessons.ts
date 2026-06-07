@@ -91,6 +91,7 @@ export const lessons: Lesson[] = [
     titleKo: "환각(Hallucination)을 잡는 검증법",
     titleEn: "Catching hallucinations",
     hook: "AI는 \"모른다\"라고 말하는 능력이 약합니다. 그래서 검증은 사용자의 일이 됩니다.",
+    playgroundPrompt: "아래 주장을 검토해줘. 각 문장에 [확실]·[추정]·[모름]을 표시하고, 근거가 없으면 솔직히 모른다고 해줘.\n\n주장: 한글은 1443년에 창제되어 1446년에 반포되었고, 집현전 학자 정인지가 훈민정음 해례본을 단독으로 집필했다.\n\n각 사실의 확신도와 근거를 함께 적어줘.",
     neededWhen: "AI 답을 어디까지 믿어야 할지 불안할 때. 발행·제출 전에 환각을 걸러내는 마지막 관문이 필요할 때.",
     conceptDepth: {
       explainLikeTwelve: "아는 척 잘하는 친구 같아요. 모르는 것도 자신 있게 답하니, 중요한 건 직접 확인해야 해요.",
@@ -375,6 +376,7 @@ export const lessons: Lesson[] = [
     titleKo: "출력 형식(Output Format)을 강제하는 법",
     titleEn: "Enforcing output format",
     hook: "사람이 읽을 답은 흔들려도 괜찮지만, 기계가 읽을 답은 99.9% 같은 모양이어야 해요. 한 번의 이탈이 자동화 전체를 멈춥니다.",
+    playgroundPrompt: "다음 문장에서 일정 정보를 추출해 JSON으로만 답해줘. 다른 설명 없이.\n\n형식: {\"title\": string, \"date\": \"YYYY-MM-DD\", \"attendees\": string[], \"location\": string}\n\n문장: 다음 주 화요일(3월 12일) 오후 2시에 강남 사무실에서 김대표·이팀장·박과장이 분기 리뷰 회의를 합니다.",
     summary: "프롬프트 + API 스키마 강제 + 파싱 실패 재시도의 3단 방어선으로 LLM 출력을 자동화 가능한 수준으로 고정합니다. Zod/Pydantic 런타임 검증까지 한 폴더에 모아 다음 자동화에서 복사해 쓸 수 있게 만듭니다.",
     level: "beginner",
     estimatedMinutes: 50,
@@ -489,6 +491,7 @@ export const lessons: Lesson[] = [
     titleKo: "긴 문서를 AI에게 먹이는 법",
     titleEn: "Feeding long documents to AI",
     hook: "100페이지를 통째로 넣어도 모델은 가운데를 흐릿하게 봅니다. \"Lost in the Middle\" 은 운이 아니라 구조예요. 작업 모양에 맞게 입력을 다듬는 게 출력 품질을 결정합니다.",
+    playgroundPrompt: "아래 글을 3단계로 요약해줘.\n1) 한 문장 핵심\n2) 주요 논점 3개(각 한 줄)\n3) 빠지면 안 되는 숫자·고유명사\n\n[여기에 긴 문서나 기사를 붙여넣기 — 길수록 'Lost in the Middle'을 체감할 수 있어요]",
     conceptDepth: {
       explainLikeTwelve: "두꺼운 책을 통째로 외우라 하면 가운데를 잊어요. 필요한 장만 펴서 보여주면 훨씬 잘 답합니다.",
       practicalExplanation: "컨텍스트 창에 다 넣는다고 다 읽는 게 아니에요. 작업에 필요한 부분만 골라 넣고, 길면 요약·분할·검색으로 다듬습니다.",
@@ -698,6 +701,7 @@ export const lessons: Lesson[] = [
     titleKo: "보고서 초안 자동화",
     titleEn: "Automate report drafts",
     hook: "매주 금요일, 보고서 형식을 맞추느라 분석할 시간이 없어요. 형식은 매번 같은데 매번 새로 채워야 하는 게 보고서의 함정입니다.",
+    playgroundPrompt: "주간 업무 보고서 초안을 만들어줘.\n\n작업: 아래 메모를 주간 보고서로\n맥락: 팀장 보고용, 5줄 이내\n제약: 완료·진행중·이슈 3섹션, 수치는 그대로 인용\n출력: 마크다운\n\n메모: 신규 가입 1,200명(전주 대비 +15%), 결제 전환율 3.2%로 하락(목표 4%), 서버 장애 1건(화요일 2시간), 다음 주 A/B 테스트 예정",
     neededWhen: "메모를 넣어도 보고서가 엉뚱하게 채워질 때. 매주 반복되는 정리에 시간을 뺏길 때.",
     summary: "과거 보고서 2~3개를 컨텍스트로 주입해 AI가 \"우리 양식\"을 학습하게 하고(Template Grounding), 초안 → 자기 검토 → 사람 검수 3단 파이프라인으로 매주 반복되는 보고서를 자동화합니다. 수치 검증 체크리스트까지 한 폴더에 담아 매주 금요일의 시작점으로 씁니다.",
     level: "beginner",
@@ -1219,6 +1223,7 @@ export const lessons: Lesson[] = [
     titleKo: "GitHub 이슈 → AI 브리프",
     titleEn: "GitHub issue → AI brief",
     hook: "\"버그 수정해줘\" 한 줄 이슈를 에이전트에게 던지면? 추측으로 고치다 멀쩡한 기능까지 깨집니다. 이슈를 브리프로 바꾸면 첫 시도가 달라져요.",
+    playgroundPrompt: "아래 한 줄 이슈를 코딩 에이전트가 헛나가지 않게 '브리프'로 바꿔줘.\n\n네 축으로 정리해줘: 1) 재현 단계 2) 기대 동작 3) 영향 범위(건드리면 안 되는 곳) 4) 완료 검증 방법\n\n이슈: \"로그인하면 가끔 흰 화면이 떠요. 고쳐주세요.\"",
     neededWhen: "\"버그 수정해줘\" 한 줄 이슈를 에이전트에 던졌더니 멀쩡한 기능까지 깨졌을 때. 첫 시도가 자꾸 헛나갈 때.",
     conceptDepth: {
       explainLikeTwelve: "이슈는 \"어디 아파요\"이고, 브리프는 검사·진단·처방이 적힌 차트예요. 차트가 있어야 의사(에이전트)가 헛손질을 안 해요.",
