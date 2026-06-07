@@ -86,6 +86,9 @@ Phase / `phaseId` / `recommendedPhases` / `requiredPhases`는 **legacy로 보존
 | `reflectionQuestions` | `string[]` | 회고 질문 3개. |
 | `extensionIdeas` | `string[]` | 다음 주 확장 아이디어. |
 | `tags` | `string[]` | 검색/필터용. |
+| `neededWhen` | `string?` | JIT 헤더 — "이 레슨이 필요한 순간". top-down 막힘 착지용. |
+| `conceptDepth` | `ConceptDepth?` | 개념 깊이 4단(비유·실무·구현·원리). 아코디언 + 컴패니언 주입. |
+| `playgroundPrompt` | `string?` | 프롬프트 연습장 프리필. 있으면 '직접 해보기'(Gemini BYO 키) 블록 노출. |
 
 ## 4. Track
 

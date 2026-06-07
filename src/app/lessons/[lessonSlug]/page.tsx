@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { LessonBackToProject } from "@/components/LessonBackToProject";
 import { SectionChecklist } from "@/components/SectionChecklist";
+import { PromptPlayground } from "@/components/PromptPlayground";
 import { MissionChecklist, type MissionTask } from "@/components/MissionChecklist";
 import { ReviewJumps } from "@/components/ReviewJumps";
 import { LessonNotes } from "@/components/LessonNotes";
@@ -117,6 +118,10 @@ export default async function LessonPage({
               )}
             </div>
           </details>
+        )}
+
+        {lesson.playgroundPrompt && (
+          <PromptPlayground initialPrompt={lesson.playgroundPrompt} />
         )}
 
         {/* 산출물 칩 — 처음부터 목표를 보여줌 */}

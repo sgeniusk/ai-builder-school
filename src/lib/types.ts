@@ -240,6 +240,8 @@ export interface Lesson extends NodeMeta {
   neededWhen?: string;
   /** 개념 깊이 4단. 있으면 레슨 상단 아코디언 + 컴패니언 핸드오프에 주입. */
   conceptDepth?: ConceptDepth;
+  /** 프롬프트 연습장 프리필 — 있으면 개념 아코디언 아래에 '직접 해보기'(Gemini BYO 키) 블록을 노출한다. */
+  playgroundPrompt?: string;
   /**
    * outputs/ 폴더에 함께 제공되는 파일들. 학습자가 다운로드하거나 복사할 수 있음.
    */

@@ -285,6 +285,7 @@ export const lessons: Lesson[] = [
       implementationNotes: "출력 예시나 스키마를 프롬프트 안에 직접 박아 재현성을 확보합니다. 4축을 섹션 헤더로 명시하면 모델이 빠뜨리지 않아요.",
       deeperTheory: "맥락이 빠지면 모델은 학습 분포의 가장 흔한 답으로 회귀합니다. 명세가 분포를 좁히는 만큼 출력이 안정됩니다.",
     },
+    playgroundPrompt: "다음 회의 메모를 정리해줘.\n\n작업: 메모를 결정·할 일·보류로 분류\n맥락: 주간 팀 회의, 참석자 5명\n제약: 각 항목 한 줄, 담당자 명시, 추측 금지\n출력: 마크다운 3개 섹션(결정/할 일/보류)\n\n[여기에 회의 메모를 붙여넣기]",
     summary: "Task / Context / Constraints / Output 4축으로 프롬프트를 분리해 재현 가능한 작업지시서로 바꾸고, 가장 자주 쓰는 3개 패턴을 개인 템플릿으로 만듭니다.",
     level: "beginner",
     estimatedMinutes: 45,
