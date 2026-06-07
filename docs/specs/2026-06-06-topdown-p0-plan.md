@@ -3,7 +3,7 @@
 > **For agentic workers:** 이 레포의 검증 루프는 단위 테스트가 아니라 `npm run check`(lint·typecheck·validate·build) + 시각 확인이다(Harness Contract). writing-plans의 TDD 단계를 그 게이트로 치환했다. 단계는 `- [ ]` 체크박스로 추적한다.
 > 근거 보고서 — [2026-06-06-topdown-transition-review.md](./2026-06-06-topdown-transition-review.md) §8 P0
 >
-> ✅ **실행 완료** 2026-06-06 — Task 0~5 전부 커밋(`5daf0a3`..`9329242`). 로컬 `npm run check` + GitHub Pages export 빌드 모두 그린. 아직 push 안 함(prod 배포 승인 대기).
+> ✅ **실행 완료 · push 완료** 2026-06-06 — Task 0~5 전부 커밋(`5daf0a3`..`9329242`). 로컬 `npm run check` + GitHub Pages export 빌드 모두 그린. **origin/main 반영됨 — prod 라이브.**
 
 **Goal** — Top-down 전환의 P0(카피·진입·프레이밍·죽은 코드)를 적용해, 데이터 대공사 없이 적합도 58 → ~72로 끌어올린다.
 
