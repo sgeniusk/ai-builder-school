@@ -3766,4 +3766,44 @@ body::before {
   .sb-copy-btn:hover { background: #1f1f1f; }
   .sb-copy-btn.is-copied { background: #1f8a4c; border-color: #1f8a4c; }
 
+  /* — 산출물 포트폴리오 (/me) — */
+  .dash-portfolio__grid {
+    list-style: none; padding: 0; margin: 12px 0 0;
+    display: grid; gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+  .dash-portfolio__item {
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 14px; border: 1px solid var(--line);
+    border-radius: var(--r-sm); background: var(--paper-2);
+  }
+  .dash-portfolio__top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .dash-portfolio__date { font-size: 12px; color: var(--ink-3); }
+  .dash-portfolio__title { font-weight: 600; color: var(--ink); }
+  .dash-portfolio__note { margin: 0; font-size: 13px; color: var(--ink-2); }
+  .dash-portfolio__link { font-size: 14px; color: var(--jic, var(--ink)); }
+  .dash-portfolio__empty { margin: 8px 0 0; font-size: 14px; color: var(--ink-2); }
+
+  /* — 프로젝트 완성 기록 (ProjectBuildLog) — */
+  .build-log {
+    margin: 8px 0 0; padding: 16px;
+    border: 1px solid var(--line); border-radius: var(--r-sm);
+    background: var(--paper-2);
+  }
+  .build-log.is-built { border-color: var(--jic, var(--ink)); }
+  .build-log--skeleton { min-height: 56px; opacity: .4; }
+  .build-log__toggle {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 600; color: var(--ink); cursor: pointer;
+  }
+  .build-log__fields { display: grid; gap: 12px; margin-top: 14px; }
+  .build-log__field { display: flex; flex-direction: column; gap: 4px; }
+  .build-log__label { font-size: 13px; color: var(--ink-3); }
+  .build-log__input {
+    padding: 9px 12px; font-size: 14px; font-family: inherit;
+    border: 1px solid var(--line); border-radius: var(--r-sm);
+    background: var(--paper); color: var(--ink);
+  }
+  .build-log__date { margin: 0; font-size: 12px; color: var(--ink-3); }
+
 }

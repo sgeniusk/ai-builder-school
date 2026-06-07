@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/Layout";
 import { CodeBlock } from "@/components/CodeBlock";
+import { ProjectBuildLog } from "@/components/ProjectBuildLog";
 import {
   getLessonBySlug,
   getProjectBySlug,
@@ -206,6 +207,13 @@ export default async function ProjectDetailPage({
             <li key={v}>{v}</li>
           ))}
         </ul>
+
+        <h2>완성 기록</h2>
+        <p className="proj-ms-intro">
+          위 완료 기준을 채웠다면 여기 기록하세요. 결과물 링크를 남기면{" "}
+          <Link href="/me">내 빌더 대시보드</Link>의 포트폴리오에 모입니다.
+        </p>
+        <ProjectBuildLog slug={project.slug} />
 
         <h2>막힐 때 펴 보는 레슨</h2>
         <ul className="lessons-list" style={{ marginTop: 16 }}>

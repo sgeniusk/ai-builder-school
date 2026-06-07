@@ -14,6 +14,7 @@ import {
 } from "@/hooks/useLessonProgress";
 import { useNotes } from "@/hooks/useNotes";
 import { useStreak } from "@/hooks/useStreak";
+import { usePortfolio } from "@/hooks/usePortfolio";
 import { ProjectReadiness } from "@/components/ProjectReadiness";
 
 export type DashStage = {
@@ -62,9 +63,10 @@ export function BuilderDashboard({
 }: Props) {
   const { mounted: pMounted, journey, isLessonComplete } = useLessonProgress();
   const { mounted: cMounted, character } = useCharacter();
+  const { mounted: poMounted, getBuiltSlugs, getEntry } = usePortfolio();
   const streak = useStreak();
   const { notes } = useNotes();
-  const mounted = pMounted && cMounted;
+  const mounted = pMounted && cMounted && poMounted;
 
   // SSR/첫 렌더 — 자리만 잡아 hydration mismatch 방지
   if (!mounted) {
@@ -76,6 +78,11 @@ export function BuilderDashboard({
       </Container>
     );
   }
+
+  const builtSlugs = getBuiltSlugs();
+  const builtProjects = builtSlugs
+    .map((slug) => projects.find((p) => p.slug === slug))
+    .filter((p): p is DashProject => Boolean(p));
 
   const allLessons = stages.flatMap((s) => lessonsByStage[s.id] ?? []);
   const total = allLessons.length;
@@ -147,6 +154,58 @@ export function BuilderDashboard({
             streak={streak?.current ?? 0}
           />
         </header>
+
+        {/* 내가 지은 것 — 산출물 포트폴리오 */}
+        <section className="dash-card dash-portfolio">
+          <div className="dash-card__head">
+            <span className="rail-section-label">내가 지은 것</span>
+            <span className="mono dash-frac">{builtProjects.length}</span>
+          </div>
+          {builtProjects.length > 0 ? (
+            <ul className="dash-portfolio__grid">
+              {builtProjects.map((p) => {
+                const e = getEntry(p.slug);
+                const safeUrl =
+                  e.url && /^https?:\/\//i.test(e.url) ? e.url : undefined;
+                return (
+                  <li key={p.slug} className="dash-portfolio__item">
+                    <div className="dash-portfolio__top">
+                      <span className="chip">{p.difficultyLabel}</span>
+                      {e.builtAt && (
+                        <span className="dash-portfolio__date mono">
+                          {e.builtAt.slice(0, 10)}
+                        </span>
+                      )}
+                    </div>
+                    <Link
+                      href={`/projects/${p.slug}`}
+                      className="dash-portfolio__title"
+                    >
+                      {p.title}
+                    </Link>
+                    {e.note && <p className="dash-portfolio__note">{e.note}</p>}
+                    {safeUrl && (
+                      <a
+                        href={safeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="dash-portfolio__link"
+                      >
+                        결과물 보기 <span className="arrow">→</span>
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="dash-portfolio__empty">
+              아직 완성 기록이 없어요.{" "}
+              <Link href="/projects">프로젝트 하나를 골라</Link> 첫 삽을 뜨고, 다
+              지으면 상세 페이지에서 기록하세요.
+            </p>
+          )}
+        </section>
 
         {/* 전체 진척 */}
         <section className="dash-card dash-overall">
