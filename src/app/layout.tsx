@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "@/styles/globals.css";
 import { SiteFooter, SiteHeader } from "@/components/Layout";
 import { SiteChrome } from "@/components/SiteChrome";
@@ -46,6 +47,9 @@ export const metadata: Metadata = {
   },
 };
 
+// 운영자 학습 분석 — 도메인 env 가 설정됐을 때만 Plausible 을 켠다(미설정이면 추적 0, 무백엔드 유지).
+const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -62,6 +66,20 @@ export default function RootLayout({
               "(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){}})();",
           }}
         />
+        {/* 운영자 학습 분석 — Plausible (도메인 env 설정 시에만 활성, 쿠키리스·익명) */}
+        {PLAUSIBLE_DOMAIN && (
+          <>
+            <Script id="plausible-init" strategy="afterInteractive">
+              {`window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}`}
+            </Script>
+            <Script
+              defer
+              data-domain={PLAUSIBLE_DOMAIN}
+              src="https://plausible.io/js/script.js"
+              strategy="afterInteractive"
+            />
+          </>
+        )}
         <SiteChrome header={<SiteHeader />} footer={<SiteFooter />}>
           {children}
         </SiteChrome>

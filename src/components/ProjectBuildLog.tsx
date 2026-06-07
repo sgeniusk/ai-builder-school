@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { usePortfolio } from "@/hooks/usePortfolio";
+import { trackEvent } from "@/lib/analytics";
 
 export function ProjectBuildLog({ slug }: { slug: string }) {
   const { mounted, getEntry, setEntry } = usePortfolio();
@@ -26,7 +27,11 @@ export function ProjectBuildLog({ slug }: { slug: string }) {
         <input
           type="checkbox"
           checked={entry.built}
-          onChange={(e) => setEntry(slug, { built: e.target.checked })}
+          onChange={(e) => {
+            const checked = e.target.checked;
+            setEntry(slug, { built: checked });
+            if (checked) trackEvent("Project Built", { project: slug });
+          }}
           suppressHydrationWarning
         />
         <span>이 프로젝트, 지었어요</span>

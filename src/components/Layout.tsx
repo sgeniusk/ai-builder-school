@@ -188,6 +188,11 @@ export function SiteFooter() {
           }}
         >
           <span>© {new Date().getFullYear()} 지음 (Jieum) — formerly AI Builder School</span>
+          {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
+            <span style={{ fontSize: 12, color: "var(--ink-4)" }}>
+              익명 사용량 분석 · Plausible (쿠키리스)
+            </span>
+          )}
           <span className="mono" style={{ fontSize: 12, color: "var(--ink-4)" }}>
             v1.0.1 · calm editorial
           </span>
