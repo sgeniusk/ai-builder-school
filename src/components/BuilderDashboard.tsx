@@ -16,6 +16,7 @@ import { useNotes } from "@/hooks/useNotes";
 import { useStreak } from "@/hooks/useStreak";
 import { usePortfolio } from "@/hooks/usePortfolio";
 import { ProjectReadiness } from "@/components/ProjectReadiness";
+import { ApiKeySettings } from "@/components/ApiKeySettings";
 
 export type DashStage = {
   id: string;
@@ -391,6 +392,8 @@ export function BuilderDashboard({
             </ul>
           </section>
         )}
+
+        <ApiKeySettings />
 
         <p className="dash-note">
           진척·메모는 이 브라우저에만 저장돼요. 레슨의 빌드·검증·회고를 모두
