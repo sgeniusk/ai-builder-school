@@ -45,5 +45,6 @@ yarn-error.log*
 .tmp-codex-logs/
 .claude/worktrees/
 .claude/launch.json
+.playwright-mcp/
 .vercel
 .env*.local
