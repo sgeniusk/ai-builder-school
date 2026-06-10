@@ -7,7 +7,8 @@
  * 항상 exit 0 — 차단하지 않는다. 사람이 flag를 보고 우선순위를 정한다.
  *
  * 기준: docs/lesson-quality-rubric.md (런타임에 읽어 프롬프트에 주입 — 단일 소스).
- * 채점 6축: 명료성 · 어조 · 연속성 · 7-step 정합성 · 사실성 · 실행 가능성.
+ * tone 축은 docs/voice/README.md(보이스 정의서) + sample-*.md(골든 샘플)도 함께 주입.
+ * 채점 6축: 명료성 · 어조(사람 목소리) · 연속성 · 7-step 정합성 · 사실성 · 실행 가능성.
  *
  * 사용법:
  *   GEMINI_API_KEY=... npm run eval:rubric                 # 기본 8개 샘플
@@ -145,6 +146,31 @@ if (!fs.existsSync(rubricPath)) {
 }
 const rubricText = fs.readFileSync(rubricPath, "utf-8");
 
+// 보이스 정의서 + 골든 샘플 — tone 축 채점 기준으로 프롬프트에 주입.
+// docs/voice/README.md가 없으면 조용히 생략 (rubric만으로 채점).
+const voiceDir = path.join(ROOT, "docs/voice");
+const voiceReadmePath = path.join(voiceDir, "README.md");
+let voiceText = "";
+if (fs.existsSync(voiceReadmePath)) {
+  const parts = [fs.readFileSync(voiceReadmePath, "utf-8")];
+  const sampleFiles = fs
+    .readdirSync(voiceDir)
+    .filter((f) => /^sample-.*\.md$/.test(f))
+    .sort();
+  for (const f of sampleFiles) {
+    // 샘플당 4000자 컷 — 프롬프트 비대 방지
+    const body = fs.readFileSync(path.join(voiceDir, f), "utf-8").slice(0, 4000);
+    parts.push(`### 골든 샘플 — ${f}\n\n${body}`);
+  }
+  voiceText = parts.join("\n\n");
+  console.log(
+    c(
+      COLORS.dim,
+      `보이스 기준 주입 — docs/voice/README.md + 골든 샘플 ${sampleFiles.length}편`,
+    ),
+  );
+}
+
 const lessons = getLessons();
 const stages = getStages();
 const lessonBySlug = new Map(lessons.map((l) => [l.slug, l]));
@@ -196,7 +222,19 @@ console.log("");
 const SYSTEM_PROMPT = `너는 한국어 AI 교육 콘텐츠의 품질 평가자다. 아래 루브릭으로 레슨 하나를 정확하고 엄정하게 채점한다.
 
 ${rubricText}
+${
+  voiceText
+    ? `
+---
 
+## 보이스 기준 (tone 축 채점에 사용)
+
+tone 축은 아래 보이스 정의서를 기준으로 채점한다. AI-스멜 금지 목록의 패턴을 발견하면 "AI-스멜 — <패턴> (<위치>)" 형식으로 flags에 넣는다. 골든 샘플이 포함돼 있으면 "같은 사람이 쓴 글로 읽히는가"를 함께 본다.
+
+${voiceText}
+`
+    : ""
+}
 반드시 아래 JSON 객체 하나만 출력한다. 그 외 텍스트·코드펜스 금지.
 {
   "scores": { "clarity": 1-5, "tone": 1-5, "continuity": 1-5, "loop": 1-5, "factual": 1-5, "actionability": 1-5 },

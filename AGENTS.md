@@ -47,7 +47,7 @@ The "Stop points" list in §8 is hard. Don't bypass.
 
 ### Axis 5 · Agent topology
 Pick the right skill:
-- **`lesson-writer`** (`.claude/skills/lesson-writer.md`) — adding/editing lessons. Wraps `npm run new-lesson`.
+- **`lesson-writer`** (`.claude/skills/lesson-writer.md`) — adding/editing lessons. Wraps `npm run new-lesson`. 산문 작성·수정 전 `docs/voice/README.md` 필독, 기존 레슨은 diff-only (전체 재작성 금지).
 - **`content-validator`** (`.claude/skills/content-validator.md`) — validates and reports.
 - **`ui-stylist`** (`.claude/skills/ui-stylist.md`) — UI / styling only; never touches `src/content/**` or `src/lib/**`.
 

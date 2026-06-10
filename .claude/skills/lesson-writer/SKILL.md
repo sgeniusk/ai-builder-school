@@ -10,7 +10,7 @@ description: AI Builder School에 새 레슨을 추가하거나 기존 레슨의
 ## 언제 쓰나
 
 - 새 레슨을 추가할 때
-- 기존 레슨의 MDX 본문을 친근 어조로 다시 쓸 때
+- 기존 레슨의 MDX 본문을 수정할 때 (아래 diff-only 룰 적용)
 - outputs/ 산출물 템플릿을 만들 때
 - `targetJourneys`, `coreConcepts`, `mission` 등 7-step 루프 필드를 다듬을 때
 
@@ -19,6 +19,31 @@ description: AI Builder School에 새 레슨을 추가하거나 기존 레슨의
 - UI 스타일/컴포넌트 변경 → `ui-stylist` 사용
 - 타입·헬퍼·라이브 코드 변경 → 직접 작업 (이 스킬 범위 아님)
 - 단순 typo 수정도 이 스킬을 거쳐 톤이 깨지지 않게
+
+## 기존 레슨 수정 = diff-only (의무)
+
+**기존 레슨의 산문을 통째로 다시 쓰지 않는다.** 수정 요청이 오면 바뀌어야 할 부분(낡은 사실, 깨진 링크, 어긋난 연결문, 지적받은 문장)만 최소 diff로 고치고 나머지 문장은 그대로 둔다.
+
+이유 — AI가 산문을 재생성할 때마다 모델 평균 문체로 회귀한다. "개선" 패스가 반복될수록 AI 특유의 말투가 누적된 것이 이 사이트의 실제 사고 이력이다.
+
+- 전체 재작성은 사용자가 명시적으로 "이 레슨 다시 써"라고 했을 때만. 그때도 `docs/voice/`를 먼저 읽는다.
+- 루브릭 flag를 고칠 때도 flag가 가리킨 문장만 고친다. 주변 문단을 "겸사겸사" 다듬지 않는다.
+
+## 목소리 — `docs/voice/`가 단일 기준 (의무)
+
+산문을 쓰거나 고치기 전에 **반드시 `docs/voice/README.md`와 `docs/voice/sample-*.md`(있으면)를 읽는다.** 골든 샘플이 있으면 규칙보다 샘플 모사가 우선이다 — 그 사람이 이 주제를 설명한다면 어떻게 쓸지를 기준으로 쓴다.
+
+- ❌ "AI를 업무 OS처럼 다뤄 반복 업무를 줄이고 판단에 시간을 씁니다."
+- ✅ "매일 1시간씩 반복되는 일에 AI 한 줄 깔아두면, 그 시간이 손에 돌아와요."
+
+기본기 — 추상 명사 대신 구체, 결과 통보(~합니다) 대신 말 거는 어조(~돼요), 콜론 종결 금지.
+
+AI-스멜 금지 (전체 목록과 예시는 `docs/voice/README.md`).
+- 수사 의문문은 레슨당 최대 1회 ("보이시죠?", "볼까요?")
+- 모든 섹션을 펀치라인 한 줄로 끝내지 않는다
+- 근거 없는 계량 과장 금지 ("두 단계 위로", "80%가 사라져요")
+- em-dash·삼분 병렬·균질한 문단 길이의 반복 주의
+- 실제 일화가 필요한 자리는 지어내지 말고 `{/* TODO(운영자): 실제 일화 */}`로 비워 둔다
 
 ## 작업 순서 (의무)
 
@@ -33,22 +58,13 @@ npm run new-lesson <slug> --phase phase-2-prompt-engineering --title "한글 제
 - `src/content/lesson-bodies.ts` 자동 등록
 
 이후:
-1. lessons.ts의 TODO를 차례로 채운다 (hook → mission → buildSteps → verificationChecklist → deliverable → reflectionQuestions → outputs)
-2. MDX 본문을 친근 어조 700~1200단어로 작성한다 (도입 시나리오 → 핵심 개념 → 오늘 할 일 → 마무리)
-3. 다른 레슨 1개 이상에 인터링크 (`[관련 레슨](/lessons/<slug>)`)
-4. outputs/ 폴더에 산출물 템플릿 .md 1개 이상
-5. `phases.ts` 의 해당 Phase `lessonSlugs`에 새 slug 추가
-6. `npm run check` 실행 — exit 0 확인
-
-## 친근 어조 가이드
-
-- ❌ "AI를 업무 OS처럼 다뤄 반복 업무를 줄이고 판단에 시간을 씁니다."
-- ✅ "매일 1시간씩 반복되는 일에 AI 한 줄 깔아두면, 그 시간이 손에 돌아와요."
-
-핵심:
-- 추상 명사("업무 OS") 대신 구체("매일 1시간씩 반복되는 일")
-- 결과 통보(~합니다) 대신 학습자 감각에 다가가는 어조(~돌아와요 / ~돼요)
-- 1~2문단 안에 학습자가 공감할 시나리오 1개
+1. `docs/voice/README.md` + 골든 샘플을 읽는다 (위 "목소리" 섹션)
+2. lessons.ts의 TODO를 차례로 채운다 (hook → mission → buildSteps → verificationChecklist → deliverable → reflectionQuestions → outputs)
+3. MDX 본문을 700~1200단어로 작성한다 (도입 시나리오 → 핵심 개념 → 오늘 할 일 → 마무리)
+4. 다른 레슨 1개 이상에 인터링크 (`[관련 레슨](/lessons/<slug>)`)
+5. outputs/ 폴더에 산출물 템플릿 .md 1개 이상
+6. `phases.ts` 의 해당 Phase `lessonSlugs`에 새 slug 추가
+7. `npm run check` 실행 — exit 0 확인
 
 ## 7-step 루프 (절대 빼지 말 것)
 

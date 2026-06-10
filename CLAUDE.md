@@ -74,6 +74,7 @@ Curriculum and content schema:
 - `docs/implementation-plan.md` — MVP plan
 - `docs/assumptions.md` — open decisions
 - `docs/harness-engineering-spec.md` — full Harness Engineering spec for this repo
+- `docs/voice/README.md` — 보이스 정의서 (레슨 산문의 목소리 기준 + AI-스멜 금지 목록). 레슨 산문을 쓰거나 고치기 전 필독. 기존 레슨 수정은 diff-only — 전체 재작성 금지 (lesson-writer 스킬 참조)
 
 Content data sources:
 - `src/content/phases.ts`
